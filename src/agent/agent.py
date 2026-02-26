@@ -830,7 +830,7 @@ def route_after_analysis(state: AgentState) -> str:
 
 # --- 5. Build and Compile Graph ---
 def get_agent_executor():
-    """ Build and compile the Adsorb-Agent state machine graph. """
+    """ Build and compile the AdsKRK state machine graph. """
     workflow = StateGraph(AgentState)
     workflow.add_node("pre_processor", pre_processor_node)
     workflow.add_node("planner", solution_planner_node)
@@ -902,7 +902,7 @@ def _prepare_initial_state(
     }
 
 def parse_args():
-    parser = argparse.ArgumentParser(description="Run the Adsorb-Agent.")
+    parser = argparse.ArgumentParser(description="Run the AdsKRK.")
     parser.add_argument("--smiles", type=str, required=True, help="SMILES string.")
     parser.add_argument("--slab_path", type=str, required=True, help="Path to the slab structure file (XYZ, CIF, PDB, SDF, MOL, POSCAR).")
     parser.add_argument("--user_request", type=str, default="Find a stable adsorption configuration.", help="User's request.")
@@ -946,7 +946,7 @@ def main_cli():
     agent_executor = get_agent_executor()
     seed_info = f", Seed: {args.seed}" if args.seed is not None else ""
     mode_info = f", Mode: {relaxation_mode}"
-    print(f"\n--- 🚀 Adsorb-Agent Started (Backend: {llm_backend}{seed_info}{mode_info}) ---\n")
+    print(f"\n--- 🚀 AdsKRK Started (Backend: {llm_backend}{seed_info}{mode_info}) ---\n")
     final_state = None
 
     config = {"recursion_limit": 50}
@@ -960,7 +960,7 @@ def main_cli():
                 print(f"[{last_message.type}]")
                 print(last_message.content)
                 print("---\n")
-    print("\n--- 🏁 Adsorb-Agent Task Completed ---\n")
+    print("\n--- 🏁 AdsKRK Task Completed ---\n")
     print("Final Analysis Report:")
     if final_state and "messages" in final_state:
         for msg in reversed(final_state["messages"]):
