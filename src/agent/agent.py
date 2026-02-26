@@ -564,11 +564,18 @@ def tool_executor_node(state: AgentState) -> dict:
         tool_logs.append(f"Error during tool execution: {error_message}")
         analysis_json = {"status": "error", "message": f"Tool execution failed: {error_message}"}
         
+    # Record attempted plan key for duplicate detection in plan_validator_node
+    updated_keys = list(state.get("attempted_keys", []))
+    plan_key = make_plan_key(state.get("plan"))
+    if plan_key is not None and plan_key not in updated_keys:
+        updated_keys.append(plan_key)
+
     return {
         "messages": [ToolMessage(content="\n".join(tool_logs), tool_call_id="tool_executor")],
         "analysis_json": json.dumps(analysis_json),
         "best_result": new_best_molecular,
-        "best_dissociated_result": new_best_dissociated
+        "best_dissociated_result": new_best_dissociated,
+        "attempted_keys": updated_keys,
     }
 
 def final_analyzer_node(state: AgentState) -> dict:

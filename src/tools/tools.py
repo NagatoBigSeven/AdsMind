@@ -120,8 +120,8 @@ def get_shrinkwrap_grid_fixed(
         pbc=[True, True, True],
         cell=slab.cell,
     )
-    # Filter out points that penetrated below the surface (Z < 0)
-    grid = grid[[atom.index for atom in grid if atom.position[2] > 0]]
+    z_min = slab.positions[:, 2].min()
+    grid = grid[[atom.index for atom in grid if atom.position[2] > z_min - 1.0]]
 
     return grid, faces
 
@@ -480,14 +480,13 @@ def prepare_slab(slab_atoms: ase.Atoms) -> Tuple[ase.Atoms, bool]:
     a_len = np.linalg.norm(cell_vectors[0])
     b_len = np.linalg.norm(cell_vectors[1])
     
-    is_expanded = False
-    if a_len < 6.0 or b_len < 6.0:
-        print(f"--- 🛠️ [Prepare] Small cell detected (a={a_len:.2f}Å, b={b_len:.2f}Å). Expanding to 2x2x1... ---")
-        clean_slab = clean_slab * (2, 2, 1)
-        is_expanded = True
-    else:
-        print(f"--- 🛠️ [Prepare] Cell size sufficient (a={a_len:.2f}Å, b={b_len:.2f}Å). Keeping as is. ---")
-    
+    mult_a = 2 if a_len < 6.0 else 1
+    mult_b = 2 if b_len < 6.0 else 1
+    is_expanded = (mult_a > 1 or mult_b > 1)
+    if is_expanded:
+        print(f"--- 🛠️ [Prepare] Small cell detected. Expanding to {mult_a}x{mult_b}x1... ---")
+        clean_slab = clean_slab * (mult_a, mult_b, 1)   
+        
     # 3. Vacuum layer thickness check
     # Calculate vacuum as (cell height - slab thickness)
     MIN_VACUUM_THICKNESS = 15.0  # Angstroms
@@ -505,7 +504,7 @@ def prepare_slab(slab_atoms: ase.Atoms) -> Tuple[ase.Atoms, bool]:
     else:
         logger.info(f"Vacuum layer thickness: {vacuum_thickness:.1f} Å (OK)")
         
-    return clean_slab, is_expanded
+    return clean_slab
 
 def analyze_surface_sites(slab_path: str) -> dict:
     """ Pre-scan surface to find actually existing site types for Planner reference """
@@ -531,13 +530,6 @@ def analyze_surface_sites(slab_path: str) -> dict:
             elements.extend([el] * count)
         site_desc = "-".join(sorted(elements))
         site_inventory[conn].add(site_desc)
-    
-    # Fix fictitious 3-fold sites on square lattices like FCC(100)
-    # Logic: If a surface has both 4-fold (connectivity=4) and 3-fold (connectivity=3),
-    # and no extremely complex low-symmetry features, usually 3-fold is a triangulation artifact.
-    if 4 in site_inventory and 3 in site_inventory:
-        print("--- 🛠️ Crystallographic Correction: Hollow-4 detected, filtering geometric artifact Hollow-3 sites. ---")
-        del site_inventory[3]
 
     desc_list = []
     conn_map = {1: "Ontop", 2: "Bridge", 3: "Hollow-3", 4: "Hollow-4"}
@@ -565,8 +557,15 @@ def _get_fragment(SMILES: str, site_type: str, num_binding_indices: int, to_init
         except Exception:
             mol_with_hs = mol
         
-        # Clear charges to appease UFF force field
+        # Detect charged atoms BEFORE clearing, so we can decide whether to skip UFF later
         mol_for_opt = Chem.Mol(mol_with_hs)
+        has_charge = False
+        for atom in mol_for_opt.GetAtoms():
+            if atom.GetFormalCharge() != 0:
+                has_charge = True
+                break
+
+        # Clear charges/radicals/isotopes to appease UFF force field and conformer embedding
         for atom in mol_for_opt.GetAtoms():
             atom.SetFormalCharge(0)
             atom.SetNumRadicalElectrons(0) 
@@ -597,13 +596,6 @@ def _get_fragment(SMILES: str, site_type: str, num_binding_indices: int, to_init
             params_rand = AllChem.ETKDGv3()
             params_rand.useRandomCoords = True
             conf_ids = list(AllChem.EmbedMultipleConfs(mol_for_opt, numConfs=1, params=params_rand))
-
-        # Check for charged atoms. If present, UFF force field might crash/error, so skip UFF.
-        has_charge = False
-        for atom in mol_for_opt.GetAtoms():
-            if atom.GetFormalCharge() != 0:
-                has_charge = True
-                break
         
         if has_charge:
             print(f"--- 🛠️ _get_fragment: Charged atoms detected, skipping UFF pre-optimization. ---")
@@ -1101,8 +1093,8 @@ def relax_atoms(
             return 0
         radii = np.array(natural_cutoffs(initial, mult=1.25))
         cutoff_mat = radii[:, None] + radii[None, :]
-        d_initial = initial.get_all_distances()
-        d_final = final.get_all_distances()
+        d_initial = initial.get_all_distances(mic=True)
+        d_final = final.get_all_distances(mic=True)
 
         # Ignore H-H bonds
         symbols = initial.get_chemical_symbols()
