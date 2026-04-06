@@ -20,7 +20,7 @@ dependencies = [
     "langchain-google-genai",
     "langchain-ollama>=0.2.0",
     "langchain-huggingface>=0.1.0",
-    "langgraph-codeact>=0.1.3",
+    "langgraph-codeact>=0.1.0",
     "llm-openrouter>=0.4.1",
     "requests>=2.32.5",
     "autoadsorbate>=0.2.2",
@@ -47,10 +47,18 @@ dev = ["tox>=4.0", "doc8>=1.0"]
 [tool.tox]
 legacy_tox_ini = """
 [tox]
-envlist = doc8
+envlist = doc8,pyroma,py
 skip_missing_interpreters = true
 
 [testenv:doc8]
 deps = doc8
 commands = doc8 docs/ README.md
+
+[testenv:pyroma]
+deps = pyroma
+commands = pyroma .
+
+[testenv:py]
+deps = pytest
+commands = pytest tests/
 """
