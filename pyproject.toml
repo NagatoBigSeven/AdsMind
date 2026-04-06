@@ -42,3 +42,15 @@ find = {}
 
 [project.optional-dependencies]
 weave = ["weave>=0.52.6"]
+dev = ["tox>=4.0", "doc8>=1.0"]
+
+[tool.tox]
+legacy_tox_ini = """
+[tox]
+envlist = doc8
+skip_missing_interpreters = true
+
+[testenv:doc8]
+deps = doc8
+commands = doc8 docs/ README.md
+"""
