@@ -1,6 +1,6 @@
 # Quickstart Guide
 
-Get AdsKRK running in 5 minutes.
+Get AdsMind running in 5 minutes.
 
 ## Prerequisites
 

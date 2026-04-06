@@ -7,7 +7,7 @@ This module provides a unified interface for different atomistic simulation calc
 Usage:
     from src.calculators import get_backend, CalculatorConfig
 
-    backend = get_backend("mace")  # or from env: os.getenv("ADSKRK_BACKEND", "mace")
+    backend = get_backend("mace")  # or from env: os.getenv("ADSMIND_BACKEND", "mace")
     config = CalculatorConfig(device="cpu", model="small")
     calc = backend.get_calculator(config)
 """

@@ -102,7 +102,7 @@ def get_llm(api_key: str, backend_name: str = None, llm_config: dict = None):
     
     Args:
         api_key: API key for cloud backends (ignored for local backends)
-        backend_name: Backend name (defaults to ADSKRK_LLM_BACKEND env var or "google")
+        backend_name: Backend name (defaults to ADSMIND_LLM_BACKEND env var or "google")
         llm_config: Optional configuration overrides
         
     Returns:
@@ -110,7 +110,7 @@ def get_llm(api_key: str, backend_name: str = None, llm_config: dict = None):
     """
     # Determine backend
     if backend_name is None:
-        backend_name = os.environ.get("ADSKRK_LLM_BACKEND", DEFAULT_LLM_BACKEND)
+        backend_name = os.environ.get("ADSMIND_LLM_BACKEND", DEFAULT_LLM_BACKEND)
     
     # Get backend instance
     backend = get_llm_backend(backend_name)
@@ -391,7 +391,7 @@ def tool_executor_node(state: AgentState) -> dict:
         # 3. Initialize Calculator via Backend Abstraction
         try:
             # Get the calculator backend (defaults to MACE)
-            backend_name = os.getenv("ADSKRK_BACKEND", "mace")
+            backend_name = os.getenv("ADSMIND_BACKEND", "mace")
             backend = get_backend(backend_name)
             
             # Check GPU availability
@@ -837,7 +837,7 @@ def route_after_analysis(state: AgentState) -> str:
 
 # --- 5. Build and Compile Graph ---
 def get_agent_executor():
-    """ Build and compile the AdsKRK state machine graph. """
+    """ Build and compile the AdsMind state machine graph. """
     workflow = StateGraph(AgentState)
     workflow.add_node("pre_processor", pre_processor_node)
     workflow.add_node("planner", solution_planner_node)
@@ -889,7 +889,7 @@ def _prepare_initial_state(
     return {
         "session_id": session_id,
         "api_key": api_key,
-        "llm_backend": llm_backend or os.environ.get("ADSKRK_LLM_BACKEND", DEFAULT_LLM_BACKEND),
+        "llm_backend": llm_backend or os.environ.get("ADSMIND_LLM_BACKEND", DEFAULT_LLM_BACKEND),
         "llm_config": llm_config,
         "random_seed": random_seed,
         "relaxation_mode": relaxation_mode,
@@ -909,7 +909,7 @@ def _prepare_initial_state(
     }
 
 def parse_args():
-    parser = argparse.ArgumentParser(description="Run the AdsKRK.")
+    parser = argparse.ArgumentParser(description="Run the AdsMind.")
     parser.add_argument("--smiles", type=str, required=True, help="SMILES string.")
     parser.add_argument("--slab_path", type=str, required=True, help="Path to the slab structure file (XYZ, CIF, PDB, SDF, MOL, POSCAR).")
     parser.add_argument("--user_request", type=str, default="Find a stable adsorption configuration.", help="User's request.")
@@ -953,7 +953,7 @@ def main_cli():
     agent_executor = get_agent_executor()
     seed_info = f", Seed: {args.seed}" if args.seed is not None else ""
     mode_info = f", Mode: {relaxation_mode}"
-    print(f"\n--- 🚀 AdsKRK Started (Backend: {llm_backend}{seed_info}{mode_info}) ---\n")
+    print(f"\n--- 🚀 AdsMind Started (Backend: {llm_backend}{seed_info}{mode_info}) ---\n")
     final_state = None
 
     config = {"recursion_limit": 50}
@@ -967,7 +967,7 @@ def main_cli():
                 print(f"[{last_message.type}]")
                 print(last_message.content)
                 print("---\n")
-    print("\n--- 🏁 AdsKRK Task Completed ---\n")
+    print("\n--- 🏁 AdsMind Task Completed ---\n")
     print("Final Analysis Report:")
     if final_state and "messages" in final_state:
         for msg in reversed(final_state["messages"]):

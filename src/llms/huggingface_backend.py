@@ -12,7 +12,7 @@ Benefits:
 Setup:
     1. Install dependencies: pip install transformers accelerate
     2. (Optional) For quantization: pip install bitsandbytes
-    3. Set backend: ADSKRK_LLM_BACKEND=huggingface
+    3. Set backend: ADSMIND_LLM_BACKEND=huggingface
 
 Environment Variables:
     - HF_MODEL: Model Name/Path (default: Qwen/Qwen3-8B)

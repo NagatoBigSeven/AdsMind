@@ -1,6 +1,6 @@
 # Calculator Backend System
 
-AdsKRK supports pluggable calculator backends for atomistic simulations. This allows flexibility in choosing different computational engines while maintaining a unified interface.
+AdsMind supports pluggable calculator backends for atomistic simulations. This allows flexibility in choosing different computational engines while maintaining a unified interface.
 
 ## Quick Start
 
@@ -17,10 +17,10 @@ streamlit run src/app/app.py
 
 ```bash
 # Use MACE (default)
-export ADSKRK_BACKEND=mace
+export ADSMIND_BACKEND=mace
 
 # Future: Use OpenMD (not yet implemented)
-export ADSKRK_BACKEND=openmd
+export ADSMIND_BACKEND=openmd
 ```
 
 ### Programmatic Usage

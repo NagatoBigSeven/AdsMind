@@ -19,7 +19,7 @@ from src.utils.config import (
 )
 
 st.set_page_config(page_title="LLM Agent Demo", layout="wide")
-st.title("adsKRK")
+st.title("AdsMind")
 
 @st.cache_resource
 def initialize_agent_executor():
@@ -131,7 +131,7 @@ if is_cloud_backend(selected_backend):
     if not env_key_active:
         save_key_checkbox = st.sidebar.checkbox(
             "Save for future sessions",
-            help="Saves to ~/.adskrk/config.json"
+            help="Saves to ~/.adsmind/config.json"
         )
         
         # Save if checkbox is checked and key is different from saved
@@ -448,7 +448,7 @@ with st.sidebar.expander("ℹ️ Quick Start Guide"):
 # Scientific disclaimer
 st.sidebar.markdown("---")
 st.sidebar.caption(
-    "⚠️ **Disclaimer**: AdsKRK is an AI-assisted screening tool. "
+    "⚠️ **Disclaimer**: AdsMind is an AI-assisted screening tool. "
     "Results should be validated with DFT or experimental methods before publication. "
     "Energy values are computed at 0K without thermal/entropic corrections. "
     "See [documentation](docs/quickstart.md) for details."

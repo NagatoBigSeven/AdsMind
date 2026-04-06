@@ -12,7 +12,7 @@ Benefits:
 Setup:
     1. Install Ollama: curl -fsSL https://ollama.com/install.sh | sh
     2. Pull a model: ollama pull qwen3:8b
-    3. Set backend: ADSKRK_LLM_BACKEND=ollama
+    3. Set backend: ADSMIND_LLM_BACKEND=ollama
 """
 
 import os

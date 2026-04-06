@@ -1,5 +1,5 @@
 <p style="text-align: center;">
-  <img src="./assets/adskrk_concept.png" alt="Project logo" width="80%"/>
+  <img src="./assets/adsmind_concept.png" alt="Project logo" width="80%"/>
 </p>
 
 <br>
@@ -8,14 +8,14 @@
 [![Learn more @SchwallerGroup](https://img.shields.io/badge/Learn%20%0Amore-schwallergroup-blue)](https://schwallergroup.github.io)
 
 <h1 align="left">
-  AdsKRK: An agentic atomistic simulation framework for surface science.
+  AdsMind: A Physics-Grounded Agent for Self-Correcting Adsorption Configuration Discovery on Heterogeneous Catalyst Surfaces
 </h1>
 
 <br>
 
-Welcome to the AdsKRK repository! This project was developed as a semester-long research project at EPFL, inspired by the [LLM Hackathon for Application in Chemistry and Materials Science](https://llmhackathon.github.io/).
+Welcome to the AdsMind repository! This project presents a physics-grounded LLM agent that autonomously discovers stable adsorption configurations on heterogeneous catalyst surfaces.
 
-The goal of AdsKRK is to showcase how Large Language Models (LLMs) can autonomously explore the binding configurations of adsorbates on hetero-catalytic surfaces. Starting from only a SMILES string and a surface structure, the agent can:
+The goal of AdsMind is to showcase how Large Language Models (LLMs) can self-correctively explore the binding configurations of adsorbates on hetero-catalytic surfaces. Starting from only a SMILES string and a surface structure, the agent can:
 
 * generate binding configurations,
 * run structure relaxations,
@@ -24,7 +24,7 @@ The goal of AdsKRK is to showcase how Large Language Models (LLMs) can autonomou
 
 Users can also interact with the agent - asking questions about the system or guiding the search process through prompts.
 
-At the core of AdsKRK is [AutoAdsorbate](https://github.com/basf/autoadsorbate) - a powerful tool for generating chemically meaningful molecular and fragment configurations on surfaces, providing a search space for the agent.
+At the core of AdsMind is [AutoAdsorbate](https://github.com/basf/autoadsorbate) - a powerful tool for generating chemically meaningful molecular and fragment configurations on surfaces, providing a search space for the agent.
 
 ## ✨ Features
 
@@ -69,7 +69,7 @@ Then provide your inputs in the sidebar:
 Select your backend in the app sidebar or via environment variable:
 
 ```bash
-export ADSKRK_LLM_BACKEND=google    # or openrouter, ollama, huggingface
+export ADSMIND_LLM_BACKEND=google    # or openrouter, ollama, huggingface
 ```
 
 📖 See [LLM Backends](docs/llm_backends.md) for configuration details.
@@ -98,7 +98,7 @@ Multiple ways to provide your API key (in priority order):
    ```
 
 2. **Config file**: Use the app's "Save for future sessions" checkbox
-   * Stored at: `~/.adskrk/config.json`
+   * Stored at: `~/.adsmind/config.json`
 
 3. **Manual input**: Enter in the sidebar each session
 

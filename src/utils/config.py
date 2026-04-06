@@ -1,5 +1,5 @@
 """
-Configuration management utilities for AdsKRK.
+Configuration management utilities for AdsMind.
 
 Handles loading and saving API keys from/to a local JSON configuration file.
 Supports auto-detection of API keys from multiple sources with priority:
@@ -12,7 +12,7 @@ from pathlib import Path
 from typing import Optional, Tuple, Literal
 
 # Configuration file path (stored in user's home directory)
-CONFIG_DIR = Path.home() / ".adskrk"
+CONFIG_DIR = Path.home() / ".adsmind"
 CONFIG_FILE_PATH = CONFIG_DIR / "config.json"
 
 # Type alias for API key source
@@ -63,7 +63,7 @@ def get_api_key() -> Tuple[Optional[str], ApiKeySource]:
     
     Priority order:
     1. Environment variable (OPENROUTER_API_KEY)
-    2. Config file (~/.adskrk/config.json)
+    2. Config file (~/.adsmind/config.json)
     3. None (user must input)
     
     Returns:
@@ -113,7 +113,7 @@ def get_calculator_backend() -> str:
     """
     Get the calculator backend name from environment variable.
     
-    The backend can be configured via the ADSKRK_BACKEND environment variable.
+    The backend can be configured via the ADSMIND_BACKEND environment variable.
     Defaults to "mace" if not set.
     
     Available backends:
@@ -123,7 +123,7 @@ def get_calculator_backend() -> str:
     Returns:
         str: Backend name (e.g., "mace", "openmd")
     """
-    return os.environ.get("ADSKRK_BACKEND", "mace")
+    return os.environ.get("ADSMIND_BACKEND", "mace")
 
 
 # ============================================================
@@ -151,8 +151,8 @@ def get_llm_backend_name() -> str:
     Get the LLM backend name from environment variable or config.
     
     Priority order:
-    1. Environment variable (ADSKRK_LLM_BACKEND)
-    2. Config file (~/.adskrk/config.json -> llm_backend)
+    1. Environment variable (ADSMIND_LLM_BACKEND)
+    2. Config file (~/.adsmind/config.json -> llm_backend)
     3. Default ("google")
     
     Available backends:
@@ -165,7 +165,7 @@ def get_llm_backend_name() -> str:
         str: LLM backend name
     """
     # Environment variable takes priority
-    env_backend = os.environ.get("ADSKRK_LLM_BACKEND")
+    env_backend = os.environ.get("ADSMIND_LLM_BACKEND")
     if env_backend:
         return env_backend
     
@@ -184,7 +184,7 @@ def get_api_key_for_backend(backend: str) -> Tuple[Optional[str], ApiKeySource]:
     
     Priority order:
     1. Environment variable (backend-specific, e.g., GOOGLE_API_KEY)
-    2. Config file (~/.adskrk/config.json)
+    2. Config file (~/.adsmind/config.json)
     3. None (user must input)
     
     Args:
