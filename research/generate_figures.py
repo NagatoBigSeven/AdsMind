@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate publication-quality figures and LaTeX tables for the AdsKRK paper."""
+"""Generate publication-quality figures and LaTeX tables for the AdsMind paper."""
 
 import importlib
 import importlib.util

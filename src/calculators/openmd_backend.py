@@ -40,7 +40,7 @@ class OpenMDBackend(BaseBackend):
         """
         raise NotImplementedError(
             "OpenMD backend is not yet implemented. "
-            "Contributions welcome! See: https://github.com/schwallergroup/llm_adsorbate"
+            "Contributions welcome! See: https://github.com/AI4QC/AdsMind"
         )
 
     def get_default_config(self, has_gpu: bool) -> CalculatorConfig:

@@ -16,7 +16,8 @@
 
 ## Configuration and Secrets
 
-- API keys and the preferred LLM backend are stored in `~/.adskrk/config.json`.
+- API keys and the preferred LLM backend are stored in `~/.adsmind/config.json`.
+- The legacy `~/.adskrk/config.json` path is still accepted as a fallback.
 - Environment variables override values stored in that file.
 - The config writer applies a best-effort `0600` permission mask on POSIX systems.
 
@@ -32,4 +33,4 @@
 
 - Heavy local backends such as HuggingFace and MACE inherit the host's PyTorch, accelerator, and driver constraints.
 - CI intentionally avoids remote API calls and long relaxation jobs; integration validation should be done on a prepared research machine before publication-quality runs.
-- `adskrk-preflight --ci` provides a lightweight local sanity check for install state, backend discovery, and graph compilation.
+- `adsmind-preflight --ci` provides a lightweight local sanity check for install state, backend discovery, and graph compilation.

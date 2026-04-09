@@ -1,4 +1,4 @@
-"""Environment preflight checks for AdsKRK."""
+"""Environment preflight checks for AdsMind."""
 
 from __future__ import annotations
 
@@ -54,7 +54,7 @@ def run_preflight(strict: bool = False) -> tuple[int, dict[str, Any]]:
 
 def main(argv: list[str] | None = None) -> int:
     """CLI entrypoint for environment preflight."""
-    parser = argparse.ArgumentParser(description="Run AdsKRK environment preflight checks.")
+    parser = argparse.ArgumentParser(description="Run AdsMind environment preflight checks.")
     parser.add_argument(
         "--json",
         action="store_true",
@@ -71,7 +71,7 @@ def main(argv: list[str] | None = None) -> int:
     if args.json:
         print(json.dumps(report, indent=2, ensure_ascii=False))
     else:
-        print("AdsKRK preflight")
+        print("AdsMind preflight")
         print(f"Python: {report.get('python_version', 'unknown')}")
         print(f"Platform: {report.get('platform', 'unknown')}")
         print(f"Configured LLM backend: {report.get('configured_llm_backend', 'unknown')}")

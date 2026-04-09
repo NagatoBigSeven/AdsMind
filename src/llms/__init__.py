@@ -1,5 +1,5 @@
 """
-LLM Backend Module for AdsKRK.
+LLM Backend Module for AdsMind.
 
 This module provides a factory pattern for LLM backends, allowing easy switching
 between different LLM providers (cloud and local).

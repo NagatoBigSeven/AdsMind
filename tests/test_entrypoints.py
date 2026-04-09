@@ -50,7 +50,7 @@ class TestEntrypoints(unittest.TestCase):
                 agent.main_cli()
 
         output = stdout.getvalue()
-        self.assertIn("AdsKRK Started", output)
+        self.assertIn("AdsMind Started", output)
         self.assertIn("final report", output)
 
     def test_streamlit_root_entrypoint_reexports_app_module(self):

@@ -1,1 +1,1 @@
-"""Research-only scripts and assets for AdsKRK."""
+"""Research-only scripts and assets for AdsMind."""

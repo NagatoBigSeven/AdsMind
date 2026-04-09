@@ -41,5 +41,5 @@ validated.
 
 - `python -m unittest discover -s tests -p 'test_*.py' -v` is the required regression baseline.
 - `python -m compileall src tests streamlit_app.py research` is the required import/compile smoke baseline.
-- `adskrk-preflight --ci` is the required install/runtime sanity baseline.
+- `adsmind-preflight --ci` is the required install/runtime sanity baseline.
 - Streamlit, remote APIs, and heavy relaxation runs are validated as runtime paths, but not exercised in CI to avoid network and hardware coupling.

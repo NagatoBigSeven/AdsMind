@@ -1,6 +1,6 @@
 # DFT 验证实验执行细则
 
-本文档提供 AdsKRK 论文中 DFT 验证实验的详细执行方案，包括体系选择、计算设置、工作流程、数据分析和质量保证。
+本文档提供 AdsMind 论文中 DFT 验证实验的详细执行方案，包括体系选择、计算设置、工作流程、数据分析和质量保证。
 
 ---
 
@@ -129,7 +129,7 @@
 | **文献基准数据可用性** | 20% | 5=大量数据；3=部分数据；1=无数据 |
 | **计算成本** | 15% | 5=低成本；3=中等成本；1=高成本 |
 | **化学代表性** | 25% | 5=高度代表性；3=中等；1=边缘案例 |
-| ** AdsKRK 特性测试价值** | 25% | 5=能测试核心功能；3=部分测试；1=无关 |
+| ** AdsMind 特性测试价值** | 25% | 5=能测试核心功能；3=部分测试；1=无关 |
 | **失败风险** | 15% | 5=低风险；3=中等风险；1=高风险 |
 
 **推荐选择方法**：
@@ -320,7 +320,7 @@
 
 ```
 # DFT 参数设置
-SYSTEM = AdsKRK DFT Validation - Single Point
+SYSTEM = AdsMind DFT Validation - Single Point
 ENCUT = 500
 PREC = Accurate
 
@@ -348,7 +348,7 @@ LWAVE = .FALSE.
 
 ```
 # DFT 参数设置
-SYSTEM = AdsKRK DFT Validation - Relaxation
+SYSTEM = AdsMind DFT Validation - Relaxation
 ENCUT = 500
 PREC = Accurate
 
@@ -726,7 +726,7 @@ if __name__ == '__main__':
 #!/bin/bash
 # submit_jobs.sh - 提交 DFT 计算任务
 
-#SBATCH --job-name=AdsKRK_DFT
+#SBATCH --job-name=AdsMind_DFT
 #SBATCH --partition=compute
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=24
@@ -1067,8 +1067,8 @@ backup/
 
 **文档版本**：v1.0
 **创建日期**：2026-03-28
-**维护者**：AdsKRK 项目组
+**维护者**：AdsMind 项目组
 
 ---
 
-通过遵循本执行细则，DFT 验证实验将能够高效、可靠地完成，为 AdsKRK 论文提供坚实的实证基础。
+通过遵循本执行细则，DFT 验证实验将能够高效、可靠地完成，为 AdsMind 论文提供坚实的实证基础。

@@ -1,7 +1,7 @@
 """
 Google AI backend implementation.
 
-This is the default LLM backend for AdsKRK, providing direct access to
+This is the default LLM backend for AdsMind, providing direct access to
 Google's Gemini models via the Google AI Studio API.
 
 Benefits over OpenRouter:
@@ -27,7 +27,7 @@ class GoogleBackend(BaseLLMBackend):
     """
     Google AI (Gemini) LLM backend.
 
-    This is the default and recommended backend for AdsKRK, using Google's
+    This is the default and recommended backend for AdsMind, using Google's
     Gemini models for chemical reasoning and planning.
     """
 

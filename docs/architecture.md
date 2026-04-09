@@ -1,7 +1,6 @@
 # Architecture
 
-AdsKRK is the application name used in the UI and documentation. The Python
-distribution remains `llm-adsorbate` for packaging compatibility.
+AdsMind is the application name used in the UI, documentation, and packaging.
 
 ## Runtime Flow
 
@@ -31,7 +30,8 @@ distribution remains `llm-adsorbate` for packaging compatibility.
 ## Outputs
 
 - Session outputs are written under `outputs/<session_id>/`
-- API keys and the preferred LLM backend are stored in `~/.adskrk/config.json`
+- API keys and the preferred LLM backend are stored in `~/.adsmind/config.json`
+- The legacy `~/.adskrk/config.json` path is still read as a fallback.
 - See `docs/runtime_operations.md` for output lifecycle, session isolation, and runtime controls.
 
 ## Compatibility

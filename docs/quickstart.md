@@ -1,6 +1,6 @@
 # Quickstart Guide
 
-Get AdsKRK running in 5 minutes.
+Get AdsMind running in 5 minutes.
 
 ## Prerequisites
 
@@ -12,7 +12,7 @@ Get AdsKRK running in 5 minutes.
 
 ```bash
 # Clone the repository
-git clone <your-repo-url> AdsMind
+git clone https://github.com/AI4QC/AdsMind.git
 cd AdsMind
 
 # Install dependencies

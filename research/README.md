@@ -2,7 +2,7 @@
 
 This directory contains scripts and artifacts used for benchmarks, figure
 generation, and manuscript work. These files are not required to run the main
-AdsKRK application.
+AdsMind application.
 
 ## Scripts
 

@@ -45,7 +45,7 @@ def prepare_slab(slab_atoms: ase.Atoms) -> tuple[ase.Atoms, bool]:
         logger.warning(
             "Input structure has no periodic boundary conditions (PBC). "
             "This typically indicates a molecular cluster (e.g., from PDB/MOL files), "
-            "not a surface slab. AdsKRK is designed for periodic surfaces; results may "
+            "not a surface slab. AdsMind is designed for periodic surfaces; results may "
             "be unreliable."
         )
         logger.warning("Applying fallback XY periodic boundary conditions")
