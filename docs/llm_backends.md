@@ -8,7 +8,7 @@ The default backend is **Google AI (Gemini 2.5 Pro)**. Set your API key and run:
 
 ```bash
 export GOOGLE_API_KEY="your-google-api-key"
-streamlit run src/app/app.py
+streamlit run streamlit_app.py
 ```
 
 ## Supported Backends
@@ -113,8 +113,11 @@ Load models directly from HuggingFace Hub for full offline capability.
 **Setup:**
 
 ```bash
-# Install dependencies (included in project)
-pip install transformers accelerate
+# Install core project deps
+uv pip install -e .
+
+# Optional: update local-model tooling only
+uv pip install -e ".[dev]"
 
 # Optional: For quantization
 pip install bitsandbytes

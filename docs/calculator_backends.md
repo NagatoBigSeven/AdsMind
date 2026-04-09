@@ -8,7 +8,7 @@ The default backend is **MACE** (MACE-MP foundation model). No configuration is 
 
 ```python
 # The agent automatically uses MACE with platform-optimized settings
-streamlit run src/app/app.py
+streamlit run streamlit_app.py
 ```
 
 ## Backend Selection

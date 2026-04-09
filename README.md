@@ -15,6 +15,9 @@
 
 Welcome to the AdsKRK repository! This project was developed as a semester-long research project at EPFL, inspired by the [LLM Hackathon for Application in Chemistry and Materials Science](https://llmhackathon.github.io/).
 
+The application and UI are named **AdsKRK**. The Python distribution name remains
+`llm-adsorbate` for packaging compatibility.
+
 The goal of AdsKRK is to showcase how Large Language Models (LLMs) can autonomously explore the binding configurations of adsorbates on hetero-catalytic surfaces. Starting from only a SMILES string and a surface structure, the agent can:
 
 * generate binding configurations,
@@ -37,15 +40,15 @@ At the core of AdsKRK is [AutoAdsorbate](https://github.com/basf/autoadsorbate) 
 
 ```bash
 # Clone and install
-git clone https://github.com/schwallergroup/llm_adsorbate.git
-cd llm_adsorbate
+git clone <your-repo-url> AdsMind
+cd AdsMind
 uv pip install -e .
 
 # Set API key (Google AI is default)
 export GOOGLE_API_KEY="your-google-api-key"
 
 # Run the app
-streamlit run src/app/app.py
+streamlit run streamlit_app.py
 ```
 
 Then provide your inputs in the sidebar:
@@ -128,6 +131,9 @@ on a top site of the Cu(211) surface, is unstable and leads to desorption.
 * [Quickstart Guide](docs/quickstart.md) - Get started in 5 minutes
 * [LLM Backends](docs/llm_backends.md) - Configure LLM providers
 * [Calculator Backends](docs/calculator_backends.md) - MACE and other calculators
+* [Architecture](docs/architecture.md) - Runtime components and data flow
+* [Support Matrix](docs/support_matrix.md) - Supported environments and backend maturity
+* [Runtime Operations](docs/runtime_operations.md) - Outputs, session isolation, and runtime controls
 
 ## 👩‍💻 Development
 
@@ -135,8 +141,11 @@ on a top site of the Cu(211) surface, is unstable and leads to desorption.
 # Install with dev dependencies
 uv pip install -e ".[dev]"
 
+# Run preflight checks
+adskrk-preflight --ci
+
 # Run tests
-pytest tests/
+python -m unittest discover -s tests -p 'test_*.py' -v
 ```
 
 ## 📄 License

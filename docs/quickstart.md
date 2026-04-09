@@ -12,8 +12,8 @@ Get AdsKRK running in 5 minutes.
 
 ```bash
 # Clone the repository
-git clone https://github.com/schwallergroup/llm_adsorbate.git
-cd llm_adsorbate
+git clone <your-repo-url> AdsMind
+cd AdsMind
 
 # Install dependencies
 uv pip install -e .
@@ -48,7 +48,7 @@ uv pip install -e .
 ## Step 2: Launch the App
 
 ```bash
-streamlit run src/app/app.py
+streamlit run streamlit_app.py
 ```
 
 The app will open in your browser at `http://localhost:8501`.
