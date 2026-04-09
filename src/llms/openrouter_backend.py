@@ -10,6 +10,7 @@ Benefits:
 - Usage-based billing across providers
 """
 
+import importlib.util
 from typing import Optional
 
 from langchain_core.language_models.chat_models import BaseChatModel
@@ -45,12 +46,7 @@ class OpenRouterBackend(BaseLLMBackend):
     @property
     def is_available(self) -> bool:
         """Check if langchain-openai is installed."""
-        try:
-            from langchain_openai import ChatOpenAI
-
-            return True
-        except ImportError:
-            return False
+        return importlib.util.find_spec("langchain_openai") is not None
 
     def get_chat_model(self, config: LLMConfig) -> BaseChatModel:
         """

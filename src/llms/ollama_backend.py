@@ -15,6 +15,7 @@ Setup:
     3. Set backend: ADSKRK_LLM_BACKEND=ollama
 """
 
+import importlib.util
 import os
 from typing import Optional
 
@@ -49,12 +50,7 @@ class OllamaBackend(BaseLLMBackend):
     @property
     def is_available(self) -> bool:
         """Check if langchain-ollama is installed."""
-        try:
-            from langchain_ollama import ChatOllama
-
-            return True
-        except ImportError:
-            return False
+        return importlib.util.find_spec("langchain_ollama") is not None
 
     def get_chat_model(self, config: LLMConfig) -> BaseChatModel:
         """

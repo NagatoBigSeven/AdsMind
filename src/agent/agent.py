@@ -1,24 +1,9 @@
 import os
-import builtins
-import math
 import argparse
 import json
-from collections import Counter
 from typing import TypedDict, List, Optional, Dict, Any
 import numpy as np
-import pandas as pd
-import scipy
-import sklearn
 from rdkit import Chem
-import ase
-from ase import units
-from ase.constraints import FixAtoms
-from ase.io import read
-from ase.md.langevin import Langevin
-from ase.md.velocitydistribution import MaxwellBoltzmannDistribution
-from ase.optimize import BFGS
-import autoadsorbate
-import torch
 from dotenv import load_dotenv
 
 # Calculator backend abstraction
@@ -32,18 +17,7 @@ from langgraph.graph import StateGraph, END
 from langchain_core.output_parsers import JsonOutputParser
 
 from src.utils.logger import get_logger
-from src.utils.config import get_api_key
-from src.tools.tools import (
-    read_atoms_object,
-    get_atom_index_menu,
-    prepare_slab,
-    analyze_surface_sites,
-    create_fragment_from_plan,
-    populate_surface_with_fragment,
-    relax_atoms, 
-    save_ase_atoms,
-    analyze_relaxation_results
-)
+from src.agent.history import build_history_entry
 from src.agent.prompts import PLANNER_PROMPT
 
 # Initialize logger for this module
@@ -165,6 +139,8 @@ def make_plan_key(plan_json: Optional[dict]) -> Optional[str]:
 # --- 3. Define LangGraph Nodes ---
 def pre_processor_node(state: AgentState) -> dict:
     logger.info("Calling Pre-Processor Node")
+    from src.tools.tools import analyze_surface_sites
+
     try:
         analysis = analyze_surface_sites(state["slab_path"])
         return {
@@ -182,6 +158,8 @@ def pre_processor_node(state: AgentState) -> dict:
 
 def solution_planner_node(state: AgentState) -> dict:
     logger.info("Calling Planner Node")
+    from src.tools.tools import get_atom_index_menu
+
     llm = get_llm(
         state["api_key"],
         backend_name=state.get("llm_backend"),
@@ -252,7 +230,9 @@ def plan_validator_node(state: AgentState) -> dict:
         # Use state["smiles"] (from initial input) instead of anything in the plan
         mol = Chem.MolFromSmiles(state["smiles"])
         if not mol:
-            raise ValueError(f"RDKit returned None. SMILES might be invalid or contain valences RDKit cannot handle.")
+            raise ValueError(
+                "RDKit returned None. SMILES might be invalid or contain valences RDKit cannot handle."
+            )
     except Exception as e:
         error = f"False, Base SMILES string '{state['smiles']}' cannot be parsed by RDKit. This is an unrecoverable error. Please check SMILES. Error: {e}"
         logger.info(f"Validation Failed: {error}")
@@ -273,7 +253,10 @@ def plan_validator_node(state: AgentState) -> dict:
     
     adsorbate_type = plan_json.get("adsorbate_type")
     if adsorbate_type not in ["Molecule", "ReactiveSpecies"]:
-        error = f"False, Plan JSON missing or invalid `adsorbate_type` field (must be 'Molecule' or 'ReactiveSpecies')."
+        error = (
+            "False, Plan JSON missing or invalid `adsorbate_type` field "
+            "(must be 'Molecule' or 'ReactiveSpecies')."
+        )
         logger.info(f"Validation Failed: {error}")
         return {"validation_error": error}
 
@@ -347,7 +330,22 @@ def plan_validator_node(state: AgentState) -> dict:
 
 def tool_executor_node(state: AgentState) -> dict:
     """ Node 4: Tool Executor """
-    print("--- 🛠️ Calling Tool Executor Node ---")
+    logger.info("Calling Tool Executor Node")
+    from ase import units
+    from ase.constraints import FixAtoms
+    from ase.io import read
+    from ase.md.langevin import Langevin
+    from ase.md.velocitydistribution import MaxwellBoltzmannDistribution
+    from ase.optimize import BFGS
+    import torch
+    from src.tools.tools import (
+        read_atoms_object,
+        prepare_slab,
+        create_fragment_from_plan,
+        populate_surface_with_fragment,
+        relax_atoms,
+        analyze_relaxation_results,
+    )
     
     # Set random seeds for reproducibility if specified
     random_seed = state.get("random_seed")
@@ -429,7 +427,7 @@ def tool_executor_node(state: AgentState) -> dict:
             constraint = FixAtoms(indices=list(range(len(e_surf_atoms))))
             e_surf_atoms.set_constraint(constraint)
 
-            print(f"--- 🛠️ Calculating single point energy of bare surface (all atoms fixed)... ---")
+            logger.info("Calculating single point energy of bare surface (all atoms fixed)")
 
             E_surface = e_surf_atoms.get_potential_energy() # This is now a single point energy
             tool_logs.append(f"Success: E_surface = {E_surface:.4f} eV.")
@@ -460,7 +458,7 @@ def tool_executor_node(state: AgentState) -> dict:
             adsorbate_only_atoms.set_cell([20, 20, 20]) 
             adsorbate_only_atoms.center()
             
-            print(f"--- 🛠️ Relaxing isolated {state['smiles']} molecule... ---")
+            logger.info(f"Relaxing isolated adsorbate for SMILES {state['smiles']}")
 
             # Detect single atom molecule.
             if len(adsorbate_only_atoms) > 1:
@@ -473,7 +471,10 @@ def tool_executor_node(state: AgentState) -> dict:
                 # Protocol 2: BFGS Optimization (Consistent with relax_atoms)
                 BFGS(adsorbate_only_atoms, trajectory=None, logfile=None).run(fmax=opt_fmax, steps=opt_steps)
             else:
-                print(f"--- 🛠️ Single atom adsorbate detected ({len(adsorbate_only_atoms)} atom), skipping vacuum relaxation. ---")
+                logger.info(
+                    "Single atom adsorbate detected "
+                    f"({len(adsorbate_only_atoms)} atom), skipping vacuum relaxation"
+                )
             
             E_adsorbate = adsorbate_only_atoms.get_potential_energy()
             tool_logs.append(f"Success: E_adsorbate = {E_adsorbate:.4f} eV.")
@@ -499,7 +500,10 @@ def tool_executor_node(state: AgentState) -> dict:
         slab_indices = list(range(len(final_slab_atoms)))
         relax_n = plan_solution.get("relax_top_n", 1)
         relaxation_mode = state.get("relaxation_mode", "fast")
-        print(f"--- 🛠️ Using {backend.name} backend on device: {calc_config.device} (relaxation_mode={relaxation_mode}) ---")
+        logger.info(
+            f"Using {backend.name} backend on device: {calc_config.device} "
+            f"(relaxation_mode={relaxation_mode})"
+        )
 
         final_traj_file = relax_atoms(
             atoms_list=list(initial_conformers),
@@ -526,7 +530,7 @@ def tool_executor_node(state: AgentState) -> dict:
             e_surface_ref=E_surface,
             e_adsorbate_ref=E_adsorbate
         )
-        tool_logs.append(f"Success: Analysis tool executed.")
+        tool_logs.append("Success: Analysis tool executed.")
         logger.info(f"Analysis Result: {analysis_json_str}")
         analysis_json = json.loads(analysis_json_str)
 
@@ -570,9 +574,19 @@ def tool_executor_node(state: AgentState) -> dict:
     if plan_key is not None and plan_key not in updated_keys:
         updated_keys.append(plan_key)
 
+    updated_history = list(state.get("history", []))
+    if isinstance(analysis_json, dict):
+        try:
+            updated_history.append(
+                build_history_entry(state.get("plan"), analysis_json, new_best_molecular)
+            )
+        except Exception as history_error:
+            updated_history.append(f"History generation exception: {history_error}")
+
     return {
         "messages": [ToolMessage(content="\n".join(tool_logs), tool_call_id="tool_executor")],
         "analysis_json": json.dumps(analysis_json),
+        "history": updated_history,
         "best_result": new_best_molecular,
         "best_dissociated_result": new_best_dissociated,
         "attempted_keys": updated_keys,
@@ -583,7 +597,7 @@ def final_analyzer_node(state: AgentState) -> dict:
     Node 5: Final Analyzer
     Function: Generate report based on global best results, distinguishing between perfect adsorption and intramolecular rearrangement.
     """
-    print("--- ✍️ Calling Final Analyzer Node ---")
+    logger.info("Calling Final Analyzer Node")
     llm = get_llm(
         state["api_key"],
         backend_name=state.get("llm_backend"),
@@ -597,34 +611,32 @@ def final_analyzer_node(state: AgentState) -> dict:
     
     try:
         last_analysis = json.loads(last_analysis_json_str)
-    except:
+    except (TypeError, json.JSONDecodeError):
         last_analysis = {}
 
     # 2. Decision: Which data to report?
     target_data = None
     plan_used = None
     source_type = "failure"
-    result_label = "Unknown" # Used to prompt LLM for result type
-
     # Priority 1: History Best
     if best_result and isinstance(best_result, dict):
-        print(f"--- ✍️ Final Analyzer: Locked global best plan (E={best_result.get('most_stable_energy_eV')} eV) ---")
+        logger.info(
+            "Final Analyzer: Locked global best plan "
+            f"(E={best_result.get('most_stable_energy_eV')} eV)"
+        )
         target_data = best_result.get("analysis_json")
         plan_used = best_result.get("plan")
-        # If route_after_analysis saved result_type, read it
-        result_label = best_result.get("result_type", "Best History")
         source_type = "success"
     
     # Priority 2: Last attempt success
     elif last_analysis.get("status") == "success" and last_analysis.get("is_covalently_bound"):
-        print("--- ✍️ Final Analyzer: No history best, using success result from last step ---")
+        logger.info("Final Analyzer: No history best, using success result from last step")
         target_data = last_analysis
         plan_used = state.get("plan")
-        result_label = "Last Attempt"
         source_type = "success"
     
     else:
-        print("--- ✍️ Final Analyzer: All attempts failed ---")
+        logger.info("Final Analyzer: All attempts failed")
         source_type = "failure"
 
     # 3. Construct Prompt
@@ -725,110 +737,15 @@ def route_after_analysis(state: AgentState) -> str:
         logger.info("Decision: Termination signal detected (Terminate Action), process ending normally. ")
         return "end"
 
-    current_history = state.get("history", [])
-    
     try:
         analysis_data = json.loads(state.get("analysis_json", "{}"))
-        status = analysis_data.get("status")
-        
-        # Extract plan description
-        plan = state.get("plan", {}).get("solution", {})
-        plan_desc = f"{plan.get('site_type')} @ {plan.get('surface_binding_atoms')} (Index {plan.get('adsorbate_binding_indices')})"
-        
-        if status == "fatal_error":
-            state["history"].append(f"【FATAL ERROR】 Plan: {plan_desc} -> {analysis_data.get('message')}")
+        if analysis_data.get("status") == "fatal_error":
             return "end"
-
-        # 1. Extract Key Metrics
-        energy = analysis_data.get("most_stable_energy_eV", "N/A")
-        bond_change = analysis_data.get("bond_change_count", 0)
-        is_dissociated = analysis_data.get("is_dissociated", False)
-        
-        # 2. Extract Site Slip Information
-        site_info = analysis_data.get("site_analysis", {})
-        actual_site = site_info.get("actual_site_type", "unknown")
-        planned_site = site_info.get("planned_site_type", "unknown")
-        
-        # Handle Chemical Slip
-        is_chem_slip = site_info.get("is_chemical_slip", False)
-        planned_syms = site_info.get("planned_symbols", [])
-        actual_syms = site_info.get("actual_symbols", [])
-
-        # --- Define base site_msg ---
-        site_msg = f"Site: {actual_site} ({','.join(actual_syms)})"
-
-        # Reinforce negative feedback for slips
-        if is_chem_slip:
-            planned_str = "-".join(planned_syms)
-            actual_str = "-".join(actual_syms)
-            site_msg = (
-                f"⚠️【Unstable Site Warning】⚠️: "
-                f"Planned {planned_site} ({planned_str}) is unstable, adsorbate spontaneously slipped to {actual_site} ({actual_str})."
-                f"This means {planned_str} has insufficient affinity for this adsorbate. Please **FORBID** testing {planned_str} type sites again!"
-            )
-        elif actual_site != "unknown" and planned_site != "unknown" and actual_site != planned_site:
-            site_msg = f"⚠️ Geometric Slip: {planned_site} -> {actual_site}"
-
-        # --- 3. [Fix Logic] Intelligently distinguish "New Best" from "Duplicate Convergence" ---
-        tag = ""
-        best_res = state.get("best_result")
-        
-        if best_res and isinstance(energy, (int, float)):
-            best_e = best_res.get("most_stable_energy_eV", float('inf'))
-            
-            # Core Fix: Check if current run is the one that created Best Result
-            # We compare plan objects. best_result stores the plan that produced it.
-            current_plan_obj = state.get("plan")
-            best_plan_obj = best_res.get("plan")
-            
-            # If current Plan is Best Plan, it's a "New Record", not "Duplicate"
-            is_new_record = (current_plan_obj == best_plan_obj)
-
-            # Extract geometric fingerprints for rigorous comparison
-            current_fp = site_info.get("site_fingerprint", "")
-            best_fp_data = best_res.get("analysis_json", {}).get("site_analysis", {})
-            # Handle case where analysis_json might be a dict or needs parsing (best_result stores parsed dict in your logic)
-            best_fp = best_fp_data.get("site_fingerprint", "")
-            
-            if is_new_record:
-                tag = " [🌟 New Best]"
-            elif abs(energy - best_e) < 0.05:
-                # Rigorous check: Energy is same, but is it the same site?
-                if current_fp and best_fp and current_fp == best_fp:
-                    tag = " [🔄 Converged to known best]"
-                else:
-                    tag = " [⚠️ Energy Degenerate but Geometrically Distinct]"
-        
-        # Append Tag
-        site_msg = f"{site_msg}{tag}"
-
-        # 4. Build History Entry
-        if status == "success":
-            if is_dissociated:
-                res_str = "❌ Dissociated"
-            elif bond_change > 0:
-                res_str = f"⚠️ Rearrangement(BC={bond_change})"
-            else:
-                res_str = "✅ Perfect Adsorption"
-                
-            # Format: [Result] Plan -> Actual Site | Energy
-            history_entry = (
-                f"【{res_str}】 {plan_desc} "
-                f"-> {site_msg} | "
-                f"E={energy:.3f} eV"
-            )
-        else:
-            history_entry = f"【Calculation Failed】 {plan_desc} -> Reason: {analysis_data.get('message')}"
-            
-        current_history.append(history_entry)
-
-    except Exception as e:
-        current_history.append(f"History generation exception: {e}")
-
-    # Update History
-    state["history"] = current_history
+    except Exception:
+        pass
 
     # 5. Decision Logic
+    current_history = state.get("history", [])
     if len(current_history) >= MAX_RETRIES:
         logger.info(f"Decision: Reached {len(current_history)} attempts limit. Process ending. ")
         return "end"
@@ -978,10 +895,4 @@ def main_cli():
              print("No final AI message found.")
 
 if __name__ == '__main__':
-    exec_globals = builtins.__dict__.copy()
-    exec_globals.update({
-        "np": np, "pd": pd, "scipy": scipy, "sklearn": sklearn, "math": math,
-        "ase": ase, "autoadsorbate": autoadsorbate, "torch": torch
-    })
-    
     main_cli()

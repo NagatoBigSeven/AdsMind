@@ -20,8 +20,9 @@ Environment Variables:
     - HF_QUANTIZE: Quantization Mode (4bit, 8bit, none)
 """
 
+import importlib.util
 import os
-from typing import Optional
+from typing import Any, Optional
 
 from langchain_core.language_models.chat_models import BaseChatModel
 
@@ -37,7 +38,7 @@ DEFAULT_QUANTIZE = "none"
 
 # Cache for loaded model (lazy loading)
 _cached_pipeline = None
-_cached_model_name = None
+_cached_config_key = None
 
 
 class HuggingFaceBackend(BaseLLMBackend):
@@ -59,13 +60,10 @@ class HuggingFaceBackend(BaseLLMBackend):
     @property
     def is_available(self) -> bool:
         """Check if transformers and langchain-huggingface are installed."""
-        try:
-            from langchain_huggingface import ChatHuggingFace, HuggingFacePipeline
-            import transformers
-
-            return True
-        except ImportError:
-            return False
+        return (
+            importlib.util.find_spec("langchain_huggingface") is not None
+            and importlib.util.find_spec("transformers") is not None
+        )
 
     def get_chat_model(self, config: LLMConfig) -> BaseChatModel:
         """
@@ -80,17 +78,22 @@ class HuggingFaceBackend(BaseLLMBackend):
         Returns:
             ChatHuggingFace instance
         """
-        global _cached_pipeline, _cached_model_name
+        global _cached_pipeline, _cached_config_key
 
-        from langchain_huggingface import ChatHuggingFace, HuggingFacePipeline
+        from langchain_huggingface import ChatHuggingFace
 
         model_name = config.model
         device = config.extra_options.get("device", DEFAULT_DEVICE)
         quantize = config.extra_options.get("quantize", DEFAULT_QUANTIZE)
 
+        cache_key = self._make_cache_key(model_name, device, quantize)
+
         # Check if we can reuse cached pipeline
-        if _cached_pipeline is not None and _cached_model_name == model_name:
-            logger.info(f"Reusing cached HuggingFace pipeline: {model_name}")
+        if _cached_pipeline is not None and _cached_config_key == cache_key:
+            logger.info(
+                "Reusing cached HuggingFace pipeline: "
+                f"{model_name} (device: {device}, quantize: {quantize})"
+            )
             return ChatHuggingFace(llm=_cached_pipeline, model_id=model_name)
 
         # Load new model
@@ -103,13 +106,18 @@ class HuggingFaceBackend(BaseLLMBackend):
 
         # Cache for reuse
         _cached_pipeline = pipeline
-        _cached_model_name = model_name
+        _cached_config_key = cache_key
 
         return ChatHuggingFace(llm=pipeline, model_id=model_name)
 
+    @staticmethod
+    def _make_cache_key(model_name: str, device: str, quantize: str) -> tuple[str, str, str]:
+        """Build a cache key that distinguishes model/device/quantization variants."""
+        return (model_name, device, quantize)
+
     def _create_pipeline(
         self, model_name: str, device: str, quantize: str, config: LLMConfig
-    ) -> "HuggingFacePipeline":
+    ) -> Any:
         """
         Create a HuggingFacePipeline with optional quantization.
 
@@ -218,6 +226,6 @@ class HuggingFaceBackend(BaseLLMBackend):
     @classmethod
     def clear_cache(cls) -> None:
         """Clear the cached pipeline (useful for testing)."""
-        global _cached_pipeline, _cached_model_name
+        global _cached_pipeline, _cached_config_key
         _cached_pipeline = None
-        _cached_model_name = None
+        _cached_config_key = None

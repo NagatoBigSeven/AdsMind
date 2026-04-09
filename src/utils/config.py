@@ -52,6 +52,11 @@ def save_config(config: dict) -> bool:
         
         with open(CONFIG_FILE_PATH, "w", encoding="utf-8") as f:
             json.dump(config, f, indent=2, ensure_ascii=False)
+        try:
+            os.chmod(CONFIG_FILE_PATH, 0o600)
+        except OSError:
+            # Best-effort on platforms that do not support POSIX permissions.
+            pass
         return True
     except IOError:
         return False
@@ -258,4 +263,3 @@ def is_cloud_backend(backend: str) -> bool:
         bool: True if the backend requires an API key
     """
     return backend in ("google", "openrouter")
-

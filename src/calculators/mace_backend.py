@@ -11,6 +11,7 @@ preserves all platform-specific logic:
 - CUDA GPU: float64 precision + larger model + dispersion corrections
 """
 
+import importlib.util
 import platform
 from typing import Optional
 
@@ -44,12 +45,7 @@ class MACEBackend(BaseBackend):
     @property
     def is_available(self) -> bool:
         """Check if MACE is installed."""
-        try:
-            from mace.calculators import mace_mp
-
-            return True
-        except ImportError:
-            return False
+        return importlib.util.find_spec("mace") is not None
 
     def get_calculator(self, config: CalculatorConfig) -> Calculator:
         """

@@ -13,9 +13,8 @@ import tempfile
 import unittest
 from pathlib import Path
 
-import numpy as np
 from ase import Atoms
-from ase.build import fcc111, molecule
+from ase.build import fcc111
 from ase.io import write
 
 from src.tools.tools import read_atoms_object, prepare_slab
@@ -69,6 +68,14 @@ class TestPrepareSlab(unittest.TestCase):
         
         # Atom count should match (no atoms added/removed)
         self.assertEqual(len(prepared), len(slab) if not expanded else len(slab) * 4)
+
+    def test_small_cell_reports_expansion_flag(self):
+        """Small XY cells should return an explicit expansion flag."""
+        slab = fcc111('Cu', size=(1, 1, 3), vacuum=10.0)
+        prepared, expanded = prepare_slab(slab)
+
+        self.assertTrue(expanded)
+        self.assertGreater(len(prepared), len(slab))
     
     def test_nonperiodic_gets_fallback_pbc(self):
         """Test that non-periodic inputs get automatic PBC fallback."""
