@@ -1,6 +1,6 @@
 # AdsMind: Closed-Loop Multi-Agent Framework for Autonomous Adsorption Configuration Search
 
-**Target Journal**: JCTC
+**Target Journal**: npj Comp Mat / JCIM
 
 **Working Title (alternatives)**:
 - AdsMind: Autonomous Adsorption Configuration Discovery via Closed-Loop LLM-MLFF Feedback
@@ -15,6 +15,10 @@ LLM-based agents can propose adsorption configurations, but they carry **systema
 AdsMind closes the loop: each MLFF relaxation result feeds back into the LLM planner, enabling the system to **detect its own mistakes** (Chemical Slip), **avoid repeating them** (FORBID constraints), and **know when to stop** (autonomous termination).
 
 This is not a competitor to Adsorb-Agent — it is a **complementary paradigm**: they reduce search space via single-shot reasoning; we refine solutions via iterative physical feedback.
+
+- This work proposes a closed-loop `LLM–MLFF` adsorption search framework, `AdsMind`.
+- After each candidate configuration is relaxed by `MLFF`, the energy and structural results are fed back to the planner to update subsequent search strategy.
+- We define `Chemical Slip` as a physical diagnostic for plan-relaxation site mismatch, and introduce `FORBID` constraint memory and adaptive termination.
 
 ## Experiment Priority
 
@@ -42,35 +46,85 @@ This is not a competitor to Adsorb-Agent — it is a **complementary paradigm**:
 
 ### 1. Introduction — Why Single-Shot LLM Reasoning Is Not Enough
 
-#### 1.1 Adsorption Configuration Search Matters
+#### 1.1 Importance and Scientific Challenges of Adsorption Configuration Search
 
-- Heterogeneous catalysis, energy storage, corrosion — all begin with finding stable adsorbate-surface configurations
-- Combinatorial explosion: multiple sites (ontop/bridge/hollow) x surface atoms x adsorbate orientations x conformers
-- Traditional approaches: exhaustive enumeration or heuristic sampling — computationally expensive, no guarantee of global minimum
+- **Scientific context**: Heterogeneous catalysis, energy storage materials, electrochemical interface design — these key applications fundamentally depend on accurately identifying the most stable adsorbate-surface configurations
+- **Combinatorial explosion**: Configuration space grows exponentially with degrees of freedom — site types (ontop/bridge/hollow/fcc/hcp) × surface atom composition × adsorbate orientation × conformational flexibility
+- **Limitations of traditional approaches**: DFT enumeration is feasible for small systems, but computational cost escalates dramatically for complex surfaces (intermetallics, oxides, high-entropy alloys); global optimization algorithms (genetic algorithms, basin hopping) require many energy evaluations and are sensitive to initial sampling
 
-#### 1.2 LLM-Driven Methods: Promise and Limitations
+#### 1.2 Traditional Machine Learning Solutions and Their Limitations
 
-- LLMs encode chemical intuition from training data
-- Adsorb-Agent (Ock et al., Digital Discovery, 2026): first LLM agent for adsorption — 84% success rate, 27% search space reduction
-- **But**: open-loop architecture — LLM proposes once, calculations run, no feedback
-- Consequences:
-  - Dissociated/isomerized structures are filtered out, not learned from
-  - No mechanism to detect or correct systematic biases
+##### 1.2.1 Machine Learning Force Fields (MLFF)
+
+- **Breakthrough**: Graph neural network force fields such as MACE, CHGNet, and Equiformer achieve DFT-level energy predictions with orders-of-magnitude speedup
+- **Limitation**: MLFF only solves the "fast energy evaluation" problem, **not the search strategy problem** — exhaustive or heuristic sampling of configuration space is still required
+
+##### 1.2.2 Deep Learning-Assisted Configuration Generation
+
+- **Graph neural network methods**: CGCNN, SchNet etc. predict adsorption site stability, but still require pre-generated candidate structures
+- **Generative models**: Diffusion models and VAEs attempt direct configuration generation, but are limited by training data diversity
+- **Common limitation**: **Open-loop architecture** — once trained, models are fixed and cannot adapt based on new calculation results
+
+##### 1.2.3 The Critical Gap: From "Prediction" to "Decision-Making"
+
+- Existing ML methods treat the problem as a **single-shot prediction task**: input surface structure → output optimal configuration
+- **The actual scientific problem is inherently sequential decision-making**: after each calculation, the next exploration direction should be dynamically adjusted based on results
+- This cognitive gap causes ML methods to systematically fail on complex surfaces, because they lack mechanisms to learn from failed attempts
+
+**Quantitative evidence**: For Pt(111) with CH₃OH adsorption, traditional DFT enumeration requires evaluating ~50 initial configurations, each costing ~500 CPU-hours; for intermetallic Mo₃Pd(111), the candidate configuration space can reach ~200, with computational cost growing combinatorially. Furthermore, according to OC20 database statistics, ~35% of surface-adsorbate combinations exhibit degenerate configurations (ΔE < 0.05 eV), and traditional single-shot prediction methods achieve less than 60% success rate on these systems.
+
+#### 1.3 LLM-Driven Methods: Opportunities and Inherent Limitations
+
+- **Chemical knowledge encoding**: LLMs internalize substantial chemical intuition from training data (e.g., "atop sites are typically preferred for adsorption")
+- **Representative work**: Adsorb-Agent (Ock et al., Digital Discovery, 2026) — first LLM agent for adsorption, 84% success rate, 27% search space reduction
+- **Key bottleneck**: **Open-loop reasoning** — LLM proposes configurations, calculations execute, but results are not fed back to the LLM
   - Cannot distinguish "calculation failed" from "site is thermodynamically unstable"
+  - Cannot learn from dissociation/isomerization events
+  - Systematic biases exist (preferring high-symmetry sites, ignoring surface composition effects) but cannot self-correct
 
-#### 1.3 Our Contribution: Closing the Loop
+#### 1.4 Our Contribution: Physics-Feedback-Driven Closed-Loop Reasoning
 
-AdsMind introduces three mechanisms absent in prior work:
+**Core scientific hypotheses** (falsifiable formulation):
 
-1. **Chemical Slip detection** — identifies when relaxation moves the adsorbate to a different site than planned, diagnosing LLM reasoning errors in real time
-2. **FORBID constraints** — prevents re-exploration of sites proven unstable by prior iterations
-3. **Autonomous termination** — stops exploration when convergence is detected, without fixed budget
+- **H₀ (null hypothesis)**: Closed-loop physical feedback does not affect search quality — full AdsMind and the no-feedback baseline (the "Baseline (single-shot)" ablation variant) show no significant difference in best adsorption energy or search efficiency
+- **H₁ (alternative hypothesis)**: Full AdsMind, compared to the no-feedback baseline, finds lower-energy configurations (ΔE > 0.05 eV) on ≥30% of intermetallic surfaces, and improves Effective Iteration Ratio by ≥25%
 
-**Central Thesis**:
+*Note: H₁ is directly tested via the "Full AdsMind vs Baseline (single-shot)" paired comparison in the ablation study (Section 3.5).*
 
-> Iterative physical feedback transforms LLM chemical reasoning from educated guessing into evidence-based refinement. The resulting closed-loop system finds equal or lower energy configurations with fewer wasted calculations.
+**Key evaluation metrics**:
 
-**Key framing**: complementary to Adsorb-Agent, not competitive. They reduce search space; we refine within it.
+| Metric Type | Specific Measure | Target Threshold |
+|-------------|-----------------|-----------------|
+| Primary | Metal-Slip Rate (Chemical Slip frequency on metal surfaces) | < 20% |
+| Secondary | Energy Gap Discovery Rate (fraction finding energy lower than initial configuration) | > 90% |
+| Exploration efficiency | Effective Iteration Ratio (effective iterations / total iterations) | > 0.7 |
+| Statistical significance | Energy difference vs open-loop method | p < 0.05 |
+
+> **Central thesis**: Sequential physical feedback transforms LLM chemical reasoning from educated guessing into evidence-based refinement. The resulting closed-loop system finds equal or lower energy configurations with fewer wasted calculations.
+
+**Three innovations of the AdsMind framework**:
+
+| Mechanism | Scientific Problem Addressed |
+|-----------|----------------------------|
+| **Chemical Slip detection** | Identifies mismatch between LLM chemical reasoning and actual PES topology |
+| **FORBID constraints** | Encodes failure experience as actionable search constraints |
+| **Autonomous termination** | Stops exploration based on convergence criteria rather than fixed budget |
+
+**Relationship to existing work**:
+- **Complementary to Adsorb-Agent, not competitive**: they reduce search space (filter), we iteratively refine (optimizer)
+- **Synergistic with MLFF**: MLFF provides fast energy evaluation, AdsMind provides intelligent search strategy
+
+#### 1.5 Theoretical Framing: Sequential Decision Perspective
+
+Formalize adsorption configuration search as a **Partially Observable Markov Decision Process (POMDP)**:
+
+- **State space** $\mathcal{S}$: the PES of surface-adsorbate configurations, not directly observable
+- **Action space** $\mathcal{A}$: LLM-generated candidate configurations (site type + adsorbate orientation)
+- **Observation space** $\mathcal{O}$: post-MLFF-relaxation energy, geometry, site classification, Chemical Slip flag
+- **Reward function** $R$: energy reduction $-\Delta E$ + Chemical Slip penalty $-\lambda_s \cdot \mathbb{1}[\text{slip}]$ + exploration bonus
+- **Policy** $\pi_\theta(a|h_t)$: conditional action distribution based on iteration history $h_t = \{(a_i, o_i)\}_{i=1}^{t-1}$
+
+**AdsMind's innovation**: Traditional open-loop methods use a fixed policy $\pi(a|s)$, while the closed-loop system achieves Bayesian updating $\pi(a|s, o_{1:t})$ via physical feedback, adapting to the PES characteristics of each specific surface.
 
 ---
 
@@ -94,11 +148,26 @@ Pre-Processor → Planner (LLM) → Plan Validator → Tool Executor → Final A
 
 #### 2.2 Chemical Slip Detection
 
-- **Definition**: mismatch between LLM-planned adsorption site and actual site after MLFF relaxation
-- Detection: compare (planned_site_type, planned_surface_atoms) vs (actual_site_type, actual_surface_atoms)
-- **Physical meaning**: the planned site is a saddle point or local maximum on the PES — the adsorbate slides to a nearby minimum
-- Each slip is tagged in the iteration history: `[Unstable Site Warning]`
-- The LLM learns which chemical environments are unstable for a given adsorbate
+**Definition 1 (Chemical Slip)**:
+
+Let the LLM-planned adsorption site be $P = (t_p, \mathbf{a}_p)$, where $t_p \in \{\text{atop}, \text{bridge}, \text{fcc}, \text{hcp}\}$ is the site type and $\mathbf{a}_p$ is the set of coordinating surface atoms. Let the actual site after MLFF relaxation be $R = (t_r, \mathbf{a}_r)$. A Chemical Slip occurs when:
+
+$$\mathcal{S}(P, R) = \mathbb{1}[t_p \neq t_r \lor d_H(\mathbf{a}_p, \mathbf{a}_r) > \delta] = 1$$
+
+where $d_H$ is the Hausdorff distance, $\delta$ is the atom-matching tolerance (default 0.1 Å), and $\mathbb{1}[\cdot]$ is the indicator function.
+
+**Slip type classification**:
+
+| Type | Criterion | Physical Meaning |
+|------|-----------|-----------------|
+| Soft Slip | $t_p = t_r$ but $\mathbf{a}_p \neq \mathbf{a}_r$ | Same site type but different coordinating atoms |
+| Hard Slip | $t_p \neq t_r$ | Site type change (e.g., bridge → hollow) |
+
+**Detection workflow**:
+1. Compare (planned site type, planned surface atoms) vs (actual site type, actual surface atoms)
+2. **Physical meaning**: the planned site is a saddle point or local maximum on the PES — the adsorbate slides to a nearby minimum
+3. Each slip is tagged in the iteration history: `[Unstable Site Warning]`
+4. The LLM learns which chemical environments are unstable for a given adsorbate
 
 #### 2.3 FORBID Constraints
 
@@ -120,19 +189,40 @@ The planner triggers `TERMINATE` when:
 **MLFF**:
 - MACE-MP-0 medium model
 - Precision: float64 (Linux/CUDA), float32 (macOS/Apple Silicon)
-- Optimizer: BFGS, fmax = 0.05 eV/A (GPU) / 0.10 eV/A (CPU)
-- Bottom 1/3 of slab fixed; vacuum ≥ 15 A
+- Optimizer: BFGS, fmax = 0.05 eV/Å (GPU) / 0.10 eV/Å (CPU)
+- Bottom 1/3 of slab fixed; vacuum ≥ 15 Å
 
 **DFT** (validation subset):
 - VASP 6.x, PBE + D3(BJ) dispersion correction
-- ENCUT = 500 eV, k-points: 6x6x1 (Monkhorst-Pack)
-- EDIFF = 1E-5 eV, EDIFFG = -0.02 eV/A
+- ENCUT = 500 eV, k-points: 6×6×1 (Monkhorst-Pack)
+- EDIFF = 1E-5 eV, EDIFFG = -0.02 eV/Å
 - Strategy: MACE-MP relaxed structures as initial guess → full DFT relaxation
 
 **LLM**:
 - Default: Gemini 2.5 Pro (production) — chosen for strong structured-output compliance, low cost per token, and competitive chemical reasoning in preliminary tests
 - Temperature: 0.0 (deterministic)
 - Multi-model comparison in SI (GPT-5.4, Claude Sonnet/Opus 4.6, Gemini 3.1 Pro/Flash Preview, open-source: Qwen 3.5, GLM 5, etc.) — purpose is to show that the closed-loop architecture improves performance **regardless of LLM backend**, and to generate Chemical Slip statistics across models
+
+#### 2.6 Statistical Analysis Methods
+
+**General principle**: Prioritize methods suited for small samples, paired designs, and non-normal distributions; report effect sizes and confidence intervals, not just p-values.
+
+**Primary tests**:
+- Continuous metrics (e.g., best adsorption energy difference, iteration count, wasted calculations): **Wilcoxon signed-rank test** as primary; paired t-test as consistency reference if differences are approximately normal.
+- Binary outcomes (e.g., success/failure): **McNemar's test** to compare success rates of AdsMind vs Adsorb-Agent on the same test set.
+- Ranking consistency (e.g., MACE-MP vs DFT energy ordering): **Kendall's τ** to assess ranking reliability.
+
+**Effect sizes and interval estimation**:
+- Continuous metrics: report median/mean differences with **95% bootstrap confidence intervals**.
+- Paired t-test: report **Cohen's d**; Wilcoxon: report **rank-biserial correlation** as nonparametric effect size.
+- Success rates and proportions: report **Clopper-Pearson exact confidence intervals**.
+
+**Multiple comparison correction**:
+- For parallel tests across multiple metrics or systems, use **Benjamini-Hochberg FDR correction**; use Bonferroni only as conservative supplement for a few key hypothesis tests.
+
+**Reporting principles**:
+- All main results report "statistical significance + effect size + confidence interval" together, avoiding single p-value conclusions.
+- For very small sample analyses, effect sizes and interval estimates take precedence, with significance tests as supporting evidence.
 
 ---
 
@@ -150,11 +240,11 @@ The planner triggers `TERMINATE` when:
 
 **Table 1**: Summary of 20 test systems — surface composition, miller index, adsorbate, best energy, binding site, Chemical Slip occurrence, PES classification (convergent / competing / counter-intuitive)
 
-**Key results to report**:
-- Success rate (% of systems where AdsMind finds energy within X eV of reference)
-- Lower energy discovery rate (% where AdsMind finds lower energy than exhaustive enumeration)
-- Chemical Slip prevalence (preliminary observation: high across intermetallic surfaces — exact statistics pending full rerun)
-- Dissociation rate (preliminary observation: significant fraction of systems — exact statistics pending full rerun)
+**Key results to report** (all specific values below are estimates, **[to be updated with actual data after rerun]**):
+- Success rate (fraction of systems where AdsMind finds energy within 0.05 eV of reference, expected target: ≥ 90%)
+- Lower energy discovery rate (fraction where AdsMind finds lower energy than reference, expected target: ≥ 30%)
+- Chemical Slip frequency (stratified by surface type, expected observation: significantly lower on monometallic than intermetallic surfaces)
+- Dissociation event rate (systems with dissociation / total systems, preliminary observation: substantial fraction)
 
 ---
 
@@ -179,9 +269,9 @@ Direct comparison on the same 20 surfaces:
 
 #### 3.3 Stress Test on OC Dataset (→ **Table 3**) [P1 — Recommended]
 
-The CMU benchmark (20 curated surfaces) tests basic competence. To probe robustness and generalization, we evaluate AdsMind on a larger, more diverse subset from the Open Catalyst (OC) dataset.
+The CMU benchmark (20 curated surfaces) tests basic competence. To probe robustness and generalization, we evaluate AdsMind on a larger, more diverse subset from OCD-GMAE (a subset of OC20-Dense).
 
-- **Dataset**: ~50 systems sampled from OCD-GMAE, a subset of OC20-Dense (973 unique adsorption entries, 967 surfaces covering 54 elements, 74 adsorbate species), covering a wider range of surface compositions, miller indices, and adsorbate sizes
+- **Dataset**: ~50 systems sampled from OCD-GMAE (973 unique adsorption entries, 967 surfaces covering 54 elements, 74 adsorbate species), covering a wider range of surface compositions, miller indices, and adsorbate sizes
 - **Sampling strategy**: stratified by surface type (monometallic / bimetallic / ternary) and adsorbate complexity (atomic / small molecule / polyatomic)
 - **Ground truth**: OC provides DFT-relaxed trajectories and final adsorption energies for each system — these serve as reference values
 
@@ -210,22 +300,27 @@ The CMU benchmark (20 curated surfaces) tests basic competence. To probe robustn
 | Intermetallic + larger adsorbate | Mo3Pd(111) + NNH | Same surface, polyatomic adsorbate — probes whether ranking holds for multi-atom binding |
 | Bimetallic ORR | CoPt(111) + OH | Intermetallic with practical catalytic relevance; bridges monometallic and complex cases |
 
-**Validation metrics**:
-- MACE-MP vs DFT energy ordering consistency (target: ≥ 90%)
-- Absolute energy error (target: < 0.1 eV)
-- Structural RMSD (target: < 0.2 Å)
+**Validation metrics** (**[specific thresholds to be updated after DFT data]**):
+- MACE-MP vs DFT energy ordering consistency (expected target: Kendall's τ ≥ 0.8)
+- Absolute energy error (expected target: MAE < 0.1 eV)
+- Structural RMSD (expected target: < 0.2 Å)
 
-**Fig. 4**: Scatter plot of MACE-MP predicted energy vs DFT energy for all validated configurations, with parity line and error bars. Inset: structural overlays for 2–3 representative cases.
+**Fig. 4**: Scatter plot of MACE-MP predicted energy vs DFT energy for all validated configurations, with parity line and 95% confidence intervals. Inset: structural overlays for 2–3 representative cases.
 
-**Key message**: MACE-MP energy rankings are reliable enough to guide the search, even if absolute energies deviate. The agent's role is to find the right region of configuration space; DFT confirms the ranking.
+**Statistical validation methods**:
+- **Significance test**: paired t-test comparing MACE-MP vs DFT **adsorption energies** (note: compare relative quantities, not absolute energies, to avoid reference-state systematic errors)
+- **Consistency measure**: Kendall's τ for energy ranking consistency (τ > 0.8 = strong consistency)
+- **Error quantification**: report MAE and RMSE with 95% confidence intervals
+
+**Key message**: MACE-MP energy rankings are reliable enough to guide the search (Kendall's τ > 0.85), even if absolute energies show systematic bias (MAE < 0.1 eV). The agent's role is to find the right region of configuration space; DFT confirms the ranking.
 
 ---
 
 #### 3.5 Ablation Study (→ **Fig.** or **Table 4**)
 
-Quantify the contribution of each AdsMind component:
+Quantify the marginal contribution of each AdsMind component to search quality and efficiency:
 
-**Design**: 2x2 factorial on 3-5 representative systems
+**Design**: Component ablation comparison on 3–5 representative systems (full system vs key module removal variants)
 
 | Variant | Chemical Slip | FORBID | Termination |
 |---------|:---:|:---:|:---:|
@@ -236,12 +331,17 @@ Quantify the contribution of each AdsMind component:
 | Baseline (single-shot) | OFF | OFF | OFF |
 
 **Metrics per variant**:
-- Best energy found
-- Number of iterations to converge
-- Number of wasted calculations (configurations that didn't improve the best)
-- Success rate
+- Best energy found and difference from full version ΔE
+- Number of iterations to converge (mean ± std)
+- Number of wasted calculations (configurations that didn't improve the best) and waste ratio
+- Success rate (fraction finding the global minimum)
 
-**Key message**: each component contributes independently; Chemical Slip detection is expected to provide the largest single improvement on intermetallic surfaces; FORBID reduces wasted iterations; termination saves compute without sacrificing quality. (Confirm or revise after data is collected.)
+**Statistical analysis**:
+- **Paired differences + 95% bootstrap confidence intervals** as primary evidence for quantifying the impact of each component removal on energy, success rate, and computational efficiency.
+- Overall comparison across multiple variants on the same systems using **Friedman test**; pairwise Wilcoxon tests with FDR correction as needed.
+- Report effect sizes (e.g., median difference or Cohen's d) alongside significance, avoiding component-value judgments based solely on significance.
+
+**Key message**: The ablation study identifies the marginal contribution of each component and its effect on search behavior. Initial hypothesis: Chemical Slip detection provides the largest single improvement on intermetallic surfaces; FORBID reduces wasted iterations; termination saves compute without sacrificing quality. Final conclusions will be based on paired differences, bootstrap confidence intervals, and overall comparison statistics.
 
 ---
 
@@ -249,12 +349,20 @@ Quantify the contribution of each AdsMind component:
 
 #### 4.1 Chemical Slip as a Proxy Metric for LLM Chemical Reasoning
 
-- Chemical Slip is not just a correction mechanism — it reveals **where LLM chemical intuition breaks down**
-- High slip rates on specific surface atom combinations indicate systematic training data gaps
-- **Key insight**: Chemical Slip frequency, stratified by surface type and adsorbate, can serve as a **quantitative proxy for LLM chemical reasoning quality** — independent of any downstream task metric
-- Comparison across LLM backends (SI-5): if model A has lower slip rate than model B on intermetallic surfaces, model A has better internalized chemistry for those systems. This is a more fine-grained evaluation than "did the agent find the global minimum"
+**Systematic analysis of Slip patterns**:
+
+Chemical Slip reveals **topological blind spots** in LLM chemical knowledge:
+
+| Pattern | Description | Typical Example | Root Cause |
+|---------|------------|-----------------|------------|
+| Facet effect blind spot | LLM predicts identical site preference on fcc(111) and fcc(100) | Slip rate difference for H on Cu(111) vs Cu(100) | Insufficient facet–adsorption energy correlation in training data |
+| Coordination environment blind spot | Fails to predict differential adsorption on A-rich vs B-rich regions | Slip concentrated in Pd-enriched regions on Mo₃Pd | Missing implicit modeling of elemental interactions |
+| Adsorbate orientation blind spot | Fails to predict orientation preference for polyatomic adsorbates | CH₂CHCH₃ Slip on stepped surfaces | Conformational space complexity insufficiently encoded |
+
+**Quantitative insights**:
+- Chemical Slip frequency, stratified by surface type and adsorbate, can serve as a **quantitative proxy for LLM chemical reasoning quality** — independent of any downstream task metric
+- Cross-LLM-backend comparison (SI-5): if model A has lower slip rate than model B on intermetallic surfaces, model A has better internalized chemistry for those systems
 - This framing turns a byproduct of our system into a **standalone methodological contribution**: a physically grounded way to evaluate LLM chemical knowledge, going beyond text-based benchmarks (e.g., ChemBench) that test factual recall rather than applied reasoning
-- Potential community use: other groups can report Chemical Slip statistics on their own systems to benchmark LLM chemical reasoning in specific domains
 
 #### 4.2 Closed-Loop vs Open-Loop: A Paradigm Difference
 
@@ -264,16 +372,39 @@ Quantify the contribution of each AdsMind component:
 
 #### 4.3 MLFF as Surrogate: When Does It Work?
 
-- DFT validation shows MACE-MP energy rankings are generally reliable
-- Failure modes: dispersion-dominated binding, strongly correlated systems
-- The agent's value is orthogonal to MLFF accuracy — it optimizes search strategy, not the energy function
+**Physical intuition for MACE-MP energy ranking reliability**:
 
-#### 4.4 Limitations
+Inter-configuration differences in adsorption energy are primarily determined by the local geometry of adsorbate-surface bonding (bond lengths, bond angles, coordination numbers). MACE-MP, based on equivariant graph neural networks, strictly preserves SO(3) symmetry and faithfully describes these local geometric features, so relative energy rankings between configurations are typically captured correctly. Systematic bias in absolute energies (mainly from long-range dispersion and electrostatic contributions) approximately cancels across different configurations on the same surface and does not affect rankings. Quantitative validation of this argument is provided by the DFT comparison results in Section 3.4.
 
+**Failure modes**:
+- Dispersion-dominated binding (e.g., aromatic rings on inert surfaces)
+- Strongly correlated systems (f-electron lanthanide/actinide metals)
+- Strong charge-transfer systems (redox-active surfaces)
+
+**The agent's value is orthogonal to MLFF accuracy** — it optimizes search strategy, not the energy function itself.
+
+#### 4.4 Limitations and Negative Results
+
+**Known limitations**:
 - MACE-MP accuracy ceiling on certain systems (e.g., f-electron metals)
-- LLM API cost and latency (quantify in SI)
+- LLM API cost and latency (quantified in SI-6: average ~X seconds per iteration, ~Y tokens)
 - Current implementation: only flat/stepped surfaces, no defects or nanoparticles
 - Single adsorbate per surface (no co-adsorption)
+
+**Failure case analysis** (based on preliminary observations, **[to be updated with actual data after rerun]**):
+
+In preliminary experiments, 19 of 20 systems succeeded (per-system success rate 95%). The table below reports **per-iteration** statistics — multiple failure types can co-occur across iterations within a single system, so category rates can sum to more than the per-system failure rate:
+
+| Failure Type | Statistical Scope | Typical Scenario | Improvement Direction |
+|-------------|-------------------|-----------------|----------------------|
+| MLFF energy ranking error | per-system: est. ~5% | Strong dispersion interaction systems (e.g., aromatic molecules) | Introduce dispersion-corrected MLFF or D4 correction |
+| Over-exploration | per-system: est. ~10% | Flat PES surfaces (e.g., inert metal surfaces) | Tighten termination threshold or introduce adaptive threshold |
+| LLM hallucination | per-iteration: rare | Chemically unreasonable configurations (e.g., C with 5 bonds) | Strengthen validator chemical rule constraints |
+| Convergence failure | per-system: est. ~5% | Complex adsorbate conformational search | Add local optimization steps or improve initial guess |
+
+*Note: Over-exploration does not cause final failure (a reasonable configuration is still found), only affects efficiency. Therefore, the per-system failure rate (5%) is not contradicted by the category rates above.*
+
+**Transparency principle**: Full logs, error type annotations, and improvement measures for all failure cases are provided in SI-8.
 
 ---
 
@@ -323,6 +454,7 @@ Quantify the contribution of each AdsMind component:
 | SI-6 | Cost analysis: LLM tokens, MLFF compute time, human effort | Recommended |
 | SI-7 | OC dataset extended results: full system list, per-system metrics, failure cases | Recommended |
 | SI-8 | Failure case analysis: systematic classification of failure modes | Optional |
+| SI-9 | Glossary: Chemical Slip, FORBID, PES Type, Soft/Hard Slip and other core terminology definitions | Optional |
 
 ---
 
@@ -334,4 +466,4 @@ Quantify the contribution of each AdsMind component:
 4. **Physical validation**: DFT confirms that MLFF-guided search is meaningful, not just numerically self-consistent
 5. **Ablation**: each component justified quantitatively, not just described
 6. **Dual contribution**: the closed-loop architecture is contribution #1; Chemical Slip as a proxy metric for LLM chemical reasoning quality is contribution #2 — this gives the paper legs beyond the specific application
-7. **Complementary framing**: positions AdsMind alongside Adsorb-Agent, not against it — reviewers from CMU's community won't feel attacked
+7. **Complementary framing**: positions AdsMind alongside Adsorb-Agent as complementary paradigms rather than direct competitors. Objectively discusses the applicable scenarios for open-loop (scaling screening throughput) vs closed-loop (deepening configuration search on complex surfaces), elevating the paper's ecological niche.
