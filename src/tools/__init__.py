@@ -1,4 +1,4 @@
-"""Backward-compatible facade for the tools package."""
+"""Tooling utilities for surface preparation, relaxation, and analysis."""
 
 from src.tools.analysis import analyze_relaxation_results
 from src.tools.constants import RelaxationMode
@@ -15,8 +15,6 @@ from src.tools.patches import (
 )
 from src.tools.relaxation import relax_atoms, save_ase_atoms
 from src.tools.surface import analyze_surface_sites, prepare_slab, read_atoms_object
-
-apply_autoadsorbate_patches()
 
 __all__ = [
     "RelaxationMode",

@@ -1,6 +1,6 @@
 # LLM Backend System
 
-AdsKRK supports multiple LLM backends for the agentic workflow. Choose between cloud APIs (for best performance) or local models (for privacy and no API costs).
+AdsMind supports multiple LLM backends for the agentic workflow. Choose between cloud APIs (for best performance) or local models (for privacy and no API costs).
 
 ## Quick Start
 
@@ -8,7 +8,7 @@ The default backend is **Google AI (Gemini 2.5 Pro)**. Set your API key and run:
 
 ```bash
 export GOOGLE_API_KEY="your-google-api-key"
-streamlit run src/app/app.py
+streamlit run streamlit_app.py
 ```
 
 ## Supported Backends
@@ -33,21 +33,23 @@ streamlit run src/app/app.py
 
 ```bash
 # Use Google AI (default)
-export ADSKRK_LLM_BACKEND=google
+export ADSMIND_LLM_BACKEND=google
 export GOOGLE_API_KEY="your-google-api-key"
 
 # Use OpenRouter
-export ADSKRK_LLM_BACKEND=openrouter
+export ADSMIND_LLM_BACKEND=openrouter
 export OPENROUTER_API_KEY="your-openrouter-api-key"
 
 # Use Ollama (local)
-export ADSKRK_LLM_BACKEND=ollama
+export ADSMIND_LLM_BACKEND=ollama
 # Make sure Ollama is running: ollama serve
 
 # Use HuggingFace (local)
-export ADSKRK_LLM_BACKEND=huggingface
+export ADSMIND_LLM_BACKEND=huggingface
 export HF_QUANTIZE=4bit  # Optional: reduce memory usage
 ```
+
+Legacy `ADSKRK_LLM_BACKEND` is still accepted as a fallback.
 
 ## Cloud Backends
 
@@ -113,8 +115,11 @@ Load models directly from HuggingFace Hub for full offline capability.
 **Setup:**
 
 ```bash
-# Install dependencies (included in project)
-pip install transformers accelerate
+# Install core project deps
+uv pip install -e .
+
+# Optional: update local-model tooling only
+uv pip install -e ".[dev]"
 
 # Optional: For quantization
 pip install bitsandbytes

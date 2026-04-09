@@ -1,6 +1,6 @@
 # Calculator Backend System
 
-AdsKRK supports pluggable calculator backends for atomistic simulations. This allows flexibility in choosing different computational engines while maintaining a unified interface.
+AdsMind supports pluggable calculator backends for atomistic simulations. This allows flexibility in choosing different computational engines while maintaining a unified interface.
 
 ## Quick Start
 
@@ -8,7 +8,7 @@ The default backend is **MACE** (MACE-MP foundation model). No configuration is 
 
 ```python
 # The agent automatically uses MACE with platform-optimized settings
-streamlit run src/app/app.py
+streamlit run streamlit_app.py
 ```
 
 ## Backend Selection
@@ -17,11 +17,13 @@ streamlit run src/app/app.py
 
 ```bash
 # Use MACE (default)
-export ADSKRK_BACKEND=mace
+export ADSMIND_BACKEND=mace
 
 # Future: Use OpenMD (not yet implemented)
-export ADSKRK_BACKEND=openmd
+export ADSMIND_BACKEND=openmd
 ```
+
+Legacy `ADSKRK_BACKEND` is still accepted as a fallback.
 
 ### Programmatic Usage
 

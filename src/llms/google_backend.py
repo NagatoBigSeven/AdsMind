@@ -1,7 +1,7 @@
 """
 Google AI backend implementation.
 
-This is the default LLM backend for AdsKRK, providing direct access to
+This is the default LLM backend for AdsMind, providing direct access to
 Google's Gemini models via the Google AI Studio API.
 
 Benefits over OpenRouter:
@@ -9,6 +9,7 @@ Benefits over OpenRouter:
 - Direct access to latest Gemini features
 """
 
+import importlib.util
 from typing import Optional
 
 from langchain_core.language_models.chat_models import BaseChatModel
@@ -26,7 +27,7 @@ class GoogleBackend(BaseLLMBackend):
     """
     Google AI (Gemini) LLM backend.
 
-    This is the default and recommended backend for AdsKRK, using Google's
+    This is the default and recommended backend for AdsMind, using Google's
     Gemini models for chemical reasoning and planning.
     """
 
@@ -41,12 +42,7 @@ class GoogleBackend(BaseLLMBackend):
     @property
     def is_available(self) -> bool:
         """Check if langchain-google-genai is installed."""
-        try:
-            from langchain_google_genai import ChatGoogleGenerativeAI
-
-            return True
-        except ImportError:
-            return False
+        return importlib.util.find_spec("langchain_google_genai") is not None
 
     def get_chat_model(self, config: LLMConfig) -> BaseChatModel:
         """

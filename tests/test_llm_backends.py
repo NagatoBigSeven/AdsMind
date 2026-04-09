@@ -6,63 +6,78 @@ configuration, and backend availability checks.
 """
 
 import os
-import pytest
-from unittest.mock import patch, MagicMock
+import sys
+import types
+import unittest
+from unittest.mock import patch
 
 
-class TestLLMFactory:
+class TestLLMFactory(unittest.TestCase):
     """Test the LLM backend factory."""
     
     def test_factory_import(self):
         """Test that factory can be imported."""
         from src.llms import get_llm_backend, get_available_llm_backends
-        assert callable(get_llm_backend)
-        assert callable(get_available_llm_backends)
+        self.assertTrue(callable(get_llm_backend))
+        self.assertTrue(callable(get_available_llm_backends))
     
     def test_get_google_backend(self):
         """Test getting Google backend."""
         from src.llms import get_llm_backend
         backend = get_llm_backend("google")
-        assert backend.name == "google"
-        assert backend.requires_api_key is True
+        self.assertEqual(backend.name, "google")
+        self.assertTrue(backend.requires_api_key)
     
     def test_get_openrouter_backend(self):
         """Test getting OpenRouter backend."""
         from src.llms import get_llm_backend
         backend = get_llm_backend("openrouter")
-        assert backend.name == "openrouter"
-        assert backend.requires_api_key is True
+        self.assertEqual(backend.name, "openrouter")
+        self.assertTrue(backend.requires_api_key)
     
     def test_get_ollama_backend(self):
         """Test getting Ollama backend."""
         from src.llms import get_llm_backend
         backend = get_llm_backend("ollama")
-        assert backend.name == "ollama"
-        assert backend.requires_api_key is False
+        self.assertEqual(backend.name, "ollama")
+        self.assertFalse(backend.requires_api_key)
     
     def test_get_huggingface_backend(self):
         """Test getting HuggingFace backend."""
         from src.llms import get_llm_backend
         backend = get_llm_backend("huggingface")
-        assert backend.name == "huggingface"
-        assert backend.requires_api_key is False
+        self.assertEqual(backend.name, "huggingface")
+        self.assertFalse(backend.requires_api_key)
     
     def test_unknown_backend_raises_error(self):
         """Test that unknown backend raises ValueError."""
         from src.llms import get_llm_backend
-        with pytest.raises(ValueError) as exc_info:
+        with self.assertRaises(ValueError) as exc_info:
             get_llm_backend("unknown_backend")
-        assert "Unknown LLM backend" in str(exc_info.value)
+        self.assertIn("Unknown LLM backend", str(exc_info.exception))
     
     def test_available_backends(self):
-        """Test listing available backends."""
+        """Test listing available backends without relying on host installs."""
         from src.llms import get_available_llm_backends
-        available = get_available_llm_backends()
-        # At minimum, google and openrouter should be available
-        assert "google" in available or "openrouter" in available
+
+        class AvailableBackend:
+            def __init__(self):
+                self.is_available = True
+
+        class UnavailableBackend:
+            def __init__(self):
+                self.is_available = False
+
+        with patch("src.llms.factory._get_llm_registry", return_value={
+            "available": AvailableBackend,
+            "unavailable": UnavailableBackend,
+        }):
+            available = get_available_llm_backends()
+
+        self.assertEqual(available, ["available"])
 
 
-class TestLLMConfig:
+class TestLLMConfig(unittest.TestCase):
     """Test LLM configuration dataclass."""
     
     def test_config_creation(self):
@@ -73,22 +88,22 @@ class TestLLMConfig:
             api_key="test-key",
             model="gemini-2.5-pro"
         )
-        assert config.backend == "google"
-        assert config.api_key == "test-key"
-        assert config.model == "gemini-2.5-pro"
-        assert config.temperature == 0.0  # Default
+        self.assertEqual(config.backend, "google")
+        self.assertEqual(config.api_key, "test-key")
+        self.assertEqual(config.model, "gemini-2.5-pro")
+        self.assertEqual(config.temperature, 0.0)
     
     def test_config_defaults(self):
         """Test LLMConfig default values."""
         from src.llms.base import LLMConfig
         config = LLMConfig(backend="test")
-        assert config.temperature == 0.0
-        assert config.max_tokens == 4096
-        assert config.timeout == 120
-        assert config.extra_options == {}
+        self.assertEqual(config.temperature, 0.0)
+        self.assertEqual(config.max_tokens, 4096)
+        self.assertEqual(config.timeout, 120)
+        self.assertEqual(config.extra_options, {})
 
 
-class TestGoogleBackend:
+class TestGoogleBackend(unittest.TestCase):
     """Test Google AI backend."""
     
     def test_default_config(self):
@@ -97,20 +112,20 @@ class TestGoogleBackend:
         backend = get_llm_backend("google")
         config = backend.get_default_config(api_key="test-key")
         
-        assert config.backend == "google"
-        assert config.api_key == "test-key"
-        assert config.model == "gemini-2.5-pro"
-        assert config.temperature == 0.0
+        self.assertEqual(config.backend, "google")
+        self.assertEqual(config.api_key, "test-key")
+        self.assertEqual(config.model, "gemini-2.5-pro")
+        self.assertEqual(config.temperature, 0.0)
     
     def test_is_available(self):
         """Test availability check."""
         from src.llms import get_llm_backend
         backend = get_llm_backend("google")
         # Should be True if langchain_google_genai is installed
-        assert isinstance(backend.is_available, bool)
+        self.assertIsInstance(backend.is_available, bool)
 
 
-class TestOpenRouterBackend:
+class TestOpenRouterBackend(unittest.TestCase):
     """Test OpenRouter backend."""
     
     def test_default_config(self):
@@ -119,12 +134,12 @@ class TestOpenRouterBackend:
         backend = get_llm_backend("openrouter")
         config = backend.get_default_config(api_key="test-key")
         
-        assert config.backend == "openrouter"
-        assert config.api_key == "test-key"
-        assert config.model == "google/gemini-2.5-pro"
+        self.assertEqual(config.backend, "openrouter")
+        self.assertEqual(config.api_key, "test-key")
+        self.assertEqual(config.model, "google/gemini-2.5-pro")
 
 
-class TestOllamaBackend:
+class TestOllamaBackend(unittest.TestCase):
     """Test Ollama backend."""
     
     def test_default_config(self):
@@ -133,10 +148,10 @@ class TestOllamaBackend:
         backend = get_llm_backend("ollama")
         config = backend.get_default_config()
         
-        assert config.backend == "ollama"
-        assert config.api_key is None
-        assert config.model == "qwen3:8b"
-        assert "host" in config.extra_options
+        self.assertEqual(config.backend, "ollama")
+        self.assertIsNone(config.api_key)
+        self.assertEqual(config.model, "qwen3:8b")
+        self.assertIn("host", config.extra_options)
     
     def test_custom_host_from_env(self):
         """Test custom host from environment variable."""
@@ -144,10 +159,10 @@ class TestOllamaBackend:
         with patch.dict(os.environ, {"OLLAMA_HOST": "http://custom:11434"}):
             backend = get_llm_backend("ollama")
             config = backend.get_default_config()
-            assert config.extra_options["host"] == "http://custom:11434"
+            self.assertEqual(config.extra_options["host"], "http://custom:11434")
 
 
-class TestHuggingFaceBackend:
+class TestHuggingFaceBackend(unittest.TestCase):
     """Test HuggingFace backend."""
     
     def test_default_config(self):
@@ -156,14 +171,48 @@ class TestHuggingFaceBackend:
         backend = get_llm_backend("huggingface")
         config = backend.get_default_config()
         
-        assert config.backend == "huggingface"
-        assert config.api_key is None
-        assert config.model == "Qwen/Qwen3-8B"
-        assert "device" in config.extra_options
-        assert "quantize" in config.extra_options
+        self.assertEqual(config.backend, "huggingface")
+        self.assertIsNone(config.api_key)
+        self.assertEqual(config.model, "Qwen/Qwen3-8B")
+        self.assertIn("device", config.extra_options)
+        self.assertIn("quantize", config.extra_options)
+
+    def test_cache_key_distinguishes_device_and_quantization(self):
+        """Cached pipelines should be keyed by model, device, and quantization."""
+        from src.llms import get_llm_backend
+        from src.llms.huggingface_backend import HuggingFaceBackend
+
+        fake_module = types.SimpleNamespace(
+            ChatHuggingFace=lambda llm, model_id: {"llm": llm, "model_id": model_id},
+            HuggingFacePipeline=object,
+        )
+
+        with patch.dict(sys.modules, {"langchain_huggingface": fake_module}):
+            backend = get_llm_backend("huggingface")
+            self.assertIsInstance(backend, HuggingFaceBackend)
+            backend.clear_cache()
+
+            with patch.object(backend, "_create_pipeline", side_effect=["pipe-a", "pipe-b"]) as create_pipeline:
+                config = backend.get_default_config()
+                config.model = "Qwen/Qwen3-8B"
+                config.extra_options = {"device": "cpu", "quantize": "none"}
+                backend.get_chat_model(config)
+
+                cached_config = backend.get_default_config()
+                cached_config.model = "Qwen/Qwen3-8B"
+                cached_config.extra_options = {"device": "cpu", "quantize": "none"}
+                backend.get_chat_model(cached_config)
+
+                changed_config = backend.get_default_config()
+                changed_config.model = "Qwen/Qwen3-8B"
+                changed_config.extra_options = {"device": "cpu", "quantize": "4bit"}
+                backend.get_chat_model(changed_config)
+
+            self.assertEqual(create_pipeline.call_count, 2)
+            backend.clear_cache()
 
 
-class TestConfigModule:
+class TestConfigModule(unittest.TestCase):
     """Test config module LLM functions."""
     
     def test_get_llm_backend_name_default(self):
@@ -172,18 +221,18 @@ class TestConfigModule:
         # Clear any environment override
         with patch.dict(os.environ, {}, clear=True):
             backend = get_llm_backend_name()
-            assert backend == DEFAULT_LLM_BACKEND
+            self.assertEqual(backend, DEFAULT_LLM_BACKEND)
     
     def test_is_cloud_backend(self):
         """Test cloud backend detection."""
         from src.utils.config import is_cloud_backend
-        assert is_cloud_backend("google") is True
-        assert is_cloud_backend("openrouter") is True
-        assert is_cloud_backend("ollama") is False
-        assert is_cloud_backend("huggingface") is False
+        self.assertTrue(is_cloud_backend("google"))
+        self.assertTrue(is_cloud_backend("openrouter"))
+        self.assertFalse(is_cloud_backend("ollama"))
+        self.assertFalse(is_cloud_backend("huggingface"))
 
 
-class TestAgentIntegration:
+class TestAgentIntegration(unittest.TestCase):
     """Test agent.py integration with LLM backends."""
     
     def test_get_llm_function_signature(self):
@@ -192,17 +241,17 @@ class TestAgentIntegration:
         import inspect
         sig = inspect.signature(get_llm)
         params = list(sig.parameters.keys())
-        assert "api_key" in params
-        assert "backend_name" in params
-        assert "llm_config" in params
+        self.assertIn("api_key", params)
+        self.assertIn("backend_name", params)
+        self.assertIn("llm_config", params)
     
     def test_agent_state_has_llm_fields(self):
         """Test AgentState has LLM configuration fields."""
         from src.agent.agent import AgentState
         # TypedDict annotations
         annotations = AgentState.__annotations__
-        assert "llm_backend" in annotations
-        assert "llm_config" in annotations
+        self.assertIn("llm_backend", annotations)
+        self.assertIn("llm_config", annotations)
     
     def test_prepare_initial_state_signature(self):
         """Test _prepare_initial_state function signature."""
@@ -210,5 +259,5 @@ class TestAgentIntegration:
         import inspect
         sig = inspect.signature(_prepare_initial_state)
         params = list(sig.parameters.keys())
-        assert "llm_backend" in params
-        assert "llm_config" in params
+        self.assertIn("llm_backend", params)
+        self.assertIn("llm_config", params)

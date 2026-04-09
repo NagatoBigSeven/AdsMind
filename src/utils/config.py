@@ -1,22 +1,49 @@
 """
-Configuration management utilities for AdsKRK.
+Configuration management utilities for AdsMind.
 
 Handles loading and saving API keys from/to a local JSON configuration file.
 Supports auto-detection of API keys from multiple sources with priority:
 environment variable > config file > user input.
+
+The project was previously named AdsKRK. Legacy environment variables and the
+legacy ``~/.adskrk/config.json`` path remain supported as fallbacks.
 """
 
 import json
 import os
 from pathlib import Path
-from typing import Optional, Tuple, Literal
+from typing import Literal, Optional, Tuple
 
 # Configuration file path (stored in user's home directory)
-CONFIG_DIR = Path.home() / ".adskrk"
+CONFIG_DIR = Path.home() / ".adsmind"
+LEGACY_CONFIG_DIR = Path.home() / ".adskrk"
 CONFIG_FILE_PATH = CONFIG_DIR / "config.json"
+LEGACY_CONFIG_FILE_PATH = LEGACY_CONFIG_DIR / "config.json"
+
+LLM_BACKEND_ENV_VAR = "ADSMIND_LLM_BACKEND"
+LEGACY_LLM_BACKEND_ENV_VAR = "ADSKRK_LLM_BACKEND"
+CALCULATOR_BACKEND_ENV_VAR = "ADSMIND_BACKEND"
+LEGACY_CALCULATOR_BACKEND_ENV_VAR = "ADSKRK_BACKEND"
 
 # Type alias for API key source
 ApiKeySource = Literal["env", "config", None]
+
+
+def _get_first_env(*names: str) -> Optional[str]:
+    """Return the first configured environment variable value."""
+    for name in names:
+        value = os.environ.get(name)
+        if value:
+            return value
+    return None
+
+
+def _get_existing_config_path() -> Optional[Path]:
+    """Return the active config path, preferring AdsMind then legacy AdsKRK."""
+    for path in (CONFIG_FILE_PATH, LEGACY_CONFIG_FILE_PATH):
+        if path.exists():
+            return path
+    return None
 
 
 def load_config() -> dict:
@@ -26,11 +53,12 @@ def load_config() -> dict:
     Returns:
         dict: Configuration dictionary, or empty dict if file doesn't exist.
     """
-    if not CONFIG_FILE_PATH.exists():
+    config_path = _get_existing_config_path()
+    if config_path is None:
         return {}
     
     try:
-        with open(CONFIG_FILE_PATH, "r", encoding="utf-8") as f:
+        with open(config_path, "r", encoding="utf-8") as f:
             return json.load(f)
     except (json.JSONDecodeError, IOError):
         return {}
@@ -52,6 +80,11 @@ def save_config(config: dict) -> bool:
         
         with open(CONFIG_FILE_PATH, "w", encoding="utf-8") as f:
             json.dump(config, f, indent=2, ensure_ascii=False)
+        try:
+            os.chmod(CONFIG_FILE_PATH, 0o600)
+        except OSError:
+            # Best-effort on platforms that do not support POSIX permissions.
+            pass
         return True
     except IOError:
         return False
@@ -63,7 +96,7 @@ def get_api_key() -> Tuple[Optional[str], ApiKeySource]:
     
     Priority order:
     1. Environment variable (OPENROUTER_API_KEY)
-    2. Config file (~/.adskrk/config.json)
+    2. Config file (~/.adsmind/config.json, legacy ~/.adskrk/config.json also supported)
     3. None (user must input)
     
     Returns:
@@ -113,7 +146,8 @@ def get_calculator_backend() -> str:
     """
     Get the calculator backend name from environment variable.
     
-    The backend can be configured via the ADSKRK_BACKEND environment variable.
+    The backend can be configured via the ADSMIND_BACKEND environment variable.
+    The legacy ADSKRK_BACKEND variable is still accepted as a fallback.
     Defaults to "mace" if not set.
     
     Available backends:
@@ -123,7 +157,10 @@ def get_calculator_backend() -> str:
     Returns:
         str: Backend name (e.g., "mace", "openmd")
     """
-    return os.environ.get("ADSKRK_BACKEND", "mace")
+    return _get_first_env(
+        CALCULATOR_BACKEND_ENV_VAR,
+        LEGACY_CALCULATOR_BACKEND_ENV_VAR,
+    ) or "mace"
 
 
 # ============================================================
@@ -151,8 +188,8 @@ def get_llm_backend_name() -> str:
     Get the LLM backend name from environment variable or config.
     
     Priority order:
-    1. Environment variable (ADSKRK_LLM_BACKEND)
-    2. Config file (~/.adskrk/config.json -> llm_backend)
+    1. Environment variable (ADSMIND_LLM_BACKEND, legacy ADSKRK_LLM_BACKEND)
+    2. Config file (~/.adsmind/config.json -> llm_backend, legacy ~/.adskrk/config.json also supported)
     3. Default ("google")
     
     Available backends:
@@ -165,7 +202,10 @@ def get_llm_backend_name() -> str:
         str: LLM backend name
     """
     # Environment variable takes priority
-    env_backend = os.environ.get("ADSKRK_LLM_BACKEND")
+    env_backend = _get_first_env(
+        LLM_BACKEND_ENV_VAR,
+        LEGACY_LLM_BACKEND_ENV_VAR,
+    )
     if env_backend:
         return env_backend
     
@@ -184,7 +224,7 @@ def get_api_key_for_backend(backend: str) -> Tuple[Optional[str], ApiKeySource]:
     
     Priority order:
     1. Environment variable (backend-specific, e.g., GOOGLE_API_KEY)
-    2. Config file (~/.adskrk/config.json)
+    2. Config file (~/.adsmind/config.json, legacy ~/.adskrk/config.json also supported)
     3. None (user must input)
     
     Args:
@@ -258,4 +298,3 @@ def is_cloud_backend(backend: str) -> bool:
         bool: True if the backend requires an API key
     """
     return backend in ("google", "openrouter")
-

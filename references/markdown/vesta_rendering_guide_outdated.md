@@ -68,7 +68,7 @@
 | (c) | 俯视图标注两个 hollow 位置 | 展示两个简并位点的空间关系 |
 
 > **注意**: CuZnO 的结构文件可能在运行时的 `outputs/e05a0585/` 目录下，而非 `results/` 目录。
-> 检查路径: `find /Users/nagato/workspace/llm_adsorbate -name "*CuZnO*" -o -name "*e05a0585*" -type d`
+> 检查路径: `find /Users/nagato/workspace/AdsMind -name "*CuZnO*" -o -name "*e05a0585*" -type d`
 
 ### VESTA 设置
 

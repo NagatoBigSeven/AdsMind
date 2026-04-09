@@ -4,13 +4,14 @@ MACE backend implementation.
 This module provides the MACEBackend class that wraps MACE-MP (Materials Project)
 foundation model for atomistic simulations.
 
-MACE is the default and primary calculator for AdsKRK. This implementation
+MACE is the default and primary calculator for AdsMind. This implementation
 preserves all platform-specific logic:
 - Apple Silicon (Darwin): float32 precision (MPS doesn't support FP64)
 - Linux CPU: float64 precision
 - CUDA GPU: float64 precision + larger model + dispersion corrections
 """
 
+import importlib.util
 import platform
 from typing import Optional
 
@@ -26,7 +27,7 @@ class MACEBackend(BaseBackend):
     """
     MACE-MP calculator backend.
 
-    This is the primary calculator backend for AdsKRK, using the MACE-MP
+    This is the primary calculator backend for AdsMind, using the MACE-MP
     foundation model for energy and force calculations.
 
     The backend implements calculator caching to avoid reloading the model
@@ -44,12 +45,7 @@ class MACEBackend(BaseBackend):
     @property
     def is_available(self) -> bool:
         """Check if MACE is installed."""
-        try:
-            from mace.calculators import mace_mp
-
-            return True
-        except ImportError:
-            return False
+        return importlib.util.find_spec("mace") is not None
 
     def get_calculator(self, config: CalculatorConfig) -> Calculator:
         """

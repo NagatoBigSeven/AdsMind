@@ -1,5 +1,5 @@
 <p style="text-align: center;">
-  <img src="./assets/adskrk_concept.png" alt="Project logo" width="80%"/>
+  <img src="./assets/adsmind_concept.png" alt="Project logo" width="80%"/>
 </p>
 
 <br>
@@ -8,14 +8,16 @@
 [![Learn more @SchwallerGroup](https://img.shields.io/badge/Learn%20%0Amore-schwallergroup-blue)](https://schwallergroup.github.io)
 
 <h1 align="left">
-  AdsKRK: An agentic atomistic simulation framework for surface science.
+  AdsMind: An agentic atomistic simulation framework for surface science.
 </h1>
 
 <br>
 
-Welcome to the AdsKRK repository! This project was developed as a semester-long research project at EPFL, inspired by the [LLM Hackathon for Application in Chemistry and Materials Science](https://llmhackathon.github.io/).
+Welcome to the AdsMind repository! This project was developed as a semester-long research project at EPFL, inspired by the [LLM Hackathon for Application in Chemistry and Materials Science](https://llmhackathon.github.io/).
 
-The goal of AdsKRK is to showcase how Large Language Models (LLMs) can autonomously explore the binding configurations of adsorbates on hetero-catalytic surfaces. Starting from only a SMILES string and a surface structure, the agent can:
+The application, UI, and Python distribution are all named **AdsMind**.
+
+The goal of AdsMind is to showcase how Large Language Models (LLMs) can autonomously explore the binding configurations of adsorbates on hetero-catalytic surfaces. Starting from only a SMILES string and a surface structure, the agent can:
 
 * generate binding configurations,
 * run structure relaxations,
@@ -24,7 +26,7 @@ The goal of AdsKRK is to showcase how Large Language Models (LLMs) can autonomou
 
 Users can also interact with the agent - asking questions about the system or guiding the search process through prompts.
 
-At the core of AdsKRK is [AutoAdsorbate](https://github.com/basf/autoadsorbate) - a powerful tool for generating chemically meaningful molecular and fragment configurations on surfaces, providing a search space for the agent.
+At the core of AdsMind is [AutoAdsorbate](https://github.com/basf/autoadsorbate) - a powerful tool for generating chemically meaningful molecular and fragment configurations on surfaces, providing a search space for the agent.
 
 ## ✨ Features
 
@@ -37,15 +39,15 @@ At the core of AdsKRK is [AutoAdsorbate](https://github.com/basf/autoadsorbate) 
 
 ```bash
 # Clone and install
-git clone https://github.com/schwallergroup/llm_adsorbate.git
-cd llm_adsorbate
+git clone https://github.com/AI4QC/AdsMind.git
+cd AdsMind
 uv pip install -e .
 
 # Set API key (Google AI is default)
 export GOOGLE_API_KEY="your-google-api-key"
 
 # Run the app
-streamlit run src/app/app.py
+streamlit run streamlit_app.py
 ```
 
 Then provide your inputs in the sidebar:
@@ -69,8 +71,10 @@ Then provide your inputs in the sidebar:
 Select your backend in the app sidebar or via environment variable:
 
 ```bash
-export ADSKRK_LLM_BACKEND=google    # or openrouter, ollama, huggingface
+export ADSMIND_LLM_BACKEND=google    # or openrouter, ollama, huggingface
 ```
+
+Legacy `ADSKRK_LLM_BACKEND` is still accepted as a fallback.
 
 📖 See [LLM Backends](docs/llm_backends.md) for configuration details.
 
@@ -98,7 +102,8 @@ Multiple ways to provide your API key (in priority order):
    ```
 
 2. **Config file**: Use the app's "Save for future sessions" checkbox
-   * Stored at: `~/.adskrk/config.json`
+   * Stored at: `~/.adsmind/config.json`
+   * Legacy fallback: `~/.adskrk/config.json`
 
 3. **Manual input**: Enter in the sidebar each session
 
@@ -128,6 +133,9 @@ on a top site of the Cu(211) surface, is unstable and leads to desorption.
 * [Quickstart Guide](docs/quickstart.md) - Get started in 5 minutes
 * [LLM Backends](docs/llm_backends.md) - Configure LLM providers
 * [Calculator Backends](docs/calculator_backends.md) - MACE and other calculators
+* [Architecture](docs/architecture.md) - Runtime components and data flow
+* [Support Matrix](docs/support_matrix.md) - Supported environments and backend maturity
+* [Runtime Operations](docs/runtime_operations.md) - Outputs, session isolation, and runtime controls
 
 ## 👩‍💻 Development
 
@@ -135,8 +143,11 @@ on a top site of the Cu(211) surface, is unstable and leads to desorption.
 # Install with dev dependencies
 uv pip install -e ".[dev]"
 
+# Run preflight checks
+adsmind-preflight --ci
+
 # Run tests
-pytest tests/
+python -m unittest discover -s tests -p 'test_*.py' -v
 ```
 
 ## 📄 License

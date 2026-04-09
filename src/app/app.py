@@ -1,25 +1,18 @@
-import sys
 import os
 import re
 import tempfile
 import uuid
 from pathlib import Path
 
-current_dir = os.path.dirname(os.path.abspath(__file__))
-project_root = os.path.abspath(os.path.join(current_dir, "..", ".."))
-if project_root not in sys.path:
-    sys.path.insert(0, project_root)
-
 import streamlit as st
 from src.agent.agent import get_agent_executor, _prepare_initial_state
 from src.utils.config import (
-    get_api_key, save_api_key, is_env_key_set,
     get_llm_backend_name, get_api_key_for_backend, save_api_key_for_backend,
-    save_llm_backend, is_cloud_backend
+    save_llm_backend, is_cloud_backend, CONFIG_FILE_PATH
 )
 
-st.set_page_config(page_title="LLM Agent Demo", layout="wide")
-st.title("adsKRK")
+st.set_page_config(page_title="AdsMind", layout="wide")
+st.title("AdsMind")
 
 @st.cache_resource
 def initialize_agent_executor():
@@ -115,7 +108,7 @@ if is_cloud_backend(selected_backend):
     elif key_source == "config":
         st.sidebar.info("📁 Loaded from config file")
     else:
-        st.sidebar.caption(f"✏️ Enter your API Key")
+        st.sidebar.caption("✏️ Enter your API Key")
     
     # API key input field (disabled when from environment variable)
     api_key_input = st.sidebar.text_input(
@@ -131,7 +124,7 @@ if is_cloud_backend(selected_backend):
     if not env_key_active:
         save_key_checkbox = st.sidebar.checkbox(
             "Save for future sessions",
-            help="Saves to ~/.adskrk/config.json"
+            help=f"Saves to {CONFIG_FILE_PATH}"
         )
         
         # Save if checkbox is checked and key is different from saved
@@ -312,14 +305,9 @@ with col2:
 if not can_run:
     st.sidebar.caption(f"⚠️ Missing: {', '.join(missing_requirements)}")
 
-# Handle clear button - reset ALL session state to defaults
+# Handle clear button - reset all session state for a fresh run
 if clear_button:
-    # Keys to preserve (backend-related settings that shouldn't be cleared)
-    preserve_keys = set()
-    
-    # Clear all session state except preserved keys
-    keys_to_delete = [key for key in st.session_state.keys() if key not in preserve_keys]
-    for key in keys_to_delete:
+    for key in list(st.session_state.keys()):
         del st.session_state[key]
     
     st.rerun()
@@ -374,7 +362,7 @@ if run_button:
                 MAX_STEPS = int(os.environ.get("AGENT_MAX_STEPS", "20"))
                 step_count = 0
                 recent_messages = []
-                recent_tool_calls = []
+                recent_tool_messages = []
 
                 for event in agent_executor.stream(
                     initial_state,
@@ -384,33 +372,27 @@ if run_button:
                     if step_count >= MAX_STEPS:
                         status.markdown("⚠️ **WARNING: Reached maximum step limit. Terminating to prevent infinite loop.**")
                         break
-                    if "tool_calls" in event:
-                        for tc in event["tool_calls"]:
-                            tool_sig = f"{tc['name']}:{str(tc['args'])}"
-                            # Check for repeated tool calls
-                            if recent_tool_calls.count(tool_sig) >= 3:
-                                status.markdown("⚠️ **WARNING: Detected repeated tool calls. Possible loop.**")
-                            recent_tool_calls.append(tool_sig)
-                            if len(recent_tool_calls) > 10:
-                                recent_tool_calls.pop(0)
-                            status.markdown(f"Calling tool: `{tc['name']}` with args: `{tc['args']}`")
-                        status.divider()
-                    if "tool_output" in event:
-                        for to in event["tool_output"]:
-                            status.markdown(f"Tool output: `{to}`")
-                        status.divider()
                     if "messages" in event:
                         last_message = event["messages"][-1]
-                        if last_message.type == "ai" and last_message.content:
+                        if last_message.content:
                             content = last_message.content
-                            if content in recent_messages:
-                                status.markdown("⚠️ **WARNING: Detected repeated message content.**")
-                            recent_messages.append(content)
-                            if len(recent_messages) > 5:
-                                recent_messages.pop(0)
-                            render_message_in_status(content, status)
-                            status.divider()
-                            final_answer = content
+                            if last_message.type == "tool":
+                                if content in recent_tool_messages:
+                                    status.markdown("⚠️ **WARNING: Detected repeated tool output.**")
+                                recent_tool_messages.append(content)
+                                if len(recent_tool_messages) > 5:
+                                    recent_tool_messages.pop(0)
+                                render_message_in_status(content, status)
+                                status.divider()
+                            elif last_message.type == "ai":
+                                if content in recent_messages:
+                                    status.markdown("⚠️ **WARNING: Detected repeated message content.**")
+                                recent_messages.append(content)
+                                if len(recent_messages) > 5:
+                                    recent_messages.pop(0)
+                                render_message_in_status(content, status)
+                                status.divider()
+                                final_answer = content
                 
                 status.update(label="Agent finished.", state="complete", expanded=False)
 
@@ -448,7 +430,7 @@ with st.sidebar.expander("ℹ️ Quick Start Guide"):
 # Scientific disclaimer
 st.sidebar.markdown("---")
 st.sidebar.caption(
-    "⚠️ **Disclaimer**: AdsKRK is an AI-assisted screening tool. "
+    "⚠️ **Disclaimer**: AdsMind is an AI-assisted screening tool. "
     "Results should be validated with DFT or experimental methods before publication. "
     "Energy values are computed at 0K without thermal/entropic corrections. "
     "See [documentation](docs/quickstart.md) for details."
