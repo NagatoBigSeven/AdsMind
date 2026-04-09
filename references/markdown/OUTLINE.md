@@ -20,24 +20,6 @@ This is not a competitor to Adsorb-Agent — it is a **complementary paradigm**:
 - After each candidate configuration is relaxed by `MLFF`, the energy and structural results are fed back to the planner to update subsequent search strategy.
 - We define `Chemical Slip` as a physical diagnostic for plan-relaxation site mismatch, and introduce `FORBID` constraint memory and adaptive termination.
 
-## Experiment Priority
-
-| Priority | Task | Status | Deadline Sensitivity |
-|----------|------|--------|---------------------|
-| **P0 (Must)** | CMU 20-surface benchmark | To rerun | Blocks everything |
-| **P0 (Must)** | Head-to-head vs Adsorb-Agent | Depends on P0 above | Core claim |
-| **P0 (Must)** | DFT validation (3–5 systems) | Bowen leading | Philippe explicitly requested |
-| **P0 (Must)** | Ablation study (3–5 systems) | Not started | Philippe explicitly requested |
-| **P1 (Recommended)** | OC dataset evaluation (~50 systems) | Not started | Strengthens story significantly |
-| **P1 (Recommended)** | Multi-model comparison (SI) | Not started | Reviewer will ask |
-| **P2 (Nice-to-have)** | Literature reproduction (published DFT results) | Not started | If time allows |
-
-**OCD-GMAE Dataset Overview** (used in Section 3.3 OC Stress Test):
-
-- Unique catalyst surfaces (Surface Num.): 967 (covering 54 elements)
-- Adsorbate species (Adsorbate Num.): 74
-- Total surface/adsorbate combinations (System Num.): 973
-
 ---
 
 ## Full Paper Outline
@@ -51,6 +33,8 @@ This is not a competitor to Adsorb-Agent — it is a **complementary paradigm**:
 - **Scientific context**: Heterogeneous catalysis, energy storage materials, electrochemical interface design — these key applications fundamentally depend on accurately identifying the most stable adsorbate-surface configurations
 - **Combinatorial explosion**: Configuration space grows exponentially with degrees of freedom — site types (ontop/bridge/hollow/fcc/hcp) × surface atom composition × adsorbate orientation × conformational flexibility
 - **Limitations of traditional approaches**: DFT enumeration is feasible for small systems, but computational cost escalates dramatically for complex surfaces (intermetallics, oxides, high-entropy alloys); global optimization algorithms (genetic algorithms, basin hopping) require many energy evaluations and are sensitive to initial sampling
+
+**Quantitative evidence**: For Pt(111) with CH₃OH adsorption, traditional DFT enumeration requires evaluating ~50 initial configurations, each costing ~500 CPU-hours; for intermetallic Mo₃Pd(111), the candidate configuration space can reach ~200, with computational cost growing combinatorially. According to OC20-Dense statistics (Chanussot et al., ACS Catal. 2021), a substantial fraction of surface-adsorbate combinations exhibit near-degenerate configurations (ΔE < 0.05 eV), making single-shot prediction unreliable for these systems. [Exact statistics to be confirmed and cited from OC20/OC22 publications.]
 
 #### 1.2 Traditional Machine Learning Solutions and Their Limitations
 
@@ -70,8 +54,6 @@ This is not a competitor to Adsorb-Agent — it is a **complementary paradigm**:
 - Existing ML methods treat the problem as a **single-shot prediction task**: input surface structure → output optimal configuration
 - **The actual scientific problem is inherently sequential decision-making**: after each calculation, the next exploration direction should be dynamically adjusted based on results
 - This cognitive gap causes ML methods to systematically fail on complex surfaces, because they lack mechanisms to learn from failed attempts
-
-**Quantitative evidence**: For Pt(111) with CH₃OH adsorption, traditional DFT enumeration requires evaluating ~50 initial configurations, each costing ~500 CPU-hours; for intermetallic Mo₃Pd(111), the candidate configuration space can reach ~200, with computational cost growing combinatorially. Furthermore, according to OC20 database statistics, ~35% of surface-adsorbate combinations exhibit degenerate configurations (ΔE < 0.05 eV), and traditional single-shot prediction methods achieve less than 60% success rate on these systems.
 
 #### 1.3 LLM-Driven Methods: Opportunities and Inherent Limitations
 
@@ -114,17 +96,18 @@ This is not a competitor to Adsorb-Agent — it is a **complementary paradigm**:
 - **Complementary to Adsorb-Agent, not competitive**: they reduce search space (filter), we iteratively refine (optimizer)
 - **Synergistic with MLFF**: MLFF provides fast energy evaluation, AdsMind provides intelligent search strategy
 
-#### 1.5 Theoretical Framing: Sequential Decision Perspective
+#### 1.5 Conceptual Framing: Sequential Decision Perspective
 
-Formalize adsorption configuration search as a **Partially Observable Markov Decision Process (POMDP)**:
+We draw an analogy between adsorption configuration search and a **Partially Observable Markov Decision Process (POMDP)** to motivate the closed-loop design. This analogy is conceptual — AdsMind does not explicitly solve the POMDP, but its architecture mirrors POMDP components:
 
-- **State space** $\mathcal{S}$: the PES of surface-adsorbate configurations, not directly observable
+- **State space** $\mathcal{S}$: the PES of surface-adsorbate configurations — not directly observable
 - **Action space** $\mathcal{A}$: LLM-generated candidate configurations (site type + adsorbate orientation)
 - **Observation space** $\mathcal{O}$: post-MLFF-relaxation energy, geometry, site classification, Chemical Slip flag
-- **Reward function** $R$: energy reduction $-\Delta E$ + Chemical Slip penalty $-\lambda_s \cdot \mathbb{1}[\text{slip}]$ + exploration bonus
-- **Policy** $\pi_\theta(a|h_t)$: conditional action distribution based on iteration history $h_t = \{(a_i, o_i)\}_{i=1}^{t-1}$
+- **Policy** $\pi(a|h_t)$: the LLM's next-configuration proposal, conditioned on the full iteration history $h_t = \{(a_i, o_i)\}_{i=1}^{t-1}$
 
-**AdsMind's innovation**: Traditional open-loop methods use a fixed policy $\pi(a|s)$, while the closed-loop system achieves Bayesian updating $\pi(a|s, o_{1:t})$ via physical feedback, adapting to the PES characteristics of each specific surface.
+**Why this framing matters**: Traditional open-loop methods use a fixed policy $\pi(a|s)$ that cannot adapt after deployment. AdsMind's closed-loop architecture conditions each decision on accumulated observations, approximating a history-dependent policy $\pi(a|h_t)$. The LLM's in-context learning serves as a practical (though approximate) mechanism for this history-conditioned updating, without requiring explicit reward engineering or policy optimization.
+
+This perspective clarifies why feedback helps: each observation (relaxation result, Chemical Slip detection) reduces uncertainty about the PES, enabling increasingly informed site selection.
 
 ---
 
@@ -232,8 +215,9 @@ The planner triggers `TERMINATE` when:
 
 #### 3.1 CMU Benchmark Replication (→ **Fig. 2** + **Table 1**)
 
-- 20 surfaces from Adsorb-Agent benchmark (same test set for fair comparison) + 1 additional CuZnO complex multi-metal oxide system
+- 20 surfaces from Adsorb-Agent benchmark (same test set for fair comparison)
 - **Note**: the exact 20 systems are from Adsorb-Agent SI Table S1. Previous runs completed all 20 (19 succeeded, 1 failed), but run logs and full trajectories were not saved. Need to rerun to obtain publishable data.
+- +1 additional CuZnO complex multi-metal oxide system, included to probe generalization beyond the original benchmark's intermetallic-dominated composition (AdsMind's design is surface-agnostic; this tests whether it extends to oxide supports)
 - Systems span: monometallic (Pt, Pd, Au, Ag), intermetallic (Mo3Pd, CuPd3, CoPt, Ru3Mo, Au2Hf, Al3Zr), and others from the original benchmark
 - Adsorbates: H, NNH, OH, OCHCH3, CH2CHCH3, CHO, and larger molecules
 - Metrics: best adsorption energy found, number of iterations, Chemical Slip frequency, dissociation events
@@ -267,7 +251,7 @@ Direct comparison on the same 20 surfaces:
 
 ---
 
-#### 3.3 Stress Test on OC Dataset (→ **Table 3**) [P1 — Recommended]
+#### 3.3 Generalization Test on OC Dataset (→ **Table 3**) [P1 — if timeline permits]
 
 The CMU benchmark (20 curated surfaces) tests basic competence. To probe robustness and generalization, we evaluate AdsMind on a larger, more diverse subset from OCD-GMAE (a subset of OC20-Dense).
 
@@ -282,7 +266,7 @@ The CMU benchmark (20 curated surfaces) tests basic competence. To probe robustn
 - Chemical Slip frequency vs surface type — does slip rate increase on less-studied compositions?
 - Comparison with Adsorb-Agent on the same OC subset (if feasible within timeline)
 
-**Fallback**: if full OC evaluation is not feasible before submission, present preliminary results on a smaller subset (~20 systems) and flag the full evaluation as follow-up work.
+**Scope note**: This section is P1 priority. If not feasible before submission, we present preliminary results on a smaller subset (~20 systems) and flag the full evaluation as future work. The core claims of the paper (Sections 3.1, 3.2, 3.4, 3.5) do not depend on this section.
 
 ---
 
@@ -364,11 +348,21 @@ Chemical Slip reveals **topological blind spots** in LLM chemical knowledge:
 - Cross-LLM-backend comparison (SI-5): if model A has lower slip rate than model B on intermetallic surfaces, model A has better internalized chemistry for those systems
 - This framing turns a byproduct of our system into a **standalone methodological contribution**: a physically grounded way to evaluate LLM chemical knowledge, going beyond text-based benchmarks (e.g., ChemBench) that test factual recall rather than applied reasoning
 
-#### 4.2 Closed-Loop vs Open-Loop: A Paradigm Difference
+#### 4.2 Closed-Loop vs Open-Loop: When to Use Which
 
-- Open-loop (Adsorb-Agent): fast, parallelizable, good for well-understood surfaces
-- Closed-loop (AdsMind): slower per iteration, but finds better solutions on complex surfaces
-- Not mutually exclusive — could combine: Adsorb-Agent for initial proposals → AdsMind for iterative refinement
+**Complementary paradigms with distinct trade-offs**:
+
+| Dimension | Open-Loop (Adsorb-Agent) | Closed-Loop (AdsMind) |
+|-----------|--------------------------|----------------------|
+| **Execution model** | Single-shot, fully parallelizable | Sequential, inherently serial per system |
+| **Throughput** | High — can screen thousands of surfaces concurrently | Low — each system requires multiple serial iterations |
+| **Per-system depth** | Limited — no learning from calculation outcomes | Deep — adapts to each surface's PES via feedback |
+| **Best suited for** | Large-scale screening on well-studied surface types | In-depth search on complex / poorly characterized surfaces |
+| **Failure handling** | Filters out failures (dissociation, convergence errors) | Learns from failures (Chemical Slip → FORBID) |
+
+**Practical implication**: For high-throughput catalyst screening (e.g., thousands of candidates for initial down-selection), open-loop methods are more efficient. For the subsequent deep exploration of promising candidates — especially intermetallics, multimetallics, or novel compositions where LLM priors are unreliable — closed-loop refinement adds significant value.
+
+**Potential synergy**: The two paradigms are not mutually exclusive. A two-stage pipeline — Adsorb-Agent for initial proposals → AdsMind for iterative refinement on the top candidates — could combine the throughput of open-loop with the depth of closed-loop. We leave this integration to future work.
 
 #### 4.3 MLFF as Surrogate: When Does It Work?
 
@@ -390,6 +384,7 @@ Inter-configuration differences in adsorption energy are primarily determined by
 - LLM API cost and latency (quantified in SI-6: average ~X seconds per iteration, ~Y tokens)
 - Current implementation: only flat/stepped surfaces, no defects or nanoparticles
 - Single adsorbate per surface (no co-adsorption)
+- **LLM reproducibility**: LLM APIs are black-box services subject to model updates; even at temperature 0.0, outputs may vary across API versions. We mitigate this by: (1) recording exact model version identifiers for all runs, (2) providing complete prompt templates in SI-1, (3) releasing full trajectory logs (SI-2) so that all reported results can be independently verified from the saved data, even if LLM outputs are not exactly reproducible. The multi-model comparison (SI-5) further demonstrates that conclusions hold across different LLM backends, reducing dependence on any single provider.
 
 **Failure case analysis** (based on preliminary observations, **[to be updated with actual data after rerun]**):
 
@@ -437,7 +432,7 @@ In preliminary experiments, 19 of 20 systems succeeded (per-system success rate 
 | **Fig. 5** | Case study | Head-to-head: cases where AdsMind succeeds and Adsorb-Agent fails | 3.2 | Zongmin | P0 |
 | **Table 1** | Data | 20 test systems summary: surface, adsorbate, energy, site, slip, PES type | 3.1 | Zongmin | P0 |
 | **Table 2** | Comparison | AdsMind vs Adsorb-Agent: energy, iterations, success rate | 3.2 | Zongmin | P0 |
-| **Table 3** | Data | OC dataset stress test: success rate by surface type, slip frequency | 3.3 | Zongmin | P1 |
+| **Table 3** | Data | OC dataset generalization test: success rate by surface type, slip frequency | 3.3 | Zongmin | P1 |
 | **Table 4** | Ablation | Component contribution: full vs variants on 3–5 systems | 3.5 | Zongmin | P0 |
 
 ---
@@ -452,8 +447,8 @@ In preliminary experiments, 19 of 20 systems succeeded (per-system success rate 
 | SI-4 | Ablation study full statistics and interaction effects | Must |
 | SI-5 | LLM model comparison: 4–5 models on representative systems + Chemical Slip statistics per model | Recommended |
 | SI-6 | Cost analysis: LLM tokens, MLFF compute time, human effort | Recommended |
-| SI-7 | OC dataset extended results: full system list, per-system metrics, failure cases | Recommended |
-| SI-8 | Failure case analysis: systematic classification of failure modes | Optional |
+| SI-7 | OC dataset extended results: full system list, per-system metrics, failure cases | If Section 3.3 included |
+| SI-8 | Failure case analysis: systematic classification of failure modes | Recommended |
 | SI-9 | Glossary: Chemical Slip, FORBID, PES Type, Soft/Hard Slip and other core terminology definitions | Optional |
 
 ---
@@ -462,8 +457,28 @@ In preliminary experiments, 19 of 20 systems succeeded (per-system success rate 
 
 1. **Clear contribution**: not "yet another LLM agent" — a specific architectural innovation (closed-loop feedback) with a specific mechanism (Chemical Slip)
 2. **Fair comparison**: same benchmark, same surfaces, direct head-to-head with the only published competitor
-3. **Escalating difficulty**: CMU benchmark (curated) → OC dataset (diverse) → DFT validation (ground truth) — a three-tier evaluation that preempts "but does it generalize?" reviewer concerns
+3. **Multi-level evaluation**: CMU benchmark (curated, 20 systems) + DFT validation (ground truth) + ablation (mechanism analysis) form the core evidence. OC dataset (diverse, ~50 systems) extends generalization claims if timeline permits.
 4. **Physical validation**: DFT confirms that MLFF-guided search is meaningful, not just numerically self-consistent
 5. **Ablation**: each component justified quantitatively, not just described
 6. **Dual contribution**: the closed-loop architecture is contribution #1; Chemical Slip as a proxy metric for LLM chemical reasoning quality is contribution #2 — this gives the paper legs beyond the specific application
 7. **Complementary framing**: positions AdsMind alongside Adsorb-Agent as complementary paradigms rather than direct competitors. Objectively discusses the applicable scenarios for open-loop (scaling screening throughput) vs closed-loop (deepening configuration search on complex surfaces), elevating the paper's ecological niche.
+
+---
+
+## Internal: Experiment Priority & Dataset
+
+| Priority | Task | Status | Deadline Sensitivity |
+|----------|------|--------|---------------------|
+| **P0 (Must)** | CMU 20-surface benchmark | To rerun | Blocks everything |
+| **P0 (Must)** | Head-to-head vs Adsorb-Agent | Depends on P0 above | Core claim |
+| **P0 (Must)** | DFT validation (3–5 systems) | Bowen leading | Philippe explicitly requested |
+| **P0 (Must)** | Ablation study (3–5 systems) | Not started | Philippe explicitly requested |
+| **P1 (Recommended)** | OC dataset evaluation (~50 systems) | Not started | Strengthens story significantly |
+| **P1 (Recommended)** | Multi-model comparison (SI) | Not started | Reviewer will ask |
+| **P2 (Nice-to-have)** | Literature reproduction (published DFT results) | Not started | If time allows |
+
+**OCD-GMAE Dataset Overview** (used in Section 3.3):
+
+- Unique catalyst surfaces (Surface Num.): 967 (covering 54 elements)
+- Adsorbate species (Adsorbate Num.): 74
+- Total surface/adsorbate combinations (System Num.): 973
