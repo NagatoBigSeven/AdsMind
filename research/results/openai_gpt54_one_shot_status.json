@@ -1,0 +1,67 @@
+{
+  "raw_one_shot": {
+    "total_cases": 20,
+    "valid_cases": 18,
+    "failed_cases": [
+      "06",
+      "08"
+    ],
+    "status_counts": {
+      "success": 18,
+      "failed": 2
+    },
+    "mean_tokens_per_case": 4815.2
+  },
+  "retry": {
+    "total_cases": 2,
+    "valid_cases": 1,
+    "failed_cases": [
+      "06"
+    ],
+    "recovered_cases": [
+      "08"
+    ],
+    "status_counts": {
+      "failed": 1,
+      "success": 1
+    },
+    "mean_tokens_per_case": 5135.0
+  },
+  "corrected_one_shot": {
+    "total_cases": 20,
+    "valid_cases": 19,
+    "failed_cases": [
+      "06"
+    ],
+    "selected_retry_cases": [
+      "08"
+    ],
+    "status_counts": {
+      "success": 19,
+      "failed": 1
+    },
+    "mean_tokens_per_case": 4847.65
+  },
+  "ablation": {
+    "total_runs": 25,
+    "success_runs": 25,
+    "variants": [
+      "full",
+      "no_slip",
+      "no_forbid",
+      "no_termination",
+      "single_shot"
+    ],
+    "cases": [
+      "01",
+      "02",
+      "09",
+      "14",
+      "19"
+    ]
+  },
+  "recommended_use": {
+    "one_shot": "Use raw and retry-corrected tables separately; do not claim raw 20/20 success.",
+    "ablation": "Use as complete GPT-5.4 5x5 ablation matrix."
+  }
+}

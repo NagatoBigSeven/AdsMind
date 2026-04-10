@@ -1,0 +1,78 @@
+{
+  "openai_raw": {
+    "total_cases": 20,
+    "valid_cases": 18,
+    "failed_cases": [
+      "06",
+      "08"
+    ],
+    "failure_reason": "Both raw failures are one-shot NNH dissociation outcomes, not API/runtime failures."
+  },
+  "openai_retry": {
+    "total_cases": 2,
+    "valid_cases": 1,
+    "failed_cases": [
+      "06"
+    ],
+    "recovered_cases": [
+      "08"
+    ]
+  },
+  "openai_corrected": {
+    "total_cases": 20,
+    "valid_cases": 19,
+    "failed_cases": [
+      "06"
+    ],
+    "selected_retry_cases": [
+      "08"
+    ]
+  },
+  "pairwise_energy_agreement_corrected": {
+    "openai_vs_gemini": {
+      "valid_n": 19,
+      "mean_abs_delta": 0.208345,
+      "median_abs_delta": 0.080742,
+      "within_0_01": 4,
+      "within_0_05": 8,
+      "within_0_10": 10,
+      "largest_delta": 1.047825,
+      "largest_delta_case": "20"
+    },
+    "openai_vs_grok4": {
+      "valid_n": 19,
+      "mean_abs_delta": 0.272731,
+      "median_abs_delta": 0.170198,
+      "within_0_01": 3,
+      "within_0_05": 5,
+      "within_0_10": 6,
+      "largest_delta": 1.049778,
+      "largest_delta_case": "20"
+    }
+  },
+  "site_agreement_corrected": {
+    "openai_vs_gemini": {
+      "valid_n": 19,
+      "matches": 13,
+      "rate": 0.684211
+    },
+    "openai_vs_grok4": {
+      "valid_n": 19,
+      "matches": 7,
+      "rate": 0.368421
+    }
+  },
+  "case_06_status": {
+    "raw_status": "failed",
+    "retry_status": "failed",
+    "raw_dissociation_count": "1",
+    "retry_dissociation_count": "1",
+    "interpretation": "Reproducible one-shot dissociation failure; do not use dissociated energy as valid adsorption energy."
+  },
+  "case_08_status": {
+    "raw_status": "failed",
+    "retry_status": "success",
+    "retry_energy_eV": "-6.427181243896484",
+    "interpretation": "Retry recovered a valid non-dissociated hollow adsorption structure."
+  }
+}
