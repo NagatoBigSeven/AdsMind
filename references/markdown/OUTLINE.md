@@ -71,17 +71,17 @@ This is not a competitor to Adsorb-Agent — it is a **complementary paradigm**:
 - **H₀ (null hypothesis)**: Closed-loop physical feedback does not affect search quality — full AdsMind and the no-feedback baseline (the "Baseline (single-shot)" ablation variant) show no significant difference in best adsorption energy or search efficiency
 - **H₁ (alternative hypothesis)**: Full AdsMind, compared to the no-feedback baseline, finds lower-energy configurations (ΔE > 0.05 eV) on a substantial fraction of intermetallic surfaces, with the benefit increasing when the base planner is less capable
 
-*Note: H₁ is directly tested via the "Full AdsMind vs Baseline (single-shot)" paired comparison in the ablation study (Section 3.5). Results: Grok-4 supports H₁ (3/4 intermetallic cases improved by > 0.05 eV, 75%); Gemini does not (1/4, 25%). This asymmetry is itself an informative finding — the closed-loop benefit scales inversely with LLM single-shot capability.*
+*Note: H₁ is directly tested via the "Full AdsMind vs Baseline (single-shot)" paired comparison in the ablation study (Section 3.5). Results: Grok-4 and GPT-5.4 support H₁ (3/4 intermetallic cases improved by > 0.05 eV, 75%); Gemini does not (1/4, 25%). This asymmetry is itself an informative finding — the closed-loop benefit depends on the planner's one-shot behavior and is strongest when the initial planner misses a difficult site family.*
 
 **Key evaluation metrics**:
 
 | Metric Type | Specific Measure | Observed Value | Note |
 |-------------|-----------------|----------------|------|
-| Diagnostic | Chemical Slip Rate (per-case, any slip in episode) | 60% (one-shot, 20 cases); monometallic 20%, intermetallic 73% | Not a failure metric — slip frequency quantifies LLM reasoning bias and motivates the closed loop |
-| Search quality | Energy Gap Discovery Rate (full finds lower energy than single-shot) | Gemini 60% (3/5), Grok-4 80% (4/5) | Cases where full = single-shot indicate the LLM already found the optimum in one shot |
+| Diagnostic | Chemical Slip Rate (per-case, any slip in episode) | Gemini/Grok-4: 60% (one-shot, 20 cases); GPT-5.4: 12/19 valid retry-corrected cases | Not a failure metric — slip frequency quantifies LLM reasoning bias and motivates the closed loop |
+| Search quality | Energy Gap Discovery Rate (full finds lower energy than single-shot) | Gemini 60% (3/5), Grok-4 80% (4/5), GPT-5.4 60% (3/5) | Cases where full = single-shot indicate the LLM already found the optimum in one shot |
 | Exploration efficiency | Effective Iteration Ratio (effective iterations / total iterations) | 1.0 across all runs | No MACE calculation failures observed; all agent iterations were productive |
-| Cross-LLM robustness | Iterative convergence agreement across LLM backends | 4/5 identical (ΔE < 0.01 eV); one-shot only 1/5 | Iterative loop reduces backend variance by 4.2× |
-| Statistical | Friedman test across ablation variants | Gemini p = 0.30, Grok-4 p = 0.018 | n = 5 limits Wilcoxon power; effect sizes and CIs are primary evidence |
+| Cross-LLM robustness | Iterative convergence agreement across LLM backends | Three-backend full-search mean range 0.051 eV vs one-shot 0.426 eV on the locked subset | Iterative loop reduces backend variance by 8.4× |
+| Statistical | Friedman test across ablation variants | Gemini p = 0.30, Grok-4 p = 0.018, GPT-5.4 p = 0.062 | n = 5 limits Wilcoxon power; effect sizes and CIs are primary evidence |
 
 > **Central thesis**: Sequential physical feedback transforms LLM chemical reasoning from educated guessing into evidence-based refinement. The benefit is most pronounced when the base planner is weakest (intermetallic surfaces, less capable LLM backends). The closed-loop architecture also functions as a backend-robustness mechanism, driving different LLMs toward the same solution.
 
@@ -185,7 +185,7 @@ The planner triggers `TERMINATE` when:
 **LLM**:
 - Default: Gemini 2.5 Pro (production) — chosen for strong structured-output compliance, low cost per token, and competitive chemical reasoning in preliminary tests
 - Temperature: 0.0 (deterministic)
-- Multi-model comparison in SI (GPT-5.4, Claude Sonnet/Opus 4.6, Gemini 3.1 Pro/Flash Preview, open-source: Qwen 3.5, GLM 5, etc.) — purpose is to show that the closed-loop architecture improves performance **regardless of LLM backend**, and to generate Chemical Slip statistics across models
+- Multi-model comparison in SI: completed for Gemini 2.5 Pro, Grok-4, and GPT-5.4 under the same AdsMind+MACE protocol; additional Claude/open-source backends remain optional. The purpose is to show that the closed-loop architecture improves performance **across LLM backends**, and to generate Chemical Slip statistics across models
 
 #### 2.6 Statistical Analysis Methods
 
@@ -225,12 +225,12 @@ The planner triggers `TERMINATE` when:
 
 **Table 1**: Summary of 20 test systems — surface composition, miller index, adsorbate, best energy, binding site, Chemical Slip occurrence, PES classification (convergent / competing / counter-intuitive)
 
-**Key results** (from completed runs — Gemini 2.5 Pro and Grok-4, one-shot on all 20 cases):
+**Key results** (from completed runs — Gemini 2.5 Pro, Grok-4, and GPT-5.4, one-shot on all 20 cases):
 
-- Success rate: **20/20 (100%)** on both backends (previous preliminary run had 19/20; the rerun succeeded on all cases)
-- Chemical Slip frequency: **60% of cases** (12/20) exhibit at least one slip. Stratified: monometallic 20% (1/5), intermetallic 73% (11/15) — confirms that LLM priors are significantly less reliable on intermetallic surfaces
-- Dissociation event rate: 0/20 in one-shot runs (dissociation appears only in multi-iteration ablation runs on hard cases, e.g., case 19)
-- Cross-backend agreement: 9/20 cases produce identical energy (within 0.01 eV) across Gemini and Grok-4 in one-shot mode; iterative full variant raises this to 4/5 on the ablation subset
+- Success rate: **20/20 (100%)** for Gemini and Grok-4; GPT-5.4 produced **18/20 raw valid adsorption structures** and **19/20 retry-corrected valid structures**. The persistent GPT-5.4 failure is case 06 (`Cu3Ag + NNH`), where raw and retry runs both dissociate the adsorbate.
+- Chemical Slip frequency: Gemini/Grok-4 each show **60%** (12/20) one-shot slip frequency. GPT-5.4 shows **12/19** slips among retry-corrected valid one-shot cases. These values confirm that LLM priors remain unreliable on complex surfaces even when the final structure is valid.
+- Dissociation event rate: Gemini/Grok-4 one-shot runs show no dissociation; GPT-5.4 raw one-shot shows two NNH dissociation outcomes (cases 06 and 08), with case 08 recovered by retry and case 06 retained as a reproducible failure.
+- Cross-backend agreement: Gemini/Grok-4 produce identical energy (within 0.01 eV) on 9/20 one-shot cases. With GPT-5.4 included, valid corrected comparisons are available for 19/20 cases; the full iterative variant has a three-backend mean range of 0.051 eV on the ablation subset versus 0.426 eV for one-shot.
 
 ---
 
@@ -327,13 +327,13 @@ Quantify the marginal contribution of each AdsMind component to search quality a
 - Overall comparison across multiple variants on the same systems using **Friedman test**; pairwise Wilcoxon tests with FDR correction as needed.
 - Report effect sizes (e.g., median difference or Cohen's d) alongside significance, avoiding component-value judgments based solely on significance.
 
-**Completed ablation results** (5 cases × 5 variants × 2 LLM backends = 50 runs, all successful):
+**Completed ablation results** (5 cases × 5 variants × 3 LLM backends = 75 runs, all successful):
 
-- **Slip feedback and FORBID** matter selectively: on Grok-4, removing either degrades case 19 by ~0.45 eV. On Gemini, the same ablations have negligible effect on 4/5 cases. Interpretation: these mechanisms are most valuable when the base planner struggles with complex adsorbate+surface combinations.
-- **Termination** is primarily a cost-control mechanism: disabling it matches full energy on 4/5 cases for both backends, but increases token consumption substantially (e.g., Gemini case 09: 29k → 170k tokens).
-- **Single-shot** is the clearest baseline weakness: Grok-4 1-shot is worse by 0.62 eV on case 02, 0.37 eV on case 14, 0.45 eV on case 19. Gemini 1-shot is worse by 0.17 eV on case 09 and 0.71 eV on case 19.
-- **Cross-LLM robustness**: iterative loop achieves 4/5 exact matches across backends (mean |ΔE| = 0.041 eV); 1-shot only 1/5 (mean |ΔE| = 0.324 eV). The loop reduces backend variance by 4.2×.
-- **Statistics**: Grok-4 Friedman p = 0.018 (significant); Gemini p = 0.30 (not significant). Pairwise Wilcoxon tests are underpowered at n=5; effect sizes and bootstrap CIs are the primary evidence.
+- **Slip feedback and FORBID** matter selectively: on Grok-4, removing either degrades case 19 by ~0.45 eV. On GPT-5.4, removing slip feedback degrades case 14 by ~0.160 eV, while removing FORBID improves case 19 by ~0.136 eV. On Gemini, the same ablations have negligible effect on 4/5 cases. Interpretation: these mechanisms are most valuable when the base planner struggles with complex adsorbate+surface combinations, but FORBID can occasionally overconstrain a useful late search move.
+- **Termination** is primarily a cost-control mechanism: disabling it usually matches full energy, with the largest quality change coming from case 19 on Gemini/Grok-4. GPT-5.4 no-termination is effectively neutral (mean delta about -0.001 eV), reinforcing that termination is mainly a cost guard.
+- **Single-shot** is the clearest baseline weakness: mean full-vs-single-shot improvement is Grok-4 0.288 eV, Gemini 0.176 eV, and GPT-5.4 0.131 eV. GPT-5.4 has the smallest mean gain, consistent with a stronger one-shot planner leaving less room for iterative recovery.
+- **Cross-LLM robustness**: with all three backends included, the full iterative variant has a mean three-backend energy range of 0.051 eV, while one-shot has 0.426 eV. The loop reduces backend spread by 8.4× on the locked subset.
+- **Statistics**: Grok-4 Friedman p = 0.018 (significant); GPT-5.4 p = 0.062 (near-threshold); Gemini p = 0.30 (not significant). Pairwise Wilcoxon tests are underpowered at n=5; effect sizes and bootstrap CIs are the primary evidence.
 
 **Key message**: The ablation reveals that closed-loop feedback is not uniformly necessary — it is most valuable on hard cases (complex adsorbates, intermetallic surfaces) and with less capable LLM backends. The architecture also serves as a backend-robustness mechanism.
 
@@ -391,23 +391,24 @@ Inter-configuration differences in adsorption energy are primarily determined by
 
 **Known limitations**:
 - MACE-MP accuracy ceiling on certain systems (e.g., f-electron metals)
-- LLM API cost and latency (quantified in SI-6: average ~6 min per full case on Gemini, ~11 min on Grok-4; ~40k total tokens per full case, ~7k per one-shot case)
+- LLM API cost and latency (quantified in SI-6: average ~6 min per full case on Gemini, ~11 min on Grok-4; GPT-5.4 full runs average ~27k tokens on the locked subset; one-shot cases are much cheaper)
 - Current implementation: only flat/stepped surfaces, no defects or nanoparticles
 - Single adsorbate per surface (no co-adsorption)
 - **LLM reproducibility**: LLM APIs are black-box services subject to model updates; even at temperature 0.0, outputs may vary across API versions. We mitigate this by: (1) recording exact model version identifiers for all runs, (2) providing complete prompt templates in SI-1, (3) releasing full trajectory logs (SI-2) so that all reported results can be independently verified from the saved data, even if LLM outputs are not exactly reproducible. The multi-model comparison (SI-5) further demonstrates that conclusions hold across different LLM backends, reducing dependence on any single provider.
 
-**Failure case analysis** (from completed 20-case benchmark + 50-run ablation):
+**Failure case analysis** (from completed 20-case benchmark + 75-run ablation):
 
-Success rate: **20/20 (100%)** on both Gemini and Grok-4 one-shot benchmarks; **50/50 (100%)** across all ablation runs. No hard failures observed. The table below reports behavioral issues that affect quality or efficiency rather than outright failure:
+Success rate: **20/20 (100%)** on both Gemini and Grok-4 one-shot benchmarks; GPT-5.4 is **18/20 raw** and **19/20 retry-corrected** because case 06 repeatedly dissociates. The ablation matrix is **75/75 (100%)** across Gemini, Grok-4, and GPT-5.4. The table below reports behavioral issues that affect quality or efficiency rather than API/runtime availability:
 
 | Issue Type | Observed Frequency | Concrete Example | Mitigation |
 |-----------|-------------------|------------------|------------|
-| Chemical Slip (site mismatch) | 60% of one-shot cases (12/20); 73% on intermetallic, 20% on monometallic | Case 01 Mo3Pd: LLM plans bridge, relaxation converges to hollow | Core design feature — slip feedback drives the closed loop |
-| Dissociation under ablation | Case 19 no_slip (Grok-4): hollow attempt dissociates (E = −1.32 eV) | Large adsorbate OCHCH3 on Hf2Zn6(110) without slip feedback | Slip feedback prevents agent from retrying unstable sites |
+| Chemical Slip (site mismatch) | Gemini/Grok-4 one-shot: 12/20 each; GPT-5.4 retry-corrected one-shot: 12/19 valid cases | Case 01 Mo3Pd: LLM plans bridge, relaxation converges to hollow | Core design feature — slip feedback drives the closed loop |
+| NNH dissociation in one-shot | GPT-5.4 raw cases 06 and 08; retry recovers 08 but reproduces 06 | Case 06 Cu3Ag + NNH repeatedly dissociates from an ontop Cu proposal | Treat as backend-specific failure mode; do not report dissociated energy as valid adsorption energy |
+| Dissociation under ablation | Case 19 no_slip/no_forbid/no_termination for Gemini/Grok-4 show dissociation events; GPT-5.4 ablation has zero dissociation in 25 runs | Large adsorbate OCHCH3 on Hf2Zn6(110) without adequate feedback | Slip feedback and conservative site memory reduce retries of unstable sites |
 | Over-exploration (termination off) | Case 09 Gemini no_termination: 170k tokens vs 29k with termination | Flat PES already converged after 3 iterations | Termination logic is a cost guard, not a quality mechanism |
 | Non-determinism at temperature 0 | Case 19: two consecutive Gemini runs give −4.042 vs −3.594 eV | API-side non-determinism in Gemini at T=0 | Multi-run or multi-backend averaging; report both |
 
-*Note: No MACE calculation failures (calc_failure_count = 0 across all 70 runs). The Effective Iteration Ratio is 1.0 everywhere.*
+*Note: No MACE calculation failures were observed in the committed agent-side result tables. The observed hard failures are chemistry outcomes (primarily dissociation), not calculator crashes.*
 
 **Transparency principle**: Full logs, error type annotations, and improvement measures for all failure cases are provided in SI-8.
 
@@ -455,7 +456,7 @@ Success rate: **20/20 (100%)** on both Gemini and Grok-4 one-shot benchmarks; **
 | SI-2 | Complete benchmark data for all 20 CMU surfaces (energy tables, iteration logs) | Must |
 | SI-3 | DFT validation extended data: all configurations, INCAR settings, convergence | Must |
 | SI-4 | Ablation study full statistics and interaction effects | Must |
-| SI-5 | LLM model comparison: 4–5 models on representative systems + Chemical Slip statistics per model | Recommended |
+| SI-5 | LLM model comparison: three completed backends (Gemini 2.5 Pro, Grok-4, GPT-5.4) on representative systems + Chemical Slip statistics per model; additional Claude/open-source backends optional | Recommended |
 | SI-6 | Cost analysis: LLM tokens, MLFF compute time, human effort | Recommended |
 | SI-7 | OC dataset extended results: full system list, per-system metrics, failure cases | If Section 3.3 included |
 | SI-8 | Failure case analysis: systematic classification of failure modes | Recommended |
@@ -479,12 +480,12 @@ Success rate: **20/20 (100%)** on both Gemini and Grok-4 one-shot benchmarks; **
 
 | Priority | Task | Status | Deadline Sensitivity |
 |----------|------|--------|---------------------|
-| **P0 (Must)** | CMU 20-surface benchmark | **DONE** — 20/20 success on Gemini + Grok-4 | Blocks everything |
+| **P0 (Must)** | CMU 20-surface benchmark | **DONE** — 20/20 success on Gemini + Grok-4; GPT-5.4 18/20 raw and 19/20 retry-corrected | Blocks everything |
 | **P0 (Must)** | Head-to-head vs Adsorb-Agent | **DONE** — behavioral comparison (Route B); energy comparison infeasible (different MLFFs) | Core claim |
 | **P0 (Must)** | DFT validation (3–5 systems) | Bowen leading | Philippe explicitly requested |
-| **P0 (Must)** | Ablation study (3–5 systems) | **DONE** — 5 cases × 5 variants × 2 backends = 50 runs complete | Philippe explicitly requested |
+| **P0 (Must)** | Ablation study (3–5 systems) | **DONE** — 5 cases × 5 variants × 3 backends = 75 runs complete | Philippe explicitly requested |
 | **P1 (Recommended)** | OC dataset evaluation (~50 systems) | Not started | Strengthens story significantly |
-| **P1 (Recommended)** | Multi-model comparison (SI) | **Partial** — 2 backends (Gemini + Grok-4) complete; outline calls for 4–5 | Reviewer will ask |
+| **P1 (Recommended)** | Multi-model comparison (SI) | **DONE for current robustness claim** — 3 backends complete (Gemini + Grok-4 + GPT-5.4); more models optional | Reviewer will ask |
 | **P2 (Nice-to-have)** | Literature reproduction (published DFT results) | Not started | If time allows |
 
 **OCD-GMAE Dataset Overview** (used in Section 3.3):

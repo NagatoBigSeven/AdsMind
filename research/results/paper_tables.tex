@@ -1,10 +1,12 @@
 % ============================================================
 % AdsMind Paper-Ready Tables
-% Regenerated after completed Gemini + Grok ablation matrices
+% Regenerated after completed Gemini + Grok-4 + GPT-5.4 ablation matrices
 % Source artifacts:
 %   - research/results/gemini_ablation_v1/ablation_summary.csv
 %   - research/results/xai_ablation_v2/ablation_summary.csv
-%   - research/results/cross_llm_ablation_comparison.json
+%   - research/results/openai_gpt54_ablation_v1/ablation_summary.csv
+%   - research/results/cross_llm_ablation_with_openai.json
+%   - research/results/cross_llm_20case_with_openai.json
 % ============================================================
 
 % Table 1: Ablation Energy Matrix (Gemini)
@@ -43,59 +45,95 @@ Case & Full & $-$Slip & $-$Forbid & $-$Term & 1-Shot \\
 \end{tabular}
 \end{table}
 
-% Table 3: Cross-LLM robustness summary
+% Table 3: Ablation Energy Matrix (GPT-5.4)
 \begin{table}[t]
 \centering
-\caption{Cross-LLM robustness across the completed 5$\times$5 ablation matrix. $\Delta E$ denotes the absolute energy difference between Gemini and Grok for the same case and runtime variant.}
+\caption{GPT-5.4 ablation study on the same five representative cases. Lower (more negative) adsorption energy is better. Values are rounded to 3 decimals; ties at the displayed precision are co-bolded.}
+\label{tab:ablation-gpt54}
+\begin{tabular}{lrrrrr}
+\toprule
+Case & Full & $-$Slip & $-$Forbid & $-$Term & 1-Shot \\
+\midrule
+01 & $-$3.627 & $-$3.627 & $-$3.627 & \textbf{$-$3.630} & $-$3.557 \\
+02 & \textbf{$-$4.769} & $-$4.764 & \textbf{$-$4.769} & \textbf{$-$4.769} & $-$4.343 \\
+09 & \textbf{$-$1.991} & \textbf{$-$1.991} & \textbf{$-$1.991} & \textbf{$-$1.991} & \textbf{$-$1.991} \\
+14 & \textbf{$-$3.591} & $-$3.431 & \textbf{$-$3.591} & \textbf{$-$3.591} & $-$3.431 \\
+19 & $-$4.013 & $-$4.100 & \textbf{$-$4.149} & $-$4.013 & $-$4.013 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% Table 4: Cross-LLM robustness summary
+\begin{table}[t]
+\centering
+\caption{Cross-LLM robustness across the completed 5$\times$5 ablation matrix. The three-backend range is max--min energy across Gemini, Grok-4, and GPT-5.4 for the same case and runtime variant. The final column preserves the earlier Gemini--Grok pairwise spread for continuity.}
 \label{tab:cross-llm-summary}
 \begin{tabular}{lrrrr}
 \toprule
-Variant & Mean $|\Delta E|$ (eV) & Exact Match & $\leq$0.01 eV & Largest $|\Delta E|$ (eV) \\
+Variant & Mean 3-backend range (eV) & 3-backend $\leq$0.01 eV & Largest range (eV) & Gemini--Grok mean $|\Delta E|$ (eV) \\
 \midrule
-Full & 0.041 & 4/5 & 4/5 & 0.203 \\
-$-$Slip & 0.050 & 3/5 & 4/5 & 0.247 \\
-$-$Forbid & 0.091 & 3/5 & 4/5 & 0.448 \\
-$-$Term & 0.087 & 4/5 & 4/5 & 0.433 \\
-1-Shot & 0.324 & 1/5 & 1/5 & 0.615 \\
+Full & 0.051 & 2/5 & 0.203 & 0.041 \\
+$-$Slip & 0.143 & 2/5 & 0.506 & 0.050 \\
+$-$Forbid & 0.122 & 2/5 & 0.555 & 0.091 \\
+$-$Term & 0.096 & 2/5 & 0.433 & 0.087 \\
+1-Shot & 0.426 & 0/5 & 0.880 & 0.324 \\
 \midrule
-Overall & 0.118 & 15/25 & 17/25 & 0.615 \\
+Overall & 0.168 & 8/25 & 0.880 & 0.118 \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-% Table 4: Key evaluation metrics
+% Table 5: Key evaluation metrics
 \begin{table}[t]
 \centering
-\caption{Key evaluation metrics requested by the outline. Chemical Slip Rate is reported for both the 5-case full-ablation subset and the 20-case one-shot CMU benchmark. Surface-family stratification is provided in the machine-readable JSON outputs.}
+\caption{Key evaluation metrics requested by the outline. Chemical Slip Rate is reported for both the 5-case full-ablation subset and the 20-case one-shot CMU benchmark; GPT-5.4 one-shot is retry-corrected and excludes the persistent case 06 dissociation from valid-energy slip-rate denominators.}
 \label{tab:key-evaluation-metrics}
-\begin{tabular}{p{3.6cm}p{2.0cm}p{4.2cm}p{4.2cm}p{1.6cm}}
+\begin{tabular}{p{3.1cm}p{1.6cm}p{3.0cm}p{3.0cm}p{3.0cm}p{1.4cm}}
 \toprule
-Metric & Target & Gemini & Grok-4 & Meets Target \\
+Metric & Target & Gemini & Grok-4 & GPT-5.4 & Meets Target \\
 \midrule
-Chemical Slip Rate & $< 20\%$ & Full 5-case: 100\%; 20-case 1-shot: 60\% & Full 5-case: 100\%; 20-case 1-shot: 60\% & No \\
-Effective Iteration Ratio & $> 0.7$ & 1.0 across all analyzed datasets & 1.0 across all analyzed datasets & Yes \\
-Energy Gap Discovery Rate & $> 90\%$ & 60\% (3/5) & 80\% (4/5) & No \\
-Full vs.\ 1-shot significance & $p < 0.05$ & $p = 0.25$ & $p = 0.125$ & No \\
+Chemical Slip Rate & $< 20\%$ & Full: 100\%; 20-case 1-shot: 60\% & Full: 100\%; 20-case 1-shot: 60\% & Full: 80\%; corrected 1-shot: 12/19 valid & No \\
+Effective Iteration Ratio & $> 0.7$ & 1.0 across analyzed runs & 1.0 across analyzed runs & 1.0 across analyzed runs & Yes \\
+Energy Gap Discovery Rate & $> 90\%$ & 60\% (3/5) & 80\% (4/5) & 60\% (3/5) & No \\
+Full vs.\ 1-shot significance & $p < 0.05$ & $p = 0.25$ & $p = 0.125$ & $p = 0.25$ & No \\
+Backend convergence & Lower variance & \multicolumn{3}{p{9.0cm}}{Full-search mean 3-backend range is 0.051 eV, versus 0.426 eV for 1-shot; the closed loop reduces backend spread by 8.4$\times$ on the locked subset.} & Yes \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-% Table 5: Explicit H1 hypothesis test
+% Table 6: Explicit H1 hypothesis test
 \begin{table}[t]
 \centering
-\caption{Explicit test of H$_1$ on the locked ablation subset using $\Delta E = E_{\mathrm{full}} - E_{\mathrm{1shot}}$. Negative values mean the full closed-loop agent found a lower energy. H$_1$ uses only intermetallic surfaces; case 09 is shown for completeness but excluded from the support rate. Following the task specification, the iteration-efficiency condition is treated operationally as satisfied because all added full-search iterations were effective, although the raw Effective Iteration Ratio remains 1.0 for both full and 1-shot.}
+\caption{Explicit test of H$_1$ on the locked ablation subset using $\Delta E = E_{\mathrm{full}} - E_{\mathrm{1shot}}$. Negative values mean the full closed-loop agent found a lower energy; hits require $\Delta E < -0.05$ eV. H$_1$ uses only intermetallic surfaces; case 09 is shown for completeness but excluded from the support rate. Following the task specification, the iteration-efficiency condition is treated operationally as satisfied because all added full-search iterations were effective.}
 \label{tab:hypothesis-test}
-\begin{tabular}{lrrrrr}
+\begin{tabular}{llrrr}
 \toprule
-Case & Family & Gemini $\Delta E$ (eV) & Gemini hit & Grok-4 $\Delta E$ (eV) & Grok-4 hit \\
+Case & Family & Gemini $\Delta E$/hit & Grok-4 $\Delta E$/hit & GPT-5.4 $\Delta E$/hit \\
 \midrule
-01 & intermetallic & $-$0.001 & No & $-$0.001 & No \\
-02 & intermetallic & 0.000 & No & $-$0.615 & Yes \\
-09 & monometallic & $-$0.173 & N/A & 0.000 & N/A \\
-14 & intermetallic & 0.000 & No & $-$0.372 & Yes \\
-19 & intermetallic & $-$0.709 & Yes & $-$0.451 & Yes \\
+01 & intermetallic & $-$0.001 / No & $-$0.001 / No & $-$0.070 / Yes \\
+02 & intermetallic & 0.000 / No & $-$0.615 / Yes & $-$0.426 / Yes \\
+09 & monometallic & $-$0.173 / N/A & 0.000 / N/A & 0.000 / N/A \\
+14 & intermetallic & 0.000 / No & $-$0.372 / Yes & $-$0.160 / Yes \\
+19 & intermetallic & $-$0.709 / Yes & $-$0.451 / Yes & 0.000 / No \\
 \midrule
-Intermetallic support rate & --- & 1/4 = 25\% & H$_1$ not supported & 3/4 = 75\% & H$_1$ supported \\
+Intermetallic support rate & --- & 1/4 = 25\% & 3/4 = 75\% & 3/4 = 75\% \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% Table 7: GPT-5.4 one-shot provenance summary
+\begin{table}[t]
+\centering
+\caption{GPT-5.4 OpenAI backend provenance summary. Corrected one-shot uses the successful retry for case 08 while retaining case 06 as a reproducible dissociation failure.}
+\label{tab:gpt54-openai-summary}
+\begin{tabular}{lrrrr}
+\toprule
+Dataset & Total & Valid & Failed & Mean tokens/run \\
+\midrule
+Raw one-shot & 20 & 18 & 2 & 4815.2 \\
+Retry-only & 2 & 1 & 1 & 5135.0 \\
+Corrected one-shot & 20 & 19 & 1 & 4847.6 \\
+Ablation matrix & 25 & 25 & 0 & 22198.6 \\
 \bottomrule
 \end{tabular}
 \end{table}

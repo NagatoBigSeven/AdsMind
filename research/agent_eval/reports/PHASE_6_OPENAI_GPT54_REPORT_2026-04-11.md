@@ -78,10 +78,22 @@ For GPT-5.4 specifically:
 
 - Single-shot is worse than full on cases 01, 02, 14.
 - Single-shot is better than full on cases none.
+- The largest `no_slip` degradation is case 14: +0.160 eV relative to full.
+- The largest `no_forbid` improvement is case 19: -0.136 eV relative to full, which is a negative FORBID-control result that should be reported transparently.
+- `no_termination` is effectively neutral for GPT-5.4: mean delta is about -0.001 eV.
+- GPT-5.4 has zero dissociation events across the 25 ablation runs, unlike the Gemini/Grok-4 ablation matrices.
 - Wilcoxon p-value: 0.25
 - BH-adjusted p-value: 1.0
 
 Interpretation: GPT-5.4 follows the same broad pattern as Gemini and Grok-4: multi-step closed-loop search improves the difficult subset on average, but the sample is too small for strong standalone significance claims. The result should be presented as converging evidence across backends.
+
+## Paper Integration
+
+The main paper tables and outline have been updated to three-backend wording:
+
+- `paper_tables.tex` now includes the GPT-5.4 ablation matrix, the three-backend robustness table, GPT-5.4 values in key metrics, and GPT-5.4 in the explicit H1 table.
+- `OUTLINE.md` now reports Gemini, Grok-4, and GPT-5.4 together rather than describing the agentic-system evidence as a two-backend result.
+- The GPT-5.4 `single_shot` ablation directory is retained as an independent ablation-protocol run rather than replaced by references to the 20-case one-shot directory. This preserves provenance because the two sources are not identical for every case.
 
 ## Recommended Manuscript Wording
 
@@ -106,3 +118,5 @@ Avoid writing:
 - `research/results/cross_llm_ablation_with_openai.csv`
 - `research/results/cross_llm_ablation_with_openai.json`
 - `research/results/openai_gpt54_paper_tables.tex`
+- `research/results/paper_tables.tex`
+- `references/markdown/OUTLINE.md`
