@@ -34,6 +34,20 @@ class TestLLMFactory(unittest.TestCase):
         backend = get_llm_backend("openrouter")
         self.assertEqual(backend.name, "openrouter")
         self.assertTrue(backend.requires_api_key)
+
+    def test_get_anthropic_backend(self):
+        """Test getting Anthropic backend."""
+        from src.llms import get_llm_backend
+        backend = get_llm_backend("anthropic")
+        self.assertEqual(backend.name, "anthropic")
+        self.assertTrue(backend.requires_api_key)
+
+    def test_get_xai_backend(self):
+        """Test getting xAI backend."""
+        from src.llms import get_llm_backend
+        backend = get_llm_backend("xai")
+        self.assertEqual(backend.name, "xai")
+        self.assertTrue(backend.requires_api_key)
     
     def test_get_ollama_backend(self):
         """Test getting Ollama backend."""
@@ -166,6 +180,97 @@ class TestOpenRouterBackend(unittest.TestCase):
         self.assertEqual(captured["seed"], 7)
 
 
+class TestAnthropicBackend(unittest.TestCase):
+    """Test Anthropic backend."""
+
+    def test_default_config(self):
+        """Test default Anthropic configuration."""
+        from src.llms import get_llm_backend
+        backend = get_llm_backend("anthropic")
+        config = backend.get_default_config(api_key="test-key")
+
+        self.assertEqual(config.backend, "anthropic")
+        self.assertEqual(config.api_key, "test-key")
+        self.assertEqual(config.model, "claude-sonnet-4-6")
+
+    def test_chat_model_uses_official_anthropic_base_url(self):
+        """Anthropic backend should call the official compatibility endpoint."""
+        from src.llms import get_llm_backend
+
+        captured = {}
+
+        class FakeChatOpenAI:
+            def __init__(self, **kwargs):
+                captured.update(kwargs)
+
+        fake_module = types.SimpleNamespace(ChatOpenAI=FakeChatOpenAI)
+
+        with patch.dict(sys.modules, {"langchain_openai": fake_module}):
+            backend = get_llm_backend("anthropic")
+            config = backend.get_default_config(api_key="test-key")
+            backend.get_chat_model(config)
+
+        self.assertEqual(captured["openai_api_base"], "https://api.anthropic.com/v1/")
+        self.assertEqual(captured["openai_api_key"], "test-key")
+        self.assertEqual(captured["model"], "claude-sonnet-4-6")
+
+    def test_chat_model_allows_custom_headers(self):
+        """Anthropic backend should forward custom headers when configured."""
+        from src.llms import get_llm_backend
+
+        captured = {}
+
+        class FakeChatOpenAI:
+            def __init__(self, **kwargs):
+                captured.update(kwargs)
+
+        fake_module = types.SimpleNamespace(ChatOpenAI=FakeChatOpenAI)
+
+        with patch.dict(sys.modules, {"langchain_openai": fake_module}):
+            backend = get_llm_backend("anthropic")
+            config = backend.get_default_config(api_key="test-key")
+            config.extra_options = {"default_headers": {"X-Test": "1"}}
+            backend.get_chat_model(config)
+
+        self.assertEqual(captured["default_headers"], {"X-Test": "1"})
+
+
+class TestXAIBackend(unittest.TestCase):
+    """Test xAI backend."""
+
+    def test_default_config(self):
+        """Test default xAI configuration."""
+        from src.llms import get_llm_backend
+        backend = get_llm_backend("xai")
+        config = backend.get_default_config(api_key="test-key")
+
+        self.assertEqual(config.backend, "xai")
+        self.assertEqual(config.api_key, "test-key")
+        self.assertEqual(config.model, "grok-4-0709")
+
+    def test_chat_model_uses_official_xai_base_url(self):
+        """xAI backend should call the official API endpoint."""
+        from src.llms import get_llm_backend
+
+        captured = {}
+
+        class FakeChatOpenAI:
+            def __init__(self, **kwargs):
+                captured.update(kwargs)
+
+        fake_module = types.SimpleNamespace(ChatOpenAI=FakeChatOpenAI)
+
+        with patch.dict(sys.modules, {"langchain_openai": fake_module}):
+            backend = get_llm_backend("xai")
+            config = backend.get_default_config(api_key="test-key")
+            backend.get_chat_model(config)
+
+        self.assertEqual(captured["openai_api_base"], "https://api.x.ai/v1")
+        self.assertEqual(captured["openai_api_key"], "test-key")
+        self.assertEqual(captured["model"], "grok-4-0709")
+        self.assertEqual(captured["seed"], 42)
+
+
 class TestOllamaBackend(unittest.TestCase):
     """Test Ollama backend."""
     
@@ -254,9 +359,26 @@ class TestConfigModule(unittest.TestCase):
         """Test cloud backend detection."""
         from src.utils.config import is_cloud_backend
         self.assertTrue(is_cloud_backend("google"))
+        self.assertTrue(is_cloud_backend("anthropic"))
+        self.assertTrue(is_cloud_backend("xai"))
         self.assertTrue(is_cloud_backend("openrouter"))
         self.assertFalse(is_cloud_backend("ollama"))
         self.assertFalse(is_cloud_backend("huggingface"))
+
+    def test_provider_api_key_mappings(self):
+        """Provider-specific cloud backends should use their own API key vars."""
+        from src.utils.config import get_api_key_for_backend
+
+        with patch.dict(
+            os.environ,
+            {
+                "ANTHROPIC_API_KEY": "anthropic-key",
+                "XAI_API_KEY": "xai-key",
+            },
+            clear=True,
+        ):
+            self.assertEqual(get_api_key_for_backend("anthropic"), ("anthropic-key", "env"))
+            self.assertEqual(get_api_key_for_backend("xai"), ("xai-key", "env"))
 
 
 class TestAgentIntegration(unittest.TestCase):

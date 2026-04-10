@@ -6,6 +6,8 @@ between different LLM providers (cloud and local).
 
 Supported backends:
 - google: Google AI (Gemini) - Default, direct access
+- anthropic: Anthropic Claude API - Direct access via official compatibility endpoint
+- xai: xAI Grok API - Direct access via official OpenAI-compatible endpoint
 - openrouter: OpenRouter API - Access to multiple models via unified API
 - ollama: Ollama local service - Privacy-focused, no API cost
 - huggingface: HuggingFace Transformers - Offline, customizable

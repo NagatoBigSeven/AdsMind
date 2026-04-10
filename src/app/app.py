@@ -8,7 +8,7 @@ import streamlit as st
 from src.agent.agent import get_agent_executor, _prepare_initial_state
 from src.utils.config import (
     get_llm_backend_name, get_api_key_for_backend, save_api_key_for_backend,
-    save_llm_backend, is_cloud_backend, CONFIG_FILE_PATH
+    save_llm_backend, is_cloud_backend, CONFIG_FILE_PATH, LLM_API_KEY_ENV_VARS
 )
 
 st.set_page_config(page_title="AdsMind", layout="wide")
@@ -44,23 +44,36 @@ def render_message_in_status(content, status):
 st.sidebar.header("🤖 LLM Backend")
 
 # Available backends with descriptions
-LLM_BACKENDS = ["google", "openrouter", "ollama", "huggingface"]
+LLM_BACKENDS = ["google", "anthropic", "xai", "openrouter", "ollama", "huggingface"]
 LLM_BACKEND_LABELS = {
     "google": "Google AI (Gemini)",
+    "anthropic": "Anthropic (Claude)",
+    "xai": "xAI (Grok)",
     "openrouter": "OpenRouter (Multi-provider)",
     "ollama": "Ollama (Local)",
     "huggingface": "HuggingFace (Local)",
 }
 LLM_BACKEND_DESCRIPTIONS = {
     "google": "Direct access to Google's Gemini models. Low latency, recommended.",
+    "anthropic": "Direct access to Anthropic Claude models through Anthropic's API.",
+    "xai": "Direct access to xAI Grok models through xAI's API.",
     "openrouter": "Access multiple providers (GPT-4, Claude, Gemini) through one API.",
     "ollama": "Run models locally. Free, private, no internet required.",
     "huggingface": "Load HuggingFace models locally. Full customization.",
 }
 
+LLM_BACKEND_KEY_HELP = {
+    "google": "Google AI Studio",
+    "anthropic": "Anthropic Console",
+    "xai": "xAI Console",
+    "openrouter": "openrouter.ai",
+}
+
 # Default models for each backend
 DEFAULT_MODELS = {
     "google": ["gemini-2.5-pro", "gemini-2.5-flash", "gemini-2.5-flash-lite"],
+    "anthropic": ["claude-sonnet-4-6", "claude-opus-4-6"],
+    "xai": ["grok-4-0709"],
     "openrouter": ["google/gemini-3-pro-preview", "openai/gpt-5.2-pro", "anthropic/claude-opus-4.5"],
     "ollama": [],  # Will be populated dynamically
     "huggingface": ["Qwen/Qwen3-8B"],
@@ -99,7 +112,7 @@ if is_cloud_backend(selected_backend):
     saved_key, key_source = get_api_key_for_backend(selected_backend)
     
     # Determine environment variable name
-    env_var_name = "GOOGLE_API_KEY" if selected_backend == "google" else "OPENROUTER_API_KEY"
+    env_var_name = LLM_API_KEY_ENV_VARS.get(selected_backend, "API_KEY")
     env_key_active = key_source == "env"
     
     # Show source indicator
@@ -117,7 +130,7 @@ if is_cloud_backend(selected_backend):
         type="password", 
         key=f"{selected_backend}_api_key",
         disabled=env_key_active,  # Lock input when from env var
-        help=f"Get your key from {'Google AI Studio' if selected_backend == 'google' else 'openrouter.ai'}"
+        help=f"Get your key from {LLM_BACKEND_KEY_HELP.get(selected_backend, 'the provider console')}"
     )
     
     # Save checkbox (disabled if env var is active)
@@ -135,14 +148,14 @@ if is_cloud_backend(selected_backend):
     # Model selection for cloud backends
     st.sidebar.subheader("📦 Model")
     model_options = DEFAULT_MODELS.get(selected_backend, [])
-    if selected_backend == "openrouter":
-        # Allow custom model input for OpenRouter
+    if selected_backend in ("anthropic", "xai", "openrouter"):
+        # Allow custom model input for hosted backends that expose model ids directly.
         use_custom_model = st.sidebar.checkbox("Use custom model", key="custom_model_toggle")
         if use_custom_model:
             selected_model = st.sidebar.text_input(
                 "Model Name",
-                value="google/gemini-2.5-pro",
-                help="Enter OpenRouter model path (e.g., openai/gpt-4o)"
+                value=model_options[0] if model_options else "",
+                help="Enter the provider model id."
             )
         else:
             selected_model = st.sidebar.selectbox("Select Model", model_options)

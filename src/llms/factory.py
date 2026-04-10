@@ -18,12 +18,16 @@ def _get_llm_registry() -> Dict[str, Type[BaseLLMBackend]]:
     until actually needed.
     """
     from src.llms.google_backend import GoogleBackend
+    from src.llms.anthropic_backend import AnthropicBackend
     from src.llms.openrouter_backend import OpenRouterBackend
+    from src.llms.xai_backend import XAIBackend
     from src.llms.ollama_backend import OllamaBackend
     from src.llms.huggingface_backend import HuggingFaceBackend
 
     return {
         "google": GoogleBackend,
+        "anthropic": AnthropicBackend,
+        "xai": XAIBackend,
         "openrouter": OpenRouterBackend,
         "ollama": OllamaBackend,
         "huggingface": HuggingFaceBackend,
@@ -35,7 +39,8 @@ def get_llm_backend(name: str) -> BaseLLMBackend:
     Get an LLM backend by name.
 
     Args:
-        name: Backend name ("google", "openrouter", "ollama", "huggingface")
+        name: Backend name ("google", "anthropic", "xai", "openrouter",
+            "ollama", "huggingface")
 
     Returns:
         An instance of the requested backend

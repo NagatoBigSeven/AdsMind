@@ -2,7 +2,7 @@
 
 Purpose: run the same AdsMind agent-side protocol used for Gemini, Grok-4, and GPT-5.4 with Claude Sonnet 4.6 on the EPFL workstation.
 
-This runbook uses Anthropic's OpenAI-compatible Chat Completions endpoint so the existing AdsMind `openrouter` transport can be reused with only `base_url`, model, and API-key changes.
+This runbook uses AdsMind's first-class `anthropic` backend, which talks to Anthropic's OpenAI-compatible Chat Completions endpoint without routing through OpenRouter.
 
 ## Scope
 

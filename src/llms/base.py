@@ -21,7 +21,8 @@ class LLMConfig:
     Backend-specific options should be placed in `extra_options`.
 
     Attributes:
-        backend: Backend identifier ("google", "openrouter", "ollama", "huggingface")
+        backend: Backend identifier ("google", "anthropic", "xai",
+            "openrouter", "ollama", "huggingface")
         api_key: API key for cloud backends (None for local backends)
         model: Model identifier (backend-specific)
         temperature: Sampling temperature (0.0 for deterministic output)

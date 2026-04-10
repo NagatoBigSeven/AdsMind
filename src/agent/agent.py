@@ -33,7 +33,7 @@ class AgentState(TypedDict):
     session_id: str  # UUID for file path isolation
     api_key: str     # API key for this session (not from global env)
     # LLM configuration
-    llm_backend: str  # LLM backend name ("google", "openrouter", "ollama", "huggingface")
+    llm_backend: str  # LLM backend name ("google", "anthropic", "xai", etc.)
     llm_config: Optional[Dict[str, Any]]  # Optional LLM configuration overrides
     # Calculator configuration
     calculator_backend: str
@@ -1015,7 +1015,8 @@ def _prepare_initial_state(
         user_request: User's natural language request
         api_key: API key for this session (required for cloud backends)
         session_id: UUID for file path isolation
-        llm_backend: LLM backend name ("google", "openrouter", "ollama", "huggingface")
+        llm_backend: LLM backend name ("google", "anthropic", "xai",
+            "openrouter", "ollama", "huggingface")
         llm_config: Optional LLM configuration overrides
         random_seed: Optional random seed for reproducible runs (None = not fixed)
         relaxation_mode: "fast" (all slab fixed) or "standard" (bottom 1/3 fixed)

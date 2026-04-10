@@ -173,12 +173,16 @@ DEFAULT_LLM_BACKEND = "google"
 # Environment variable to API key mapping
 LLM_API_KEY_ENV_VARS = {
     "google": "GOOGLE_API_KEY",
+    "anthropic": "ANTHROPIC_API_KEY",
+    "xai": "XAI_API_KEY",
     "openrouter": "OPENROUTER_API_KEY",
 }
 
 # Config file key mapping
 LLM_API_KEY_CONFIG_KEYS = {
     "google": "google_api_key",
+    "anthropic": "anthropic_api_key",
+    "xai": "xai_api_key",
     "openrouter": "openrouter_api_key",
 }
 
@@ -194,6 +198,8 @@ def get_llm_backend_name() -> str:
     
     Available backends:
     - "google": Google AI (Gemini) - Default
+    - "anthropic": Anthropic Claude API
+    - "xai": xAI Grok API
     - "openrouter": OpenRouter API
     - "ollama": Local Ollama service
     - "huggingface": Local HuggingFace Transformers
@@ -297,4 +303,4 @@ def is_cloud_backend(backend: str) -> bool:
     Returns:
         bool: True if the backend requires an API key
     """
-    return backend in ("google", "openrouter")
+    return backend in ("google", "anthropic", "xai", "openrouter")
