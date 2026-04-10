@@ -1,0 +1,47 @@
+# Default: ignore everything, then whitelist
+*
+!.gitignore
+
+# ── Top-level summaries & paper data ──
+!*.csv
+!*.json
+!*.tex
+
+# ── Dataset directories ──
+!gemini_ablation_v1/
+!xai_ablation_v2/
+!cmu_v1_gemini_one_shot/
+!cmu_v1_xai_progressive_one_shot/
+
+# Dataset-level summaries
+!gemini_ablation_v1/*.csv
+!gemini_ablation_v1/*.json
+!xai_ablation_v2/*.csv
+!xai_ablation_v2/*.json
+!cmu_v1_gemini_one_shot/*.csv
+!cmu_v1_gemini_one_shot/*.json
+!cmu_v1_xai_progressive_one_shot/*.csv
+!cmu_v1_xai_progressive_one_shot/*.json
+!cmu_v1_xai_progressive_one_shot/paper_comparison/
+!cmu_v1_xai_progressive_one_shot/paper_comparison/*.csv
+!cmu_v1_xai_progressive_one_shot/paper_comparison/*.json
+
+# Ablation: variant dirs + case dirs + result.json only
+!gemini_ablation_v1/*/
+!gemini_ablation_v1/*/*/
+!gemini_ablation_v1/*/*/result.json
+!xai_ablation_v2/*/
+!xai_ablation_v2/*/*/
+!xai_ablation_v2/*/*/result.json
+
+# One-shot: case dirs + result.json only
+!cmu_v1_gemini_one_shot/*/
+!cmu_v1_gemini_one_shot/*/result.json
+!cmu_v1_xai_progressive_one_shot/*/
+!cmu_v1_xai_progressive_one_shot/*/result.json
+
+# Explicitly exclude per-run artifacts that leak through dir unignore
+**/config.json
+**/comparison_snapshot.json
+**/agent_log.txt
+**/artifacts/

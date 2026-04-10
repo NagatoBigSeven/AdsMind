@@ -1,0 +1,209 @@
+{
+  "case_id": "06",
+  "case_metadata": {
+    "case_id": "06",
+    "slab_file": "benchmark_slabs/06_Cu3Ag_111.xyz",
+    "smiles": "[N]=[NH]",
+    "user_request": "Find the lowest-energy adsorption configuration for NNH on the provided surface.",
+    "surface_family": "intermetallic",
+    "adsorbate_name": "NNH",
+    "miller_index": "(111)",
+    "reaction_class": "NRR",
+    "ablation_candidate": "FALSE",
+    "notes": "Cu3Ag NNH benchmark; dissociation observed before"
+  },
+  "status": "success",
+  "best_energy_eV": -1.7266368865966797,
+  "iteration_count": 1,
+  "max_attempts": 1,
+  "final_site_type": "hollow (FCC/No-Subsurf)",
+  "converged_tag": false,
+  "wall_clock_sec": 129.69275241700234,
+  "total_input_tokens": 4972,
+  "total_output_tokens": 1191,
+  "artifact_paths": {
+    "BEST_N_NH_ontop_to_hollow_FCC-No-Subsurf_E-1.727": "research/results/cmu_v1_xai_progressive_one_shot/06/artifacts/BEST_N_NH_ontop_to_hollow_FCC-No-Subsurf_E-1.727.xyz",
+    "BEST_N_NH_ontop_to_hollow_FCC-No-Subsurf_E-1.727.xyz": "research/results/cmu_v1_xai_progressive_one_shot/06/artifacts/BEST_N_NH_ontop_to_hollow_FCC-No-Subsurf_E-1.727.xyz",
+    "best_structure_file": "research/results/cmu_v1_xai_progressive_one_shot/06/artifacts/BEST_N_NH_ontop_to_hollow_FCC-No-Subsurf_E-1.727.xyz",
+    "conformers_[N]_[NH]": "research/results/cmu_v1_xai_progressive_one_shot/06/artifacts/conformers_[N]_[NH].traj",
+    "conformers_[N]_[NH].traj": "research/results/cmu_v1_xai_progressive_one_shot/06/artifacts/conformers_[N]_[NH].traj",
+    "final": "research/results/cmu_v1_xai_progressive_one_shot/06/artifacts/final.xyz",
+    "final.xyz": "research/results/cmu_v1_xai_progressive_one_shot/06/artifacts/final.xyz",
+    "relaxation": "research/results/cmu_v1_xai_progressive_one_shot/06/artifacts/relaxation.traj",
+    "relaxation.traj": "research/results/cmu_v1_xai_progressive_one_shot/06/artifacts/relaxation.traj",
+    "relaxation_trajectory_file": "research/results/cmu_v1_xai_progressive_one_shot/06/artifacts/relaxation.traj"
+  },
+  "best_result": {
+    "most_stable_energy_eV": -1.7266368865966797,
+    "analysis_json": {
+      "status": "success",
+      "message": "Most stable config adsorption energy: -1.7266 eV. Target Atom: N (from plan index 0, global index 64 in relaxed structure). -> Nearest: Cu (Index 59), Distance: 1.994 Å (Threshold: 2.944), Bound: True. Bonded Surface Atoms: Cu-1.994Å, Cu-2.072Å, Cu-2.079Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Cu'] -> Actual ['Cu', 'Cu', 'Cu']).",
+      "most_stable_energy_eV": -1.7266368865966797,
+      "target_adsorbate_atom": "N",
+      "target_adsorbate_atom_index": 64,
+      "bonded_surface_atoms": [
+        {
+          "symbol": "Cu",
+          "index": 59,
+          "distance": 1.994
+        },
+        {
+          "symbol": "Cu",
+          "index": 49,
+          "distance": 2.072
+        },
+        {
+          "symbol": "Cu",
+          "index": 51,
+          "distance": 2.079
+        }
+      ],
+      "nearest_slab_atom": "Cu",
+      "nearest_slab_atom_index": 59,
+      "final_bond_distance_A": 1.994,
+      "estimated_covalent_cutoff_A": 2.233,
+      "is_covalently_bound": true,
+      "reaction_detected": false,
+      "is_dissociated": false,
+      "n_components": 1,
+      "bond_change_count": 0,
+      "site_analysis": {
+        "planned_site_type": "ontop",
+        "planned_connectivity": 1,
+        "actual_site_type": "hollow (FCC/No-Subsurf)",
+        "actual_connectivity": 3,
+        "is_chemical_slip": true,
+        "planned_symbols": [
+          "Cu"
+        ],
+        "actual_symbols": [
+          "Cu",
+          "Cu",
+          "Cu"
+        ],
+        "site_fingerprint": "Cu59-Cu49-Cu51"
+      },
+      "best_structure_file": "outputs/06-1c3b5c29/BEST_N_NH_ontop_to_hollow_FCC-No-Subsurf_E-1.727.xyz",
+      "generated_conformers_file": "outputs/06-1c3b5c29/conformers_[N]_[NH].traj",
+      "relaxation_trajectory_file": "outputs/06-1c3b5c29/final.xyz",
+      "session_id": "06-1c3b5c29"
+    },
+    "plan": {
+      "reasoning": "SMILES consistency check: The SMILES is [N]=[NH], representing NNH with a double bond between two N atoms, where index 0 (N) has a radical electron and index 1 (N) is bonded to H (implicit in SMILES). Hybridization is SP2 for both, which matches a double-bonded structure. The user request for NNH aligns with the SMILES. Radical check: Index 0 has radical_electrons=1, suitable for ReactiveSpecies adsorption via that atom. History is None, so no previous attempts to analyze. No converged or degenerate tags, so proceed with initial plan. User intent: Find the lowest-energy adsorption configuration for NNH on Cu3Ag(111) surface. Adsorbate analysis: NNH is a reactive radical species with a N=N double bond, radical on index 0 (N), and H on index 1 (NH). Likely adsorbs via the radical N (index 0) in catalysis contexts. Surface analysis: Alloy with Cu and Ag sites; available ontop sites include Cu and Ag. For initial plan, prioritize ontop adsorption via the radical N on Cu, as Cu is typically more reactive for nitrogen species than Ag in such alloys. This is a monodentate configuration. Adsorbate_type set to ReactiveSpecies due to the radical. Site_type 'ontop' aligns with len(adsorbate_binding_indices)=1. This is a new plan since history is empty. Process limit noted, but proceeding with first attempt.",
+      "adsorbate_type": "ReactiveSpecies",
+      "solution": {
+        "action": "continue",
+        "site_type": "ontop",
+        "surface_binding_atoms": [
+          "Cu"
+        ],
+        "adsorbate_binding_indices": [
+          0
+        ],
+        "relax_top_n": 1,
+        "touch_sphere_size": 2,
+        "overlap_thr": 0.1,
+        "conformers_per_site_cap": 4
+      }
+    },
+    "result_type": "Perfect"
+  },
+  "last_analysis": {
+    "status": "success",
+    "message": "Most stable config adsorption energy: -1.7266 eV. Target Atom: N (from plan index 0, global index 64 in relaxed structure). -> Nearest: Cu (Index 59), Distance: 1.994 Å (Threshold: 2.944), Bound: True. Bonded Surface Atoms: Cu-1.994Å, Cu-2.072Å, Cu-2.079Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Cu'] -> Actual ['Cu', 'Cu', 'Cu']).",
+    "most_stable_energy_eV": -1.7266368865966797,
+    "target_adsorbate_atom": "N",
+    "target_adsorbate_atom_index": 64,
+    "bonded_surface_atoms": [
+      {
+        "symbol": "Cu",
+        "index": 59,
+        "distance": 1.994
+      },
+      {
+        "symbol": "Cu",
+        "index": 49,
+        "distance": 2.072
+      },
+      {
+        "symbol": "Cu",
+        "index": 51,
+        "distance": 2.079
+      }
+    ],
+    "nearest_slab_atom": "Cu",
+    "nearest_slab_atom_index": 59,
+    "final_bond_distance_A": 1.994,
+    "estimated_covalent_cutoff_A": 2.233,
+    "is_covalently_bound": true,
+    "reaction_detected": false,
+    "is_dissociated": false,
+    "n_components": 1,
+    "bond_change_count": 0,
+    "site_analysis": {
+      "planned_site_type": "ontop",
+      "planned_connectivity": 1,
+      "actual_site_type": "hollow (FCC/No-Subsurf)",
+      "actual_connectivity": 3,
+      "is_chemical_slip": true,
+      "planned_symbols": [
+        "Cu"
+      ],
+      "actual_symbols": [
+        "Cu",
+        "Cu",
+        "Cu"
+      ],
+      "site_fingerprint": "Cu59-Cu49-Cu51"
+    },
+    "best_structure_file": "outputs/06-1c3b5c29/BEST_N_NH_ontop_to_hollow_FCC-No-Subsurf_E-1.727.xyz",
+    "generated_conformers_file": "outputs/06-1c3b5c29/conformers_[N]_[NH].traj",
+    "relaxation_trajectory_file": "outputs/06-1c3b5c29/final.xyz",
+    "session_id": "06-1c3b5c29"
+  },
+  "attempt_records": [
+    {
+      "attempt_index": 1,
+      "plan": {
+        "reasoning": "SMILES consistency check: The SMILES is [N]=[NH], representing NNH with a double bond between two N atoms, where index 0 (N) has a radical electron and index 1 (N) is bonded to H (implicit in SMILES). Hybridization is SP2 for both, which matches a double-bonded structure. The user request for NNH aligns with the SMILES. Radical check: Index 0 has radical_electrons=1, suitable for ReactiveSpecies adsorption via that atom. History is None, so no previous attempts to analyze. No converged or degenerate tags, so proceed with initial plan. User intent: Find the lowest-energy adsorption configuration for NNH on Cu3Ag(111) surface. Adsorbate analysis: NNH is a reactive radical species with a N=N double bond, radical on index 0 (N), and H on index 1 (NH). Likely adsorbs via the radical N (index 0) in catalysis contexts. Surface analysis: Alloy with Cu and Ag sites; available ontop sites include Cu and Ag. For initial plan, prioritize ontop adsorption via the radical N on Cu, as Cu is typically more reactive for nitrogen species than Ag in such alloys. This is a monodentate configuration. Adsorbate_type set to ReactiveSpecies due to the radical. Site_type 'ontop' aligns with len(adsorbate_binding_indices)=1. This is a new plan since history is empty. Process limit noted, but proceeding with first attempt.",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "ontop",
+          "surface_binding_atoms": [
+            "Cu"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "ontop|Cu|0|ReactiveSpecies|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -1.7266368865966797,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": true,
+      "planned_site_type": "ontop",
+      "actual_site_type": "hollow (FCC/No-Subsurf)",
+      "best_structure_file": "outputs/06-1c3b5c29/BEST_N_NH_ontop_to_hollow_FCC-No-Subsurf_E-1.727.xyz",
+      "generated_conformers_file": "outputs/06-1c3b5c29/conformers_[N]_[NH].traj",
+      "relaxation_trajectory_file": "outputs/06-1c3b5c29/final.xyz",
+      "message": "Most stable config adsorption energy: -1.7266 eV. Target Atom: N (from plan index 0, global index 64 in relaxed structure). -> Nearest: Cu (Index 59), Distance: 1.994 Å (Threshold: 2.944), Bound: True. Bonded Surface Atoms: Cu-1.994Å, Cu-2.072Å, Cu-2.079Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Cu'] -> Actual ['Cu', 'Cu', 'Cu']).",
+      "history_entry": "【✅ Perfect Adsorption】 ontop @ ['Cu'] (Index [0]) -> ⚠️【Unstable Site Warning】⚠️: Planned ontop (Cu) is unstable, adsorbate spontaneously slipped to hollow (FCC/No-Subsurf) (Cu-Cu-Cu).This means Cu has insufficient affinity for this adsorbate. Please **FORBID** testing Cu type sites again! [🌟 New Best] | E=-1.727 eV"
+    }
+  ],
+  "history": [
+    "【✅ Perfect Adsorption】 ontop @ ['Cu'] (Index [0]) -> ⚠️【Unstable Site Warning】⚠️: Planned ontop (Cu) is unstable, adsorbate spontaneously slipped to hollow (FCC/No-Subsurf) (Cu-Cu-Cu).This means Cu has insufficient affinity for this adsorbate. Please **FORBID** testing Cu type sites again! [🌟 New Best] | E=-1.727 eV"
+  ],
+  "error": null,
+  "perfect_count": 1,
+  "dissociation_count": 0,
+  "rearrangement_count": 0,
+  "calc_failure_count": 0,
+  "chemical_slip_count": 1
+}

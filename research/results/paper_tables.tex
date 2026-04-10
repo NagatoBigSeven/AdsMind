@@ -1,0 +1,101 @@
+% ============================================================
+% AdsMind Paper-Ready Tables
+% Regenerated after completed Gemini + Grok ablation matrices
+% Source artifacts:
+%   - research/results/gemini_ablation_v1/ablation_summary.csv
+%   - research/results/xai_ablation_v2/ablation_summary.csv
+%   - research/results/cross_llm_ablation_comparison.json
+% ============================================================
+
+% Table 1: Ablation Energy Matrix (Gemini)
+\begin{table}[t]
+\centering
+\caption{Gemini ablation study on the five locked representative cases. Lower (more negative) adsorption energy is better. Values are rounded to 3 decimals; ties at the displayed precision are co-bolded.}
+\label{tab:ablation-gemini}
+\begin{tabular}{lrrrrr}
+\toprule
+Case & Full & $-$Slip & $-$Forbid & $-$Term & 1-Shot \\
+\midrule
+01 & \textbf{$-$3.632} & \textbf{$-$3.632} & \textbf{$-$3.632} & \textbf{$-$3.632} & $-$3.631 \\
+02 & \textbf{$-$4.766} & \textbf{$-$4.766} & \textbf{$-$4.766} & \textbf{$-$4.766} & \textbf{$-$4.766} \\
+09 & \textbf{$-$1.974} & \textbf{$-$1.974} & \textbf{$-$1.974} & \textbf{$-$1.974} & $-$1.801 \\
+14 & \textbf{$-$3.617} & \textbf{$-$3.617} & \textbf{$-$3.617} & \textbf{$-$3.617} & \textbf{$-$3.617} \\
+19 & $-$3.841 & $-$3.841 & \textbf{$-$4.042} & $-$3.594 & $-$3.133 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% Table 2: Ablation Energy Matrix (Grok-4)
+\begin{table}[t]
+\centering
+\caption{Grok-4 ablation study on the same five representative cases. Lower (more negative) adsorption energy is better. Values are rounded to 3 decimals; ties at the displayed precision are co-bolded.}
+\label{tab:ablation-grok}
+\begin{tabular}{lrrrrr}
+\toprule
+Case & Full & $-$Slip & $-$Forbid & $-$Term & 1-Shot \\
+\midrule
+01 & \textbf{$-$3.632} & \textbf{$-$3.632} & \textbf{$-$3.632} & \textbf{$-$3.632} & $-$3.631 \\
+02 & \textbf{$-$4.766} & \textbf{$-$4.766} & $-$4.760 & \textbf{$-$4.766} & $-$4.150 \\
+09 & \textbf{$-$1.974} & \textbf{$-$1.974} & \textbf{$-$1.974} & \textbf{$-$1.974} & \textbf{$-$1.974} \\
+14 & \textbf{$-$3.617} & \textbf{$-$3.617} & \textbf{$-$3.617} & \textbf{$-$3.617} & $-$3.245 \\
+19 & \textbf{$-$4.045} & $-$3.594 & $-$3.594 & $-$4.027 & $-$3.594 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% Table 3: Cross-LLM robustness summary
+\begin{table}[t]
+\centering
+\caption{Cross-LLM robustness across the completed 5$\times$5 ablation matrix. $\Delta E$ denotes the absolute energy difference between Gemini and Grok for the same case and runtime variant.}
+\label{tab:cross-llm-summary}
+\begin{tabular}{lrrrr}
+\toprule
+Variant & Mean $|\Delta E|$ (eV) & Exact Match & $\leq$0.01 eV & Largest $|\Delta E|$ (eV) \\
+\midrule
+Full & 0.041 & 4/5 & 4/5 & 0.203 \\
+$-$Slip & 0.050 & 3/5 & 4/5 & 0.247 \\
+$-$Forbid & 0.091 & 3/5 & 4/5 & 0.448 \\
+$-$Term & 0.087 & 4/5 & 4/5 & 0.433 \\
+1-Shot & 0.324 & 1/5 & 1/5 & 0.615 \\
+\midrule
+Overall & 0.118 & 15/25 & 17/25 & 0.615 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% Table 4: Key evaluation metrics
+\begin{table}[t]
+\centering
+\caption{Key evaluation metrics requested by the outline. Chemical Slip Rate is reported for both the 5-case full-ablation subset and the 20-case one-shot CMU benchmark. Surface-family stratification is provided in the machine-readable JSON outputs.}
+\label{tab:key-evaluation-metrics}
+\begin{tabular}{p{3.6cm}p{2.0cm}p{4.2cm}p{4.2cm}p{1.6cm}}
+\toprule
+Metric & Target & Gemini & Grok-4 & Meets Target \\
+\midrule
+Chemical Slip Rate & $< 20\%$ & Full 5-case: 100\%; 20-case 1-shot: 60\% & Full 5-case: 100\%; 20-case 1-shot: 60\% & No \\
+Effective Iteration Ratio & $> 0.7$ & 1.0 across all analyzed datasets & 1.0 across all analyzed datasets & Yes \\
+Energy Gap Discovery Rate & $> 90\%$ & 60\% (3/5) & 80\% (4/5) & No \\
+Full vs.\ 1-shot significance & $p < 0.05$ & $p = 0.25$ & $p = 0.125$ & No \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% Table 5: Explicit H1 hypothesis test
+\begin{table}[t]
+\centering
+\caption{Explicit test of H$_1$ on the locked ablation subset using $\Delta E = E_{\mathrm{full}} - E_{\mathrm{1shot}}$. Negative values mean the full closed-loop agent found a lower energy. H$_1$ uses only intermetallic surfaces; case 09 is shown for completeness but excluded from the support rate. Following the task specification, the iteration-efficiency condition is treated operationally as satisfied because all added full-search iterations were effective, although the raw Effective Iteration Ratio remains 1.0 for both full and 1-shot.}
+\label{tab:hypothesis-test}
+\begin{tabular}{lrrrrr}
+\toprule
+Case & Family & Gemini $\Delta E$ (eV) & Gemini hit & Grok-4 $\Delta E$ (eV) & Grok-4 hit \\
+\midrule
+01 & intermetallic & $-$0.001 & No & $-$0.001 & No \\
+02 & intermetallic & 0.000 & No & $-$0.615 & Yes \\
+09 & monometallic & $-$0.173 & N/A & 0.000 & N/A \\
+14 & intermetallic & 0.000 & No & $-$0.372 & Yes \\
+19 & intermetallic & $-$0.709 & Yes & $-$0.451 & Yes \\
+\midrule
+Intermetallic support rate & --- & 1/4 = 25\% & H$_1$ not supported & 3/4 = 75\% & H$_1$ supported \\
+\bottomrule
+\end{tabular}
+\end{table}

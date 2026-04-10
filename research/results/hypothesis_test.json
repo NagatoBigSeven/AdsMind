@@ -1,0 +1,97 @@
+{
+  "null_hypothesis": "Closed-loop physical feedback does not affect search quality; full AdsMind and single-shot show no meaningful difference in best energy or search efficiency.",
+  "alternative_hypothesis": "Full AdsMind finds lower-energy configurations (ΔE < -0.05 eV when defined as E_full - E_single_shot) on at least 30% of intermetallic surfaces and improves Effective Iteration Ratio by at least 25%.",
+  "backend_results": {
+    "gemini": {
+      "intermetallic_cases": [
+        {
+          "case_id": "01",
+          "surface_family": "intermetallic",
+          "delta_eV_full_minus_single_shot": -0.000549,
+          "meaningful_lower_energy": false
+        },
+        {
+          "case_id": "02",
+          "surface_family": "intermetallic",
+          "delta_eV_full_minus_single_shot": 0.0,
+          "meaningful_lower_energy": false
+        },
+        {
+          "case_id": "14",
+          "surface_family": "intermetallic",
+          "delta_eV_full_minus_single_shot": 0.0,
+          "meaningful_lower_energy": false
+        },
+        {
+          "case_id": "19",
+          "surface_family": "intermetallic",
+          "delta_eV_full_minus_single_shot": -0.708641,
+          "meaningful_lower_energy": true
+        }
+      ],
+      "meaningful_improvement_cases": 1,
+      "total_intermetallic_cases": 4,
+      "improvement_rate": 0.25,
+      "energy_condition_threshold": 0.3,
+      "energy_condition_supported": false,
+      "effective_iteration_ratio": {
+        "full": 1.0,
+        "single_shot": 1.0,
+        "literal_relative_improvement": 0.0,
+        "literal_threshold": 0.25,
+        "literal_condition_supported": false,
+        "operational_condition_supported": true
+      },
+      "h1_supported_task_interpretation": false,
+      "h1_supported_literal_metric_definition": false
+    },
+    "grok4": {
+      "intermetallic_cases": [
+        {
+          "case_id": "01",
+          "surface_family": "intermetallic",
+          "delta_eV_full_minus_single_shot": -0.000549,
+          "meaningful_lower_energy": false
+        },
+        {
+          "case_id": "02",
+          "surface_family": "intermetallic",
+          "delta_eV_full_minus_single_shot": -0.615463,
+          "meaningful_lower_energy": true
+        },
+        {
+          "case_id": "14",
+          "surface_family": "intermetallic",
+          "delta_eV_full_minus_single_shot": -0.371552,
+          "meaningful_lower_energy": true
+        },
+        {
+          "case_id": "19",
+          "surface_family": "intermetallic",
+          "delta_eV_full_minus_single_shot": -0.450783,
+          "meaningful_lower_energy": true
+        }
+      ],
+      "meaningful_improvement_cases": 3,
+      "total_intermetallic_cases": 4,
+      "improvement_rate": 0.75,
+      "energy_condition_threshold": 0.3,
+      "energy_condition_supported": true,
+      "effective_iteration_ratio": {
+        "full": 1.0,
+        "single_shot": 1.0,
+        "literal_relative_improvement": 0.0,
+        "literal_threshold": 0.25,
+        "literal_condition_supported": false,
+        "operational_condition_supported": true
+      },
+      "h1_supported_task_interpretation": true,
+      "h1_supported_literal_metric_definition": false
+    }
+  },
+  "notes": [
+    "Energy condition is evaluated only on intermetallic cases in the locked 5-case ablation subset.",
+    "The task file instructs that the iteration-ratio condition be treated as operationally satisfied because all additional full-search iterations were effective.",
+    "Literal Effective Iteration Ratio values are 1.0 for both full and single-shot in all observed runs, so the raw ratio itself does not increase numerically."
+  ]
+}

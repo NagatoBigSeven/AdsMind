@@ -1,0 +1,19 @@
+\begin{table}[h]
+\centering
+\caption{Full pairwise ablation statistics versus the full variant. Positive $\Delta E$ means the ablated variant is worse than full. BH denotes the Benjamini--Hochberg adjusted $p$-value.}
+\label{tab:si4-ablation-statistics}
+\begin{tabular}{llrrrrllr}
+\toprule
+Backend & Variant & Mean $\Delta E$ & Median $\Delta E$ & Wilcoxon $p$ & BH $p$ & Rank-biserial $r$ & 95\% CI & Max degr. \\
+\midrule
+gemini & -Slip & 0.000 & 0.000 & 1 & 1 & 1.000 & [-0.000, 0.000] & 0.000 (02) \\
+gemini & -Forbid & -0.040 & 0.000 & 1 & 1 & -0.333 & [-0.000, 0.201] & 0.000 (02) \\
+gemini & -Term & 0.049 & 0.000 & 1 & 1 & 1.000 & [-0.247, 0.000] & 0.247 (19) \\
+gemini & 1-Shot & 0.176 & 0.001 & 0.25 & 1 & 1.000 & [-0.708, 0.001] & 0.709 (19) \\
+grok4 & -Slip & 0.090 & 0.000 & 1 & 1 & 1.000 & [-0.451, 0.000] & 0.451 (19) \\
+grok4 & -Forbid & 0.091 & 0.000 & 0.5 & 1 & 1.000 & [-0.451, 0.000] & 0.451 (19) \\
+grok4 & -Term & 0.003 & 0.000 & 1 & 1 & 1.000 & [-0.017, 0.000] & 0.017 (19) \\
+grok4 & 1-Shot & 0.288 & 0.372 & 0.125 & 0.5 & 1.000 & [0.128, 0.743] & 0.615 (02) \\
+\bottomrule
+\end{tabular}
+\end{table}

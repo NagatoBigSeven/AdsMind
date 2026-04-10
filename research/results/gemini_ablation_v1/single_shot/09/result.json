@@ -1,0 +1,185 @@
+{
+  "case_id": "09",
+  "case_metadata": {
+    "case_id": "09",
+    "slab_file": "benchmark_slabs/09_Pt_111.xyz",
+    "smiles": "[OH]",
+    "user_request": "Find the lowest-energy adsorption configuration for hydroxyl radical on the provided surface.",
+    "surface_family": "monometallic",
+    "adsorbate_name": "OH",
+    "miller_index": "(111)",
+    "reaction_class": "ORR",
+    "ablation_candidate": "TRUE",
+    "notes": "Monometallic ORR baseline; DFT handoff target"
+  },
+  "status": "success",
+  "best_energy_eV": -1.8013858795166016,
+  "iteration_count": 1,
+  "max_attempts": 1,
+  "final_site_type": "ontop",
+  "converged_tag": false,
+  "wall_clock_sec": 217.33664145803778,
+  "total_input_tokens": 3306,
+  "total_output_tokens": 2715,
+  "artifact_paths": {
+    "BEST_OH_ontop_E-1.801": "research/results/gemini_ablation_v1/single_shot/09/artifacts/BEST_OH_ontop_E-1.801.xyz",
+    "BEST_OH_ontop_E-1.801.xyz": "research/results/gemini_ablation_v1/single_shot/09/artifacts/BEST_OH_ontop_E-1.801.xyz",
+    "best_structure_file": "research/results/gemini_ablation_v1/single_shot/09/artifacts/BEST_OH_ontop_E-1.801.xyz",
+    "conformers_[OH]": "research/results/gemini_ablation_v1/single_shot/09/artifacts/conformers_[OH].traj",
+    "conformers_[OH].traj": "research/results/gemini_ablation_v1/single_shot/09/artifacts/conformers_[OH].traj",
+    "final": "research/results/gemini_ablation_v1/single_shot/09/artifacts/final.xyz",
+    "final.xyz": "research/results/gemini_ablation_v1/single_shot/09/artifacts/final.xyz",
+    "relaxation": "research/results/gemini_ablation_v1/single_shot/09/artifacts/relaxation.traj",
+    "relaxation.traj": "research/results/gemini_ablation_v1/single_shot/09/artifacts/relaxation.traj",
+    "relaxation_trajectory_file": "research/results/gemini_ablation_v1/single_shot/09/artifacts/relaxation.traj"
+  },
+  "best_result": {
+    "most_stable_energy_eV": -1.8013858795166016,
+    "analysis_json": {
+      "status": "success",
+      "message": "Most stable config adsorption energy: -1.8014 eV. Target Atom: O (from plan index 0, global index 54 in relaxed structure). -> Nearest: Pt (Index 39), Distance: 1.98 Å (Threshold: 2.929), Bound: True. Bonded Surface Atoms: Pt-1.98Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: False (Planned ['Pt'] -> Actual ['Pt']).",
+      "most_stable_energy_eV": -1.8013858795166016,
+      "target_adsorbate_atom": "O",
+      "target_adsorbate_atom_index": 54,
+      "bonded_surface_atoms": [
+        {
+          "symbol": "Pt",
+          "index": 39,
+          "distance": 1.98
+        }
+      ],
+      "nearest_slab_atom": "Pt",
+      "nearest_slab_atom_index": 39,
+      "final_bond_distance_A": 1.98,
+      "estimated_covalent_cutoff_A": 2.222,
+      "is_covalently_bound": true,
+      "reaction_detected": false,
+      "is_dissociated": false,
+      "n_components": 1,
+      "bond_change_count": 0,
+      "site_analysis": {
+        "planned_site_type": "ontop",
+        "planned_connectivity": 1,
+        "actual_site_type": "ontop",
+        "actual_connectivity": 1,
+        "is_chemical_slip": false,
+        "planned_symbols": [
+          "Pt"
+        ],
+        "actual_symbols": [
+          "Pt"
+        ],
+        "site_fingerprint": "Pt39"
+      },
+      "best_structure_file": "outputs/09-3f772b89/BEST_OH_ontop_E-1.801.xyz",
+      "generated_conformers_file": "outputs/09-3f772b89/conformers_[OH].traj",
+      "relaxation_trajectory_file": "outputs/09-3f772b89/final.xyz",
+      "session_id": "09-3f772b89"
+    },
+    "plan": {
+      "reasoning": "This is the first attempt to find the lowest energy adsorption site for a hydroxyl radical on Pt(111). The provided SMILES is [OH], and the RDKit analysis confirms that the oxygen atom (index 0) has one radical electron. This makes it a reactive species, so `adsorbate_type` will be `ReactiveSpecies`. The binding will occur through this radical oxygen atom, so `adsorbate_binding_indices` is `[0]`. I will start the systematic search by testing the on-top site, which is a chemically intuitive and common configuration for hydroxyl adsorption on platinum surfaces. This involves forming a direct bond between the oxygen atom and a single surface platinum atom.",
+      "adsorbate_type": "ReactiveSpecies",
+      "solution": {
+        "action": "continue",
+        "site_type": "ontop",
+        "surface_binding_atoms": [
+          "Pt"
+        ],
+        "adsorbate_binding_indices": [
+          0
+        ],
+        "relax_top_n": 1,
+        "touch_sphere_size": 2,
+        "overlap_thr": 0.1,
+        "conformers_per_site_cap": 4
+      }
+    },
+    "result_type": "Perfect"
+  },
+  "last_analysis": {
+    "status": "success",
+    "message": "Most stable config adsorption energy: -1.8014 eV. Target Atom: O (from plan index 0, global index 54 in relaxed structure). -> Nearest: Pt (Index 39), Distance: 1.98 Å (Threshold: 2.929), Bound: True. Bonded Surface Atoms: Pt-1.98Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: False (Planned ['Pt'] -> Actual ['Pt']).",
+    "most_stable_energy_eV": -1.8013858795166016,
+    "target_adsorbate_atom": "O",
+    "target_adsorbate_atom_index": 54,
+    "bonded_surface_atoms": [
+      {
+        "symbol": "Pt",
+        "index": 39,
+        "distance": 1.98
+      }
+    ],
+    "nearest_slab_atom": "Pt",
+    "nearest_slab_atom_index": 39,
+    "final_bond_distance_A": 1.98,
+    "estimated_covalent_cutoff_A": 2.222,
+    "is_covalently_bound": true,
+    "reaction_detected": false,
+    "is_dissociated": false,
+    "n_components": 1,
+    "bond_change_count": 0,
+    "site_analysis": {
+      "planned_site_type": "ontop",
+      "planned_connectivity": 1,
+      "actual_site_type": "ontop",
+      "actual_connectivity": 1,
+      "is_chemical_slip": false,
+      "planned_symbols": [
+        "Pt"
+      ],
+      "actual_symbols": [
+        "Pt"
+      ],
+      "site_fingerprint": "Pt39"
+    },
+    "best_structure_file": "outputs/09-3f772b89/BEST_OH_ontop_E-1.801.xyz",
+    "generated_conformers_file": "outputs/09-3f772b89/conformers_[OH].traj",
+    "relaxation_trajectory_file": "outputs/09-3f772b89/final.xyz",
+    "session_id": "09-3f772b89"
+  },
+  "attempt_records": [
+    {
+      "attempt_index": 1,
+      "plan": {
+        "reasoning": "This is the first attempt to find the lowest energy adsorption site for a hydroxyl radical on Pt(111). The provided SMILES is [OH], and the RDKit analysis confirms that the oxygen atom (index 0) has one radical electron. This makes it a reactive species, so `adsorbate_type` will be `ReactiveSpecies`. The binding will occur through this radical oxygen atom, so `adsorbate_binding_indices` is `[0]`. I will start the systematic search by testing the on-top site, which is a chemically intuitive and common configuration for hydroxyl adsorption on platinum surfaces. This involves forming a direct bond between the oxygen atom and a single surface platinum atom.",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "ontop",
+          "surface_binding_atoms": [
+            "Pt"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "ontop|Pt|0|ReactiveSpecies|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -1.8013858795166016,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": false,
+      "planned_site_type": "ontop",
+      "actual_site_type": "ontop",
+      "best_structure_file": "outputs/09-3f772b89/BEST_OH_ontop_E-1.801.xyz",
+      "generated_conformers_file": "outputs/09-3f772b89/conformers_[OH].traj",
+      "relaxation_trajectory_file": "outputs/09-3f772b89/final.xyz",
+      "message": "Most stable config adsorption energy: -1.8014 eV. Target Atom: O (from plan index 0, global index 54 in relaxed structure). -> Nearest: Pt (Index 39), Distance: 1.98 Å (Threshold: 2.929), Bound: True. Bonded Surface Atoms: Pt-1.98Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: False (Planned ['Pt'] -> Actual ['Pt']).",
+      "history_entry": "【✅ Perfect Adsorption】 ontop @ ['Pt'] (Index [0]) -> Site: ontop (Pt) | E=-1.801 eV"
+    }
+  ],
+  "history": [
+    "【✅ Perfect Adsorption】 ontop @ ['Pt'] (Index [0]) -> Site: ontop (Pt) | E=-1.801 eV"
+  ],
+  "error": null,
+  "perfect_count": 1,
+  "dissociation_count": 0,
+  "rearrangement_count": 0,
+  "calc_failure_count": 0,
+  "chemical_slip_count": 0
+}

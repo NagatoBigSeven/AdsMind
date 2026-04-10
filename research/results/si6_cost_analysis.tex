@@ -1,0 +1,21 @@
+\begin{table}[h]
+\centering
+\caption{Cost analysis for the 5-case ablation matrix. Token counts are totals per run (input + output).}
+\label{tab:si6-cost-analysis}
+\begin{tabular}{llrrr}
+\toprule
+Backend & Variant & Mean tokens/run & Mean wall-clock (s) & Mean iterations \\
+\midrule
+gemini & Full & 39876.8 & 373.8 & 4.4 \\
+gemini & -Slip & 39651.2 & 419.2 & 4.6 \\
+gemini & -Forbid & 39411.0 & 428.7 & 4.6 \\
+gemini & -Term & 67810.4 & 768.6 & 4.8 \\
+gemini & 1-Shot & 6888.2 & 187.5 & 1.0 \\
+grok4 & Full & 31222.8 & 683.6 & 4.2 \\
+grok4 & -Slip & 32920.0 & 497.8 & 4.6 \\
+grok4 & -Forbid & 34078.4 & 536.4 & 4.6 \\
+grok4 & -Term & 38106.8 & 691.4 & 4.6 \\
+grok4 & 1-Shot & 6581.8 & 147.0 & 1.0 \\
+\bottomrule
+\end{tabular}
+\end{table}
