@@ -18,6 +18,10 @@ def build_history_entry(
     current_plan: Optional[dict],
     analysis_data: dict,
     best_result: Optional[dict],
+    *,
+    enable_slip_feedback: bool = True,
+    enable_forbid: bool = True,
+    enable_termination: bool = True,
 ) -> str:
     """Generate a history entry without mutating the graph state."""
     plan_desc = format_plan_description(current_plan)
@@ -41,18 +45,22 @@ def build_history_entry(
     if is_chem_slip:
         planned_str = "-".join(planned_syms)
         actual_str = "-".join(actual_syms)
-        site_msg = (
-            f"⚠️【Unstable Site Warning】⚠️: "
-            f"Planned {planned_site} ({planned_str}) is unstable, adsorbate spontaneously slipped to "
-            f"{actual_site} ({actual_str})."
-            f"This means {planned_str} has insufficient affinity for this adsorbate. "
-            f"Please **FORBID** testing {planned_str} type sites again!"
-        )
+        if enable_slip_feedback:
+            site_msg = (
+                f"⚠️【Unstable Site Warning】⚠️: "
+                f"Planned {planned_site} ({planned_str}) is unstable, adsorbate spontaneously slipped to "
+                f"{actual_site} ({actual_str})."
+                f"This means {planned_str} has insufficient affinity for this adsorbate."
+            )
+            if enable_forbid:
+                site_msg += f" Please **FORBID** testing {planned_str} type sites again!"
+        else:
+            site_msg = f"Site: {actual_site} ({','.join(actual_syms)})"
     elif actual_site != "unknown" and planned_site != "unknown" and actual_site != planned_site:
         site_msg = f"⚠️ Geometric Slip: {planned_site} -> {actual_site}"
 
     tag = ""
-    if best_result and isinstance(energy, (int, float)):
+    if enable_termination and best_result and isinstance(energy, (int, float)):
         best_e = best_result.get("most_stable_energy_eV", float("inf"))
         current_fp = site_info.get("site_fingerprint", "")
         best_fp = best_result.get("analysis_json", {}).get("site_analysis", {}).get("site_fingerprint", "")

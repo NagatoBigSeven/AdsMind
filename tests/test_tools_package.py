@@ -35,3 +35,11 @@ class TestToolsPackage(unittest.TestCase):
 
             self.assertTrue(session_dir.exists())
             self.assertEqual(session_dir, fake_root / "session01")
+
+    def test_analyze_surface_sites_returns_inventory(self):
+        analysis = tools.analyze_surface_sites(
+            "/Users/nagato/workspace/AdsMind/benchmark_slabs/01_Mo3Pd_111.xyz"
+        )
+        self.assertIn("surface_composition", analysis)
+        self.assertIn("available_sites_description", analysis)
+        self.assertTrue(analysis["available_sites_description"])

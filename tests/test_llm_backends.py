@@ -138,6 +138,33 @@ class TestOpenRouterBackend(unittest.TestCase):
         self.assertEqual(config.api_key, "test-key")
         self.assertEqual(config.model, "google/gemini-2.5-pro")
 
+    def test_chat_model_respects_custom_base_url(self):
+        """Custom transport options should be forwarded to ChatOpenAI."""
+        from src.llms import get_llm_backend
+
+        captured = {}
+
+        class FakeChatOpenAI:
+            def __init__(self, **kwargs):
+                captured.update(kwargs)
+
+        fake_module = types.SimpleNamespace(ChatOpenAI=FakeChatOpenAI)
+
+        with patch.dict(sys.modules, {"langchain_openai": fake_module}):
+            backend = get_llm_backend("openrouter")
+            config = backend.get_default_config(api_key="test-key")
+            config.model = "gemini-3.1-pro-preview"
+            config.extra_options = {
+                "base_url": "https://aihubmix.com/v1",
+                "default_headers": {"X-Test": "1"},
+                "seed": 7,
+            }
+            backend.get_chat_model(config)
+
+        self.assertEqual(captured["openai_api_base"], "https://aihubmix.com/v1")
+        self.assertEqual(captured["default_headers"], {"X-Test": "1"})
+        self.assertEqual(captured["seed"], 7)
+
 
 class TestOllamaBackend(unittest.TestCase):
     """Test Ollama backend."""
@@ -261,3 +288,41 @@ class TestAgentIntegration(unittest.TestCase):
         params = list(sig.parameters.keys())
         self.assertIn("llm_backend", params)
         self.assertIn("llm_config", params)
+
+    def test_get_llm_merges_extra_options(self):
+        """Unknown llm_config keys should flow into backend extra_options."""
+        from src.agent.agent import get_llm
+        from src.llms.base import LLMConfig
+
+        class FakeBackend:
+            requires_api_key = False
+            saved_config = None
+
+            def get_default_config(self, api_key=None):
+                return LLMConfig(backend="openrouter", api_key=api_key, model="placeholder")
+
+            def get_chat_model(self, config):
+                self.saved_config = config
+                return {"model": config.model, "extra_options": dict(config.extra_options)}
+
+        backend = FakeBackend()
+        with patch("src.agent.agent.get_llm_backend", return_value=backend):
+            model = get_llm(
+                api_key="",
+                backend_name="openrouter",
+                llm_config={
+                    "model": "gemini-3.1-pro-preview",
+                    "extra_options": {"base_url": "https://aihubmix.com/v1"},
+                    "default_headers": {"X-Test": "1"},
+                },
+            )
+
+        self.assertEqual(model["model"], "gemini-3.1-pro-preview")
+        self.assertEqual(
+            backend.saved_config.extra_options["base_url"],
+            "https://aihubmix.com/v1",
+        )
+        self.assertEqual(
+            backend.saved_config.extra_options["default_headers"],
+            {"X-Test": "1"},
+        )

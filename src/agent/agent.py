@@ -8,6 +8,7 @@ from dotenv import load_dotenv
 
 # Calculator backend abstraction
 from src.calculators import get_backend
+from src.calculators.base import CalculatorConfig
 
 # LLM backend abstraction
 from src.llms import get_llm_backend
@@ -19,12 +20,12 @@ from langchain_core.output_parsers import JsonOutputParser
 from src.utils.logger import get_logger
 from src.agent.history import build_history_entry
 from src.utils.config import get_calculator_backend, get_llm_backend_name
-from src.agent.prompts import PLANNER_PROMPT
+from src.agent.prompts import build_planner_prompt
 
 # Initialize logger for this module
 logger = get_logger(__name__)
 
-MAX_RETRIES = 5
+DEFAULT_MAX_ATTEMPTS = 5
 
 # --- 1. Define Agent State ---
 class AgentState(TypedDict):
@@ -34,10 +35,22 @@ class AgentState(TypedDict):
     # LLM configuration
     llm_backend: str  # LLM backend name ("google", "openrouter", "ollama", "huggingface")
     llm_config: Optional[Dict[str, Any]]  # Optional LLM configuration overrides
+    # Calculator configuration
+    calculator_backend: str
+    calculator_config: Optional[Dict[str, Any]]
+    relaxation_config: Optional[Dict[str, Any]]
     # Reproducibility
     random_seed: Optional[int]  # Optional random seed for reproducible runs (None = not fixed)
     # Relaxation settings
     relaxation_mode: str  # "fast" (all slab fixed) or "standard" (bottom 1/3 fixed)
+    # Experiment instrumentation
+    total_input_tokens: int
+    total_output_tokens: int
+    enable_slip_feedback: bool
+    enable_forbid: bool
+    enable_termination: bool
+    max_attempts: int
+    validation_retry_count: int
     # Input data
     smiles: str
     slab_path: str
@@ -50,6 +63,7 @@ class AgentState(TypedDict):
     # Results
     analysis_json: Optional[str]
     history: List[str]
+    attempt_records: List[Dict[str, Any]]
     best_result: Optional[dict]
     best_dissociated_result: Optional[dict]
     attempted_keys: List[str]
@@ -63,6 +77,84 @@ load_dotenv()
 
 # Default LLM backend (can be overridden via environment variable)
 DEFAULT_LLM_BACKEND = "google"
+
+
+def _read_usage_value(container: Any, *keys: str) -> int:
+    """Return the first usable integer token count from dict/object metadata."""
+    if container is None:
+        return 0
+
+    for key in keys:
+        value = container.get(key) if isinstance(container, dict) else getattr(container, key, None)
+        if value is None:
+            continue
+        try:
+            return int(value)
+        except (TypeError, ValueError):
+            continue
+    return 0
+
+
+def extract_token_usage(response: Any) -> tuple[int, int]:
+    """Extract prompt/output token counts from LangChain response metadata."""
+    usage_metadata = getattr(response, "usage_metadata", None)
+    prompt_tokens = _read_usage_value(
+        usage_metadata,
+        "input_tokens",
+        "prompt_token_count",
+        "prompt_tokens",
+    )
+    output_tokens = _read_usage_value(
+        usage_metadata,
+        "output_tokens",
+        "candidates_token_count",
+        "completion_tokens",
+    )
+
+    response_metadata = getattr(response, "response_metadata", None) or {}
+    token_usage = response_metadata.get("token_usage") if isinstance(response_metadata, dict) else {}
+    prompt_tokens = prompt_tokens or _read_usage_value(token_usage, "prompt_tokens", "input_tokens")
+    output_tokens = output_tokens or _read_usage_value(
+        token_usage,
+        "completion_tokens",
+        "output_tokens",
+    )
+    return prompt_tokens, output_tokens
+
+
+def get_max_attempts(state: AgentState) -> int:
+    """Return the hard attempt cap for the current run."""
+    try:
+        value = int(state.get("max_attempts", DEFAULT_MAX_ATTEMPTS))
+    except (TypeError, ValueError):
+        value = DEFAULT_MAX_ATTEMPTS
+    return max(1, value)
+
+
+def _coalesce_override(overrides: Optional[Dict[str, Any]], key: str, default: Any) -> Any:
+    """Return a runtime override only when it is explicitly non-null."""
+    if not overrides:
+        return default
+    value = overrides.get(key, default)
+    return default if value is None else value
+
+
+def _apply_calculator_overrides(
+    calc_config: CalculatorConfig,
+    overrides: Optional[Dict[str, Any]],
+) -> CalculatorConfig:
+    """Apply experiment-time calculator overrides on top of backend defaults."""
+    if not overrides:
+        return calc_config
+
+    for key, value in overrides.items():
+        if value is None:
+            continue
+        if key == "extra_options" and isinstance(value, dict):
+            calc_config.extra_options.update(value)
+        elif hasattr(calc_config, key):
+            setattr(calc_config, key, value)
+    return calc_config
 
 
 def get_llm(api_key: str, backend_name: str = None, llm_config: dict = None):
@@ -103,9 +195,11 @@ def get_llm(api_key: str, backend_name: str = None, llm_config: dict = None):
     # Apply overrides from llm_config
     if llm_config:
         for key, value in llm_config.items():
-            if hasattr(config, key):
+            if key == "extra_options" and isinstance(value, dict):
+                config.extra_options.update(value)
+            elif hasattr(config, key):
                 setattr(config, key, value)
-            elif key in ("host", "device", "quantize"):
+            else:
                 # Backend-specific options go into extra_options
                 config.extra_options[key] = value
     
@@ -136,6 +230,20 @@ def make_plan_key(plan_json: Optional[dict]) -> Optional[str]:
     except Exception as e:
         logger.warning(f"make_plan_key failed: {e}")
         return None
+
+
+def get_valid_binding_indices(mol: Chem.Mol) -> set[int]:
+    """Return planner-visible binding indices for the current adsorbate.
+
+    The planner normally sees heavy-atom indices only. Single-atom species such as
+    ``[H]`` have no heavy atoms, so we fall back to all atom indices in that case.
+    """
+    heavy_atom_indices = {
+        atom.GetIdx() for atom in mol.GetAtoms() if atom.GetSymbol() != "H"
+    }
+    if heavy_atom_indices:
+        return heavy_atom_indices
+    return {atom.GetIdx() for atom in mol.GetAtoms()}
 
 # --- 3. Define LangGraph Nodes ---
 def pre_processor_node(state: AgentState) -> dict:
@@ -184,21 +292,28 @@ def solution_planner_node(state: AgentState) -> dict:
         "surface_composition": state.get("surface_composition", "Unknown"),
         "user_request": state["user_request"],
         "history": "\n".join(state["history"]) if state.get("history") else "None",
-        "MAX_RETRIES": MAX_RETRIES,
+        "max_attempts": get_max_attempts(state),
         "autoadsorbate_context": atom_menu_json,
         "available_sites_description": state.get("available_sites_description", "None"),
+        "enable_slip_feedback": state.get("enable_slip_feedback", True),
+        "enable_forbid": state.get("enable_forbid", True),
+        "enable_termination": state.get("enable_termination", True),
     }
+    planner_prompt = build_planner_prompt(**prompt_input)
     
     if state.get("validation_error"):
-        messages.append(HumanMessage(content=PLANNER_PROMPT.format(**prompt_input)))
+        messages.append(HumanMessage(content=planner_prompt))
         messages.append(AIMessage(content=json.dumps(state.get("plan", "{}"))))
         messages.append(HumanMessage(content=f"Your plan has logical errors: {state['validation_error']}. Please replan."))
     else:
         if state.get("history"):
             logger.info("Planner: Detected failure history, retrying...")
-        messages.append(HumanMessage(content=PLANNER_PROMPT.format(**prompt_input)))
+        messages.append(HumanMessage(content=planner_prompt))
 
     response = llm.invoke(messages)
+    input_tokens, output_tokens = extract_token_usage(response)
+    total_input_tokens = state.get("total_input_tokens", 0) + input_tokens
+    total_output_tokens = state.get("total_output_tokens", 0) + output_tokens
     
     try:
         parser = JsonOutputParser()
@@ -212,7 +327,9 @@ def solution_planner_node(state: AgentState) -> dict:
         return {
             "plan": plan_json,
             "messages": [AIMessage(content=response.content)],
-            "validation_error": None
+            "validation_error": None,
+            "total_input_tokens": total_input_tokens,
+            "total_output_tokens": total_output_tokens,
         }
     except Exception as e:
         logger.error(f"Planner Output JSON Parse Failed: {e}")
@@ -220,12 +337,25 @@ def solution_planner_node(state: AgentState) -> dict:
         return {
             "plan": None,
             "validation_error": f"False, Planner output format error: {e}. Please output strictly in JSON format.",
-            "messages": [AIMessage(content=response.content)]
+            "messages": [AIMessage(content=response.content)],
+            "total_input_tokens": total_input_tokens,
+            "total_output_tokens": total_output_tokens,
         }
 
 def plan_validator_node(state: AgentState) -> dict:
     """ Node 2: Python Validator """
     logger.info("Calling Python Validator Node")
+    validation_retry_count = int(state.get("validation_retry_count", 0) or 0)
+
+    def fail_validation(error: str, *, clear_plan: bool = False) -> dict:
+        logger.info(f"Validation Failed: {error}")
+        payload = {
+            "validation_error": error,
+            "validation_retry_count": validation_retry_count + 1,
+        }
+        if clear_plan:
+            payload["plan"] = None
+        return payload
 
     try:
         # Use state["smiles"] (from initial input) instead of anything in the plan
@@ -236,21 +366,20 @@ def plan_validator_node(state: AgentState) -> dict:
             )
     except Exception as e:
         error = f"False, Base SMILES string '{state['smiles']}' cannot be parsed by RDKit. This is an unrecoverable error. Please check SMILES. Error: {e}"
-        logger.info(f"Validation Failed: {error}")
         # This is a fatal error; we should stop retrying.
         # We notify the router by setting a special validation_error
         # Note: Ideally, the graph should have a "terminal_failure" state,
         # but currently we can only return to the planner and expect it to stop after N attempts.
-        return {"validation_error": error, "plan": None} # Clear plan
+        return fail_validation(error, clear_plan=True) # Clear plan
 
     plan_json = state.get("plan")
     if plan_json is None:
-        logger.info("Validation Failed: Planner failed to generate valid JSON. ")
-        return {"validation_error": state.get("validation_error", "False, Planner node failed to generate valid JSON.")}
+        return fail_validation(
+            state.get("validation_error", "False, Planner node failed to generate valid JSON.")
+        )
     if "solution" not in plan_json:
         error = "False, Plan JSON missing 'solution' key."
-        logger.info(f"Validation Failed: {error}")
-        return {"validation_error": error}
+        return fail_validation(error)
     
     adsorbate_type = plan_json.get("adsorbate_type")
     if adsorbate_type not in ["Molecule", "ReactiveSpecies"]:
@@ -258,58 +387,81 @@ def plan_validator_node(state: AgentState) -> dict:
             "False, Plan JSON missing or invalid `adsorbate_type` field "
             "(must be 'Molecule' or 'ReactiveSpecies')."
         )
-        logger.info(f"Validation Failed: {error}")
-        return {"validation_error": error}
+        return fail_validation(error)
 
     solution = plan_json.get("solution", {})
     if not solution:
         error = "False, Plan JSON missing or malformed ('solution' key is empty)."
-        logger.info(f"Validation Failed: {error}")
-        return {"validation_error": error}
+        return fail_validation(error)
+    if solution.get("action") == "terminate" and not state.get("enable_termination", True):
+        error = (
+            "False, Termination is disabled for this run. "
+            "Please provide another adsorption plan instead of terminate."
+        )
+        return fail_validation(error)
+
     if solution.get("action") == "terminate":
         logger.error("Planner decided to terminate (converged or no more plans)")
-        return {"validation_error": None}  # Pass directly
+        return {"validation_error": None, "validation_retry_count": validation_retry_count}  # Pass directly
 
     site_type = solution.get("site_type", "")
     surf_atoms = solution.get("surface_binding_atoms", [])
     ads_indices = solution.get("adsorbate_binding_indices", [])
+    valid_binding_indices = get_valid_binding_indices(mol)
+    if not isinstance(ads_indices, list):
+        error = "False, Plan JSON field 'adsorbate_binding_indices' must be a list."
+        return fail_validation(error)
+    if any(not isinstance(idx, int) for idx in ads_indices):
+        error = (
+            "False, Rule 2: Python check failed. "
+            "'adsorbate_binding_indices' must contain only integers."
+        )
+        return fail_validation(error)
+    if len(set(ads_indices)) != len(ads_indices):
+        error = (
+            "False, Rule 2: Python check failed. "
+            "'adsorbate_binding_indices' must not repeat the same atom index."
+        )
+        return fail_validation(error)
+    invalid_indices = [idx for idx in ads_indices if idx not in valid_binding_indices]
+    if invalid_indices:
+        valid_indices_text = sorted(valid_binding_indices)
+        error = (
+            "False, Rule 2: Python check failed. "
+            f"'adsorbate_binding_indices' must refer to planner-visible atoms {valid_indices_text}, "
+            f"but got invalid indices {invalid_indices}."
+        )
+        return fail_validation(error)
     if site_type == "ontop" and len(ads_indices) != 1:
         error = f"False, Rule 2: Python check failed. site_type 'ontop' must pair with 1 index (end-on), but got {len(ads_indices)}."
-        logger.info(f"Validation Failed: {error}")
-        return {"validation_error": error}
+        return fail_validation(error)
     if site_type == "bridge" and len(ads_indices) not in [1, 2]:
         error = f"False, Rule 2: Python check failed. site_type 'bridge' must pair with 1 (end-on) or 2 (side-on) indices, but got {len(ads_indices)}."
-        logger.info(f"Validation Failed: {error}")
-        return {"validation_error": error}
+        return fail_validation(error)
     if site_type == "hollow" and len(ads_indices) not in [1, 2]:
         error = f"False, Rule 2: Python check failed. site_type 'hollow' must pair with 1 (end-on) or 2 (side-on) indices, but got {len(ads_indices)}."
-        logger.info(f"Validation Failed: {error}")
-        return {"validation_error": error}
+        return fail_validation(error)
     if not isinstance(surf_atoms, list):
         error = "False, Plan JSON field 'surface_binding_atoms' must be a list."
-        logger.info(f"Validation Failed: {error}")
-        return {"validation_error": error}
+        return fail_validation(error)
     if site_type == "ontop" and len(surf_atoms) != 1:
         error = (
             "False, Rule 2b: 'ontop' site requires surface_binding_atoms length of 1, "
             f"but got {len(surf_atoms)}."
         )
-        logger.info(f"Validation Failed: {error}")
-        return {"validation_error": error}
+        return fail_validation(error)
     if site_type == "bridge" and len(surf_atoms) not in [1, 2]:
         error = (
             "False, Rule 2b: 'bridge' site requires surface_binding_atoms length of 1 or 2, "
             f"but got {len(surf_atoms)}."
         )
-        logger.info(f"Validation Failed: {error}")
-        return {"validation_error": error}
+        return fail_validation(error)
     if site_type == "hollow" and len(surf_atoms) < 3:
         error = (
             "False, Rule 2b: 'hollow' site requires surface_binding_atoms to have at least 3 elements, "
             f"but got {len(surf_atoms)}."
         )
-        logger.info(f"Validation Failed: {error}")
-        return {"validation_error": error}
+        return fail_validation(error)
     
     try:
         attempted_keys = state.get("attempted_keys", [])
@@ -321,13 +473,12 @@ def plan_validator_node(state: AgentState) -> dict:
                 "False, This plan has already been attempted in the (site_type, surface_binding_atoms, adsorbate_binding_indices) space. "
                 "Please plan a different combination."
             )
-            logger.info(f"Validation Failed: {error}")
-            return {"validation_error": error}
+            return fail_validation(error)
     except Exception as e_dup:
         logger.warning(f"Exception during Duplicate-check: {e_dup}")
 
     logger.info("Validation Succeeded ")
-    return {"validation_error": None}
+    return {"validation_error": None, "validation_retry_count": validation_retry_count}
 
 def tool_executor_node(state: AgentState) -> dict:
     """ Node 4: Tool Executor """
@@ -390,7 +541,7 @@ def tool_executor_node(state: AgentState) -> dict:
         # 3. Initialize Calculator via Backend Abstraction
         try:
             # Get the calculator backend (defaults to MACE)
-            backend_name = get_calculator_backend()
+            backend_name = state.get("calculator_backend") or get_calculator_backend()
             backend = get_backend(backend_name)
             
             # Check GPU availability
@@ -398,13 +549,18 @@ def tool_executor_node(state: AgentState) -> dict:
             
             # Get platform-specific configuration from backend
             calc_config = backend.get_default_config(has_gpu=has_cuda)
+            calc_config = _apply_calculator_overrides(
+                calc_config,
+                state.get("calculator_config"),
+            )
             relax_params = backend.get_default_relaxation_params(has_gpu=has_cuda)
             
             # Extract parameters for use in this function
-            opt_fmax = relax_params.fmax
-            opt_steps = relax_params.steps
-            md_steps = relax_params.md_steps
-            md_temp = relax_params.md_temp
+            relax_overrides = state.get("relaxation_config") or {}
+            opt_fmax = float(_coalesce_override(relax_overrides, "fmax", relax_params.fmax))
+            opt_steps = int(_coalesce_override(relax_overrides, "steps", relax_params.steps))
+            md_steps = int(_coalesce_override(relax_overrides, "md_steps", relax_params.md_steps))
+            md_temp = float(_coalesce_override(relax_overrides, "md_temp", relax_params.md_temp))
             
             # Get calculator instance
             temp_calc = backend.get_calculator(calc_config)
@@ -532,8 +688,11 @@ def tool_executor_node(state: AgentState) -> dict:
             e_adsorbate_ref=E_adsorbate
         )
         tool_logs.append("Success: Analysis tool executed.")
-        logger.info(f"Analysis Result: {analysis_json_str}")
         analysis_json = json.loads(analysis_json_str)
+        analysis_json["generated_conformers_file"] = generated_traj_file
+        analysis_json["relaxation_trajectory_file"] = final_traj_file
+        analysis_json["session_id"] = state["session_id"]
+        logger.info(f"Analysis Result: {json.dumps(analysis_json)}")
 
         if analysis_json.get("status") == "success":
             e_new = analysis_json.get("most_stable_energy_eV")
@@ -579,15 +738,46 @@ def tool_executor_node(state: AgentState) -> dict:
     if isinstance(analysis_json, dict):
         try:
             updated_history.append(
-                build_history_entry(state.get("plan"), analysis_json, new_best_molecular)
+                build_history_entry(
+                    state.get("plan"),
+                    analysis_json,
+                    new_best_molecular,
+                    enable_slip_feedback=state.get("enable_slip_feedback", True),
+                    enable_forbid=state.get("enable_forbid", True),
+                    enable_termination=state.get("enable_termination", True),
+                )
             )
         except Exception as history_error:
             updated_history.append(f"History generation exception: {history_error}")
+
+    updated_attempt_records = list(state.get("attempt_records", []))
+    if isinstance(analysis_json, dict):
+        site_info = analysis_json.get("site_analysis", {}) or {}
+        updated_attempt_records.append(
+            {
+                "attempt_index": len(updated_attempt_records) + 1,
+                "plan": state.get("plan"),
+                "plan_key": plan_key,
+                "status": analysis_json.get("status"),
+                "most_stable_energy_eV": analysis_json.get("most_stable_energy_eV"),
+                "bond_change_count": analysis_json.get("bond_change_count"),
+                "is_dissociated": analysis_json.get("is_dissociated"),
+                "is_chemical_slip": site_info.get("is_chemical_slip"),
+                "planned_site_type": site_info.get("planned_site_type"),
+                "actual_site_type": site_info.get("actual_site_type"),
+                "best_structure_file": analysis_json.get("best_structure_file"),
+                "generated_conformers_file": analysis_json.get("generated_conformers_file"),
+                "relaxation_trajectory_file": analysis_json.get("relaxation_trajectory_file"),
+                "message": analysis_json.get("message"),
+                "history_entry": updated_history[-1] if updated_history else None,
+            }
+        )
 
     return {
         "messages": [ToolMessage(content="\n".join(tool_logs), tool_call_id="tool_executor")],
         "analysis_json": json.dumps(analysis_json),
         "history": updated_history,
+        "attempt_records": updated_attempt_records,
         "best_result": new_best_molecular,
         "best_dissociated_result": new_best_dissociated,
         "attempted_keys": updated_keys,
@@ -703,14 +893,26 @@ def final_analyzer_node(state: AgentState) -> dict:
 
     # 4. Call LLM
     response = llm.invoke([HumanMessage(content=final_prompt)])
+    input_tokens, output_tokens = extract_token_usage(response)
     
     logger.info("Final Report Generated")
-    return {"messages": [AIMessage(content=response.content)]}
+    return {
+        "messages": [AIMessage(content=response.content)],
+        "total_input_tokens": state.get("total_input_tokens", 0) + input_tokens,
+        "total_output_tokens": state.get("total_output_tokens", 0) + output_tokens,
+    }
 
 # --- 4. Define Graph Logic Flow (Edges) ---
 def route_after_validation(state: AgentState) -> str:
     logger.info("Python Decision Branch 1 (Validator)")
     if state.get("validation_error"):
+        validation_retry_count = int(state.get("validation_retry_count", 0) or 0)
+        if validation_retry_count >= get_max_attempts(state):
+            logger.info(
+                "Decision: Reached validation retry limit (%s). Going to Final Analyzer.",
+                validation_retry_count,
+            )
+            return "final_analyzer"
         logger.info("Decision: Plan failed, returning to Planner ")
         return "planner"
     
@@ -747,8 +949,15 @@ def route_after_analysis(state: AgentState) -> str:
 
     # 5. Decision Logic
     current_history = state.get("history", [])
-    if len(current_history) >= MAX_RETRIES:
-        logger.info(f"Decision: Reached {len(current_history)} attempts limit. Process ending. ")
+    validation_retry_count = int(state.get("validation_retry_count", 0) or 0)
+    total_attempts = len(current_history) + validation_retry_count
+    if total_attempts >= get_max_attempts(state):
+        logger.info(
+            "Decision: Reached %s total attempts limit (%s tool attempts + %s validation retries). Process ending. ",
+            total_attempts,
+            len(current_history),
+            validation_retry_count,
+        )
         return "end"
     
     return "planner"
@@ -787,8 +996,15 @@ def _prepare_initial_state(
     session_id: str,
     llm_backend: str = None,
     llm_config: dict = None,
+    calculator_backend: str = None,
+    calculator_config: dict = None,
+    relaxation_config: dict = None,
     random_seed: int = None,
-    relaxation_mode: str = "fast"
+    relaxation_mode: str = "fast",
+    enable_slip_feedback: bool = True,
+    enable_forbid: bool = True,
+    enable_termination: bool = True,
+    max_attempts: int = DEFAULT_MAX_ATTEMPTS,
 ) -> AgentState:
     """
     Prepare initial agent state with session isolation.
@@ -809,8 +1025,18 @@ def _prepare_initial_state(
         "api_key": api_key,
         "llm_backend": llm_backend or get_llm_backend_name(),
         "llm_config": llm_config,
+        "calculator_backend": calculator_backend or get_calculator_backend(),
+        "calculator_config": calculator_config,
+        "relaxation_config": relaxation_config,
         "random_seed": random_seed,
         "relaxation_mode": relaxation_mode,
+        "total_input_tokens": 0,
+        "total_output_tokens": 0,
+        "enable_slip_feedback": enable_slip_feedback,
+        "enable_forbid": enable_forbid,
+        "enable_termination": enable_termination,
+        "max_attempts": max_attempts,
+        "validation_retry_count": 0,
         "smiles": smiles,
         "slab_path": slab_path,
         "surface_composition": None,
@@ -820,6 +1046,7 @@ def _prepare_initial_state(
         "messages": [HumanMessage(content=f"SMILES: {smiles}\nSLAB: {slab_path}\nREQUEST: {user_request}")],
         "analysis_json": None,
         "history": [],
+        "attempt_records": [],
         "best_result": None,
         "best_dissociated_result": None,
         "attempted_keys": [],

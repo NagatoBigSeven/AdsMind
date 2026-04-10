@@ -77,6 +77,8 @@ def get_shrinkwrap_grid_fixed(
     )
     z_min = slab.positions[:, 2].min()
     grid = grid[[atom.index for atom in grid if atom.position[2] > z_min - 1.0]]
+    grid.wrap()
+    grid.arrays["wrapped_positions"] = grid.get_positions(wrap=True)
 
     return grid, faces
 

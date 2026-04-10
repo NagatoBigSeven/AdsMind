@@ -223,6 +223,7 @@ outputs/
 research/images/
 .pytest_cache/
 .ruff_cache/
+CatalystAIgent/
 
 ### PyCharm ###
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio, WebStorm and Rider
@@ -911,10 +912,11 @@ uv.lock
 
 .mcp.json
 
-# === AdsMind paper artifacts ===
-# Raw experiment data (large binary files)
-results/*.traj
-results/*.xyz
-
-# Misc
-outputs/
+# === AdsMind experiment artifacts ===
+# Binary trajectories & structures (large, reproducible)
+research/results/**/*.traj
+research/results/**/*.xyz
+# Per-run agent logs (verbose, not needed in git)
+research/results/**/agent_log.txt
+# Per-run MACE configs (reproducible from frozen_config)
+research/results/**/config.json

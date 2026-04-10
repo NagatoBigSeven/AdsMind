@@ -20,7 +20,7 @@ from src.utils.logger import get_logger
 
 logger = get_logger(__name__)
 
-# OpenRouter API base URL
+# Default API base URL
 OPENROUTER_BASE_URL = "https://openrouter.ai/api/v1"
 
 # Default model (Gemini through OpenRouter)
@@ -66,20 +66,25 @@ class OpenRouterBackend(BaseLLMBackend):
                 "or provide it in the configuration."
             )
 
+        base_url = config.extra_options.get("base_url", OPENROUTER_BASE_URL)
+        default_headers = config.extra_options.get("default_headers") or {}
+        seed = config.extra_options.get("seed", 42)
+
         logger.info(
-            f"Initializing OpenRouter backend (model: {config.model}, "
-            f"temperature: {config.temperature})"
+            f"Initializing OpenRouter backend (base_url: {base_url}, "
+            f"model: {config.model}, temperature: {config.temperature})"
         )
 
         return ChatOpenAI(
-            openai_api_base=OPENROUTER_BASE_URL,
+            openai_api_base=base_url,
             openai_api_key=config.api_key,
             model=config.model,
             streaming=False,
             temperature=config.temperature,
             max_tokens=config.max_tokens,
             timeout=config.timeout,
-            seed=42,  # For reproducibility
+            seed=seed,  # For reproducibility
+            default_headers=default_headers,
         )
 
     def get_default_config(self, api_key: Optional[str] = None) -> LLMConfig:

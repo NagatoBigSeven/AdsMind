@@ -23,6 +23,15 @@ from src.utils.logger import get_logger
 logger = get_logger(__name__)
 
 
+def _ensure_torch_compiler_compat() -> None:
+    """Backfill torch.compiler.is_compiling for older torch releases used on macOS."""
+    import torch
+
+    compiler = getattr(torch, "compiler", None)
+    if compiler is not None and not hasattr(compiler, "is_compiling"):
+        compiler.is_compiling = lambda: False
+
+
 class MACEBackend(BaseBackend):
     """
     MACE-MP calculator backend.
@@ -60,6 +69,7 @@ class MACEBackend(BaseBackend):
         Returns:
             MACE-MP ASE calculator
         """
+        _ensure_torch_compiler_compat()
         from mace.calculators import mace_mp
 
         current_key = config.cache_key()
