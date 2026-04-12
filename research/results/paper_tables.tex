@@ -86,13 +86,13 @@ Overall & 0.168 & 8/25 & 0.880 & 0.118 \\
 % Table 5: Key evaluation metrics
 \begin{table}[t]
 \centering
-\caption{Key evaluation metrics requested by the outline. Chemical Slip Rate is reported for both the 5-case full-ablation subset and the 20-case one-shot CMU benchmark; GPT-5.4 one-shot is retry-corrected and excludes the persistent case 06 dissociation from valid-energy slip-rate denominators.}
+\caption{Key evaluation metrics. Chemical Slip Rate is reported for both the 5-case full-ablation subset and the 20-case one-shot CMU benchmark. $^\dagger$GPT-5.4 one-shot is retry-corrected (19/20 valid); the persistent case~06 dissociation is excluded from the slip-rate denominator.}
 \label{tab:key-evaluation-metrics}
 \begin{tabular}{p{3.1cm}p{1.6cm}p{3.0cm}p{3.0cm}p{3.0cm}p{1.4cm}}
 \toprule
 Metric & Target & Gemini & Grok-4 & GPT-5.4 & Meets Target \\
 \midrule
-Chemical Slip Rate & $< 20\%$ & Full: 100\%; 20-case 1-shot: 60\% & Full: 100\%; 20-case 1-shot: 60\% & Full: 80\%; corrected 1-shot: 12/19 valid & No \\
+Chemical Slip Rate & $< 20\%$ & Full: 100\%; 1-shot: 60\% (12/20) & Full: 100\%; 1-shot: 60\% (12/20) & Full: 80\% (4/5); 1-shot: 63\% (12/19)$^\dagger$ & No \\
 Effective Iteration Ratio & $> 0.7$ & 1.0 across analyzed runs & 1.0 across analyzed runs & 1.0 across analyzed runs & Yes \\
 Energy Gap Discovery Rate & $> 90\%$ & 60\% (3/5) & 80\% (4/5) & 60\% (3/5) & No \\
 Full vs.\ 1-shot significance & $p < 0.05$ & $p = 0.25$ & $p = 0.125$ & $p = 0.25$ & No \\

@@ -1,25 +1,56 @@
 \subsection{Controlled ablation on a locked representative set}
 
-We evaluated the agent on a locked 5-case subset (cases 01, 02, 09, 14, and 19), chosen to cover atomic H, NNH, OH, and acetaldehyde adsorption across increasingly difficult alloy surfaces. For each case, we executed five runtime variants under a fixed MACE-small CPU backend: \textit{Full}, \textit{$-$Slip}, \textit{$-$Forbid}, \textit{$-$Term}, and \textit{1-Shot}. Here \textit{$-$Slip} removes slip-conditioned guidance, \textit{$-$Forbid} keeps slip detection but removes the explicit ``do not retry this site'' instruction, \textit{$-$Term} disables convergence-based early stopping, and \textit{1-Shot} reduces the total budget to a single attempt.
+We evaluated the agent on a locked 5-case subset (cases 01, 02, 09, 14, and 19), chosen to cover atomic H, NNH, OH, and acetaldehyde adsorption across increasingly difficult alloy surfaces.
+For each case, we executed five runtime variants under a fixed MACE-small CPU backend: \textit{Full}, \textit{$-$Slip}, \textit{$-$Forbid}, \textit{$-$Term}, and \textit{1-Shot}.
+Here \textit{$-$Slip} removes slip-conditioned guidance, \textit{$-$Forbid} keeps slip detection but removes the explicit ``do not retry this site'' instruction, \textit{$-$Term} disables convergence-based early stopping, and \textit{1-Shot} reduces the total budget to a single attempt.
+The full 5$\times$5 matrix was executed independently on three LLM backends---Gemini~2.5~Pro, Grok-4, and GPT-5.4---yielding 75 runs in total, all of which completed successfully.
 
 \input{../research/results/paper_tables}
 
-Tables~\ref{tab:ablation-gemini} and~\ref{tab:ablation-grok} show that the effect of the agentic loop is strongly case- and backend-dependent rather than uniformly monotonic. The Gemini backend is already robust on this subset: the full agent and the 1-shot baseline coincide on cases 02 and 14, and the other ablations remain effectively identical to full on cases 01, 02, and 14. Case 09 still benefits from the loop, with 1-shot trailing full by 0.173~eV. The main Gemini failure mode is case 19, where disabling termination degrades the final energy by 0.247~eV, while removing the \textit{FORBID} text unexpectedly improves the result by 0.201~eV relative to the nominal full configuration. This is an important negative result: explicit negative constraints are not universally beneficial and can over-prune exploration on some reactive surfaces.
+Tables~\ref{tab:ablation-gemini}--\ref{tab:ablation-gpt54} show that the effect of the agentic loop is strongly case- and backend-dependent rather than uniformly monotonic.
 
+\paragraph{Gemini~2.5~Pro.}
+The Gemini backend is already robust on this subset: the full agent and the 1-shot baseline coincide on cases 02 and 14, and the other ablations remain effectively identical to full on cases 01, 02, and 14. Case 09 still benefits from the loop, with 1-shot trailing full by 0.173~eV. The main Gemini failure mode is case 19, where disabling termination degrades the final energy by 0.247~eV, while removing the \textit{FORBID} text unexpectedly improves the result by 0.201~eV relative to the nominal full configuration. This is an important negative result: explicit negative constraints are not universally beneficial and can over-prune exploration on some reactive surfaces.
+
+\paragraph{Grok-4.}
 The Grok-4 backend exhibits a clearer closed-loop gain. Relative to the full agent, the 1-shot baseline is worse by 0.615~eV on case 02, 0.372~eV on case 14, and 0.451~eV on case 19. On the same hardest case, removing slip-conditioned feedback or removing the \textit{FORBID} instruction also degrades the final non-dissociated solution by about 0.451~eV. In other words, when the base planner is less stable, the memory of failed geometric intents becomes functionally important rather than merely cosmetic.
+
+\paragraph{GPT-5.4.}
+The GPT-5.4 backend occupies an intermediate position.
+The mean full-versus-single-shot improvement is 0.131~eV, smaller than both Grok-4 (0.288~eV) and Gemini (0.176~eV), consistent with a stronger one-shot planner that leaves less room for iterative recovery.
+The closed loop still matters on difficult cases: single-shot is worse by 0.426~eV on case~02 and 0.160~eV on case~14.
+Removing slip feedback has a distinctive effect on case~14, where the energy degrades by 0.160~eV ($-$3.591 $\to$ $-$3.431~eV)---a pattern not observed on the other two backends, indicating that the value of slip-conditioned guidance depends on the planner's internal site-preference distribution.
+As with Gemini, removing \textit{FORBID} improves case~19 ($-$4.013 $\to$ $-$4.149~eV, $\Delta = -0.136$~eV), providing a second independent instance of the negative-constraint over-pruning effect.
+Notably, GPT-5.4 produced zero dissociation events across all 25 ablation runs, the only backend to do so.
 
 \subsection{Termination mostly controls compute, not chemistry}
 
-The termination signal behaves primarily as a cost-control mechanism. For Grok-4, disabling termination matches the full agent on four of the five cases and is only 0.017~eV worse on case 19. For Gemini, the same ablation preserves the full energy on four of the five cases and fails noticeably only on case 19. However, the compute overhead is substantial: disabling termination increases token consumption from 26.7k to 44.6k on Grok case 09, from 21.4k to 38.9k on Grok case 19, and from 29.1k to 170.0k on Gemini case 09. Thus, the termination logic should be understood mainly as a guard against planner churn after the search has already converged.
+The termination signal behaves primarily as a cost-control mechanism across all three backends.
+For Grok-4, disabling termination matches the full agent on four of the five cases and is only 0.017~eV worse on case 19.
+For Gemini, the same ablation preserves the full energy on four of the five cases and fails noticeably only on case 19.
+For GPT-5.4, the effect is negligible: the mean energy delta between \textit{Full} and \textit{$-$Term} is $-$0.001~eV, with the largest shift being a marginal $-$0.003~eV improvement on case~01.
+However, the compute overhead of disabling termination can be substantial: token consumption increases from 26.7k to 44.6k on Grok-4 case 09, from 21.4k to 38.9k on Grok-4 case 19, and from 29.1k to 170.0k on Gemini case 09.
+Thus, the termination logic should be understood mainly as a guard against planner churn after the search has already converged.
 
-This reading is consistent with the statistical outputs of the completed matrices. On the Grok-4 ablation, the overall Friedman test across variants is significant ($p = 0.0185$), but pairwise Wilcoxon comparisons remain non-significant after correction because the representative set contains only five cases. Gemini shows no overall variant effect on the same test ($p = 0.3006$). We therefore interpret the ablation primarily through effect sizes and reproducible case-local failures, rather than through binary significance labels.
+This reading is consistent with the statistical outputs of the completed matrices. The overall Friedman test across variants is significant for Grok-4 ($p = 0.018$) and near-threshold for GPT-5.4 ($p = 0.062$), but not for Gemini ($p = 0.30$). Pairwise Wilcoxon comparisons remain non-significant after BH correction on all three backends because the representative set contains only five cases. We therefore interpret the ablation primarily through effect sizes and reproducible case-local failures, rather than through binary significance labels.
 
 \subsection{Closed-loop search reduces backend variance}
 
-Table~\ref{tab:cross-llm-summary} summarizes agreement between Gemini and Grok on the same 25 case-variant rows. Across the entire matrix, the median absolute energy difference is 0.0~eV, with exact agreement on 15/25 rows and agreement within 0.01~eV on 17/25 rows. The backend variance is smallest for the iterative full agent (mean $|\Delta E| = 0.041$~eV, 4/5 exact matches) and largest for the 1-shot baseline (mean $|\Delta E| = 0.324$~eV, 1/5 exact matches). The largest disagreement in the full comparison does not occur in the iterative setting, but in 1-shot case 02, where Gemini and Grok differ by 0.615~eV. These data support a concrete systems claim: the closed-loop architecture is not only a search strategy, but also a backend-robustness mechanism.
+Table~\ref{tab:cross-llm-summary} summarizes energy agreement across Gemini, Grok-4, and GPT-5.4 on the same 25 case$\times$variant configurations.
+For each configuration, we compute the three-backend range (maximum minus minimum energy).
+Under the iterative full agent, the mean three-backend range is 0.051~eV, with 2/5~cases agreeing within 0.01~eV.
+Under the 1-shot baseline, the mean range rises to 0.426~eV with 0/5~within 0.01~eV---an 8.4$\times$ increase in backend spread.
+The overall mean range across all 25~rows is 0.168~eV, with 8/25~configurations within 0.01~eV.
 
-The remaining disagreement is concentrated rather than diffuse. Case 19 is the dominant stress test: it is the only representative system that remains backend-sensitive across all five variants. This concentration is scientifically useful because it tells us where the current agent is brittle. The problem is not generic adsorption search, but a specific combination of a large adsorbate, a reactive alloy surface, and unstable intermediate plans.
+The largest three-backend spread occurs in 1-shot case~19 (0.880~eV), where Gemini finds $-$3.133~eV, Grok-4 finds $-$3.594~eV, and GPT-5.4 finds $-$4.013~eV.
+Under full iterative search, the same case narrows to a range of 0.203~eV ($-$3.841 to $-$4.045~eV)---still the widest full-variant spread, but a 4.3$\times$ reduction from one-shot.
+These data support a concrete systems claim: the closed-loop architecture is not only a search strategy, but also a backend-robustness mechanism that drives heterogeneous LLM planners toward the same physical solution.
+
+The remaining disagreement is concentrated rather than diffuse.
+Case 19 is the dominant stress test: it is the only representative system that remains backend-sensitive across all five variants.
+This concentration is scientifically useful because it tells us where the current agent is brittle.
+The problem is not generic adsorption search, but a specific combination of a large adsorbate (OCHCH$_3$), a reactive alloy surface (Hf$_2$Zn$_6$(110)), and unstable intermediate plans that differ across LLM backends.
 
 \subsection{Scope of external comparison}
 
-We intentionally avoid treating raw energy differences against published Adsorb-Agent values as evidence of superior adsorption strength. The published Adsorb-Agent numbers were obtained under a different MLFF and reference-energy scheme, whereas the results reported here use MACE throughout. Directly subtracting those energies would therefore conflate search behavior with incompatible energetic conventions. In the current manuscript, the main evidence for the agentic system is therefore internal: controlled ablations, backend-robustness analysis, and explicit failure-case tracing under a fixed physical backend.
+We intentionally avoid treating raw energy differences against published Adsorb-Agent values as evidence of superior adsorption strength. The published Adsorb-Agent numbers were obtained under a different MLFF and reference-energy scheme, whereas the results reported here use MACE throughout. Directly subtracting those energies would therefore conflate search behavior with incompatible energetic conventions. In the current manuscript, the main evidence for the agentic system is therefore internal: controlled ablations, three-backend robustness analysis, and explicit failure-case tracing under a fixed physical backend.

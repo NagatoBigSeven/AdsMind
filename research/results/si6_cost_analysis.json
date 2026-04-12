@@ -43,6 +43,28 @@
       "mean_wall_clock_sec": 149.84912478750047,
       "mean_iterations_per_run": 1.0,
       "tokens_per_iteration": 6266.55
+    },
+    "gpt54_ablation": {
+      "n_runs": 25,
+      "total_input_tokens": 434716,
+      "total_output_tokens": 120250,
+      "mean_input_tokens_per_run": 17388.64,
+      "mean_output_tokens_per_run": 4810.0,
+      "mean_total_tokens_per_run": 22198.64,
+      "mean_wall_clock_sec": 212.78,
+      "mean_iterations_per_run": 3.68,
+      "tokens_per_iteration": 6032.24
+    },
+    "gpt54_1shot": {
+      "n_runs": 20,
+      "total_input_tokens": 74094,
+      "total_output_tokens": 22210,
+      "mean_input_tokens_per_run": 3704.7,
+      "mean_output_tokens_per_run": 1110.5,
+      "mean_total_tokens_per_run": 4815.2,
+      "mean_wall_clock_sec": 60.19,
+      "mean_iterations_per_run": 1.0,
+      "tokens_per_iteration": 4815.2
     }
   },
   "variant_breakdown": {
@@ -180,6 +202,73 @@
         "variant": "single_shot",
         "source_note": "single_shot fallback from cmu_v1_xai_progressive_one_shot cases 01,02,09,14,19"
       }
+    },
+    "openai_gpt54": {
+      "full": {
+        "n_runs": 5,
+        "total_input_tokens": 107481,
+        "total_output_tokens": 27863,
+        "mean_input_tokens_per_run": 21496.2,
+        "mean_output_tokens_per_run": 5572.6,
+        "mean_total_tokens_per_run": 27068.8,
+        "mean_wall_clock_sec": 252.12,
+        "mean_iterations_per_run": 4.4,
+        "tokens_per_iteration": 6152.0,
+        "dataset": "gpt54_ablation",
+        "variant": "full"
+      },
+      "no_slip": {
+        "n_runs": 5,
+        "total_input_tokens": 93196,
+        "total_output_tokens": 27463,
+        "mean_input_tokens_per_run": 18639.2,
+        "mean_output_tokens_per_run": 5492.6,
+        "mean_total_tokens_per_run": 24131.8,
+        "mean_wall_clock_sec": 226.26,
+        "mean_iterations_per_run": 4.0,
+        "tokens_per_iteration": 6032.95,
+        "dataset": "gpt54_ablation",
+        "variant": "no_slip"
+      },
+      "no_forbid": {
+        "n_runs": 5,
+        "total_input_tokens": 105075,
+        "total_output_tokens": 29003,
+        "mean_input_tokens_per_run": 21015.0,
+        "mean_output_tokens_per_run": 5800.6,
+        "mean_total_tokens_per_run": 26815.6,
+        "mean_wall_clock_sec": 249.44,
+        "mean_iterations_per_run": 4.4,
+        "tokens_per_iteration": 6094.45,
+        "dataset": "gpt54_ablation",
+        "variant": "no_forbid"
+      },
+      "no_termination": {
+        "n_runs": 5,
+        "total_input_tokens": 112151,
+        "total_output_tokens": 30526,
+        "mean_input_tokens_per_run": 22430.2,
+        "mean_output_tokens_per_run": 6105.2,
+        "mean_total_tokens_per_run": 28535.4,
+        "mean_wall_clock_sec": 280.9,
+        "mean_iterations_per_run": 4.6,
+        "tokens_per_iteration": 6203.35,
+        "dataset": "gpt54_ablation",
+        "variant": "no_termination"
+      },
+      "single_shot": {
+        "n_runs": 5,
+        "total_input_tokens": 16813,
+        "total_output_tokens": 5395,
+        "mean_input_tokens_per_run": 3362.6,
+        "mean_output_tokens_per_run": 1079.0,
+        "mean_total_tokens_per_run": 4441.6,
+        "mean_wall_clock_sec": 55.19,
+        "mean_iterations_per_run": 1.0,
+        "tokens_per_iteration": 4441.6,
+        "dataset": "gpt54_ablation",
+        "variant": "single_shot"
+      }
     }
   },
   "derived_metrics": {
@@ -208,31 +297,14 @@
       }
     },
     "cross_backend_mean_total_tokens_per_run": {
-      "full": {
-        "gemini": 39876.8,
-        "grok4": 31222.8,
-        "gemini_over_grok4_ratio": 1.2771692481135581
-      },
-      "no_slip": {
-        "gemini": 39651.2,
-        "grok4": 32920.0,
-        "gemini_over_grok4_ratio": 1.204471445929526
-      },
-      "no_forbid": {
-        "gemini": 39411.0,
-        "grok4": 34078.4,
-        "gemini_over_grok4_ratio": 1.1564803511901967
-      },
-      "no_termination": {
-        "gemini": 67810.4,
-        "grok4": 38106.8,
-        "gemini_over_grok4_ratio": 1.7794829269316759
-      },
-      "single_shot": {
-        "gemini": 6888.2,
-        "grok4": 6581.8,
-        "gemini_over_grok4_ratio": 1.0465526147862287
-      }
+      "gemini_ablation": 38727.52,
+      "grok4_ablation": 34082.0,
+      "gpt54_ablation": 22198.64
+    },
+    "openai_gpt54": {
+      "token_cost_ratio_full_vs_single_shot": 6.09,
+      "full_mean_total_tokens": 27068.8,
+      "single_shot_mean_total_tokens": 4441.6
     }
   }
 }
