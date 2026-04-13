@@ -17,6 +17,7 @@ from research.agent_eval.common import (
     load_frozen_config,
     load_manifest_map,
     normalise_case_ids,
+    resolve_repo_path,
 )
 from research.agent_eval.run_case import execute_case
 
@@ -49,7 +50,8 @@ def main(argv: Optional[list[str]] = None) -> int:
 
     manifest = load_manifest_map(args.manifest)
     frozen_config = load_frozen_config(args.config)
-    output_root = Path(args.output)
+    repo_root = Path(__file__).resolve().parents[2]
+    output_root = resolve_repo_path(args.output, repo_root=repo_root)
     output_root.mkdir(parents=True, exist_ok=True)
 
     case_ids = normalise_case_ids(args.cases)
@@ -72,7 +74,7 @@ def main(argv: Optional[list[str]] = None) -> int:
                 runtime_overrides=ABLATED_VARIANTS[variant],
                 explicit_api_key=args.api_key,
                 dry_run=args.dry_run,
-                repo_root=Path(__file__).resolve().parents[2],
+                repo_root=repo_root,
             )
             best_energy = run.result.get("best_energy_eV")
             if variant == "full" and isinstance(best_energy, (int, float)):

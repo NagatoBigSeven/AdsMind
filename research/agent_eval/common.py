@@ -24,6 +24,7 @@ from src.agent.agent import _prepare_initial_state, get_agent_executor
 from src.tools.common import ensure_output_dir
 from src.utils.config import get_api_key_for_backend
 
+REPO_ROOT = Path(__file__).resolve().parents[2]
 RUN_RECURSION_LIMIT = 50
 DEFAULT_RESULT_NAME = "result.json"
 SUMMARY_COLUMNS = [
@@ -98,9 +99,29 @@ class CaseRunResult:
     result: Dict[str, Any]
 
 
+def get_repo_root() -> Path:
+    """Return the AdsMind repository root for research-side tools."""
+    return REPO_ROOT
+
+
+def resolve_repo_path(path: Path | str, repo_root: Path | str | None = None) -> Path:
+    """Resolve a path from cwd first, then fall back to the repo root.
+
+    The research scripts are often launched from nested directories on remote
+    machines while their CLI examples use repo-root-relative paths.
+    """
+    candidate = Path(path).expanduser()
+    if candidate.is_absolute():
+        return candidate
+    if candidate.exists():
+        return candidate.resolve()
+    root = Path(repo_root).resolve() if repo_root is not None else get_repo_root()
+    return (root / candidate).resolve()
+
+
 def load_manifest(path: Path | str) -> List[Dict[str, str]]:
     """Load the CMU manifest while preserving string case IDs."""
-    manifest_path = Path(path)
+    manifest_path = resolve_repo_path(path)
     with manifest_path.open("r", encoding="utf-8", newline="") as handle:
         reader = csv.DictReader(handle)
         rows = []
@@ -118,7 +139,7 @@ def load_manifest_map(path: Path | str) -> Dict[str, Dict[str, str]]:
 
 def load_frozen_config(path: Path | str) -> Dict[str, Any]:
     """Load the experiment config."""
-    config_path = Path(path)
+    config_path = resolve_repo_path(path)
     with config_path.open("r", encoding="utf-8") as handle:
         return json.load(handle)
 
@@ -222,12 +243,13 @@ def build_initial_state_for_case(
     session_id: str,
     api_key: str,
     runtime_overrides: Optional[Dict[str, Any]] = None,
+    repo_root: Path | str | None = None,
 ) -> Dict[str, Any]:
     """Construct the runtime initial state for a benchmark case."""
     runtime_flags = resolve_runtime_flags(frozen_config, runtime_overrides)
     return _prepare_initial_state(
         smiles=case_row["smiles"],
-        slab_path=case_row["slab_file"],
+        slab_path=str(resolve_repo_path(case_row["slab_file"], repo_root=repo_root)),
         user_request=case_row["user_request"],
         api_key=api_key,
         session_id=session_id,
@@ -502,7 +524,7 @@ class DryRunExecutor:
 
 def summarize_directory(output_dir: Path | str) -> List[Dict[str, Any]]:
     """Scan a run directory and return flattened summary rows."""
-    output_path = Path(output_dir)
+    output_path = resolve_repo_path(output_dir)
     if not output_path.exists():
         return []
     rows: List[Dict[str, Any]] = []
@@ -518,7 +540,7 @@ def summarize_directory(output_dir: Path | str) -> List[Dict[str, Any]]:
 
 def write_summary_csv(rows: Sequence[Dict[str, Any]], output_path: Path | str) -> Path:
     """Write summary rows to disk with a fixed column order."""
-    output = Path(output_path)
+    output = resolve_repo_path(output_path)
     output.parent.mkdir(parents=True, exist_ok=True)
     with output.open("w", encoding="utf-8", newline="") as handle:
         writer = csv.DictWriter(handle, fieldnames=SUMMARY_COLUMNS)

@@ -6,7 +6,7 @@ import argparse
 from pathlib import Path
 from typing import Optional
 
-from research.agent_eval.common import summarize_directory, write_summary_csv
+from research.agent_eval.common import resolve_repo_path, summarize_directory, write_summary_csv
 
 
 def parse_args(argv: Optional[list[str]] = None) -> argparse.Namespace:
@@ -24,9 +24,14 @@ def parse_args(argv: Optional[list[str]] = None) -> argparse.Namespace:
 def main(argv: Optional[list[str]] = None) -> int:
     """CLI entrypoint for summary generation."""
     args = parse_args(argv)
-    output_dir = Path(args.output)
+    repo_root = Path(__file__).resolve().parents[2]
+    output_dir = resolve_repo_path(args.output, repo_root=repo_root)
     rows = summarize_directory(output_dir)
-    summary_path = Path(args.summary_path) if args.summary_path else output_dir / "summary.csv"
+    summary_path = (
+        resolve_repo_path(args.summary_path, repo_root=repo_root)
+        if args.summary_path
+        else output_dir / "summary.csv"
+    )
     write_summary_csv(rows, summary_path)
     print(summary_path)
     return 0

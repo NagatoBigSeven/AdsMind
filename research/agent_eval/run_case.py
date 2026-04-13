@@ -20,6 +20,7 @@ from research.agent_eval.common import (
     get_git_sha,
     load_frozen_config,
     load_manifest_map,
+    resolve_repo_path,
     resolve_api_key,
     resolve_runtime_flags,
     write_json,
@@ -63,7 +64,7 @@ def execute_case(
     repo_root: Path | str = ".",
 ) -> CaseRunResult:
     """Execute one benchmark case and write a self-contained case directory."""
-    output_root = Path(output_root)
+    output_root = resolve_repo_path(output_root, repo_root=repo_root)
     case_dir = output_root / case_row["case_id"]
     case_dir.mkdir(parents=True, exist_ok=True)
     config_path = case_dir / "config.json"
@@ -92,6 +93,7 @@ def execute_case(
         session_id=session_id,
         api_key=api_key or "",
         runtime_overrides=runtime_overrides,
+        repo_root=repo_root,
     )
 
     actual_executor = executor or (DryRunExecutor() if dry_run else get_agent_executor())

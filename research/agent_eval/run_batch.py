@@ -11,6 +11,7 @@ from research.agent_eval.common import (
     load_frozen_config,
     load_manifest,
     normalise_case_ids,
+    resolve_repo_path,
     summarize_directory,
     write_summary_csv,
 )
@@ -54,7 +55,8 @@ def result_exists(case_dir: Path) -> bool:
 def main(argv: Optional[list[str]] = None) -> int:
     """CLI entrypoint for the sequential batch runner."""
     args = parse_args(argv)
-    output_root = Path(args.output)
+    repo_root = Path(__file__).resolve().parents[2]
+    output_root = resolve_repo_path(args.output, repo_root=repo_root)
     output_root.mkdir(parents=True, exist_ok=True)
     manifest_rows = load_manifest(args.manifest)
     if args.case_ids:
@@ -80,7 +82,7 @@ def main(argv: Optional[list[str]] = None) -> int:
                 output_root=output_root,
                 explicit_api_key=args.api_key,
                 dry_run=args.dry_run,
-                repo_root=Path(__file__).resolve().parents[2],
+                repo_root=repo_root,
             )
         except Exception as exc:  # pragma: no cover - batch guardrail
             failures.append({"case_id": case_row["case_id"], "error": str(exc)})

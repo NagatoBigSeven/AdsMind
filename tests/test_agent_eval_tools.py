@@ -2,12 +2,14 @@
 
 import csv
 import json
+import os
 import tempfile
 import unittest
 from pathlib import Path
 
 from research.agent_eval.common import (
     DryRunExecutor,
+    build_initial_state_for_case,
     load_frozen_config,
     load_manifest,
     resolve_runtime_flags,
@@ -39,6 +41,20 @@ class TestAgentEvalTools(unittest.TestCase):
     def test_resolve_runtime_flags_drops_none_relaxation_values(self):
         flags = resolve_runtime_flags(load_frozen_config(CONFIG))
         self.assertEqual(flags["relaxation_config"], {"fmax": 0.10})
+
+    def test_build_initial_state_resolves_manifest_slab_path_to_repo_root(self):
+        case_row = load_manifest(MANIFEST)[0]
+        state = build_initial_state_for_case(
+            case_row=case_row,
+            frozen_config=load_frozen_config(CONFIG),
+            session_id="session01",
+            api_key="dummy",
+            repo_root=ROOT,
+        )
+        self.assertEqual(
+            Path(state["slab_path"]),
+            ROOT / "benchmark_slabs" / "01_Mo3Pd_111.xyz",
+        )
 
     def test_run_case_serializes_result_with_fake_executor(self):
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -132,6 +148,30 @@ class TestAgentEvalTools(unittest.TestCase):
                 ]
             )
             self.assertEqual(code, 0)
+
+    def test_run_batch_resolves_repo_relative_manifest_and_config_from_nested_cwd(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            output_dir = Path(tmpdir) / "out"
+            previous_cwd = Path.cwd()
+            try:
+                os.chdir(tmpdir)
+                code = run_batch_main(
+                    [
+                        "--manifest",
+                        "research/agent_eval/manifests/cmu_manifest.csv",
+                        "--config",
+                        "research/agent_eval/configs/frozen_config.json",
+                        "--output",
+                        str(output_dir),
+                        "--case-ids",
+                        "09",
+                        "--dry-run",
+                    ]
+                )
+            finally:
+                os.chdir(previous_cwd)
+            self.assertEqual(code, 0)
+            self.assertTrue((output_dir / "09" / "result.json").exists())
 
     def test_summarize_runs_skips_missing_case_dirs(self):
         with tempfile.TemporaryDirectory() as tmpdir:
