@@ -1,12 +1,11 @@
 % ============================================================
 % AdsMind Paper-Ready Tables
-% Regenerated after completed Gemini + Grok-4 + GPT-5.4 ablation matrices
+% Regenerated after completed 4-backend ablation matrices
 % Source artifacts:
 %   - research/results/gemini_ablation_v1/ablation_summary.csv
 %   - research/results/xai_ablation_v2/ablation_summary.csv
 %   - research/results/openai_gpt54_ablation_v1/ablation_summary.csv
-%   - research/results/cross_llm_ablation_with_openai.json
-%   - research/results/cross_llm_20case_with_openai.json
+%   - research/results/anthropic_sonnet46_ablation_v1/ablation_summary.csv
 % ============================================================
 
 % Table 1: Ablation Energy Matrix (Gemini)
@@ -63,22 +62,40 @@ Case & Full & $-$Slip & $-$Forbid & $-$Term & 1-Shot \\
 \end{tabular}
 \end{table}
 
-% Table 4: Cross-LLM robustness summary
+% Table 4: Ablation Energy Matrix (Claude Sonnet 4.6)
 \begin{table}[t]
 \centering
-\caption{Cross-LLM robustness across the completed 5$\times$5 ablation matrix. The three-backend range is max--min energy across Gemini, Grok-4, and GPT-5.4 for the same case and runtime variant. The final column preserves the earlier Gemini--Grok pairwise spread for continuity.}
-\label{tab:cross-llm-summary}
-\begin{tabular}{lrrrr}
+\caption{Claude~Sonnet~4.6 ablation study on the same five representative cases. Lower (more negative) adsorption energy is better. Values are rounded to 3 decimals; ties at the displayed precision are co-bolded.}
+\label{tab:ablation-claude}
+\begin{tabular}{lrrrrr}
 \toprule
-Variant & Mean 3-backend range (eV) & 3-backend $\leq$0.01 eV & Largest range (eV) & Gemini--Grok mean $|\Delta E|$ (eV) \\
+Case & Full & $-$Slip & $-$Forbid & $-$Term & 1-Shot \\
 \midrule
-Full & 0.051 & 2/5 & 0.203 & 0.041 \\
-$-$Slip & 0.143 & 2/5 & 0.506 & 0.050 \\
-$-$Forbid & 0.122 & 2/5 & 0.555 & 0.091 \\
-$-$Term & 0.096 & 2/5 & 0.433 & 0.087 \\
-1-Shot & 0.426 & 0/5 & 0.880 & 0.324 \\
+01 & \textbf{$-$3.630} & \textbf{$-$3.630} & $-$3.624 & \textbf{$-$3.630} & $-$3.557 \\
+02 & \textbf{$-$4.769} & \textbf{$-$4.769} & \textbf{$-$4.769} & \textbf{$-$4.769} & $-$4.343 \\
+09 & \textbf{$-$1.991} & \textbf{$-$1.991} & \textbf{$-$1.991} & \textbf{$-$1.991} & $-$1.804 \\
+14 & $-$3.580 & \textbf{$-$3.591} & \textbf{$-$3.591} & \textbf{$-$3.591} & $-$3.453 \\
+19 & $-$4.013 & \textbf{$-$4.149} & \textbf{$-$4.149} & $-$4.013 & $-$4.013 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% Table 5: Cross-LLM robustness summary
+\begin{table}[t]
+\centering
+\caption{Cross-LLM robustness across the completed 5$\times$5 ablation matrix. The four-backend range is max--min energy across Gemini, Grok-4, GPT-5.4, and Claude for the same case and runtime variant.}
+\label{tab:cross-llm-summary}
+\begin{tabular}{lrrr}
+\toprule
+Variant & Mean 4-backend range (eV) & $\leq$0.01 eV & Largest range (eV) \\
 \midrule
-Overall & 0.168 & 8/25 & 0.880 & 0.118 \\
+Full & 0.053 & 2/5 & 0.203 \\
+$-$Slip & 0.153 & 2/5 & 0.555 \\
+$-$Forbid & 0.123 & 2/5 & 0.555 \\
+$-$Term & 0.096 & 2/5 & 0.433 \\
+1-Shot & 0.426 & 0/5 & 0.880 \\
+\midrule
+Overall & 0.170 & 8/25 & 0.880 \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -86,17 +103,16 @@ Overall & 0.168 & 8/25 & 0.880 & 0.118 \\
 % Table 5: Key evaluation metrics
 \begin{table}[t]
 \centering
-\caption{Key evaluation metrics. Chemical Slip Rate is reported for both the 5-case full-ablation subset and the 20-case one-shot CMU benchmark. $^\dagger$GPT-5.4 one-shot is retry-corrected (19/20 valid); the persistent case~06 dissociation is excluded from the slip-rate denominator.}
+\caption{Key evaluation metrics across all four backends. $^\dagger$GPT-5.4 and Claude one-shot slip-rate denominators reflect valid (non-dissociated) results only.}
 \label{tab:key-evaluation-metrics}
-\begin{tabular}{p{3.1cm}p{1.6cm}p{3.0cm}p{3.0cm}p{3.0cm}p{1.4cm}}
+\begin{tabular}{p{2.4cm}p{1.1cm}p{2.1cm}p{2.1cm}p{2.1cm}p{2.1cm}p{1.0cm}}
 \toprule
-Metric & Target & Gemini & Grok-4 & GPT-5.4 & Meets Target \\
+Metric & Target & Gemini & Grok-4 & GPT-5.4 & Claude & Met \\
 \midrule
-Chemical Slip Rate & $< 20\%$ & Full: 100\%; 1-shot: 60\% (12/20) & Full: 100\%; 1-shot: 60\% (12/20) & Full: 80\% (4/5); 1-shot: 63\% (12/19)$^\dagger$ & No \\
-Effective Iteration Ratio & $> 0.7$ & 1.0 across analyzed runs & 1.0 across analyzed runs & 1.0 across analyzed runs & Yes \\
-Energy Gap Discovery Rate & $> 90\%$ & 60\% (3/5) & 80\% (4/5) & 60\% (3/5) & No \\
-Full vs.\ 1-shot significance & $p < 0.05$ & $p = 0.25$ & $p = 0.125$ & $p = 0.25$ & No \\
-Backend convergence & Lower variance & \multicolumn{3}{p{9.0cm}}{Full-search mean 3-backend range is 0.051 eV, versus 0.426 eV for 1-shot; the closed loop reduces backend spread by 8.4$\times$ on the locked subset.} & Yes \\
+1-shot slip rate & $< 20\%$ & 60\% (12/20) & 60\% (12/20) & 63\% (12/19)$^\dagger$ & 67\% (12/18)$^\dagger$ & No \\
+Friedman $p$ & $< 0.05$ & 0.30 & 0.018 & 0.062 & 0.010 & 2/4 \\
+H$_1$ support & $\geq$75\% & 1/4 (25\%) & 3/4 (75\%) & 3/4 (75\%) & 3/4 (75\%) & 3/4 \\
+Backend conv. & Lower & \multicolumn{4}{p{8.4cm}}{Full mean 4-backend range 0.053~eV vs.\ 0.426~eV 1-shot; 8.0$\times$ reduction.} & Yes \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -104,19 +120,19 @@ Backend convergence & Lower variance & \multicolumn{3}{p{9.0cm}}{Full-search mea
 % Table 6: Explicit H1 hypothesis test
 \begin{table}[t]
 \centering
-\caption{Explicit test of H$_1$ on the locked ablation subset using $\Delta E = E_{\mathrm{full}} - E_{\mathrm{1shot}}$. Negative values mean the full closed-loop agent found a lower energy; hits require $\Delta E < -0.05$ eV. H$_1$ uses only intermetallic surfaces; case 09 is shown for completeness but excluded from the support rate. Following the task specification, the iteration-efficiency condition is treated operationally as satisfied because all added full-search iterations were effective.}
+\caption{Explicit test of H$_1$ on the locked ablation subset using $\Delta E = E_{\mathrm{full}} - E_{\mathrm{1shot}}$. Negative values mean the full closed-loop agent found a lower energy; hits require $\Delta E < -0.05$~eV. H$_1$ uses only intermetallic surfaces; case~09 is shown for completeness but excluded from the support rate.}
 \label{tab:hypothesis-test}
-\begin{tabular}{llrrr}
+\begin{tabular}{llrrrr}
 \toprule
-Case & Family & Gemini $\Delta E$/hit & Grok-4 $\Delta E$/hit & GPT-5.4 $\Delta E$/hit \\
+Case & Family & Gemini $\Delta E$/hit & Grok-4 $\Delta E$/hit & GPT-5.4 $\Delta E$/hit & Claude $\Delta E$/hit \\
 \midrule
-01 & intermetallic & $-$0.001 / No & $-$0.001 / No & $-$0.070 / Yes \\
-02 & intermetallic & 0.000 / No & $-$0.615 / Yes & $-$0.426 / Yes \\
-09 & monometallic & $-$0.173 / N/A & 0.000 / N/A & 0.000 / N/A \\
-14 & intermetallic & 0.000 / No & $-$0.372 / Yes & $-$0.160 / Yes \\
-19 & intermetallic & $-$0.709 / Yes & $-$0.451 / Yes & 0.000 / No \\
+01 & intermetallic & $-$0.001 / No & $-$0.001 / No & $-$0.070 / Yes & $-$0.073 / Yes \\
+02 & intermetallic & 0.000 / No & $-$0.615 / Yes & $-$0.426 / Yes & $-$0.426 / Yes \\
+09 & monometallic & $-$0.173 / N/A & 0.000 / N/A & 0.000 / N/A & $-$0.188 / N/A \\
+14 & intermetallic & 0.000 / No & $-$0.372 / Yes & $-$0.160 / Yes & $-$0.126 / Yes \\
+19 & intermetallic & $-$0.709 / Yes & $-$0.451 / Yes & 0.000 / No & 0.000 / No \\
 \midrule
-Intermetallic support rate & --- & 1/4 = 25\% & 3/4 = 75\% & 3/4 = 75\% \\
+Support rate & --- & 1/4 = 25\% & 3/4 = 75\% & 3/4 = 75\% & 3/4 = 75\% \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -124,7 +140,7 @@ Intermetallic support rate & --- & 1/4 = 25\% & 3/4 = 75\% & 3/4 = 75\% \\
 % Table 7: GPT-5.4 one-shot provenance summary
 \begin{table}[t]
 \centering
-\caption{GPT-5.4 OpenAI backend provenance summary. Corrected one-shot uses the successful retry for case 08 while retaining case 06 as a reproducible dissociation failure.}
+\caption{GPT-5.4 backend provenance summary. Corrected one-shot uses the successful retry for case~08 while retaining case~06 as a reproducible dissociation failure.}
 \label{tab:gpt54-openai-summary}
 \begin{tabular}{lrrrr}
 \toprule
@@ -134,6 +150,21 @@ Raw one-shot & 20 & 18 & 2 & 4815.2 \\
 Retry-only & 2 & 1 & 1 & 5135.0 \\
 Corrected one-shot & 20 & 19 & 1 & 4847.6 \\
 Ablation matrix & 25 & 25 & 0 & 22198.6 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% Table 8: Claude Sonnet 4.6 provenance summary
+\begin{table}[t]
+\centering
+\caption{Claude~Sonnet~4.6 backend provenance summary. Cases~06 and~08 failed due to NNH dissociation (same failure mode as GPT-5.4); no retries were attempted.}
+\label{tab:claude-summary}
+\begin{tabular}{lrrrr}
+\toprule
+Dataset & Total & Valid & Failed & Mean tokens/run \\
+\midrule
+Raw one-shot & 20 & 18 & 2 & 6390.3 \\
+Ablation matrix & 25 & 25 & 0 & 29082.0 \\
 \bottomrule
 \end{tabular}
 \end{table}

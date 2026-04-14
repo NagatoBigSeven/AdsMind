@@ -65,6 +65,28 @@
       "mean_wall_clock_sec": 60.19,
       "mean_iterations_per_run": 1.0,
       "tokens_per_iteration": 4815.2
+    },
+    "claude_ablation": {
+      "n_runs": 25,
+      "total_input_tokens": 0,
+      "total_output_tokens": 0,
+      "mean_input_tokens_per_run": 0,
+      "mean_output_tokens_per_run": 0,
+      "mean_total_tokens_per_run": 29082.1,
+      "mean_wall_clock_sec": 0,
+      "mean_iterations_per_run": 3.72,
+      "tokens_per_iteration": 7817.8
+    },
+    "claude_1shot": {
+      "n_runs": 20,
+      "total_input_tokens": 91115,
+      "total_output_tokens": 36590,
+      "mean_input_tokens_per_run": 4555.8,
+      "mean_output_tokens_per_run": 1829.5,
+      "mean_total_tokens_per_run": 6385.2,
+      "mean_wall_clock_sec": 0,
+      "mean_iterations_per_run": 1.0,
+      "tokens_per_iteration": 6385.2
     }
   },
   "variant_breakdown": {
@@ -269,6 +291,48 @@
         "dataset": "gpt54_ablation",
         "variant": "single_shot"
       }
+    },
+    "anthropic_claude": {
+      "full": {
+        "n_runs": 5,
+        "mean_total_tokens_per_run": 35234.2,
+        "mean_iterations_per_run": 4.2,
+        "tokens_per_iteration": 8389.1,
+        "dataset": "claude_ablation",
+        "variant": "full"
+      },
+      "no_slip": {
+        "n_runs": 5,
+        "mean_total_tokens_per_run": 32997.2,
+        "mean_iterations_per_run": 4.6,
+        "tokens_per_iteration": 7173.3,
+        "dataset": "claude_ablation",
+        "variant": "no_slip"
+      },
+      "no_forbid": {
+        "n_runs": 5,
+        "mean_total_tokens_per_run": 34333.2,
+        "mean_iterations_per_run": 4.2,
+        "tokens_per_iteration": 8174.6,
+        "dataset": "claude_ablation",
+        "variant": "no_forbid"
+      },
+      "no_termination": {
+        "n_runs": 5,
+        "mean_total_tokens_per_run": 37067.8,
+        "mean_iterations_per_run": 4.6,
+        "tokens_per_iteration": 8058.2,
+        "dataset": "claude_ablation",
+        "variant": "no_termination"
+      },
+      "single_shot": {
+        "n_runs": 5,
+        "mean_total_tokens_per_run": 5778.2,
+        "mean_iterations_per_run": 1.0,
+        "tokens_per_iteration": 5778.2,
+        "dataset": "claude_ablation",
+        "variant": "single_shot"
+      }
     }
   },
   "derived_metrics": {
@@ -299,12 +363,18 @@
     "cross_backend_mean_total_tokens_per_run": {
       "gemini_ablation": 38727.52,
       "grok4_ablation": 34082.0,
-      "gpt54_ablation": 22198.64
+      "gpt54_ablation": 22198.64,
+      "claude_ablation": 29082.1
     },
     "openai_gpt54": {
       "token_cost_ratio_full_vs_single_shot": 6.09,
       "full_mean_total_tokens": 27068.8,
       "single_shot_mean_total_tokens": 4441.6
+    },
+    "anthropic_claude": {
+      "token_cost_ratio_full_vs_single_shot": 6.1,
+      "full_mean_total_tokens": 35234.2,
+      "single_shot_mean_total_tokens": 5778.2
     }
   }
 }
