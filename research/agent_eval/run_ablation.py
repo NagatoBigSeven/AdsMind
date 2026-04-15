@@ -125,7 +125,7 @@ def main(argv: Optional[list[str]] = None) -> int:
 
     stats_payload: Dict[str, object] = {"friedman": None, "pairwise": {}, "bh_fdr": {}}
     matrix = [variant_energies[variant] for variant in variants if len(variant_energies[variant]) == len(case_ids)]
-    if len(matrix) >= 2 and len({tuple(scores) for scores in matrix}) > 1:
+    if len(matrix) >= 3 and len({tuple(scores) for scores in matrix}) > 1:
         friedman = friedmanchisquare(*matrix)
         stats_payload["friedman"] = {
             "statistic": float(friedman.statistic),

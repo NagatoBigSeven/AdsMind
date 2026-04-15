@@ -14,6 +14,10 @@ agent-side benchmark and ablation work.
   Execute a manifest sequentially and emit a summary CSV.
 - [`run_ablation.py`](/Users/nagato/workspace/AdsMind/research/agent_eval/run_ablation.py)
   Run the locked ablation variants on a selected case set.
+- [`prepare_ocd_gmae.py`](/Users/nagato/workspace/AdsMind/research/agent_eval/prepare_ocd_gmae.py)
+  Build an AdsMind-compatible OCD-GMAE subset manifest and export bare slab files.
+- [`rank_one_shot_ranges.py`](/Users/nagato/workspace/AdsMind/research/agent_eval/rank_one_shot_ranges.py)
+  Rank benchmark cases by cross-backend one-shot energy spread.
 - [`summarize_runs.py`](/Users/nagato/workspace/AdsMind/research/agent_eval/summarize_runs.py)
   Rebuild a summary table from an output directory.
 - [`compare_adsorbagent.py`](/Users/nagato/workspace/AdsMind/research/agent_eval/compare_adsorbagent.py)
@@ -47,3 +51,7 @@ agent-side benchmark and ablation work.
   [`research/results`](/Users/nagato/workspace/AdsMind/research/results), which is Git-ignored by default.
 - This directory is for reusable experiment logic and curated metadata, not raw
   run products.
+- Shell helpers under this directory are for launching or monitoring reproducible
+  experiment batches, such as `run_ocd_gmae_one_shot.sh`,
+  `launch_ocd_gmae_one_shot_tmux.sh`, `monitor_ocd_gmae_one_shot.sh`, and
+  `rebuild_phase_a_extended.sh`.

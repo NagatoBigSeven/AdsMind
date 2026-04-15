@@ -1,0 +1,29 @@
+{
+  "llm_backend": "openrouter",
+  "llm_model": "google/gemini-2.5-pro",
+  "llm_base_url": "https://openrouter.ai/api/v1",
+  "llm_api_key_env_var": "OPENROUTER_API_KEY",
+  "temperature": 0.0,
+  "max_tokens": 4096,
+  "timeout_sec": 120,
+  "max_retries": 5,
+  "relaxation_mode": "standard",
+  "calculator_backend": "mace",
+  "mace_device": "cpu",
+  "mace_precision": "float32",
+  "mace_model": "small",
+  "mace_use_dispersion": false,
+  "fmax": 0.1,
+  "random_seed": 42,
+  "platform": "macOS-M3Pro-float32",
+  "manifest_version": "ocd_gmae_manifest_v1",
+  "transport_variant": "openrouter-official-gemini25pro-recovery",
+  "user_request_mode": "per-case explicit request string from manifests/ocd_gmae_manifest.csv",
+  "notes": [
+    "Recovery config for Gemini 2.5 Pro on the OCD-GMAE Step B3 ablation reruns.",
+    "Uses OpenRouter's official API endpoint instead of AiHubMix.",
+    "The target model is google/gemini-2.5-pro, matching OpenRouter model naming.",
+    "API key is read from the OPENROUTER_API_KEY environment variable.",
+    "The MACE settings stay aligned with the locked benchmark settings: cpu + small + float32 + no dispersion."
+  ]
+}
