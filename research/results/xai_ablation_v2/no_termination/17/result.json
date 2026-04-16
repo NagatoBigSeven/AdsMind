@@ -1,0 +1,304 @@
+{
+  "case_id": "17",
+  "case_metadata": {
+    "case_id": "17",
+    "slab_file": "benchmark_slabs/17_Rh2Ti2_111.xyz",
+    "smiles": "CC=O",
+    "user_request": "Find the lowest-energy adsorption configuration for acetaldehyde on the provided surface.",
+    "surface_family": "intermetallic",
+    "adsorbate_name": "OCHCH3",
+    "miller_index": "(111)",
+    "reaction_class": "COMPLEX",
+    "ablation_candidate": "FALSE",
+    "notes": "Best-available reconstruction from sanitized filename CC_O and formula C2H4O"
+  },
+  "status": "success",
+  "best_energy_eV": -3.064361572265625,
+  "iteration_count": 2,
+  "max_attempts": 5,
+  "final_site_type": "hollow (FCC/No-Subsurf)",
+  "converged_tag": false,
+  "wall_clock_sec": 115.06827118992805,
+  "total_input_tokens": 8292,
+  "total_output_tokens": 2040,
+  "artifact_paths": {
+    "BEST_CC_O_bridge_to_hollow_FCC-No-Subsurf_DISS_E-3.177": "research/results/xai_ablation_v2/no_termination/17/artifacts/BEST_CC_O_bridge_to_hollow_FCC-No-Subsurf_DISS_E-3.177.xyz",
+    "BEST_CC_O_bridge_to_hollow_FCC-No-Subsurf_DISS_E-3.177.xyz": "research/results/xai_ablation_v2/no_termination/17/artifacts/BEST_CC_O_bridge_to_hollow_FCC-No-Subsurf_DISS_E-3.177.xyz",
+    "best_structure_file": "research/results/xai_ablation_v2/no_termination/17/artifacts/BEST_CC_O_bridge_to_hollow_FCC-No-Subsurf_ISO_E-3.064.xyz",
+    "BEST_CC_O_bridge_to_hollow_FCC-No-Subsurf_ISO_E-3.064": "research/results/xai_ablation_v2/no_termination/17/artifacts/BEST_CC_O_bridge_to_hollow_FCC-No-Subsurf_ISO_E-3.064.xyz",
+    "BEST_CC_O_bridge_to_hollow_FCC-No-Subsurf_ISO_E-3.064.xyz": "research/results/xai_ablation_v2/no_termination/17/artifacts/BEST_CC_O_bridge_to_hollow_FCC-No-Subsurf_ISO_E-3.064.xyz",
+    "conformers_CC_O": "research/results/xai_ablation_v2/no_termination/17/artifacts/conformers_CC_O.traj",
+    "conformers_CC_O.traj": "research/results/xai_ablation_v2/no_termination/17/artifacts/conformers_CC_O.traj",
+    "final": "research/results/xai_ablation_v2/no_termination/17/artifacts/final.xyz",
+    "final.xyz": "research/results/xai_ablation_v2/no_termination/17/artifacts/final.xyz",
+    "relaxation": "research/results/xai_ablation_v2/no_termination/17/artifacts/relaxation.traj",
+    "relaxation.traj": "research/results/xai_ablation_v2/no_termination/17/artifacts/relaxation.traj",
+    "relaxation_trajectory_file": "research/results/xai_ablation_v2/no_termination/17/artifacts/relaxation.traj"
+  },
+  "best_result": {
+    "most_stable_energy_eV": -3.064361572265625,
+    "analysis_json": {
+      "status": "success",
+      "message": "Most stable config adsorption energy: -3.0644 eV. Target Atom 1: C (from plan index 1, global index 48). -> Nearest: Rh (Index 21), Distance: 2.213 Å (Threshold: 2.398), Bound: True. Target Atom 2: O (from plan index 2, global index 49). -> Nearest: Ti (Index 19), Distance: 2.198 Å (Threshold: 2.486), Bound: True. Bonded Surface Atoms: O(49)-Ti(1.856Å), C(48)-Rh(2.203Å), C(48)-Ti(2.517Å), O(49)-Rh(2.66Å), O(49)-Rh(3.014Å). Is Bound: True. Reactivity Change Detected: True (Bond Changes: 2). Chemical Slip: True (Planned ['Rh', 'Rh'] -> Actual ['Rh', 'Rh', 'Rh', 'Ti', 'Ti']).",
+      "most_stable_energy_eV": -3.064361572265625,
+      "bonded_surface_atoms": [
+        {
+          "adsorbate_atom": "O(49)",
+          "adsorbate_atom_index": 49,
+          "symbol": "Ti",
+          "index": 19,
+          "distance": 1.856
+        },
+        {
+          "adsorbate_atom": "C(48)",
+          "adsorbate_atom_index": 48,
+          "symbol": "Rh",
+          "index": 21,
+          "distance": 2.203
+        },
+        {
+          "adsorbate_atom": "C(48)",
+          "adsorbate_atom_index": 48,
+          "symbol": "Ti",
+          "index": 19,
+          "distance": 2.517
+        },
+        {
+          "adsorbate_atom": "O(49)",
+          "adsorbate_atom_index": 49,
+          "symbol": "Rh",
+          "index": 45,
+          "distance": 2.66
+        },
+        {
+          "adsorbate_atom": "O(49)",
+          "adsorbate_atom_index": 49,
+          "symbol": "Rh",
+          "index": 21,
+          "distance": 3.014
+        }
+      ],
+      "final_bond_distance_A": 1.856,
+      "is_covalently_bound": true,
+      "atom_1": {
+        "symbol": "C",
+        "global_index": 48,
+        "distance_A": 2.213,
+        "is_bound": true
+      },
+      "atom_2": {
+        "symbol": "O",
+        "global_index": 49,
+        "distance_A": 2.198,
+        "is_bound": true
+      },
+      "reaction_detected": true,
+      "bond_change_count": 2,
+      "is_dissociated": false,
+      "n_components": 1,
+      "site_analysis": {
+        "planned_site_type": "bridge",
+        "planned_connectivity": 2,
+        "actual_site_type": "hollow (FCC/No-Subsurf)",
+        "actual_connectivity": 3,
+        "is_chemical_slip": true,
+        "planned_symbols": [
+          "Rh",
+          "Rh"
+        ],
+        "actual_symbols": [
+          "Rh",
+          "Rh",
+          "Rh",
+          "Ti",
+          "Ti"
+        ],
+        "site_fingerprint": "Ti19-Rh21-Ti19-Rh45-Rh21"
+      },
+      "best_structure_file": "outputs/17-4b40d8e1/BEST_CC_O_bridge_to_hollow_FCC-No-Subsurf_ISO_E-3.064.xyz",
+      "generated_conformers_file": "outputs/17-4b40d8e1/conformers_CC_O.traj",
+      "relaxation_trajectory_file": "outputs/17-4b40d8e1/final.xyz",
+      "session_id": "17-4b40d8e1"
+    },
+    "plan": {
+      "reasoning": "SMILES consistency check: SMILES CC=O represents acetaldehyde (CH3CHO). Atom list: index 0 (C, SP3), index 1 (C, SP2), index 2 (O, SP2). No radicals (all radical_electrons=0). Hybridization matches a saturated methyl group and unsaturated carbonyl. No mismatch with user description. History is none, so this is the first attempt. No previous plans to analyze. No unstable sites identified. Formulate new plan: Goal is to find the lowest adsorption energy configuration. Adsorbate analysis: Acetaldehyde has a carbonyl group (C=O), which can adsorb via oxygen lone pair (eta1-O) or via pi-bond in eta2-C,O mode. Surface analysis: Alloy with Rh and Ti; Rh likely more active for adsorption. Available bridge sites include Rh-Rh. For aldehydes on transition metals like Rh, eta2 configuration on bridge sites is often stable. Start with eta2 on Rh-Rh bridge as the potentially lowest energy. Use 'Molecule' type since no radicals; binding via SP2 C (index 1) and O (index 2) is valid for pi-coordination, similar to alkene example. User intent: Find lowest-energy config, no specifics, so systematically test likely stable modes.",
+      "adsorbate_type": "Molecule",
+      "solution": {
+        "action": "continue",
+        "site_type": "bridge",
+        "surface_binding_atoms": [
+          "Rh",
+          "Rh"
+        ],
+        "adsorbate_binding_indices": [
+          1,
+          2
+        ],
+        "relax_top_n": 1,
+        "touch_sphere_size": 2,
+        "overlap_thr": 0.1,
+        "conformers_per_site_cap": 4
+      }
+    },
+    "result_type": "Isomerized"
+  },
+  "last_analysis": {
+    "status": "success",
+    "message": "Most stable config adsorption energy: -3.1767 eV. Target Atom 1: C (from plan index 1, global index 48). -> Nearest: Ti (Index 19), Distance: 2.653 Å (Threshold: 2.596), Bound: False. Target Atom 2: O (from plan index 2, global index 49). -> Nearest: Ti (Index 19), Distance: 1.918 Å (Threshold: 2.486), Bound: True. Bonded Surface Atoms: O(49)-Ti(1.905Å), O(49)-Rh(2.34Å), C(48)-Ti(2.659Å), C(48)-Rh(2.978Å). Is Bound: False. Reactivity Change Detected: True (Bond Changes: 1). Chemical Slip: True (Planned ['Rh', 'Ti'] -> Actual ['Rh', 'Rh', 'Ti', 'Ti']).",
+    "most_stable_energy_eV": -3.17669677734375,
+    "bonded_surface_atoms": [
+      {
+        "adsorbate_atom": "O(49)",
+        "adsorbate_atom_index": 49,
+        "symbol": "Ti",
+        "index": 19,
+        "distance": 1.905
+      },
+      {
+        "adsorbate_atom": "O(49)",
+        "adsorbate_atom_index": 49,
+        "symbol": "Rh",
+        "index": 9,
+        "distance": 2.34
+      },
+      {
+        "adsorbate_atom": "C(48)",
+        "adsorbate_atom_index": 48,
+        "symbol": "Ti",
+        "index": 19,
+        "distance": 2.659
+      },
+      {
+        "adsorbate_atom": "C(48)",
+        "adsorbate_atom_index": 48,
+        "symbol": "Rh",
+        "index": 45,
+        "distance": 2.978
+      }
+    ],
+    "final_bond_distance_A": 1.905,
+    "is_covalently_bound": false,
+    "atom_1": {
+      "symbol": "C",
+      "global_index": 48,
+      "distance_A": 2.653,
+      "is_bound": false
+    },
+    "atom_2": {
+      "symbol": "O",
+      "global_index": 49,
+      "distance_A": 1.918,
+      "is_bound": true
+    },
+    "reaction_detected": true,
+    "bond_change_count": 1,
+    "is_dissociated": true,
+    "n_components": 2,
+    "site_analysis": {
+      "planned_site_type": "bridge",
+      "planned_connectivity": 2,
+      "actual_site_type": "hollow (FCC/No-Subsurf)",
+      "actual_connectivity": 3,
+      "is_chemical_slip": true,
+      "planned_symbols": [
+        "Rh",
+        "Ti"
+      ],
+      "actual_symbols": [
+        "Rh",
+        "Rh",
+        "Ti",
+        "Ti"
+      ],
+      "site_fingerprint": "Ti19-Rh9-Ti19-Rh45"
+    },
+    "best_structure_file": "outputs/17-4b40d8e1/BEST_CC_O_bridge_to_hollow_FCC-No-Subsurf_DISS_E-3.177.xyz",
+    "generated_conformers_file": "outputs/17-4b40d8e1/conformers_CC_O.traj",
+    "relaxation_trajectory_file": "outputs/17-4b40d8e1/final.xyz",
+    "session_id": "17-4b40d8e1"
+  },
+  "attempt_records": [
+    {
+      "attempt_index": 1,
+      "plan": {
+        "reasoning": "SMILES consistency check: SMILES CC=O represents acetaldehyde (CH3CHO). Atom list: index 0 (C, SP3), index 1 (C, SP2), index 2 (O, SP2). No radicals (all radical_electrons=0). Hybridization matches a saturated methyl group and unsaturated carbonyl. No mismatch with user description. History is none, so this is the first attempt. No previous plans to analyze. No unstable sites identified. Formulate new plan: Goal is to find the lowest adsorption energy configuration. Adsorbate analysis: Acetaldehyde has a carbonyl group (C=O), which can adsorb via oxygen lone pair (eta1-O) or via pi-bond in eta2-C,O mode. Surface analysis: Alloy with Rh and Ti; Rh likely more active for adsorption. Available bridge sites include Rh-Rh. For aldehydes on transition metals like Rh, eta2 configuration on bridge sites is often stable. Start with eta2 on Rh-Rh bridge as the potentially lowest energy. Use 'Molecule' type since no radicals; binding via SP2 C (index 1) and O (index 2) is valid for pi-coordination, similar to alkene example. User intent: Find lowest-energy config, no specifics, so systematically test likely stable modes.",
+        "adsorbate_type": "Molecule",
+        "solution": {
+          "action": "continue",
+          "site_type": "bridge",
+          "surface_binding_atoms": [
+            "Rh",
+            "Rh"
+          ],
+          "adsorbate_binding_indices": [
+            1,
+            2
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "bridge|Rh,Rh|1,2|Molecule|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -3.064361572265625,
+      "bond_change_count": 2,
+      "is_dissociated": false,
+      "is_chemical_slip": true,
+      "planned_site_type": "bridge",
+      "actual_site_type": "hollow (FCC/No-Subsurf)",
+      "best_structure_file": "outputs/17-4b40d8e1/BEST_CC_O_bridge_to_hollow_FCC-No-Subsurf_ISO_E-3.064.xyz",
+      "generated_conformers_file": "outputs/17-4b40d8e1/conformers_CC_O.traj",
+      "relaxation_trajectory_file": "outputs/17-4b40d8e1/final.xyz",
+      "message": "Most stable config adsorption energy: -3.0644 eV. Target Atom 1: C (from plan index 1, global index 48). -> Nearest: Rh (Index 21), Distance: 2.213 Å (Threshold: 2.398), Bound: True. Target Atom 2: O (from plan index 2, global index 49). -> Nearest: Ti (Index 19), Distance: 2.198 Å (Threshold: 2.486), Bound: True. Bonded Surface Atoms: O(49)-Ti(1.856Å), C(48)-Rh(2.203Å), C(48)-Ti(2.517Å), O(49)-Rh(2.66Å), O(49)-Rh(3.014Å). Is Bound: True. Reactivity Change Detected: True (Bond Changes: 2). Chemical Slip: True (Planned ['Rh', 'Rh'] -> Actual ['Rh', 'Rh', 'Rh', 'Ti', 'Ti']).",
+      "history_entry": "【⚠️ Rearrangement(BC=2)】 bridge @ ['Rh', 'Rh'] (Index [1, 2]) -> ⚠️【Unstable Site Warning】⚠️: Planned bridge (Rh-Rh) is unstable, adsorbate spontaneously slipped to hollow (FCC/No-Subsurf) (Rh-Rh-Rh-Ti-Ti).This means Rh-Rh has insufficient affinity for this adsorbate. Please **FORBID** testing Rh-Rh type sites again! | E=-3.064 eV"
+    },
+    {
+      "attempt_index": 2,
+      "plan": {
+        "reasoning": "Step 0: SMILES Consistency Check. The SMILES is CC=O, which is acetaldehyde (CH3CHO). Atom list: Index 0 (C, SP3), Index 1 (C, SP2), Index 2 (O, SP2). No radicals (all radical_electrons=0). Hybridization matches a typical aldehyde: methyl C is SP3, carbonyl C is SP2, O is SP2. No mismatch with user description of acetaldehyde. Proceed with Molecule type since no unpaired electrons.\nStep 1: Analyze Old Plans. History shows one attempt: bridge on Rh-Rh (indices [1,2]), but it rearranged (BC=2) to hollow (Rh-Rh-Rh-Ti-Ti) with E=-3.064 eV. This is a failure due to instability and rearrangement. Instruction to FORBID testing Rh-Rh type sites again. No successful attempts yet. The rearranged structure has a low energy, indicating hollow sites might be stable, but the planned bridge Rh-Rh was unstable.\nLearning Conclusion: Rh-Rh bridge is invalid/unstable for this adsorbate. Avoid Rh-Rh bridges. Surface is heterogeneous (Rh, Ti), so different compositions may yield different stabilities.\nStep 2: Formulate New Plan. Goal is lowest energy adsorption. Avoid forbidden Rh-Rh sites. The rearranged to hollow with E=-3.064 eV suggests hollows could be favorable, but to systematically explore, test other sites. Propose a new plan different from history.\nStep 3: Analyze Request. User wants the lowest-energy adsorption configuration for acetaldehyde on the surface. No specific atom/orientation mentioned, so explore common modes.\nStep 4: Analyze Adsorbate. SMILES CC=O: Functional group is aldehyde (C=O). Possible binding: via O lone pair (index 2), via carbonyl C (index 1), or eta2 via C and O (indices [1,2]). No radicals, so Molecule type. Binding via saturated methyl C (index 0) not sensible.\nStep 5: Analyze Surface. Available: Ontop Rh/Ti, Bridge Rh-Rh (forbidden)/Rh-Ti, Hollow-4 Rh-Rh-Rh-Ti, Hollow-3 Rh-Rh-Rh/Rh-Rh-Ti. Use canonical site_types.\nStep 6: Formulate Plan. For aldehydes, eta2 adsorption (C and O binding) is common on bridges. Since Rh-Rh bridge is forbidden, try bridge on Rh-Ti for eta2 mode. This is different from history. surface_binding_atoms: ['Rh', 'Ti']. adsorbate_binding_indices: [1,2] (C and O). Defaults for other params. Action: continue, as termination disabled and more attempts available.",
+        "adsorbate_type": "Molecule",
+        "solution": {
+          "action": "continue",
+          "site_type": "bridge",
+          "surface_binding_atoms": [
+            "Rh",
+            "Ti"
+          ],
+          "adsorbate_binding_indices": [
+            1,
+            2
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "bridge|Rh,Ti|1,2|Molecule|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -3.17669677734375,
+      "bond_change_count": 1,
+      "is_dissociated": true,
+      "is_chemical_slip": true,
+      "planned_site_type": "bridge",
+      "actual_site_type": "hollow (FCC/No-Subsurf)",
+      "best_structure_file": "outputs/17-4b40d8e1/BEST_CC_O_bridge_to_hollow_FCC-No-Subsurf_DISS_E-3.177.xyz",
+      "generated_conformers_file": "outputs/17-4b40d8e1/conformers_CC_O.traj",
+      "relaxation_trajectory_file": "outputs/17-4b40d8e1/final.xyz",
+      "message": "Most stable config adsorption energy: -3.1767 eV. Target Atom 1: C (from plan index 1, global index 48). -> Nearest: Ti (Index 19), Distance: 2.653 Å (Threshold: 2.596), Bound: False. Target Atom 2: O (from plan index 2, global index 49). -> Nearest: Ti (Index 19), Distance: 1.918 Å (Threshold: 2.486), Bound: True. Bonded Surface Atoms: O(49)-Ti(1.905Å), O(49)-Rh(2.34Å), C(48)-Ti(2.659Å), C(48)-Rh(2.978Å). Is Bound: False. Reactivity Change Detected: True (Bond Changes: 1). Chemical Slip: True (Planned ['Rh', 'Ti'] -> Actual ['Rh', 'Rh', 'Ti', 'Ti']).",
+      "history_entry": "【❌ Dissociated】 bridge @ ['Rh', 'Ti'] (Index [1, 2]) -> ⚠️【Unstable Site Warning】⚠️: Planned bridge (Rh-Ti) is unstable, adsorbate spontaneously slipped to hollow (FCC/No-Subsurf) (Rh-Rh-Ti-Ti).This means Rh-Ti has insufficient affinity for this adsorbate. Please **FORBID** testing Rh-Ti type sites again! | E=-3.177 eV"
+    }
+  ],
+  "history": [
+    "【⚠️ Rearrangement(BC=2)】 bridge @ ['Rh', 'Rh'] (Index [1, 2]) -> ⚠️【Unstable Site Warning】⚠️: Planned bridge (Rh-Rh) is unstable, adsorbate spontaneously slipped to hollow (FCC/No-Subsurf) (Rh-Rh-Rh-Ti-Ti).This means Rh-Rh has insufficient affinity for this adsorbate. Please **FORBID** testing Rh-Rh type sites again! | E=-3.064 eV",
+    "【❌ Dissociated】 bridge @ ['Rh', 'Ti'] (Index [1, 2]) -> ⚠️【Unstable Site Warning】⚠️: Planned bridge (Rh-Ti) is unstable, adsorbate spontaneously slipped to hollow (FCC/No-Subsurf) (Rh-Rh-Ti-Ti).This means Rh-Ti has insufficient affinity for this adsorbate. Please **FORBID** testing Rh-Ti type sites again! | E=-3.177 eV"
+  ],
+  "error": null,
+  "perfect_count": 0,
+  "dissociation_count": 1,
+  "rearrangement_count": 1,
+  "calc_failure_count": 0,
+  "chemical_slip_count": 2
+}

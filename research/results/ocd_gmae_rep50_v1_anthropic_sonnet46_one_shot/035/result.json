@@ -1,0 +1,178 @@
+{
+  "case_id": "035",
+  "case_metadata": {
+    "case_id": "035",
+    "slab_file": "research/agent_eval/generated_slabs/ocd_gmae_rep50/035_ocd_105_Se48Sn48_CO.xyz",
+    "smiles": "CO",
+    "user_request": "Find the lowest-energy adsorption configuration for the adsorbate with SMILES CO on the provided surface.",
+    "surface_family": "compound",
+    "adsorbate_name": "CO",
+    "miller_index": "",
+    "reaction_class": "GENERALIZATION",
+    "ablation_candidate": "FALSE",
+    "notes": "OCD-GMAE source key=105; original_ads_smi=CO; surface_formula=Se48Sn48; y_relaxed=-1.719915 eV; site=[72]",
+    "source_key": "105",
+    "original_ads_smi": "CO",
+    "surface_formula": "Se48Sn48",
+    "surface_elements": "Se;Sn",
+    "bare_slab_atoms": "96",
+    "adsorbate_atoms": "6",
+    "y_relaxed": "-1.719915",
+    "site_indices": "72",
+    "selection_bucket": "small_organic"
+  },
+  "status": "success",
+  "best_energy_eV": -4.418554306030273,
+  "iteration_count": 1,
+  "max_attempts": 1,
+  "final_site_type": "hollow (inferred)",
+  "converged_tag": false,
+  "wall_clock_sec": 251.8013154156506,
+  "total_input_tokens": 4201,
+  "total_output_tokens": 1583,
+  "artifact_paths": {
+    "BEST_CO_ontop_to_hollow_inferred_E-4.419": "research/results/ocd_gmae_rep50_v1_anthropic_sonnet46_one_shot/035/artifacts/BEST_CO_ontop_to_hollow_inferred_E-4.419.xyz",
+    "BEST_CO_ontop_to_hollow_inferred_E-4.419.xyz": "research/results/ocd_gmae_rep50_v1_anthropic_sonnet46_one_shot/035/artifacts/BEST_CO_ontop_to_hollow_inferred_E-4.419.xyz",
+    "best_structure_file": "research/results/ocd_gmae_rep50_v1_anthropic_sonnet46_one_shot/035/artifacts/BEST_CO_ontop_to_hollow_inferred_E-4.419.xyz",
+    "conformers_CO": "research/results/ocd_gmae_rep50_v1_anthropic_sonnet46_one_shot/035/artifacts/conformers_CO.traj",
+    "conformers_CO.traj": "research/results/ocd_gmae_rep50_v1_anthropic_sonnet46_one_shot/035/artifacts/conformers_CO.traj",
+    "final": "research/results/ocd_gmae_rep50_v1_anthropic_sonnet46_one_shot/035/artifacts/final.xyz",
+    "final.xyz": "research/results/ocd_gmae_rep50_v1_anthropic_sonnet46_one_shot/035/artifacts/final.xyz",
+    "relaxation": "research/results/ocd_gmae_rep50_v1_anthropic_sonnet46_one_shot/035/artifacts/relaxation.traj",
+    "relaxation.traj": "research/results/ocd_gmae_rep50_v1_anthropic_sonnet46_one_shot/035/artifacts/relaxation.traj",
+    "relaxation_trajectory_file": "research/results/ocd_gmae_rep50_v1_anthropic_sonnet46_one_shot/035/artifacts/relaxation.traj"
+  },
+  "best_result": {
+    "most_stable_energy_eV": -4.418554306030273,
+    "analysis_json": {
+      "status": "success",
+      "message": "Most stable config adsorption energy: -4.4186 eV. Target Atom: C (from plan index 0, global index 96 in relaxed structure). -> Nearest: Sn (Index 84), Distance: 3.365 Å (Threshold: 3.117), Bound: False. Bonded Surface Atoms: None. Is Bound: False. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: False (Planned ['Sn'] -> Actual []).",
+      "most_stable_energy_eV": -4.418554306030273,
+      "target_adsorbate_atom": "C",
+      "target_adsorbate_atom_index": 96,
+      "bonded_surface_atoms": [],
+      "nearest_slab_atom": "Sn",
+      "nearest_slab_atom_index": 84,
+      "final_bond_distance_A": 3.365,
+      "estimated_covalent_cutoff_A": 2.365,
+      "is_covalently_bound": false,
+      "reaction_detected": false,
+      "is_dissociated": false,
+      "n_components": 1,
+      "bond_change_count": 0,
+      "site_analysis": {
+        "planned_site_type": "ontop",
+        "planned_connectivity": 1,
+        "actual_site_type": "hollow (inferred)",
+        "actual_connectivity": 3,
+        "is_chemical_slip": false,
+        "planned_symbols": [
+          "Sn"
+        ],
+        "actual_symbols": [],
+        "site_fingerprint": ""
+      },
+      "best_structure_file": "outputs/035-04596a6a/BEST_CO_ontop_to_hollow_inferred_E-4.419.xyz",
+      "generated_conformers_file": "outputs/035-04596a6a/conformers_CO.traj",
+      "relaxation_trajectory_file": "outputs/035-04596a6a/final.xyz",
+      "session_id": "035-04596a6a"
+    },
+    "plan": {
+      "reasoning": "This is the first attempt (no history). The adsorbate is CO (SMILES: CO), which RDKit interprets as methanol (C-O single bond, both SP3). However, in catalysis context, CO typically refers to carbon monoxide [C-]#[O+]. The SMILES 'CO' in RDKit gives methanol, but the user intent is carbon monoxide adsorption. I will proceed based on the SMILES as given: C (index 0, SP3) and O (index 1, SP3). For CO (carbon monoxide) adsorption on metal surfaces, the canonical binding mode is C-down ontop adsorption. The surface contains Se and Sn atoms. Sn is more metallic and typically provides better binding for CO. I will plan C-ontop adsorption on Sn, which is the most common and energetically favorable configuration for CO on metal-containing surfaces. Using adsorbate_binding_indices=[0] for the C atom (index 0) at an ontop Sn site. This is a Molecule type since CO is a stable molecule with lone pairs on C for donation to the surface.",
+      "adsorbate_type": "Molecule",
+      "solution": {
+        "action": "continue",
+        "site_type": "ontop",
+        "surface_binding_atoms": [
+          "Sn"
+        ],
+        "adsorbate_binding_indices": [
+          0
+        ],
+        "relax_top_n": 1,
+        "touch_sphere_size": 2,
+        "overlap_thr": 0.1,
+        "conformers_per_site_cap": 4
+      }
+    },
+    "result_type": "Perfect"
+  },
+  "last_analysis": {
+    "status": "success",
+    "message": "Most stable config adsorption energy: -4.4186 eV. Target Atom: C (from plan index 0, global index 96 in relaxed structure). -> Nearest: Sn (Index 84), Distance: 3.365 Å (Threshold: 3.117), Bound: False. Bonded Surface Atoms: None. Is Bound: False. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: False (Planned ['Sn'] -> Actual []).",
+    "most_stable_energy_eV": -4.418554306030273,
+    "target_adsorbate_atom": "C",
+    "target_adsorbate_atom_index": 96,
+    "bonded_surface_atoms": [],
+    "nearest_slab_atom": "Sn",
+    "nearest_slab_atom_index": 84,
+    "final_bond_distance_A": 3.365,
+    "estimated_covalent_cutoff_A": 2.365,
+    "is_covalently_bound": false,
+    "reaction_detected": false,
+    "is_dissociated": false,
+    "n_components": 1,
+    "bond_change_count": 0,
+    "site_analysis": {
+      "planned_site_type": "ontop",
+      "planned_connectivity": 1,
+      "actual_site_type": "hollow (inferred)",
+      "actual_connectivity": 3,
+      "is_chemical_slip": false,
+      "planned_symbols": [
+        "Sn"
+      ],
+      "actual_symbols": [],
+      "site_fingerprint": ""
+    },
+    "best_structure_file": "outputs/035-04596a6a/BEST_CO_ontop_to_hollow_inferred_E-4.419.xyz",
+    "generated_conformers_file": "outputs/035-04596a6a/conformers_CO.traj",
+    "relaxation_trajectory_file": "outputs/035-04596a6a/final.xyz",
+    "session_id": "035-04596a6a"
+  },
+  "attempt_records": [
+    {
+      "attempt_index": 1,
+      "plan": {
+        "reasoning": "This is the first attempt (no history). The adsorbate is CO (SMILES: CO), which RDKit interprets as methanol (C-O single bond, both SP3). However, in catalysis context, CO typically refers to carbon monoxide [C-]#[O+]. The SMILES 'CO' in RDKit gives methanol, but the user intent is carbon monoxide adsorption. I will proceed based on the SMILES as given: C (index 0, SP3) and O (index 1, SP3). For CO (carbon monoxide) adsorption on metal surfaces, the canonical binding mode is C-down ontop adsorption. The surface contains Se and Sn atoms. Sn is more metallic and typically provides better binding for CO. I will plan C-ontop adsorption on Sn, which is the most common and energetically favorable configuration for CO on metal-containing surfaces. Using adsorbate_binding_indices=[0] for the C atom (index 0) at an ontop Sn site. This is a Molecule type since CO is a stable molecule with lone pairs on C for donation to the surface.",
+        "adsorbate_type": "Molecule",
+        "solution": {
+          "action": "continue",
+          "site_type": "ontop",
+          "surface_binding_atoms": [
+            "Sn"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "ontop|Sn|0|Molecule|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -4.418554306030273,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": false,
+      "planned_site_type": "ontop",
+      "actual_site_type": "hollow (inferred)",
+      "best_structure_file": "outputs/035-04596a6a/BEST_CO_ontop_to_hollow_inferred_E-4.419.xyz",
+      "generated_conformers_file": "outputs/035-04596a6a/conformers_CO.traj",
+      "relaxation_trajectory_file": "outputs/035-04596a6a/final.xyz",
+      "message": "Most stable config adsorption energy: -4.4186 eV. Target Atom: C (from plan index 0, global index 96 in relaxed structure). -> Nearest: Sn (Index 84), Distance: 3.365 Å (Threshold: 3.117), Bound: False. Bonded Surface Atoms: None. Is Bound: False. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: False (Planned ['Sn'] -> Actual []).",
+      "history_entry": "【✅ Perfect Adsorption】 ontop @ ['Sn'] (Index [0]) -> ⚠️ Geometric Slip: ontop -> hollow (inferred) [🌟 New Best] | E=-4.419 eV"
+    }
+  ],
+  "history": [
+    "【✅ Perfect Adsorption】 ontop @ ['Sn'] (Index [0]) -> ⚠️ Geometric Slip: ontop -> hollow (inferred) [🌟 New Best] | E=-4.419 eV"
+  ],
+  "error": null,
+  "perfect_count": 1,
+  "dissociation_count": 0,
+  "rearrangement_count": 0,
+  "calc_failure_count": 0,
+  "chemical_slip_count": 0
+}
