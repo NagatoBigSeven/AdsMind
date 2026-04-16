@@ -58,6 +58,32 @@ Case 19 is the dominant stress test: it is the only representative system that r
 This concentration is scientifically useful because it tells us where the current agent is brittle.
 The problem is not generic adsorption search, but a specific combination of a large adsorbate (OCHCH$_3$), a reactive alloy surface (Hf$_2$Zn$_6$(110)), and unstable intermediate plans that differ across LLM backends.
 
+\subsection{Independent validation on the OCD-GMAE dataset}
+
+To test whether the ablation findings generalise beyond the five locked CMU cases, we constructed an independent validation set from the Open Catalyst 2020 Dense dataset~\cite{oc20dense}.
+We selected 10 cases spanning 8 adsorbate species (H, OH, NH$_2$, N$_2$, NH, N, NO, N$_2$O), 9 distinct intermetallic surfaces, and a wide range of DFT reference energies ($-$14.55 to $-$1.35~eV).
+The same 5$\times$5 ablation matrix was executed on three LLM backends (Grok-4, GPT-5.4, Claude~Sonnet~4.6); Gemini was excluded from this analysis because of intermittent HTTP~403 failures from the proxy endpoint on non-full variants.
+
+\input{../research/results/ocd_gmae_paper_tables}
+
+\paragraph{Closed-loop improvement is larger and more consistent.}
+The mean full-versus-single-shot improvement across the 10 cases is 0.568~eV (3-backend average), substantially larger than the 0.189~eV observed on the CMU subset.
+Nine of ten cases show improvement exceeding 0.05~eV; only case~015 is effectively neutral ($\Delta = -0.006$~eV).
+The largest gains occur on cases with multiple competitive binding sites: case~003 (+1.903~eV), case~004 (+1.273~eV), and case~013 (+0.966~eV).
+
+\paragraph{Statistical significance is achieved.}
+With 10 cases, the Friedman test reaches significance on all three backends: Grok-4 ($p = 0.002$), GPT-5.4 ($p = 0.007$), Claude ($p < 0.001$).
+For GPT-5.4, the pairwise Wilcoxon test for $-$Slip versus Full is individually significant ($p = 0.016$), confirming that slip-conditioned feedback contributes measurably to search quality on this dataset.
+
+\paragraph{Backend convergence pattern.}
+Table~\ref{tab:ocd-cross-llm} shows that the $-$Term variant achieves the tightest cross-backend agreement (mean range 0.098~eV), while single-shot shows the widest spread (0.698~eV)---a 7.1$\times$ ratio.
+The overall pattern mirrors the CMU result but with higher absolute ranges, reflecting the greater chemical diversity and more complex potential-energy surfaces in the OCD-GMAE set.
+The Full variant shows a larger mean range (0.352~eV) than on CMU (0.053~eV), driven largely by case~013, where Claude finds a distinct local minimum ($-$9.320~eV) that the other two backends miss ($-$10.361~eV).
+
+\paragraph{Ablated variants can outperform full.}
+Several cases show ablated variants finding lower energies than Full: case~004 under Grok-4 $-$Term ($-$11.384 vs.\ $-$10.138~eV, $\Delta = -1.247$~eV), case~005 under Grok-4 $-$Slip ($-$10.643 vs.\ $-$10.118~eV), and case~024 under Claude $-$Slip ($-$3.716 vs.\ $-$3.418~eV).
+These confirm the CMU observation that the agentic guardrails are not universally beneficial: on certain surfaces, the FORBID or slip-conditioned constraints over-prune the search space.
+
 \subsection{Scope of external comparison}
 
 We intentionally avoid treating raw energy differences against published Adsorb-Agent values as evidence of superior adsorption strength. The published Adsorb-Agent numbers were obtained under a different MLFF and reference-energy scheme, whereas the results reported here use MACE throughout. Directly subtracting those energies would therefore conflate search behavior with incompatible energetic conventions. In the current manuscript, the main evidence for the agentic system is therefore internal: controlled ablations, four-backend robustness analysis, and explicit failure-case tracing under a fixed physical backend.
