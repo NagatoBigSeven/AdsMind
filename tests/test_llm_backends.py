@@ -27,6 +27,13 @@ class TestLLMFactory(unittest.TestCase):
         backend = get_llm_backend("google")
         self.assertEqual(backend.name, "google")
         self.assertTrue(backend.requires_api_key)
+
+    def test_get_google_vertexai_backend(self):
+        """Test getting Google Vertex AI backend."""
+        from src.llms import get_llm_backend
+        backend = get_llm_backend("google_vertexai")
+        self.assertEqual(backend.name, "google_vertexai")
+        self.assertFalse(backend.requires_api_key)
     
     def test_get_openrouter_backend(self):
         """Test getting OpenRouter backend."""
@@ -137,6 +144,46 @@ class TestGoogleBackend(unittest.TestCase):
         backend = get_llm_backend("google")
         # Should be True if langchain_google_genai is installed
         self.assertIsInstance(backend.is_available, bool)
+
+
+class TestGoogleVertexAIBackend(unittest.TestCase):
+    """Test Google Vertex AI backend."""
+
+    def test_default_config(self):
+        """Test default Vertex AI configuration."""
+        from src.llms import get_llm_backend
+        backend = get_llm_backend("google_vertexai")
+        config = backend.get_default_config(api_key="ignored")
+
+        self.assertEqual(config.backend, "google_vertexai")
+        self.assertIsNone(config.api_key)
+        self.assertEqual(config.model, "gemini-2.5-pro")
+
+    def test_chat_model_passes_vertex_options(self):
+        """Vertex backend should forward project and location."""
+        from src.llms import get_llm_backend
+
+        captured = {}
+
+        class FakeChatVertexAI:
+            def __init__(self, **kwargs):
+                captured.update(kwargs)
+
+        fake_module = types.SimpleNamespace(ChatVertexAI=FakeChatVertexAI)
+
+        with patch.dict(sys.modules, {"langchain_google_vertexai": fake_module}):
+            backend = get_llm_backend("google_vertexai")
+            config = backend.get_default_config()
+            config.extra_options = {
+                "project": "test-project",
+                "location": "europe-west1",
+            }
+            backend.get_chat_model(config)
+
+        self.assertEqual(captured["model"], "gemini-2.5-pro")
+        self.assertEqual(captured["project"], "test-project")
+        self.assertEqual(captured["location"], "europe-west1")
+        self.assertEqual(captured["temperature"], 0.0)
 
 
 class TestOpenRouterBackend(unittest.TestCase):

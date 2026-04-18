@@ -1,0 +1,30 @@
+\begin{table}[h]
+\centering
+\small
+\caption{Head-to-head comparison of AdsMind (best across 4~LLM backends) versus Adsorb-Agent (GPT-4o, MACE-matched) on 15 overlapping CMU benchmark cases. Adsorption energies in eV; lower is better. ``Failed'' denotes Adsorb-Agent site-selection failures.}
+\label{tab:si-adsorbagent-comparison}
+\begin{tabular}{lrrrrrl}
+\toprule
+Case & AdsMind (eV) & Adsorb-Ag.\ (eV) & $\Delta$ (eV) & Configs & Tokens & Winner \\
+\midrule
+  02 & $-4.769$ & $-5.092$ & $+0.323$ & 29 & 3439 & Adsorb-Ag. \\
+  04 & $-2.285$ & $-3.457$ & $+1.172$ & 15 & 3626 & Adsorb-Ag. \\
+  05 & $-2.962$ & $-2.953$ & $-0.008$ & 26 & 3553 & tie \\
+  10 & $-2.718$ & $-2.741$ & $+0.023$ & 17 & 3156 & Adsorb-Ag. \\
+  12 & $-2.351$ & $-2.244$ & $-0.108$ & 28 & 5882 & AdsMind \\
+  13 & $-2.825$ & $-2.858$ & $+0.033$ & 37 & 3474 & Adsorb-Ag. \\
+  14 & $-3.617$ & $-4.162$ & $+0.545$ & 24 & 3476 & Adsorb-Ag. \\
+  16 & $-4.663$ & $-6.699$ & $+2.036$ & 19 & 3471 & Adsorb-Ag. \\
+  17 & $-3.241$ & $-4.411$ & $+1.170$ & 6 & 8170 & Adsorb-Ag. \\
+  18 & $-3.129$ & $-4.483$ & $+1.354$ & 41 & 3904 & Adsorb-Ag. \\
+  19 & $-4.045$ & $-4.694$ & $+0.649$ & 21 & 3754 & Adsorb-Ag. \\
+  01 & $-3.632$ & \textit{failed} & --- & 0 & 0 & AdsMind \\
+  09 & $-1.991$ & \textit{failed} & --- & 0 & 0 & AdsMind \\
+  15 & $-3.258$ & \textit{failed} & --- & 0 & 0 & AdsMind \\
+  20 & $-11.653$ & \textit{failed} & --- & 0 & 0 & AdsMind \\
+\midrule
+  \multicolumn{7}{l}{Comparable: 11, AdsMind wins 1, Adsorb-Agent wins 9, ties 1. Wilcoxon $p = 0.0098$, mean $\Delta = +0.654$~eV.} \\
+  \multicolumn{7}{l}{Success rate: AdsMind 15/15 (100%), Adsorb-Agent 11/15 (73%).} \\
+\bottomrule
+\end{tabular}
+\end{table}

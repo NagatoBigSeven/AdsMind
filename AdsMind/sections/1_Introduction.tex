@@ -1,48 +1,84 @@
 \section{Introduction}
 
-Heterogeneous catalysis, electrochemical energy conversion, and surface-mediated synthesis all depend critically on identifying the most stable adsorbate--surface configurations.
-The configuration space for this problem grows combinatorially: site types (ontop, bridge, hollow, and their compositional variants), adsorbate orientation, and conformational flexibility combine to produce candidate counts that can exceed several hundred for a single intermetallic surface with a polyatomic adsorbate.
-Traditional approaches---DFT enumeration, genetic algorithms, basin hopping---require many energy evaluations, each costing hundreds to thousands of CPU-hours, and scale poorly to the complex alloy and multimetallic surfaces that are of greatest practical interest.
+Heterogeneous catalysis, electrochemical energy conversion, and surface-mediated synthesis depend critically on identifying the most stable adsorbate--surface configurations.
+The configuration space for this problem grows combinatorially: site types (ontop, bridge, hollow, and their compositional variants), adsorbate orientation, and conformational flexibility combine to produce candidate counts exceeding several hundred for a single intermetallic surface with a polyatomic adsorbate.
+Traditional approaches---DFT enumeration, genetic algorithms, basin hopping---require many energy evaluations, each costing hundreds to thousands of CPU-hours, and scale poorly to the complex alloy and multimetallic surfaces of greatest practical interest.
 
-\subsection{Machine learning surrogates and their limits}
+\subsection{Machine learning surrogates and the remaining search problem}
 
-Machine learning force fields (MLFFs) such as MACE~\cite{batatia2022mace}, CHGNet~\cite{deng2023chgnet}, and Equiformer~\cite{liao2023equiformerv2} have dramatically reduced the per-evaluation cost, achieving DFT-level energy predictions with orders-of-magnitude speedup.
-However, MLFFs solve only the \textit{fast energy evaluation} problem; they do not address the upstream \textit{search strategy} problem of which configurations to evaluate in the first place.
-Deep-learning-assisted configuration generators---graph neural networks that predict site stability, diffusion models that propose structures directly---remain open-loop: once trained, they cannot adapt based on new calculation results.
+Machine learning force fields (MLFFs) such as MACE~\cite{batatia2022mace}, CHGNet~\cite{deng2023chgnet}, and Equiformer~\cite{liao2023equiformerv2} have dramatically reduced the per-evaluation cost, achieving near-DFT accuracy at orders-of-magnitude speedup.
+However, MLFFs solve only the \textit{fast energy evaluation} problem; they do not address the upstream \textit{search strategy} problem of deciding which configurations to evaluate.
+Deep-learning-assisted configuration generators---graph neural networks that predict site stability, diffusion models that propose structures---remain open-loop: once trained, they cannot adapt based on new calculation results.
 This architectural limitation causes systematic failures on surfaces where training-data coverage is sparse, precisely the complex compositions where better search is most needed.
 
-\subsection{LLM-driven agents: opportunities and bottlenecks}
+\subsection{LLM agents: capability and reliability gaps}
 
 Large language models encode substantial chemical intuition from their training corpora and can generate plausible adsorption hypotheses from natural-language surface descriptions.
-Adsorb-Agent~\cite{ock2024adsorbagent} demonstrated that an LLM agent can reduce the configuration search space by 27\% on a curated benchmark.
-Yet Adsorb-Agent and similar systems operate in an \textit{open-loop} regime: the LLM proposes configurations, calculations execute, but the results are not fed back to the planner.
-This means the agent cannot distinguish a thermodynamically unstable site from a calculation failure, cannot learn from dissociation or rearrangement events, and cannot correct the systematic biases that all current LLMs carry---preferring high-symmetry sites, underweighting surface composition effects, and ignoring adsorbate conformational flexibility.
+Adsorb-Agent~\cite{ock2024adsorbagent} demonstrated that an LLM agent can propose initial site selections and enumerate configurations at each, reducing the effective search space relative to naive DFT sweeps.
+However, existing LLM agents operate in a \textit{single-pass} regime: the LLM proposes configurations, relaxations execute, the lowest-energy result is reported, and the LLM is never informed of the physical outcome.
+This architectural choice has two consequences we quantify in this work.
+First, \textit{reliability suffers:} when the LLM's initial site prediction does not match any geometrically enumerable site on the surface, the system produces zero valid configurations and fails silently. We observe this failure mode on 20--27\% of cases across GPT-4o and GPT-5.4, with failure patterns that differ between LLMs, indicating an irreducible architectural limit rather than a model-capability artifact.
+Second, \textit{interpretability suffers:} the system cannot distinguish a thermodynamically unstable site from a simulation failure, cannot learn from dissociation or rearrangement events, and cannot correct the systematic biases all current LLMs carry---preferring high-symmetry sites, underweighting surface composition effects, and ignoring adsorbate conformational flexibility.
 
-\subsection{Closing the loop: physics-feedback-driven reasoning}
+\subsection{Related work}
+
+\textit{Adsorption configuration search.}
+Classical approaches include exhaustive DFT enumeration on canonical site families, genetic algorithms~\cite{vilhelmsen2014genetic}, basin hopping~\cite{wales1997global}, and random structure search~\cite{pickard2011ab}.
+More recent work uses MLFFs as fast evaluators inside these loops, including AdsorbML on the Open Catalyst 2020 Dense benchmark~\cite{lan2023adsorbml} and heuristic enumerators such as Autoadsorbate~\cite{fako2025simple}.
+These methods are reliable (brute force does not fail silently) but scale linearly with configuration-space size; our results confirm that they reach lower energies than AdsMind on complex surfaces, at the cost of 5--25$\times$ more relaxations.
+
+\textit{LLM agents for chemistry.}
+Adsorb-Agent~\cite{ock2024adsorbagent} is the closest prior system: a single-pass LLM planner paired with EquiformerV2.
+Related efforts include ChemCrow~\cite{bran2024chemcrow} (tool-augmented LLM for synthesis planning), Coscientist~\cite{boiko2023autonomous} (autonomous chemistry experimentation), and early closed-loop retrosynthesis agents~\cite{schwaller2020predicting}.
+None have been evaluated head-to-head against non-LLM baselines \textit{under identical MACE physics}, leaving open whether reported gains reflect planning quality or force-field/backbone choice.
+
+\textit{LLM evaluation in scientific domains.}
+Benchmarks such as ChemBench~\cite{mirza2024chembench}, MatBench~\cite{dunn2020benchmarking}, and SciEval~\cite{sun2024scieval} test factual recall and text-based reasoning but not applied chemical prediction.
+Chemical Slip, introduced in this work, is a physically grounded complementary signal: it quantifies whether an LLM's structural hypothesis survives physical relaxation, measured automatically from relaxation trajectories.
+
+\textit{Our contribution in this landscape.}
+We believe this is the first study to (i)~run four independent LLM backends on an identical closed-loop search pipeline, (ii)~compare an LLM agent head-to-head against non-LLM baselines (random, heuristic) and an LLM baseline (Adsorb-Agent) under \textit{matched} MACE-MP-0 physics, and (iii)~report explicit negative results on energy-depth to clarify the operating envelope in which closed-loop LLM reasoning adds value.
+
+\subsection{The uncomfortable truth: configuration-space coverage dominates}
+
+A second line of evidence, from exhaustive control experiments we report below, shows that on complex intermetallic surfaces with multiple competitive binding sites, the dominant factor in finding low-energy configurations is simply \textit{the number of distinct initial configurations sampled}.
+Random placement of N=20 adsorbate poses, relaxed under the same MACE protocol, finds lower energies than a closed-loop LLM agent on 4 of 15 benchmark cases (by up to 2.08~eV).
+Heuristic enumeration of all high-symmetry sites (25--98 per case) beats the LLM agent on 6 of 15 cases.
+Adsorb-Agent with its $\sim$21 MACE relaxations per case beats AdsMind on 9--10 of 11--12 successful cases.
+These results make clear that brute-force sampling, when it succeeds, matches or exceeds any closed-loop refinement strategy at the cost of 5--25$\times$ more MACE compute.
+
+The question, then, is not ``which system finds the absolute lowest energy?''---an LLM agent cannot realistically out-sample a brute-force enumerator with sufficient budget---but rather: \textit{what is the contribution of closed-loop LLM reasoning when we hold compute, physics, and data fixed?}
+
+\subsection{Closing the loop: reliability, efficiency, and interpretability}
 
 We introduce AdsMind, a closed-loop multi-agent framework in which each MLFF relaxation result feeds back into the LLM planner, enabling the system to detect its own reasoning errors, encode them as actionable search constraints, and decide autonomously when to stop.
 Three mechanisms implement this feedback cycle:
 
 \begin{enumerate}
     \item \textbf{Chemical Slip detection.} After each relaxation, the analyzer compares the planner's intended adsorption site with the realized coordination environment. A mismatch---termed a \textit{Chemical Slip}---signals that the potential energy surface (PES) topology disagrees with the LLM's chemical intuition at that point, providing a physically grounded diagnostic of planner error.
-    \item \textbf{FORBID constraints.} Detected slips and dissociation events are converted into explicit negative constraints in the planner's prompt history, preventing the agent from retrying site families that have already been shown to be unstable or misclassified.
-    \item \textbf{Autonomous termination.} The agent monitors whether successive iterations converge to the same best energy and terminates early when further exploration is unlikely to improve the result, avoiding unnecessary compute.
+    \item \textbf{FORBID constraints.} Detected slips and dissociation events are converted into explicit negative constraints in the planner's prompt history, preventing the agent from retrying site families that have already proven unstable or misclassified.
+    \item \textbf{Autonomous termination.} The agent monitors whether successive iterations converge to the same best energy and terminates early when further exploration is unlikely to improve the result.
 \end{enumerate}
 
 We frame this design through a sequential-decision lens: adsorption configuration search is analogous to a partially observable Markov decision process (POMDP), where the PES is the hidden state, each relaxation is an observation, and the planner's next proposal is conditioned on the full history of prior observations.
-Open-loop methods use a fixed policy $\pi(a \mid s)$ that cannot adapt after deployment; AdsMind approximates a history-dependent policy $\pi(a \mid h_t)$ through the LLM's in-context learning, without requiring explicit reward engineering or policy optimization.
+Open-loop methods use a fixed policy $\pi(a \mid s)$ that cannot adapt after deployment; AdsMind approximates a history-dependent policy $\pi(a \mid h_t)$ through the LLM's in-context learning, without explicit reward engineering or policy optimization.
 
-\subsection{Hypotheses and evaluation}
+\subsection{Claims and evaluation}
 
-We test two complementary claims:
+This paper establishes four empirical claims through 500+ controlled runs across two datasets, four LLM backends, and six baseline controls:
 
 \begin{description}
-    \item[H$_1$ (search quality):] Full AdsMind, compared to the no-feedback single-shot baseline, finds lower-energy configurations ($\Delta E > 0.05$~eV) on a substantial fraction of intermetallic surfaces, with the benefit strongest when the base planner is least capable.
-    \item[H$_2$ (backend robustness):] The iterative closed-loop architecture reduces energy variance across heterogeneous LLM backends, driving planners with different internal biases toward the same physical solution.
+    \item[C$_1$ (reliability):] AdsMind achieves 100\% search success across every backend and every case on both CMU (15 cases) and OCD-GMAE (10 cases), compared to 73--80\% for single-pass LLM agents (Adsorb-Agent with GPT-4o and GPT-5.4). Failure patterns differ across LLMs, ruling out LLM-capability explanations.
+    \item[C$_2$ (backend convergence):] The iterative closed-loop architecture reduces energy variance across heterogeneous LLM backends. On CMU, the four-backend energy range drops from 0.425~eV (one-shot) to 0.129~eV (full search)---a 3.3$\times$ convergence toward a shared physical solution. The equivalent reduction on OCD-GMAE is 2.3$\times$.
+    \item[C$_3$ (compute efficiency):] AdsMind Full uses approximately 4 MACE relaxations per case, compared to 20 (random), 25--98 (heuristic), and $\sim$21 (Adsorb-Agent). At this reduced budget, AdsMind matches or beats the non-LLM controls on 8--11 of 15 cases.
+    \item[C$_4$ (interpretability):] Closed-loop reasoning produces structured artifacts---slip events, forbid constraints, site-mismatch fingerprints---that serve as physically grounded diagnostics for LLM chemical reasoning. We show that one-shot slip rates correlate with surface composition complexity across all four backends, establishing Chemical Slip as a standalone evaluation signal for LLM science applications.
 \end{description}
 
-We evaluate these hypotheses on a 20-surface benchmark derived from Adsorb-Agent's test set, a controlled 5-case ablation study executed independently on three LLM backends (Gemini~2.5~Pro, Grok-4, and GPT-5.4), and DFT validation of representative configurations.
-All experiments use a fixed MACE-small physical backend so that observed differences reflect search strategy, not energy-function choice.
+We also report, as negative results, that AdsMind does not deliver the deepest energy basins on complex surfaces: broader initial sampling strategies consistently reach lower minima when they succeed.
+This trade-off---reliability and efficiency against depth of exploration---frames the central message of the paper.
+AdsMind is not a replacement for brute-force methods where compute is cheap and failures are tolerable; it is a foundation for \textit{autonomous chemistry workflows} where silent failures, irreproducibility, and uninterpretable failures are unacceptable, and where compute is expensive enough that a 5--25$\times$ efficiency gain matters.
+A natural extension, outlined in Section~4, couples AdsMind's closed-loop error recovery with broader initial site enumeration to combine the reliability of the former with the depth of the latter.
 
-AdsMind is complementary to, not competitive with, open-loop screening tools.
-High-throughput methods are efficient for initial down-selection across thousands of candidate surfaces; closed-loop refinement adds value in the subsequent deep exploration of promising but poorly characterized systems---intermetallics, multimetallics, and novel compositions where LLM priors are least reliable.
+All experiments use the same MACE-MP-0 (small, CPU, float32) physical backend so that observed differences reflect search strategy, not energy-function choice.
+Head-to-head comparisons against Adsorb-Agent were performed by forking the original codebase and replacing its EquiformerV2 backend with MACE, ensuring apples-to-apples physics.
+We release all data, frozen configurations, and agent trajectories at \url{https://github.com/AI4QC/AdsMind}.

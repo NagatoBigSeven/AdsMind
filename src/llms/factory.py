@@ -18,6 +18,7 @@ def _get_llm_registry() -> Dict[str, Type[BaseLLMBackend]]:
     until actually needed.
     """
     from src.llms.google_backend import GoogleBackend
+    from src.llms.google_vertexai_backend import GoogleVertexAIBackend
     from src.llms.anthropic_backend import AnthropicBackend
     from src.llms.openrouter_backend import OpenRouterBackend
     from src.llms.xai_backend import XAIBackend
@@ -26,6 +27,7 @@ def _get_llm_registry() -> Dict[str, Type[BaseLLMBackend]]:
 
     return {
         "google": GoogleBackend,
+        "google_vertexai": GoogleVertexAIBackend,
         "anthropic": AnthropicBackend,
         "xai": XAIBackend,
         "openrouter": OpenRouterBackend,

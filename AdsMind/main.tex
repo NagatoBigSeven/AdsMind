@@ -41,8 +41,7 @@ superscriptaddress,
 \begin{document}
 
 
-\title{TBD}
-%Beyond Geometric Heuristics: A Physics-Grounded Agent for Self-Correcting Adsorption Configuration Discovery on Heterogeneous Catalyst Surfaces}
+\title{AdsMind: A Reliable, Compute-Efficient, and Interpretable Closed-Loop Agent for Autonomous Adsorption Configuration Search}
 \author{Zongmin Zhang}
 \affiliation{Department of Computer Science and Engineering, Hong Kong University of Science and Technology, Kowloon, Hong Kong 999077, China}
 \author{Bowen Zhang}
@@ -69,7 +68,11 @@ superscriptaddress,
 
 
 \begin{abstract}
-
+Identifying the most stable adsorbate--surface configuration is a core step in catalyst design, but the combinatorial growth of candidate sites, orientations, and conformers renders exhaustive search expensive on complex intermetallic surfaces.
+We present AdsMind, a closed-loop multi-agent framework that couples a large language model (LLM) planner with a machine-learning force field (MACE-MP-0) through three physics-grounded feedback mechanisms: Chemical Slip detection (diagnosing mismatches between the planner's intended site and the realized post-relaxation geometry), FORBID constraints (converting failed hypotheses into negative evidence for the planner), and autonomous termination.
+Through 500 controlled runs spanning 4 LLM backends (Gemini~2.5~Pro, Grok-4, GPT-5.4, Claude~Sonnet~4.6) on the 15-case CMU benchmark and an independent 10-case OCD-GMAE validation set, we show that the closed loop: (i) achieves 100\% search success across every backend and every case, compared to 73--80\% for the single-pass Adsorb-Agent and 20--27\% failure for LLM one-shot baselines; (ii) reduces the cross-backend energy range from 0.425~eV (one-shot) to 0.129~eV (full search) on CMU, a 3.3$\times$ convergence toward a shared physical solution; (iii) delivers this reliability at 5--25$\times$ less MACE compute than random placement, heuristic site enumeration, or Adsorb-Agent; and (iv) provides chemically interpretable reasoning traces (slip events, forbid constraints) absent from brute-force methods.
+Head-to-head comparison against Adsorb-Agent under identical MACE physics, together with non-LLM random and heuristic baselines, establishes the trade-off explicitly: broader initial sampling finds lower energies when it works, but closed-loop refinement is the foundation for reliable autonomous chemistry workflows.
+All data, code, and agent trajectories are released for reproducibility.
 \end{abstract}
 
 
@@ -85,6 +88,8 @@ superscriptaddress,
 
 \section*{Results}
 \input{sections/3_Results}
+
+\input{sections/4_DiscussionConclusion}
 
 \section*{Data Availability}
 \input{sections/5_Data_Availability}

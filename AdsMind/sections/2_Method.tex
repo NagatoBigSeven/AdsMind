@@ -1,3 +1,4 @@
+
 \subsection{Closed-loop agent architecture}
 
 AdsMind is implemented as a deterministic state machine with four explicit roles: a planner, a validator, a tool executor, and a final analyzer. The planner proposes a structured adsorption hypothesis in JSON format, including the canonical site type (\textit{ontop}, \textit{bridge}, or \textit{hollow}), the intended surface symbols, and the adsorbate binding indices. The validator then enforces chemistry- and schema-level constraints before any expensive physics call is made. In the current implementation, this validation step rejects duplicate plans, invalid binding-index choices, and site/index combinations that are inconsistent with the visible heavy-atom representation of the adsorbate.

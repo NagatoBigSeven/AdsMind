@@ -1,18 +1,43 @@
 % ============================================================
 % OCD-GMAE Independent Validation Paper Tables
-% 3-backend analysis: Grok-4, GPT-5.4, Claude Sonnet 4.6
-% Gemini excluded due to AiHubMix 403 proxy failures on ablation variants
+% 4-backend analysis: Gemini 2.5 Pro, Grok-4, GPT-5.4, Claude Sonnet 4.6
+% Gemini accessed via AiHubMix proxy; remaining three via direct API
 % Source artifacts:
+%   - research/results/ocd_gmae_gemini_ablation_v1/ablation_summary.csv
 %   - research/results/ocd_gmae_xai_grok4_ablation_v1/ablation_summary.csv
 %   - research/results/ocd_gmae_openai_gpt54_ablation_v1/ablation_summary.csv
 %   - research/results/ocd_gmae_anthropic_sonnet46_ablation_v1/ablation_summary.csv
 % ============================================================
 
+% Table: OCD-GMAE Ablation Energy Matrix (Gemini 2.5 Pro)
+\begin{table}[t]
+\centering
+\small
+\caption{Gemini~2.5~Pro ablation on 10 OCD-GMAE cases drawn from the Open Catalyst 2020 Dense dataset. Lower (more negative) adsorption energy is better; bold marks the best variant per case. Gemini was accessed via Google Vertex AI direct API.}
+\label{tab:ocd-ablation-gemini}
+\begin{tabular}{lrrrrr}
+\toprule
+Case & Full & $-$Slip & $-$Forbid & $-$Term & 1-Shot \\
+\midrule
+003 & \textbf{$-$11.655} & \textbf{$-$11.655} & \textbf{$-$11.655} & \textbf{$-$11.655} & \textbf{$-$11.655} \\
+004 & \textbf{$-$10.138} & \textbf{$-$10.138} & \textbf{$-$10.138} & \textbf{$-$10.138} & $-$8.813 \\
+005 & $-$10.643 & \textbf{$-$10.643} & \textbf{$-$10.643} & $-$10.607 & \textbf{$-$10.643} \\
+012 & \textbf{$-$2.746} & $-$2.694 & \textbf{$-$2.746} & \textbf{$-$2.746} & $-$2.360 \\
+013 & \textbf{$-$10.361} & \textbf{$-$10.361} & \textbf{$-$10.361} & \textbf{$-$10.361} & $-$9.077 \\
+015 & $-$1.415 & \textbf{$-$1.570} & \textbf{$-$1.570} & $-$1.415 & $-$1.351 \\
+016 & \textbf{$-$12.999} & \textbf{$-$12.999} & \textbf{$-$12.999} & \textbf{$-$12.999} & $-$12.921 \\
+019 & \textbf{$-$3.504} & \textbf{$-$3.504} & $-$3.338 & $-$3.338 & $-$3.302 \\
+023 & \textbf{$-$14.550} & $-$14.256 & \textbf{$-$14.550} & \textbf{$-$14.550} & $-$13.564 \\
+024 & \textbf{$-$3.716} & \textbf{$-$3.716} & \textbf{$-$3.716} & \textbf{$-$3.716} & $-$3.377 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
 % Table: OCD-GMAE Ablation Energy Matrix (Grok-4)
 \begin{table}[t]
 \centering
 \small
-\caption{Grok-4 ablation on 10 OCD-GMAE cases drawn from the Open Catalyst 2020 Dense dataset. Lower (more negative) adsorption energy is better; bold marks the best variant per case.}
+\caption{Grok-4 ablation on the same 10 OCD-GMAE cases. Bold marks the best variant per case.}
 \label{tab:ocd-ablation-grok4}
 \begin{tabular}{lrrrrr}
 \toprule
@@ -80,22 +105,22 @@ Case & Full & $-$Slip & $-$Forbid & $-$Term & 1-Shot \\
 \end{tabular}
 \end{table}
 
-% Table: OCD-GMAE Cross-LLM Robustness (3-backend)
+% Table: OCD-GMAE Cross-LLM Robustness (4-backend, Gemini via Vertex AI direct)
 \begin{table}[t]
 \centering
-\caption{Cross-LLM robustness on the OCD-GMAE independent validation set (3~backends: Grok-4, GPT-5.4, Claude). The three-backend range is max--min energy for the same case and variant.}
+\caption{Cross-LLM robustness on the OCD-GMAE independent validation set (4~backends: Gemini~2.5~Pro, Grok-4, GPT-5.4, Claude). The four-backend range is max--min energy for the same case and variant.}
 \label{tab:ocd-cross-llm}
 \begin{tabular}{lrrr}
 \toprule
-Variant & Mean 3-backend range (eV) & $\leq$0.01\,eV & Largest range (eV) \\
+Variant & Mean 4-backend range (eV) & $\leq$0.01\,eV & Largest range (eV) \\
 \midrule
 Full & 0.352 & 2/10 & 1.247 \\
-$-$Slip & 0.248 & 4/10 & 1.247 \\
-$-$Forbid & 0.253 & 8/10 & 1.284 \\
-$-$Term & 0.098 & 6/10 & 0.689 \\
-1-Shot & 0.698 & 2/10 & 4.674 \\
+$-$Slip & 0.273 & 4/10 & 1.247 \\
+$-$Forbid & 0.292 & 6/10 & 1.284 \\
+$-$Term & 0.240 & 4/10 & 1.247 \\
+1-Shot & 0.810 & 1/10 & 4.674 \\
 \midrule
-Overall & 0.330 & 22/50 & 4.674 \\
+Overall & 0.393 & 17/50 & 4.674 \\
 \bottomrule
 \end{tabular}
 \end{table}
