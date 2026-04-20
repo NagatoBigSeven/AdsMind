@@ -11,8 +11,8 @@ from unittest.mock import patch
 
 from langchain_core.messages import AIMessage, ToolMessage
 
-from src.agent import agent
-from src.utils import preflight
+from adsmind.agent import agent
+from adsmind.utils import preflight
 
 
 class FakeExecutor:
@@ -36,12 +36,12 @@ class TestEntrypoints(unittest.TestCase):
         )
 
         with (
-            patch("src.agent.agent.parse_args", return_value=args),
-            patch("src.agent.agent.get_agent_executor", return_value=FakeExecutor()),
-            patch("src.agent.agent.os.path.exists", return_value=True),
-            patch("src.utils.config.get_llm_backend_name", return_value="google"),
+            patch("adsmind.agent.agent.parse_args", return_value=args),
+            patch("adsmind.agent.agent.get_agent_executor", return_value=FakeExecutor()),
+            patch("adsmind.agent.agent.os.path.exists", return_value=True),
+            patch("adsmind.utils.config.get_llm_backend_name", return_value="google"),
             patch(
-                "src.utils.config.get_api_key_for_backend",
+                "adsmind.utils.config.get_api_key_for_backend",
                 return_value=("dummy-key", "env"),
             ),
         ):
@@ -54,11 +54,11 @@ class TestEntrypoints(unittest.TestCase):
         self.assertIn("final report", output)
 
     def test_streamlit_root_entrypoint_reexports_app_module(self):
-        fake_app = types.ModuleType("src.app.app")
+        fake_app = types.ModuleType("adsmind.app.app")
         fake_app.EXPORTED_SENTINEL = "ok"
 
-        original = sys.modules.get("src.app.app")
-        sys.modules["src.app.app"] = fake_app
+        original = sys.modules.get("adsmind.app.app")
+        sys.modules["adsmind.app.app"] = fake_app
         sys.modules.pop("streamlit_app", None)
         try:
             module = importlib.import_module("streamlit_app")
@@ -66,9 +66,41 @@ class TestEntrypoints(unittest.TestCase):
         finally:
             sys.modules.pop("streamlit_app", None)
             if original is None:
-                sys.modules.pop("src.app.app", None)
+                sys.modules.pop("adsmind.app.app", None)
             else:
-                sys.modules["src.app.app"] = original
+                sys.modules["adsmind.app.app"] = original
+
+    def test_packaged_streamlit_launcher_targets_app_module(self):
+        from adsmind.app import launcher
+
+        captured = {}
+
+        def fake_main():
+            captured["argv"] = list(sys.argv)
+
+        fake_cli = types.ModuleType("streamlit.web.cli")
+        fake_cli.main = fake_main
+        fake_web = types.ModuleType("streamlit.web")
+        fake_web.cli = fake_cli
+        fake_streamlit = types.ModuleType("streamlit")
+        fake_streamlit.web = fake_web
+
+        with (
+            patch.dict(
+                sys.modules,
+                {
+                    "streamlit": fake_streamlit,
+                    "streamlit.web": fake_web,
+                    "streamlit.web.cli": fake_cli,
+                },
+            ),
+            patch.object(sys, "argv", ["adsmind-ui", "--server.port=9999"]),
+        ):
+            launcher.main()
+
+        self.assertEqual(captured["argv"][0:2], ["streamlit", "run"])
+        self.assertTrue(captured["argv"][2].endswith("adsmind/app/app.py"))
+        self.assertIn("--server.port=9999", captured["argv"])
 
     def test_preflight_main_json_output(self):
         report = {
@@ -82,7 +114,7 @@ class TestEntrypoints(unittest.TestCase):
         }
         stdout = io.StringIO()
         with (
-            patch("src.utils.preflight.run_preflight", return_value=(0, report)),
+            patch("adsmind.utils.preflight.run_preflight", return_value=(0, report)),
             redirect_stdout(stdout),
         ):
             code = preflight.main(["--json", "--ci"])

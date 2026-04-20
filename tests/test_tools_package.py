@@ -5,9 +5,11 @@ import unittest
 from pathlib import Path
 from unittest.mock import patch
 
-import src.tools as tools
-from src.tools.common import ensure_output_dir, sanitize_smiles_for_filename
-from src.tools.constants import RelaxationMode
+import adsmind.tools as tools
+from adsmind.tools.common import ensure_output_dir, sanitize_smiles_for_filename
+from adsmind.tools.constants import RelaxationMode
+
+ROOT = Path(__file__).resolve().parents[1]
 
 
 class TestToolsPackage(unittest.TestCase):
@@ -30,7 +32,7 @@ class TestToolsPackage(unittest.TestCase):
     def test_ensure_output_dir_creates_session_subdir(self):
         with tempfile.TemporaryDirectory() as tmpdir:
             fake_root = Path(tmpdir) / "outputs"
-            with patch("src.tools.common.OUTPUT_ROOT", fake_root):
+            with patch("adsmind.tools.common.OUTPUT_ROOT", fake_root):
                 session_dir = ensure_output_dir("session01")
 
             self.assertTrue(session_dir.exists())
@@ -38,7 +40,7 @@ class TestToolsPackage(unittest.TestCase):
 
     def test_analyze_surface_sites_returns_inventory(self):
         analysis = tools.analyze_surface_sites(
-            "/Users/nagato/workspace/AdsMind/benchmark_slabs/01_Mo3Pd_111.xyz"
+            str(ROOT / "benchmark_slabs" / "01_Mo3Pd_111.xyz")
         )
         self.assertIn("surface_composition", analysis)
         self.assertIn("available_sites_description", analysis)

@@ -1,0 +1,76 @@
+
+%\yuyang{Rewrite by gemini3.1, I will use review mode to edit it.}
+
+
+\subsection{Closed-Loop Agent Architecture}
+
+The proposed \textit{AdsMind} framework operates as a closed-loop, deterministic state machine driven by Large Language Models (LLMs). The architecture is partitioned into four explicit functional roles—a Planner, a Validator, a Tool Executor, and a Final Analyzer—which cyclically interact to explore the potential energy surface of adsorbate-surface systems. The workflow is instantiated as a directed graph where the state encapsulates the target molecule (represented via SMILES), the surface slab, conversation history, and structural metrics.
+
+At the onset of each iteration, the \textbf{Planner} proposes a structured adsorption hypothesis in a constrained JSON format. This hypothesis comprises the canonical site type (i.e., \textit{ontop}, \textit{bridge}, or \textit{hollow}), the intended surface atomic symbols, and the adsorbate binding indices.
+
+Subsequently, the \textbf{Validator} enforces stringent chemistry- and schema-level constraints prior to invoking any computationally expensive physical simulations. The validation protocol ensures that:
+\begin{enumerate}
+    \item The requested adsorbate binding indices are valid and correspond to non-hydrogen heavy atoms, unless the adsorbate is explicitly a single atom (e.g., [H]).
+    \item The cardinality of the binding indices matches the topological requirements of the specified site type (e.g., \textit{ontop} requires exactly one index, while \textit{bridge} allows up to two indices for side-on modes).
+    \item The hypothesis has not been previously evaluated within the current search trajectory, thereby preventing redundant calculations.
+\end{enumerate}
+Hypotheses failing these checks elicit an immediate penalty feedback prompt, directing the LLM to refine its proposal without advancing the state machine to the physical simulation phase.
+
+\subsection{Semantic-to-Geometric Execution}
+\label{subsec:semantic_geometric}
+
+Once a hypothesis is validated, it must be translated from a discrete semantic representation into a continuous, physically valid 3D geometry. This semantic-to-geometric mapping is achieved through a surrogate-SMILES geometry layer, leveraging the underlying routines of \textit{AutoAdsorbate}.
+
+The framework first maps the selected binding atoms to proxy adsorption markers. For complex adsorbates, conformers are generated and initialized by aligning these proxy markers with the target coordinate vectors defined by the specified surface site. To account for local minima in the placement, the system samples a predefined capacity of initial configurations (e.g., four conformers across up to eight sampled surface coordinates per semantic site family).
+
+A two-stage evaluation procedure is then employed to optimize computational throughput. The candidate structures undergo a computationally inexpensive screening phase, integrating a short molecular dynamics (MD) warmup via Langevin dynamics, followed by a preliminary static potential energy evaluation. The structures are subsequently ranked, and the most stable candidate is propagated to the full structural relaxation phase.
+
+\subsection{Atomistic Simulation and Objective Functions}
+\label{subsec:atomistic_simulation}
+
+The core physical engine of the \textit{AdsMind} framework relies on Machine Learning Interatomic Potentials (MLIPs), specifically the MACE (Machine Learning for a Materials Foundation Model) architecture, functioning as the primary surrogate calculator.
+
+For a given adsorption state, the thermodynamic stability is quantified by the adsorption energy $E_{\text{ads}}$, defined as:
+\begin{equation}
+    E_{\text{ads}} = E_{\text{total}} - E_{\text{surface}} - E_{\text{adsorbate}}
+    \label{eq:adsorption_energy}
+\end{equation}
+where $E_{\text{total}}$ is the total potential energy of the relaxed adsorbate-slab system, $E_{\text{surface}}$ is the single-point potential energy of the bare surface (evaluated under identical boundary and constraint conditions), and $E_{\text{adsorbate}}$ is the energy of the isolated adsorbate in a vacuum box.
+
+Structural relaxation is performed using the Broyden–Fletcher–Goldfarb–Shanno (BFGS) optimization algorithm. The forces $\mathbf{F}_i$ on each unconstrained atom $i$ are minimized until the maximum force component falls below a predefined threshold $f_{\text{max}}$:
+\begin{equation}
+    \max_{i} \| \mathbf{F}_i \|_{\infty} \le f_{\text{max}}
+\end{equation}
+During the optimization, a selective constraint protocol is applied. In the standard mode, the bottom fraction of the surface slab atoms (typically one-third of the $z$-axis dimension) is held fixed to simulate the bulk crystal termination, while the upper atomic layers and the adsorbate are fully relaxed.
+
+\subsection{Automated Post-Relaxation Analysis and Chemical Slip Detection}
+\label{subsec:post_relaxation_analysis}
+
+Following geometric optimization, the \textbf{Final Analyzer} module systematically parses the relaxed trajectory to extract the precise local coordination environment. A critical innovation in \textit{AdsMind} is the automated detection of \textit{Chemical Slips}. A chemical slip occurs when the energy minimization gradient drives the adsorbate from the planner’s intended semantic site to a disparate stable geometric site.
+
+The connectivity of the relaxed system is established by constructing a localized adjacency matrix $A$. Two atoms $i$ and $j$ are considered bonded if their interatomic distance $d_{ij}$ satisfies:
+\begin{equation}
+    d_{ij} \le \gamma \left( R_i + R_j \right)
+\end{equation}
+where $R_i$ and $R_j$ are the natural covalent radii of the atoms, and $\gamma$ is an empirically tuned tolerance multiplier (defaulting to 1.35, but dynamically scaled based on the relative strength of adsorption domains). Using the adjacency matrix $A$, the system evaluates:
+\begin{itemize}
+    \item \textbf{Dissociation:} Computed via the connected components of the adsorbate subgraph. If the number of components exceeds one, intramolecular dissociation is flagged.
+    \item \textbf{Coordination Environment:} By identifying all surface atoms $k$ bonded to the targeted adsorbate anchor atom $a$ ($A_{ak} = 1$), the actual site type is classified into \textit{ontop} ($\sum_k A_{ak} = 1$), \textit{bridge} ($\sum_k A_{ak} = 2$), or \textit{hollow} ($\sum_k A_{ak} \ge 3$).
+\end{itemize}
+If the realized coordination environment differs from the planner’s intent, the slip is explicitly logged. The analyzer updates the running memory with the empirical $E_{\text{ads}}$, bond integrity, and slip status, enabling the LLM to dynamically adjust its exploration strategy in subsequent iterations.
+
+\subsection{Prompting Strategy and Ablation Mechanisms}
+\label{subsec:prompting_strategy}
+
+To rigorously evaluate the heuristic capabilities of the LLM, the \textit{AdsMind} planner prompt is dynamically assembled using conditional logic. Three primary ablation switches control the agentic feedback mechanisms:
+\begin{enumerate}
+    \item \textbf{Slip Feedback:} Injects historical occurrences of chemical slips into the prompt context, providing explicit evidence that previously planned configurations are geometrically unstable on the specific local potential energy surface.
+    \item \textbf{FORBID Constraint:} Enforces an explicit negative constraint, prohibiting the LLM from proposing site families or specific index combinations that previously resulted in a chemical slip, high-energy local minima, or structural failure.
+    \item \textbf{Termination Signal:} Grants the planner the autonomy to conclude the search phase early if consecutive iterations converge to the identical optimal global minimum, thus conserving the computational budget.
+\end{enumerate}
+The complete framework, termed \textit{Full}, activates all three mechanisms. Ablation variants (e.g., \textit{$-$Slip}, \textit{$-$Forbid}, \textit{$-$Term}) selectively disable these modules to isolate their individual contributions to the overall search efficiency. Furthermore, a \textit{1-Shot} baseline restricts the search to a single attempt, eliminating the closed-loop feedback entirely.
+
+\subsection{Benchmark and Computational Protocol}
+\label{subsec:computational_protocol}
+
+All benchmark evaluations executed in this study utilize frozen experiment configurations to guarantee exact reproducibility. The reasoning agents invoke foundational models (e.g., Gemini 2.5 Pro, GPT-5.4, Claude Sonnet 4.6) at a temperature of $T=0.0$ to ensure deterministic policy generation. The physical relaxation backend, powered by MACE, is constrained to a predefined architecture (\texttt{model=small}) executed in single-precision (\texttt{float32}) without dispersion corrections. This standardization balances rapid throughput with sufficient accuracy for generative screening. To maintain data provenance, each computational run comprehensively logs the initial coordinates, optimization trajectory, thermodynamic markers, and the precise agentic decision tree.

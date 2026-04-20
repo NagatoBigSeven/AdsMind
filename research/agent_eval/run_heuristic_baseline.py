@@ -25,11 +25,11 @@ from research.agent_eval.baseline_utils import (
     write_json,
 )
 from research.agent_eval.common import load_manifest_map, resolve_repo_path
-from src.tools.fragment import (
+from adsmind.tools.fragment import (
     _bump_adsorbate_to_safe_distance,
     create_fragment_from_plan,
 )
-from src.tools.patches import apply_autoadsorbate_patches
+from adsmind.tools.patches import apply_autoadsorbate_patches
 
 
 SUMMARY_FIELDS = [

@@ -2,7 +2,7 @@
 
 import unittest
 
-from src.agent.agent import (
+from adsmind.agent.agent import (
     _coalesce_override,
     extract_token_usage,
     get_valid_binding_indices,

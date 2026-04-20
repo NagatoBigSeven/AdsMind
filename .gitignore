@@ -224,6 +224,16 @@ research/images/
 .pytest_cache/
 .ruff_cache/
 CatalystAIgent/
+.claude/
+
+# Local credentials and provider tokens
+secret_keys.py
+*.credentials.json
+application_default_credentials.json
+*.pem
+*.key
+.env.*
+!.env.example
 
 ### PyCharm ###
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio, WebStorm and Rider
@@ -920,3 +930,15 @@ research/results/**/*.xyz
 research/results/**/agent_log.txt
 # Per-run MACE configs (reproducible from frozen_config)
 research/results/**/config.json
+
+# Internal research planning notes and local run reports
+ideas/
+research/*PLAN*.md
+research/NEXT_STEPS*.md
+research/agent_eval/reports/
+research/agent_eval/configs/outputs/
+research/agent_eval/*.sh
+research/agent_eval/*tmux*.sh
+research/agent_eval/monitor_*progress.sh
+research/agent_eval/watchdog_*.sh
+research/agent_eval/recover_*

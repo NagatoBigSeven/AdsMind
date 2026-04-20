@@ -6,7 +6,7 @@ import argparse
 import csv
 import json
 from pathlib import Path
-from typing import Any, Dict, Iterable, List, Optional
+from typing import Any, Iterable, Optional
 
 
 def parse_args(argv: Optional[list[str]] = None) -> argparse.Namespace:

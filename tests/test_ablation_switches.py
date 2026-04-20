@@ -2,7 +2,7 @@
 
 import unittest
 
-from src.agent.history import build_history_entry
+from adsmind.agent.history import build_history_entry
 
 
 class TestAblationSwitches(unittest.TestCase):

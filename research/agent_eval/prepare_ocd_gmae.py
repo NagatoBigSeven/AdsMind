@@ -5,6 +5,7 @@ from __future__ import annotations
 import argparse
 import csv
 import json
+import os
 import pickle
 import re
 from collections import Counter
@@ -19,7 +20,7 @@ from ase.io import write
 
 from research.agent_eval.common import resolve_repo_path
 
-DEFAULT_LMDB_PATH = Path("/Users/nagato/workspace/AdsMT/datasets/OCD-GMAE/data.lmdb")
+DEFAULT_LMDB_PATH = Path(os.environ.get("OCD_GMAE_LMDB_PATH", "datasets/OCD-GMAE/data.lmdb"))
 DEFAULT_MANIFEST_PATH = Path("research/agent_eval/manifests/ocd_gmae_manifest.csv")
 DEFAULT_SLAB_DIR = Path("research/agent_eval/generated_slabs/ocd_gmae")
 DEFAULT_SUMMARY_PATH = Path("research/agent_eval/manifests/ocd_gmae_manifest_selection.json")

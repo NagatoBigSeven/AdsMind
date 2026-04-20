@@ -17,7 +17,7 @@ from ase import Atoms
 from ase.build import fcc111
 from ase.io import write
 
-from src.tools.tools import read_atoms_object, prepare_slab
+from adsmind.tools.tools import read_atoms_object, prepare_slab
 
 
 class TestFormatReading(unittest.TestCase):

@@ -9,7 +9,6 @@ import logging
 import shutil
 import subprocess
 import traceback
-import uuid
 from contextlib import contextmanager, redirect_stderr, redirect_stdout
 from dataclasses import dataclass
 from datetime import datetime, timezone
@@ -18,11 +17,11 @@ from statistics import median
 from typing import Any, Dict, Iterable, Iterator, List, Optional, Sequence
 
 from langchain_core.messages import AIMessage
-from scipy.stats import binomtest, bootstrap, friedmanchisquare, rankdata, wilcoxon
+from scipy.stats import binomtest, bootstrap, rankdata
 
-from src.agent.agent import _prepare_initial_state, get_agent_executor
-from src.tools.common import ensure_output_dir
-from src.utils.config import get_api_key_for_backend
+from adsmind.agent.agent import _prepare_initial_state
+from adsmind.tools.common import ensure_output_dir
+from adsmind.utils.config import get_api_key_for_backend
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 RUN_RECURSION_LIMIT = 50
@@ -428,7 +427,7 @@ def capture_logs(log_path: Path) -> Iterator[io.StringIO]:
     for name, logger_obj in logger_map.items():
         if not isinstance(logger_obj, logging.Logger):
             continue
-        if name.startswith("src.") or name.startswith("research."):
+        if name.startswith("adsmind.") or name.startswith("research."):
             logger_obj.addHandler(file_handler)
             attached_loggers.append(logger_obj)
 

@@ -19,7 +19,7 @@ from ase.optimize import BFGS
 from rdkit import Chem
 from rdkit.Chem import AllChem
 
-from src.tools.constants import FIXED_BOTTOM_FRACTION
+from adsmind.tools.constants import FIXED_BOTTOM_FRACTION
 
 
 @dataclass

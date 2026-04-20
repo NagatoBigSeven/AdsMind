@@ -4,8 +4,8 @@ Lightweight smoke tests for import and graph compilation.
 
 import unittest
 
-from src.agent.agent import _prepare_initial_state, get_agent_executor
-from src.calculators.mace_backend import _ensure_torch_compiler_compat
+from adsmind.agent.agent import _prepare_initial_state, get_agent_executor
+from adsmind.calculators.mace_backend import _ensure_torch_compiler_compat
 
 
 class TestSmoke(unittest.TestCase):

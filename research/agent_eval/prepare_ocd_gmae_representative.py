@@ -7,7 +7,7 @@ import json
 from collections import Counter
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Dict, Iterable, Optional, Sequence
+from typing import Dict, Optional, Sequence
 
 from research.agent_eval.common import resolve_repo_path
 from research.agent_eval.prepare_ocd_gmae import (

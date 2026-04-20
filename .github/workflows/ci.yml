@@ -20,7 +20,7 @@ jobs:
         run: python -m pip install --upgrade pip && python -m pip install -e ".[dev]"
 
       - name: Run Ruff
-        run: python -m ruff check src tests streamlit_app.py research
+        run: python -m ruff check adsmind tests streamlit_app.py research
 
   test:
     strategy:
@@ -50,7 +50,7 @@ jobs:
         run: python -m pip install --upgrade pip && python -m pip install -e ".[dev]"
 
       - name: Compile sources
-        run: python -m compileall src tests streamlit_app.py research
+        run: python -m compileall adsmind tests streamlit_app.py research
 
       - name: Run preflight
         run: adsmind-preflight --ci

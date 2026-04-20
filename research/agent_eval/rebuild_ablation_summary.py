@@ -16,7 +16,6 @@ from typing import Any, Dict, List, Optional
 from scipy.stats import friedmanchisquare, wilcoxon
 
 from research.agent_eval.common import (
-    ABLATED_VARIANTS,
     benjamini_hochberg,
     compute_bootstrap_ci,
     rank_biserial_from_differences,
@@ -129,7 +128,7 @@ def rebuild(
     stats: Dict[str, Any] = {"friedman": None, "pairwise": {}, "bh_fdr": {}}
     n = len(case_ids)
     matrix = [variant_energies[v] for v in variants if len(variant_energies[v]) == n]
-    if len(matrix) >= 2 and len({tuple(s) for s in matrix}) > 1:
+    if len(matrix) >= 3 and len({tuple(s) for s in matrix}) > 1:
         fr = friedmanchisquare(*matrix)
         stats["friedman"] = {"statistic": float(fr.statistic), "p_value": float(fr.pvalue)}
 

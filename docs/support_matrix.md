@@ -10,7 +10,7 @@ validated.
 |--------|--------|---------|
 | 3.10 | CI-tested | GitHub Actions unit-test job |
 | 3.11 | CI-tested | GitHub Actions unit-test job |
-| 3.12+ | Best effort | Not part of the supported baseline yet |
+| 3.12+ | Unsupported for packaged installs | Current MACE/PyTorch baseline is pinned to Python 3.10/3.11 |
 
 ## Operating Systems
 
@@ -26,6 +26,9 @@ validated.
 | Backend | Status | Validation Level |
 |--------|--------|------------------|
 | Google | Core | Config and factory tests, production default |
+| Vertex AI | Core-hosted | Factory tests; requires Google ADC on the host |
+| Anthropic | Core-hosted | Config and factory tests |
+| xAI | Core-hosted | Config and factory tests |
 | OpenRouter | Core | Config and factory tests |
 | Ollama | Core | Config and factory tests; requires local daemon |
 | HuggingFace | Experimental-local | Factory tests plus cache-key regression test; model availability depends on host stack |
@@ -40,6 +43,7 @@ validated.
 ## Validation Scope
 
 - `python -m unittest discover -s tests -p 'test_*.py' -v` is the required regression baseline.
-- `python -m compileall src tests streamlit_app.py research` is the required import/compile smoke baseline.
+- `python -m compileall adsmind tests streamlit_app.py research` is the required import/compile smoke baseline.
 - `adsmind-preflight --ci` is the required install/runtime sanity baseline.
+- `python -m build --sdist --wheel` and `twine check dist/*` are the required packaging checks before PyPI upload.
 - Streamlit, remote APIs, and heavy relaxation runs are validated as runtime paths, but not exercised in CI to avoid network and hardware coupling.

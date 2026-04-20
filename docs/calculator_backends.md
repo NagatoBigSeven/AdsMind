@@ -6,9 +6,9 @@ AdsMind supports pluggable calculator backends for atomistic simulations. This a
 
 The default backend is **MACE** (MACE-MP foundation model). No configuration is needed for basic usage.
 
-```python
+```bash
 # The agent automatically uses MACE with platform-optimized settings
-streamlit run streamlit_app.py
+adsmind-ui
 ```
 
 ## Backend Selection
@@ -28,7 +28,7 @@ Legacy `ADSKRK_BACKEND` is still accepted as a fallback.
 ### Programmatic Usage
 
 ```python
-from src.calculators import get_backend, CalculatorConfig
+from adsmind.calculators import get_backend, CalculatorConfig
 
 # Get backend instance
 backend = get_backend("mace")
@@ -55,10 +55,10 @@ MACE automatically adapts to your platform:
 
 To add a new backend (e.g., DeePMD-kit):
 
-1. Create `src/calculators/deepmd_backend.py`:
+1. Create `adsmind/calculators/deepmd_backend.py`:
 
 ```python
-from src.calculators.base import BaseBackend, CalculatorConfig, RelaxationParams
+from adsmind.calculators.base import BaseBackend, CalculatorConfig, RelaxationParams
 
 class DeePMDBackend(BaseBackend):
     @property
@@ -72,10 +72,10 @@ class DeePMDBackend(BaseBackend):
     # ... implement other abstract methods
 ```
 
-1. Register in `src/calculators/factory.py`:
+1. Register in `adsmind/calculators/factory.py`:
 
 ```python
-from src.calculators.deepmd_backend import DeePMDBackend
+from adsmind.calculators.deepmd_backend import DeePMDBackend
 
 _BACKENDS = {
     "mace": MACEBackend,

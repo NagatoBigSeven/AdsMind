@@ -7,7 +7,7 @@ import unittest
 from pathlib import Path
 from unittest.mock import patch
 
-from src.utils import config as config_module
+from adsmind.utils import config as config_module
 
 
 class TestAdsMindRenameCompatibility(unittest.TestCase):

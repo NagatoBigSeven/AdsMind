@@ -23,7 +23,7 @@ from research.agent_eval.run_case import execute_case
 from research.agent_eval.summarize_runs import main as summarize_main
 
 
-ROOT = Path("/Users/nagato/workspace/AdsMind")
+ROOT = Path(__file__).resolve().parents[1]
 MANIFEST = ROOT / "research/agent_eval/manifests/cmu_manifest.csv"
 CONFIG = ROOT / "research/agent_eval/configs/frozen_config.json"
 
@@ -35,7 +35,7 @@ class TestAgentEvalTools(unittest.TestCase):
         manifest = load_manifest(MANIFEST)
         config = load_frozen_config(CONFIG)
         self.assertEqual(len(manifest), 20)
-        self.assertEqual(config["llm_model"], "gemini-3.1-pro-preview")
+        self.assertEqual(config["llm_model"], "gemini-2.5-pro")
         self.assertEqual(config["mace_model"], "small")
 
     def test_resolve_runtime_flags_drops_none_relaxation_values(self):

@@ -1,57 +1,81 @@
-# Agent Eval
+# Agent Evaluation
 
-This directory contains the reproducible tooling and metadata for AdsMind's
-agent-side benchmark and ablation work.
+This directory contains the reusable benchmark tooling and locked metadata used
+for AdsMind's agent-side experiments. It is intended to be reproducible public
+research infrastructure, not a logbook of local runs.
 
-## Layout
+## Authoritative Inputs
 
-- [`common.py`](/Users/nagato/workspace/AdsMind/research/agent_eval/common.py)
-  Shared helpers for loading manifests/configs, serializing results, and
-  computing summary statistics.
-- [`run_case.py`](/Users/nagato/workspace/AdsMind/research/agent_eval/run_case.py)
-  Run one benchmark case and persist a structured case directory.
-- [`run_batch.py`](/Users/nagato/workspace/AdsMind/research/agent_eval/run_batch.py)
-  Execute a manifest sequentially and emit a summary CSV.
-- [`run_ablation.py`](/Users/nagato/workspace/AdsMind/research/agent_eval/run_ablation.py)
-  Run the locked ablation variants on a selected case set.
-- [`prepare_ocd_gmae.py`](/Users/nagato/workspace/AdsMind/research/agent_eval/prepare_ocd_gmae.py)
-  Build an AdsMind-compatible OCD-GMAE subset manifest and export bare slab files.
-- [`rank_one_shot_ranges.py`](/Users/nagato/workspace/AdsMind/research/agent_eval/rank_one_shot_ranges.py)
-  Rank benchmark cases by cross-backend one-shot energy spread.
-- [`summarize_runs.py`](/Users/nagato/workspace/AdsMind/research/agent_eval/summarize_runs.py)
-  Rebuild a summary table from an output directory.
-- [`compare_adsorbagent.py`](/Users/nagato/workspace/AdsMind/research/agent_eval/compare_adsorbagent.py)
-  Join AdsMind outputs with paper-reported Adsorb-Agent values and compute
-  comparison statistics.
-- [`package_results.py`](/Users/nagato/workspace/AdsMind/research/agent_eval/package_results.py)
-  Build curated handoff and SI-ready result packages from local outputs.
+- `manifests/cmu_manifest.csv`: CMU benchmark case definitions.
+- `manifests/ocd_gmae_manifest.csv`: OCD-GMAE validation subset.
+- `manifests/ocd_gmae_rep50_manifest.csv`: 50-case OCD-GMAE one-shot subset.
+- `configs/frozen_config*.json`: backend-specific locked experiment configs.
+  See `configs/README.md` for public routes versus provenance-only proxy
+  routes.
+- `generated_slabs/`: derived slab files for OCD-GMAE manifests.
 
-## Metadata
+OCD-GMAE manifest generation expects an LMDB dataset path via
+`--lmdb-path` or `OCD_GMAE_LMDB_PATH`; no machine-specific default path is
+stored in the repository.
 
-- [`manifests/cmu_manifest.csv`](/Users/nagato/workspace/AdsMind/research/agent_eval/manifests/cmu_manifest.csv)
-  Locked benchmark case definitions.
-- [`configs/frozen_config.json`](/Users/nagato/workspace/AdsMind/research/agent_eval/configs/frozen_config.json)
-  Reference experiment config.
-- [`configs/frozen_config_aihubmix.json`](/Users/nagato/workspace/AdsMind/research/agent_eval/configs/frozen_config_aihubmix.json)
-  AIHubMix transport variant used when direct Google quota was blocked.
-- [`configs/frozen_config_xai_grok4.json`](/Users/nagato/workspace/AdsMind/research/agent_eval/configs/frozen_config_xai_grok4.json)
-  xAI transport variant for multi-attempt runs.
-- [`configs/frozen_config_xai_grok4_one_shot.json`](/Users/nagato/workspace/AdsMind/research/agent_eval/configs/frozen_config_xai_grok4_one_shot.json)
-  xAI transport variant for one-shot runs.
+## Core Commands
 
-## Reports
+Run a manifest sequentially:
 
-- [`reports/SMILES_RESOLUTION.md`](/Users/nagato/workspace/AdsMind/research/agent_eval/reports/SMILES_RESOLUTION.md)
-- [`reports/PHASE_0_REPORT.md`](/Users/nagato/workspace/AdsMind/research/agent_eval/reports/PHASE_0_REPORT.md)
-- [`reports/PHASE_2_REPORT.md`](/Users/nagato/workspace/AdsMind/research/agent_eval/reports/PHASE_2_REPORT.md)
+```bash
+python -m research.agent_eval.run_batch \
+  --manifest research/agent_eval/manifests/cmu_manifest.csv \
+  --config research/agent_eval/configs/frozen_config_gemini25pro_vertexai_one_shot.json \
+  --output research/results/cmu_v1_gemini_one_shot
+```
 
-## Notes
+Run an ablation matrix:
 
-- Local machine-generated outputs belong under
-  [`research/results`](/Users/nagato/workspace/AdsMind/research/results), which is Git-ignored by default.
-- This directory is for reusable experiment logic and curated metadata, not raw
-  run products.
-- Shell helpers under this directory are for launching or monitoring reproducible
-  experiment batches, such as `run_ocd_gmae_one_shot.sh`,
-  `launch_ocd_gmae_one_shot_tmux.sh`, `monitor_ocd_gmae_one_shot.sh`, and
-  `rebuild_phase_a_extended.sh`.
+```bash
+python -m research.agent_eval.run_ablation \
+  --manifest research/agent_eval/manifests/cmu_manifest.csv \
+  --config research/agent_eval/configs/frozen_config_gemini25pro_vertexai.json \
+  --output research/results/gemini_ablation_v1 \
+  --cases 01,02,09,14,19 \
+  --variants full,no_slip,no_forbid,no_termination
+```
+
+Rebuild summaries from existing result directories:
+
+```bash
+python -m research.agent_eval.summarize_runs \
+  --input research/results/cmu_v1_gemini_one_shot \
+  --output research/results/cmu_v1_gemini_one_shot/summary.csv
+```
+
+```bash
+python -m research.agent_eval.rebuild_ablation_summary \
+  --ablation-dir research/results/gemini_ablation_v1 \
+  --one-shot-dir research/results/cmu_v1_gemini_one_shot
+```
+
+## Useful Utilities
+
+- `compare_adsorbagent.py`: joins AdsMind outputs with Adsorb-Agent reference values.
+- `compare_llm_ablation.py`: compares ablation summaries across backends.
+- `rank_one_shot_ranges.py`: ranks cases by cross-backend one-shot energy spread.
+- `summarize_multi_backend_ablation.py`: builds multi-backend ablation tables.
+- `evaluate_ocd_gmae_ground_truth.py`: compares OCD-GMAE predictions with reference values.
+- `package_results.py`: creates curated result packages from local outputs.
+
+## Results
+
+Paper-facing outputs live in `research/results/`. Start with
+`research/results/README.md` before using any CSV/JSON file, because several
+intermediate tables have similar names and some superseded tables were removed
+during public-release cleanup.
+
+## Public-Release Policy
+
+- Do not commit API keys, provider credentials, local shell profiles, or private
+  workstation details.
+- Do not commit transient run logs, tmux/watchdog notes, local status reports,
+  per-run `config.json`, `agent_log.txt`, trajectories, or generated structures.
+- Keep historical execution plans and local recovery notes outside version
+  control. Reproducibility should come from manifests, frozen configs, scripts,
+  and the curated result manifest.

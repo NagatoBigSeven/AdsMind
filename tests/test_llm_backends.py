@@ -17,69 +17,69 @@ class TestLLMFactory(unittest.TestCase):
     
     def test_factory_import(self):
         """Test that factory can be imported."""
-        from src.llms import get_llm_backend, get_available_llm_backends
+        from adsmind.llms import get_llm_backend, get_available_llm_backends
         self.assertTrue(callable(get_llm_backend))
         self.assertTrue(callable(get_available_llm_backends))
     
     def test_get_google_backend(self):
         """Test getting Google backend."""
-        from src.llms import get_llm_backend
+        from adsmind.llms import get_llm_backend
         backend = get_llm_backend("google")
         self.assertEqual(backend.name, "google")
         self.assertTrue(backend.requires_api_key)
 
     def test_get_google_vertexai_backend(self):
         """Test getting Google Vertex AI backend."""
-        from src.llms import get_llm_backend
+        from adsmind.llms import get_llm_backend
         backend = get_llm_backend("google_vertexai")
         self.assertEqual(backend.name, "google_vertexai")
         self.assertFalse(backend.requires_api_key)
     
     def test_get_openrouter_backend(self):
         """Test getting OpenRouter backend."""
-        from src.llms import get_llm_backend
+        from adsmind.llms import get_llm_backend
         backend = get_llm_backend("openrouter")
         self.assertEqual(backend.name, "openrouter")
         self.assertTrue(backend.requires_api_key)
 
     def test_get_anthropic_backend(self):
         """Test getting Anthropic backend."""
-        from src.llms import get_llm_backend
+        from adsmind.llms import get_llm_backend
         backend = get_llm_backend("anthropic")
         self.assertEqual(backend.name, "anthropic")
         self.assertTrue(backend.requires_api_key)
 
     def test_get_xai_backend(self):
         """Test getting xAI backend."""
-        from src.llms import get_llm_backend
+        from adsmind.llms import get_llm_backend
         backend = get_llm_backend("xai")
         self.assertEqual(backend.name, "xai")
         self.assertTrue(backend.requires_api_key)
     
     def test_get_ollama_backend(self):
         """Test getting Ollama backend."""
-        from src.llms import get_llm_backend
+        from adsmind.llms import get_llm_backend
         backend = get_llm_backend("ollama")
         self.assertEqual(backend.name, "ollama")
         self.assertFalse(backend.requires_api_key)
     
     def test_get_huggingface_backend(self):
         """Test getting HuggingFace backend."""
-        from src.llms import get_llm_backend
+        from adsmind.llms import get_llm_backend
         backend = get_llm_backend("huggingface")
         self.assertEqual(backend.name, "huggingface")
         self.assertFalse(backend.requires_api_key)
     
     def test_unknown_backend_raises_error(self):
         """Test that unknown backend raises ValueError."""
-        from src.llms import get_llm_backend
+        from adsmind.llms import get_llm_backend
         with self.assertRaises(ValueError) as exc_info:
             get_llm_backend("unknown_backend")
         self.assertIn("Unknown LLM backend", str(exc_info.exception))
     
     def test_available_backends(self):
         """Test listing available backends without relying on host installs."""
-        from src.llms import get_available_llm_backends
+        from adsmind.llms import get_available_llm_backends
 
         class AvailableBackend:
             def __init__(self):
@@ -89,7 +89,7 @@ class TestLLMFactory(unittest.TestCase):
             def __init__(self):
                 self.is_available = False
 
-        with patch("src.llms.factory._get_llm_registry", return_value={
+        with patch("adsmind.llms.factory._get_llm_registry", return_value={
             "available": AvailableBackend,
             "unavailable": UnavailableBackend,
         }):
@@ -103,7 +103,7 @@ class TestLLMConfig(unittest.TestCase):
     
     def test_config_creation(self):
         """Test creating LLMConfig."""
-        from src.llms.base import LLMConfig
+        from adsmind.llms.base import LLMConfig
         config = LLMConfig(
             backend="google",
             api_key="test-key",
@@ -116,7 +116,7 @@ class TestLLMConfig(unittest.TestCase):
     
     def test_config_defaults(self):
         """Test LLMConfig default values."""
-        from src.llms.base import LLMConfig
+        from adsmind.llms.base import LLMConfig
         config = LLMConfig(backend="test")
         self.assertEqual(config.temperature, 0.0)
         self.assertEqual(config.max_tokens, 4096)
@@ -129,7 +129,7 @@ class TestGoogleBackend(unittest.TestCase):
     
     def test_default_config(self):
         """Test default configuration."""
-        from src.llms import get_llm_backend
+        from adsmind.llms import get_llm_backend
         backend = get_llm_backend("google")
         config = backend.get_default_config(api_key="test-key")
         
@@ -140,7 +140,7 @@ class TestGoogleBackend(unittest.TestCase):
     
     def test_is_available(self):
         """Test availability check."""
-        from src.llms import get_llm_backend
+        from adsmind.llms import get_llm_backend
         backend = get_llm_backend("google")
         # Should be True if langchain_google_genai is installed
         self.assertIsInstance(backend.is_available, bool)
@@ -151,7 +151,7 @@ class TestGoogleVertexAIBackend(unittest.TestCase):
 
     def test_default_config(self):
         """Test default Vertex AI configuration."""
-        from src.llms import get_llm_backend
+        from adsmind.llms import get_llm_backend
         backend = get_llm_backend("google_vertexai")
         config = backend.get_default_config(api_key="ignored")
 
@@ -161,7 +161,7 @@ class TestGoogleVertexAIBackend(unittest.TestCase):
 
     def test_chat_model_passes_vertex_options(self):
         """Vertex backend should forward project and location."""
-        from src.llms import get_llm_backend
+        from adsmind.llms import get_llm_backend
 
         captured = {}
 
@@ -191,7 +191,7 @@ class TestOpenRouterBackend(unittest.TestCase):
     
     def test_default_config(self):
         """Test default configuration."""
-        from src.llms import get_llm_backend
+        from adsmind.llms import get_llm_backend
         backend = get_llm_backend("openrouter")
         config = backend.get_default_config(api_key="test-key")
         
@@ -201,7 +201,7 @@ class TestOpenRouterBackend(unittest.TestCase):
 
     def test_chat_model_respects_custom_base_url(self):
         """Custom transport options should be forwarded to ChatOpenAI."""
-        from src.llms import get_llm_backend
+        from adsmind.llms import get_llm_backend
 
         captured = {}
 
@@ -214,15 +214,15 @@ class TestOpenRouterBackend(unittest.TestCase):
         with patch.dict(sys.modules, {"langchain_openai": fake_module}):
             backend = get_llm_backend("openrouter")
             config = backend.get_default_config(api_key="test-key")
-            config.model = "gemini-3.1-pro-preview"
+            config.model = "gemini-2.5-pro"
             config.extra_options = {
-                "base_url": "https://aihubmix.com/v1",
+                "base_url": "https://example.test/v1",
                 "default_headers": {"X-Test": "1"},
                 "seed": 7,
             }
             backend.get_chat_model(config)
 
-        self.assertEqual(captured["openai_api_base"], "https://aihubmix.com/v1")
+        self.assertEqual(captured["openai_api_base"], "https://example.test/v1")
         self.assertEqual(captured["default_headers"], {"X-Test": "1"})
         self.assertEqual(captured["seed"], 7)
 
@@ -232,7 +232,7 @@ class TestAnthropicBackend(unittest.TestCase):
 
     def test_default_config(self):
         """Test default Anthropic configuration."""
-        from src.llms import get_llm_backend
+        from adsmind.llms import get_llm_backend
         backend = get_llm_backend("anthropic")
         config = backend.get_default_config(api_key="test-key")
 
@@ -242,7 +242,7 @@ class TestAnthropicBackend(unittest.TestCase):
 
     def test_chat_model_uses_official_anthropic_base_url(self):
         """Anthropic backend should call the official compatibility endpoint."""
-        from src.llms import get_llm_backend
+        from adsmind.llms import get_llm_backend
 
         captured = {}
 
@@ -263,7 +263,7 @@ class TestAnthropicBackend(unittest.TestCase):
 
     def test_chat_model_allows_custom_headers(self):
         """Anthropic backend should forward custom headers when configured."""
-        from src.llms import get_llm_backend
+        from adsmind.llms import get_llm_backend
 
         captured = {}
 
@@ -287,7 +287,7 @@ class TestXAIBackend(unittest.TestCase):
 
     def test_default_config(self):
         """Test default xAI configuration."""
-        from src.llms import get_llm_backend
+        from adsmind.llms import get_llm_backend
         backend = get_llm_backend("xai")
         config = backend.get_default_config(api_key="test-key")
 
@@ -297,7 +297,7 @@ class TestXAIBackend(unittest.TestCase):
 
     def test_chat_model_uses_official_xai_base_url(self):
         """xAI backend should call the official API endpoint."""
-        from src.llms import get_llm_backend
+        from adsmind.llms import get_llm_backend
 
         captured = {}
 
@@ -323,7 +323,7 @@ class TestOllamaBackend(unittest.TestCase):
     
     def test_default_config(self):
         """Test default configuration."""
-        from src.llms import get_llm_backend
+        from adsmind.llms import get_llm_backend
         backend = get_llm_backend("ollama")
         config = backend.get_default_config()
         
@@ -334,7 +334,7 @@ class TestOllamaBackend(unittest.TestCase):
     
     def test_custom_host_from_env(self):
         """Test custom host from environment variable."""
-        from src.llms import get_llm_backend
+        from adsmind.llms import get_llm_backend
         with patch.dict(os.environ, {"OLLAMA_HOST": "http://custom:11434"}):
             backend = get_llm_backend("ollama")
             config = backend.get_default_config()
@@ -346,7 +346,7 @@ class TestHuggingFaceBackend(unittest.TestCase):
     
     def test_default_config(self):
         """Test default configuration."""
-        from src.llms import get_llm_backend
+        from adsmind.llms import get_llm_backend
         backend = get_llm_backend("huggingface")
         config = backend.get_default_config()
         
@@ -358,8 +358,8 @@ class TestHuggingFaceBackend(unittest.TestCase):
 
     def test_cache_key_distinguishes_device_and_quantization(self):
         """Cached pipelines should be keyed by model, device, and quantization."""
-        from src.llms import get_llm_backend
-        from src.llms.huggingface_backend import HuggingFaceBackend
+        from adsmind.llms import get_llm_backend
+        from adsmind.llms.huggingface_backend import HuggingFaceBackend
 
         fake_module = types.SimpleNamespace(
             ChatHuggingFace=lambda llm, model_id: {"llm": llm, "model_id": model_id},
@@ -396,7 +396,7 @@ class TestConfigModule(unittest.TestCase):
     
     def test_get_llm_backend_name_default(self):
         """Test default backend name."""
-        from src.utils.config import get_llm_backend_name, DEFAULT_LLM_BACKEND
+        from adsmind.utils.config import get_llm_backend_name, DEFAULT_LLM_BACKEND
         # Clear any environment override
         with patch.dict(os.environ, {}, clear=True):
             backend = get_llm_backend_name()
@@ -404,8 +404,9 @@ class TestConfigModule(unittest.TestCase):
     
     def test_is_cloud_backend(self):
         """Test cloud backend detection."""
-        from src.utils.config import is_cloud_backend
+        from adsmind.utils.config import is_cloud_backend
         self.assertTrue(is_cloud_backend("google"))
+        self.assertFalse(is_cloud_backend("google_vertexai"))
         self.assertTrue(is_cloud_backend("anthropic"))
         self.assertTrue(is_cloud_backend("xai"))
         self.assertTrue(is_cloud_backend("openrouter"))
@@ -414,7 +415,7 @@ class TestConfigModule(unittest.TestCase):
 
     def test_provider_api_key_mappings(self):
         """Provider-specific cloud backends should use their own API key vars."""
-        from src.utils.config import get_api_key_for_backend
+        from adsmind.utils.config import get_api_key_for_backend
 
         with patch.dict(
             os.environ,
@@ -433,7 +434,7 @@ class TestAgentIntegration(unittest.TestCase):
     
     def test_get_llm_function_signature(self):
         """Test get_llm function signature."""
-        from src.agent.agent import get_llm
+        from adsmind.agent.agent import get_llm
         import inspect
         sig = inspect.signature(get_llm)
         params = list(sig.parameters.keys())
@@ -443,7 +444,7 @@ class TestAgentIntegration(unittest.TestCase):
     
     def test_agent_state_has_llm_fields(self):
         """Test AgentState has LLM configuration fields."""
-        from src.agent.agent import AgentState
+        from adsmind.agent.agent import AgentState
         # TypedDict annotations
         annotations = AgentState.__annotations__
         self.assertIn("llm_backend", annotations)
@@ -451,7 +452,7 @@ class TestAgentIntegration(unittest.TestCase):
     
     def test_prepare_initial_state_signature(self):
         """Test _prepare_initial_state function signature."""
-        from src.agent.agent import _prepare_initial_state
+        from adsmind.agent.agent import _prepare_initial_state
         import inspect
         sig = inspect.signature(_prepare_initial_state)
         params = list(sig.parameters.keys())
@@ -460,8 +461,8 @@ class TestAgentIntegration(unittest.TestCase):
 
     def test_get_llm_merges_extra_options(self):
         """Unknown llm_config keys should flow into backend extra_options."""
-        from src.agent.agent import get_llm
-        from src.llms.base import LLMConfig
+        from adsmind.agent.agent import get_llm
+        from adsmind.llms.base import LLMConfig
 
         class FakeBackend:
             requires_api_key = False
@@ -475,21 +476,21 @@ class TestAgentIntegration(unittest.TestCase):
                 return {"model": config.model, "extra_options": dict(config.extra_options)}
 
         backend = FakeBackend()
-        with patch("src.agent.agent.get_llm_backend", return_value=backend):
+        with patch("adsmind.agent.agent.get_llm_backend", return_value=backend):
             model = get_llm(
                 api_key="",
                 backend_name="openrouter",
                 llm_config={
-                    "model": "gemini-3.1-pro-preview",
-                    "extra_options": {"base_url": "https://aihubmix.com/v1"},
+                    "model": "gemini-2.5-pro",
+                    "extra_options": {"base_url": "https://example.test/v1"},
                     "default_headers": {"X-Test": "1"},
                 },
             )
 
-        self.assertEqual(model["model"], "gemini-3.1-pro-preview")
+        self.assertEqual(model["model"], "gemini-2.5-pro")
         self.assertEqual(
             backend.saved_config.extra_options["base_url"],
-            "https://aihubmix.com/v1",
+            "https://example.test/v1",
         )
         self.assertEqual(
             backend.saved_config.extra_options["default_headers"],

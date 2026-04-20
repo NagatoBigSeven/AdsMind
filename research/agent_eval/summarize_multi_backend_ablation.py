@@ -7,7 +7,7 @@ import csv
 import json
 from pathlib import Path
 from statistics import mean, median
-from typing import Any, Dict, Iterable, List, Optional, Tuple
+from typing import Any, Dict, Iterable, Optional, Tuple
 
 
 SUMMARY_FIELDS = [

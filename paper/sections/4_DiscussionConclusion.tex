@@ -1,0 +1,91 @@
+\section{Discussion}
+
+\subsection{What AdsMind contributes, and what it does not}
+
+The results of this study, including the deliberately adversarial baselines introduced in Section~3, point to a nuanced characterization of closed-loop LLM agents that differs from the message conveyed by much of the prior literature.
+Prior work on LLM agents for chemistry has tended to emphasize the \textit{capability} axis: what new kinds of tasks can an LLM accomplish that prior methods could not?
+Our evidence suggests that for the specific problem of finding low-energy adsorbate configurations, the capability axis is not where closed-loop LLM reasoning wins.
+Under identical MACE physics, random sampling with 20 relaxations matches AdsMind on eight of fifteen CMU cases and beats it on four; heuristic enumeration of $\sim$50 canonical sites beats AdsMind on six of fifteen; Adsorb-Agent's multi-configuration search reaches lower energies on all 12 comparable GPT-5.4 cases, and on 9 of 11 comparable cases in the historical GPT-4o run.
+These are not artifacts of a single LLM backend: the closed-loop reliability and backend-convergence results hold across 4 independently trained LLM backends and two independent benchmarks (CMU and OCD-GMAE), while the MACE-large check confirms that representative AdsMind trajectories remain sensitive to force-field fidelity but do not overturn the reliability--depth trade-off.
+
+What closed-loop LLM reasoning contributes is along a different axis: the combined property of being \textit{reliable, compute-efficient, and interpretable} simultaneously.
+Each of these attributes alone has precedents. Brute-force methods are reliable.
+Heuristic enumeration is interpretable (canonical sites). Single-pass LLMs are compute-efficient.
+What is new in AdsMind is the co-occurrence: 100\% success across every case and backend, 5--25$\times$ less MACE compute than the brute-force alternatives, and physically grounded reasoning artifacts (slip events, forbid constraints, site-mismatch fingerprints) that a practitioner can inspect, contest, and incorporate into downstream workflows.
+This combination is a prerequisite for autonomous chemistry, where silent failure or irreproducibility in any one of these dimensions would break the pipeline.
+
+\subsection{Chemical Slip as a standalone LLM evaluation signal}
+
+Chemical Slip---the mismatch between an LLM-planned adsorption site and the site realized after physical relaxation---was introduced as a feedback signal for the closed-loop agent.
+The slip statistics aggregated across 300 CMU benchmark runs and 200 OCD-GMAE runs reveal a secondary value: slip frequency, stratified by surface type and adsorbate, serves as a physically grounded proxy for LLM chemical reasoning quality that is independent of any downstream task metric.
+The one-shot slip rate on intermetallic surfaces far exceeds the rate on monometallic surfaces across all four backends, confirming that LLM chemical priors are substantially less reliable on complex alloy compositions.
+In contrast to text-based chemistry benchmarks (e.g., ChemBench) that test factual recall, Chemical Slip evaluates \textit{applied} reasoning---whether the model's structural prediction survives physical simulation---and complements existing LLM evaluation frameworks for scientific domains.
+
+\subsection{Why brute-force sampling wins on depth, and when it matters}
+
+The energy-depth advantage of random placement and heuristic enumeration on complex surfaces deserves explicit mechanistic explanation rather than hand-waving.
+On simple adsorbates with few competitive binding sites (H on Cu$_3$Ag(111), OH on Pt(100)), AdsMind Full matches the non-LLM baselines within 0.01~eV; the PES has few distinct basins and iterative refinement from any initial guess converges to the global minimum.
+On complex adsorbates (CH$_2$CH$_2$OH, OCHCH$_3$, ONN(CH$_3$)$_2$), the PES has many local minima separated by non-trivial barriers; iterative refinement from a single trajectory becomes trapped in whichever basin the first relaxation descends into, regardless of whether that is the global minimum.
+Broad initial sampling circumvents this trap by seeding multiple trajectories in different basins.
+
+This observation matters practically because it delineates when closed-loop search is the right tool.
+For high-throughput catalyst screening where thousands of candidate surfaces must be down-selected, brute-force methods are more compute-efficient in aggregate (all relaxations run in parallel) and their failure modes are tolerable (failed cases can be re-queued).
+For autonomous exploration of a single promising candidate where failure is costly and interpretability is required, closed-loop refinement adds value.
+A two-stage pipeline---brute-force screening followed by closed-loop refinement on top candidates---would combine the throughput of the former with the reliability of the latter, and we outline the architectural integration in Section~4.3.
+
+\subsection{MLFF as surrogate: scope and validation}
+
+All experiments in this study use MACE-MP-0 small as the primary physical backend.
+The agent's value is orthogonal to MLFF accuracy: it optimizes search strategy, not the energy function itself.
+Inter-configuration energy differences on the same surface are primarily determined by local adsorbate--surface bonding geometry, which equivariant graph neural networks describe faithfully.
+Systematic bias in absolute energies approximately cancels across configurations on the same surface and does not affect rankings.
+
+To test this assumption directly, we repeated the AdsMind Full variant on 5 representative cases with MACE-large (GPU, float64, dispersion enabled).
+MACE-large shifts absolute AdsMind energies substantially: case~16 and case~18 become more stable by 1.46 and 1.37~eV relative to the MACE-small GPT-5.4 run, while case~14 becomes less stable by 0.47~eV and case~20 fails because the adsorbate dissociates.
+Because Adsorb-Agent was not rerun with MACE-large, this experiment should be interpreted as a force-field sensitivity check on AdsMind trajectories, not as a second AdsMind--Adsorb-Agent head-to-head.
+DFT validation of representative configurations is in progress through collaboration with the chemistry group.
+
+Known MLFF failure modes---dispersion-dominated binding, strongly correlated $f$-electron systems, strong charge-transfer interfaces---define the current scope boundary of the framework.
+Extending to these regimes will require either higher-fidelity MLFFs or hybrid MLFF--DFT workflows, but does not require changes to the agent architecture.
+
+\subsection{Limitations and negative results}
+
+\paragraph{Energy depth on complex adsorbates.}
+On cases with multiple competitive binding sites and complex adsorbates (16, 17, 18, 19), AdsMind Full consistently produces higher energies than the broader-sampling baselines that succeed on those cases.
+A multi-seed control experiment (5 independent random seeds on cases 16, 17, 18 with GPT-5.4) reduces but does not remove this depth gap on the comparable Adsorb-Agent cases: the best-of-seeds AdsMind result remains 0.90~eV higher on case~16 and 1.20~eV higher on case~17, while GPT-5.4 Adsorb-Agent produces no valid trajectory files on case~18.
+The mechanism is the iterative refinement trajectory's tendency to stay within the initial energy basin regardless of seed.
+We do not regard this as a defect of the architecture---it is inherent to any single-trajectory closed-loop refinement---but as a specification of the operating envelope in which closed-loop refinement adds value.
+
+\paragraph{FORBID over-pruning.}
+On several cases in both CMU and OCD-GMAE, removing the FORBID constraint \textit{improves} the final energy.
+On GPT-5.4 the pairwise Wilcoxon test for $-$Forbid trends toward significance (BH $p = 0.084$) with negative rank-biserial correlation ($r = -0.79$), indicating that explicit negative constraints over-prune the search space on surfaces where the globally optimal site was initially rejected.
+Adaptive or soft-constraint variants of the FORBID mechanism, in which the strength of a negative constraint decays with additional evidence, merit future investigation.
+
+\paragraph{Statistical power.}
+Although the 15-case CMU and 10-case OCD-GMAE benchmarks are large enough for Friedman tests to reach significance across all four backends (CMU: $p = 1.4\times10^{-6}$ to $2.2\times10^{-3}$; OCD-GMAE: $p = 8.2\times10^{-5}$ to $6.9\times10^{-3}$), many pairwise Wilcoxon tests do not survive BH correction.
+We interpret individual pairwise comparisons primarily through effect sizes and bootstrap confidence intervals, and rely on the \textit{consistent direction} of effects across 4 independent LLM backends as a form of conceptual replication.
+
+\paragraph{Scope.}
+The current implementation handles flat and stepped crystalline surfaces with a single adsorbate species.
+Extensions to defective surfaces, nanoparticles, co-adsorption, and solvated interfaces are architecturally straightforward but require additional validation.
+
+\paragraph{LLM reproducibility and platform sensitivity.}
+LLM APIs are black-box services subject to unannounced model updates; at temperature 0.0, outputs may still vary across API versions.
+We mitigate this by recording exact model version identifiers, providing complete prompt templates (SI), and releasing full trajectory logs so that all reported results can be independently verified from saved data.
+The four-backend design further ensures that conclusions do not depend on any single LLM provider.
+A cross-machine control experiment on a subset of cases reveals that case~14 energies shift by $\sim$0.20~eV between Apple Silicon M3 Pro (macOS, ARM, float32) and Linux x86\_64 (float32) platforms, while case~09 is stable within 0.003~eV; the shift is consistent across both Gemini and Grok-4 and preserves the within-run decision trajectory, indicating a platform/MLFF-environment effect rather than LLM divergence.
+All within-backend ablation comparisons in the main text use a single platform throughout and are unaffected.
+
+\section{Conclusion}
+
+We have presented AdsMind, a closed-loop multi-agent framework that integrates LLM-driven planning with iterative MLFF relaxation feedback for autonomous adsorption configuration search.
+Three mechanisms---Chemical Slip detection, FORBID constraint memory, and autonomous termination---enable the agent to detect its own reasoning errors, avoid repeating them, and stop when further exploration is unproductive.
+
+Through 500 controlled runs across four LLM backends (Gemini, Grok-4, GPT-5.4, Claude) on two independent benchmarks (15-case CMU, 10-case OCD-GMAE), and head-to-head comparisons against four external baselines under identical MACE physics (random placement, heuristic enumeration, Adsorb-Agent with GPT-4o and GPT-5.4), we establish that AdsMind's primary value lies in the combination of (i) 100\% search success across every case and backend; (ii) cross-backend energy convergence (3.3$\times$ reduction in backend spread on CMU); (iii) compute efficiency (5--25$\times$ fewer MACE relaxations than brute-force controls); and (iv) interpretable reasoning artifacts in the form of slip events and forbid constraints.
+We also report a substantive negative result: on complex adsorbates, brute-force sampling reaches lower energies than closed-loop refinement, a trade-off that arises from single-trajectory iteration rather than from insufficient compute, and one that motivates future hybrid architectures.
+Chemical Slip, introduced here as a feedback signal, additionally serves as a physically grounded diagnostic for LLM chemical reasoning quality---a standalone methodological contribution that may extend beyond the application in this work.
+
+The central message is that closed-loop LLM reasoning is not a replacement for brute-force configuration search on well-resourced problems; it is the foundation for a new class of \textit{autonomous chemistry workflows} where reliability, efficiency, and interpretability must be achieved simultaneously.
+A natural next step is to combine AdsMind's closed-loop error recovery with broader initial site enumeration, yielding an agent that inherits the depth of brute-force methods and the reliability of closed-loop refinement.
+
+Code, frozen experiment configurations, structured result files, all agent logs, baseline implementations, and comparison scripts are available at \url{https://github.com/AI4QC/AdsMind}.

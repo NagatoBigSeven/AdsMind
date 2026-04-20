@@ -4,19 +4,31 @@ Get AdsMind running in 5 minutes.
 
 ## Prerequisites
 
-- Python 3.10+
+- Python 3.10 or 3.11
 - [uv](https://github.com/astral-sh/uv) package manager (recommended)
-- API key from Google AI or OpenRouter (for cloud backends)
+- API key from Google AI, Anthropic, xAI, or OpenRouter for hosted API backends
+  (Vertex AI uses Google Application Default Credentials instead)
 
 ## Installation
+
+### PyPI Install
+
+```bash
+python -m pip install adsmind
+```
+
+### Source Install
+
+Use this path if you want the repository examples, benchmark assets, tests, or
+paper reproduction scripts.
 
 ```bash
 # Clone the repository
 git clone https://github.com/AI4QC/AdsMind.git
 cd AdsMind
 
-# Install dependencies
-uv pip install -e .
+# Install runtime, dev, and research dependencies
+uv pip install -e ".[dev,research]"
 ```
 
 ## Step 1: Set Up LLM Backend
@@ -30,7 +42,23 @@ uv pip install -e .
    export GOOGLE_API_KEY="your-google-api-key"
    ```
 
-### Option B: OpenRouter
+### Option B: Vertex AI
+
+1. Authenticate with Google Application Default Credentials:
+
+   ```bash
+   gcloud auth application-default login
+   export GOOGLE_CLOUD_PROJECT="your-gcp-project"
+   export GOOGLE_CLOUD_LOCATION="us-central1"
+   ```
+
+2. Set the backend:
+
+   ```bash
+   export ADSMIND_LLM_BACKEND=google_vertexai
+   ```
+
+### Option C: OpenRouter
 
 1. Get an API key from [OpenRouter](https://openrouter.ai/)
 2. Set the environment variable:
@@ -39,7 +67,7 @@ uv pip install -e .
    export OPENROUTER_API_KEY="your-openrouter-api-key"
    ```
 
-### Option C: Ollama (Local, No API Key)
+### Option D: Ollama (Local, No API Key)
 
 1. Install Ollama: `curl -fsSL https://ollama.com/install.sh | sh`
 2. Pull a model: `ollama pull qwen3:8b`
@@ -48,16 +76,20 @@ uv pip install -e .
 ## Step 2: Launch the App
 
 ```bash
-streamlit run streamlit_app.py
+adsmind-ui
 ```
 
 The app will open in your browser at `http://localhost:8501`.
+
+When working from a source checkout, `streamlit run streamlit_app.py` remains
+available as an equivalent contributor entry point.
 
 ## Step 3: Run Your First Simulation
 
 ### 1. Select LLM Backend (Sidebar)
 
-- Choose your backend (Google AI, OpenRouter, Ollama, or HuggingFace)
+- Choose your backend (Google AI, Vertex AI, Anthropic, xAI, OpenRouter, Ollama,
+  or HuggingFace)
 - Enter API key if using a cloud backend
 - Select a model
 
@@ -85,7 +117,7 @@ The agent will:
 **Inputs:**
 
 - SMILES: `O=C=O`
-- Slab: `notebooks/cu_slab_211.xyz` (included in repo)
+- Slab: `examples/slabs/cu_slab_211.xyz` (included in repo)
 - Query: "Find the most stable binding configuration for CO2"
 
 **What happens:**

@@ -25,7 +25,7 @@ from research.agent_eval.common import (
     resolve_runtime_flags,
     write_json,
 )
-from src.agent.agent import get_agent_executor
+from adsmind.agent.agent import get_agent_executor
 
 
 def _invoke_with_partial_state(executor: Any, initial_state: Dict[str, Any]) -> Dict[str, Any]:

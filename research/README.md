@@ -4,6 +4,18 @@ This directory contains scripts and artifacts used for benchmarks, figure
 generation, and manuscript work. These files are not required to run the main
 AdsMind application.
 
+Do not store API keys, workstation credentials, copied external repositories,
+downloaded PDFs, or private meeting notes here. Keep public research outputs in
+`research/results/` and document which CSV/JSON files are paper-facing.
+
+## Layout
+
+- `agent_eval/`: reproducible benchmark runners, locked manifests, and frozen
+  experiment configs.
+- `results/`: curated paper-facing summaries, joined analysis tables, and
+  LaTeX table exports. Start from `results/README.md` before plotting.
+- `images/`: generated paper figures, if present locally.
+
 ## Scripts
 
 - `generate_figures.py`: generates paper figures under `research/images/`
@@ -19,3 +31,17 @@ AdsMind application.
 
 - Generated figures are written to `research/images/`
 - Benchmark slabs are written to `benchmark_slabs/`
+
+## Public-Release Policy
+
+Internal execution plans, local status reports, private runbooks, and
+machine-specific recovery notes are intentionally excluded from the public
+repository. Keep reproducibility metadata in manifests, frozen configs, scripts,
+and `research/results/README.md`.
+
+The GitHub repository should keep only curated paper-facing CSV/JSON/TEX files
+under `research/results/`. Raw per-run payloads, complete logs, generated
+trajectories, and bulky generated structures should be staged into
+`adsmind-paper-artifacts-v0.1.0.zip` using the layout in
+`paper-artifacts/MANIFEST.md`, attached to the matching GitHub release, and
+archived as the same zip on Zenodo for a DOI.

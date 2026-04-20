@@ -1,7 +1,9 @@
 {
   "llm_backend": "google_vertexai",
   "llm_model": "gemini-2.5-pro",
-  "llm_api_key_env_var": "GOOGLE_API_KEY",
+  "llm_extra_options": {
+    "location": "us-central1"
+  },
   "temperature": 0.0,
   "max_tokens": 4096,
   "timeout_sec": 120,
@@ -14,7 +16,11 @@
   "mace_use_dispersion": false,
   "fmax": 0.10,
   "random_seed": 42,
-  "platform": "Ubuntu-22.04-x86_64-float32",
+  "platform": "linux-x86_64-cpu-float32",
   "transport_variant": "vertex-ai-direct",
-  "notes": ["Direct Vertex AI access, replacing AiHubMix proxy to eliminate proxy artifacts."]
+  "notes": [
+    "Direct Vertex AI access through Google Application Default Credentials.",
+    "Set GOOGLE_CLOUD_PROJECT or GCLOUD_PROJECT in the execution environment, or add a local-only project override outside version control.",
+    "This config replaces proxy transport for Gemini runs where direct Vertex AI provenance is required."
+  ]
 }

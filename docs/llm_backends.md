@@ -8,7 +8,7 @@ The default backend is **Google AI (Gemini 2.5 Pro)**. Set your API key and run:
 
 ```bash
 export GOOGLE_API_KEY="your-google-api-key"
-streamlit run streamlit_app.py
+adsmind-ui
 ```
 
 ## Supported Backends
@@ -16,6 +16,9 @@ streamlit run streamlit_app.py
 | Backend | Type | API Key Required | Best For |
 |---------|------|------------------|----------|
 | **Google AI** | Cloud | Yes (`GOOGLE_API_KEY`) | Production, low latency |
+| **Vertex AI** | Cloud | No API key; uses Google ADC | Enterprise Gemini deployments |
+| **Anthropic** | Cloud | Yes (`ANTHROPIC_API_KEY`) | Claude models |
+| **xAI** | Cloud | Yes (`XAI_API_KEY`) | Grok models |
 | **OpenRouter** | Cloud | Yes (`OPENROUTER_API_KEY`) | Access to multiple models |
 | **Ollama** | Local | No | Privacy, offline use |
 | **HuggingFace** | Local | No | Full customization |
@@ -35,6 +38,19 @@ streamlit run streamlit_app.py
 # Use Google AI (default)
 export ADSMIND_LLM_BACKEND=google
 export GOOGLE_API_KEY="your-google-api-key"
+
+# Use Vertex AI
+export ADSMIND_LLM_BACKEND=google_vertexai
+export GOOGLE_CLOUD_PROJECT="your-gcp-project"
+export GOOGLE_CLOUD_LOCATION="us-central1"
+
+# Use Anthropic
+export ADSMIND_LLM_BACKEND=anthropic
+export ANTHROPIC_API_KEY="your-anthropic-api-key"
+
+# Use xAI
+export ADSMIND_LLM_BACKEND=xai
+export XAI_API_KEY="your-xai-api-key"
 
 # Use OpenRouter
 export ADSMIND_LLM_BACKEND=openrouter
@@ -67,6 +83,42 @@ Direct access to Google's Gemini models. Recommended for production use.
 - `gemini-2.5-pro` (default) - Best reasoning
 - `gemini-2.5-flash` - Fast responses
 - `gemini-2.5-flash-lite` - Fastest, lightweight
+
+### Vertex AI (Gemini)
+
+Gemini through Google Cloud Vertex AI. This backend uses Google Application
+Default Credentials rather than an API key.
+
+**Setup:**
+
+```bash
+gcloud auth application-default login
+export GOOGLE_CLOUD_PROJECT="your-gcp-project"
+export GOOGLE_CLOUD_LOCATION="us-central1"
+export ADSMIND_LLM_BACKEND=google_vertexai
+```
+
+### Anthropic
+
+Direct Claude access through Anthropic's OpenAI-compatible endpoint.
+
+**Setup:**
+
+```bash
+export ADSMIND_LLM_BACKEND=anthropic
+export ANTHROPIC_API_KEY="your-anthropic-api-key"
+```
+
+### xAI
+
+Direct Grok access through xAI's OpenAI-compatible endpoint.
+
+**Setup:**
+
+```bash
+export ADSMIND_LLM_BACKEND=xai
+export XAI_API_KEY="your-xai-api-key"
+```
 
 ### OpenRouter
 
@@ -116,9 +168,9 @@ Load models directly from HuggingFace Hub for full offline capability.
 
 ```bash
 # Install core project deps
-uv pip install -e .
+python -m pip install adsmind
 
-# Optional: update local-model tooling only
+# Optional for source checkouts: install development tooling
 uv pip install -e ".[dev]"
 
 # Optional: For quantization
@@ -143,7 +195,7 @@ The app provides advanced settings for fine-tuning LLM behavior:
 ## Programmatic Usage
 
 ```python
-from src.llms import get_llm_backend
+from adsmind.llms import get_llm_backend
 
 # Get a backend
 backend = get_llm_backend("google")

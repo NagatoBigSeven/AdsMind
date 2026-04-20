@@ -8,7 +8,7 @@ import json
 import math
 from pathlib import Path
 from statistics import mean, median
-from typing import Any, Dict, Iterable, Optional
+from typing import Any, Iterable, Optional
 
 
 THRESHOLDS = (0.1, 0.2, 0.5)

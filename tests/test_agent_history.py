@@ -4,8 +4,8 @@ Tests for agent history generation and routing behavior.
 
 import unittest
 
-from src.agent.agent import route_after_analysis
-from src.agent.history import build_history_entry
+from adsmind.agent.agent import route_after_analysis
+from adsmind.agent.history import build_history_entry
 
 
 class TestAgentHistory(unittest.TestCase):

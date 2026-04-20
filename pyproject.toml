@@ -1,5 +1,5 @@
 [build-system]
-requires = ["setuptools>=64", "wheel"]
+requires = ["setuptools>=77", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
@@ -7,7 +7,33 @@ name = "adsmind"
 version = "0.1.0"
 description = "Agentic atomistic simulation framework for adsorption configuration discovery on surfaces."
 readme = "README.md"
-requires-python = ">=3.10"
+requires-python = ">=3.10,<3.12"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [
+    { name = "Zongmin Zhang", email = "zzhanghw@connect.ust.hk" },
+]
+maintainers = [
+    { name = "AdsMind contributors" },
+]
+keywords = [
+    "adsorption",
+    "catalysis",
+    "atomistic-simulation",
+    "multi-agent-systems",
+    "mace",
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Science/Research",
+    "Operating System :: MacOS",
+    "Operating System :: POSIX :: Linux",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Scientific/Engineering :: Chemistry",
+]
 dependencies = [
     "ase>=3.26.0",
     "autoadsorbate>=0.2.2",
@@ -34,18 +60,25 @@ dependencies = [
 ]
 
 [project.scripts]
-adsmind = "src.agent.agent:main_cli"
-adsmind-preflight = "src.utils.preflight:main"
-adskrk = "src.agent.agent:main_cli"
-adskrk-preflight = "src.utils.preflight:main"
+adsmind = "adsmind.agent.agent:main_cli"
+adsmind-preflight = "adsmind.utils.preflight:main"
+adsmind-ui = "adsmind.app.launcher:main"
 
-[tool.setuptools.packages]
-find = {}
+[project.urls]
+Homepage = "https://github.com/AI4QC/AdsMind"
+Repository = "https://github.com/AI4QC/AdsMind"
+Issues = "https://github.com/AI4QC/AdsMind/issues"
+
+[tool.setuptools.packages.find]
+include = ["adsmind", "adsmind.*"]
+exclude = ["research", "research.*", "tests", "tests.*"]
 
 [project.optional-dependencies]
 dev = [
+    "build>=1.2",
     "pytest>=8.0",
     "ruff>=0.6.0",
+    "twine>=5.1",
 ]
 research = [
     "matplotlib>=3.8",
