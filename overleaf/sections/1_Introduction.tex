@@ -35,7 +35,7 @@ Benchmarks such as ChemBench~\cite{mirza2024chembench}, MatBench~\cite{dunn2020b
 Chemical Slip, introduced in this work, is a physically grounded complementary signal: it quantifies whether an LLM's structural hypothesis survives physical relaxation, measured automatically from relaxation trajectories.
 
 \textit{Our contribution in this landscape.}
-We believe this is the first study to (i)~run four independent LLM backends on an identical closed-loop search pipeline, (ii)~compare an LLM agent head-to-head against non-LLM baselines (random, heuristic) and an LLM baseline (Adsorb-Agent) under \textit{matched} MACE-MP-0 physics, and (iii)~report explicit negative results on energy-depth to clarify the operating envelope in which closed-loop LLM reasoning adds value.
+We believe this is the first study to (i)~run four distinct LLM backends on an identical closed-loop search pipeline, (ii)~compare an LLM agent head-to-head against non-LLM baselines (random, heuristic) and an LLM baseline (Adsorb-Agent) under \textit{matched} MACE-MP-0 physics, and (iii)~report explicit negative results on energy-depth to clarify the operating envelope in which closed-loop LLM reasoning adds value.
 
 \subsection{The uncomfortable truth: configuration-space coverage dominates}
 
@@ -63,10 +63,10 @@ Open-loop methods use a fixed policy $\pi(a \mid s)$ that cannot adapt after dep
 
 \subsection{Claims and evaluation}
 
-This paper establishes four empirical claims through 500+ controlled runs across two datasets, four LLM backends, and six baseline controls:
+This paper establishes four empirical claims through 500 controlled ablation runs across two datasets and four LLM backends, plus matched baseline controls:
 
 \begin{description}
-    \item[C$_1$ (reliability):] AdsMind achieves 100\% search success across every backend and every case on both CMU (15 cases) and OCD-GMAE (10 cases), compared to 73--80\% for single-pass LLM agents (Adsorb-Agent with GPT-4o and GPT-5.4). Failure patterns differ across LLMs, ruling out LLM-capability explanations.
+    \item[C$_1$ (reliability):] AdsMind achieves 100\% search success across every backend and every case on both CMU (15 cases) and OCD-GMAE (10 cases). On the matched CMU overlap, single-pass Adsorb-Agent runs with GPT-4o and GPT-5.4 succeed on 73--80\% of cases. Failure patterns differ across LLMs, ruling out LLM-capability explanations.
     \item[C$_2$ (backend convergence):] The iterative closed-loop architecture reduces energy variance across heterogeneous LLM backends. On CMU, the four-backend energy range drops from 0.425~eV (one-shot) to 0.129~eV (full search)---a 3.3$\times$ convergence toward a shared physical solution. The equivalent reduction on OCD-GMAE is 2.3$\times$.
     \item[C$_3$ (compute efficiency):] AdsMind Full uses approximately 4 MACE relaxations per case, compared to 20 (random), 25--98 (heuristic), and $\sim$21 (Adsorb-Agent). At this reduced budget, AdsMind matches or beats random placement on 11 of 15 cases and heuristic enumeration on 9 of 15 cases under a 0.01~eV tolerance.
     \item[C$_4$ (interpretability):] Closed-loop reasoning produces structured artifacts---slip events, forbid constraints, site-mismatch fingerprints---that serve as physically grounded diagnostics for LLM chemical reasoning. We show that one-shot slip rates correlate with surface composition complexity across all four backends, establishing Chemical Slip as a standalone evaluation signal for LLM science applications.
@@ -75,9 +75,9 @@ This paper establishes four empirical claims through 500+ controlled runs across
 We also report, as negative results, that AdsMind does not deliver the deepest energy basins on complex surfaces: broader initial sampling strategies consistently reach lower minima when they succeed.
 This trade-off---reliability and efficiency against depth of exploration---frames the central message of the paper.
 AdsMind is not a replacement for brute-force methods where compute is cheap and failures are tolerable; it is a foundation for \textit{autonomous chemistry workflows} where silent failures, irreproducibility, and uninterpretable failures are unacceptable, and where compute is expensive enough that a 5--25$\times$ efficiency gain matters.
-A natural extension, outlined in Section~4, couples AdsMind's closed-loop error recovery with broader initial site enumeration to combine the reliability of the former with the depth of the latter.
+A natural extension, outlined in the Conclusion, couples AdsMind's closed-loop error recovery with broader initial site enumeration to combine the reliability of the former with the depth of the latter.
 
-All experiments use the same MACE-MP-0 (small, CPU, float32) physical backend so that observed differences reflect search strategy, not energy-function choice.
+All primary benchmark and matched-baseline experiments use the same MACE-MP-0 (small, CPU, float32) physical backend so that observed differences reflect search strategy, not energy-function choice; the separate MACE-large run is treated only as a force-field sensitivity check.
 Head-to-head comparisons against Adsorb-Agent were performed by forking the original codebase and replacing its EquiformerV2 backend with MACE, ensuring apples-to-apples physics.
 We release the code, curated result summaries, frozen configurations, and reproduction scripts at \url{https://github.com/AI4QC/AdsMind}.
 
