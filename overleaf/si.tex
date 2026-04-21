@@ -91,7 +91,7 @@
 
 \begin{document}
 
-\title{Supporting Information for: \\}
+\title{Supporting Information for: \\ AdsMind: A Physics-Grounded Multi-agent System for Self-Correcting Discovery of Adsorption Configurations on Heterogeneous Catalyst Surfaces}
 \author{Zongmin Zhang}
 \affiliation{Department of Computer Science and Engineering, Hong Kong University of Science and Technology, Kowloon, Hong Kong 999077, China}
 \author{Bowen Zhang}
@@ -122,9 +122,267 @@
 
 \clearpage
 
+\section{Ablation statistics}
 
-\section*{Acknowledgments}
-This work was supported by...
+% ===== inlined from research/results/si4_ablation_statistics.tex =====
+% SI Table: CMU Benchmark Ablation Statistics (15 cases, 4 backends)
+\begin{table}[h]
+\centering
+\small
+\caption{CMU benchmark pairwise ablation statistics versus the full variant (15~cases, 4~backends). Positive $\Delta E$ means the ablated variant is worse than full. BH denotes the Benjamini--Hochberg adjusted $p$-value; CI is a deterministic bootstrap 95\% interval for the mean $\Delta E$.}
+\label{tab:si4-ablation-statistics}
+\begin{tabular}{llrrrrllr}
+\toprule
+Backend & Variant & Mean $\Delta E$ & Median $\Delta E$ & Wilcoxon $p$ & BH $p$ & Rank-biserial $r$ & 95\% CI & Max degr. \\
+\midrule
+Gemini & $-$Slip & -0.010 & 0.000 & 0.8927 & 0.9165 & -0.067 & [-0.046, 0.023] & 0.158 (17) \\
+Gemini & $-$Forbid & -0.005 & 0.000 & 0.9165 & 0.9165 & 0.048 & [-0.075, 0.062] & 0.294 (15) \\
+Gemini & $-$Term & 0.018 & 0.000 & 0.5002 & 0.9165 & 0.333 & [-0.054, 0.081] & 0.247 (19) \\
+Gemini & 1-Shot & 0.363 & 0.369 & 0.0015 & 0.0059 & 1.000 & [0.211, 0.524] & 1.048 (20) \\
+Grok-4 & $-$Slip & 0.049 & 0.000 & 0.4631 & 0.6174 & 0.333 & [-0.027, 0.138] & 0.451 (19) \\
+Grok-4 & $-$Forbid & 0.045 & 0.000 & 0.2489 & 0.4977 & 0.524 & [-0.026, 0.134] & 0.451 (19) \\
+Grok-4 & $-$Term & -0.012 & 0.000 & 1.0000 & 1.0000 & 0.000 & [-0.040, 0.003] & 0.017 (19) \\
+Grok-4 & 1-Shot & 0.341 & 0.372 & 0.0029 & 0.0115 & 0.905 & [0.174, 0.517] & 1.050 (20) \\
+GPT-5.4 & $-$Slip & -0.034 & 0.000 & 0.6744 & 0.6744 & -0.167 & [-0.130, 0.051] & 0.294 (15) \\
+GPT-5.4 & $-$Forbid & -0.094 & 0.000 & 0.0630 & 0.0840 & -0.786 & [-0.181, -0.026] & 0.003 (20) \\
+GPT-5.4 & $-$Term & -0.078 & 0.000 & 0.0464 & 0.0840 & -0.905 & [-0.166, -0.001] & 0.000 (17) \\
+GPT-5.4 & 1-Shot & 0.097 & 0.017 & 0.0409 & 0.0840 & 0.697 & [-0.009, 0.207] & 0.549 (17) \\
+Claude & $-$Slip & -0.016 & 0.000 & 0.6744 & 0.6744 & -0.167 & [-0.107, 0.069] & 0.391 (16) \\
+Claude & $-$Forbid & -0.017 & 0.000 & 0.2489 & 0.4977 & -0.524 & [-0.042, 0.000] & 0.007 (01) \\
+Claude & $-$Term & -0.031 & 0.000 & 0.4631 & 0.6174 & -0.333 & [-0.099, 0.007] & 0.042 (04) \\
+Claude & 1-Shot & 0.185 & 0.126 & 0.0033 & 0.0134 & 1.000 & [0.089, 0.286] & 0.549 (17) \\
+\bottomrule
+\end{tabular}
+\end{table}
+% ===== end inlined si4_ablation_statistics =====
+
+\clearpage
+
+\section{Independent OCD-GMAE validation statistics}
+
+% ===== inlined from research/results/si4_ocd_gmae_ablation_statistics.tex =====
+\begin{table}[h]
+\centering
+\small
+\caption{OCD-GMAE pairwise ablation statistics versus the full variant (4~backends, 10~cases each). Positive $\Delta E$ means the ablated variant is worse (higher energy) than full. Gemini was accessed via Google Vertex AI direct API; the remaining three backends used their native endpoints.}
+\label{tab:si4-ocd-ablation-statistics}
+\begin{tabular}{llrrrrr}
+\toprule
+Backend & Variant & Mean $\Delta E$ & Median $\Delta E$ & Wilcoxon $p$ & 95\% CI & Max degr. \\
+\midrule
+Gemini & $-$Slip & 0.019 & 0.000 & 0.750 & [$-$0.042, 0.093] & 0.294 (023) \\
+Gemini & $-$Forbid & 0.001 & 0.000 & 1.000 & [$-$0.047, 0.050] & 0.166 (019) \\
+Gemini & $-$Term & 0.020 & 0.000 & 0.500 & [0.000, 0.057] & 0.166 (019) \\
+Gemini & 1-Shot & 0.466 & 0.271 & 0.008 & [0.179, 0.789] & 1.325 (004) \\
+\midrule
+Grok-4 & $-$Slip & $-$0.050 & 0.000 & 0.812 & [$-$0.182, 0.070] & 0.295 (024) \\
+Grok-4 & $-$Forbid & $-$0.066 & 0.000 & 0.625 & [$-$0.174, 0.006] & 0.026 (012) \\
+Grok-4 & $-$Term & $-$0.187 & 0.000 & 0.312 & [$-$0.446, 0.000] & 0.026 (012) \\
+Grok-4 & 1-Shot & 0.352 & 0.227 & 0.031 & [0.109, 0.645] & 1.284 (013) \\
+\midrule
+GPT-5.4 & $-$Slip & 0.037 & 0.007 & 0.016 & [0.007, 0.075] & 0.166 (019) \\
+GPT-5.4 & $-$Forbid & 0.122 & 0.000 & 0.062 & [0.002, 0.320] & 0.988 (004) \\
+GPT-5.4 & $-$Term & 0.008 & 0.000 & 0.219 & [$-$0.001, 0.024] & 0.075 (012) \\
+GPT-5.4 & 1-Shot & 0.578 & 0.316 & 0.012 & [0.171, 1.108] & 2.571 (004) \\
+\midrule
+Claude & $-$Slip & $-$0.065 & 0.000 & 0.438 & [$-$0.166, 0.027] & 0.166 (019) \\
+Claude & $-$Forbid & $-$0.006 & 0.000 & 1.000 & [$-$0.089, 0.073] & 0.242 (013) \\
+Claude & $-$Term & $-$0.085 & 0.000 & 0.312 & [$-$0.175, 0.000] & 0.000 (003) \\
+Claude & 1-Shot & 0.774 & 0.270 & 0.004 & [0.189, 1.719] & 4.671 (003) \\
+\bottomrule
+\end{tabular}
+\end{table}
+% ===== end inlined si4_ocd_gmae_ablation_statistics =====
+
+\clearpage
+
+\section{External baselines and force-field sensitivity}
+
+% ===== inlined from research/results/si_adsorbagent_comparison.tex =====
+\begin{table}[h]
+\centering
+\small
+\caption{Head-to-head comparison of AdsMind (GPT-5.4 Full variant) versus Adsorb-Agent (GPT-5.4, MACE-matched) on 15 overlapping CMU benchmark cases. Adsorption energies in eV; lower is better. $\Delta = E_{\mathrm{AdsMind}} - E_{\mathrm{AdsorbAgent}}$, so positive values mean Adsorb-Agent is lower in energy. ``Failed'' denotes Adsorb-Agent runs with no valid trajectory files.}
+\label{tab:si-adsorbagent-comparison}
+\begin{tabular}{lrrrrrl}
+\toprule
+Case & AdsMind (eV) & Adsorb-Ag.\ (eV) & $\Delta$ (eV) & Configs & Tokens & Winner \\
+\midrule
+  01 & $-3.627$ & $-3.879$ & $+0.252$ & 29 & 6976 & Adsorb-Ag. \\
+  02 & $-4.769$ & $-5.097$ & $+0.328$ & 2 & 4737 & Adsorb-Ag. \\
+  04 & $-2.255$ & $-2.915$ & $+0.660$ & 34 & 4764 & Adsorb-Ag. \\
+  05 & $-2.962$ & \textit{failed} & --- & 0 & 0 & AdsMind \\
+  09 & $-1.991$ & $-1.997$ & $+0.006$ & 25 & 4336 & Adsorb-Ag. \\
+  10 & $-2.710$ & $-2.741$ & $+0.032$ & 22 & 4457 & Adsorb-Ag. \\
+  12 & $-2.081$ & $-2.245$ & $+0.164$ & 23 & 4066 & Adsorb-Ag. \\
+  13 & $-2.825$ & $-2.857$ & $+0.032$ & 25 & 4058 & Adsorb-Ag. \\
+  14 & $-3.591$ & $-4.125$ & $+0.534$ & 8 & 4290 & Adsorb-Ag. \\
+  15 & $-3.258$ & \textit{failed} & --- & 0 & 0 & AdsMind \\
+  16 & $-4.272$ & $-5.700$ & $+1.428$ & 20 & 5147 & Adsorb-Ag. \\
+  17 & $-3.241$ & $-4.476$ & $+1.235$ & 31 & 4862 & Adsorb-Ag. \\
+  18 & $-2.724$ & \textit{failed} & --- & 0 & 0 & AdsMind \\
+  19 & $-4.013$ & $-4.707$ & $+0.695$ & 18 & 4490 & Adsorb-Ag. \\
+  20 & $-11.652$ & $-12.285$ & $+0.633$ & 16 & 9566 & Adsorb-Ag. \\
+\midrule
+  \multicolumn{7}{l}{Comparable: 12, AdsMind wins 0, Adsorb-Agent wins 12, ties 0. Wilcoxon $p = 0.00049$, mean $\Delta = +0.500$~eV.} \\
+  \multicolumn{7}{l}{Success rate: AdsMind 15/15 (100\%), Adsorb-Agent 12/15 (80\%).} \\
+\bottomrule
+\end{tabular}
+\end{table}
+% ===== end inlined si_adsorbagent_comparison =====
+
+% ===== inlined from research/results/si_baselines_comparison.tex =====
+\begin{table}[h]
+\centering
+\scriptsize
+\caption{Baseline comparison on 15 CMU cases. Best energy achieved by each method under identical MACE-MP-0 small physics. Dashes indicate that the method produced no valid energy for that case. Energies in eV; lower is better. Relax column shows approximate MACE relaxation count per case.}
+\label{tab:si-baseline-comparison}
+\begin{tabular}{lrrrrrr}
+\toprule
+Case & Random(20) & Heuristic(sites) & AM-1Shot & AM-Full & AA-GPT4o & AA-GPT5.4 \\
+Relax/case & 20 & 25--98 & 1 & $\sim$4 & $\sim$21 & $\sim$21 \\
+\midrule
+  01 & $-3.632$ & $-3.637$ & $-3.631$ & $-3.632$ & --- & $-3.879$ \\
+  02 & $-4.762$ & $-4.777$ & $-4.766$ & $-4.769$ & $-5.092$ & $-5.097$ \\
+  04 & $-3.294$ & $-3.470$ & $-2.243$ & $-2.285$ & $-3.457$ & $-2.915$ \\
+  05 & $-2.965$ & $-2.967$ & $-2.962$ & $-2.962$ & $-2.953$ & --- \\
+  09 & $-1.990$ & $-1.993$ & $-1.991$ & $-1.991$ & --- & $-1.997$ \\
+  10 & $-2.715$ & $-2.721$ & $-2.718$ & $-2.718$ & $-2.741$ & $-2.741$ \\
+  12 & $-2.360$ & $-2.361$ & $-2.081$ & $-2.351$ & $-2.244$ & $-2.245$ \\
+  13 & $-2.825$ & $-2.828$ & $-2.825$ & $-2.825$ & $-2.858$ & $-2.857$ \\
+  14 & $-3.623$ & $-3.613$ & $-3.617$ & $-3.617$ & $-4.162$ & $-4.125$ \\
+  15 & $-3.001$ & $-3.226$ & $-2.964$ & $-3.258$ & --- & --- \\
+  16 & $-6.737$ & $-5.376$ & $-4.663$ & $-4.663$ & $-6.699$ & $-5.700$ \\
+  17 & $-3.171$ & $-3.265$ & $-3.066$ & $-3.241$ & $-4.411$ & $-4.476$ \\
+  18 & $-3.213$ & $-3.241$ & $-2.519$ & $-3.129$ & $-4.483$ & --- \\
+  19 & $-3.567$ & $-4.696$ & $-4.013$ & $-4.045$ & $-4.694$ & $-4.707$ \\
+  20 & $-13.422$ & $-11.756$ & $-11.652$ & $-11.653$ & --- & $-12.285$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+% ===== end inlined si_baselines_comparison =====
+
+% ===== inlined from research/results/si_mace_sensitivity.tex =====
+\begin{table}[h]
+\centering
+\caption{MACE force-field sensitivity. AdsMind Full variant (GPT-5.4 backend) run with MACE-MP-0 \textit{small} (CPU, float32, no dispersion) vs.\ MACE-MP-0 \textit{large} (GPU, float64, dispersion) on 5 representative cases. Adsorption energies in eV; lower is better.}
+\label{tab:si-mace-sensitivity}
+\begin{tabular}{lrrrr}
+\toprule
+Case & MACE-small & MACE-large & $\Delta$ & Status \\
+\midrule
+  05 & $-2.962$ & $-3.345$ & $-0.383$ & True \\
+  14 & $-3.591$ & $-3.117$ & $+0.474$ & True \\
+  16 & $-4.272$ & $-5.734$ & $-1.462$ & True \\
+  18 & $-2.724$ & $-4.094$ & $-1.370$ & True \\
+  20 & $-11.652$ & \textit{failed} & --- & False \\
+\bottomrule
+\end{tabular}
+\end{table}
+% ===== end inlined si_mace_sensitivity =====
+
+\clearpage
+
+\begin{table}[h]
+\centering
+\scriptsize
+\caption{GPT-5.4 multi-seed depth check on the three complex CMU cases highlighted in the limitations discussion. Energies are AdsMind Full adsorption energies in eV under MACE-MP-0 small physics; lower is better. ``Default'' is the original GPT-5.4 Full run, and seeds 43--46 are independent reruns. Gain is $E_{\mathrm{default}} - E_{\mathrm{best\ of\ five}}$; residual gap is $E_{\mathrm{best\ of\ five}} - E_{\mathrm{AdsorbAgent}}$, so positive values mean Adsorb-Agent remains lower in energy.}
+\label{tab:si-multiseed-gpt54}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lrrrrrrrrr}
+\toprule
+Case & Default & Seed 43 & Seed 44 & Seed 45 & Seed 46 & Best of five & Gain & Adsorb-Agent & Residual gap \\
+\midrule
+16 & $-4.272$ & $-4.796$ & $-4.676$ & $-4.659$ & $-4.613$ & $-4.796$ (43) & $+0.524$ & $-5.700$ & $+0.904$ \\
+17 & $-3.241$ & $-3.279$ & $-3.268$ & $-3.260$ & $-3.214$ & $-3.279$ (43) & $+0.038$ & $-4.476$ & $+1.197$ \\
+18 & $-2.724$ & $-3.224$ & $-2.889$ & $-3.229$ & $-2.914$ & $-3.229$ (45) & $+0.505$ & \textit{failed} & --- \\
+\bottomrule
+\end{tabular}%
+}
+\end{table}
+
+\clearpage
+
+\section{Chemical Slip diagnostic statistics}
+
+\begin{table}[h]
+\centering
+\caption{One-shot Chemical Slip rates by surface family on the CMU one-shot benchmark. Entries are slip events divided by valid one-shot runs for each backend.}
+\label{tab:si-slip-surface-family}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lrrrr}
+\toprule
+Surface family & Gemini & Grok-4 & GPT-5.4 & Claude \\
+\midrule
+Intermetallic & 11/15 (73.3\%) & 11/15 (73.3\%) & 10/14 (71.4\%) & 10/13 (76.9\%) \\
+Monometallic & 1/5 (20.0\%) & 1/5 (20.0\%) & 2/5 (40.0\%) & 2/5 (40.0\%) \\
+Overall & 12/20 (60.0\%) & 12/20 (60.0\%) & 12/19 (63.2\%) & 12/18 (66.7\%) \\
+\midrule
+\multicolumn{5}{l}{Gemini/Grok-4 slip-label agreement: 18/20 cases (90.0\%). Most common slip pattern: ontop $\rightarrow$ hollow.} \\
+\bottomrule
+\end{tabular}
+}
+\end{table}
+
+\clearpage
+
+\section{Cost and convergence}
+
+% ===== inlined from research/results/si6_cost_analysis.tex =====
+\begin{table}[h]
+\centering
+\caption{Cost analysis for the 15-case CMU benchmark ablation matrix (4~backends $\times$ 5~variants). Token counts are totals per run (input + output); 1-Shot data drawn from the dedicated one-shot directories.}
+\label{tab:si6-cost-analysis}
+\begin{tabular}{llrrr}
+\toprule
+Backend & Variant & Mean tokens/run & Mean wall-clock (s) & Mean iterations \\
+\midrule
+Gemini & Full & 40131.1 & 699.4 & 4.5 \\
+Gemini & $-$Slip & 38639.7 & 676.9 & 4.5 \\
+Gemini & $-$Forbid & 38131.6 & 617.4 & 4.3 \\
+Gemini & $-$Term & 54619.7 & 562.3 & 4.8 \\
+Gemini & 1-Shot & 7347.6 & 81.0 & 1.0 \\
+Grok-4 & Full & 34270.4 & 963.4 & 4.3 \\
+Grok-4 & $-$Slip & 33088.9 & 950.3 & 4.5 \\
+Grok-4 & $-$Forbid & 33102.9 & 553.8 & 4.3 \\
+Grok-4 & $-$Term & 38941.7 & 696.1 & 4.4 \\
+Grok-4 & 1-Shot & 6265.7 & 145.9 & 1.0 \\
+GPT-5.4 & Full & 25448.7 & 437.1 & 3.9 \\
+GPT-5.4 & $-$Slip & 21527.0 & 399.6 & 3.6 \\
+GPT-5.4 & $-$Forbid & 25863.9 & 440.9 & 4.1 \\
+GPT-5.4 & $-$Term & 31036.5 & 595.6 & 4.6 \\
+GPT-5.4 & 1-Shot & 4845.1 & 61.5 & 1.0 \\
+Claude & Full & 36436.9 & 568.2 & 4.2 \\
+Claude & $-$Slip & 32894.8 & 572.5 & 4.4 \\
+Claude & $-$Forbid & 35256.9 & 632.8 & 4.3 \\
+Claude & $-$Term & 40481.7 & 406.5 & 4.6 \\
+Claude & 1-Shot & 6384.7 & 72.1 & 1.0 \\
+\bottomrule
+\end{tabular}
+\end{table}
+% ===== end inlined si6_cost_analysis =====
+
+% ===== inlined from research/results/si_iteration_convergence.tex =====
+\begin{table}[h]
+\centering
+\caption{Iteration convergence of AdsMind Full variant across 4 LLM backends (CMU benchmark, 15 cases). Mean running-best adsorption energy (eV) after each iteration, averaged across cases. Bottom rows: fraction of the total iter-1-to-final improvement captured by iteration 2 and iteration 3.}
+\label{tab:si-iteration-convergence}
+\begin{tabular}{lrrrr}
+\toprule
+Iteration & Gemini & Grok-4 & GPT-5.4 & Claude \\
+\midrule
+  1 & $-3.608$ & $-3.651$ & $-3.617$ & $-3.659$ \\
+  2 & $-3.763$ & $-3.789$ & $-3.816$ & $-3.707$ \\
+  3 & $-3.857$ & $-3.860$ & $-3.914$ & $-3.736$ \\
+  4 & $-4.307$ & $-4.246$ & $-4.364$ & $-4.097$ \\
+  5 & $-4.460$ & $-4.737$ & $-5.256$ & $-5.231$ \\
+\midrule
+  Frac. by iter 2 & 0.61 & 0.58 & 0.73 & 0.59 \\
+  Frac. by iter 3 & 0.82 & 0.90 & 0.80 & 0.74 \\
+\bottomrule
+\end{tabular}
+\end{table}
+% ===== end inlined si_iteration_convergence =====
 
 \bibliography{refs}
 

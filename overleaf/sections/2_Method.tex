@@ -1,11 +1,68 @@
 
-%\yuyang{Rewrite by gemini3.1, I will use review mode to edit it.}
+\subsection{Overview of AdsMind}
+%The defined problem that Adsmind provides solution
+%化学搜索空间中，指导Adsmind寻找最低能量构型。
 
-% The problem that we provide a solution.
-% I get the architecture, then need to demonstrate it.
-% what modules we have, how it is implemented.
+To identify the most stable absorption configuration and energy of a certain adsorbate and surface, the Adsmind implements a close-loop agent architecture to provide a search strategy. The Adsmind is composed by 4 main modules: \textbf{Planner}, \textbf{Validator}, \textbf{Executor}, \textbf{Analyzer}. In each iteration, a structured adsorption hypothesis is proposed by the \textbf{Planner}, verified by the \textbf{Validator}, calculated the energy and related information by the \textbf{Executor}, and generate the post-relaxation analysis. Once the terminate action or budget exhausted, the loop will be broken up, and the final \textbf{Analyzer} will generate the final report of the best configuration. The following sections will explain the pipeline and modules in detail.
 
 
+
+
+\subsection{Planner and Validator: Adsorption Hypothesis Generation}
+
+
+%% Planner
+
+% 这里可以解释对于一个具体体系是如何预处理SMILE和slab文件的，分析表面文件。
+The planner proposes a structured adsorption hypothesis in JSON format, including the canonical site type (\textit{ontop}, \textit{bridge}, or \textit{hollow}), the intended surface symbols, and the adsorbate binding indices.
+% 对于planner都需要什么样的context，下文已经解释的足够清楚，此处应该提及闭环结构稍微解释一下context的内容。
+The planner prompt is assembled from conditional sections rather than a monolithic, fixed template. Three runtime switches control the agentic feedback exposed to the language model. \textit{Slip feedback} determines whether prior slips are framed as explicit evidence that the originally planned site is unstable. \textit{FORBID} determines whether slipped or otherwise failed site intents are converted into an explicit negative constraint in the planner history. \textit{Termination} determines whether convergence-to-known-best signals are surfaced to the planner and whether the planner is allowed to stop early after repeated convergence.
+
+%% Validator
+
+The validator then enforces chemistry- and schema-level constraints before any expensive physics call is made. In the current implementation, this validation step rejects duplicate plans, invalid binding-index choices, and site/index combinations that are inconsistent with the visible heavy-atom representation of the adsorbate.
+
+% 考虑到篇幅详略，暂时吧planner和validator放到一起，把Executor and Analyzer放到一起
+% Scientific verification
+\subsection{Executor and Analyzer: Physical call and report analysis}
+
+
+%% Executor
+
+% 这部分更多是一个整体介绍，需要看看怎么和后文合并。
+The tool executor instantiates the accepted plan on the slab, performs physical relaxation, and returns a structured post-relaxation analysis rather than only a scalar energy. The analyzer records whether the final structure remained bound, whether dissociation or rearrangement occurred, and whether the realized coordination environment differs from the planner's intent. We refer to this latter event as a \textit{Chemical Slip}: the agent asked for one adsorption environment, but relaxation converged to another.
+
+
+% 这部分具体介绍了在MLFF弛豫前，对吸附物从SMILE到位点几何的处理，需要剪裁和上面的段落重组。
+Each accepted plan is translated into an atomistic starting structure through a surrogate-SMILES geometry layer. This layer maps the selected binding atom(s) to proxy adsorption markers, constructs physically valid initial placements for \textit{ontop}, \textit{bridge}, and \textit{hollow} adsorption, and samples a capped set of candidate surface sites and conformers. In the benchmark configuration used here, the default cap is eight sampled surface coordinates per semantic site family and four conformers per site, with one top-ranked candidate carried into full relaxation.
+
+% 这部分介绍了具体的candidate选择和计算，以及本轮报告生成。衔接到上面的段落中即可。
+The physical stage uses a two-step evaluation procedure. Candidate structures are first screened cheaply to eliminate obviously unstable configurations and to rank promising candidates. The best surviving candidate is then fully relaxed and analyzed. The post-relaxation analysis reconstructs the actual local coordination environment, detects dissociation and bond changes, and writes structured artifacts that can be consumed directly by the next planning step or by offline benchmark tooling.
+
+
+%% Analyzer
+% final analyzer其实没有太多需要介绍的，计划直接放到整体pipeline中介绍即可，subsection只介绍比较复杂的两个module。
+The final analyzer updates the running memory with this outcome and either requests another hypothesis or terminates the episode.
+
+
+
+\subsection{Benchmark and ablation protocol}
+
+% 这部分来自planner会收到的上下文，结合context进行解释消融实验
+These switches define the ablation variants used in the Results section. The \textit{Full} setting enables all three mechanisms. \textit{$-$Slip} removes slip-conditioned guidance and the associated negative constraint. \textit{$-$Forbid} keeps slip detection but suppresses the explicit prohibition against retrying a failed site family. \textit{$-$Term} disables convergence-based early stopping while preserving the rest of the loop. \textit{1-Shot} disables all three mechanisms and sets the maximum attempt budget to one.
+
+% 这部分是benchmark方法和消融实验，与前文关系不大，单独解释这两部分的方法，具体的结果在section 3.
+All agent-side benchmark runs in this manuscript use frozen experiment configurations rather than mutable product defaults. Four reasoning backends are evaluated: Gemini~2.5~Pro (\texttt{gemini-2.5-pro}), Grok-4 (\texttt{grok-4-0709}), GPT-5.4 (\texttt{gpt-5.4-2026-03-05}), and Claude~Sonnet~4.6 (\texttt{claude-sonnet-4-6-20250514}), all run at zero temperature through each provider's official API endpoint. For the local Apple Silicon benchmark, the physical backend is locked to a conservative MACE configuration: \texttt{model=small}, \texttt{precision=float32}, \texttt{device=cpu}, and dispersion disabled. This choice reflects the practical hardware constraints of the benchmark environment and is held fixed across all reported ablations and backend comparisons. Each frozen configuration records the exact model identifier, API transport variant, and key resolution path so that provenance is traceable per run.
+
+The locked CMU ablation matrix uses 15 cases (01--02, 04--05, 09--10, 12--20), spanning atomic adsorbates (H, OH), multi-atom intermediates (NNH, CH$_3$), and complex species (acetaldehyde, OCHCH$_3$, ONN(CH$_3$)$_2$) across intermetallic and monometallic surfaces. Full runs use a maximum of five attempts. The 1-shot baseline uses the same tooling and physical backend but restricts the planner to a single attempt, allowing us to isolate the value of closed-loop refinement from the value of the base planner alone. All batch experiments are executed sequentially, with fixed seeds and structured result serialization for reproducibility.
+
+
+
+
+
+
+
+%\yuyang{Followings are written by gemini3.1.}
 
 \subsection{Closed-Loop Agent Architecture}
 
