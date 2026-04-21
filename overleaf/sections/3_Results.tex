@@ -1,0 +1,96 @@
+\begin{table}[t]
+\centering
+\scriptsize
+\caption{Twenty-case CMU benchmark master table with available AdsMind and Adsorb-Agent comparison results. Cases missing from the current local comparison bundle are marked as NULL. Abbreviation: intermetallic (IN), monometallic (MO)}
+\label{tab:cmu-system-summary}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lllllllllll}
+\hline
+\hline
+Case & Surface & Adsorbate & Family & Final site & Slip count & PES type & AdsMind energy (eV) & AdsMind iters & Adsorb-Agent energy (eV) & Adsorb-Agent configs \\
+\hline
+01 & Mo3Pd(111) & H & IN & bridge & 1 & Convergent & -3.627 & 4 & -3.879 & 29 \\
+02 & Mo3Pd(111) & NNH & IN & hollow (FCC/No-Subsurf) & 1 & Convergent & -4.769 & 5 & -5.097 & 2 \\
+03 & CuPd3(111) & H & IN & hollow (FCC/No-Subsurf) & 0 & Convergent & NULL & NULL & NULL & NULL \\
+04 & CuPd3(111) & NNH & IN & hollow (FCC/No-Subsurf) & 1 & Competing & -2.255 & 4 & -2.915 & 34 \\
+05 & Cu3Ag(111) & H & IN & hollow (HCP/Subsurf-Atom) & 0 & Convergent & -2.962 & 4 & NULL & 0 \\
+06 & Cu3Ag(111) & NNH & IN & hollow (HCP/Subsurf-Atom) & 1 & Competing & NULL & NULL & NULL & NULL \\
+07 & Ru3Mo(111) & H & IN & ontop & 1 & Convergent & NULL & NULL & NULL & NULL \\
+08 & Ru3Mo(111) & NNH & IN & bridge & 1 & Counter-intuitive & NULL & NULL & NULL & NULL \\
+09 & Pt(111) & OH & MO & ontop & 0 & Counter-intuitive & -1.991 & 3 & -1.997 & 25 \\
+10 & Pt(100) & OH & MO & ontop & 0 & Convergent & -2.710 & 2 & -2.741 & 22 \\
+11 & Pd(111) & OH & MO & hollow (FCC/No-Subsurf) & 1 & Convergent & NULL & NULL & NULL & NULL \\
+12 & Au(111) & OH & MO & ontop & 0 & Convergent & -2.081 & 1 & -2.245 & 23 \\
+13 & Ag(100) & OH & MO & bridge & 0 & Convergent & -2.825 & 3 & -2.857 & 25 \\
+14 & CoPt(111) & OH & IN & bridge & 1 & Convergent & -3.591 & 5 & -4.125 & 8 \\
+15 & Cu6Ga2(100) & CH2CH2OH & IN & ontop & 0 & Counter-intuitive & -3.258 & 4 & NULL & 0 \\
+16 & Au2Hf(102) & CH2CH2OH & IN & ontop & 0 & Competing & -4.272 & 5 & -5.700 & 20 \\
+17 & Rh2Ti2(111) & OCHCH3 & IN & bridge & 1 & Competing & -3.241 & 5 & -4.476 & 31 \\
+18 & Al3Zr(101) & OCHCH3 & IN & bridge & 1 & Competing & -2.724 & 3 & NULL & 0 \\
+19 & Hf2Zn6(110) & OCHCH3 & IN & hollow (HCP/Subsurf-Atom) & 1 & Competing & -4.013 & 5 & -4.707 & 18 \\
+20 & Bi2Ti6(211) & ONN(CH3)2 & IN & hollow (HCP/Subsurf-Atom) & 1 & Counter-intuitive & -11.652 & 5 & -12.285 & 16 \\
+\hline
+\hline
+
+\end{tabular}%
+}
+\end{table}
+
+% Notes:
+% 1. System metadata comes from research/results/cmu_v1_gemini_one_shot/summary.csv.
+% 2. Comparison values come from research/results/adsorbagent_mace_gpt54/comparison.csv.
+% 3. PES type is generated from a script-side override table plus fallback rules.
+% 4. Missing comparison rows are emitted as NULL.
+
+
+
+
+\begin{table}[t]
+\centering
+\scriptsize
+\caption{OCD-GMAE rep50 one-shot generalization summary grouped by surface family. Each row aggregates all currently available one-shot runs across four LLM backends. Slip rate is computed as chemical-slip count divided by iteration count for each run.}
+\label{tab:ocd-generalization-summary}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lrrrr}
+\hline
+Surface family & $N$ runs & Success rate & Mean slip rate & Mean iterations  \\
+\hline
+Monometallic & 4 & 0.0\% & 1.00 & 1.00  \\
+Intermetallic & 156 & 89.7\% & 0.78 & 1.00 \\
+Compound & 40 & 95.0\% & 0.45 & 1.00  \\
+Overall & 200 & 89.0\% & 0.71 & 1.00 \\
+\hline
+\end{tabular}%
+}
+\end{table}
+
+% Notes:
+% 1. This table uses the rep50 one-shot OCD-GMAE evaluation runs, not the 10-case ablation subset.
+% 2. It is a cross-backend aggregate over current result directories rather than a single formal production run.
+% 3. Surface family labels come from research/agent_eval/manifests/ocd_gmae_rep50_manifest.csv.
+
+
+\begin{table}[t]
+\centering
+\scriptsize
+\caption{Table 4. Cross-backend ablation summary on the current 15-case locked CMU subset. Each row aggregates all available runs for one variant across four LLM backends. $\Delta E = E_{\mathrm{variant}} - E_{\mathrm{full}}$; positive values indicate worse average adsorption energy than the full AdsMind agent.}
+\label{tab:ablation-summary-main}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lrrrrr}
+\hline
+Variant & $N$ runs & Mean $\Delta E$ vs full (eV) & Mean iterations & Mean wasted iterations & Success rate \\
+\hline
+Full & 60 & +0.000 & 4.22 & 0.05 & 100.0\%  \\
+-Slip & 60 & -0.003 & 4.25 & 0.02 & 100.0\% \\
+-Forbid & 60 & -0.018 & 4.25 & 0.05 & 100.0\% \\
+-Term & 60 & -0.026 & 4.60 & 0.05 & 100.0\% \\
+1-Shot & 60 & +0.246 & 1.00 & 0.00 & 100.0\% \\
+\hline
+\end{tabular}%
+}
+\end{table}
+
+% Notes:
+% 1. This table is the current main-text mechanism summary, not the appendix-style case-by-case ablation matrix.
+% 2. Default inputs are the four backend ablation_summary.csv files under research/results/.
+% 3. It is a cross-backend 15-case aggregate, not the missing formal research/results/ablation_v1/ablation_summary.csv artifact.
