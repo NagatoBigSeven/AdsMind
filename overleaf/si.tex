@@ -198,6 +198,47 @@ Claude & 1-Shot & 0.774 & 0.270 & 0.004 & [0.189, 1.719] & 4.671 (003) \\
 
 \section{External baselines and force-field sensitivity}
 
+This section separates the locked 15-case CMU overlap used for mechanism-level comparisons from newly completed control data.
+The completed additions are CMU20 Full reliability, CMU20 random placement, MACE-large sensitivity on CMU20 and OCD-rep10, and an Adsorb-Agent single-configuration stress control.
+They should not be read as a completed 20-case five-variant ablation matrix.
+
+\begin{table}[h]
+\centering
+\scriptsize
+\caption{Completed CMU20 Full-variant backend matrix. Energies are AdsMind Full adsorption energies in eV under the primary MACE-small protocol. This table extends the locked 15-case ablation subset with cases 03, 06, 07, 08, and 11 for the Full variant only.}
+\label{tab:si-cmu20-full-backend-matrix}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lrrrrrl}
+\toprule
+Case & Gemini & Grok-4 & GPT-5.4 & Claude & Range & Best within 0.01~eV \\
+\midrule
+01 & $-3.632$ & $-3.632$ & $-3.627$ & $-3.630$ & $0.004$ & all \\
+02 & $-4.766$ & $-4.766$ & $-4.769$ & $-4.769$ & $0.003$ & all \\
+03 & $-3.352$ & $-3.352$ & $-3.352$ & $-3.352$ & $0.000$ & all \\
+04 & $-2.060$ & $-2.255$ & $-2.255$ & $-2.285$ & $0.225$ & Claude \\
+05 & $-2.962$ & $-2.962$ & $-2.962$ & $-2.962$ & $0.000$ & all \\
+06 & $-2.165$ & $-1.875$ & $-2.165$ & $-1.875$ & $0.290$ & Gemini/GPT-5.4 \\
+07 & $-7.051$ & $-7.051$ & $-7.031$ & $-7.051$ & $0.020$ & Gemini/Grok-4/Claude \\
+08 & $-6.414$ & $-6.414$ & $-7.191$ & $-6.869$ & $0.776$ & GPT-5.4 \\
+09 & $-1.974$ & $-1.974$ & $-1.991$ & $-1.991$ & $0.017$ & GPT-5.4/Claude \\
+10 & $-2.718$ & $-2.718$ & $-2.710$ & $-2.718$ & $0.008$ & all \\
+11 & $-2.389$ & $-2.418$ & $-2.381$ & $-2.418$ & $0.037$ & Grok-4/Claude \\
+12 & $-2.351$ & $-2.351$ & $-2.081$ & $-2.351$ & $0.270$ & Gemini/Grok-4/Claude \\
+13 & $-2.825$ & $-2.825$ & $-2.825$ & $-2.825$ & $0.000$ & all \\
+14 & $-3.617$ & $-3.617$ & $-3.591$ & $-3.580$ & $0.037$ & Gemini/Grok-4 \\
+15 & $-3.258$ & $-3.258$ & $-3.258$ & $-3.258$ & $0.000$ & all \\
+16 & $-4.663$ & $-4.663$ & $-4.272$ & $-4.663$ & $0.391$ & Gemini/Grok-4/Claude \\
+17 & $-3.222$ & $-2.866$ & $-3.241$ & $-3.241$ & $0.375$ & GPT-5.4/Claude \\
+18 & $-2.779$ & $-3.129$ & $-2.724$ & $-2.724$ & $0.405$ & Grok-4 \\
+19 & $-3.841$ & $-4.045$ & $-4.013$ & $-4.013$ & $0.203$ & Grok-4 \\
+20 & $-11.652$ & $-11.653$ & $-11.652$ & $-11.653$ & $0.000$ & all \\
+\midrule
+\multicolumn{7}{l}{Summary: 80/80 successful Full runs; mean range 0.153~eV; median range 0.029~eV; 8/20 within 0.01~eV and 12/20 within 0.05~eV.} \\
+\bottomrule
+\end{tabular}%
+}
+\end{table}
+
 % ===== inlined from research/results/si_adsorbagent_comparison.tex =====
 \begin{table}[h]
 \centering
@@ -231,6 +272,44 @@ Case & AdsMind (eV) & Adsorb-Ag.\ (eV) & $\Delta$ (eV) & Configs & Tokens & Winn
 \end{table}
 % ===== end inlined si_adsorbagent_comparison =====
 
+\begin{table}[h]
+\centering
+\scriptsize
+\caption{Adsorb-Agent single-configuration stress control on CMU20. The control forces the CatalystAIgent/Adsorb-Agent pipeline to select at most one configuration, testing whether the original multi-configuration depth comes from one-shot LLM placement alone or from breadth. Derived single-config adsorption energies use the original multi-config Adsorb-Agent reference offset when available; dashes indicate missing reference offsets or no selected configuration.}
+\label{tab:si-aa-single-config-control}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{llrrrr}
+\toprule
+Case & Single-config status & Single-config $E_\mathrm{ads}$ & Original multi-config $E_\mathrm{ads}$ & Single $-$ multi & Multi configs \\
+\midrule
+01 & no selected config & --- & $-3.879$ & --- & 29 \\
+02 & no selected config & --- & $-5.097$ & --- & 2 \\
+03 & success & --- & --- & --- & --- \\
+04 & success & $-1.687$ & $-2.915$ & $+1.228$ & 34 \\
+05 & no selected config & --- & --- & --- & --- \\
+06 & success & $-1.871$ & $-2.243$ & $+0.372$ & 23 \\
+07 & no selected config & --- & $-6.726$ & --- & 17 \\
+08 & success & $-4.768$ & $-7.142$ & $+2.374$ & 24 \\
+09 & success & $-1.805$ & $-1.997$ & $+0.192$ & 25 \\
+10 & success & $-2.369$ & $-2.741$ & $+0.373$ & 22 \\
+11 & success & $-1.730$ & $-2.577$ & $+0.847$ & 19 \\
+12 & success & $-1.491$ & $-2.245$ & $+0.754$ & 23 \\
+13 & success & $-1.691$ & $-2.857$ & $+1.166$ & 25 \\
+14 & success & $-3.998$ & $-4.125$ & $+0.127$ & 8 \\
+15 & no selected config & --- & --- & --- & --- \\
+16 & no selected config & --- & $-5.700$ & --- & 20 \\
+17 & success & $-4.003$ & $-4.476$ & $+0.473$ & 31 \\
+18 & success & --- & --- & --- & --- \\
+19 & success & $-3.521$ & $-4.707$ & $+1.186$ & 18 \\
+20 & success & $-8.071$ & $-12.285$ & $+4.214$ & 16 \\
+\midrule
+\multicolumn{6}{l}{Selected configuration produced on 14/20 cases; no selected configuration on 01, 02, 05, 07, 15, and 16.} \\
+\multicolumn{6}{l}{Comparable derived adsorption energies: 12 cases; single-config loses to multi-config on 12/12, mean gap $+1.109$~eV.} \\
+\bottomrule
+\end{tabular}%
+}
+\end{table}
+
 % ===== inlined from research/results/si_baselines_comparison.tex =====
 \begin{table}[h]
 \centering
@@ -262,24 +341,107 @@ Relax/case & 20 & 25--98 & 1 & $\sim$4 & $\sim$21 & $\sim$21 \\
 \end{table}
 % ===== end inlined si_baselines_comparison =====
 
-% ===== inlined from research/results/si_mace_sensitivity.tex =====
 \begin{table}[h]
 \centering
-\caption{MACE force-field sensitivity. AdsMind Full variant (GPT-5.4 backend) run with MACE-MP-0 \textit{small} (CPU, float32, no dispersion) vs.\ MACE-MP-0 \textit{large} (GPU, float64, dispersion) on 5 representative cases. Adsorption energies in eV; lower is better.}
-\label{tab:si-mace-sensitivity}
-\begin{tabular}{lrrrr}
+\scriptsize
+\caption{Completed CMU20 random-placement control versus AdsMind Full best-of-four-backends. Random(20) uses 20 MACE-small relaxations per case; AdsMind uses the best Full result among the four LLM backends. $\Delta = E_\mathrm{random} - E_\mathrm{AdsMind}$; negative values mean random found a lower-energy relaxed structure. Random rows are protocol-valid MACE energy comparisons but have not yet been filtered by the same anomaly detector used for agentic summaries.}
+\label{tab:si-cmu20-random-vs-adsmind}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lrrrl}
 \toprule
-Case & MACE-small & MACE-large & $\Delta$ & Status \\
+Case & Random(20) & AdsMind best Full & $\Delta$ & Outcome \\
 \midrule
-  05 & $-2.962$ & $-3.345$ & $-0.383$ & True \\
-  14 & $-3.591$ & $-3.117$ & $+0.474$ & True \\
-  16 & $-4.272$ & $-5.734$ & $-1.462$ & True \\
-  18 & $-2.724$ & $-4.094$ & $-1.370$ & True \\
-  20 & $-11.652$ & \textit{failed} & --- & False \\
+01 & $-3.632$ & $-3.632$ & $0.000$ & tie \\
+02 & $-4.762$ & $-4.769$ & $+0.007$ & tie \\
+03 & $-3.323$ & $-3.352$ & $+0.029$ & AdsMind lower \\
+04 & $-3.294$ & $-2.285$ & $-1.009$ & random lower \\
+05 & $-2.965$ & $-2.962$ & $-0.004$ & tie \\
+06 & $-2.679$ & $-2.165$ & $-0.514$ & random lower \\
+07 & $-7.042$ & $-7.051$ & $+0.010$ & tie \\
+08 & $-7.188$ & $-7.191$ & $+0.002$ & tie \\
+09 & $-1.990$ & $-1.991$ & $+0.002$ & tie \\
+10 & $-2.715$ & $-2.718$ & $+0.003$ & tie \\
+11 & $-2.440$ & $-2.418$ & $-0.021$ & random lower \\
+12 & $-2.360$ & $-2.351$ & $-0.009$ & tie \\
+13 & $-2.825$ & $-2.825$ & $0.000$ & tie \\
+14 & $-3.623$ & $-3.617$ & $-0.006$ & tie \\
+15 & $-3.001$ & $-3.258$ & $+0.257$ & AdsMind lower \\
+16 & $-6.737$ & $-4.663$ & $-2.074$ & random lower \\
+17 & $-3.171$ & $-3.241$ & $+0.070$ & AdsMind lower \\
+18 & $-3.213$ & $-3.129$ & $-0.084$ & random lower \\
+19 & $-3.567$ & $-4.045$ & $+0.477$ & AdsMind lower \\
+20 & $-13.422$ & $-11.653$ & $-1.770$ & random lower \\
+\midrule
+\multicolumn{5}{l}{Outcome at 0.01~eV tolerance: random lower 6/20, AdsMind lower 4/20, tie 10/20; mean $\Delta = -0.232$~eV.} \\
 \bottomrule
-\end{tabular}
+\end{tabular}%
+}
 \end{table}
-% ===== end inlined si_mace_sensitivity =====
+
+\begin{table}[h]
+\centering
+\scriptsize
+\caption{CMU20 MACE force-field sensitivity. AdsMind Full variant with GPT-5.4 is compared between the primary MACE-MP-0 \textit{small} protocol (CPU, float32, no dispersion) and the MACE-MP-0 \textit{large} sensitivity protocol (GPU, float64, dispersion). $\Delta = E_\mathrm{large} - E_\mathrm{small}$; lower energies are more negative. ``Anomaly'' marks cases with dissociation events or extreme force-field shifts and should not be read as DFT validation.}
+\label{tab:si-mace-sensitivity-cmu20}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lrrrrl}
+\toprule
+Case & MACE-small & MACE-large & $\Delta$ & Diss. events & Flag \\
+\midrule
+01 & $-3.627$ & $-4.492$ & $-0.864$ & 0 & ordinary \\
+02 & $-4.769$ & $-5.092$ & $-0.323$ & 0 & ordinary \\
+03 & $-3.352$ & $-3.958$ & $-0.606$ & 0 & ordinary \\
+04 & $-2.255$ & $-2.736$ & $-0.481$ & 0 & ordinary \\
+05 & $-2.962$ & $-3.345$ & $-0.383$ & 0 & ordinary \\
+06 & $-2.165$ & $-2.119$ & $+0.046$ & 1 & anomaly \\
+07 & $-7.031$ & $-4.818$ & $+2.213$ & 0 & anomaly \\
+08 & $-7.191$ & $-5.385$ & $+1.806$ & 0 & anomaly \\
+09 & $-1.991$ & $-2.867$ & $-0.876$ & 0 & ordinary \\
+10 & $-2.710$ & $-3.688$ & $-0.979$ & 0 & ordinary \\
+11 & $-2.381$ & $-3.204$ & $-0.823$ & 0 & ordinary \\
+12 & $-2.081$ & $-2.185$ & $-0.103$ & 0 & ordinary \\
+13 & $-2.825$ & $-3.253$ & $-0.428$ & 0 & ordinary \\
+14 & $-3.591$ & $-3.117$ & $+0.474$ & 0 & ordinary \\
+15 & $-3.258$ & $-3.677$ & $-0.419$ & 0 & ordinary \\
+16 & $-4.272$ & $-5.734$ & $-1.462$ & 1 & anomaly \\
+17 & $-3.241$ & $-3.307$ & $-0.066$ & 1 & anomaly \\
+18 & $-2.724$ & $-4.094$ & $-1.370$ & 0 & anomaly \\
+19 & $-4.013$ & $-6.131$ & $-2.119$ & 0 & anomaly \\
+20 & $-11.652$ & $-2.402$ & $+9.251$ & 4 & anomaly \\
+\midrule
+\multicolumn{6}{l}{All 20 rows retain a summary result; mean absolute shift is 1.255~eV, or 0.834~eV excluding case~20.} \\
+\multicolumn{6}{l}{Case~20 retains a non-dissociated best result but later dissociated analyses reach lower unretained energies.} \\
+\bottomrule
+\end{tabular}%
+}
+\end{table}
+
+\begin{table}[h]
+\centering
+\scriptsize
+\caption{MACE-large sensitivity on 10 representative OCD-GMAE rep50 cases. This is a force-field stress test on chemistry outside the CMU set, not a replacement for the locked 10-case OCD-GMAE MACE-small ablation matrix. Case~043 fails naturally through slip and dissociation; no API or calculator error is recorded.}
+\label{tab:si-mace-large-ocd-rep10}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{llllrrr}
+\toprule
+Case & Surface & Adsorbate & MACE-large energy & Status & Slip & Diss. \\
+\midrule
+003 & Na$_{12}$Pb$_{36}$ & \texttt{[H]} & $-3.126$ & success & 5 & 0 \\
+006 & Ca$_{16}$Pb$_{16}$Pd$_{16}$ & \texttt{[OH]} & $-6.534$ & success & 3 & 0 \\
+012 & Sb$_{20}$Ta$_{60}$ & \texttt{[N]=N} & $-10.620$ & success & 5 & 4 \\
+020 & Pb$_{24}$Y$_8$ & \texttt{[N]=O} & $-2.286$ & success & 5 & 1 \\
+024 & Cd$_{24}$Pd$_{24}$ & \texttt{NO} & $-3.123$ & success & 3 & 0 \\
+027 & Cr$_{36}$N$_{48}$ & \texttt{[CH]=O} & $-7.819$ & success & 2 & 0 \\
+035 & Se$_{48}$Sn$_{48}$ & \texttt{CO} & $-3.387$ & success & 1 & 1 \\
+039 & As$_{40}$Ti$_{40}$ & \texttt{C[O]} & $-8.640$ & success & 4 & 0 \\
+043 & K$_{20}$ & \texttt{C([CH2])O} & --- & failed & 1 & 1 \\
+050 & Ni$_{38}$Se$_{40}$ & \texttt{[CH2]C} & $-9.525$ & success & 4 & 0 \\
+\midrule
+\multicolumn{7}{l}{Summary: 9/10 successes; failed case 043 has status=\texttt{failed}, error=None, calc\_failure\_count=0.} \\
+\bottomrule
+\end{tabular}%
+}
+\end{table}
 
 \clearpage
 
