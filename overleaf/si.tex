@@ -199,13 +199,36 @@ Claude & 1-Shot & 0.774 & 0.270 & 0.004 & [0.189, 1.719] & 4.671 (003) \\
 \section{External baselines and force-field sensitivity}
 
 This section separates the locked 15-case CMU overlap used for mechanism-level comparisons from newly completed control data.
-The completed additions are CMU20 Full reliability, CMU20 random placement, MACE-large sensitivity on CMU20 and OCD-rep10, and an Adsorb-Agent single-configuration stress control.
-They should not be read as a completed 20-case five-variant ablation matrix.
+The completed additions are the CMU20 five-variant ablation completion, CMU20 random placement, MACE-large sensitivity on CMU20 and OCD-rep10, and an Adsorb-Agent single-configuration stress control.
+The CMU20 ablation completion is used here as a reliability and failure-mode audit; the original 15-case tables above are retained for the first locked mechanism package.
 
 \begin{table}[h]
 \centering
 \scriptsize
-\caption{Completed CMU20 Full-variant backend matrix. Energies are AdsMind Full adsorption energies in eV under the primary MACE-small protocol. This table extends the locked 15-case ablation subset with cases 03, 06, 07, 08, and 11 for the Full variant only.}
+\caption{Completed CMU20 five-variant ablation summary across four LLM backends. $\Delta E = E_{\mathrm{variant}} - E_{\mathrm{full}}$ for the same backend and case; positive values mean the variant is worse than Full. Energy deltas for 1-Shot are conditional on successful non-dissociated attempts, while failures remain in the success-rate denominator.}
+\label{tab:si-cmu20-ablation-completion}
+\begin{tabular}{lrrrrrr}
+\toprule
+Variant & Attempts & Successful & Mean $\Delta E$ & Median $\Delta E$ & Mean iterations & Success rate \\
+\midrule
+Full & 80 & 80 & 0.000 & 0.000 & 4.18 & 100.0\% \\
+$-$Slip & 80 & 80 & $-$0.008 & 0.000 & 4.33 & 100.0\% \\
+$-$Forbid & 80 & 80 & $-$0.007 & 0.000 & 4.30 & 100.0\% \\
+$-$Term & 80 & 80 & $-$0.036 & 0.000 & 4.58 & 100.0\% \\
+1-Shot & 80 & 73 & +0.217 & +0.125 & 1.00 & 91.2\% \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The seven CMU20 1-Shot failures are natural physics outcomes rather than external execution failures: case~06 fails on all four backends and case~08 fails on Grok-4, GPT-5.4, and Claude.
+All seven have \texttt{error=None}, \texttt{calc\_failure\_count=0}, \texttt{dissociation\_count=1}, \texttt{is\_dissociated=True}, and no retained best adsorption energy.
+Accordingly, these rows are counted as failed attempts in success-rate and reach-Full statistics, but excluded from conditional energy means.
+For this reason, ordinary paired Wilcoxon statistics in Table~\ref{tab:si4-ablation-statistics} are retained for the original 15-case complete-energy CMU package; the completed CMU20 data are reported here as a failure-aware audit rather than as a naively imputed 20-case paired test.
+
+\begin{table}[h]
+\centering
+\scriptsize
+\caption{Completed CMU20 Full-variant backend matrix. Energies are AdsMind Full adsorption energies in eV under the primary MACE-small protocol. This table is the Full row of the completed CMU20 five-variant ablation matrix.}
 \label{tab:si-cmu20-full-backend-matrix}
 \resizebox{\textwidth}{!}{%
 \begin{tabular}{lrrrrrl}

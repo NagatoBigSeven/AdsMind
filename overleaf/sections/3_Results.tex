@@ -1,40 +1,42 @@
-\subsection{Controlled ablation on a locked benchmark set}
+\subsection{Controlled ablation on the CMU20 benchmark}
 
-We evaluated the agent on a locked 15-case CMU benchmark subset (cases 01--02, 04--05, 09--10, 12--20), spanning H, NNH, OH, CH$_2$CH$_2$OH, OCHCH$_3$, and ONN(CH$_3$)$_2$ adsorption across increasingly difficult intermetallic and monometallic surfaces.
+We evaluated the agent on the completed 20-case CMU benchmark, spanning H, NNH, OH, CH$_2$CH$_2$OH, OCHCH$_3$, and ONN(CH$_3$)$_2$ adsorption across increasingly difficult intermetallic and monometallic surfaces.
 For each case, we executed five runtime variants under a fixed MACE-small CPU backend: \textit{Full}, \textit{$-$Slip}, \textit{$-$Forbid}, \textit{$-$Term}, and \textit{1-Shot}.
 Here \textit{$-$Slip} removes slip-conditioned guidance together with its associated FORBID constraint, \textit{$-$Forbid} keeps slip detection and history but removes the explicit ``do not retry this site'' instruction, \textit{$-$Term} disables convergence-based early stopping, and \textit{1-Shot} reduces the total budget to a single attempt.
-The full 15$\times$5 matrix was executed independently on four LLM backends---Gemini~2.5~Pro, Grok-4, GPT-5.4, and Claude~Sonnet~4.6---yielding 300 successful runs out of 300 (100\%).
+The complete 20$\times$5 matrix was executed independently on four LLM backends---Gemini~2.5~Pro, Grok-4, GPT-5.4, and Claude~Sonnet~4.6---yielding 393 successful runs out of 400 attempts.
 
 \begin{table}[t]
 \centering
 \scriptsize
-\caption{Cross-backend ablation summary on the current 15-case locked CMU subset. Each row aggregates all available runs for one variant across four LLM backends. $\Delta E = E_{\mathrm{variant}} - E_{\mathrm{full}}$; positive values indicate worse average adsorption energy than the full AdsMind agent.}
+\caption{Cross-backend ablation summary on the completed 20-case CMU benchmark. Each row aggregates one variant across four LLM backends. $\Delta E = E_{\mathrm{variant}} - E_{\mathrm{full}}$; positive values indicate worse adsorption energy than the same-backend full AdsMind agent. For 1-Shot, energy statistics are conditional on successful non-dissociated runs; failed attempts are retained in the success-rate denominator.}
 \label{tab:ablation-summary-main}
 \resizebox{\textwidth}{!}{%
-\begin{tabular}{lrrrrr}
+\begin{tabular}{lrrrrrr}
 \hline
-Variant & $N$ runs & Mean $\Delta E$ vs full (eV) & Mean iterations & Mean wasted iterations & Success rate \\
+Variant & Attempts & Successful & Mean $\Delta E$ vs full (eV) & Median $\Delta E$ (eV) & Mean iterations & Success rate \\
 \hline
-Full & 60 & +0.000 & 4.22 & 0.05 & 100.0\%  \\
-$-$Slip & 60 & $-$0.003 & 4.25 & 0.02 & 100.0\% \\
-$-$Forbid & 60 & $-$0.018 & 4.25 & 0.05 & 100.0\% \\
-$-$Term & 60 & $-$0.026 & 4.60 & 0.05 & 100.0\% \\
-1-Shot & 60 & +0.246 & 1.00 & 0.00 & 100.0\% \\
+Full & 80 & 80 & +0.000 & 0.000 & 4.18 & 100.0\%  \\
+$-$Slip & 80 & 80 & $-$0.008 & 0.000 & 4.33 & 100.0\% \\
+$-$Forbid & 80 & 80 & $-$0.007 & 0.000 & 4.30 & 100.0\% \\
+$-$Term & 80 & 80 & $-$0.036 & 0.000 & 4.58 & 100.0\% \\
+1-Shot & 80 & 73 & +0.217 & 0.125 & 1.00 & 91.2\% \\
 \hline
 \end{tabular}%
 }
 \end{table}
 
-\paragraph{CMU20 Full completion.}
-The locked 15-case matrix remains the mechanism ablation dataset, but we also completed the missing Full-variant CMU cases (03, 06, 07, 08, 11) on all four LLM backends.
-This expanded Full-only control contains 80/80 successful runs and closes the reliability gap on the complete 20-case CMU scope.
+\paragraph{CMU20 completion and natural 1-Shot failures.}
+The newly completed cases (03, 06, 07, 08, 11) close the CMU benchmark gap across all five variants, not only the Full variant.
+The Full, $-$Slip, $-$Forbid, and $-$Term variants contain 320/320 successful runs across CMU20.
+The only failures occur in the 1-Shot control: case~06 fails on all four backends and case~08 fails on Grok-4, GPT-5.4, and Claude, yielding 73/80 successful 1-Shot runs.
+These failures are not external errors; in each case the relaxation/analyzer completes, but the final structure is rejected because \texttt{is\_dissociated=True} with \texttt{dissociation\_count=1} and no valid best adsorption energy.
 Across CMU20, the mean four-backend range is 0.153~eV, the median range is 0.029~eV, 8/20 cases agree within 0.01~eV, and 12/20 agree within 0.05~eV.
 The largest disagreement occurs on case~08 (Ru$_3$Mo + NNH), where GPT-5.4 reaches $-7.191$~eV, Claude reaches $-6.869$~eV, and Gemini/Grok-4 remain at $-6.414$~eV.
-Thus, the Full agent is reliable on CMU20, but backend agreement remains case-dependent rather than universal.
+Thus, the Full agent is reliable on CMU20, while backend agreement remains case-dependent rather than universal.
 
 \begin{table}[t]
 \centering
-\caption{Completed CMU20 Full-variant robustness across four LLM backends. This is a Full-only reliability and backend-sensitivity control, not a completed 20-case five-variant ablation matrix.}
+\caption{Full-row backend robustness within the completed CMU20 five-variant ablation matrix.}
 \label{tab:cmu20-full-completion}
 \begin{tabular}{lr}
 \toprule
@@ -49,6 +51,9 @@ Cases within 0.05~eV & 12/20 \\
 \bottomrule
 \end{tabular}
 \end{table}
+
+The detailed per-backend energy matrices and formal pairwise tests below preserve the original locked 15-case CMU subset used in the first complete-energy ablation package.
+We do not recompute ordinary 20-case Wilcoxon tests over the CMU20 1-Shot row because seven 1-Shot attempts are censored by natural dissociation/reaction failures; the completed CMU20 matrix is therefore summarized through success rates, failure audit, and success-conditioned energy deltas in the Supporting Information.
 
 % ===== inlined from research/results/paper_tables.tex =====
 % ============================================================
@@ -241,7 +246,7 @@ Support rate & --- & 7/11 = 64\% & 8/11 = 73\% & 7/11 = 64\% & 7/11 = 64\% \\
 \end{table}
 % ===== end inlined paper_tables =====
 
-Tables~\ref{tab:si-ablation-gemini}--\ref{tab:si-ablation-claude} report the full energy matrices.
+Tables~\ref{tab:si-ablation-gemini}--\ref{tab:si-ablation-claude} report the full energy matrices for the original locked 15-case subset.
 The Friedman test is highly significant on all four backends: Gemini ($p = 1.4 \times 10^{-6}$), Grok-4 ($p = 2.2 \times 10^{-6}$), GPT-5.4 ($p = 2.2 \times 10^{-3}$), and Claude ($p = 1.1 \times 10^{-4}$).
 Pairwise Wilcoxon tests confirm that the full agent significantly outperforms the 1-shot baseline after BH correction on three of four backends (Gemini BH~$p = 0.006$, Grok-4 BH~$p = 0.011$, Claude BH~$p = 0.013$); GPT-5.4 is borderline (BH~$p = 0.084$).
 
@@ -251,7 +256,7 @@ The largest per-case improvements occur on complex surfaces: case~20 shows 1-sho
 GPT-5.4 shows the smallest mean improvement, consistent with a stronger one-shot planner that leaves less room for iterative recovery; however, it still gains 0.426~eV on case~02 and 0.549~eV on case~17.
 
 \paragraph{Ablated variants sometimes outperform full.}
-On 15 cases, the expanded matrix reveals a systematic pattern: ablated variants find lower energies than the full agent on specific case$\times$backend combinations.
+On the original locked 15-case subset, the expanded matrix reveals a systematic pattern: ablated variants find lower energies than the full agent on specific case$\times$backend combinations.
 Case~18 is the clearest example: \textit{$-$Slip} improves over full by 0.491~eV on GPT-5.4 and Claude, while \textit{$-$Forbid} improves by 0.350~eV on Gemini.
 Case~16 shows a reversal where \textit{$-$Slip} degrades by 0.391~eV on Claude but \textit{$-$Forbid}, \textit{$-$Term}, and 1-Shot all match or beat the full variant on GPT-5.4.
 Case~17 similarly shows \textit{$-$Slip} outperforming full on Grok-4 by 0.280~eV.
@@ -516,7 +521,7 @@ The current matched-physics comparison therefore should not be read as AdsMind w
 It supports a reliability--cost trade-off: AdsMind is more reliable and uses far fewer relaxations, while Adsorb-Agent is deeper when its one-pass enumeration succeeds.
 
 \paragraph{Implications.}
-AdsMind's closed-loop design achieves successful convergence on every case in the locked subset, but its iterative single-configuration refinement under-samples the configuration space on complex surfaces.
+AdsMind's closed-loop design achieves successful Full-variant convergence across the completed CMU20 benchmark, but its iterative single-configuration refinement under-samples the configuration space on complex surfaces.
 Adsorb-Agent's multi-configuration enumeration explores more of the energy landscape when the candidate set is valid, but fails when the one-pass setup produces no valid trajectories.
 These findings motivate a concrete architectural extension: coupling AdsMind's closed-loop error recovery with broader initial site enumeration and parallel relaxation.
 
@@ -529,7 +534,7 @@ We include the GPT-5.4 Adsorb-Agent run above and in the SI baseline table to ke
 After adding the five previously missing random-control cases, the CMU20 comparison gives a mean energy difference of $-0.232$~eV relative to AdsMind Full (best-across-backends); random wins 6 cases, AdsMind wins 4, and 10 tie within 0.01~eV.
 The two largest random advantages remain case~16 ($-6.74$ vs.\ $-4.66$ eV, $\Delta = -2.07$~eV) and case~20 ($-13.42$ vs.\ $-11.65$ eV, $\Delta = -1.77$~eV), while AdsMind's largest advantage is case~19 ($+0.477$~eV in random-minus-AdsMind energy).
 Critically, the random baseline uses $5\times$ more MACE relaxations than a single AdsMind Full run on the same case (20 vs.\ $\sim$4); the best-across-backends comparison above is a reporting view for robustness, not a claim that the four-backend aggregate itself costs only $\sim$4 relaxations.
-AdsMind's \textit{1-Shot} variant, which allots the same single MACE relaxation as a naive search would, never beats AdsMind Full and underperforms random on several cases.
+In the CMU20 case-level best-of-backend view, AdsMind's \textit{1-Shot} variant, which allots the same single MACE relaxation as a naive search would, never beats AdsMind Full and underperforms random on several cases.
 This supports the interpretation that the LLM planner's single-pass placement is not inherently better than broader random sampling; the value of the agent lies in \textit{iterative refinement}, reliability, and interpretable error recovery rather than raw deepest-basin discovery.
 Because the current random summary records successful MACE energy calculations but does not yet apply the same anomaly filtering as the agent summaries, random winners should be interpreted as protocol-level energy comparisons until their top structures are manually or programmatically filtered.
 
@@ -561,5 +566,5 @@ These shifts do not change the qualitative systems conclusion from the MACE-smal
 Taken together, these controls reveal that AdsMind's primary contribution is not deepest-basin discovery.
 Random sampling with 20 relaxations is competitive with AdsMind Full and reaches a lower mean energy; heuristic enumeration with $\sim$50 sites beats it on 40\% of cases; Adsorb-Agent with $\sim$21 relaxations reaches deeper basins whenever the GPT-5.4 one-pass enumeration succeeds.
 In the GPT-5.4 matched-physics run, Adsorb-Agent is lower in energy on all 12 successful comparable cases, but fails on the remaining three.
-AdsMind's distinctive value is the combination of: (i) 100\% success rate across backends and cases in the controlled ablation matrices and in the completed CMU20 Full control, versus 73--80\% for Adsorb-Agent on the locked CMU overlap and 14/20 selected configurations in the Adsorb-Agent single-configuration stress test; (ii) compute efficiency per backend---remaining competitive with random at $5\times$ less MACE work per run and approaching heuristic at $6$--$25\times$ less; (iii) chemical interpretability via Slip detection, FORBID logic, and backend-convergent reasoning traces absent from brute-force methods; and (iv) iterative error recovery, which is a prerequisite for autonomous chemistry workflows where silent failures are unacceptable.
+AdsMind's distinctive value is the combination of: (i) 100\% success for the Full variant on both completed ablation matrices (80/80 CMU20 and 40/40 OCD-GMAE), with 320/320 successful CMU20 iterative-variant runs versus 73/80 for the CMU20 1-Shot control, 73--80\% for Adsorb-Agent on the locked CMU overlap, and 14/20 selected configurations in the Adsorb-Agent single-configuration stress test; (ii) compute efficiency per backend---remaining competitive with random at $5\times$ less MACE work per run and approaching heuristic at $6$--$25\times$ less; (iii) chemical interpretability via Slip detection, FORBID logic, and backend-convergent reasoning traces absent from brute-force methods; and (iv) iterative error recovery, which is a prerequisite for autonomous chemistry workflows where silent failures are unacceptable.
 A natural extension couples AdsMind's closed-loop error-recovery with broader initial sampling (multi-site LLM placement with parallel relaxation), which would combine the depth of enumeration with the reliability and interpretability of the closed-loop agent.
