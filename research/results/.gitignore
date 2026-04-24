@@ -1,54 +1,15 @@
 # Default: ignore everything, then whitelist
 *
 !.gitignore
-!README.md
-!README_CN.md
 
 # ── Top-level summaries & paper data ──
-!cross_llm_ablation_4backend.json
-!hypothesis_test.json
-!key_evaluation_metrics.json
-!ocd_gmae_ablation_final_vs_one_shot_4backend.csv
-!ocd_gmae_ablation_multi_backend_final.csv
-!ocd_gmae_ablation_multi_backend_final.json
-!ocd_gmae_paper_tables.tex
-!paper_tables.tex
-!si4_ablation_statistics.json
-!si4_ablation_statistics.tex
-!si4_ocd_gmae_ablation_statistics.json
-!si4_ocd_gmae_ablation_statistics.tex
-!si6_cost_analysis.json
-!si6_cost_analysis.tex
-!si_adsorbagent_comparison.tex
-!si_baselines_comparison.tex
-!si_iteration_convergence.tex
-!si_mace_sensitivity.tex
+!*.csv
+!*.json
+!*.tex
 
 # ── Analysis directory ──
 !analysis/
-!analysis/adsmind_vs_adsorbagent_behavioral.csv
-!analysis/adsorbagent_paper_results.csv
-!analysis/baselines_comparison.json
-!analysis/case19_trajectory.csv
-!analysis/case19_trajectory.json
-!analysis/cmu_benchmark_table.csv
-!analysis/cmu_one_shot_range_ranking_new_cases.csv
-!analysis/cmu_one_shot_range_ranking_new_cases.json
-!analysis/cross_llm_20case_4backend.json
-!analysis/cross_llm_20case_with_openai.csv
-!analysis/cross_llm_20case_with_openai.json
-!analysis/cross_llm_ablation_with_openai.csv
-!analysis/cross_llm_ablation_with_openai.json
-!analysis/cross_llm_unified_range_table.csv
-!analysis/cross_llm_unified_summary.json
-!analysis/iteration_convergence.csv
-!analysis/iteration_convergence.png
-!analysis/iteration_convergence_summary.json
-!analysis/ocd_gmae_one_shot_range_ranking.csv
-!analysis/ocd_gmae_one_shot_range_ranking.json
-!analysis/ocd_gmae_one_shot_top_10_case_ids.txt
-!analysis/slip_analysis.csv
-!analysis/slip_analysis.json
+!analysis/*
 # ── Dataset directories ──
 !gemini_ablation_v1/
 !xai_ablation_v2/
@@ -71,39 +32,91 @@
 !ocd_gmae_anthropic_sonnet46_ablation_v1/
 
 # Dataset-level summaries
-!gemini_ablation_v1/ablation_summary.csv
-!gemini_ablation_v1/ablation_stats.json
-!xai_ablation_v2/ablation_summary.csv
-!xai_ablation_v2/ablation_stats.json
-!openai_gpt54_ablation_v1/ablation_summary.csv
-!openai_gpt54_ablation_v1/ablation_stats.json
-!anthropic_sonnet46_ablation_v1/ablation_summary.csv
-!anthropic_sonnet46_ablation_v1/ablation_stats.json
-!cmu_v1_gemini_one_shot/summary.csv
-!cmu_v1_xai_progressive_one_shot/summary.csv
-!cmu_v1_xai_progressive_one_shot/overall_summary.json
-!cmu_v1_openai_gpt54_one_shot/summary.csv
-!cmu_v1_openai_gpt54_one_shot_retry/summary.csv
-!cmu_v1_anthropic_sonnet46_one_shot/summary.csv
-!cmu_v1_gemini_one_shot_epfl_control/summary.csv
-!cmu_v1_xai_progressive_one_shot_epfl_control/summary.csv
-!ocd_gmae_rep50_v1_gemini_one_shot/summary.csv
-!ocd_gmae_rep50_v1_xai_grok4_one_shot/summary.csv
-!ocd_gmae_rep50_v1_openai_gpt54_one_shot/summary.csv
-!ocd_gmae_rep50_v1_anthropic_sonnet46_one_shot/summary.csv
-!ocd_gmae_gemini_ablation_v2/ablation_summary.csv
-!ocd_gmae_gemini_ablation_v2/ablation_stats.json
-!ocd_gmae_xai_grok4_ablation_v1/ablation_summary.csv
-!ocd_gmae_xai_grok4_ablation_v1/ablation_stats.json
-!ocd_gmae_openai_gpt54_ablation_v1/ablation_summary.csv
-!ocd_gmae_openai_gpt54_ablation_v1/ablation_stats.json
-!ocd_gmae_anthropic_sonnet46_ablation_v1/ablation_summary.csv
-!ocd_gmae_anthropic_sonnet46_ablation_v1/ablation_stats.json
+!gemini_ablation_v1/*.csv
+!gemini_ablation_v1/*.json
+!xai_ablation_v2/*.csv
+!xai_ablation_v2/*.json
+!openai_gpt54_ablation_v1/*.csv
+!openai_gpt54_ablation_v1/*.json
+!anthropic_sonnet46_ablation_v1/*.csv
+!anthropic_sonnet46_ablation_v1/*.json
+!cmu_v1_gemini_one_shot/*.csv
+!cmu_v1_gemini_one_shot/*.json
+!cmu_v1_xai_progressive_one_shot/*.csv
+!cmu_v1_xai_progressive_one_shot/*.json
+!cmu_v1_openai_gpt54_one_shot/*.csv
+!cmu_v1_openai_gpt54_one_shot/*.json
+!cmu_v1_openai_gpt54_one_shot_retry/*.csv
+!cmu_v1_openai_gpt54_one_shot_retry/*.json
+!cmu_v1_anthropic_sonnet46_one_shot/*.csv
+!cmu_v1_anthropic_sonnet46_one_shot/*.json
+!cmu_v1_gemini_one_shot_epfl_control/*.csv
+!cmu_v1_gemini_one_shot_epfl_control/*.json
+!cmu_v1_xai_progressive_one_shot_epfl_control/*.csv
+!cmu_v1_xai_progressive_one_shot_epfl_control/*.json
+!cmu_v1_xai_progressive_one_shot/paper_comparison/
+!cmu_v1_xai_progressive_one_shot/paper_comparison/*.csv
+!cmu_v1_xai_progressive_one_shot/paper_comparison/*.json
+!ocd_gmae_gemini_ablation_v2/*.csv
+!ocd_gmae_gemini_ablation_v2/*.json
+!ocd_gmae_xai_grok4_ablation_v1/*.csv
+!ocd_gmae_xai_grok4_ablation_v1/*.json
+!ocd_gmae_openai_gpt54_ablation_v1/*.csv
+!ocd_gmae_openai_gpt54_ablation_v1/*.json
+!ocd_gmae_anthropic_sonnet46_ablation_v1/*.csv
+!ocd_gmae_anthropic_sonnet46_ablation_v1/*.json
 
-# Per-case raw payloads and run artifacts are intentionally excluded from the
-# public release. Regenerate them by rerunning the manifests from
-# `research/agent_eval/`.
-**/result.json
+# Ablation: variant dirs + case dirs + result.json only
+!gemini_ablation_v1/*/
+!gemini_ablation_v1/*/*/
+!gemini_ablation_v1/*/*/result.json
+!xai_ablation_v2/*/
+!xai_ablation_v2/*/*/
+!xai_ablation_v2/*/*/result.json
+!openai_gpt54_ablation_v1/*/
+!openai_gpt54_ablation_v1/*/*/
+!openai_gpt54_ablation_v1/*/*/result.json
+!anthropic_sonnet46_ablation_v1/*/
+!anthropic_sonnet46_ablation_v1/*/*/
+!anthropic_sonnet46_ablation_v1/*/*/result.json
+!ocd_gmae_gemini_ablation_v2/*/
+!ocd_gmae_gemini_ablation_v2/*/*/
+!ocd_gmae_gemini_ablation_v2/*/*/result.json
+!ocd_gmae_xai_grok4_ablation_v1/*/
+!ocd_gmae_xai_grok4_ablation_v1/*/*/
+!ocd_gmae_xai_grok4_ablation_v1/*/*/result.json
+!ocd_gmae_openai_gpt54_ablation_v1/*/
+!ocd_gmae_openai_gpt54_ablation_v1/*/*/
+!ocd_gmae_openai_gpt54_ablation_v1/*/*/result.json
+!ocd_gmae_anthropic_sonnet46_ablation_v1/*/
+!ocd_gmae_anthropic_sonnet46_ablation_v1/*/*/
+!ocd_gmae_anthropic_sonnet46_ablation_v1/*/*/result.json
+
+# One-shot: case dirs + result.json only
+!cmu_v1_gemini_one_shot/*/
+!cmu_v1_gemini_one_shot/*/result.json
+!cmu_v1_xai_progressive_one_shot/*/
+!cmu_v1_xai_progressive_one_shot/*/result.json
+!cmu_v1_openai_gpt54_one_shot/*/
+!cmu_v1_openai_gpt54_one_shot/*/result.json
+!cmu_v1_openai_gpt54_one_shot_retry/*/
+!cmu_v1_openai_gpt54_one_shot_retry/*/result.json
+!cmu_v1_anthropic_sonnet46_one_shot/*/
+!cmu_v1_anthropic_sonnet46_one_shot/*/result.json
+!cmu_v1_gemini_one_shot_epfl_control/*/
+!cmu_v1_gemini_one_shot_epfl_control/*/result.json
+!cmu_v1_xai_progressive_one_shot_epfl_control/*/
+!cmu_v1_xai_progressive_one_shot_epfl_control/*/result.json
+!ocd_gmae_rep50_v1_gemini_one_shot/*/
+!ocd_gmae_rep50_v1_gemini_one_shot/*/result.json
+!ocd_gmae_rep50_v1_xai_grok4_one_shot/*/
+!ocd_gmae_rep50_v1_xai_grok4_one_shot/*/result.json
+!ocd_gmae_rep50_v1_openai_gpt54_one_shot/*/
+!ocd_gmae_rep50_v1_openai_gpt54_one_shot/*/result.json
+!ocd_gmae_rep50_v1_anthropic_sonnet46_one_shot/*/
+!ocd_gmae_rep50_v1_anthropic_sonnet46_one_shot/*/result.json
+
+# Explicitly exclude per-run artifacts that leak through dir unignore
 **/config.json
 **/comparison_snapshot.json
 **/agent_log.txt
@@ -111,24 +124,28 @@
 
 # ── Adsorb-Agent MACE comparison ──
 !adsorbagent_mace_gpt4o/
-!adsorbagent_mace_gpt4o/comparison.json
-!adsorbagent_mace_gpt4o/compute_matched_bootstrap.json
-!adsorbagent_mace_gpt4o/summary.json
+!adsorbagent_mace_gpt4o/*.json
 
 # ── Supplementary ablation experiments ──
 !random_baseline_n20/
-!random_baseline_n20/summary.csv
-!random_baseline_n20/summary.json
+!random_baseline_n20/*.csv
+!random_baseline_n20/*.json
+!random_baseline_n20/*/
+!random_baseline_n20/*/result.json
 !heuristic_baseline/
-!heuristic_baseline/summary.csv
-!heuristic_baseline/summary.json
+!heuristic_baseline/*.csv
+!heuristic_baseline/*.json
+!heuristic_baseline/*/
+!heuristic_baseline/*/result.json
 !mace_large_gpt54/
-!mace_large_gpt54/ablation_summary.csv
-!mace_large_gpt54/ablation_stats.json
+!mace_large_gpt54/*.csv
+!mace_large_gpt54/*.json
+!mace_large_gpt54/*/
+!mace_large_gpt54/*/*/
+!mace_large_gpt54/*/*/result.json
 !adsorbagent_mace_gpt54/
-!adsorbagent_mace_gpt54/adsorbagent_mace_summary.csv
-!adsorbagent_mace_gpt54/comparison.csv
-!adsorbagent_mace_gpt54/comparison_stats.json
+!adsorbagent_mace_gpt54/*.csv
+!adsorbagent_mace_gpt54/*.json
 
 # ── Multi-seed experiment ──
 !multiseed_gpt54/

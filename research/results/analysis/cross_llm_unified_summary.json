@@ -1,9 +1,9 @@
 {
   "cmu_benchmark": {
-    "n_cases": 15,
+    "n_cases": 5,
     "n_backends": 4,
     "n_variants": 5,
-    "total_runs": 300,
+    "total_runs": 100,
     "success_rate": 1.0,
     "backends": [
       "Gemini",
@@ -13,77 +13,67 @@
     ],
     "cross_backend_range": {
       "full": {
-        "mean_range": 0.1293,
-        "within_0.01": 7,
-        "n_cases": 15,
-        "max_range": 0.4051
+        "mean_range": 0.053,
+        "within_0.01": 2,
+        "n_cases": 5,
+        "max_range": 0.2033
       },
       "no_slip": {
-        "mean_range": 0.1843,
-        "within_0.01": 5,
-        "n_cases": 15,
+        "mean_range": 0.1533,
+        "within_0.01": 2,
+        "n_cases": 5,
         "max_range": 0.5549
       },
       "no_forbid": {
-        "mean_range": 0.1361,
-        "within_0.01": 8,
-        "n_cases": 15,
+        "mean_range": 0.123,
+        "within_0.01": 2,
+        "n_cases": 5,
         "max_range": 0.5549
       },
       "no_termination": {
-        "mean_range": 0.0772,
-        "within_0.01": 9,
-        "n_cases": 15,
+        "mean_range": 0.0962,
+        "within_0.01": 2,
+        "n_cases": 5,
         "max_range": 0.4333
       },
       "single_shot": {
-        "mean_range": 0.4253,
+        "mean_range": 0.4261,
         "within_0.01": 0,
-        "n_cases": 15,
-        "max_range": 1.0498
+        "n_cases": 5,
+        "max_range": 0.8798
       }
     },
-    "full_vs_single_shot": {
-      "mean_improvement_eV": 0.2464,
-      "cases_improved_gt_0.05": 12,
-      "n_cases": 15,
-      "per_case_mean_delta": [
+    "full_vs_oneshot": {
+      "mean_improvement_eV": 0.1895,
+      "cases_improved_gt_0.05": 4,
+      "n_cases": 5,
+      "per_case_delta": [
         0.036,
         0.367,
-        0.3628,
-        0.0371,
         0.09,
-        0.1502,
-        0.3212,
-        0.2287,
         0.1644,
-        0.4559,
-        -0.0386,
-        0.3363,
-        0.3705,
-        0.2899,
-        0.5246
+        0.2899
       ]
     },
     "friedman_p": {
-      "Claude": 0.000114,
-      "Gemini": 1e-06,
-      "Grok-4": 2e-06,
-      "GPT-5.4": 0.002152
+      "Gemini": 0.3006,
+      "Grok-4": 0.0185,
+      "GPT-5.4": 0.0623,
+      "Claude": 0.0098
     }
   },
   "ocd_gmae_validation": {
     "n_cases": 10,
-    "n_backends": 4,
+    "n_backends": 3,
     "n_variants": 5,
-    "total_runs": 200,
+    "total_runs": 150,
     "success_rate": 1.0,
     "backends": [
-      "Gemini",
       "Grok-4",
       "GPT-5.4",
       "Claude"
     ],
+    "note": "Gemini excluded due to HTTP 403 proxy failures on ablation variants",
     "cross_backend_range": {
       "full": {
         "mean_range": 0.3519,
@@ -92,52 +82,51 @@
         "max_range": 1.2467
       },
       "no_slip": {
-        "mean_range": 0.2733,
+        "mean_range": 0.2483,
         "within_0.01": 4,
         "n_cases": 10,
         "max_range": 1.2467
       },
       "no_forbid": {
-        "mean_range": 0.2916,
-        "within_0.01": 6,
+        "mean_range": 0.2535,
+        "within_0.01": 8,
         "n_cases": 10,
         "max_range": 1.2841
       },
       "no_termination": {
-        "mean_range": 0.2398,
-        "within_0.01": 4,
+        "mean_range": 0.0985,
+        "within_0.01": 6,
         "n_cases": 10,
-        "max_range": 1.2467
+        "max_range": 0.6889
       },
       "single_shot": {
-        "mean_range": 0.8104,
-        "within_0.01": 1,
+        "mean_range": 0.6978,
+        "within_0.01": 2,
         "n_cases": 10,
         "max_range": 4.6744
       }
     },
-    "full_vs_single_shot": {
-      "mean_improvement_eV": 0.5422,
+    "full_vs_oneshot": {
+      "mean_improvement_eV": 0.5675,
       "cases_improved_gt_0.05": 9,
       "n_cases": 10,
-      "per_case_mean_delta": [
-        1.4272,
-        1.2857,
-        0.307,
-        0.4419,
-        1.0458,
-        0.0109,
-        0.0601,
-        0.1123,
-        0.4664,
-        0.2648
+      "per_case_delta": [
+        1.903,
+        1.2727,
+        0.4093,
+        0.4604,
+        0.9664,
+        -0.0065,
+        0.0542,
+        0.0825,
+        0.2935,
+        0.2399
       ]
     },
     "friedman_p": {
-      "Claude": 8.2e-05,
-      "Gemini": 0.000336,
       "Grok-4": 0.0023,
-      "GPT-5.4": 0.006881
+      "GPT-5.4": 0.0069,
+      "Claude": 0.0001
     }
   }
 }

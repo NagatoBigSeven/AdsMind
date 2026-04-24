@@ -1,0 +1,226 @@
+{
+  "case_id": "017",
+  "case_metadata": {
+    "case_id": "017",
+    "slab_file": "research/agent_eval/generated_slabs/ocd_gmae_rep50/017_ocd_87_Ga12Pd36_NH.xyz",
+    "smiles": "[NH]",
+    "user_request": "Find the lowest-energy adsorption configuration for the adsorbate with SMILES [NH] on the provided surface.",
+    "surface_family": "intermetallic",
+    "adsorbate_name": "[NH]",
+    "miller_index": "",
+    "reaction_class": "GENERALIZATION",
+    "ablation_candidate": "FALSE",
+    "notes": "OCD-GMAE source key=87; original_ads_smi=[NH]; surface_formula=Ga12Pd36; y_relaxed=0.445898 eV; site=[19, 23, 28]",
+    "source_key": "87",
+    "original_ads_smi": "[NH]",
+    "surface_formula": "Ga12Pd36",
+    "surface_elements": "Ga;Pd",
+    "bare_slab_atoms": "48",
+    "adsorbate_atoms": "2",
+    "y_relaxed": "0.445898",
+    "site_indices": "19;23;28",
+    "selection_bucket": "small_n_species"
+  },
+  "status": "success",
+  "best_energy_eV": -7.173670768737793,
+  "iteration_count": 1,
+  "max_attempts": 1,
+  "final_site_type": "hollow (HCP/Subsurf-Atom)",
+  "converged_tag": false,
+  "wall_clock_sec": 82.684997882694,
+  "total_input_tokens": 4533,
+  "total_output_tokens": 1576,
+  "artifact_paths": {
+    "BEST_NH_hollow_to_hollow_HCP-Subsurf-Atom_E-7.174": "research/results/ocd_gmae_rep50_v1_anthropic_sonnet46_one_shot/017/artifacts/BEST_NH_hollow_to_hollow_HCP-Subsurf-Atom_E-7.174.xyz",
+    "BEST_NH_hollow_to_hollow_HCP-Subsurf-Atom_E-7.174.xyz": "research/results/ocd_gmae_rep50_v1_anthropic_sonnet46_one_shot/017/artifacts/BEST_NH_hollow_to_hollow_HCP-Subsurf-Atom_E-7.174.xyz",
+    "best_structure_file": "research/results/ocd_gmae_rep50_v1_anthropic_sonnet46_one_shot/017/artifacts/BEST_NH_hollow_to_hollow_HCP-Subsurf-Atom_E-7.174.xyz",
+    "conformers_[NH]": "research/results/ocd_gmae_rep50_v1_anthropic_sonnet46_one_shot/017/artifacts/conformers_[NH].traj",
+    "conformers_[NH].traj": "research/results/ocd_gmae_rep50_v1_anthropic_sonnet46_one_shot/017/artifacts/conformers_[NH].traj",
+    "final": "research/results/ocd_gmae_rep50_v1_anthropic_sonnet46_one_shot/017/artifacts/final.xyz",
+    "final.xyz": "research/results/ocd_gmae_rep50_v1_anthropic_sonnet46_one_shot/017/artifacts/final.xyz",
+    "relaxation": "research/results/ocd_gmae_rep50_v1_anthropic_sonnet46_one_shot/017/artifacts/relaxation.traj",
+    "relaxation.traj": "research/results/ocd_gmae_rep50_v1_anthropic_sonnet46_one_shot/017/artifacts/relaxation.traj",
+    "relaxation_trajectory_file": "research/results/ocd_gmae_rep50_v1_anthropic_sonnet46_one_shot/017/artifacts/relaxation.traj"
+  },
+  "best_result": {
+    "most_stable_energy_eV": -7.173670768737793,
+    "analysis_json": {
+      "status": "success",
+      "message": "Most stable config adsorption energy: -7.1737 eV. Target Atom: N (from plan index 0, global index 48 in relaxed structure). -> Nearest: Pd (Index 32), Distance: 2.01 Å (Threshold: 3.045), Bound: True. Bonded Surface Atoms: Pd-2.01Å, Pd-2.013Å, Pd-2.019Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: False (Planned ['Pd', 'Pd', 'Pd'] -> Actual ['Pd', 'Pd', 'Pd']).",
+      "most_stable_energy_eV": -7.173670768737793,
+      "target_adsorbate_atom": "N",
+      "target_adsorbate_atom_index": 48,
+      "bonded_surface_atoms": [
+        {
+          "symbol": "Pd",
+          "index": 32,
+          "distance": 2.01
+        },
+        {
+          "symbol": "Pd",
+          "index": 37,
+          "distance": 2.013
+        },
+        {
+          "symbol": "Pd",
+          "index": 46,
+          "distance": 2.019
+        }
+      ],
+      "nearest_slab_atom": "Pd",
+      "nearest_slab_atom_index": 32,
+      "final_bond_distance_A": 2.01,
+      "estimated_covalent_cutoff_A": 2.31,
+      "is_covalently_bound": true,
+      "reaction_detected": false,
+      "is_dissociated": false,
+      "n_components": 1,
+      "bond_change_count": 0,
+      "site_analysis": {
+        "planned_site_type": "hollow",
+        "planned_connectivity": 3,
+        "actual_site_type": "hollow (HCP/Subsurf-Atom)",
+        "actual_connectivity": 3,
+        "is_chemical_slip": false,
+        "planned_symbols": [
+          "Pd",
+          "Pd",
+          "Pd"
+        ],
+        "actual_symbols": [
+          "Pd",
+          "Pd",
+          "Pd"
+        ],
+        "site_fingerprint": "Pd32-Pd37-Pd46"
+      },
+      "best_structure_file": "outputs/017-02042eb6/BEST_NH_hollow_to_hollow_HCP-Subsurf-Atom_E-7.174.xyz",
+      "generated_conformers_file": "outputs/017-02042eb6/conformers_[NH].traj",
+      "relaxation_trajectory_file": "outputs/017-02042eb6/final.xyz",
+      "session_id": "017-02042eb6"
+    },
+    "plan": {
+      "reasoning": "SMILES Consistency Check: The SMILES [NH] represents an NH radical (nitrene/imidogen). The RDKit analysis confirms: N atom at index 0, SP3 hybridization, degree 0 (no heavy atom neighbors), radical_electrons = 2, formal_charge = 0. This is a diradical species (NH with 2 unpaired electrons), so it should be treated as ReactiveSpecies. The binding atom is N at index 0.\n\nNo history exists, so this is the first attempt. Hard limit is 1 attempt, so I must choose the most promising site.\n\nAdsorbate Analysis: [NH] is an NH radical with 2 unpaired electrons on N. It will bind strongly through the N atom. With 2 radical electrons, it can form strong bonds with surface metal atoms.\n\nSurface Analysis: Available sites are:\n- Ontop: Ga, Pd\n- Bridge: Ga-Pd, Pd-Pd\n- Hollow-3: Ga-Pd-Pd, Pd-Pd-Pd\n\nFor NH radicals on transition metal surfaces, hollow sites typically provide the strongest binding due to maximum coordination. On Pd-containing surfaces, NH tends to prefer hollow sites. The Pd-Pd-Pd hollow site is a pure Pd hollow which typically gives strong binding for N-containing species. The Ga-Pd-Pd hollow is also a good candidate on this alloy surface.\n\nGiven that NH has 2 radical electrons and N is the binding atom (index 0), I will start with the hollow site. For a Pd-Ga alloy, the Pd-Pd-Pd hollow is likely the most stable for NH adsorption based on literature precedent for N-species on Pd surfaces. I'll use hollow with Pd-Pd-Pd as the first attempt since we only have 1 attempt.\n\nSite selection: hollow, Pd-Pd-Pd, adsorbate_binding_indices=[0] (N atom).",
+      "adsorbate_type": "ReactiveSpecies",
+      "solution": {
+        "action": "continue",
+        "site_type": "hollow",
+        "surface_binding_atoms": [
+          "Pd",
+          "Pd",
+          "Pd"
+        ],
+        "adsorbate_binding_indices": [
+          0
+        ],
+        "relax_top_n": 1,
+        "touch_sphere_size": 2,
+        "overlap_thr": 0.1,
+        "conformers_per_site_cap": 4
+      }
+    },
+    "result_type": "Perfect"
+  },
+  "last_analysis": {
+    "status": "success",
+    "message": "Most stable config adsorption energy: -7.1737 eV. Target Atom: N (from plan index 0, global index 48 in relaxed structure). -> Nearest: Pd (Index 32), Distance: 2.01 Å (Threshold: 3.045), Bound: True. Bonded Surface Atoms: Pd-2.01Å, Pd-2.013Å, Pd-2.019Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: False (Planned ['Pd', 'Pd', 'Pd'] -> Actual ['Pd', 'Pd', 'Pd']).",
+    "most_stable_energy_eV": -7.173670768737793,
+    "target_adsorbate_atom": "N",
+    "target_adsorbate_atom_index": 48,
+    "bonded_surface_atoms": [
+      {
+        "symbol": "Pd",
+        "index": 32,
+        "distance": 2.01
+      },
+      {
+        "symbol": "Pd",
+        "index": 37,
+        "distance": 2.013
+      },
+      {
+        "symbol": "Pd",
+        "index": 46,
+        "distance": 2.019
+      }
+    ],
+    "nearest_slab_atom": "Pd",
+    "nearest_slab_atom_index": 32,
+    "final_bond_distance_A": 2.01,
+    "estimated_covalent_cutoff_A": 2.31,
+    "is_covalently_bound": true,
+    "reaction_detected": false,
+    "is_dissociated": false,
+    "n_components": 1,
+    "bond_change_count": 0,
+    "site_analysis": {
+      "planned_site_type": "hollow",
+      "planned_connectivity": 3,
+      "actual_site_type": "hollow (HCP/Subsurf-Atom)",
+      "actual_connectivity": 3,
+      "is_chemical_slip": false,
+      "planned_symbols": [
+        "Pd",
+        "Pd",
+        "Pd"
+      ],
+      "actual_symbols": [
+        "Pd",
+        "Pd",
+        "Pd"
+      ],
+      "site_fingerprint": "Pd32-Pd37-Pd46"
+    },
+    "best_structure_file": "outputs/017-02042eb6/BEST_NH_hollow_to_hollow_HCP-Subsurf-Atom_E-7.174.xyz",
+    "generated_conformers_file": "outputs/017-02042eb6/conformers_[NH].traj",
+    "relaxation_trajectory_file": "outputs/017-02042eb6/final.xyz",
+    "session_id": "017-02042eb6"
+  },
+  "attempt_records": [
+    {
+      "attempt_index": 1,
+      "plan": {
+        "reasoning": "SMILES Consistency Check: The SMILES [NH] represents an NH radical (nitrene/imidogen). The RDKit analysis confirms: N atom at index 0, SP3 hybridization, degree 0 (no heavy atom neighbors), radical_electrons = 2, formal_charge = 0. This is a diradical species (NH with 2 unpaired electrons), so it should be treated as ReactiveSpecies. The binding atom is N at index 0.\n\nNo history exists, so this is the first attempt. Hard limit is 1 attempt, so I must choose the most promising site.\n\nAdsorbate Analysis: [NH] is an NH radical with 2 unpaired electrons on N. It will bind strongly through the N atom. With 2 radical electrons, it can form strong bonds with surface metal atoms.\n\nSurface Analysis: Available sites are:\n- Ontop: Ga, Pd\n- Bridge: Ga-Pd, Pd-Pd\n- Hollow-3: Ga-Pd-Pd, Pd-Pd-Pd\n\nFor NH radicals on transition metal surfaces, hollow sites typically provide the strongest binding due to maximum coordination. On Pd-containing surfaces, NH tends to prefer hollow sites. The Pd-Pd-Pd hollow site is a pure Pd hollow which typically gives strong binding for N-containing species. The Ga-Pd-Pd hollow is also a good candidate on this alloy surface.\n\nGiven that NH has 2 radical electrons and N is the binding atom (index 0), I will start with the hollow site. For a Pd-Ga alloy, the Pd-Pd-Pd hollow is likely the most stable for NH adsorption based on literature precedent for N-species on Pd surfaces. I'll use hollow with Pd-Pd-Pd as the first attempt since we only have 1 attempt.\n\nSite selection: hollow, Pd-Pd-Pd, adsorbate_binding_indices=[0] (N atom).",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "hollow",
+          "surface_binding_atoms": [
+            "Pd",
+            "Pd",
+            "Pd"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "hollow|Pd,Pd,Pd|0|ReactiveSpecies|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -7.173670768737793,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": false,
+      "planned_site_type": "hollow",
+      "actual_site_type": "hollow (HCP/Subsurf-Atom)",
+      "best_structure_file": "outputs/017-02042eb6/BEST_NH_hollow_to_hollow_HCP-Subsurf-Atom_E-7.174.xyz",
+      "generated_conformers_file": "outputs/017-02042eb6/conformers_[NH].traj",
+      "relaxation_trajectory_file": "outputs/017-02042eb6/final.xyz",
+      "message": "Most stable config adsorption energy: -7.1737 eV. Target Atom: N (from plan index 0, global index 48 in relaxed structure). -> Nearest: Pd (Index 32), Distance: 2.01 Å (Threshold: 3.045), Bound: True. Bonded Surface Atoms: Pd-2.01Å, Pd-2.013Å, Pd-2.019Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: False (Planned ['Pd', 'Pd', 'Pd'] -> Actual ['Pd', 'Pd', 'Pd']).",
+      "history_entry": "【✅ Perfect Adsorption】 hollow @ ['Pd', 'Pd', 'Pd'] (Index [0]) -> ⚠️ Geometric Slip: hollow -> hollow (HCP/Subsurf-Atom) [🌟 New Best] | E=-7.174 eV"
+    }
+  ],
+  "history": [
+    "【✅ Perfect Adsorption】 hollow @ ['Pd', 'Pd', 'Pd'] (Index [0]) -> ⚠️ Geometric Slip: hollow -> hollow (HCP/Subsurf-Atom) [🌟 New Best] | E=-7.174 eV"
+  ],
+  "error": null,
+  "perfect_count": 1,
+  "dissociation_count": 0,
+  "rearrangement_count": 0,
+  "calc_failure_count": 0,
+  "chemical_slip_count": 0
+}
