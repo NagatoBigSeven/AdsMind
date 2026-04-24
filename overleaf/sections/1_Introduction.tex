@@ -55,20 +55,18 @@ Three mechanisms implement this feedback cycle:
 We frame this design through a sequential-decision lens: adsorption configuration search is analogous to a partially observable Markov decision process (POMDP), where the PES is the hidden state, each relaxation is an observation, and the planner's next proposal is conditioned on the full history of prior observations.
 Open-loop methods use a fixed policy $\pi(a \mid s)$ that cannot adapt after deployment; AdsMind approximates a history-dependent policy $\pi(a \mid h_t)$ through the LLM's in-context learning, without explicit reward engineering or policy optimization.
 
+On the currently complete evaluation tracks, this closed-loop design yields a consistent reliability advantage across chemically broader surfaces.
+On CMU20, AdsMind Full succeeds on 80/80 runs across four backends while the 1-Shot control drops to 73/80.
+On the expanded OCD24 benchmark, the clean-backend set (GPT-5.4, Claude, Gemini) gives 72/72 Full successes versus 61/72 for 1-Shot.
+On the broader 50-case OCD rep50 slice, the same three-backend comparison gives 148/150 Full successes versus 132/150 for 1-Shot.
+These completed tracks already indicate that the main value of closing the loop is not deeper basin discovery, but a reproducible gain in reliability and backend robustness across surfaces where open-loop planning is brittle.
+
 
 % \subsection{The uncomfortable truth: configuration-space coverage dominates}
 %% this section is moved to Discussion, but need a version of summary here
 \subsection{The uncomfortable truth: configuration-space coverage dominates}
 
 %The question, then, is not ``which system finds the absolute lowest energy?''---an LLM agent cannot realistically out-sample a brute-force enumerator with sufficient budget---but rather: \textit{what is the contribution of closed-loop LLM reasoning when we hold compute, physics, and data fixed?}
-
-% \subsection{Claims and evaluation}
-%% this section is moved to Discussion, but need a summary here
-
-% This paper establishes four empirical claims through 600 controlled ablation attempts across two datasets and four LLM backends, plus matched baseline controls.
-
-
-
 
 We also report, as negative results, that AdsMind does not deliver the deepest energy basins on complex surfaces: broader initial sampling strategies consistently reach lower minima when they succeed.
 This trade-off---reliability and efficiency against depth of exploration---frames the central message of the paper.
