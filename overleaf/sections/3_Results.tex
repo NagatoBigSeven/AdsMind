@@ -290,13 +290,13 @@ These data support a concrete systems claim: the closed-loop architecture acts a
 
 To test whether the CMU conclusions survive broader chemistry, we expanded the OCD-GMAE validation package from the original locked 10 cases to an audited 24-case set by combining the locked10 subset with an extra14 extension.
 The formal expanded analysis uses GPT-5.4, Claude~Sonnet~4.6, and Gemini Vertex only.
-Grok-4 extra14 is excluded because 9/70 runs fail externally with xAI 429 quota errors, not because of chemistry.
+Grok-4 extra14 is excluded from this frozen analysis because the batch was not a complete clean matrix at the analysis freeze owing to external service failures, not because of chemistry.
 We therefore report a 24-case, 3-backend failure-aware ablation matrix (360 attempts total), while retaining the original 10-case four-backend tables in the Supporting Information as the first complete-energy mechanism package.
 
 \begin{table}[t]
 \centering
 \scriptsize
-\caption{Expanded OCD24 five-variant ablation summary on the three clean backends (GPT-5.4, Claude~Sonnet~4.6, Gemini Vertex). The 24-case table combines the audited locked10 subset with the extra14 extension. Grok-4 is excluded because the extra14 batch is contaminated by external xAI 429 failures. $\Delta E = E_{\mathrm{variant}} - E_{\mathrm{full}}$ for the same backend and case; positive values mean worse adsorption energy than Full. Mean and median $\Delta E$ are computed over successful runs only.}
+\caption{Expanded OCD24 five-variant ablation summary on the three clean backends (GPT-5.4, Claude~Sonnet~4.6, Gemini Vertex). The 24-case table combines the audited locked10 subset with the extra14 extension. Grok-4 is excluded because the extra14 batch was not a complete clean matrix at the analysis freeze owing to external service failures. $\Delta E = E_{\mathrm{variant}} - E_{\mathrm{full}}$ for the same backend and case; positive values mean worse adsorption energy than Full. Mean and median $\Delta E$ are computed over successful runs only.}
 \label{tab:ocd24-three-backend-summary}
 \begin{tabular}{lrrrrrr}
 \toprule
@@ -321,7 +321,7 @@ Notably, $-$Forbid is slightly better than Full in the case-best success-only vi
 \subsection{Broader rep50 generalization favors iterative search}
 
 We then compared Full and 1-Shot on a broader 50-case representative slice of OCD-GMAE.
-Again, formal statistics use only GPT-5.4, Claude, and Gemini: the Grok-4 Full batch is entirely blocked by external xAI 429 failures and is excluded rather than counted as a scientific negative result.
+Again, formal statistics use only GPT-5.4, Claude, and Gemini: the Grok-4 Full batch was not complete at the analysis freeze owing to external service failures and is excluded rather than counted as a scientific negative result.
 
 \begin{table}[t]
 \centering
@@ -415,7 +415,7 @@ These findings motivate a concrete architectural extension: coupling AdsMind's c
 
 \subsection{Non-LLM and cross-backend control baselines}
 
-To isolate the contribution of the LLM planner from that of the underlying MACE relaxation pipeline, we implemented two non-LLM controls using the same MACE-matched physics: a \textit{random placement} baseline (N=20 random adsorbate poses per case, each relaxed with the standard protocol) and a \textit{heuristic enumeration} baseline (all high-symmetry sites identified by Autoadsorbate, median 53 sites per case).
+To isolate the contribution of the LLM planner from that of the underlying MACE relaxation pipeline, we implemented two non-LLM controls using the same MACE-matched physics: a \textit{random placement} baseline (N=20 random adsorbate poses per case, each relaxed with the standard protocol) and a \textit{heuristic enumeration} baseline (all high-symmetry sites identified by Autoadsorbate, median 56 sites per case).
 We include the GPT-5.4 Adsorb-Agent run above and in the SI baseline table to keep the LLM backend matched where possible.
 
 \paragraph{Random placement is competitive with AdsMind Full when given more samples.}
@@ -426,11 +426,12 @@ In the CMU20 case-level best-of-backend view, AdsMind's \textit{1-Shot} variant,
 This supports the interpretation that the LLM planner's single-pass placement is not inherently better than broader random sampling; the value of the agent lies in \textit{iterative refinement}, reliability, and interpretable error recovery rather than raw deepest-basin discovery.
 Because the current random summary records successful MACE energy calculations but does not yet apply the same anomaly filtering as the agent summaries, random winners should be interpreted as protocol-level energy comparisons until their top structures are manually or programmatically filtered.
 
-\paragraph{Heuristic enumeration beats AdsMind Full on 6 of 15 cases.}
-Systematically relaxing every Autoadsorbate-enumerated site (25--98 sites per case, no LLM) wins on 6 cases, loses on 1, ties on 8.
-On case~19 (Hf$_2$Zn$_6$ + OCHCH$_3$), heuristic finds $-4.70$~eV versus AdsMind Full's $-4.04$~eV---a 0.65~eV gap comparable to Adsorb-Agent's.
-The heuristic baseline uses 6--25$\times$ more MACE compute than AdsMind Full.
-This result positions AdsMind's LLM planner as a \textit{compute-efficient approximation} of exhaustive site enumeration: AdsMind trails the heuristic optimum by 0.19~eV on average while using 1/6 to 1/25 the number of relaxations.
+\paragraph{Heuristic enumeration is a strong but anomaly-sensitive depth control.}
+The completed CMU20 heuristic enumeration relaxes 1{,}137 Autoadsorbate sites (25--98 sites per case, no LLM).
+In the raw energy summary, it is lower than AdsMind Full best-of-four-backends on 8/20 cases, higher on 1/20, and tied within 0.01~eV on 11/20.
+However, a connectivity audit of the saved top-3 heuristic structures flags the largest raw advantages as chemically unsafe or unresolved: cases~04 and~08 show NNH fragmentation, cases~16 and~19 fragment larger adsorbates, and case~20 has no saved top structure available for audit.
+Under this conservative saved-top-3 filtering, heuristic enumeration has validated lower energies on 3/20 cases (11, 17, 18), AdsMind is lower on 1/20 (15), 11/20 tie, and 5/20 remain unresolved pending full anomaly filtering of non-saved candidates.
+We therefore report heuristic enumeration as a protocol-level breadth/depth control rather than a chemically validated winner table; its main implication is that broader enumeration can expose additional MACE-small minima at 6--25$\times$ more candidate relaxations, but raw low energies require structure filtering before chemical interpretation.
 
 \paragraph{Adsorb-Agent LLM choice changes failures but not the trade-off.}
 The current GPT-5.4 Adsorb-Agent run succeeds on 12 of 15 locked CMU cases, while the historical GPT-4o run succeeds on 11 of 15.
@@ -452,7 +453,7 @@ These shifts do not change the qualitative systems conclusion from the MACE-smal
 
 \paragraph{Reframing AdsMind's contribution.}
 Taken together, these controls reveal that AdsMind's primary contribution is not deepest-basin discovery.
-Random sampling with 20 relaxations is competitive with AdsMind Full and reaches a lower mean energy; heuristic enumeration with $\sim$50 sites beats it on 40\% of cases; Adsorb-Agent with $\sim$21 relaxations reaches deeper basins whenever the GPT-5.4 one-pass enumeration succeeds.
+Random sampling with 20 relaxations is competitive with AdsMind Full and reaches a lower raw mean energy before anomaly filtering; heuristic enumeration exposes additional low-energy basins but requires connectivity filtering before its raw wins can be interpreted chemically; Adsorb-Agent with $\sim$21 relaxations reaches deeper basins whenever the GPT-5.4 one-pass enumeration succeeds.
 In the GPT-5.4 matched-physics run, Adsorb-Agent is lower in energy on all 12 successful comparable cases, but fails on the remaining three.
 AdsMind's distinctive value is the combination of: (i) 100\% success for the Full variant on every completed CMU20 run (80/80) and every clean-backend OCD24 run (72/72), together with a 148/150 Full success rate on the broader rep50 slice; (ii) compute efficiency per backend---remaining competitive with random at $5\times$ less MACE work per run and approaching heuristic at $6$--$25\times$ less; (iii) chemical interpretability via Slip detection, FORBID logic, and backend-convergent reasoning traces absent from brute-force methods; and (iv) iterative error recovery, which is a prerequisite for autonomous chemistry workflows where silent failures are unacceptable.
 A natural extension couples AdsMind's closed-loop error-recovery with broader initial sampling (multi-site LLM placement with parallel relaxation), which would combine the depth of enumeration with the reliability and interpretability of the closed-loop agent.

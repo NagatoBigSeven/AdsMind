@@ -161,7 +161,7 @@ Claude & 1-Shot & 0.185 & 0.126 & 0.0033 & 0.0134 & 1.000 & [0.089, 0.286] & 0.5
 \section{Independent OCD-GMAE validation statistics}
 
 The original locked10 four-backend OCD package is retained below as the first complete-energy mechanism set.
-The current formal-ready expansion uses 24 OCD cases across GPT-5.4, Claude~Sonnet~4.6, and Gemini Vertex only; Grok-4 extra14 is excluded because 9/70 runs fail externally with xAI 429 spending-limit errors, and Grok-4 rep50 Full is likewise excluded because that batch is completely blocked by the same external failure mode.
+The current formal-ready expansion uses 24 OCD cases across GPT-5.4, Claude~Sonnet~4.6, and Gemini Vertex only; Grok-4 extra14 and Grok-4 rep50 Full are excluded from this snapshot because the relevant batches were not complete clean matrices at the analysis freeze owing to external service failures.
 The 24-case formal table is assembled from the audited locked10 subset (003, 004, 005, 012, 013, 015, 016, 019, 023, 024) plus the extra14 extension (001, 002, 006, 007, 008, 009, 010, 011, 014, 017, 018, 020, 021, 022).
 For 1-Shot, the same locked10+extra14 partition is used intentionally to avoid pooling duplicate historical reruns.
 
@@ -229,7 +229,7 @@ The Full three-backend agreement itself remains tight on rep50, with a mean rang
 \begin{table}[h]
 \centering
 \small
-\caption{OCD-GMAE pairwise ablation statistics versus the full variant (4~backends, 10~cases each). Positive $\Delta E$ means the ablated variant is worse (higher energy) than full. Gemini was accessed via Google Vertex AI direct API; the remaining three backends used their native endpoints.}
+\caption{OCD-GMAE pairwise ablation statistics versus the full variant (4~backends, 10~cases each). Positive $\Delta E$ means the ablated variant is worse (higher energy) than full. All rows use the fixed backend/model settings recorded in the frozen experiment configurations.}
 \label{tab:si4-ocd-ablation-statistics}
 \begin{tabular}{llrrrrr}
 \toprule
@@ -402,7 +402,7 @@ Case & Single-config status & Single-config $E_\mathrm{ads}$ & Original multi-co
 \begin{table}[h]
 \centering
 \scriptsize
-\caption{Baseline comparison on 15 CMU cases. Best energy achieved by each method under identical MACE-MP-0 small physics. Dashes indicate that the method produced no valid energy for that case. Energies in eV; lower is better. Relax column shows approximate MACE relaxation count per case.}
+\caption{Baseline comparison on the original 15 CMU cases. Best energy achieved by each method under identical MACE-MP-0 small physics. Dashes indicate that the method produced no valid energy for that case. Energies in eV; lower is better. Relax column shows approximate MACE relaxation count per case. Heuristic entries in this legacy table are raw lowest energies before the connectivity audit in Table~\ref{tab:si-cmu20-heuristic-filtered}; raw heuristic lows should not be interpreted as chemically validated adsorption energies when the audit flags fragmentation or missing saved structures.}
 \label{tab:si-baseline-comparison}
 \begin{tabular}{lrrrrrr}
 \toprule
@@ -411,7 +411,7 @@ Relax/case & 20 & 25--98 & 1 & $\sim$4 & $\sim$21 & $\sim$21 \\
 \midrule
   01 & $-3.632$ & $-3.637$ & $-3.631$ & $-3.632$ & --- & $-3.879$ \\
   02 & $-4.762$ & $-4.777$ & $-4.766$ & $-4.769$ & $-5.092$ & $-5.097$ \\
-  04 & $-3.294$ & $-3.470$ & $-2.243$ & $-2.285$ & $-3.457$ & $-2.915$ \\
+  04 & $-3.294$ & $-3.470$\ensuremath{^\dagger} & $-2.243$ & $-2.285$ & $-3.457$ & $-2.915$ \\
   05 & $-2.965$ & $-2.967$ & $-2.962$ & $-2.962$ & $-2.953$ & --- \\
   09 & $-1.990$ & $-1.993$ & $-1.991$ & $-1.991$ & --- & $-1.997$ \\
   10 & $-2.715$ & $-2.721$ & $-2.718$ & $-2.718$ & $-2.741$ & $-2.741$ \\
@@ -419,11 +419,13 @@ Relax/case & 20 & 25--98 & 1 & $\sim$4 & $\sim$21 & $\sim$21 \\
   13 & $-2.825$ & $-2.828$ & $-2.825$ & $-2.825$ & $-2.858$ & $-2.857$ \\
   14 & $-3.623$ & $-3.613$ & $-3.617$ & $-3.617$ & $-4.162$ & $-4.125$ \\
   15 & $-3.001$ & $-3.226$ & $-2.964$ & $-3.258$ & --- & --- \\
-  16 & $-6.737$ & $-5.376$ & $-4.663$ & $-4.663$ & $-6.699$ & $-5.700$ \\
+  16 & $-6.737$ & $-5.376$\ensuremath{^\dagger} & $-4.663$ & $-4.663$ & $-6.699$ & $-5.700$ \\
   17 & $-3.171$ & $-3.265$ & $-3.066$ & $-3.241$ & $-4.411$ & $-4.476$ \\
   18 & $-3.213$ & $-3.241$ & $-2.519$ & $-3.129$ & $-4.483$ & --- \\
-  19 & $-3.567$ & $-4.696$ & $-4.013$ & $-4.045$ & $-4.694$ & $-4.707$ \\
-  20 & $-13.422$ & $-11.756$ & $-11.652$ & $-11.653$ & --- & $-12.285$ \\
+  19 & $-3.567$ & $-4.696$\ensuremath{^\dagger} & $-4.013$ & $-4.045$ & $-4.694$ & $-4.707$ \\
+  20 & $-13.422$ & $-11.756$\ensuremath{^\dagger} & $-11.652$ & $-11.653$ & --- & $-12.285$ \\
+\midrule
+\multicolumn{7}{l}{\ensuremath{^\dagger}Raw heuristic value is unresolved or fragmented in the CMU20 saved-top-3 connectivity audit.} \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -461,6 +463,28 @@ Case & Random(20) & AdsMind best Full & $\Delta$ & Outcome \\
 20 & $-13.422$ & $-11.653$ & $-1.770$ & random lower \\
 \midrule
 \multicolumn{5}{l}{Outcome at 0.01~eV tolerance: random lower 6/20, AdsMind lower 4/20, tie 10/20; mean $\Delta = -0.232$~eV.} \\
+\bottomrule
+\end{tabular}%
+}
+\end{table}
+
+\begin{table}[h]
+\centering
+\scriptsize
+\caption{Completed CMU20 heuristic enumeration after saved-top-3 connectivity audit. The heuristic baseline relaxed 1{,}137 Autoadsorbate sites across 20 cases (median 56 sites/case, range 25--98). The audit checked 56 saved top-3 structures; 41 passed the connectivity screen and 15 were flagged as fragmented or otherwise invalid. Outcomes compare the best valid saved heuristic top-3 structure against AdsMind Full best-of-four-backends at a 0.01~eV tolerance.}
+\label{tab:si-cmu20-heuristic-filtered}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{llr}
+\toprule
+Outcome after saved-top-3 audit & Cases & Count \\
+\midrule
+Tie within 0.01~eV & 01, 02, 03, 05, 06, 07, 09, 10, 12, 13, 14 & 11 \\
+Heuristic lower & 11, 17, 18 & 3 \\
+AdsMind lower & 15 & 1 \\
+Unresolved after saved-top-3 audit & 04, 08, 16, 19, 20 & 5 \\
+\midrule
+\multicolumn{3}{l}{Unresolved means no valid saved top-3 heuristic structure was available under the connectivity screen.} \\
+\multicolumn{3}{l}{These rows require full anomaly filtering of non-saved candidates before any chemical winner claim.} \\
 \bottomrule
 \end{tabular}%
 }
