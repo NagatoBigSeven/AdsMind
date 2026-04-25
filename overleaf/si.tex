@@ -161,14 +161,14 @@ Claude & 1-Shot & 0.185 & 0.126 & 0.0033 & 0.0134 & 1.000 & [0.089, 0.286] & 0.5
 \section{Independent OCD-GMAE validation statistics}
 
 The original locked10 four-backend OCD package is retained below as the first complete-energy mechanism set.
-The current formal-ready expansion uses 24 OCD cases across GPT-5.4, Claude~Sonnet~4.6, and Gemini Vertex only; Grok-4 extra14 and Grok-4 rep50 Full are excluded from this snapshot because the relevant batches were not complete clean matrices at the analysis freeze owing to external service failures.
+The current formal-ready expansion uses 24 OCD cases across GPT-5.4, Claude~Sonnet~4.6, and Gemini~2.5~Pro only; Grok-4 extra14 and Grok-4 rep50 Full are excluded from this snapshot because the relevant batches were not complete clean matrices at the analysis freeze owing to external service failures.
 The 24-case formal table is assembled from the audited locked10 subset (003, 004, 005, 012, 013, 015, 016, 019, 023, 024) plus the extra14 extension (001, 002, 006, 007, 008, 009, 010, 011, 014, 017, 018, 020, 021, 022).
 For 1-Shot, the same locked10+extra14 partition is used intentionally to avoid pooling duplicate historical reruns.
 
 \begin{table}[h]
 \centering
 \small
-\caption{Expanded OCD24 five-variant ablation summary on the three clean backends (GPT-5.4, Claude~Sonnet~4.6, Gemini Vertex). Positive $\Delta E = E_{\mathrm{variant}} - E_{\mathrm{full}}$ means the ablated variant is worse than Full. Mean and median $\Delta E$ are computed over successful runs only. Reach Full$+0.01$ counts runs within 0.01~eV of the same-backend Full result and keeps failures in the denominator.}
+\caption{Expanded OCD24 five-variant ablation summary on the three clean backends (GPT-5.4, Claude~Sonnet~4.6, Gemini~2.5~Pro). Positive $\Delta E = E_{\mathrm{variant}} - E_{\mathrm{full}}$ means the ablated variant is worse than Full. Mean and median $\Delta E$ are computed over successful runs only. Reach Full$+0.01$ counts runs within 0.01~eV of the same-backend Full result and keeps failures in the denominator.}
 \label{tab:si-ocd24-three-backend-summary}
 \begin{tabular}{lrrrrrr}
 \toprule
@@ -185,12 +185,12 @@ $-$Term & 72 & 71 & 1 & +0.009 & 0.000 & 59/72 \\
 
 Within the OCD24 case-best view across the three clean backends, 1-Shot reaches or beats Full within 0.01~eV on only 8/24 cases, compared with 21/24 for $-$Slip, 22/24 for $-$Forbid, and 20/24 for $-$Term.
 The mean three-backend range is 0.201~eV for Full and 0.406~eV for 1-Shot over the 20 OCD24 cases with at least two successful one-shot backends.
-All 11 1-Shot failures and the single $-$Term failure are natural dissociation/reaction outcomes rather than external API or calculator errors.
+All 11 1-Shot failures and the single $-$Term failure are natural dissociation/reaction outcomes rather than external service or calculator errors.
 
 \begin{table}[h]
 \centering
 \small
-\caption{rep50 Full-versus-1-Shot summary on the three clean backends (GPT-5.4, Claude~Sonnet~4.6, Gemini Vertex). Positive $\Delta E = E_{\mathrm{1shot}} - E_{\mathrm{full}}$ means the iterative Full run is lower in energy. The Overall row aggregates all backend-case pairs where both variants succeed.}
+\caption{rep50 Full-versus-1-Shot summary on the three clean backends (GPT-5.4, Claude~Sonnet~4.6, Gemini~2.5~Pro). Positive $\Delta E = E_{\mathrm{1shot}} - E_{\mathrm{full}}$ means the iterative Full run is lower in energy. The Overall row aggregates all backend-case pairs where both variants succeed.}
 \label{tab:si-rep50-three-backend-summary}
 \begin{tabular}{lrrrrrr}
 \toprule
@@ -531,7 +531,7 @@ Case & MACE-small & MACE-large & $\Delta$ & Diss. events & Flag \\
 \begin{table}[h]
 \centering
 \scriptsize
-\caption{MACE-large sensitivity on 10 representative OCD-GMAE rep50 cases. This is a force-field stress test on chemistry outside the CMU set, not a replacement for the locked 10-case OCD-GMAE MACE-small ablation matrix. Case~043 fails naturally through slip and dissociation; no API or calculator error is recorded.}
+\caption{MACE-large sensitivity on 10 representative OCD-GMAE rep50 cases. This is a force-field stress test on chemistry outside the CMU set, not a replacement for the locked 10-case OCD-GMAE MACE-small ablation matrix. Case~043 fails naturally through slip and dissociation; no external service or calculator error is recorded.}
 \label{tab:si-mace-large-ocd-rep10}
 \resizebox{\textwidth}{!}{%
 \begin{tabular}{llllrrr}

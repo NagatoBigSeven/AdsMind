@@ -289,14 +289,14 @@ These data support a concrete systems claim: the closed-loop architecture acts a
 \subsection{Independent validation on expanded OCD-GMAE chemistry}
 
 To test whether the CMU conclusions survive broader chemistry, we expanded the OCD-GMAE validation package from the original locked 10 cases to an audited 24-case set by combining the locked10 subset with an extra14 extension.
-The formal expanded analysis uses GPT-5.4, Claude~Sonnet~4.6, and Gemini Vertex only.
+The formal expanded analysis uses GPT-5.4, Claude~Sonnet~4.6, and Gemini~2.5~Pro only.
 Grok-4 extra14 is excluded from this frozen analysis because the batch was not a complete clean matrix at the analysis freeze owing to external service failures, not because of chemistry.
 We therefore report a 24-case, 3-backend failure-aware ablation matrix (360 attempts total), while retaining the original 10-case four-backend tables in the Supporting Information as the first complete-energy mechanism package.
 
 \begin{table}[t]
 \centering
 \scriptsize
-\caption{Expanded OCD24 five-variant ablation summary on the three clean backends (GPT-5.4, Claude~Sonnet~4.6, Gemini Vertex). The 24-case table combines the audited locked10 subset with the extra14 extension. Grok-4 is excluded because the extra14 batch was not a complete clean matrix at the analysis freeze owing to external service failures. $\Delta E = E_{\mathrm{variant}} - E_{\mathrm{full}}$ for the same backend and case; positive values mean worse adsorption energy than Full. Mean and median $\Delta E$ are computed over successful runs only.}
+\caption{Expanded OCD24 five-variant ablation summary on the three clean backends (GPT-5.4, Claude~Sonnet~4.6, Gemini~2.5~Pro). The 24-case table combines the audited locked10 subset with the extra14 extension. Grok-4 is excluded because the extra14 batch was not a complete clean matrix at the analysis freeze owing to external service failures. $\Delta E = E_{\mathrm{variant}} - E_{\mathrm{full}}$ for the same backend and case; positive values mean worse adsorption energy than Full. Mean and median $\Delta E$ are computed over successful runs only.}
 \label{tab:ocd24-three-backend-summary}
 \begin{tabular}{lrrrrrr}
 \toprule
@@ -313,7 +313,7 @@ $-$Term & 72 & 71 & +0.009 & 0.000 & 59/72 & 98.6\% \\
 
 The closed-loop reliability signal persists on the expanded OCD24 set.
 Full succeeds on all 72/72 runs, while the open-loop 1-Shot control succeeds on only 61/72.
-The 11 1-Shot failures and the single $-$Term failure are all natural dissociation/reaction outcomes rather than API or calculator errors.
+The 11 1-Shot failures and the single $-$Term failure are all natural dissociation/reaction outcomes rather than external service or calculator errors.
 At the case-best level across the three clean backends, 1-Shot reaches or beats Full within 0.01~eV on only 8/24 cases, compared with 21/24 for $-$Slip, 22/24 for $-$Forbid, and 20/24 for $-$Term.
 Cross-backend agreement also improves under iteration: the mean three-backend range is 0.201~eV for Full but 0.406~eV for 1-Shot over the 20 OCD24 cases with at least two successful one-shot backends.
 Notably, $-$Forbid is slightly better than Full in the case-best success-only view (mean $\Delta E = -0.004$~eV), reinforcing the CMU observation that explicit guardrails can over-prune even when the full architecture remains the most reliable default.
@@ -326,7 +326,7 @@ Again, formal statistics use only GPT-5.4, Claude, and Gemini: the Grok-4 Full b
 \begin{table}[t]
 \centering
 \scriptsize
-\caption{rep50 Full-versus-1-Shot comparison on the three clean backends (GPT-5.4, Claude~Sonnet~4.6, Gemini Vertex). Positive $\Delta E = E_{\mathrm{1shot}} - E_{\mathrm{full}}$ means the iterative Full run is lower in energy.}
+\caption{rep50 Full-versus-1-Shot comparison on the three clean backends (GPT-5.4, Claude~Sonnet~4.6, Gemini~2.5~Pro). Positive $\Delta E = E_{\mathrm{1shot}} - E_{\mathrm{full}}$ means the iterative Full run is lower in energy.}
 \label{tab:rep50-three-backend-summary}
 \begin{tabular}{lrrrrrr}
 \toprule
@@ -448,7 +448,7 @@ Repeating the GPT-5.4 Full variant on all 20 CMU cases with MACE-large (GPU, flo
 All 20 CMU rows produce retained summary results, but the mean absolute shift relative to the MACE-small GPT-5.4 run is 1.255~eV (0.834~eV if the anomalous case~20 is excluded), and no case remains within 0.01~eV.
 Fifteen cases become more stable under MACE-large and five become less stable.
 Cases~06, 16, 17, and 20 show dissociation events during the MACE-large runs; case~20 is the most important sensitivity case because a retained non-dissociated best structure appears at $-2.402$~eV while a later dissociated analysis reaches a much lower unretained energy.
-On a separate 10-case OCD-rep50 representative set, MACE-large succeeds on 9/10 cases; case~043 fails naturally with chemical slip and dissociation, not because of an API or calculator error.
+On a separate 10-case OCD-rep50 representative set, MACE-large succeeds on 9/10 cases; case~043 fails naturally with chemical slip and dissociation, not because of an external service or calculator error.
 These shifts do not change the qualitative systems conclusion from the MACE-small benchmark: primary comparisons must remain within the locked MACE-small protocol, and AdsMind's strength is reliable closed-loop recovery with a small relaxation budget rather than force-field-independent deepest-basin discovery.
 
 \paragraph{Reframing AdsMind's contribution.}
