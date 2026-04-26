@@ -3,9 +3,9 @@
 %The defined problem that AdsMind provides solution
 %化学搜索空间中，指导AdsMind寻找最低能量构型。
 
-To identify the most stable adsorption configuration and energy of a given adsorbate--surface system, AdsMind implements a closed-loop agent architecture. AdsMind is composed of four main modules: \textbf{Planner}, \textbf{Validator}, \textbf{Executor}, and \textbf{Analyzer}. In each iteration, a structured adsorption hypothesis is proposed by the \textbf{Planner}, checked by the \textbf{Validator}, instantiated and relaxed by the \textbf{Executor}, and summarized by the post-relaxation analyzer. 
+To identify the most stable adsorption configuration and energy of a given adsorbate--surface system, AdsMind implements a closed-loop agent architecture composed of four main modules: \textbf{Planner}, \textbf{Validator}, \textbf{Executor}, and \textbf{Analyzer}. In each iteration, a structured adsorption hypothesis is proposed by the \textbf{Planner}, checked by the \textbf{Validator}, instantiated and relaxed by the \textbf{Executor}, and summarized by the post-relaxation \textbf{Analyzer}. 
 % 不单独解释final analyzer模块，每一轮的后弛豫analyzer和executor一起介绍
-The \textbf{Final Analyzer} acts as the report-and-routing node after each physical execution or explicit terminate action. It either returns control to the planner when the search should continue, or emits the final report of the best configuration once the terminate action occurs or the budget is exhausted. The following sections explain the pipeline and modules in detail.
+The \textbf{Summarizer} acts as the report-and-routing node after each physical execution or explicit termination. It either returns control to the planner when the search should continue, or emits the final report of the best configuration once the terminate action occurs or the budget is exhausted. The following sections explain the pipeline and modules in detail.
 
 \subsection{Planner and Validator: Adsorption Hypothesis Generation}
 
@@ -25,7 +25,7 @@ The planner prompt is assembled from conditional sections rather than a monolith
 \textit{Termination} determines whether convergence-to-known-best signals are surfaced to the planner and whether the planner is allowed to stop early after repeated convergence.
 
 %% Validator
-After the hypothesis is proposed by the LLM planner, the validator will subsequently enforce chemistry- and schema-level constraints before any expensive physics simulation is made. The validation protocol ensures that:
+After the hypothesis is proposed by the \textbf{Planner}, the \textbf{Validator} will subsequently enforce chemistry- and schema-level constraints before any expensive physics simulation is made. The validation protocol ensures that:
 \begin{enumerate}
     \item The requested adsorbate binding indices are valid and correspond to non-hydrogen heavy atoms, unless the adsorbate is explicitly a single atom (e.g., [H]).
     \item The cardinality of the binding indices matches the topological requirements of the specified site type (e.g., \textit{ontop} requires exactly one index, while \textit{bridge} allows up to two indices for side-on modes).
@@ -76,9 +76,9 @@ All primary benchmark and matched-baseline experiments use the same MACE-MP-0 (s
 
 %% Post-Relaxation Analysis provide feedback
 
-Following physical simulation, the \textbf{Post-relaxation Analyzer} module systematically parses the relaxed trajectory to extract the precise local coordination environment. 
+Following physical simulation, the \textbf{Analyzer} after the relaxation module systematically parses the relaxed trajectory to extract the precise local coordination environment. 
 % chemical slip
-In \textit{AdsMind}, \textit{Chemical Slip} is automatically detected when relaxation drives the adsorbate away from the planner's intended surface-symbol environment toward a different stable local environment. Canonical site-family mismatch is logged as a related geometric/site slip diagnostic rather than being conflated with the surface-symbol slip flag. 
+In AdsMind, \textit{Chemical Slip} is automatically detected when relaxation drives the adsorbate away from the \textbf{Planner}'s intended surface-symbol environment toward a different stable local environment. Canonical site-family mismatch is logged as a related geometric/site slip diagnostic rather than being conflated with the surface-symbol slip flag. 
 
 %Similarly, rearrangement, dissociation, and adsorption failure are all detected and recorded.
 

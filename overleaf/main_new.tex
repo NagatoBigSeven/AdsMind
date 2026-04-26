@@ -12,7 +12,6 @@ superscriptaddress,
 %bibnotes,
  amsmath,amssymb,
  aps,
- prb,
  linenumbers,
 %pra,
 %prb,
@@ -36,7 +35,8 @@ superscriptaddress,
 \usepackage{chemformula}
 \newcommand{\sherry}[1]{#1}
 \newcommand{\yuyang}[1]{\textcolor{blue}}
-
+\counterwithin{subsection}{section}                     % 让subsection随section重置
+\renewcommand{\thesubsection}{\thesection.\arabic{subsection}} 
 \makeatletter
 \def\switch@array{}
 \makeatother
@@ -80,14 +80,15 @@ superscriptaddress,
                               %display desired
 \maketitle 
 
-\section*{Introduction}
+\section{Introduction}
 \input{sections/1_Introduction}
 
-\section*{Method}
+\section{Method}
 \input{sections/2_Method}
 
-\section*{Results}
+\section{Results}
 \input{sections/3_Results}
+
 
 \input{sections/4_DiscussionConclusion}
 
