@@ -3,9 +3,9 @@
 %The defined problem that AdsMind provides solution
 %化学搜索空间中，指导AdsMind寻找最低能量构型。
 
-To identify the most stable adsorption configuration and energy of a given adsorbate--surface system, AdsMind implements a closed-loop agent architecture composed of four main modules: \textbf{Planner}, \textbf{Validator}, \textbf{Executor}, and \textbf{Analyzer}. In each iteration, a structured adsorption hypothesis is proposed by the \textbf{Planner}, checked by the \textbf{Validator}, instantiated and relaxed by the \textbf{Executor}, and summarized by the post-relaxation \textbf{Analyzer}. 
+To identify the most stable adsorption configuration and energy of a given adsorbate--surface system, AdsMind implements a closed-loop agent architecture composed of four core execution modules: \textbf{Planner}, \textbf{Validator}, \textbf{Executor}, and \textbf{Analyzer}. In each iteration, a structured adsorption hypothesis is proposed by the \textbf{Planner}, checked by the \textbf{Validator}, instantiated and relaxed by the \textbf{Executor}, and interpreted by the \textbf{Analyzer} through post-relaxation structure analysis.
 % 不单独解释final analyzer模块，每一轮的后弛豫analyzer和executor一起介绍
-The \textbf{Summarizer} acts as the report-and-routing node after each physical execution or explicit termination. It either returns control to the planner when the search should continue, or emits the final report of the best configuration once the terminate action occurs or the budget is exhausted. The following sections explain the pipeline and modules in detail.
+A separate \textbf{Summarizer} acts as the report-and-routing node after each physical execution or explicit termination. It either returns control to the planner when the search should continue, or emits the final report of the best configuration once the terminate action occurs or the budget is exhausted. The following sections explain the pipeline and modules in detail.
 
 \subsection{Planner and Validator: Adsorption Hypothesis Generation}
 
@@ -33,8 +33,8 @@ After the hypothesis is proposed by the \textbf{Planner}, the \textbf{Validator}
 \end{enumerate}
 Hypotheses failing these checks elicit an immediate penalty feedback prompt, directing the LLM to refine its proposal without advancing the state machine to the physical simulation phase.
 
-% 考虑到篇幅详略，暂时吧planner和validator放到一起，用于hypothesis的预处理；把Executor and Analyzer放到一起，用于物理执行和结果报告。
-\subsection{Executor and Analyzer: Physical Simulation and Scientific analysis}
+% 考虑到篇幅详略，暂时把planner和validator放到一起，用于hypothesis的预处理；把Executor and Analyzer放到一起，用于物理执行和反馈分析。
+\subsection{Executor and Analyzer: Physical Simulation and Scientific Analysis}
 
 %% Executor
 With the validated adsorption hypothesis, we perform physical simulation to evaluate the adsorption energy and performance. 
@@ -49,13 +49,13 @@ This layer maps the selected binding atom(s) to proxy adsorption markers, constr
 
 % 这部分介绍了具体的candidate选择和计算，以及本轮报告生成。衔接到上面的段落中即可。
 A two-step evaluation procedure is then employed.
-Candidate structures are first screened with the MACE backend to discard pathological configurations and rank promising candidates by screened energy. This screening stage can optionally include a short Langevin molecular-dynamics warmup, but the warmup is disabled (\texttt{md\_steps=0}) in the primary CPU benchmark. The best surviving candidate (\texttt{relax\_top\_n=1}) is then fully relaxed and analyzed. 
+Candidate structures are first screened with the MACE-MP calculator used by the active protocol to discard pathological configurations and rank promising candidates by screened energy. This screening stage can optionally include a short Langevin molecular-dynamics warmup, but the warmup is disabled (\texttt{md\_steps=0}) in the primary CPU benchmark. The best surviving candidate (\texttt{relax\_top\_n=1}) is then fully relaxed and analyzed.
 % 第一阶段的candidate生成可以使用这部分内容扩充：The candidate structures undergo a computationally inexpensive screening phase via a preliminary static potential energy evaluation, optionally preceded by a short Langevin molecular-dynamics warmup. This warmup is disabled (\texttt{md\_steps=0}) in the CPU MACE benchmark reported in Section~\ref{subsec:computational_protocol} to reduce runtime; it is retained as an available option for GPU-backed runs. The structures are subsequently ranked, and the most stable candidate is propagated to the full structural relaxation phase.
 
 The post-relaxation analysis reconstructs the actual local coordination environment, detects dissociation and bond changes, and writes structured artifacts that can be consumed directly by the next planning step or by offline benchmark tooling.
 
 % 以下为物理计算的扩充内容
-The core physical engine of the \textit{AdsMind} framework relies on Machine Learning Interatomic Potentials (MLIPs), specifically the MACE (Machine Learning for a Materials Foundation Model) architecture, functioning as the primary surrogate calculator.
+The core physical engine of the \textit{AdsMind} framework relies on machine-learning interatomic potentials (MLIPs), specifically the MACE equivariant message-passing architecture and the MACE-MP foundation model~\cite{batatia2022mace,batatia2023foundation}, functioning as the primary surrogate calculator.
 
 For a given adsorption state, the thermodynamic stability is quantified by the adsorption energy $E_{\text{ads}}$, defined as:
 \begin{equation}
@@ -72,11 +72,11 @@ Structural relaxation is performed using the Broyden–Fletcher–Goldfarb–Sha
 During the optimization, selective constraints are applied. In the standard mode, the bottom fraction of the surface slab atoms (typically one-third of the $z$-axis dimension) is held fixed to simulate the bulk crystal termination, while the upper atomic layers and the adsorbate are fully relaxed.
 
 %% moved from Introduction section
-All primary benchmark and matched-baseline experiments use the same MACE-MP-0 (small, CPU, float32) physical backend so that observed differences reflect search strategy, not energy-function choice; the separate MACE-large run is treated only as a force-field sensitivity check.
+All primary benchmark and matched-baseline experiments use the same MACE-MP-0 small (CPU, float32, dispersion disabled) physical backend so that observed differences reflect search strategy, not energy-function choice; the separate MACE-MP-0 large run is treated only as a force-field sensitivity check.
 
 %% Post-Relaxation Analysis provide feedback
 
-Following physical simulation, the \textbf{Analyzer} after the relaxation module systematically parses the relaxed trajectory to extract the precise local coordination environment. 
+Following physical simulation, the \textbf{Analyzer} systematically parses the relaxed trajectory to extract the precise local coordination environment.
 % chemical slip
 In AdsMind, \textit{Chemical Slip} is automatically detected when relaxation drives the adsorbate away from the \textbf{Planner}'s intended surface-symbol environment toward a different stable local environment. Canonical site-family mismatch is logged as a related geometric/site slip diagnostic rather than being conflated with the surface-symbol slip flag. 
 
@@ -108,9 +108,8 @@ To identify the contribution of different mechanisms in AdsMind's loop search st
 The \textit{Full} setting enables all three mechanisms. \textit{$-$Slip} removes slip-conditioned guidance and the associated negative constraint. \textit{$-$Forbid} keeps slip detection but suppresses the explicit prohibition against retrying a failed site family. \textit{$-$Term} disables convergence-based early stopping while preserving the rest of the loop. \textit{1-Shot} disables all three mechanisms and sets the maximum attempt budget to one.
 
 % 这部分是实验设置的解释，与前文关系不大，具体的结果在section 3.
-All agent-side benchmark runs in this manuscript use frozen experiment configurations rather than mutable product defaults. Four reasoning backends are evaluated: Gemini~2.5~Pro (\texttt{gemini-2.5-pro}), Grok-4 (\texttt{grok-4-0709}), GPT-5.4 (\texttt{gpt-5.4-2026-03-05}), and Claude~Sonnet~4.6 (\texttt{claude-sonnet-4-6}), all run at zero temperature under fixed backend settings. For the primary benchmark protocol, the physical backend is locked to a conservative MACE configuration: \texttt{model=small}, \texttt{precision=float32}, \texttt{device=cpu}, and dispersion disabled. This choice reflects the practical hardware constraints of the benchmark environment and is held fixed across all reported ablations and backend comparisons. Each frozen configuration records the model identifier and experiment settings needed to reproduce the run.
+All agent-side benchmark runs in this manuscript use frozen experiment configurations rather than mutable product defaults. Four reasoning backends are evaluated: Gemini~2.5~Pro (\texttt{gemini-2.5-pro}), Grok-4 (\texttt{grok-4-0709}), GPT-5.4 (\texttt{gpt-5.4-2026-03-05}), and Claude~Sonnet~4.6 (\texttt{claude-sonnet-4-6}), all run at zero temperature under fixed backend settings. For the primary benchmark protocol, the physical backend is locked to a conservative MACE-MP-0 small configuration loaded through \texttt{mace.calculators.mace\_mp}: \texttt{model=small}, \texttt{default\_dtype=float32}, \texttt{device=cpu}, and dispersion disabled. This choice reflects the practical hardware constraints of the benchmark environment and is held fixed across all reported ablations and backend comparisons. Each frozen configuration records the model identifier and experiment settings needed to reproduce the run.
 
 The original locked CMU statistical package used 15 cases (01--02, 04--05, 09--10, 12--20), and the current manuscript revision extends the CMU ablation audit to the full 20-case manifest. This CMU set spans atomic adsorbates (H), small multi-atom intermediates (OH and NNH), and larger intermediates (CH$_2$CH$_2$OH, OCHCH$_3$, and ONN(CH$_3$)$_2$) across intermetallic and monometallic surfaces. Full runs use a maximum of five attempts. The 1-shot baseline uses the same tooling and physical backend but restricts the planner to a single attempt, allowing us to isolate the value of closed-loop refinement from the value of the base planner alone. Experiments are launched from frozen configurations with fixed seeds and structured result serialization for reproducibility.
 
 For the expanded OCD-GMAE validation reported in the current manuscript revision, we assemble an audited 24-case set from the original locked10 subset (003, 004, 005, 012, 013, 015, 016, 019, 023, 024) plus an extra14 extension (001, 002, 006, 007, 008, 009, 010, 011, 014, 017, 018, 020, 021, 022). The formal expanded OCD24 statistics use GPT-5.4, Claude~Sonnet~4.6, and Gemini~2.5~Pro only; Grok-4 is excluded from this frozen expanded package because the corresponding batch was not a complete clean matrix at the analysis freeze owing to external service failures rather than chemistry failures. Separately, we evaluate a 50-case representative OCD-GMAE slice (rep50) as a broader Full-versus-1-Shot generalization study on the same three clean backends. For these expanded OCD24 and rep50 analyses, natural chemistry failures are retained in success-rate and reach-Full statistics, while energy deltas are computed only on runs with valid relaxed adsorption energies.
-

@@ -3,7 +3,7 @@
 \subsection{Controlled ablation on the CMU20 benchmark}
 
 We evaluated the agent on the completed 20-case CMU benchmark, spanning H, NNH, OH, CH$_2$CH$_2$OH, OCHCH$_3$, and ONN(CH$_3$)$_2$ adsorption across increasingly difficult intermetallic and monometallic surfaces.
-For each case, we executed five runtime variants under a fixed MACE-small CPU backend: \textit{Full}, \textit{$-$Slip}, \textit{$-$Forbid}, \textit{$-$Term}, and \textit{1-Shot}.
+For each case, we executed five runtime variants under a fixed MACE-MP-0 small CPU backend: \textit{Full}, \textit{$-$Slip}, \textit{$-$Forbid}, \textit{$-$Term}, and \textit{1-Shot}.
 Here \textit{$-$Slip} removes slip-conditioned guidance together with its associated FORBID constraint, \textit{$-$Forbid} keeps slip detection and history but removes the explicit ``do not retry this site'' instruction, \textit{$-$Term} disables convergence-based early stopping, and \textit{1-Shot} reduces the total budget to a single attempt.
 The complete 20$\times$5 matrix was executed independently on four LLM backends---Gemini~2.5~Pro, Grok-4, GPT-5.4, and Claude~Sonnet~4.6---yielding 393 successful runs out of 400 attempts.
 
@@ -220,7 +220,7 @@ Backend conv. & Lower & \multicolumn{4}{p{7.2cm}}{Full mean range 0.129~eV vs.\ 
 \begin{table}[t]
 \centering
 \small
-\caption{Explicit test of H$_1$ on the 15-case CMU benchmark using $\Delta E = E_{\mathrm{full}} - E_{\mathrm{1shot}}$. Negative values mean the full agent found a lower energy; hits require $\Delta E < -0.05$~eV. H$_1$ uses only intermetallic surfaces; the four monometallic cases (09, 10, 12, 13) are shown for completeness but excluded from the support rate.}
+\caption{Explicit test of H$_1$ on the 15-case CMU benchmark using $\Delta E = E_{\mathrm{full}} - E_{\mathrm{1shot}}$. Negative values mean the full agent found a lower energy; hits require $\Delta E < -0.05$~eV. H$_1$ uses only intermetallic surfaces; the four monometallic cases (09, 10, 12, 13) are shown for completeness but excluded from the support rate. Here N/A means outside the H$_1$ intermetallic denominator, not a physical execution failure.}
 \label{tab:hypothesis-test}
 \begin{tabular}{llrrrr}
 \toprule
@@ -349,7 +349,7 @@ Finally, the Full three-backend agreement itself is tight on this broader chemis
 
 \subsection{Comparison with Adsorb-Agent under identical physics}
 
-To isolate the effect of search strategy from the choice of force field, we forked the open-source Adsorb-Agent codebase~\cite{adsorbagent} and replaced its EquiformerV2 relaxation backend with the same MACE-MP-0 (small, CPU, float32) calculator used for the primary benchmark and matched comparisons.
+To isolate the effect of search strategy from the choice of force field, we forked the open-source Adsorb-Agent codebase~\cite{adsorbagent} and replaced its EquiformerV2 relaxation backend with the same MACE-MP-0 small (CPU, float32, dispersion disabled) calculator used for the primary benchmark and matched comparisons.
 All remaining protocol parameters were locked to AdsMind's settings: BFGS optimizer, $f_\mathrm{max} = 0.10$~eV/\AA, 200 steps, and identical \textsc{FixAtoms} constraints (bottom third of slab atoms fixed).
 We ran the modified Adsorb-Agent with GPT-5.4 and report the 15-case overlap with the locked CMU ablation subset.
 We separately ran a single-configuration Adsorb-Agent stress control on CMU20 to test whether Adsorb-Agent's energy depth comes from one-shot chemical site choice alone or from its breadth of enumerated configurations.
@@ -357,7 +357,7 @@ We separately ran a single-configuration Adsorb-Agent stress control on CMU20 to
 \begin{table}[t]
 \centering
 \scriptsize
-\caption{Matched-physics comparison between AdsMind Full and Adsorb-Agent on the 15 locked CMU benchmark cases using GPT-5.4 and MACE-MP-0 small (CPU, float32). Energies are adsorption energies in eV; NULL denotes no valid Adsorb-Agent trajectory.}
+\caption{Matched-physics comparison between AdsMind Full and Adsorb-Agent on the 15 locked CMU benchmark cases using GPT-5.4 and MACE-MP-0 small (CPU, float32, dispersion disabled). Energies are adsorption energies in eV; NULL denotes no valid Adsorb-Agent trajectory, not an AdsMind failure.}
 \label{tab:cmu-gpt54-adsorbagent-comparison}
 \resizebox{\textwidth}{!}{%
 \begin{tabular}{llllrrrr}
@@ -404,7 +404,7 @@ We therefore interpret Adsorb-Agent's energy advantage as primarily a breadth ef
 
 \paragraph{Cost structure.}
 The two systems have inverted cost profiles.
-Adsorb-Agent consumes roughly 5{,}100 LLM tokens on successful cases but about 21 MACE relaxations per case; AdsMind consumes more LLM tokens through iterative reasoning but only about four MACE relaxations per case.
+Adsorb-Agent consumes roughly 5{,}100 LLM tokens on successful cases but about 21 MACE-MP relaxations per case; AdsMind consumes more LLM tokens through iterative reasoning but only about four MACE-MP relaxations per case.
 The current matched-physics comparison therefore should not be read as AdsMind winning on raw energy depth.
 It supports a reliability--cost trade-off: AdsMind is more reliable and uses far fewer relaxations, while Adsorb-Agent is deeper when its one-pass enumeration succeeds.
 
@@ -415,23 +415,23 @@ These findings motivate a concrete architectural extension: coupling AdsMind's c
 
 \subsection{Non-LLM and cross-backend control baselines}
 
-To isolate the contribution of the LLM planner from that of the underlying MACE relaxation pipeline, we implemented two non-LLM controls using the same MACE-matched physics: a \textit{random placement} baseline (N=20 random adsorbate poses per case, each relaxed with the standard protocol) and a \textit{heuristic enumeration} baseline (all high-symmetry sites identified by Autoadsorbate, median 56 sites per case).
+To isolate the contribution of the LLM planner from that of the underlying MACE-MP relaxation pipeline, we implemented two non-LLM controls using the same MACE-MP-0 small physics: a \textit{random placement} baseline (N=20 random adsorbate poses per case, each relaxed with the standard protocol) and a \textit{heuristic enumeration} baseline (all high-symmetry sites identified by Autoadsorbate, median 56 sites per case).
 We include the GPT-5.4 Adsorb-Agent run above and in the SI baseline table to keep the LLM backend matched where possible.
 
 \paragraph{Random placement is competitive with AdsMind Full when given more samples.}
 After adding the five previously missing random-control cases, the CMU20 comparison gives a mean energy difference of $-0.232$~eV relative to AdsMind Full (best-across-backends); random wins 6 cases, AdsMind wins 4, and 10 tie within 0.01~eV.
 The two largest random advantages remain case~16 ($-6.74$ vs.\ $-4.66$ eV, $\Delta = -2.07$~eV) and case~20 ($-13.42$ vs.\ $-11.65$ eV, $\Delta = -1.77$~eV), while AdsMind's largest advantage is case~19 ($+0.477$~eV in random-minus-AdsMind energy).
-Critically, the random baseline uses $5\times$ more MACE relaxations than a single AdsMind Full run on the same case (20 vs.\ $\sim$4); the best-across-backends comparison above is a reporting view for robustness, not a claim that the four-backend aggregate itself costs only $\sim$4 relaxations.
-In the CMU20 case-level best-of-backend view, AdsMind's \textit{1-Shot} variant, which allots the same single MACE relaxation as a naive search would, never beats AdsMind Full and underperforms random on several cases.
+Critically, the random baseline uses $5\times$ more MACE-MP relaxations than a single AdsMind Full run on the same case (20 vs.\ $\sim$4); the best-across-backends comparison above is a reporting view for robustness, not a claim that the four-backend aggregate itself costs only $\sim$4 relaxations.
+In the CMU20 case-level best-of-backend view, AdsMind's \textit{1-Shot} variant, which allots the same single MACE-MP relaxation as a naive search would, never beats AdsMind Full and underperforms random on several cases.
 This supports the interpretation that the LLM planner's single-pass placement is not inherently better than broader random sampling; the value of the agent lies in \textit{iterative refinement}, reliability, and interpretable error recovery rather than raw deepest-basin discovery.
-Because the current random summary records successful MACE energy calculations but does not yet apply the same anomaly filtering as the agent summaries, random winners should be interpreted as protocol-level energy comparisons until their top structures are manually or programmatically filtered.
+Because the current random summary records successful MACE-MP energy calculations but does not yet apply the same anomaly filtering as the agent summaries, random winners should be interpreted as protocol-level energy comparisons until their top structures are manually or programmatically filtered.
 
 \paragraph{Heuristic enumeration is a strong but anomaly-sensitive depth control.}
 The completed CMU20 heuristic enumeration relaxes 1{,}137 Autoadsorbate sites (25--98 sites per case, no LLM).
 In the raw energy summary, it is lower than AdsMind Full best-of-four-backends on 8/20 cases, higher on 1/20, and tied within 0.01~eV on 11/20.
 However, a connectivity audit of the saved top-3 heuristic structures flags the largest raw advantages as chemically unsafe or unresolved: cases~04 and~08 show NNH fragmentation, cases~16 and~19 fragment larger adsorbates, and case~20 has no saved top structure available for audit.
 Under this conservative saved-top-3 filtering, heuristic enumeration has validated lower energies on 3/20 cases (11, 17, 18), AdsMind is lower on 1/20 (15), 11/20 tie, and 5/20 remain unresolved pending full anomaly filtering of non-saved candidates.
-We therefore report heuristic enumeration as a protocol-level breadth/depth control rather than a chemically validated winner table; its main implication is that broader enumeration can expose additional MACE-small minima at 6--25$\times$ more candidate relaxations, but raw low energies require structure filtering before chemical interpretation.
+We therefore report heuristic enumeration as a protocol-level breadth/depth control rather than a chemically validated winner table; its main implication is that broader enumeration can expose additional MACE-MP-0 small minima at 6--25$\times$ more candidate relaxations, but raw low energies require structure filtering before chemical interpretation.
 
 \paragraph{Adsorb-Agent LLM choice changes failures but not the trade-off.}
 The current GPT-5.4 Adsorb-Agent run succeeds on 12 of 15 locked CMU cases, while the historical GPT-4o run succeeds on 11 of 15.
@@ -443,17 +443,17 @@ Tracing the per-iteration running-best energy across all 15 cases and 4 backends
 The remaining iterations contribute diminishing returns.
 This rapid convergence is the mechanistic basis for AdsMind's compute efficiency: most of the closed-loop value is extracted in the first 2--3 iterations.
 
-\paragraph{MACE-large sensitivity.}
-Repeating the GPT-5.4 Full variant on all 20 CMU cases with MACE-large (GPU, float64, dispersion) shows that force-field fidelity can shift absolute adsorption energies substantially.
-All 20 CMU rows produce retained summary results, but the mean absolute shift relative to the MACE-small GPT-5.4 run is 1.255~eV (0.834~eV if the anomalous case~20 is excluded), and no case remains within 0.01~eV.
-Fifteen cases become more stable under MACE-large and five become less stable.
-Cases~06, 16, 17, and 20 show dissociation events during the MACE-large runs; case~20 is the most important sensitivity case because a retained non-dissociated best structure appears at $-2.402$~eV while a later dissociated analysis reaches a much lower unretained energy.
-On a separate 10-case OCD-rep50 representative set, MACE-large succeeds on 9/10 cases; case~043 fails naturally with chemical slip and dissociation, not because of an external service or calculator error.
-These shifts do not change the qualitative systems conclusion from the MACE-small benchmark: primary comparisons must remain within the locked MACE-small protocol, and AdsMind's strength is reliable closed-loop recovery with a small relaxation budget rather than force-field-independent deepest-basin discovery.
+\paragraph{MACE-MP-0 large sensitivity.}
+Repeating the GPT-5.4 Full variant on all 20 CMU cases with MACE-MP-0 large (GPU, float64, dispersion enabled) shows that force-field fidelity can shift absolute adsorption energies substantially.
+All 20 CMU rows produce retained summary results, but the mean absolute shift relative to the MACE-MP-0 small GPT-5.4 run is 1.255~eV (0.834~eV if the anomalous case~20 is excluded), and no case remains within 0.01~eV.
+Fifteen cases become more stable under MACE-MP-0 large and five become less stable.
+Cases~06, 16, 17, and 20 show dissociation events during the MACE-MP-0 large runs; case~20 is the most important sensitivity case because a retained non-dissociated best structure appears at $-2.402$~eV while a later dissociated analysis reaches a much lower unretained energy.
+On a separate 10-case OCD-rep50 representative set, MACE-MP-0 large succeeds on 9/10 cases; case~043 fails naturally with chemical slip and dissociation, not because of an external service or calculator error.
+These shifts do not change the qualitative systems conclusion from the MACE-MP-0 small benchmark: primary comparisons must remain within the locked MACE-MP-0 small protocol, and AdsMind's strength is reliable closed-loop recovery with a small relaxation budget rather than force-field-independent deepest-basin discovery.
 
 \paragraph{Reframing AdsMind's contribution.}
 Taken together, these controls reveal that AdsMind's primary contribution is not deepest-basin discovery.
 Random sampling with 20 relaxations is competitive with AdsMind Full and reaches a lower raw mean energy before anomaly filtering; heuristic enumeration exposes additional low-energy basins but requires connectivity filtering before its raw wins can be interpreted chemically; Adsorb-Agent with $\sim$21 relaxations reaches deeper basins whenever the GPT-5.4 one-pass enumeration succeeds.
 In the GPT-5.4 matched-physics run, Adsorb-Agent is lower in energy on all 12 successful comparable cases, but fails on the remaining three.
-AdsMind's distinctive value is the combination of: (i) 100\% success for the Full variant on every completed CMU20 run (80/80) and every clean-backend OCD24 run (72/72), together with a 148/150 Full success rate on the broader rep50 slice; (ii) compute efficiency per backend---remaining competitive with random at $5\times$ less MACE work per run and approaching heuristic at $6$--$25\times$ less; (iii) chemical interpretability via Slip detection, FORBID logic, and backend-convergent reasoning traces absent from brute-force methods; and (iv) iterative error recovery, which is a prerequisite for autonomous chemistry workflows where silent failures are unacceptable.
+AdsMind's distinctive value is the combination of: (i) 100\% success for the Full variant on every completed CMU20 run (80/80) and every clean-backend OCD24 run (72/72), together with a 148/150 Full success rate on the broader rep50 slice; (ii) compute efficiency per backend---remaining competitive with random at $5\times$ less MACE-MP work per run and approaching heuristic at $6$--$25\times$ less; (iii) chemical interpretability via Slip detection, FORBID logic, and backend-convergent reasoning traces absent from brute-force methods; and (iv) iterative error recovery, which is a prerequisite for autonomous chemistry workflows where silent failures are unacceptable.
 A natural extension couples AdsMind's closed-loop error-recovery with broader initial sampling (multi-site LLM placement with parallel relaxation), which would combine the depth of enumeration with the reliability and interpretability of the closed-loop agent.

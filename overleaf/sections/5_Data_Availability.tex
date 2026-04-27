@@ -1,4 +1,6 @@
 All agent-side benchmark inputs, frozen configurations, runner scripts, and curated structured outputs used in this study are stored in the repository under \texttt{research/agent\_eval/} and \texttt{research/results/}. The public repository keeps the paper-facing summary tables, backend-comparison artifacts, and LaTeX table exports used in the manuscript, while per-run logs, trajectories, and structure artifacts are treated as regenerable execution products. The reported benchmark and ablation summaries can therefore be reproduced from the archived manifests, frozen configurations, and runner scripts.
 
+The primary calculator is loaded through \texttt{mace.calculators.mace\_mp} with the MACE-MP-0 small checkpoint, CPU execution, float32 precision, and dispersion disabled. The MACE-MP-0 large sensitivity runs use the large checkpoint, CUDA execution, float64 precision, and dispersion enabled. The corresponding frozen settings are archived in the experiment configuration files under \texttt{research/agent\_eval/configs/}.
+
 % moved from Introduction
 We release the code, curated result summaries, frozen configurations, and reproduction scripts at \url{https://github.com/AI4QC/AdsMind}.

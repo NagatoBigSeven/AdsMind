@@ -6,7 +6,7 @@ Traditional approaches---DFT enumeration, genetic algorithms, basin hopping---re
 %% they reflect some existing shortage, but I think should be organized in this logic: 
 %%% MLFF, MLFF work and limitations; LLM, LLM work and limitations; their combined work like CatDT?
 \subsection{Machine learning surrogates and the remaining search problem}
-With the development of deep learning, Machine learning force fields (MLFFs) such as MACE~\cite{batatia2022mace}, CHGNet~\cite{deng2023chgnet}, and Equiformer~\cite{liao2023equiformerv2} have dramatically reduced the per-evaluation cost, achieving near-DFT accuracy at orders-of-magnitude speedup.
+With the development of deep learning, Machine learning force fields (MLFFs) such as MACE/MACE-MP~\cite{batatia2022mace,batatia2023foundation}, CHGNet~\cite{deng2023chgnet}, and Equiformer~\cite{liao2023equiformerv2} have dramatically reduced the per-evaluation cost, achieving near-DFT accuracy at orders-of-magnitude speedup.
 However, MLFFs solve only the \textit{fast energy evaluation} problem; they do not address the upstream \textit{search strategy} problem of deciding which configurations to evaluate.
 Deep-learning-assisted configuration generators---graph neural networks that predict site stability, diffusion models that propose structures---remain open-loop: once trained, they cannot adapt based on new calculation results.
 This architectural limitation causes systematic failures on surfaces where training-data coverage is sparse, precisely the complex compositions where better search is most needed.
@@ -39,7 +39,7 @@ However, existing LLM agents operate in a \textit{single-pass} regime: the LLM p
 This architectural choice has two consequences we quantify in this work.
 First, \textit{reliability suffers:} when the LLM's initial site prediction does not match any geometrically enumerable site on the surface, the system produces zero valid configurations and fails silently. We observe this failure mode on 20--27\% of cases across GPT-4o and GPT-5.4, with failure patterns that differ between LLMs, indicating an irreducible architectural limit rather than a model-capability artifact.
 Second, \textit{interpretability suffers:} the system cannot distinguish a thermodynamically unstable site from a simulation failure, cannot learn from dissociation or rearrangement events, and cannot correct the systematic biases all current LLMs carry---preferring high-symmetry sites, underweighting surface composition effects, and ignoring adsorbate conformational flexibility.
-% None have been evaluated head-to-head against non-LLM baselines \textit{under identical MACE physics}, leaving open whether reported gains reflect planning quality or force-field/backbone choice.
+% None have been evaluated head-to-head against non-LLM baselines \textit{under identical MACE-MP-0 small physics}, leaving open whether reported gains reflect planning quality or force-field/backbone choice.
 
 
 %% why we need to introduce the benchmarks here??
@@ -78,7 +78,7 @@ This trade-off---reliability and efficiency against depth of exploration---frame
 AdsMind is not a replacement for brute-force methods where compute is cheap and failures are tolerable; it is a foundation for \textit{autonomous chemistry workflows} where silent failures, irreproducibility, and uninterpretable failures are unacceptable, and where compute is expensive enough that a 5--25$\times$ efficiency gain matters.
 A natural extension, outlined in the Conclusion, couples AdsMind's closed-loop error recovery with broader initial site enumeration to combine the reliability of the former with the depth of the latter.
 
-Head-to-head comparisons against Adsorb-Agent were performed by forking the original codebase and replacing its EquiformerV2 backend with MACE, ensuring apples-to-apples physics.
+Head-to-head comparisons against Adsorb-Agent were performed by forking the original codebase and replacing its EquiformerV2 backend with the same MACE-MP-0 small calculator used in the primary benchmark, ensuring apples-to-apples physics.
 
 \begin{figure}
     \centering

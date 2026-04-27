@@ -17,7 +17,7 @@
 \usepackage{graphicx}% Include figure files
 \usepackage{dcolumn}% Align table columns on decimal point
 \usepackage{bm}% bold math
-\usepackage[hidelinks]{hyperref}% add hypertext capabilities
+\usepackage[hidelinks,hypertexnames=false]{hyperref}% add hypertext capabilities
 \usepackage{tensor}
 \usepackage{xcolor}
 \usepackage{threeparttable}
@@ -91,7 +91,7 @@
 
 \begin{document}
 
-\title{Supporting Information for: \\ AdsMind: A Physics-Grounded Multi-agent System for Self-Correcting Discovery of Adsorption Configurations on Heterogeneous Catalyst Surfaces}
+\title{Supporting Information for: \texorpdfstring{\\}{ }AdsMind: A Physics-Grounded Multi-agent System for Self-Correcting Discovery of Adsorption Configurations on Heterogeneous Catalyst Surfaces}
 \author{Zongmin Zhang}
 \affiliation{Department of Computer Science and Engineering, Hong Kong University of Science and Technology, Kowloon, Hong Kong 999077, China}
 \author{Bowen Zhang}
@@ -128,9 +128,10 @@
 % SI Table: CMU Benchmark Ablation Statistics (15 cases, 4 backends)
 \begin{table}[h]
 \centering
-\small
+\scriptsize
 \caption{CMU benchmark pairwise ablation statistics versus the full variant (15~cases, 4~backends). Positive $\Delta E$ means the ablated variant is worse than full. BH denotes the Benjamini--Hochberg adjusted $p$-value; CI is a deterministic bootstrap 95\% interval for the mean $\Delta E$.}
 \label{tab:si4-ablation-statistics}
+\resizebox{\textwidth}{!}{%
 \begin{tabular}{llrrrrllr}
 \toprule
 Backend & Variant & Mean $\Delta E$ & Median $\Delta E$ & Wilcoxon $p$ & BH $p$ & Rank-biserial $r$ & 95\% CI & Max degr. \\
@@ -152,7 +153,8 @@ Claude & $-$Forbid & -0.017 & 0.000 & 0.2489 & 0.4977 & -0.524 & [-0.042, 0.000]
 Claude & $-$Term & -0.031 & 0.000 & 0.4631 & 0.6174 & -0.333 & [-0.099, 0.007] & 0.042 (04) \\
 Claude & 1-Shot & 0.185 & 0.126 & 0.0033 & 0.0134 & 1.000 & [0.089, 0.286] & 0.549 (17) \\
 \bottomrule
-\end{tabular}
+\end{tabular}%
+}
 \end{table}
 % ===== end inlined si4_ablation_statistics =====
 
@@ -167,7 +169,7 @@ For 1-Shot, the same locked10+extra14 partition is used intentionally to avoid p
 
 \begin{table}[h]
 \centering
-\small
+\scriptsize
 \caption{Expanded OCD24 five-variant ablation summary on the three clean backends (GPT-5.4, Claude~Sonnet~4.6, Gemini~2.5~Pro). Positive $\Delta E = E_{\mathrm{variant}} - E_{\mathrm{full}}$ means the ablated variant is worse than Full. Mean and median $\Delta E$ are computed over successful runs only. Reach Full$+0.01$ counts runs within 0.01~eV of the same-backend Full result and keeps failures in the denominator.}
 \label{tab:si-ocd24-three-backend-summary}
 \begin{tabular}{lrrrrrr}
@@ -264,7 +266,7 @@ Claude & 1-Shot & 0.774 & 0.270 & 0.004 & [0.189, 1.719] & 4.671 (003) \\
 \section{External baselines and force-field sensitivity}
 
 This section separates the locked 15-case CMU overlap used for mechanism-level comparisons from newly completed control data.
-The completed additions are the CMU20 five-variant ablation completion, CMU20 random placement, MACE-large sensitivity on CMU20 and OCD-rep10, and an Adsorb-Agent single-configuration stress control.
+The completed additions are the CMU20 five-variant ablation completion, CMU20 random placement, MACE-MP-0 large sensitivity on CMU20 and OCD-rep10, and an Adsorb-Agent single-configuration stress control.
 The CMU20 ablation completion is used here as a reliability and failure-mode audit; the original 15-case tables above are retained for the first locked mechanism package.
 
 \begin{table}[h]
@@ -293,7 +295,7 @@ For this reason, ordinary paired Wilcoxon statistics in Table~\ref{tab:si4-ablat
 \begin{table}[h]
 \centering
 \scriptsize
-\caption{Completed CMU20 Full-variant backend matrix. Energies are AdsMind Full adsorption energies in eV under the primary MACE-small protocol. This table is the Full row of the completed CMU20 five-variant ablation matrix.}
+\caption{Completed CMU20 Full-variant backend matrix. Energies are AdsMind Full adsorption energies in eV under the primary MACE-MP-0 small protocol. This table is the Full row of the completed CMU20 five-variant ablation matrix.}
 \label{tab:si-cmu20-full-backend-matrix}
 \resizebox{\textwidth}{!}{%
 \begin{tabular}{lrrrrrl}
@@ -330,8 +332,8 @@ Case & Gemini & Grok-4 & GPT-5.4 & Claude & Range & Best within 0.01~eV \\
 % ===== inlined from research/results/si_adsorbagent_comparison.tex =====
 \begin{table}[h]
 \centering
-\small
-\caption{Head-to-head comparison of AdsMind (GPT-5.4 Full variant) versus Adsorb-Agent (GPT-5.4, MACE-matched) on 15 overlapping CMU benchmark cases. Adsorption energies in eV; lower is better. $\Delta = E_{\mathrm{AdsMind}} - E_{\mathrm{AdsorbAgent}}$, so positive values mean Adsorb-Agent is lower in energy. ``Failed'' denotes Adsorb-Agent runs with no valid trajectory files.}
+\scriptsize
+\caption{Head-to-head comparison of AdsMind (GPT-5.4 Full variant) versus Adsorb-Agent (GPT-5.4, matched MACE-MP-0 small) on 15 overlapping CMU benchmark cases. Adsorption energies in eV; lower is better. $\Delta = E_{\mathrm{AdsMind}} - E_{\mathrm{AdsorbAgent}}$, so positive values mean Adsorb-Agent is lower in energy. ``Failed'' denotes Adsorb-Agent runs with no valid trajectory files.}
 \label{tab:si-adsorbagent-comparison}
 \begin{tabular}{lrrrrrl}
 \toprule
@@ -434,7 +436,7 @@ Relax/case & 20 & 25--98 & 1 & $\sim$4 & $\sim$21 & $\sim$21 \\
 \begin{table}[h]
 \centering
 \scriptsize
-\caption{Completed CMU20 random-placement control versus AdsMind Full best-of-four-backends. Random(20) uses 20 MACE-small relaxations per case; AdsMind uses the best Full result among the four LLM backends. $\Delta = E_\mathrm{random} - E_\mathrm{AdsMind}$; negative values mean random found a lower-energy relaxed structure. Random rows are protocol-valid MACE energy comparisons but have not yet been filtered by the same anomaly detector used for agentic summaries.}
+\caption{Completed CMU20 random-placement control versus AdsMind Full best-of-four-backends. Random(20) uses 20 MACE-MP-0 small relaxations per case; AdsMind uses the best Full result among the four LLM backends. $\Delta = E_\mathrm{random} - E_\mathrm{AdsMind}$; negative values mean random found a lower-energy relaxed structure. Random rows are protocol-valid MACE-MP-0 small energy comparisons but have not yet been filtered by the same anomaly detector used for agentic summaries.}
 \label{tab:si-cmu20-random-vs-adsmind}
 \resizebox{\textwidth}{!}{%
 \begin{tabular}{lrrrl}
@@ -498,7 +500,7 @@ Unresolved after saved-top-3 audit & 04, 08, 16, 19, 20 & 5 \\
 \resizebox{\textwidth}{!}{%
 \begin{tabular}{lrrrrl}
 \toprule
-Case & MACE-small & MACE-large & $\Delta$ & Diss. events & Flag \\
+Case & MACE-MP-0 small & MACE-MP-0 large & $\Delta$ & Diss. events & Flag \\
 \midrule
 01 & $-3.627$ & $-4.492$ & $-0.864$ & 0 & ordinary \\
 02 & $-4.769$ & $-5.092$ & $-0.323$ & 0 & ordinary \\
@@ -531,12 +533,12 @@ Case & MACE-small & MACE-large & $\Delta$ & Diss. events & Flag \\
 \begin{table}[h]
 \centering
 \scriptsize
-\caption{MACE-large sensitivity on 10 representative OCD-GMAE rep50 cases. This is a force-field stress test on chemistry outside the CMU set, not a replacement for the locked 10-case OCD-GMAE MACE-small ablation matrix. Case~043 fails naturally through slip and dissociation; no external service or calculator error is recorded.}
+\caption{MACE-MP-0 large sensitivity on 10 representative OCD-GMAE rep50 cases. This is a force-field stress test on chemistry outside the CMU set, not a replacement for the locked 10-case OCD-GMAE MACE-MP-0 small ablation matrix. Case~043 fails naturally through slip and dissociation; no external service or calculator error is recorded.}
 \label{tab:si-mace-large-ocd-rep10}
 \resizebox{\textwidth}{!}{%
 \begin{tabular}{llllrrr}
 \toprule
-Case & Surface & Adsorbate & MACE-large energy & Status & Slip & Diss. \\
+Case & Surface & Adsorbate & MACE-MP-0 large energy & Status & Slip & Diss. \\
 \midrule
 003 & Na$_{12}$Pb$_{36}$ & \texttt{[H]} & $-3.126$ & success & 5 & 0 \\
 006 & Ca$_{16}$Pb$_{16}$Pd$_{16}$ & \texttt{[OH]} & $-6.534$ & success & 3 & 0 \\
