@@ -163,37 +163,37 @@ Claude & 1-Shot & 0.185 & 0.126 & 0.0033 & 0.0134 & 1.000 & [0.089, 0.286] & 0.5
 \section{Independent OCD-GMAE validation statistics}
 
 The original locked10 four-backend OCD package is retained below as the first complete-energy mechanism set.
-The current formal-ready expansion uses 24 OCD cases across GPT-5.4, Claude~Sonnet~4.6, and Gemini~2.5~Pro only; Grok-4 extra14 and Grok-4 rep50 Full are excluded from this snapshot because the relevant batches were not complete clean matrices at the analysis freeze owing to external service failures.
+The current formal-ready expansion uses 24 OCD cases across all four LLM backends.
 The 24-case formal table is assembled from the audited locked10 subset (003, 004, 005, 012, 013, 015, 016, 019, 023, 024) plus the extra14 extension (001, 002, 006, 007, 008, 009, 010, 011, 014, 017, 018, 020, 021, 022).
 For 1-Shot, the same locked10+extra14 partition is used intentionally to avoid pooling duplicate historical reruns.
 
 \begin{table}[h]
 \centering
 \scriptsize
-\caption{Expanded OCD24 five-variant ablation summary on the three clean backends (GPT-5.4, Claude~Sonnet~4.6, Gemini~2.5~Pro). Positive $\Delta E = E_{\mathrm{variant}} - E_{\mathrm{full}}$ means the ablated variant is worse than Full. Mean and median $\Delta E$ are computed over successful runs only. Reach Full$+0.01$ counts runs within 0.01~eV of the same-backend Full result and keeps failures in the denominator.}
-\label{tab:si-ocd24-three-backend-summary}
+\caption{Expanded OCD24 five-variant ablation summary across four LLM backends. Positive $\Delta E = E_{\mathrm{variant}} - E_{\mathrm{full}}$ means the ablated variant is worse than Full. Mean and median $\Delta E$ are computed over successful runs only. Reach Full$+0.01$ counts runs within 0.01~eV of the same-backend Full result and keeps failures in the denominator.}
+\label{tab:si-ocd24-four-backend-summary}
 \begin{tabular}{lrrrrrr}
 \toprule
 Variant & Attempts & Successful & Failures & Mean $\Delta E$ & Median $\Delta E$ & Reach Full$+0.01$ \\
 \midrule
-Full & 72 & 72 & 0 & 0.000 & 0.000 & 72/72 \\
-$-$Slip & 72 & 72 & 0 & +0.026 & 0.000 & 57/72 \\
-$-$Forbid & 72 & 72 & 0 & +0.041 & 0.000 & 58/72 \\
-$-$Term & 72 & 71 & 1 & +0.009 & 0.000 & 59/72 \\
-1-Shot & 72 & 61 & 11 & +0.337 & 0.063 & 24/72 \\
+Full & 96 & 96 & 0 & 0.000 & 0.000 & 96/96 \\
+$-$Slip & 96 & 96 & 0 & +0.013 & 0.000 & 63/96 \\
+$-$Forbid & 96 & 96 & 0 & +0.015 & 0.000 & 74/96 \\
+$-$Term & 96 & 95 & 1 & $-$0.013 & 0.000 & 71/96 \\
+1-Shot & 96 & 82 & 14 & +0.305 & 0.031 & 34/96 \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-Within the OCD24 case-best view across the three clean backends, 1-Shot reaches or beats Full within 0.01~eV on only 8/24 cases, compared with 21/24 for $-$Slip, 22/24 for $-$Forbid, and 20/24 for $-$Term.
-The mean three-backend range is 0.201~eV for Full and 0.406~eV for 1-Shot over the 20 OCD24 cases with at least two successful one-shot backends.
-All 11 1-Shot failures and the single $-$Term failure are natural dissociation/reaction outcomes rather than external service or calculator errors.
+Within the paired success-only view across four backends, 1-Shot reaches Full within 0.01~eV on only 34/96 attempted backend--case pairs, compared with 63/96 for $-$Slip, 74/96 for $-$Forbid, and 71/96 for $-$Term.
+The mean four-backend range is 0.244~eV for Full and 0.396~eV for 1-Shot over the 21 OCD24 cases with at least two successful one-shot backends.
+All 14 1-Shot failures and the single $-$Term failure are natural dissociation/reaction outcomes rather than external service or calculator errors.
 
 \begin{table}[h]
 \centering
 \small
-\caption{rep50 Full-versus-1-Shot summary on the three clean backends (GPT-5.4, Claude~Sonnet~4.6, Gemini~2.5~Pro). Positive $\Delta E = E_{\mathrm{1shot}} - E_{\mathrm{full}}$ means the iterative Full run is lower in energy. The Overall row aggregates all backend-case pairs where both variants succeed.}
-\label{tab:si-rep50-three-backend-summary}
+\caption{rep50 Full-versus-1-Shot summary across four LLM backends. Positive $\Delta E = E_{\mathrm{1shot}} - E_{\mathrm{full}}$ means the iterative Full run is lower in energy. Tie denotes $|\Delta E| \leq 0.01$~eV. The Overall row aggregates all backend-case pairs where both variants succeed.}
+\label{tab:si-rep50-four-backend-summary}
 \begin{tabular}{lrrrrrr}
 \toprule
 Backend & Paired successes & Mean $\Delta E$ & Median $\Delta E$ & Full lower & Tie & 1-Shot lower \\
@@ -201,7 +201,8 @@ Backend & Paired successes & Mean $\Delta E$ & Median $\Delta E$ & Full lower & 
 GPT-5.4 & 44 & +0.264 & 0.032 & 23 & 17 & 4 \\
 Claude & 45 & +0.357 & 0.035 & 26 & 19 & 0 \\
 Gemini & 43 & +0.414 & 0.113 & 28 & 11 & 4 \\
-Overall & 132 & +0.345 & 0.067 & 77 & 47 & 8 \\
+Grok-4 & 46 & +0.422 & 0.166 & 32 & 14 & 0 \\
+Overall & 178 & +0.364 & 0.072 & 109 & 61 & 8 \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -209,23 +210,22 @@ Overall & 132 & +0.345 & 0.067 & 77 & 47 & 8 \\
 \begin{table}[h]
 \centering
 \small
-\caption{rep50 success rates by surface family on the three clean backends.}
+\caption{rep50 success rates by surface family across four LLM backends.}
 \label{tab:si-rep50-family-success}
 \begin{tabular}{lrr}
 \toprule
 Surface family & Full success & 1-Shot success \\
 \midrule
-compound & 30/30 & 29/30 \\
-intermetallic & 117/117 & 103/117 \\
-monometallic & 1/3 & 0/3 \\
+compound & 40/40 & 38/40 \\
+intermetallic & 156/156 & 140/156 \\
+monometallic & 1/4 & 0/4 \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-Across the three clean backends, Full succeeds on 148/150 rep50 runs while 1-Shot succeeds on 132/150.
-In the case-best view, 48 cases have both a successful Full and a successful 1-Shot among the clean backends; over these 48 comparable cases, the mean and median one-shot-minus-full gap are +0.251 and 0.030~eV, respectively, with Full lower on 25 cases, ties on 20, and 1-Shot lower on only 3.
-Cases 025 and 043 are excluded from this case-best comparison because no clean-backend 1-Shot success is available.
-The Full three-backend agreement itself remains tight on rep50, with a mean range of 0.120~eV over the 49 cases having at least two successful Full runs.
+Across the four backends, Full succeeds on 197/200 rep50 runs while 1-Shot succeeds on 178/200.
+Across successful backend--case pairs, the mean and median one-shot-minus-full gaps are +0.364 and 0.072~eV, respectively, with Full lower on 109 paired comparisons, ties on 61, and 1-Shot lower on only 8.
+The Full four-backend agreement itself remains tight on rep50, with a mean range of 0.172~eV over the 49 cases having at least two successful Full runs.
 
 % ===== inlined from research/results/si4_ocd_gmae_ablation_statistics.tex =====
 \begin{table}[h]

@@ -289,45 +289,45 @@ These data support a concrete systems claim: the closed-loop architecture acts a
 \subsection{Independent validation on expanded OCD-GMAE chemistry}
 
 To test whether the CMU conclusions survive broader chemistry, we expanded the OCD-GMAE validation package from the original locked 10 cases to an audited 24-case set by combining the locked10 subset with an extra14 extension.
-The formal expanded analysis uses GPT-5.4, Claude~Sonnet~4.6, and Gemini~2.5~Pro only.
-Grok-4 extra14 is excluded from this frozen analysis because the batch was not a complete clean matrix at the analysis freeze owing to external service failures, not because of chemistry.
-We therefore report a 24-case, 3-backend failure-aware ablation matrix (360 attempts total), while retaining the original 10-case four-backend tables in the Supporting Information as the first complete-energy mechanism package.
+The formal expanded analysis now uses all four reasoning backends in the same 24-case, five-variant matrix (480 attempts total).
+External service failures are excluded at the raw-attempt audit stage; the retained matrix contains no external failures, and all reported failures are natural dissociation/reaction outcomes.
+The original 10-case four-backend tables are retained in the Supporting Information as the first complete-energy mechanism package.
 
 \begin{table}[t]
 \centering
 \scriptsize
-\caption{Expanded OCD24 five-variant ablation summary on the three clean backends (GPT-5.4, Claude~Sonnet~4.6, Gemini~2.5~Pro). The 24-case table combines the audited locked10 subset with the extra14 extension. Grok-4 is excluded because the extra14 batch was not a complete clean matrix at the analysis freeze owing to external service failures. $\Delta E = E_{\mathrm{variant}} - E_{\mathrm{full}}$ for the same backend and case; positive values mean worse adsorption energy than Full. Mean and median $\Delta E$ are computed over successful runs only.}
-\label{tab:ocd24-three-backend-summary}
+\caption{Expanded OCD24 five-variant ablation summary across four LLM backends. The 24-case table combines the audited locked10 subset with the extra14 extension. $\Delta E = E_{\mathrm{variant}} - E_{\mathrm{full}}$ for the same backend and case; positive values mean worse adsorption energy than Full. Mean and median $\Delta E$ are computed over successful runs only, while natural failures remain in the success-rate denominator.}
+\label{tab:ocd24-four-backend-summary}
 \begin{tabular}{lrrrrrr}
 \toprule
 Variant & Attempts & Successful & Mean $\Delta E$ (eV) & Median $\Delta E$ (eV) & Reach Full$+0.01$ & Success rate \\
 \midrule
-Full & 72 & 72 & +0.000 & 0.000 & 72/72 & 100.0\% \\
-$-$Slip & 72 & 72 & +0.026 & 0.000 & 57/72 & 100.0\% \\
-$-$Forbid & 72 & 72 & +0.041 & 0.000 & 58/72 & 100.0\% \\
-$-$Term & 72 & 71 & +0.009 & 0.000 & 59/72 & 98.6\% \\
-1-Shot & 72 & 61 & +0.337 & 0.063 & 24/72 & 84.7\% \\
+Full & 96 & 96 & +0.000 & 0.000 & 96/96 & 100.0\% \\
+$-$Slip & 96 & 96 & +0.013 & 0.000 & 63/96 & 100.0\% \\
+$-$Forbid & 96 & 96 & +0.015 & 0.000 & 74/96 & 100.0\% \\
+$-$Term & 96 & 95 & $-$0.013 & 0.000 & 71/96 & 99.0\% \\
+1-Shot & 96 & 82 & +0.305 & 0.031 & 34/96 & 85.4\% \\
 \bottomrule
 \end{tabular}
 \end{table}
 
 The closed-loop reliability signal persists on the expanded OCD24 set.
-Full succeeds on all 72/72 runs, while the open-loop 1-Shot control succeeds on only 61/72.
-The 11 1-Shot failures and the single $-$Term failure are all natural dissociation/reaction outcomes rather than external service or calculator errors.
-At the case-best level across the three clean backends, 1-Shot reaches or beats Full within 0.01~eV on only 8/24 cases, compared with 21/24 for $-$Slip, 22/24 for $-$Forbid, and 20/24 for $-$Term.
-Cross-backend agreement also improves under iteration: the mean three-backend range is 0.201~eV for Full but 0.406~eV for 1-Shot over the 20 OCD24 cases with at least two successful one-shot backends.
-Notably, $-$Forbid is slightly better than Full in the case-best success-only view (mean $\Delta E = -0.004$~eV), reinforcing the CMU observation that explicit guardrails can over-prune even when the full architecture remains the most reliable default.
+Full succeeds on all 96/96 runs, while the open-loop 1-Shot control succeeds on only 82/96.
+The 14 1-Shot failures and the single $-$Term failure are all natural dissociation/reaction outcomes rather than external service or calculator errors.
+In the paired success-only view, 1-Shot reaches Full within 0.01~eV on only 34/96 attempted backend--case pairs, compared with 63/96 for $-$Slip, 74/96 for $-$Forbid, and 71/96 for $-$Term.
+Cross-backend agreement also improves under iteration: the mean four-backend range is 0.244~eV for Full but 0.396~eV for 1-Shot over the 21 OCD24 cases with at least two successful one-shot backends.
+Notably, $-$Term is slightly better than Full in the success-only mean ($\Delta E = -0.013$~eV), reinforcing the CMU observation that guardrails and stopping rules can over-prune or stop early even when the full architecture remains the most reliable default.
 
 \subsection{Broader rep50 generalization favors iterative search}
 
 We then compared Full and 1-Shot on a broader 50-case representative slice of OCD-GMAE.
-Again, formal statistics use only GPT-5.4, Claude, and Gemini: the Grok-4 Full batch was not complete at the analysis freeze owing to external service failures and is excluded rather than counted as a scientific negative result.
+The clean four-backend matrix contains 400 attempts and no external failures; natural failures are retained in the success-rate denominator.
 
 \begin{table}[t]
 \centering
 \scriptsize
-\caption{rep50 Full-versus-1-Shot comparison on the three clean backends (GPT-5.4, Claude~Sonnet~4.6, Gemini~2.5~Pro). Positive $\Delta E = E_{\mathrm{1shot}} - E_{\mathrm{full}}$ means the iterative Full run is lower in energy.}
-\label{tab:rep50-three-backend-summary}
+\caption{rep50 Full-versus-1-Shot comparison across four LLM backends. Positive $\Delta E = E_{\mathrm{1shot}} - E_{\mathrm{full}}$ means the iterative Full run is lower in energy. Tie denotes $|\Delta E| \leq 0.01$~eV.}
+\label{tab:rep50-four-backend-summary}
 \begin{tabular}{lrrrrrr}
 \toprule
 Backend & Paired successes & Mean $\Delta E$ (eV) & Median $\Delta E$ (eV) & Full lower & Tie & 1-Shot lower \\
@@ -335,17 +335,16 @@ Backend & Paired successes & Mean $\Delta E$ (eV) & Median $\Delta E$ (eV) & Ful
 GPT-5.4 & 44 & +0.264 & 0.032 & 23 & 17 & 4 \\
 Claude & 45 & +0.357 & 0.035 & 26 & 19 & 0 \\
 Gemini & 43 & +0.414 & 0.113 & 28 & 11 & 4 \\
-Overall & 132 & +0.345 & 0.067 & 77 & 47 & 8 \\
+Grok-4 & 46 & +0.422 & 0.166 & 32 & 14 & 0 \\
+Overall & 178 & +0.364 & 0.072 & 109 & 61 & 8 \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-Across these three backends, Full succeeds on 148/150 runs while 1-Shot succeeds on 132/150.
-On backend-case pairs where both variants succeed, the mean one-shot-minus-full gap is +0.345~eV and the median is 0.067~eV, with Full lower on 77 paired comparisons and 1-Shot lower on only 8.
-In the case-best view across clean backends, Full remains lower on 25 of 48 comparable cases, 20 tie within 0.01~eV, and 1-Shot is lower on only 3; the mean and median case-best gaps are +0.251 and 0.030~eV, respectively.
-Cases~025 and~043 are excluded from this case-best comparison because no clean-backend 1-Shot success is available.
-The family breakdown shows that Full succeeds on 30/30 compound and 117/117 intermetallic runs, whereas 1-Shot drops to 29/30 and 103/117; the monometallic slice remains difficult for both (Full 1/3, 1-Shot 0/3).
-Finally, the Full three-backend agreement itself is tight on this broader chemistry set, with a mean range of 0.120~eV over the 49 rep50 cases having at least two successful Full backends.
+Across these four backends, Full succeeds on 197/200 runs while 1-Shot succeeds on 178/200.
+On backend-case pairs where both variants succeed, the mean one-shot-minus-full gap is +0.364~eV and the median is 0.072~eV, with Full lower on 109 paired comparisons and 1-Shot lower on only 8.
+The family breakdown shows that Full succeeds on 40/40 compound and 156/156 intermetallic runs, whereas 1-Shot drops to 38/40 and 140/156; the monometallic slice remains difficult for both (Full 1/4, 1-Shot 0/4).
+Finally, the Full four-backend agreement itself is tight on this broader chemistry set, with a mean range of 0.172~eV over the 49 rep50 cases having at least two successful Full backends.
 
 \subsection{Comparison with Adsorb-Agent under identical physics}
 
@@ -455,5 +454,5 @@ These shifts do not change the qualitative systems conclusion from the MACE-MP-0
 Taken together, these controls reveal that AdsMind's primary contribution is not deepest-basin discovery.
 Random sampling with 20 relaxations is competitive with AdsMind Full and reaches a lower raw mean energy before anomaly filtering; heuristic enumeration exposes additional low-energy basins but requires connectivity filtering before its raw wins can be interpreted chemically; Adsorb-Agent with $\sim$21 relaxations reaches deeper basins whenever the GPT-5.4 one-pass enumeration succeeds.
 In the GPT-5.4 matched-physics run, Adsorb-Agent is lower in energy on all 12 successful comparable cases, but fails on the remaining three.
-AdsMind's distinctive value is the combination of: (i) 100\% success for the Full variant on every completed CMU20 run (80/80) and every clean-backend OCD24 run (72/72), together with a 148/150 Full success rate on the broader rep50 slice; (ii) compute efficiency per backend---remaining competitive with random at $5\times$ less MACE-MP work per run and approaching heuristic at $6$--$25\times$ less; (iii) chemical interpretability via Slip detection, FORBID logic, and backend-convergent reasoning traces absent from brute-force methods; and (iv) iterative error recovery, which is a prerequisite for autonomous chemistry workflows where silent failures are unacceptable.
+AdsMind's distinctive value is the combination of: (i) 100\% success for the Full variant on every completed CMU20 run (80/80) and every four-backend OCD24 run (96/96), together with a 197/200 Full success rate on the broader rep50 slice; (ii) compute efficiency per backend---remaining competitive with random at $5\times$ less MACE-MP work per run and approaching heuristic at $6$--$25\times$ less; (iii) chemical interpretability via Slip detection, FORBID logic, and backend-convergent reasoning traces absent from brute-force methods; and (iv) iterative error recovery, which is a prerequisite for autonomous chemistry workflows where silent failures are unacceptable.
 A natural extension couples AdsMind's closed-loop error-recovery with broader initial sampling (multi-site LLM placement with parallel relaxation), which would combine the depth of enumeration with the reliability and interpretability of the closed-loop agent.
