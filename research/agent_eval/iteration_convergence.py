@@ -10,13 +10,23 @@ from typing import Any, Dict, List, Optional
 
 import numpy as np
 
-from research.agent_eval.common import resolve_repo_path
+
+ROOT = Path(__file__).resolve().parents[2]
+
+
+def resolve_repo_path(raw: str | Path) -> Path:
+    path = Path(raw)
+    return path if path.is_absolute() else ROOT / path
 
 
 def backend_label(path: Path) -> str:
     """Create a compact backend label from an ablation directory name."""
     name = path.name
     replacements = {
+        "cmu20_gemini_ablation_v1": "gemini",
+        "cmu20_grok4_ablation_v1": "xai",
+        "cmu20_openai_gpt54_ablation_v1": "openai_gpt54",
+        "cmu20_anthropic_sonnet46_ablation_v1": "anthropic_sonnet46",
         "gemini_ablation_v1": "gemini",
         "xai_ablation_v2": "xai",
         "openai_gpt54_ablation_v1": "openai_gpt54",

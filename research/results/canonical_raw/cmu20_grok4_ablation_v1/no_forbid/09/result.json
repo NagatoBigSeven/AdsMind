@@ -1,0 +1,270 @@
+{
+  "case_id": "09",
+  "case_metadata": {
+    "case_id": "09",
+    "slab_file": "benchmark_slabs/09_Pt_111.xyz",
+    "smiles": "[OH]",
+    "user_request": "Find the lowest-energy adsorption configuration for hydroxyl radical on the provided surface.",
+    "surface_family": "monometallic",
+    "adsorbate_name": "OH",
+    "miller_index": "(111)",
+    "reaction_class": "ORR",
+    "ablation_candidate": "TRUE",
+    "notes": "Monometallic ORR baseline; DFT handoff target"
+  },
+  "status": "success",
+  "best_energy_eV": -1.9739322662353516,
+  "iteration_count": 3,
+  "max_attempts": 5,
+  "final_site_type": "bridge",
+  "converged_tag": false,
+  "wall_clock_sec": 328.4143691249774,
+  "total_input_tokens": 21065,
+  "total_output_tokens": 6247,
+  "artifact_paths": {
+    "BEST_OH_bridge_E-1.974": "research/results/canonical_raw/cmu20_grok4_ablation_v1/no_forbid/09/artifacts/BEST_OH_bridge_E-1.974.xyz",
+    "BEST_OH_bridge_E-1.974.xyz": "research/results/canonical_raw/cmu20_grok4_ablation_v1/no_forbid/09/artifacts/BEST_OH_bridge_E-1.974.xyz",
+    "best_structure_file": "research/results/canonical_raw/cmu20_grok4_ablation_v1/no_forbid/09/artifacts/BEST_OH_ontop_E-1.801.xyz",
+    "BEST_OH_hollow_to_bridge_E-1.943": "research/results/canonical_raw/cmu20_grok4_ablation_v1/no_forbid/09/artifacts/BEST_OH_hollow_to_bridge_E-1.943.xyz",
+    "BEST_OH_hollow_to_bridge_E-1.943.xyz": "research/results/canonical_raw/cmu20_grok4_ablation_v1/no_forbid/09/artifacts/BEST_OH_hollow_to_bridge_E-1.943.xyz",
+    "BEST_OH_ontop_E-1.801": "research/results/canonical_raw/cmu20_grok4_ablation_v1/no_forbid/09/artifacts/BEST_OH_ontop_E-1.801.xyz",
+    "BEST_OH_ontop_E-1.801.xyz": "research/results/canonical_raw/cmu20_grok4_ablation_v1/no_forbid/09/artifacts/BEST_OH_ontop_E-1.801.xyz",
+    "conformers_[OH]": "research/results/canonical_raw/cmu20_grok4_ablation_v1/no_forbid/09/artifacts/conformers_[OH].traj",
+    "conformers_[OH].traj": "research/results/canonical_raw/cmu20_grok4_ablation_v1/no_forbid/09/artifacts/conformers_[OH].traj",
+    "final": "research/results/canonical_raw/cmu20_grok4_ablation_v1/no_forbid/09/artifacts/final.xyz",
+    "final.xyz": "research/results/canonical_raw/cmu20_grok4_ablation_v1/no_forbid/09/artifacts/final.xyz",
+    "relaxation": "research/results/canonical_raw/cmu20_grok4_ablation_v1/no_forbid/09/artifacts/relaxation.traj",
+    "relaxation.traj": "research/results/canonical_raw/cmu20_grok4_ablation_v1/no_forbid/09/artifacts/relaxation.traj",
+    "relaxation_trajectory_file": "research/results/canonical_raw/cmu20_grok4_ablation_v1/no_forbid/09/artifacts/relaxation.traj"
+  },
+  "best_result": {
+    "most_stable_energy_eV": -1.9739322662353516,
+    "analysis_json": {
+      "status": "success",
+      "message": "Most stable config adsorption energy: -1.9739 eV. Target Atom: O (from plan index 0, global index 54 in relaxed structure). -> Nearest: Pt (Index 51), Distance: 2.025 Å (Threshold: 2.929), Bound: True. Bonded Surface Atoms: Pt-2.025Å, Pt-2.034Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: False (Planned ['Pt', 'Pt'] -> Actual ['Pt', 'Pt']).",
+      "most_stable_energy_eV": -1.9739322662353516,
+      "target_adsorbate_atom": "O",
+      "target_adsorbate_atom_index": 54,
+      "bonded_surface_atoms": [
+        {
+          "symbol": "Pt",
+          "index": 51,
+          "distance": 2.025
+        },
+        {
+          "symbol": "Pt",
+          "index": 27,
+          "distance": 2.034
+        }
+      ],
+      "nearest_slab_atom": "Pt",
+      "nearest_slab_atom_index": 51,
+      "final_bond_distance_A": 2.025,
+      "estimated_covalent_cutoff_A": 2.222,
+      "is_covalently_bound": true,
+      "reaction_detected": false,
+      "is_dissociated": false,
+      "n_components": 1,
+      "bond_change_count": 0,
+      "site_analysis": {
+        "planned_site_type": "bridge",
+        "planned_connectivity": 2,
+        "actual_site_type": "bridge",
+        "actual_connectivity": 2,
+        "is_chemical_slip": false,
+        "planned_symbols": [
+          "Pt",
+          "Pt"
+        ],
+        "actual_symbols": [
+          "Pt",
+          "Pt"
+        ],
+        "site_fingerprint": "Pt51-Pt27"
+      },
+      "best_structure_file": "outputs/09-cff9389c/BEST_OH_bridge_E-1.974.xyz",
+      "generated_conformers_file": "outputs/09-cff9389c/conformers_[OH].traj",
+      "relaxation_trajectory_file": "outputs/09-cff9389c/final.xyz",
+      "session_id": "09-cff9389c"
+    },
+    "plan": {
+      "reasoning": "Step 0: SMILES Consistency Check. The SMILES is [OH], representing the hydroxyl radical. The provided heavy atom list shows index 0: O, SP3, degree 0, radical_electrons: 1. This matches the user request for hydroxyl radical. Degree 0 likely because only heavy atoms are listed, and H is attached but not counted. Hybridization SP3 is consistent. For ReactiveSpecies, selected binding atom index 0 has radical_electrons > 0.\nStep 1: Analyze Old Plans. History is None, so no previous attempts, successes, failures, or tags. No convergence signals. No unstable sites noted. Surface is homogeneous Pt, no heterogeneity issues.\nStep 2: Formulate New Plan. Since history is empty, propose the best initial plan. Goal is lowest adsorption energy. Based on expertise in heterogeneous catalysis, OH radical on Pt(111) prefers bridge site, with O binding to two Pt atoms. This is a new plan. Process has 5 attempt limit, so start systematically with likely lowest energy site.\nStep 3: Analyze Request. User's core intent is to find the lowest-energy adsorption configuration for the hydroxyl radical on the Pt(111) surface.\nStep 4: Analyze Adsorbate. SMILES [OH]: Hydroxyl radical, major functional group is OH with unpaired electron on O. Heavy atom: index 0 (O), SP3, radical on O. Binding through O (index 0).\nStep 5: Analyze Surface. Surface composition: ['Pt']. Available sites: ontop (Pt), bridge (Pt-Pt), hollow (Pt-Pt-Pt). Plan for existing site combinations.\nStep 6: Formulate Plan. Select bridge site for likely stability. adsorbate_binding_indices: [0] (O atom with radical). surface_binding_atoms: ['Pt', 'Pt'] for bridge. Use defaults for other parameters.",
+      "adsorbate_type": "ReactiveSpecies",
+      "solution": {
+        "action": "continue",
+        "site_type": "bridge",
+        "surface_binding_atoms": [
+          "Pt",
+          "Pt"
+        ],
+        "adsorbate_binding_indices": [
+          0
+        ],
+        "relax_top_n": 1,
+        "touch_sphere_size": 2,
+        "overlap_thr": 0.1,
+        "conformers_per_site_cap": 4
+      }
+    },
+    "result_type": "Perfect"
+  },
+  "last_analysis": {
+    "status": "success",
+    "message": "Most stable config adsorption energy: -1.8014 eV. Target Atom: O (from plan index 0, global index 54 in relaxed structure). -> Nearest: Pt (Index 39), Distance: 1.98 Å (Threshold: 2.929), Bound: True. Bonded Surface Atoms: Pt-1.98Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: False (Planned ['Pt'] -> Actual ['Pt']).",
+    "most_stable_energy_eV": -1.8013858795166016,
+    "target_adsorbate_atom": "O",
+    "target_adsorbate_atom_index": 54,
+    "bonded_surface_atoms": [
+      {
+        "symbol": "Pt",
+        "index": 39,
+        "distance": 1.98
+      }
+    ],
+    "nearest_slab_atom": "Pt",
+    "nearest_slab_atom_index": 39,
+    "final_bond_distance_A": 1.98,
+    "estimated_covalent_cutoff_A": 2.222,
+    "is_covalently_bound": true,
+    "reaction_detected": false,
+    "is_dissociated": false,
+    "n_components": 1,
+    "bond_change_count": 0,
+    "site_analysis": {
+      "planned_site_type": "ontop",
+      "planned_connectivity": 1,
+      "actual_site_type": "ontop",
+      "actual_connectivity": 1,
+      "is_chemical_slip": false,
+      "planned_symbols": [
+        "Pt"
+      ],
+      "actual_symbols": [
+        "Pt"
+      ],
+      "site_fingerprint": "Pt39"
+    },
+    "best_structure_file": "outputs/09-cff9389c/BEST_OH_ontop_E-1.801.xyz",
+    "generated_conformers_file": "outputs/09-cff9389c/conformers_[OH].traj",
+    "relaxation_trajectory_file": "outputs/09-cff9389c/final.xyz",
+    "session_id": "09-cff9389c"
+  },
+  "attempt_records": [
+    {
+      "attempt_index": 1,
+      "plan": {
+        "reasoning": "Step 0: SMILES Consistency Check. The SMILES is [OH], representing the hydroxyl radical. The provided heavy atom list shows index 0: O, SP3, degree 0, radical_electrons: 1. This matches the user request for hydroxyl radical. Degree 0 likely because only heavy atoms are listed, and H is attached but not counted. Hybridization SP3 is consistent. For ReactiveSpecies, selected binding atom index 0 has radical_electrons > 0.\nStep 1: Analyze Old Plans. History is None, so no previous attempts, successes, failures, or tags. No convergence signals. No unstable sites noted. Surface is homogeneous Pt, no heterogeneity issues.\nStep 2: Formulate New Plan. Since history is empty, propose the best initial plan. Goal is lowest adsorption energy. Based on expertise in heterogeneous catalysis, OH radical on Pt(111) prefers bridge site, with O binding to two Pt atoms. This is a new plan. Process has 5 attempt limit, so start systematically with likely lowest energy site.\nStep 3: Analyze Request. User's core intent is to find the lowest-energy adsorption configuration for the hydroxyl radical on the Pt(111) surface.\nStep 4: Analyze Adsorbate. SMILES [OH]: Hydroxyl radical, major functional group is OH with unpaired electron on O. Heavy atom: index 0 (O), SP3, radical on O. Binding through O (index 0).\nStep 5: Analyze Surface. Surface composition: ['Pt']. Available sites: ontop (Pt), bridge (Pt-Pt), hollow (Pt-Pt-Pt). Plan for existing site combinations.\nStep 6: Formulate Plan. Select bridge site for likely stability. adsorbate_binding_indices: [0] (O atom with radical). surface_binding_atoms: ['Pt', 'Pt'] for bridge. Use defaults for other parameters.",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "bridge",
+          "surface_binding_atoms": [
+            "Pt",
+            "Pt"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "bridge|Pt,Pt|0|ReactiveSpecies|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -1.9739322662353516,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": false,
+      "planned_site_type": "bridge",
+      "actual_site_type": "bridge",
+      "best_structure_file": "outputs/09-cff9389c/BEST_OH_bridge_E-1.974.xyz",
+      "generated_conformers_file": "outputs/09-cff9389c/conformers_[OH].traj",
+      "relaxation_trajectory_file": "outputs/09-cff9389c/final.xyz",
+      "message": "Most stable config adsorption energy: -1.9739 eV. Target Atom: O (from plan index 0, global index 54 in relaxed structure). -> Nearest: Pt (Index 51), Distance: 2.025 Å (Threshold: 2.929), Bound: True. Bonded Surface Atoms: Pt-2.025Å, Pt-2.034Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: False (Planned ['Pt', 'Pt'] -> Actual ['Pt', 'Pt']).",
+      "history_entry": "【✅ Perfect Adsorption】 bridge @ ['Pt', 'Pt'] (Index [0]) -> Site: bridge (Pt,Pt) [🌟 New Best] | E=-1.974 eV"
+    },
+    {
+      "attempt_index": 2,
+      "plan": {
+        "reasoning": "Step 0: SMILES Consistency Check. The SMILES is [OH], representing a hydroxyl radical. The provided heavy atom index list shows only index 0: O (SP3, degree 0, radical_electrons 1). This suggests binding via the oxygen atom at index 0, which has an unpaired electron, suitable for ReactiveSpecies. Note: Degree 0 is unusual for [OH] as O is typically bonded to H, but proceeding based on given data. No hybridization mismatch with user request.\nStep 1: Analyze Old Plans. History shows one successful attempt: bridge site with ['Pt', 'Pt'] and adsorbate index [0], energy -1.974 eV, marked as new best. No failures or slips mentioned. No convergence tags like [🔄 Converged to known best] or [⚠️ Energy Degenerate but Geometrically Distinct]. Ontop and hollow sites remain untested. Surface is pure Pt(111), so sites are homogeneous.\nStep 2: Formulate New Plan. To find the lowest energy configuration, test a different site from the history. Propose hollow site (Hollow-3: Pt-Pt-Pt) with binding via O (index 0), as it may offer lower energy for oxygen-containing species on Pt(111). This differs from the previous bridge plan. If this converges to the same as bridge, may consider termination later. Hard attempt limit is 5, one used, so continue systematically.\nStep 3: Analyze Request. User's intent is to find the lowest-energy adsorption configuration for hydroxyl radical on Pt(111) surface.\nStep 4: Analyze Adsorbate. SMILES [OH]: Hydroxyl radical with radical on O. Heavy atom: O at index 0 with unpaired electron. Suitable for monodentate adsorption via O.\nStep 5: Analyze Surface. Available sites: ontop (Pt), bridge (Pt-Pt), hollow (Pt-Pt-Pt). Pure Pt surface.\nStep 6: Formulate Plan. Select hollow site with three Pt atoms, binding via adsorbate index 0 (O). Use ReactiveSpecies for radical. Defaults for other parameters.",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "hollow",
+          "surface_binding_atoms": [
+            "Pt",
+            "Pt",
+            "Pt"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "hollow|Pt,Pt,Pt|0|ReactiveSpecies|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -1.9427433013916016,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": true,
+      "planned_site_type": "hollow",
+      "actual_site_type": "bridge",
+      "best_structure_file": "outputs/09-cff9389c/BEST_OH_hollow_to_bridge_E-1.943.xyz",
+      "generated_conformers_file": "outputs/09-cff9389c/conformers_[OH].traj",
+      "relaxation_trajectory_file": "outputs/09-cff9389c/final.xyz",
+      "message": "Most stable config adsorption energy: -1.9427 eV. Target Atom: O (from plan index 0, global index 54 in relaxed structure). -> Nearest: Pt (Index 33), Distance: 2.025 Å (Threshold: 2.929), Bound: True. Bonded Surface Atoms: Pt-2.025Å, Pt-2.026Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Pt', 'Pt', 'Pt'] -> Actual ['Pt', 'Pt']).",
+      "history_entry": "【✅ Perfect Adsorption】 hollow @ ['Pt', 'Pt', 'Pt'] (Index [0]) -> ⚠️【Unstable Site Warning】⚠️: Planned hollow (Pt-Pt-Pt) is unstable, adsorbate spontaneously slipped to bridge (Pt-Pt).This means Pt-Pt-Pt has insufficient affinity for this adsorbate. [⚠️ Energy Degenerate but Geometrically Distinct] | E=-1.943 eV"
+    },
+    {
+      "attempt_index": 3,
+      "plan": {
+        "reasoning": "Step 0: SMILES Consistency Check. The SMILES is [OH], representing the hydroxyl radical with the unpaired electron on oxygen (index 0, radical_electrons=1, SP3 hybridization). This matches the user description of 'hydroxyl radical'. No mismatch in hybridization or saturation.\nStep 1: Analyze Old Plans. History shows two attempts: (1) Successful adsorption at bridge site with surface_binding_atoms ['Pt', 'Pt'] (likely Index [0] refers to a specific site instance), resulting in bridge (Pt,Pt) with E=-1.974 eV, marked as new best. (2) Attempt at hollow site with ['Pt', 'Pt', 'Pt'] (Index [0]), but it was unstable and slipped to bridge (Pt-Pt), resulting in E=-1.943 eV, marked as energy degenerate but geometrically distinct. No bond changes or dissociations mentioned, so both are successes, but hollow is invalid/unstable as per learning conclusion. No [Converged to known best] tag, so continue. Ontop site has not been tested. Surface is pure Pt(111), no heterogeneity. Bridge is currently the best with lower energy. Hollow slipped to a distinct bridge-like site with slightly higher energy.\nStep 2: Formulate New Plan. Goal is lowest energy adsorption. Major sites are ontop, bridge, hollow. Bridge tested successfully, hollow unstable and slipped to bridge variant. Ontop remains untested and is a high-symmetry site. Propose testing ontop to systematically cover available sites. If ontop converges to existing or has higher energy, may terminate next. Process has hard limit of 5 attempts; 2 used, room for more.\nStep 3: Analyze Request. User's intent is to find the lowest-energy adsorption configuration of hydroxyl radical on Pt(111) surface.\nStep 4: Analyze Adsorbate. SMILES [OH] is hydroxyl radical, major functional group is O-H with radical on O. RDKit shows heavy atom at index 0 (O, SP3, radical_electrons=1). Binding should be via O (index 0) as it has the unpaired electron.\nStep 5: Analyze Surface. Available sites: ontop (Pt), bridge (Pt-Pt), hollow (Pt-Pt-Pt). Pure Pt surface.\nStep 6: Formulate Plan. Propose ontop site, binding via O (index 0) to single Pt. adsorbate_type='ReactiveSpecies' since it's a radical with unpaired electron on binding atom. This is different from history (bridge and hollow). Defaults for other parameters.",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "ontop",
+          "surface_binding_atoms": [
+            "Pt"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "ontop|Pt|0|ReactiveSpecies|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -1.8013858795166016,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": false,
+      "planned_site_type": "ontop",
+      "actual_site_type": "ontop",
+      "best_structure_file": "outputs/09-cff9389c/BEST_OH_ontop_E-1.801.xyz",
+      "generated_conformers_file": "outputs/09-cff9389c/conformers_[OH].traj",
+      "relaxation_trajectory_file": "outputs/09-cff9389c/final.xyz",
+      "message": "Most stable config adsorption energy: -1.8014 eV. Target Atom: O (from plan index 0, global index 54 in relaxed structure). -> Nearest: Pt (Index 39), Distance: 1.98 Å (Threshold: 2.929), Bound: True. Bonded Surface Atoms: Pt-1.98Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: False (Planned ['Pt'] -> Actual ['Pt']).",
+      "history_entry": "【✅ Perfect Adsorption】 ontop @ ['Pt'] (Index [0]) -> Site: ontop (Pt) | E=-1.801 eV"
+    }
+  ],
+  "history": [
+    "【✅ Perfect Adsorption】 bridge @ ['Pt', 'Pt'] (Index [0]) -> Site: bridge (Pt,Pt) [🌟 New Best] | E=-1.974 eV",
+    "【✅ Perfect Adsorption】 hollow @ ['Pt', 'Pt', 'Pt'] (Index [0]) -> ⚠️【Unstable Site Warning】⚠️: Planned hollow (Pt-Pt-Pt) is unstable, adsorbate spontaneously slipped to bridge (Pt-Pt).This means Pt-Pt-Pt has insufficient affinity for this adsorbate. [⚠️ Energy Degenerate but Geometrically Distinct] | E=-1.943 eV",
+    "【✅ Perfect Adsorption】 ontop @ ['Pt'] (Index [0]) -> Site: ontop (Pt) | E=-1.801 eV"
+  ],
+  "error": null,
+  "perfect_count": 3,
+  "dissociation_count": 0,
+  "rearrangement_count": 0,
+  "calc_failure_count": 0,
+  "chemical_slip_count": 1
+}

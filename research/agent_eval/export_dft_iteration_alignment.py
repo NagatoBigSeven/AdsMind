@@ -18,10 +18,13 @@ from typing import Any, Dict, Iterable, List, Optional, Tuple
 
 
 DEFAULT_RUNS = [
-    ("Gemini_2.5_Pro", "research/results/gemini_ablation_v1/full"),
-    ("GPT_5.4", "research/results/openai_gpt54_ablation_v1/full"),
-    ("Claude_Sonnet_4.6", "research/results/anthropic_sonnet46_ablation_v1/full"),
-    ("Grok_4", "research/results/xai_ablation_v2/full"),
+    ("Gemini_2.5_Pro", "research/results/canonical_raw/cmu20_gemini_ablation_v1/full"),
+    ("GPT_5.4", "research/results/canonical_raw/cmu20_openai_gpt54_ablation_v1/full"),
+    (
+        "Claude_Sonnet_4.6",
+        "research/results/canonical_raw/cmu20_anthropic_sonnet46_ablation_v1/full",
+    ),
+    ("Grok_4", "research/results/canonical_raw/cmu20_grok4_ablation_v1/full"),
 ]
 
 

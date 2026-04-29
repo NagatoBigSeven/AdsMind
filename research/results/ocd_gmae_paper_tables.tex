@@ -1,7 +1,7 @@
 % ============================================================
 % OCD-GMAE Independent Validation Paper Tables
 % 4-backend analysis: Gemini 2.5 Pro, Grok-4, GPT-5.4, Claude Sonnet 4.6
-% Gemini accessed via AiHubMix proxy; remaining three via direct API
+% Backend labels denote model families only; provider routes are not part of the scientific comparison.
 % Source artifacts:
 %   - research/results/ocd_gmae_gemini_ablation_v1/ablation_summary.csv
 %   - research/results/ocd_gmae_xai_grok4_ablation_v1/ablation_summary.csv
@@ -13,7 +13,7 @@
 \begin{table}[t]
 \centering
 \small
-\caption{Gemini~2.5~Pro ablation on 10 OCD-GMAE cases drawn from the Open Catalyst 2020 Dense dataset. Lower (more negative) adsorption energy is better; bold marks the best variant per case. Gemini was accessed via Google Vertex AI direct API.}
+\caption{Gemini~2.5~Pro ablation on 10 OCD-GMAE cases drawn from the Open Catalyst 2020 Dense dataset. Lower (more negative) adsorption energy is better; bold marks the best variant per case.}
 \label{tab:ocd-ablation-gemini}
 \begin{tabular}{lrrrrr}
 \toprule
@@ -105,7 +105,7 @@ Case & Full & $-$Slip & $-$Forbid & $-$Term & 1-Shot \\
 \end{tabular}
 \end{table}
 
-% Table: OCD-GMAE Cross-LLM Robustness (4-backend, Gemini via Vertex AI direct)
+% Table: OCD-GMAE Cross-LLM Robustness (4-backend)
 \begin{table}[t]
 \centering
 \caption{Cross-LLM robustness on the OCD-GMAE independent validation set (4~backends: Gemini~2.5~Pro, Grok-4, GPT-5.4, Claude). The four-backend range is max--min energy for the same case and variant.}

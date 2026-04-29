@@ -2,7 +2,8 @@
 
 This directory contains curated, paper-facing outputs for AdsMind experiments:
 summary CSVs, joined analysis tables, diagnostic JSON files, and LaTeX exports.
-Raw per-run payloads, logs, trajectories, and structures are intentionally left
+Canonical per-case `result.json` payloads are retained under `canonical_raw/`.
+Transient logs, trajectories, and generated structures are intentionally left
 out of the public release because they are regenerable from `research/agent_eval/`.
 
 For the Chinese extended guide, see [README_CN.md](README_CN.md). The Chinese
@@ -18,8 +19,8 @@ Read these before plotting:
 
 - In ablation CSVs, the one-step ablation variant is named `single_shot`, not `one_shot`.
 - Directories named `*_one_shot/` are independent one-shot runs; they are separate from the `single_shot` ablation variant.
-- `analysis/cross_llm_ablation_with_openai.csv` is a legacy/convenience table with 3 backends (`gemini`, `grok4`, `openai_gpt54`) × 5 cases × 5 variants = 75 rows. It is not the full 4-backend 15-case CMU ablation table.
-- For full CMU 4-backend 15-case ablation plots, concatenate the four per-backend `ablation_summary.csv` files listed below.
+- `analysis/cross_llm_ablation_with_openai.csv` is a legacy/convenience table with 3 backends (`gemini`, `grok4`, `openai_gpt54`) × 5 cases × 5 variants = 75 rows. It is not the full 4-backend 20-case CMU ablation table.
+- For full CMU 4-backend 20-case ablation plots, concatenate the four canonical per-backend `ablation_summary.csv` files listed below.
 - In `adsorbagent_mace_gpt54/comparison.csv`, `energy_diff = adsmind_best_energy - adsorbagent_best_energy`. Positive values mean AdsMind is higher energy and Adsorb-Agent is lower.
 - Several diagnostic JSON files are historical snapshots. Use the current CSVs as the authoritative plotting sources unless a JSON is explicitly called out below.
 
@@ -30,9 +31,9 @@ Read these before plotting:
 | Claim | Current source | Caveat |
 |---|---|---|
 | AdsMind reliability and search cost | `adsorbagent_mace_gpt54/comparison.csv` | AdsMind succeeds on 15/15 cases with fewer iterations/configurations; Adsorb-Agent is lower energy on the 12 comparable successful energy pairs in this file. |
-| Backend convergence | Four CMU per-backend `ablation_summary.csv` files; `paper_tables.tex` | `analysis/cross_llm_ablation_with_openai.csv` is not the full 4-backend 15-case source. |
+| Backend convergence | Four canonical CMU20 per-backend `ablation_summary.csv` files | `analysis/cross_llm_ablation_with_openai.csv` is not the full 4-backend 20-case source; regenerate LaTeX exports after CSV changes. |
 | OCD-GMAE generalisation | `ocd_gmae_ablation_multi_backend_final.csv`; four OCD-GMAE per-backend ablation CSVs | The wide table has been regenerated from the current per-backend CSVs. |
-| Mechanism ablation | `si4_ablation_statistics.tex`, `si4_ocd_gmae_ablation_statistics.tex`, per-backend ablation CSVs | The most stable effect is full vs `single_shot`; individual `no_slip` / `no_forbid` / `no_termination` effects are backend- and case-dependent. |
+| Mechanism ablation | Canonical per-backend ablation CSVs and regenerated SI tables | The most stable effect is full vs `single_shot`; individual `no_slip` / `no_forbid` / `no_termination` effects are backend- and case-dependent. |
 
 ---
 
@@ -69,23 +70,23 @@ Schema notes:
 
 Current file shape: 15 rows, 12 comparable successful energy pairs.
 
-### 2. CMU 4-backend × 15-case × 5-variant ablation
+### 2. CMU 4-backend × 20-case × 5-variant ablation
 
 ```python
 import pandas as pd
 
 sources = {
-    "gemini": "research/results/gemini_ablation_v1/ablation_summary.csv",
-    "grok4": "research/results/xai_ablation_v2/ablation_summary.csv",
-    "openai_gpt54": "research/results/openai_gpt54_ablation_v1/ablation_summary.csv",
-    "anthropic_claude": "research/results/anthropic_sonnet46_ablation_v1/ablation_summary.csv",
+    "gemini": "research/results/canonical_raw/cmu20_gemini_ablation_v1/ablation_summary.csv",
+    "grok4": "research/results/canonical_raw/cmu20_grok4_ablation_v1/ablation_summary.csv",
+    "openai_gpt54": "research/results/canonical_raw/cmu20_openai_gpt54_ablation_v1/ablation_summary.csv",
+    "anthropic_claude": "research/results/canonical_raw/cmu20_anthropic_sonnet46_ablation_v1/ablation_summary.csv",
 }
 
 ab = pd.concat(
     [pd.read_csv(path).assign(backend=backend) for backend, path in sources.items()],
     ignore_index=True,
 )
-print(ab.shape)  # (300, 12)
+print(ab.shape)  # (400, 12)
 
 heatmap = ab.pivot_table(
     index=["backend", "variant"],
@@ -136,7 +137,7 @@ Key columns:
 
 `analysis/cmu_benchmark_table.csv` is currently a CMU 20-case one-shot table
 with Gemini and Grok-4 columns only. Do not use it as the full CMU 4-backend
-15-case ablation table.
+20-case ablation table.
 
 ---
 
@@ -145,7 +146,7 @@ with Gemini and Grok-4 columns only. Do not use it as the full CMU 4-backend
 | Plot/table target | Recommended source |
 |---|---|
 | AdsMind vs Adsorb-Agent success, energy, and configuration counts | `adsorbagent_mace_gpt54/comparison.csv` |
-| CMU 4-backend × 5-variant heatmap/boxplot | Concatenate the four CMU per-backend `ablation_summary.csv` files |
+| CMU 4-backend × 5-variant heatmap/boxplot | Concatenate the four canonical CMU20 per-backend `ablation_summary.csv` files |
 | CMU one-shot backend range ranking | `analysis/cmu_one_shot_range_ranking_new_cases.csv` |
 | OCD-GMAE 4-backend overview | `ocd_gmae_ablation_multi_backend_final.csv` |
 | OCD-GMAE full vs single-shot range improvement | `ocd_gmae_ablation_final_vs_one_shot_4backend.csv` |
@@ -156,16 +157,16 @@ with Gemini and Grok-4 columns only. Do not use it as the full CMU 4-backend
 
 ---
 
-## CMU 15-case Ablation
+## CMU 20-case Ablation
 
 | Backend | File | Rows |
 |---|---|---:|
-| Gemini 2.5 Pro | `gemini_ablation_v1/ablation_summary.csv` | 75 |
-| Grok-4 | `xai_ablation_v2/ablation_summary.csv` | 75 |
-| GPT-5.4 | `openai_gpt54_ablation_v1/ablation_summary.csv` | 75 |
-| Claude Sonnet 4.6 | `anthropic_sonnet46_ablation_v1/ablation_summary.csv` | 75 |
+| Gemini 2.5 Pro | `canonical_raw/cmu20_gemini_ablation_v1/ablation_summary.csv` | 100 |
+| Grok-4 | `canonical_raw/cmu20_grok4_ablation_v1/ablation_summary.csv` | 100 |
+| GPT-5.4 | `canonical_raw/cmu20_openai_gpt54_ablation_v1/ablation_summary.csv` | 100 |
+| Claude Sonnet 4.6 | `canonical_raw/cmu20_anthropic_sonnet46_ablation_v1/ablation_summary.csv` | 100 |
 
-Each file has 15 cases × 5 variants:
+Each file has 20 cases × 5 variants:
 `full`, `no_slip`, `no_forbid`, `no_termination`, `single_shot`.
 
 Core columns: `case_id`, `variant`, `best_energy`, `delta_vs_full`,
@@ -196,14 +197,14 @@ Supplementary controls:
 
 ## OCD-GMAE
 
-### 10-case ablation
+### 24-case ablation
 
 | Backend | File |
 |---|---|
-| Gemini 2.5 Pro | `ocd_gmae_gemini_ablation_v2/ablation_summary.csv` |
-| Grok-4 | `ocd_gmae_xai_grok4_ablation_v1/ablation_summary.csv` |
-| GPT-5.4 | `ocd_gmae_openai_gpt54_ablation_v1/ablation_summary.csv` |
-| Claude Sonnet 4.6 | `ocd_gmae_anthropic_sonnet46_ablation_v1/ablation_summary.csv` |
+| Gemini 2.5 Pro | `canonical_raw/ocd24_gemini_ablation_v1/ablation_summary.csv` |
+| Grok-4 | `canonical_raw/ocd24_grok4_ablation_v1/ablation_summary.csv` |
+| GPT-5.4 | `canonical_raw/ocd24_openai_gpt54_ablation_v1/ablation_summary.csv` |
+| Claude Sonnet 4.6 | `canonical_raw/ocd24_anthropic_sonnet46_ablation_v1/ablation_summary.csv` |
 | Wide summary | `ocd_gmae_ablation_multi_backend_final.csv`, `ocd_gmae_ablation_multi_backend_final.json` |
 | Full vs single-shot | `ocd_gmae_ablation_final_vs_one_shot_4backend.csv` |
 
@@ -235,8 +236,8 @@ Supplementary controls:
 
 | Experiment | File |
 |---|---|
-| Random baseline | `random_baseline_n20/summary.csv`, `random_baseline_n20/summary.json` |
-| Heuristic baseline | `heuristic_baseline/summary.csv`, `heuristic_baseline/summary.json` |
+| Random baseline | `canonical_raw/cmu20_random_baseline_n20/summary.csv`, `canonical_raw/cmu20_random_baseline_n20/summary.json` |
+| Heuristic baseline | `canonical_raw/cmu20_heuristic_baseline/summary.csv`, `canonical_raw/cmu20_heuristic_baseline/summary.json` |
 | Multi-seed GPT-5.4 | `multiseed_gpt54/seed_{43,44,45,46}/ablation_summary.csv` |
 | MACE large | `mace_large_gpt54/ablation_summary.csv` |
 
@@ -246,10 +247,10 @@ Supplementary controls:
 
 | File | Notes |
 |---|---|
-| `paper_tables.tex` | CMU ablation, cross-LLM summary, key metrics, and H1 table. Regenerate after CSV changes. |
-| `ocd_gmae_paper_tables.tex` | OCD-GMAE paper tables. Consistent with the current per-backend CSVs and wide summary. |
-| `si4_ablation_statistics.tex` | CMU ablation statistics, consistent with `si4_ablation_statistics.json`. |
-| `si4_ocd_gmae_ablation_statistics.tex` | OCD-GMAE ablation statistics. |
+| `paper_tables.tex` | Legacy/generated CMU table export. Regenerate after CSV changes before using in manuscript. |
+| `ocd_gmae_paper_tables.tex` | Legacy/generated OCD-GMAE table export. Regenerate after CSV changes before using in manuscript. |
+| `si4_ablation_statistics.tex` | Legacy/generated CMU ablation statistics export. Regenerate after CSV changes before using in manuscript. |
+| `si4_ocd_gmae_ablation_statistics.tex` | Legacy/generated OCD-GMAE ablation statistics export. Regenerate after CSV changes before using in manuscript. |
 | `si6_cost_analysis.tex` | Cost analysis from `si6_cost_analysis.json`. |
 | `si_adsorbagent_comparison.tex` | AdsMind vs Adsorb-Agent comparison. |
 | `si_baselines_comparison.tex` | Baseline comparison. |
@@ -266,8 +267,8 @@ Supplementary controls:
 | `analysis/cross_llm_20case_with_openai.csv` / `.json` | 4-backend one-shot join. |
 | `analysis/cross_llm_20case_4backend.json` | One-shot summary snapshot. |
 | `analysis/cross_llm_ablation_with_openai.csv` / `.json` | 3-backend × 5-case × 5-variant legacy/convenience ablation join. |
-| `analysis/cross_llm_unified_range_table.csv` | Current unified range table for CMU 15-case and OCD-GMAE 10-case ablations. |
-| `analysis/cross_llm_unified_summary.json` | Current cross-LLM summary for CMU 15-case and OCD-GMAE 10-case ablations. |
+| `analysis/cross_llm_unified_range_table.csv` | Current unified range table for CMU20 and OCD-GMAE-24 ablations. |
+| `analysis/cross_llm_unified_summary.json` | Current cross-LLM summary for CMU20 and OCD-GMAE-24 ablations. |
 | `analysis/cmu_one_shot_range_ranking_new_cases.csv` / `.json` | CMU one-shot backend range ranking. |
 | `analysis/ocd_gmae_one_shot_range_ranking.csv` / `.json` | OCD-GMAE one-shot backend range ranking. |
 | `analysis/ocd_gmae_one_shot_top_10_case_ids.txt` | OCD-GMAE top-10 case IDs. |
@@ -284,21 +285,22 @@ Supplementary controls:
 
 | File | Caveat |
 |---|---|
-| `cross_llm_ablation_4backend.json` | 5-case snapshot, not the full 15-case ablation. |
+| `cross_llm_ablation_4backend.json` | 5-case snapshot, not the full 20-case ablation. |
 | `hypothesis_test.json` | Early H0/H1 record with a 5-case scope. |
 | `key_evaluation_metrics.json` | Early metric snapshot with `*_5case` fields. |
-| `si4_ablation_statistics.json` | CMU 15-case ablation statistics source. |
-| `si4_ocd_gmae_ablation_statistics.json` | OCD-GMAE 10-case statistics source. |
+| `si4_ablation_statistics.json` | CMU20 ablation statistics source. |
+| `si4_ocd_gmae_ablation_statistics.json` | OCD-GMAE-24 statistics source. |
 | `si6_cost_analysis.json` | Cost analysis source. |
 
 ---
 
 ## Public-release Slimming Notes
 
-The repository keeps paper-facing summary tables, joined analysis files, and
-LaTeX exports. Raw `result.json` payloads, agent logs, trajectories, and
-structures are excluded from the public tree; regenerate them through
-`research/agent_eval/` when a full audit trail is needed.
+The repository keeps paper-facing summary tables, joined analysis files, LaTeX
+exports, and canonical per-case `result.json` payloads. Agent logs,
+trajectories, and generated structures are excluded from the public tree;
+regenerate them through `research/agent_eval/` when a full audit trail is
+needed.
 
 On 2026-04-19, the following superseded, raw, or purely derived outputs were
 removed instead of archived in-tree:
@@ -306,8 +308,8 @@ removed instead of archived in-tree:
 - `analysis/cross_llm_20case.{csv,json}` was superseded by `analysis/cross_llm_20case_with_openai.{csv,json}`.
 - `analysis/cross_llm_ablation_comparison.{csv,json}` was superseded by `analysis/cross_llm_ablation_with_openai.{csv,json}`.
 - `analysis/cmu_one_shot_range_ranking.{csv,json}` was superseded by `analysis/cmu_one_shot_range_ranking_new_cases.{csv,json}`.
-- `ocd_gmae_gemini_ablation_v1/` was superseded by `ocd_gmae_gemini_ablation_v2/`.
-- Per-run `result.json`, logs, trajectories, and structures under `research/results/` were removed from the release tree.
+- Split CMU15+extra5 and OCD10+extra14 raw directories were merged into `canonical_raw/`.
+- Agent logs, trajectories, and generated structures under `research/results/` remain ignored.
 
 Artifact path columns in summary CSVs are provenance labels for local,
 regenerable files; they are not expected to resolve in a clean public checkout.

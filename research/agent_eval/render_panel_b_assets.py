@@ -35,13 +35,9 @@ OCD_REP50_MANIFEST = (
     ROOT / "research/agent_eval/manifests/ocd_gmae_rep50_manifest.csv"
 )
 
-CMU_MAIN_RESULT = ROOT / "research/results/openai_gpt54_ablation_v1/full"
-CMU_EXTRA5_RESULT = (
-    ROOT / "research/results/cmu_extra5_openai_gpt54_ablation_v1/full"
-)
+CMU_MAIN_RESULT = ROOT / "research/results/canonical_raw/cmu20_openai_gpt54_ablation_v1/full"
 OCD_REP50_RESULT = ROOT / "research/results/ocd_gmae_rep50_openai_gpt54_full_v1/full"
 
-CMU_EXTRA5 = {"03", "06", "07", "08", "11"}
 BACKEND_LABEL = "GPT-5.4"
 VARIANT_LABEL = "Full"
 CHECKPOINT_LABEL = "MACE-MP-0 small"
@@ -332,8 +328,7 @@ def cmu_rows() -> list[AssetRow]:
     rows = []
     for row in read_csv(CMU_MANIFEST):
         case_id = row["case_id"]
-        result_root = CMU_EXTRA5_RESULT if case_id in CMU_EXTRA5 else CMU_MAIN_RESULT
-        result_dir = result_root / case_id
+        result_dir = CMU_MAIN_RESULT / case_id
         surface = Path(row["slab_file"]).stem.removeprefix(f"{case_id}_")
         adsorbate = row["adsorbate_name"]
         count = formula_count(adsorbate)
@@ -411,7 +406,7 @@ def write_readme(manifest_rows: list[dict[str, str]], selected_count: int) -> No
                 "",
                 "Source convention:",
                 "",
-                f"- CMU20 thumbnails use {BACKEND_LABEL} {VARIANT_LABEL} relaxed structures from `openai_gpt54_ablation_v1/full` plus `cmu_extra5_openai_gpt54_ablation_v1/full`.",
+                f"- CMU20 thumbnails use {BACKEND_LABEL} {VARIANT_LABEL} relaxed structures from `canonical_raw/cmu20_openai_gpt54_ablation_v1/full`.",
                 f"- OCD-GMAE thumbnails use {BACKEND_LABEL} {VARIANT_LABEL} relaxed structures from `ocd_gmae_rep50_openai_gpt54_full_v1/full`.",
                 f"- Force field/checkpoint label for these rendered structures: {CHECKPOINT_LABEL}.",
                 "- Individual PNGs use transparent backgrounds.",
