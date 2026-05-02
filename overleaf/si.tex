@@ -166,7 +166,6 @@ The original locked10 four-backend OCD package is retained below as the first co
 The current formal-ready expansion uses 24 OCD cases across all four LLM backends.
 The 24-case formal table is assembled from the audited locked10 subset (003, 004, 005, 012, 013, 015, 016, 019, 023, 024) plus the extra14 extension (001, 002, 006, 007, 008, 009, 010, 011, 014, 017, 018, 020, 021, 022).
 For 1-Shot, the same locked10+extra14 partition is used intentionally to avoid pooling duplicate historical reruns.
-OCD24 and rep50 are independently selected OCD-GMAE subsets rather than nested subsets; they overlap on 12 source records, and case identifiers are local to each manifest.
 
 \begin{table}[h]
 \centering
@@ -193,7 +192,7 @@ All 14 1-Shot failures and the single $-$Term failure are natural dissociation/r
 \begin{table}[h]
 \centering
 \small
-\caption{Separately selected rep50 Full-versus-1-Shot summary across four LLM backends. Positive $\Delta E = E_{\mathrm{1shot}} - E_{\mathrm{full}}$ means the iterative Full run is lower in energy. Tie denotes $|\Delta E| \leq 0.01$~eV. The Overall row aggregates all backend-case pairs where both variants succeed.}
+\caption{rep50 Full-versus-1-Shot summary across four LLM backends. Positive $\Delta E = E_{\mathrm{1shot}} - E_{\mathrm{full}}$ means the iterative Full run is lower in energy. Tie denotes $|\Delta E| \leq 0.01$~eV. The Overall row aggregates all backend-case pairs where both variants succeed.}
 \label{tab:si-rep50-four-backend-summary}
 \begin{tabular}{lrrrrrr}
 \toprule
@@ -795,3 +794,4 @@ Case & Full & $-$Slip & $-$Forbid & $-$Term & 1-Shot \\
 \bibliography{refs}
 
 \end{document}
+
