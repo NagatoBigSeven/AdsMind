@@ -33,10 +33,10 @@ All delta distributions are success-only. Natural failures are not imputed as ze
 From the repository root:
 
 ```bash
-python research/results/plotting/figure2_ablation/scripts/plot_figure2_ablation.py
+python research/figures/figure2_ablation/scripts/plot_figure2_ablation.py
 ```
 
-The script writes draft figures to `research/results/plotting/figure2_ablation/output/`.
+The script writes draft figures to `research/figures/figure2_ablation/output/`.
 These are not intended to override the final designed figure; they make the plotting inputs and conventions reproducible.
 
 The OCD24 and rep50 panels contain a small number of large positive outliers

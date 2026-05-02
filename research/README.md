@@ -12,13 +12,17 @@ downloaded PDFs, or private meeting notes here. Keep public research outputs in
 
 - `agent_eval/`: reproducible benchmark runners, locked manifests, and frozen
   experiment configs.
+- `figures/`: canonical paper figure inputs, plotting scripts, selected draft
+  outputs, and structure-rendering style references.
 - `results/`: curated paper-facing summaries, joined analysis tables, and
   LaTeX table exports. Start from `results/README.md` before plotting.
-- `images/`: generated paper figures, if present locally.
+- `images/`: legacy generated paper figures, if present locally.
 
 ## Scripts
 
 - `generate_figures.py`: generates paper figures under `research/images/`
+- `figures/figure2_ablation/scripts/plot_figure2_ablation.py`: regenerates the
+  current ablation draft figure from curated CSV inputs.
 - `generate_slabs.py`: fetches benchmark slabs for the research dataset
 
 ## Dependencies

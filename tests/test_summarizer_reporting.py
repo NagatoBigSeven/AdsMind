@@ -13,6 +13,7 @@ from adsmind.tools.visualization import (
     normalize_render_style,
     render_best_structure_blender,
     render_best_structure_matplotlib,
+    render_best_structure_ovito,
     render_best_structure_png,
 )
 
@@ -69,10 +70,14 @@ class TestSummarizerReporting(unittest.TestCase):
             self.assertEqual(normalize_render_style(), "ballstick")
         with patch.dict("os.environ", {"ADSMIND_VIS_RENDER_STYLE": "space_fill"}):
             self.assertEqual(normalize_render_style(), "spacefill")
-        with patch.dict("os.environ", {"ADSMIND_VIS_RENDER_STYLE": "unknown"}):
+        with patch.dict("os.environ", {"ADSMIND_VIS_RENDER_STYLE": "ovito"}):
             self.assertEqual(normalize_render_style(), "ovito")
+        with patch.dict("os.environ", {"ADSMIND_VIS_RENDER_STYLE": "catdt"}):
+            self.assertEqual(normalize_render_style(), "panelb")
+        with patch.dict("os.environ", {"ADSMIND_VIS_RENDER_STYLE": "unknown"}):
+            self.assertEqual(normalize_render_style(), "panelb")
 
-    def test_ovito_style_infers_bonds(self):
+    def test_only_ballstick_style_infers_bonds(self):
         symbols = ["Pt", "Pt", "H"]
         coords = np.array(
             [
@@ -83,8 +88,35 @@ class TestSummarizerReporting(unittest.TestCase):
             dtype=float,
         )
 
-        self.assertGreaterEqual(len(infer_bonds(symbols, coords, style="ovito")), 1)
+        self.assertGreaterEqual(len(infer_bonds(symbols, coords, style="ballstick")), 1)
+        self.assertEqual(infer_bonds(symbols, coords, style="panelb"), [])
+        self.assertEqual(infer_bonds(symbols, coords, style="ovito"), [])
         self.assertEqual(infer_bonds(symbols, coords, style="spacefill"), [])
+
+    def test_ovito_style_tries_native_renderer_then_panelb_fallback(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            root = Path(tmpdir)
+            xyz = root / "best.xyz"
+            xyz.write_text(
+                "3\nfixture\n"
+                "Pt 0.0 0.0 0.0\n"
+                "Pt 2.7 0.0 0.0\n"
+                "H 1.35 0.0 1.05\n",
+                encoding="utf-8",
+            )
+            out = root / "best.png"
+
+            with patch.dict("os.environ", {"ADSMIND_VIS_RENDER_STYLE": "ovito"}):
+                with patch("adsmind.tools.visualization.render_best_structure_ovito") as ovito:
+                    ovito.side_effect = RuntimeError("no ovito")
+                    with patch("adsmind.tools.visualization.render_best_structure_blender") as blender:
+                        blender.return_value = out
+
+                        result = render_best_structure_png(xyz, out)
+
+            self.assertEqual(result, out)
+            ovito.assert_called_once()
+            blender.assert_called_once()
 
     def test_blender_renderer_reports_missing_executable(self):
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -102,6 +134,22 @@ class TestSummarizerReporting(unittest.TestCase):
                     xyz,
                     root / "best.png",
                     blender_executable="/definitely/missing/blender",
+                )
+
+    def test_ovito_renderer_reports_missing_script_or_runtime(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            root = Path(tmpdir)
+            xyz = root / "best.xyz"
+            xyz.write_text(
+                "1\nfixture\n"
+                "H 0.0 0.0 0.0\n",
+                encoding="utf-8",
+            )
+            with self.assertRaises(RuntimeError):
+                render_best_structure_ovito(
+                    xyz,
+                    root / "best.png",
+                    ovito_python="/definitely/missing/python",
                 )
 
     def test_matplotlib_renderer_still_writes_nonempty_file(self):

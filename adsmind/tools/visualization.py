@@ -6,6 +6,7 @@ import json
 import os
 import shutil
 import subprocess
+import sys
 import tempfile
 from pathlib import Path
 from typing import Iterable
@@ -14,41 +15,46 @@ import numpy as np
 
 
 ELEMENT_COLORS = {
-    "H": "#f7f7f7",
-    "C": "#3b3b3b",
-    "N": "#2f56d2",
-    "O": "#e33d2e",
-    "S": "#f2c744",
-    "P": "#e36a1a",
-    "Mo": "#6f8ca7",
-    "Pd": "#c89133",
-    "Pt": "#c2c8d2",
-    "Cu": "#c8783e",
+    # CatDT / research/figures Panel-B palette. Keep these values stable so
+    # summarizer reports and manuscript figures do not drift in style.
+    "Pt": "#EFE4C4",
+    "Sn": "#506C7C",
+    "Mn": "#EBE0C0",
+    "Ni": "#3FBF44",
+    "Ga": "#3FBF44",
+    "In": "#B57878",
+    "Pd": "#7E7E8A",
+    "Cu": "#3FBF44",
+    "Zr": "#3FBF44",
+    "Ti": "#C8C8CC",
+    "Co": "#E89AAB",
+    "Fe": "#9F4F4F",
+    "Zn": "#7868A8",
+    "V": "#B0B0B4",
+    "Mo": "#5566AA",
+    "Rh": "#4B5C7A",
+    "As": "#B07FCC",
+    "Hf": "#B0C8D0",
+    "O": "#E03030",
+    "N": "#3868D8",
+    "C": "#383838",
+    "H": "#F0F0F0",
+    # Extra elements observed in OCD-GMAE/CMU runs. These are subdued fallbacks
+    # rather than a separate manuscript palette.
+    "S": "#F2C744",
+    "P": "#E36A1A",
     "Ag": "#c9c9c9",
     "Au": "#d3a526",
     "Ru": "#6d7a8b",
-    "Rh": "#7a89a6",
-    "Co": "#5378b8",
-    "Ni": "#5c9a73",
-    "Fe": "#a56b4f",
-    "Mn": "#9a78b5",
     "Cr": "#70876a",
-    "V": "#80935c",
-    "Ti": "#9aa0a6",
-    "Zr": "#8ca7aa",
-    "Hf": "#6e8f9b",
     "Ta": "#668099",
     "W": "#536a83",
     "Re": "#6a7890",
     "Al": "#b5bec8",
-    "Ga": "#a7a0c0",
-    "In": "#9aa9c9",
     "Tl": "#8d91a6",
     "Bi": "#9c88a8",
     "Pb": "#7c8297",
-    "Sn": "#9ba3a7",
     "Sb": "#9c8794",
-    "As": "#a37864",
     "Se": "#d4934b",
     "Te": "#b58a55",
     "Si": "#c3a36c",
@@ -133,7 +139,9 @@ COVALENT_RADII = {
 }
 
 DEFAULT_COVALENT_RADIUS = 1.35
-VALID_RENDER_STYLES = {"ovito", "ballstick", "spacefill"}
+PANELB_RADIUS_SCALE = 0.85
+H_DISPLAY_RADIUS = 0.55
+VALID_RENDER_STYLES = {"panelb", "ovito", "ballstick", "spacefill"}
 
 BLENDER_RENDER_SCRIPT = r"""
 import json
@@ -154,29 +162,58 @@ def load_payload() -> dict:
 
 def hex_to_rgba(value: str) -> tuple[float, float, float, float]:
     value = value.strip().lstrip("#")
+    r, g, b = (int(value[i:i+2], 16) / 255.0 for i in (0, 2, 4))
+
+    def srgb_to_linear(channel: float) -> float:
+        if channel <= 0.04045:
+            return channel / 12.92
+        return ((channel + 0.055) / 1.055) ** 2.4
+
     return (
-        int(value[0:2], 16) / 255.0,
-        int(value[2:4], 16) / 255.0,
-        int(value[4:6], 16) / 255.0,
+        srgb_to_linear(r),
+        srgb_to_linear(g),
+        srgb_to_linear(b),
         1.0,
     )
 
 
-def display_rgba(value: str) -> tuple[float, float, float, float]:
-    r, g, b, a = hex_to_rgba(value)
-    return (
-        min(1.0, r * 1.28 + 0.06),
-        min(1.0, g * 1.28 + 0.06),
-        min(1.0, b * 1.28 + 0.06),
-        a,
-    )
+def _principled_bsdf(mat):
+    return next(node for node in mat.node_tree.nodes if node.type == "BSDF_PRINCIPLED")
+
+
+def make_material(symbol: str, color_hex: str):
+    mat = bpy.data.materials.new(f"mat_{symbol}")
+    mat.use_nodes = True
+    nodes = mat.node_tree.nodes
+    links = mat.node_tree.links
+    bsdf = _principled_bsdf(mat)
+    bsdf.inputs["Roughness"].default_value = 0.25
+    if "Metallic" in bsdf.inputs:
+        bsdf.inputs["Metallic"].default_value = 0.0
+
+    if symbol == "H":
+        fresnel = nodes.new("ShaderNodeFresnel")
+        fresnel.inputs["IOR"].default_value = 1.6
+        multiply = nodes.new("ShaderNodeMath")
+        multiply.operation = "MULTIPLY"
+        multiply.inputs[1].default_value = 0.85
+        mix = nodes.new("ShaderNodeMixRGB")
+        mix.blend_type = "MIX"
+        mix.inputs["Color1"].default_value = hex_to_rgba(color_hex)
+        mix.inputs["Color2"].default_value = (0.0, 0.0, 0.0, 1.0)
+        links.new(fresnel.outputs["Fac"], multiply.inputs[0])
+        links.new(multiply.outputs["Value"], mix.inputs["Fac"])
+        links.new(mix.outputs["Color"], bsdf.inputs["Base Color"])
+    else:
+        bsdf.inputs["Base Color"].default_value = hex_to_rgba(color_hex)
+    return mat
 
 
 payload = load_payload()
 atoms = payload["atoms"]
 bonds = payload.get("bonds", [])
 output = payload["output"]
-style = payload.get("style", "ovito")
+style = payload.get("style", "panelb")
 draw_bonds = bool(payload.get("draw_bonds", True))
 bond_radius = float(payload.get("bond_radius", 0.038))
 
@@ -185,17 +222,25 @@ bpy.ops.object.delete()
 
 scene = bpy.context.scene
 scene.render.engine = "CYCLES"
-scene.cycles.samples = 128
+scene.cycles.samples = int(payload.get("samples", 256))
 scene.cycles.use_denoising = True
+try:
+    scene.cycles.denoiser = "OPENIMAGEDENOISE"
+except Exception:
+    pass
 scene.render.film_transparent = True
-scene.render.resolution_x = int(payload.get("resolution", 1200))
-scene.render.resolution_y = int(payload.get("resolution", 1200))
+scene.render.resolution_x = int(payload.get("resolution", 1024))
+scene.render.resolution_y = int(payload.get("resolution", 1024))
+scene.render.resolution_percentage = 100
+scene.render.image_settings.file_format = "PNG"
+scene.render.image_settings.color_mode = "RGBA"
+scene.render.image_settings.color_depth = "8"
 try:
     scene.view_settings.view_transform = "Standard"
     scene.view_settings.look = "None"
 except TypeError:
     pass
-scene.view_settings.exposure = 0.35
+scene.view_settings.exposure = 0.0
 scene.view_settings.gamma = 1
 
 materials = {}
@@ -205,16 +250,7 @@ for atom in atoms:
     coord = Vector(atom["coord"]) - center
     symbol = atom["symbol"]
     if symbol not in materials:
-        mat = bpy.data.materials.new(f"mat_{symbol}")
-        mat.use_nodes = True
-        bsdf = mat.node_tree.nodes.get("Principled BSDF")
-        color = display_rgba(atom["color"])
-        bsdf.inputs["Base Color"].default_value = color
-        bsdf.inputs["Roughness"].default_value = 0.42
-        bsdf.inputs["Metallic"].default_value = 0.0
-        bsdf.inputs["Emission Color"].default_value = color
-        bsdf.inputs["Emission Strength"].default_value = 0.18
-        materials[symbol] = mat
+        materials[symbol] = make_material(symbol, atom["color"])
     bpy.ops.mesh.primitive_uv_sphere_add(
         segments=48,
         ring_count=24,
@@ -258,37 +294,50 @@ if draw_bonds and bonds:
 xs = [float(v.x - center.x) for v in coords]
 ys = [float(v.y - center.y) for v in coords]
 zs = [float(v.z - center.z) for v in coords]
-span = max(max(xs) - min(xs), max(ys) - min(ys), max(zs) - min(zs), 1.0)
+span = max(max(xs) - min(xs), max(ys) - min(ys), max(zs) - min(zs), 5.0)
 
-bpy.ops.object.light_add(type="AREA", location=(0.2 * span, -0.9 * span, 2.25 * span))
+bpy.ops.object.light_add(type="AREA", location=(-span, -span * 1.2, span * 1.5))
 key = bpy.context.object
 key.name = "Key_Area_Light"
-key.data.energy = 700
-key.data.size = 5.0
+key.data.energy = 2000
+key.data.size = span * 3.0
 
-bpy.ops.object.light_add(type="AREA", location=(-1.4 * span, 1.1 * span, 1.15 * span))
+bpy.ops.object.light_add(type="AREA", location=(0, 0, span * 2.5))
 fill = bpy.context.object
 fill.name = "Fill_Area_Light"
-fill.data.energy = 180
-fill.data.size = 7.0
+fill.data.energy = 600
+fill.data.size = span * 4.0
 
-bpy.ops.object.light_add(type="AREA", location=(1.1 * span, 1.0 * span, 1.6 * span))
-rim = bpy.context.object
-rim.name = "Rim_Area_Light"
-rim.data.energy = 120
-rim.data.size = 5.5
-
-bpy.ops.object.camera_add(location=(1.10 * span, -1.45 * span, 0.92 * span), rotation=(0, 0, 0))
+distance = span * 3.0
+cam_loc = Vector((distance * 0.55, -distance * 0.75, distance * 1.05))
+bpy.ops.object.camera_add(location=cam_loc, rotation=(0, 0, 0))
 camera = bpy.context.object
 direction = Vector((0, 0, 0)) - camera.location
 camera.rotation_euler = direction.to_track_quat("-Z", "Y").to_euler()
 camera.data.type = "ORTHO"
-camera.data.ortho_scale = span * 1.75
 scene.camera = camera
+bpy.context.view_layer.update()
+
+cam_matrix_inv = camera.matrix_world.inverted()
+max_x = max_y = 0.0
+max_radius = 0.0
+for atom in atoms:
+    local = cam_matrix_inv @ (Vector(atom["coord"]) - center)
+    max_x = max(max_x, abs(local.x))
+    max_y = max(max_y, abs(local.y))
+    max_radius = max(max_radius, float(atom["radius"]))
+half_extent = max(max_x, max_y) + max_radius
+camera.data.ortho_scale = 2.0 * half_extent * 1.12
 
 world = scene.world or bpy.data.worlds.new("World")
 scene.world = world
-world.color = (1.0, 1.0, 1.0)
+world.use_nodes = True
+bg = world.node_tree.nodes.get("Background")
+if bg:
+    bg.inputs["Color"].default_value = (1.0, 1.0, 1.0, 1.0)
+    bg.inputs["Strength"].default_value = 1.0
+else:
+    world.color = (1.0, 1.0, 1.0)
 
 Path(output).parent.mkdir(parents=True, exist_ok=True)
 scene.render.filepath = output
@@ -340,11 +389,17 @@ def _as_float_sequence(values: Iterable[object]) -> list[float]:
 
 def normalize_render_style(style: str | None = None) -> str:
     """Resolve the structure-rendering style requested by env or caller."""
-    requested = (style or os.environ.get("ADSMIND_VIS_RENDER_STYLE") or "ovito").strip().lower()
+    requested = (style or os.environ.get("ADSMIND_VIS_RENDER_STYLE") or "panelb").strip().lower()
     aliases = {
-        "default": "ovito",
-        "ovito-like": "ovito",
-        "ovito_like": "ovito",
+        "default": "panelb",
+        "blender": "panelb",
+        "catdt": "panelb",
+        "catdt-panel-b": "panelb",
+        "catdt_panel_b": "panelb",
+        "panel-b": "panelb",
+        "panel_b": "panelb",
+        "ovito-like": "ballstick",
+        "ovito_like": "ballstick",
         "ball-stick": "ballstick",
         "ball_and_stick": "ballstick",
         "ball-and-stick": "ballstick",
@@ -353,7 +408,7 @@ def normalize_render_style(style: str | None = None) -> str:
         "space-filling": "spacefill",
     }
     resolved = aliases.get(requested, requested)
-    return resolved if resolved in VALID_RENDER_STYLES else "ovito"
+    return resolved if resolved in VALID_RENDER_STYLES else "panelb"
 
 
 def covalent_radius(symbol: str) -> float:
@@ -363,9 +418,9 @@ def covalent_radius(symbol: str) -> float:
 
 def infer_bonds(symbols: list[str], coords: np.ndarray, *, style: str) -> list[dict[str, object]]:
     """Infer near-neighbour bonds for OVITO-like ball-stick snapshots."""
-    if style == "spacefill":
+    if style != "ballstick":
         return []
-    scale = 1.18 if style == "ovito" else 1.12
+    scale = 1.12
     max_distance = 3.05
     bonds: list[dict[str, object]] = []
     for i, symbol_i in enumerate(symbols):
@@ -392,12 +447,14 @@ def infer_bonds(symbols: list[str], coords: np.ndarray, *, style: str) -> list[d
 
 def display_radius(symbol: str, *, style: str) -> float:
     """Return a style-specific atomic display radius."""
-    base = ELEMENT_RADII.get(symbol, DEFAULT_METAL_RADIUS)
+    if symbol == "H" and style in {"panelb", "spacefill"}:
+        return H_DISPLAY_RADIUS
+    covalent = covalent_radius(symbol)
     if style == "spacefill":
-        return base * 1.25
+        return covalent * 0.95
     if style == "ballstick":
-        return base * 0.68
-    return base * 0.76
+        return max(ELEMENT_RADII.get(symbol, DEFAULT_METAL_RADIUS) * 0.68, 0.16)
+    return covalent * PANELB_RADIUS_SCALE
 
 
 def render_best_structure_png(
@@ -412,10 +469,104 @@ def render_best_structure_png(
     Blender is preferred for publication-facing reports. The matplotlib path is
     retained as a dependency-light fallback for headless benchmark machines.
     """
+    render_style = normalize_render_style()
+    if render_style == "ovito":
+        try:
+            return render_best_structure_ovito(xyz_path, out_path)
+        except Exception:
+            # OVITO is optional and can be brittle on headless machines; fall
+            # back to the deterministic Panel-B Blender style before matplotlib.
+            pass
     try:
-        return render_best_structure_blender(xyz_path, out_path)
+        return render_best_structure_blender(xyz_path, out_path, style=render_style)
     except Exception:
         return render_best_structure_matplotlib(xyz_path, out_path, elev=elev, azim=azim)
+
+
+def _repo_root() -> Path:
+    return Path(__file__).resolve().parents[2]
+
+
+def find_ovito_python(explicit_path: str | None = None) -> str | None:
+    """Locate a Python runtime capable of importing OVITO."""
+    if explicit_path:
+        if ("/" in explicit_path or "\\" in explicit_path) and not Path(explicit_path).exists():
+            return None
+        return explicit_path
+    candidates = [
+        os.environ.get("ADSMIND_OVITO_PYTHON"),
+        str(_repo_root() / ".venv-ovito" / "bin" / "python"),
+        shutil.which("ovitos"),
+        sys.executable,
+    ]
+    for candidate in candidates:
+        if not candidate:
+            continue
+        path = Path(candidate)
+        if ("/" in candidate or "\\" in candidate) and not path.exists():
+            continue
+        return candidate
+    return None
+
+
+def render_best_structure_ovito(
+    xyz_path: Path | str,
+    out_path: Path | str,
+    *,
+    ovito_python: str | None = None,
+    timeout: int | None = None,
+) -> Path:
+    """Render using the OVITO/CatDT helper under research/figures when available."""
+    script = _repo_root() / "research" / "figures" / "panel_b_ovito" / "scripts" / (
+        "catalyst_surface_visualizer.py"
+    )
+    if not script.exists():
+        raise RuntimeError(f"OVITO visualizer script not found: {script}")
+
+    python_exec = find_ovito_python(ovito_python)
+    if not python_exec:
+        raise RuntimeError("OVITO Python runtime not found")
+
+    output = Path(out_path)
+    output.parent.mkdir(parents=True, exist_ok=True)
+    command = [
+        python_exec,
+        str(script),
+        str(xyz_path),
+        "-o",
+        str(output),
+        "--renderer",
+        os.environ.get("ADSMIND_OVITO_RENDERER", "tachyon"),
+        "--quality",
+        os.environ.get("ADSMIND_OVITO_QUALITY", "high"),
+        "--elevation",
+        os.environ.get("ADSMIND_OVITO_ELEVATION", "30"),
+        "--azimuth",
+        os.environ.get("ADSMIND_OVITO_AZIMUTH", "45"),
+        "--scale",
+        os.environ.get("ADSMIND_OVITO_SCALE", "1.0"),
+        "--background",
+        os.environ.get("ADSMIND_OVITO_BACKGROUND", "white"),
+        "--color-scheme",
+        os.environ.get("ADSMIND_OVITO_COLOR_SCHEME", "jmol"),
+        "--no-expand",
+    ]
+    completed = subprocess.run(
+        command,
+        check=False,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.STDOUT,
+        text=True,
+        timeout=timeout or int(os.environ.get("ADSMIND_OVITO_TIMEOUT_SEC", "240")),
+    )
+    if completed.returncode != 0:
+        raise RuntimeError(
+            "OVITO render failed with exit code "
+            f"{completed.returncode}: {completed.stdout[-2000:]}"
+        )
+    if not output.exists() or output.stat().st_size == 0:
+        raise RuntimeError(f"OVITO did not create a nonempty PNG: {output}")
+    return output
 
 
 def render_best_structure_matplotlib(
@@ -524,7 +675,7 @@ def render_best_structure_blender(
     *,
     blender_executable: str | None = None,
     style: str | None = None,
-    timeout: int = 90,
+    timeout: int | None = None,
 ) -> Path:
     """Render a publication-style atomistic snapshot with headless Blender."""
     blender = find_blender_executable(blender_executable)
@@ -550,6 +701,7 @@ def render_best_structure_blender(
             }
         )
     bonds = infer_bonds(symbols, coords, style=render_style)
+    draw_bonds = render_style == "ballstick"
 
     output = Path(out_path)
     with tempfile.TemporaryDirectory(prefix="adsmind_blender_") as tmpdir:
@@ -562,10 +714,11 @@ def render_best_structure_blender(
                 {
                     "atoms": atoms,
                     "bonds": bonds,
-                    "draw_bonds": render_style != "spacefill",
-                    "bond_radius": 0.032 if render_style == "ballstick" else 0.040,
+                    "draw_bonds": draw_bonds,
+                    "bond_radius": 0.032,
                     "output": str(output),
-                    "resolution": 1200,
+                    "resolution": int(os.environ.get("ADSMIND_VIS_RESOLUTION", "1024")),
+                    "samples": int(os.environ.get("ADSMIND_VIS_SAMPLES", "256")),
                     "style": render_style,
                 }
             ),
@@ -586,7 +739,7 @@ def render_best_structure_blender(
             stdout=subprocess.PIPE,
             stderr=subprocess.STDOUT,
             text=True,
-            timeout=timeout,
+            timeout=timeout or int(os.environ.get("ADSMIND_BLENDER_TIMEOUT_SEC", "180")),
         )
         if completed.returncode != 0:
             raise RuntimeError(
