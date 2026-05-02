@@ -5,8 +5,12 @@ import unittest
 from pathlib import Path
 from unittest.mock import patch
 
+import numpy as np
+
 from adsmind.agent.reporting import write_summarizer_report
 from adsmind.tools.visualization import (
+    infer_bonds,
+    normalize_render_style,
     render_best_structure_blender,
     render_best_structure_matplotlib,
     render_best_structure_png,
@@ -59,6 +63,28 @@ class TestSummarizerReporting(unittest.TestCase):
             self.assertEqual(result, out)
             blender.assert_called_once()
             fallback.assert_called_once()
+
+    def test_render_style_env_aliases(self):
+        with patch.dict("os.environ", {"ADSMIND_VIS_RENDER_STYLE": "ball-and-stick"}):
+            self.assertEqual(normalize_render_style(), "ballstick")
+        with patch.dict("os.environ", {"ADSMIND_VIS_RENDER_STYLE": "space_fill"}):
+            self.assertEqual(normalize_render_style(), "spacefill")
+        with patch.dict("os.environ", {"ADSMIND_VIS_RENDER_STYLE": "unknown"}):
+            self.assertEqual(normalize_render_style(), "ovito")
+
+    def test_ovito_style_infers_bonds(self):
+        symbols = ["Pt", "Pt", "H"]
+        coords = np.array(
+            [
+                [0.0, 0.0, 0.0],
+                [2.7, 0.0, 0.0],
+                [1.35, 0.0, 1.05],
+            ],
+            dtype=float,
+        )
+
+        self.assertGreaterEqual(len(infer_bonds(symbols, coords, style="ovito")), 1)
+        self.assertEqual(infer_bonds(symbols, coords, style="spacefill"), [])
 
     def test_blender_renderer_reports_missing_executable(self):
         with tempfile.TemporaryDirectory() as tmpdir:

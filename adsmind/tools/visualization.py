@@ -83,6 +83,58 @@ ELEMENT_RADII = {
 
 DEFAULT_METAL_RADIUS = 0.46
 
+COVALENT_RADII = {
+    "H": 0.31,
+    "C": 0.76,
+    "N": 0.71,
+    "O": 0.66,
+    "S": 1.05,
+    "P": 1.07,
+    "Mo": 1.54,
+    "Pd": 1.39,
+    "Pt": 1.36,
+    "Cu": 1.32,
+    "Ag": 1.45,
+    "Au": 1.36,
+    "Ru": 1.46,
+    "Rh": 1.42,
+    "Co": 1.26,
+    "Ni": 1.24,
+    "Fe": 1.32,
+    "Mn": 1.39,
+    "Cr": 1.39,
+    "V": 1.53,
+    "Ti": 1.60,
+    "Zr": 1.75,
+    "Hf": 1.75,
+    "Ta": 1.70,
+    "W": 1.62,
+    "Re": 1.51,
+    "Al": 1.21,
+    "Ga": 1.22,
+    "In": 1.42,
+    "Tl": 1.45,
+    "Bi": 1.48,
+    "Pb": 1.46,
+    "Sn": 1.39,
+    "Sb": 1.39,
+    "As": 1.19,
+    "Se": 1.20,
+    "Te": 1.38,
+    "Si": 1.11,
+    "Ge": 1.20,
+    "Ca": 1.76,
+    "Sr": 1.95,
+    "Y": 1.90,
+    "Sc": 1.70,
+    "Na": 1.66,
+    "K": 2.03,
+    "Os": 1.44,
+}
+
+DEFAULT_COVALENT_RADIUS = 1.35
+VALID_RENDER_STYLES = {"ovito", "ballstick", "spacefill"}
+
 BLENDER_RENDER_SCRIPT = r"""
 import json
 import sys
@@ -122,7 +174,11 @@ def display_rgba(value: str) -> tuple[float, float, float, float]:
 
 payload = load_payload()
 atoms = payload["atoms"]
+bonds = payload.get("bonds", [])
 output = payload["output"]
+style = payload.get("style", "ovito")
+draw_bonds = bool(payload.get("draw_bonds", True))
+bond_radius = float(payload.get("bond_radius", 0.038))
 
 bpy.ops.object.select_all(action="SELECT")
 bpy.ops.object.delete()
@@ -169,6 +225,35 @@ for atom in atoms:
     obj.name = f"{symbol}_{atom['index']}"
     obj.data.materials.append(materials[symbol])
     bpy.ops.object.shade_smooth()
+
+if draw_bonds and bonds:
+    bond_mat = bpy.data.materials.new("mat_bond")
+    bond_mat.use_nodes = True
+    bond_bsdf = bond_mat.node_tree.nodes.get("Principled BSDF")
+    bond_bsdf.inputs["Base Color"].default_value = (0.50, 0.54, 0.56, 1.0)
+    bond_bsdf.inputs["Roughness"].default_value = 0.48
+    bond_bsdf.inputs["Metallic"].default_value = 0.0
+    bond_bsdf.inputs["Emission Color"].default_value = (0.50, 0.54, 0.56, 1.0)
+    bond_bsdf.inputs["Emission Strength"].default_value = 0.07
+    for bond in bonds:
+        start = Vector(bond["start"]) - center
+        end = Vector(bond["end"]) - center
+        mid = (start + end) / 2.0
+        direction = end - start
+        length = direction.length
+        if length <= 1e-6:
+            continue
+        bpy.ops.mesh.primitive_cylinder_add(
+            vertices=24,
+            radius=bond_radius,
+            depth=length,
+            location=mid,
+        )
+        cyl = bpy.context.object
+        cyl.name = f"bond_{bond['i']}_{bond['j']}"
+        cyl.rotation_euler = direction.to_track_quat("Z", "Y").to_euler()
+        cyl.data.materials.append(bond_mat)
+        bpy.ops.object.shade_smooth()
 
 xs = [float(v.x - center.x) for v in coords]
 ys = [float(v.y - center.y) for v in coords]
@@ -251,6 +336,68 @@ def _as_float_sequence(values: Iterable[object]) -> list[float]:
         except (TypeError, ValueError):
             continue
     return floats
+
+
+def normalize_render_style(style: str | None = None) -> str:
+    """Resolve the structure-rendering style requested by env or caller."""
+    requested = (style or os.environ.get("ADSMIND_VIS_RENDER_STYLE") or "ovito").strip().lower()
+    aliases = {
+        "default": "ovito",
+        "ovito-like": "ovito",
+        "ovito_like": "ovito",
+        "ball-stick": "ballstick",
+        "ball_and_stick": "ballstick",
+        "ball-and-stick": "ballstick",
+        "space-fill": "spacefill",
+        "space_fill": "spacefill",
+        "space-filling": "spacefill",
+    }
+    resolved = aliases.get(requested, requested)
+    return resolved if resolved in VALID_RENDER_STYLES else "ovito"
+
+
+def covalent_radius(symbol: str) -> float:
+    """Return a stable covalent radius estimate for bond inference."""
+    return COVALENT_RADII.get(symbol, DEFAULT_COVALENT_RADIUS)
+
+
+def infer_bonds(symbols: list[str], coords: np.ndarray, *, style: str) -> list[dict[str, object]]:
+    """Infer near-neighbour bonds for OVITO-like ball-stick snapshots."""
+    if style == "spacefill":
+        return []
+    scale = 1.18 if style == "ovito" else 1.12
+    max_distance = 3.05
+    bonds: list[dict[str, object]] = []
+    for i, symbol_i in enumerate(symbols):
+        for j in range(i + 1, len(symbols)):
+            symbol_j = symbols[j]
+            distance = float(np.linalg.norm(coords[i] - coords[j]))
+            if distance < 0.35 or distance > max_distance:
+                continue
+            threshold = min(
+                covalent_radius(symbol_i) + covalent_radius(symbol_j),
+                max_distance / scale,
+            )
+            if distance <= threshold * scale:
+                bonds.append(
+                    {
+                        "i": i,
+                        "j": j,
+                        "start": [float(v) for v in coords[i]],
+                        "end": [float(v) for v in coords[j]],
+                    }
+                )
+    return bonds
+
+
+def display_radius(symbol: str, *, style: str) -> float:
+    """Return a style-specific atomic display radius."""
+    base = ELEMENT_RADII.get(symbol, DEFAULT_METAL_RADIUS)
+    if style == "spacefill":
+        return base * 1.25
+    if style == "ballstick":
+        return base * 0.68
+    return base * 0.76
 
 
 def render_best_structure_png(
@@ -376,6 +523,7 @@ def render_best_structure_blender(
     out_path: Path | str,
     *,
     blender_executable: str | None = None,
+    style: str | None = None,
     timeout: int = 90,
 ) -> Path:
     """Render a publication-style atomistic snapshot with headless Blender."""
@@ -389,6 +537,7 @@ def render_best_structure_blender(
     if len(symbols) == 0:
         raise ValueError(f"Cannot render empty XYZ file: {xyz_path}")
 
+    render_style = normalize_render_style(style)
     atoms = []
     for index, (symbol, coord) in enumerate(zip(symbols, coords)):
         atoms.append(
@@ -397,9 +546,10 @@ def render_best_structure_blender(
                 "symbol": symbol,
                 "coord": [float(coord[0]), float(coord[1]), float(coord[2])],
                 "color": element_color(symbol),
-                "radius": ELEMENT_RADII.get(symbol, DEFAULT_METAL_RADIUS),
+                "radius": display_radius(symbol, style=render_style),
             }
         )
+    bonds = infer_bonds(symbols, coords, style=render_style)
 
     output = Path(out_path)
     with tempfile.TemporaryDirectory(prefix="adsmind_blender_") as tmpdir:
@@ -408,7 +558,17 @@ def render_best_structure_blender(
         payload_path = tmp / "payload.json"
         script_path.write_text(BLENDER_RENDER_SCRIPT, encoding="utf-8")
         payload_path.write_text(
-            json.dumps({"atoms": atoms, "output": str(output), "resolution": 1200}),
+            json.dumps(
+                {
+                    "atoms": atoms,
+                    "bonds": bonds,
+                    "draw_bonds": render_style != "spacefill",
+                    "bond_radius": 0.032 if render_style == "ballstick" else 0.040,
+                    "output": str(output),
+                    "resolution": 1200,
+                    "style": render_style,
+                }
+            ),
             encoding="utf-8",
         )
         output.parent.mkdir(parents=True, exist_ok=True)
