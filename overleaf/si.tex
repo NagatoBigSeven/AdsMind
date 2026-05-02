@@ -166,6 +166,7 @@ The original locked10 four-backend OCD package is retained below as the first co
 The current formal-ready expansion uses 24 OCD cases across all four LLM backends.
 The 24-case formal table is assembled from the audited locked10 subset (003, 004, 005, 012, 013, 015, 016, 019, 023, 024) plus the extra14 extension (001, 002, 006, 007, 008, 009, 010, 011, 014, 017, 018, 020, 021, 022).
 For 1-Shot, the same locked10+extra14 partition is used intentionally to avoid pooling duplicate historical reruns.
+OCD24 and rep50 are independently selected OCD-GMAE subsets rather than nested subsets; they overlap on 12 source records, and case identifiers are local to each manifest.
 
 \begin{table}[h]
 \centering
@@ -192,7 +193,7 @@ All 14 1-Shot failures and the single $-$Term failure are natural dissociation/r
 \begin{table}[h]
 \centering
 \small
-\caption{rep50 Full-versus-1-Shot summary across four LLM backends. Positive $\Delta E = E_{\mathrm{1shot}} - E_{\mathrm{full}}$ means the iterative Full run is lower in energy. Tie denotes $|\Delta E| \leq 0.01$~eV. The Overall row aggregates all backend-case pairs where both variants succeed.}
+\caption{Separately selected rep50 Full-versus-1-Shot summary across four LLM backends. Positive $\Delta E = E_{\mathrm{1shot}} - E_{\mathrm{full}}$ means the iterative Full run is lower in energy. Tie denotes $|\Delta E| \leq 0.01$~eV. The Overall row aggregates all backend-case pairs where both variants succeed.}
 \label{tab:si-rep50-four-backend-summary}
 \begin{tabular}{lrrrrrr}
 \toprule
@@ -659,6 +660,137 @@ Iteration & Gemini & Grok-4 & GPT-5.4 & Claude \\
 \end{tabular}
 \end{table}
 % ===== end inlined si_iteration_convergence =====
+
+
+
+
+
+
+
+% ===== inlined from research/results/paper_tables.tex =====
+% ============================================================
+% AdsMind Paper-Ready Tables (15-case CMU benchmark)
+% Regenerated from 4-backend × 15-case ablation matrices
+% ============================================================
+
+% SI Table: Gemini 15-case ablation energy matrix
+\begin{table}[h]
+\centering
+\small
+\caption{Gemini~2.5~Pro ablation on the 15 locked CMU benchmark cases. Lower (more negative) adsorption energy is better; bold marks the best variant per case.}
+\label{tab:si-ablation-gemini}
+\begin{tabular}{lrrrrr}
+\toprule
+Case & Full & $-$Slip & $-$Forbid & $-$Term & 1-Shot \\
+\midrule
+01 & \textbf{$-$3.632} & \textbf{$-$3.632} & \textbf{$-$3.632} & \textbf{$-$3.632} & $-$3.631 \\
+02 & \textbf{$-$4.766} & \textbf{$-$4.766} & \textbf{$-$4.766} & \textbf{$-$4.766} & \textbf{$-$4.766} \\
+04 & $-$2.060 & \textbf{$-$2.195} & $-$2.039 & $-$1.845 & $-$1.658 \\
+05 & \textbf{$-$2.962} & \textbf{$-$2.962} & \textbf{$-$2.962} & \textbf{$-$2.962} & $-$2.947 \\
+09 & \textbf{$-$1.974} & \textbf{$-$1.974} & \textbf{$-$1.974} & \textbf{$-$1.974} & $-$1.801 \\
+10 & \textbf{$-$2.718} & \textbf{$-$2.718} & \textbf{$-$2.718} & \textbf{$-$2.718} & $-$2.122 \\
+12 & \textbf{$-$2.351} & \textbf{$-$2.351} & \textbf{$-$2.351} & \textbf{$-$2.351} & $-$1.607 \\
+13 & \textbf{$-$2.825} & \textbf{$-$2.825} & \textbf{$-$2.825} & \textbf{$-$2.825} & $-$2.376 \\
+14 & \textbf{$-$3.617} & \textbf{$-$3.617} & \textbf{$-$3.617} & \textbf{$-$3.617} & \textbf{$-$3.617} \\
+15 & \textbf{$-$3.258} & \textbf{$-$3.258} & $-$2.964 & \textbf{$-$3.258} & $-$2.889 \\
+16 & \textbf{$-$4.663} & \textbf{$-$4.663} & \textbf{$-$4.663} & \textbf{$-$4.663} & $-$4.538 \\
+17 & \textbf{$-$3.222} & $-$3.064 & $-$3.064 & $-$3.064 & $-$2.773 \\
+18 & $-$2.779 & $-$2.779 & \textbf{$-$3.129} & \textbf{$-$3.129} & $-$2.418 \\
+19 & $-$3.841 & $-$3.841 & \textbf{$-$4.042} & $-$3.594 & $-$3.133 \\
+20 & $-$11.652 & \textbf{$-$11.830} & $-$11.652 & $-$11.652 & $-$10.604 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% SI Table: Grok-4 15-case ablation energy matrix
+\begin{table}[h]
+\centering
+\small
+\caption{Grok-4 ablation on the 15 locked CMU benchmark cases. Lower (more negative) adsorption energy is better; bold marks the best variant per case.}
+\label{tab:si-ablation-grok}
+\begin{tabular}{lrrrrr}
+\toprule
+Case & Full & $-$Slip & $-$Forbid & $-$Term & 1-Shot \\
+\midrule
+01 & \textbf{$-$3.632} & \textbf{$-$3.632} & \textbf{$-$3.632} & \textbf{$-$3.632} & $-$3.631 \\
+02 & \textbf{$-$4.766} & \textbf{$-$4.766} & $-$4.760 & \textbf{$-$4.766} & $-$4.150 \\
+04 & \textbf{$-$2.255} & $-$2.039 & $-$1.845 & \textbf{$-$2.255} & $-$1.658 \\
+05 & \textbf{$-$2.962} & \textbf{$-$2.962} & \textbf{$-$2.962} & \textbf{$-$2.962} & $-$2.947 \\
+09 & \textbf{$-$1.974} & \textbf{$-$1.974} & \textbf{$-$1.974} & \textbf{$-$1.974} & \textbf{$-$1.974} \\
+10 & \textbf{$-$2.718} & \textbf{$-$2.718} & \textbf{$-$2.718} & \textbf{$-$2.718} & $-$2.712 \\
+12 & \textbf{$-$2.351} & \textbf{$-$2.351} & \textbf{$-$2.351} & \textbf{$-$2.351} & $-$2.081 \\
+13 & \textbf{$-$2.825} & \textbf{$-$2.825} & \textbf{$-$2.825} & \textbf{$-$2.825} & $-$2.376 \\
+14 & \textbf{$-$3.617} & \textbf{$-$3.617} & \textbf{$-$3.617} & \textbf{$-$3.617} & $-$3.245 \\
+15 & \textbf{$-$3.258} & \textbf{$-$3.258} & \textbf{$-$3.258} & \textbf{$-$3.258} & $-$2.587 \\
+16 & \textbf{$-$4.663} & \textbf{$-$4.663} & \textbf{$-$4.663} & \textbf{$-$4.663} & $-$4.552 \\
+17 & $-$2.866 & \textbf{$-$3.146} & $-$3.064 & $-$3.064 & $-$3.066 \\
+18 & \textbf{$-$3.129} & $-$2.779 & \textbf{$-$3.129} & \textbf{$-$3.129} & $-$2.418 \\
+19 & \textbf{$-$4.045} & $-$3.594 & $-$3.594 & $-$4.027 & $-$3.594 \\
+20 & \textbf{$-$11.653} & \textbf{$-$11.653} & $-$11.652 & $-$11.652 & $-$10.603 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% SI Table: GPT-5.4 15-case ablation energy matrix
+\begin{table}[h]
+\centering
+\small
+\caption{GPT-5.4 ablation on the 15 locked CMU benchmark cases. Lower (more negative) adsorption energy is better; bold marks the best variant per case.}
+\label{tab:si-ablation-gpt54}
+\begin{tabular}{lrrrrr}
+\toprule
+Case & Full & $-$Slip & $-$Forbid & $-$Term & 1-Shot \\
+\midrule
+01 & $-$3.627 & $-$3.627 & $-$3.627 & \textbf{$-$3.630} & $-$3.557 \\
+02 & \textbf{$-$4.769} & $-$4.764 & \textbf{$-$4.769} & \textbf{$-$4.769} & $-$4.343 \\
+04 & \textbf{$-$2.255} & \textbf{$-$2.255} & \textbf{$-$2.255} & \textbf{$-$2.255} & $-$2.243 \\
+05 & \textbf{$-$2.962} & \textbf{$-$2.962} & \textbf{$-$2.962} & \textbf{$-$2.962} & $-$2.843 \\
+09 & \textbf{$-$1.991} & \textbf{$-$1.991} & \textbf{$-$1.991} & \textbf{$-$1.991} & \textbf{$-$1.991} \\
+10 & $-$2.710 & $-$2.710 & $-$2.710 & \textbf{$-$2.718} & \textbf{$-$2.718} \\
+12 & $-$2.081 & $-$2.081 & \textbf{$-$2.351} & \textbf{$-$2.351} & $-$2.081 \\
+13 & \textbf{$-$2.825} & \textbf{$-$2.825} & \textbf{$-$2.825} & \textbf{$-$2.825} & $-$2.808 \\
+14 & \textbf{$-$3.591} & $-$3.431 & \textbf{$-$3.591} & \textbf{$-$3.591} & $-$3.431 \\
+15 & $-$3.258 & $-$2.964 & \textbf{$-$3.385} & $-$3.258 & $-$2.964 \\
+16 & $-$4.272 & \textbf{$-$4.663} & \textbf{$-$4.663} & \textbf{$-$4.663} & \textbf{$-$4.663} \\
+17 & \textbf{$-$3.241} & \textbf{$-$3.241} & \textbf{$-$3.241} & \textbf{$-$3.241} & $-$2.692 \\
+18 & $-$2.724 & \textbf{$-$3.215} & \textbf{$-$3.215} & \textbf{$-$3.215} & $-$2.519 \\
+19 & $-$4.013 & $-$4.100 & \textbf{$-$4.149} & $-$4.013 & $-$4.013 \\
+20 & $-$11.652 & \textbf{$-$11.653} & $-$11.650 & $-$11.652 & $-$11.652 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% SI Table: Claude 15-case ablation energy matrix
+\begin{table}[h]
+\centering
+\small
+\caption{Claude~Sonnet~4.6 ablation on the 15 locked CMU benchmark cases. Lower (more negative) adsorption energy is better; bold marks the best variant per case.}
+\label{tab:si-ablation-claude}
+\begin{tabular}{lrrrrr}
+\toprule
+Case & Full & $-$Slip & $-$Forbid & $-$Term & 1-Shot \\
+\midrule
+01 & \textbf{$-$3.630} & \textbf{$-$3.630} & $-$3.624 & \textbf{$-$3.630} & $-$3.557 \\
+02 & \textbf{$-$4.769} & \textbf{$-$4.769} & \textbf{$-$4.769} & \textbf{$-$4.769} & $-$4.343 \\
+04 & \textbf{$-$2.285} & $-$2.283 & \textbf{$-$2.285} & $-$2.243 & $-$1.845 \\
+05 & \textbf{$-$2.962} & \textbf{$-$2.962} & \textbf{$-$2.962} & \textbf{$-$2.962} & \textbf{$-$2.962} \\
+09 & \textbf{$-$1.991} & \textbf{$-$1.991} & \textbf{$-$1.991} & \textbf{$-$1.991} & $-$1.804 \\
+10 & \textbf{$-$2.718} & \textbf{$-$2.718} & \textbf{$-$2.718} & \textbf{$-$2.718} & $-$2.710 \\
+12 & \textbf{$-$2.351} & \textbf{$-$2.351} & \textbf{$-$2.351} & \textbf{$-$2.351} & $-$2.081 \\
+13 & $-$2.825 & $-$2.825 & $-$2.825 & \textbf{$-$2.830} & $-$2.825 \\
+14 & $-$3.580 & \textbf{$-$3.591} & \textbf{$-$3.591} & \textbf{$-$3.591} & $-$3.453 \\
+15 & \textbf{$-$3.258} & \textbf{$-$3.258} & \textbf{$-$3.258} & \textbf{$-$3.258} & $-$2.767 \\
+16 & \textbf{$-$4.663} & $-$4.272 & \textbf{$-$4.663} & \textbf{$-$4.663} & \textbf{$-$4.663} \\
+17 & \textbf{$-$3.241} & \textbf{$-$3.241} & \textbf{$-$3.241} & \textbf{$-$3.241} & $-$2.692 \\
+18 & $-$2.724 & \textbf{$-$3.215} & $-$2.838 & \textbf{$-$3.215} & $-$2.519 \\
+19 & $-$4.013 & \textbf{$-$4.149} & \textbf{$-$4.149} & $-$4.013 & $-$4.013 \\
+20 & \textbf{$-$11.653} & $-$11.652 & $-$11.652 & $-$11.652 & $-$11.652 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+
 
 \bibliography{refs}
 

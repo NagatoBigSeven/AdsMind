@@ -16,10 +16,10 @@ Adsorb-Agent single-config control is useful as SI defense: it produces exactly 
 
 | Data directory | Scope | Complete use now? | Notes |
 |---|---:|---:|---|
-| `cmu_extra5_*_ablation_v1/full/` | 5 missing CMU cases × 4 backends × Full | yes | fills CMU20 Full only; non-Full variants still running remotely |
+| `canonical_raw/cmu20_*_ablation/full/` | CMU20 × 4 backends × Full | yes | extra five CMU cases have been merged into the canonical CMU20 ablation directories |
 | `random_baseline_cmu_extra5_n20/` | 5 missing CMU cases × 20 random poses | yes | completes CMU20 random when joined with `random_baseline_n20/` |
-| `mace_large_gpt54_cmu20_full_v1/` | CMU20 × GPT-5.4 Full × MACE-large | yes | force-field sensitivity, not primary benchmark |
-| `mace_large_gpt54_ocd_rep10_full_v1/` | 10 representative OCD-rep50 cases × GPT-5.4 Full × MACE-large | yes | 9/10 success; case 043 natural failure |
+| `canonical_raw/controls/mace_large_gpt54_cmu20_full/` | CMU20 × GPT-5.4 Full × MACE-large | yes | force-field sensitivity, not primary benchmark |
+| `canonical_raw/controls/mace_large_gpt54_ocd_rep10_full/` | 10 representative OCD-rep50 cases × GPT-5.4 Full × MACE-large | yes | 9/10 success; case 043 natural failure |
 | `adsorbagent_single_config_gpt54_cmu20/` | CMU20 single-config CatalystAIgent control | self-contained | 14/20 results; 6 no-selected-config cases |
 
 Generated analysis artifacts:

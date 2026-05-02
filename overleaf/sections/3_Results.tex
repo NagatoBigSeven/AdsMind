@@ -2,9 +2,16 @@
 
 \subsection{Controlled ablation on the CMU20 benchmark}
 
+\begin{figure}
+    \centering
+    \includegraphics[width=0.75\linewidth]{images/cmu20_llm_comparison_ablation.png}
+  \caption{Violin plot of the best energy of CMU20 cases in different settings of ablation and LLM backends. Each point shows the energy error between the ablation setting and the Full setting, representing an individual case of CMU20 under the corresponding setting.}
+  \label{fig:cmu20_violin}
+\end{figure}
+
 We evaluated the agent on the completed 20-case CMU benchmark, spanning H, NNH, OH, CH$_2$CH$_2$OH, OCHCH$_3$, and ONN(CH$_3$)$_2$ adsorption across increasingly difficult intermetallic and monometallic surfaces.
-For each case, we executed five runtime variants under a fixed MACE-MP-0 small CPU backend: \textit{Full}, \textit{$-$Slip}, \textit{$-$Forbid}, \textit{$-$Term}, and \textit{1-Shot}.
-Here \textit{$-$Slip} removes slip-conditioned guidance together with its associated FORBID constraint, \textit{$-$Forbid} keeps slip detection and history but removes the explicit ``do not retry this site'' instruction, \textit{$-$Term} disables convergence-based early stopping, and \textit{1-Shot} reduces the total budget to a single attempt.
+For each case, we executed five runtime variants under a fixed MACE-MP-0 small CPU backend~\cite{batatia2023foundation}: \textit{Full}, \textit{$-$Slip}, \textit{$-$Forbid}, \textit{$-$Term}, and \textit{1-Shot}.
+Here \textit{$-$Slip} removes slip-conditioned guidance together with its associated FORBID constraint. \textit{$-$Forbid} keeps slip detection and history but removes the explicit ``do not retry this site'' instruction. \textit{$-$Term} disables convergence-based early stopping, and \textit{1-Shot} reduces the total budget to a single attempt.
 The complete 20$\times$5 matrix was executed independently on four LLM backends---Gemini~2.5~Pro, Grok-4, GPT-5.4, and Claude~Sonnet~4.6---yielding 393 successful runs out of 400 attempts.
 
 \begin{table}[t]
@@ -57,127 +64,6 @@ Cases within 0.05~eV & 12/20 \\
 The detailed per-backend energy matrices and formal pairwise tests below preserve the original locked 15-case CMU subset used in the first complete-energy ablation package.
 We do not recompute ordinary 20-case Wilcoxon tests over the CMU20 1-Shot row because seven 1-Shot attempts are censored by natural dissociation/reaction failures; the completed CMU20 matrix is therefore summarized through success rates, failure audit, and success-conditioned energy deltas in the Supporting Information.
 
-% ===== inlined from research/results/paper_tables.tex =====
-% ============================================================
-% AdsMind Paper-Ready Tables (15-case CMU benchmark)
-% Regenerated from 4-backend × 15-case ablation matrices
-% ============================================================
-
-% SI Table: Gemini 15-case ablation energy matrix
-\begin{table}[h]
-\centering
-\small
-\caption{Gemini~2.5~Pro ablation on the 15 locked CMU benchmark cases. Lower (more negative) adsorption energy is better; bold marks the best variant per case.}
-\label{tab:si-ablation-gemini}
-\begin{tabular}{lrrrrr}
-\toprule
-Case & Full & $-$Slip & $-$Forbid & $-$Term & 1-Shot \\
-\midrule
-01 & \textbf{$-$3.632} & \textbf{$-$3.632} & \textbf{$-$3.632} & \textbf{$-$3.632} & $-$3.631 \\
-02 & \textbf{$-$4.766} & \textbf{$-$4.766} & \textbf{$-$4.766} & \textbf{$-$4.766} & \textbf{$-$4.766} \\
-04 & $-$2.060 & \textbf{$-$2.195} & $-$2.039 & $-$1.845 & $-$1.658 \\
-05 & \textbf{$-$2.962} & \textbf{$-$2.962} & \textbf{$-$2.962} & \textbf{$-$2.962} & $-$2.947 \\
-09 & \textbf{$-$1.974} & \textbf{$-$1.974} & \textbf{$-$1.974} & \textbf{$-$1.974} & $-$1.801 \\
-10 & \textbf{$-$2.718} & \textbf{$-$2.718} & \textbf{$-$2.718} & \textbf{$-$2.718} & $-$2.122 \\
-12 & \textbf{$-$2.351} & \textbf{$-$2.351} & \textbf{$-$2.351} & \textbf{$-$2.351} & $-$1.607 \\
-13 & \textbf{$-$2.825} & \textbf{$-$2.825} & \textbf{$-$2.825} & \textbf{$-$2.825} & $-$2.376 \\
-14 & \textbf{$-$3.617} & \textbf{$-$3.617} & \textbf{$-$3.617} & \textbf{$-$3.617} & \textbf{$-$3.617} \\
-15 & \textbf{$-$3.258} & \textbf{$-$3.258} & $-$2.964 & \textbf{$-$3.258} & $-$2.889 \\
-16 & \textbf{$-$4.663} & \textbf{$-$4.663} & \textbf{$-$4.663} & \textbf{$-$4.663} & $-$4.538 \\
-17 & \textbf{$-$3.222} & $-$3.064 & $-$3.064 & $-$3.064 & $-$2.773 \\
-18 & $-$2.779 & $-$2.779 & \textbf{$-$3.129} & \textbf{$-$3.129} & $-$2.418 \\
-19 & $-$3.841 & $-$3.841 & \textbf{$-$4.042} & $-$3.594 & $-$3.133 \\
-20 & $-$11.652 & \textbf{$-$11.830} & $-$11.652 & $-$11.652 & $-$10.604 \\
-\bottomrule
-\end{tabular}
-\end{table}
-
-% SI Table: Grok-4 15-case ablation energy matrix
-\begin{table}[h]
-\centering
-\small
-\caption{Grok-4 ablation on the 15 locked CMU benchmark cases. Lower (more negative) adsorption energy is better; bold marks the best variant per case.}
-\label{tab:si-ablation-grok}
-\begin{tabular}{lrrrrr}
-\toprule
-Case & Full & $-$Slip & $-$Forbid & $-$Term & 1-Shot \\
-\midrule
-01 & \textbf{$-$3.632} & \textbf{$-$3.632} & \textbf{$-$3.632} & \textbf{$-$3.632} & $-$3.631 \\
-02 & \textbf{$-$4.766} & \textbf{$-$4.766} & $-$4.760 & \textbf{$-$4.766} & $-$4.150 \\
-04 & \textbf{$-$2.255} & $-$2.039 & $-$1.845 & \textbf{$-$2.255} & $-$1.658 \\
-05 & \textbf{$-$2.962} & \textbf{$-$2.962} & \textbf{$-$2.962} & \textbf{$-$2.962} & $-$2.947 \\
-09 & \textbf{$-$1.974} & \textbf{$-$1.974} & \textbf{$-$1.974} & \textbf{$-$1.974} & \textbf{$-$1.974} \\
-10 & \textbf{$-$2.718} & \textbf{$-$2.718} & \textbf{$-$2.718} & \textbf{$-$2.718} & $-$2.712 \\
-12 & \textbf{$-$2.351} & \textbf{$-$2.351} & \textbf{$-$2.351} & \textbf{$-$2.351} & $-$2.081 \\
-13 & \textbf{$-$2.825} & \textbf{$-$2.825} & \textbf{$-$2.825} & \textbf{$-$2.825} & $-$2.376 \\
-14 & \textbf{$-$3.617} & \textbf{$-$3.617} & \textbf{$-$3.617} & \textbf{$-$3.617} & $-$3.245 \\
-15 & \textbf{$-$3.258} & \textbf{$-$3.258} & \textbf{$-$3.258} & \textbf{$-$3.258} & $-$2.587 \\
-16 & \textbf{$-$4.663} & \textbf{$-$4.663} & \textbf{$-$4.663} & \textbf{$-$4.663} & $-$4.552 \\
-17 & $-$2.866 & \textbf{$-$3.146} & $-$3.064 & $-$3.064 & $-$3.066 \\
-18 & \textbf{$-$3.129} & $-$2.779 & \textbf{$-$3.129} & \textbf{$-$3.129} & $-$2.418 \\
-19 & \textbf{$-$4.045} & $-$3.594 & $-$3.594 & $-$4.027 & $-$3.594 \\
-20 & \textbf{$-$11.653} & \textbf{$-$11.653} & $-$11.652 & $-$11.652 & $-$10.603 \\
-\bottomrule
-\end{tabular}
-\end{table}
-
-% SI Table: GPT-5.4 15-case ablation energy matrix
-\begin{table}[h]
-\centering
-\small
-\caption{GPT-5.4 ablation on the 15 locked CMU benchmark cases. Lower (more negative) adsorption energy is better; bold marks the best variant per case.}
-\label{tab:si-ablation-gpt54}
-\begin{tabular}{lrrrrr}
-\toprule
-Case & Full & $-$Slip & $-$Forbid & $-$Term & 1-Shot \\
-\midrule
-01 & $-$3.627 & $-$3.627 & $-$3.627 & \textbf{$-$3.630} & $-$3.557 \\
-02 & \textbf{$-$4.769} & $-$4.764 & \textbf{$-$4.769} & \textbf{$-$4.769} & $-$4.343 \\
-04 & \textbf{$-$2.255} & \textbf{$-$2.255} & \textbf{$-$2.255} & \textbf{$-$2.255} & $-$2.243 \\
-05 & \textbf{$-$2.962} & \textbf{$-$2.962} & \textbf{$-$2.962} & \textbf{$-$2.962} & $-$2.843 \\
-09 & \textbf{$-$1.991} & \textbf{$-$1.991} & \textbf{$-$1.991} & \textbf{$-$1.991} & \textbf{$-$1.991} \\
-10 & $-$2.710 & $-$2.710 & $-$2.710 & \textbf{$-$2.718} & \textbf{$-$2.718} \\
-12 & $-$2.081 & $-$2.081 & \textbf{$-$2.351} & \textbf{$-$2.351} & $-$2.081 \\
-13 & \textbf{$-$2.825} & \textbf{$-$2.825} & \textbf{$-$2.825} & \textbf{$-$2.825} & $-$2.808 \\
-14 & \textbf{$-$3.591} & $-$3.431 & \textbf{$-$3.591} & \textbf{$-$3.591} & $-$3.431 \\
-15 & $-$3.258 & $-$2.964 & \textbf{$-$3.385} & $-$3.258 & $-$2.964 \\
-16 & $-$4.272 & \textbf{$-$4.663} & \textbf{$-$4.663} & \textbf{$-$4.663} & \textbf{$-$4.663} \\
-17 & \textbf{$-$3.241} & \textbf{$-$3.241} & \textbf{$-$3.241} & \textbf{$-$3.241} & $-$2.692 \\
-18 & $-$2.724 & \textbf{$-$3.215} & \textbf{$-$3.215} & \textbf{$-$3.215} & $-$2.519 \\
-19 & $-$4.013 & $-$4.100 & \textbf{$-$4.149} & $-$4.013 & $-$4.013 \\
-20 & $-$11.652 & \textbf{$-$11.653} & $-$11.650 & $-$11.652 & $-$11.652 \\
-\bottomrule
-\end{tabular}
-\end{table}
-
-% SI Table: Claude 15-case ablation energy matrix
-\begin{table}[h]
-\centering
-\small
-\caption{Claude~Sonnet~4.6 ablation on the 15 locked CMU benchmark cases. Lower (more negative) adsorption energy is better; bold marks the best variant per case.}
-\label{tab:si-ablation-claude}
-\begin{tabular}{lrrrrr}
-\toprule
-Case & Full & $-$Slip & $-$Forbid & $-$Term & 1-Shot \\
-\midrule
-01 & \textbf{$-$3.630} & \textbf{$-$3.630} & $-$3.624 & \textbf{$-$3.630} & $-$3.557 \\
-02 & \textbf{$-$4.769} & \textbf{$-$4.769} & \textbf{$-$4.769} & \textbf{$-$4.769} & $-$4.343 \\
-04 & \textbf{$-$2.285} & $-$2.283 & \textbf{$-$2.285} & $-$2.243 & $-$1.845 \\
-05 & \textbf{$-$2.962} & \textbf{$-$2.962} & \textbf{$-$2.962} & \textbf{$-$2.962} & \textbf{$-$2.962} \\
-09 & \textbf{$-$1.991} & \textbf{$-$1.991} & \textbf{$-$1.991} & \textbf{$-$1.991} & $-$1.804 \\
-10 & \textbf{$-$2.718} & \textbf{$-$2.718} & \textbf{$-$2.718} & \textbf{$-$2.718} & $-$2.710 \\
-12 & \textbf{$-$2.351} & \textbf{$-$2.351} & \textbf{$-$2.351} & \textbf{$-$2.351} & $-$2.081 \\
-13 & $-$2.825 & $-$2.825 & $-$2.825 & \textbf{$-$2.830} & $-$2.825 \\
-14 & $-$3.580 & \textbf{$-$3.591} & \textbf{$-$3.591} & \textbf{$-$3.591} & $-$3.453 \\
-15 & \textbf{$-$3.258} & \textbf{$-$3.258} & \textbf{$-$3.258} & \textbf{$-$3.258} & $-$2.767 \\
-16 & \textbf{$-$4.663} & $-$4.272 & \textbf{$-$4.663} & \textbf{$-$4.663} & \textbf{$-$4.663} \\
-17 & \textbf{$-$3.241} & \textbf{$-$3.241} & \textbf{$-$3.241} & \textbf{$-$3.241} & $-$2.692 \\
-18 & $-$2.724 & \textbf{$-$3.215} & $-$2.838 & \textbf{$-$3.215} & $-$2.519 \\
-19 & $-$4.013 & \textbf{$-$4.149} & \textbf{$-$4.149} & $-$4.013 & $-$4.013 \\
-20 & \textbf{$-$11.653} & $-$11.652 & $-$11.652 & $-$11.652 & $-$11.652 \\
-\bottomrule
-\end{tabular}
-\end{table}
 
 % Table: Cross-LLM robustness (15-case, 4-backend)
 \begin{table}[t]
@@ -248,7 +134,7 @@ Support rate & --- & 7/11 = 64\% & 8/11 = 73\% & 7/11 = 64\% & 7/11 = 64\% \\
 \end{table}
 % ===== end inlined paper_tables =====
 
-Tables~\ref{tab:si-ablation-gemini}--\ref{tab:si-ablation-claude} report the full energy matrices for the original locked 15-case subset.
+The Supplementary Information reports the full per-backend energy matrices for the original locked 15-case subset.
 The Friedman test is highly significant on all four backends: Gemini ($p = 1.4 \times 10^{-6}$), Grok-4 ($p = 2.2 \times 10^{-6}$), GPT-5.4 ($p = 2.2 \times 10^{-3}$), and Claude ($p = 1.1 \times 10^{-4}$).
 Pairwise Wilcoxon tests confirm that the full agent significantly outperforms the 1-shot baseline after BH correction on three of four backends (Gemini BH~$p = 0.006$, Grok-4 BH~$p = 0.011$, Claude BH~$p = 0.013$); GPT-5.4 is borderline (BH~$p = 0.084$).
 
@@ -320,13 +206,14 @@ Notably, $-$Term is slightly better than Full in the success-only mean ($\Delta 
 
 \subsection{Broader rep50 generalization favors iterative search}
 
-We then compared Full and 1-Shot on a broader 50-case representative slice of OCD-GMAE.
+We then compared Full and 1-Shot on a separately selected 50-case representative slice of OCD-GMAE.
+This rep50 set is not a superset of OCD24; it is an independent coverage-oriented sample with partial source-key overlap.
 The clean four-backend matrix contains 400 attempts and no external failures; natural failures are retained in the success-rate denominator.
 
 \begin{table}[t]
 \centering
 \scriptsize
-\caption{rep50 Full-versus-1-Shot comparison across four LLM backends. Positive $\Delta E = E_{\mathrm{1shot}} - E_{\mathrm{full}}$ means the iterative Full run is lower in energy. Tie denotes $|\Delta E| \leq 0.01$~eV.}
+\caption{Separately selected rep50 Full-versus-1-Shot comparison across four LLM backends. Positive $\Delta E = E_{\mathrm{1shot}} - E_{\mathrm{full}}$ means the iterative Full run is lower in energy. Tie denotes $|\Delta E| \leq 0.01$~eV.}
 \label{tab:rep50-four-backend-summary}
 \begin{tabular}{lrrrrrr}
 \toprule
@@ -348,7 +235,7 @@ Finally, the Full four-backend agreement itself is tight on this broader chemist
 
 \subsection{Comparison with Adsorb-Agent under identical physics}
 
-To isolate the effect of search strategy from the choice of force field, we forked the open-source Adsorb-Agent codebase~\cite{adsorbagent} and replaced its EquiformerV2 relaxation backend with the same MACE-MP-0 small (CPU, float32, dispersion disabled) calculator used for the primary benchmark and matched comparisons.
+To isolate the effect of search strategy from the choice of force field, we forked the open-source Adsorb-Agent codebase~\cite{adsorbagent} and replaced its EquiformerV2~\cite{liao2023equiformerv2} relaxation backend with the same MACE-MP-0 small (CPU, float32, dispersion disabled) calculator used for the primary benchmark and matched comparisons.
 All remaining protocol parameters were locked to AdsMind's settings: BFGS optimizer, $f_\mathrm{max} = 0.10$~eV/\AA, 200 steps, and identical \textsc{FixAtoms} constraints (bottom third of slab atoms fixed).
 We ran the modified Adsorb-Agent with GPT-5.4 and report the 15-case overlap with the locked CMU ablation subset.
 We separately ran a single-configuration Adsorb-Agent stress control on CMU20 to test whether Adsorb-Agent's energy depth comes from one-shot chemical site choice alone or from its breadth of enumerated configurations.
@@ -414,7 +301,7 @@ These findings motivate a concrete architectural extension: coupling AdsMind's c
 
 \subsection{Non-LLM and cross-backend control baselines}
 
-To isolate the contribution of the LLM planner from that of the underlying MACE-MP relaxation pipeline, we implemented two non-LLM controls using the same MACE-MP-0 small physics: a \textit{random placement} baseline (N=20 random adsorbate poses per case, each relaxed with the standard protocol) and a \textit{heuristic enumeration} baseline (all high-symmetry sites identified by Autoadsorbate, median 56 sites per case).
+To isolate the contribution of the LLM planner from that of the underlying MACE-MP relaxation pipeline, we implemented two non-LLM controls using the same MACE-MP-0 small physics. The first is a \textit{random placement} baseline (N=20 random adsorbate poses per case, each relaxed with the standard protocol). The second is a \textit{heuristic enumeration} baseline (all high-symmetry sites identified by Autoadsorbate~\cite{fako2025simple}, median 56 sites per case).
 We include the GPT-5.4 Adsorb-Agent run above and in the SI baseline table to keep the LLM backend matched where possible.
 
 \paragraph{Random placement is competitive with AdsMind Full when given more samples.}
@@ -454,5 +341,5 @@ These shifts do not change the qualitative systems conclusion from the MACE-MP-0
 Taken together, these controls reveal that AdsMind's primary contribution is not deepest-basin discovery.
 Random sampling with 20 relaxations is competitive with AdsMind Full and reaches a lower raw mean energy before anomaly filtering; heuristic enumeration exposes additional low-energy basins but requires connectivity filtering before its raw wins can be interpreted chemically; Adsorb-Agent with $\sim$21 relaxations reaches deeper basins whenever the GPT-5.4 one-pass enumeration succeeds.
 In the GPT-5.4 matched-physics run, Adsorb-Agent is lower in energy on all 12 successful comparable cases, but fails on the remaining three.
-AdsMind's distinctive value is the combination of: (i) 100\% success for the Full variant on every completed CMU20 run (80/80) and every four-backend OCD24 run (96/96), together with a 197/200 Full success rate on the broader rep50 slice; (ii) compute efficiency per backend---remaining competitive with random at $5\times$ less MACE-MP work per run and approaching heuristic at $6$--$25\times$ less; (iii) chemical interpretability via Slip detection, FORBID logic, and backend-convergent reasoning traces absent from brute-force methods; and (iv) iterative error recovery, which is a prerequisite for autonomous chemistry workflows where silent failures are unacceptable.
+AdsMind's distinctive value is the combination of: (i) 100\% success for the Full variant on every completed CMU20 run (80/80) and every four-backend OCD24 run (96/96), together with a 197/200 Full success rate on the separately selected broader rep50 slice; (ii) compute efficiency per backend---remaining competitive with random at $5\times$ less MACE-MP work per run and approaching heuristic at $6$--$25\times$ less; (iii) chemical interpretability via Slip detection, FORBID logic, and backend-convergent reasoning traces absent from brute-force methods; and (iv) iterative error recovery, which is a prerequisite for autonomous chemistry workflows where silent failures are unacceptable.
 A natural extension couples AdsMind's closed-loop error-recovery with broader initial sampling (multi-site LLM placement with parallel relaxation), which would combine the depth of enumeration with the reliability and interpretability of the closed-loop agent.
