@@ -6,8 +6,8 @@
 To identify the most stable adsorption configuration and energy, AdsMind implements a closed-loop agent architecture with four core modules: \textbf{Planner}, \textbf{Validator}, \textbf{Executor}, and \textbf{Analyzer} (Figure~\ref{fig:pipeline}). 
 In each iteration, the \textbf{Planner} proposes a structured adsorption hypothesis, which the \textbf{Validator} checks before physical execution. 
 The \textbf{Executor} relaxes the structure, and the \textbf{Analyzer} interprets the post-relaxation coordinates to guide the next iteration.
-% 不单独解释final analyzer模块，每一轮的后弛豫analyzer和executor一起介绍
-A separate \textbf{Summarizer} acts as the report-and-routing node after each physical execution or explicit termination. It either returns control to the planner when the search should continue, or emits the final report of the best configuration once the terminate action occurs or the budget is exhausted. The following sections explain the pipeline and modules in detail.
+% 不单独解释Summarizer为核心搜索模块，每一轮的后弛豫Analyzer和Executor一起介绍
+A separate \textbf{Summarizer} acts as the report-and-routing node after each physical execution or explicit termination. It either returns control to the planner when the search should continue, or emits the final Markdown report of the best configuration once the terminate action occurs or the budget is exhausted. This terminal report embeds deterministic visualizations of the selected relaxed structure and iteration energy trajectory, generated from saved artifacts rather than fed back into the planner. The following sections explain the pipeline and modules in detail.
 
 \subsection{Planner and Validator: Adsorption Hypothesis Generation}
 

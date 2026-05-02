@@ -401,6 +401,12 @@ def copy_session_artifacts(session_id: str, case_dir: Path) -> Dict[str, str]:
         copied[source.name] = str(target)
         if source.name.startswith("BEST_"):
             copied["best_structure_file"] = str(target)
+        elif source.name == "summary_report.md":
+            copied["summary_report_file"] = str(target)
+        elif source.name == "best_configuration.png":
+            copied["best_configuration_png"] = str(target)
+        elif source.name == "iteration_energy_curve.png":
+            copied["iteration_energy_curve_png"] = str(target)
         elif source.suffix == ".traj" and "generated_conformers" in source.name:
             copied["generated_conformers_file"] = str(target)
         elif source.suffix == ".traj" and "relaxation" in source.name:
@@ -453,8 +459,30 @@ class DryRunExecutor:
         gen_file = session_dir / "generated_conformers_dry_run.traj"
         traj_file = session_dir / "relaxation_run.traj"
         final_xyz = session_dir / "final_relaxed_structures.xyz"
-        for path in (best_file, gen_file, traj_file, final_xyz):
+        best_file.write_text(
+            "3\nDry-run adsorption structure\n"
+            "Pt 0.0 0.0 0.0\n"
+            "Pt 2.7 0.0 0.0\n"
+            "H 1.35 0.0 1.05\n",
+            encoding="utf-8",
+        )
+        final_xyz.write_text(best_file.read_text(encoding="utf-8"), encoding="utf-8")
+        for path in (gen_file, traj_file):
             path.write_text("dry-run artifact\n", encoding="utf-8")
+        (session_dir / "summary_report.md").write_text(
+            "# AdsMind Summarizer Report\n\nDry-run final report.\n",
+            encoding="utf-8",
+        )
+        (session_dir / "best_configuration.png").write_bytes(
+            bytes.fromhex(
+                "89504e470d0a1a0a0000000d4948445200000001000000010806000000"
+                "1f15c4890000000a49444154789c636000000200015f15c48900000000"
+                "49454e44ae426082"
+            )
+        )
+        (session_dir / "iteration_energy_curve.png").write_bytes(
+            (session_dir / "best_configuration.png").read_bytes()
+        )
 
         analysis = {
             "status": "success",
@@ -516,6 +544,10 @@ class DryRunExecutor:
                 "total_input_tokens": 111,
                 "total_output_tokens": 57,
                 "messages": [AIMessage(content="Dry-run final report")],
+                "summary_report_file": str(session_dir / "summary_report.md"),
+                "best_configuration_png": str(session_dir / "best_configuration.png"),
+                "iteration_energy_curve_png": str(session_dir / "iteration_energy_curve.png"),
+                "visualization_error": None,
             }
         )
         return final_state

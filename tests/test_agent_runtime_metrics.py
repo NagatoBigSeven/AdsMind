@@ -123,4 +123,4 @@ class TestAgentRuntimeMetrics(unittest.TestCase):
             "validation_retry_count": 5,
             "max_attempts": 5,
         }
-        self.assertEqual(route_after_validation(state), "final_analyzer")
+        self.assertEqual(route_after_validation(state), "summarizer")

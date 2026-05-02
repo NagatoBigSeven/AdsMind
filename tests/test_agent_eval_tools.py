@@ -55,7 +55,7 @@ class TestAgentEvalTools(unittest.TestCase):
         )
         self.assertEqual(
             Path(state["slab_path"]),
-            ROOT / "slabs" / "benchmark" / "cmu_dataset" / "01_Mo3Pd_111.xyz",
+            ROOT / case_row["slab_file"],
         )
 
     def test_run_case_serializes_result_with_fake_executor(self):
@@ -74,6 +74,9 @@ class TestAgentEvalTools(unittest.TestCase):
             self.assertTrue(run.result_path.exists())
             self.assertTrue(run.log_path.exists())
             self.assertIn("best_structure_file", run.result["artifact_paths"])
+            self.assertIn("summary_report_file", run.result["artifact_paths"])
+            self.assertIn("best_configuration_png", run.result["artifact_paths"])
+            self.assertIn("iteration_energy_curve_png", run.result["artifact_paths"])
 
     def test_run_case_keeps_partial_state_when_stream_raises(self):
         class StreamThenFailExecutor:

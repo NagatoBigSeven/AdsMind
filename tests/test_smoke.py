@@ -30,6 +30,9 @@ class TestSmoke(unittest.TestCase):
         executor = get_agent_executor()
 
         self.assertIsNotNone(executor)
+        graph = executor.get_graph()
+        self.assertIn("summarizer", graph.nodes)
+        self.assertNotIn("final_analyzer", graph.nodes)
 
     def test_mace_torch_compiler_compat_shim(self):
         import torch

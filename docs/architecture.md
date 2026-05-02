@@ -13,7 +13,8 @@ AdsMind is the application name used in the UI, documentation, and packaging.
    - `plan_validator`: enforces JSON shape and chemistry constraints
    - `tool_executor`: runs slab preparation, fragment placement, relaxation,
      and result analysis
-   - `final_analyzer`: turns the best available result into a user-facing report
+   - `summarizer`: turns the best available result into a Markdown report with
+     deterministic visualizations
 4. `adsmind.tools.tools` handles the chemistry and simulation logic:
    - AutoAdsorbate monkey patches
    - slab cleanup and expansion
@@ -41,5 +42,5 @@ AdsMind is the application name used in the UI, documentation, and packaging.
 ## Research Assets
 
 Research-only scripts and paper assets are kept separate from the runtime code.
-See `research/README.md` and `paper/` for figure generation and manuscript
-material.
+See `research/README.md` for figure generation and `overleaf/` for the
+manuscript source.

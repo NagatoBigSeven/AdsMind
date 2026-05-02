@@ -68,6 +68,10 @@ class AgentState(TypedDict):
     best_dissociated_result: Optional[dict]
     attempted_keys: List[str]
     available_sites_description: Optional[str]
+    summary_report_file: Optional[str]
+    best_configuration_png: Optional[str]
+    iteration_energy_curve_png: Optional[str]
+    visualization_error: Optional[str]
 
 # --- 2. Setup Environment and LLM ---
 load_dotenv()
@@ -783,12 +787,12 @@ def tool_executor_node(state: AgentState) -> dict:
         "attempted_keys": updated_keys,
     }
 
-def final_analyzer_node(state: AgentState) -> dict:
+def summarizer_node(state: AgentState) -> dict:
     """ 
-    Node 5: Final Analyzer
+    Node 5: Summarizer
     Function: Generate report based on global best results, distinguishing between perfect adsorption and intramolecular rearrangement.
     """
-    logger.info("Calling Final Analyzer Node")
+    logger.info("Calling Summarizer Node")
     llm = get_llm(
         state["api_key"],
         backend_name=state.get("llm_backend"),
@@ -812,7 +816,7 @@ def final_analyzer_node(state: AgentState) -> dict:
     # Priority 1: History Best
     if best_result and isinstance(best_result, dict):
         logger.info(
-            "Final Analyzer: Locked global best plan "
+            "Summarizer: Locked global best plan "
             f"(E={best_result.get('most_stable_energy_eV')} eV)"
         )
         target_data = best_result.get("analysis_json")
@@ -821,13 +825,13 @@ def final_analyzer_node(state: AgentState) -> dict:
     
     # Priority 2: Last attempt success
     elif last_analysis.get("status") == "success" and last_analysis.get("is_covalently_bound"):
-        logger.info("Final Analyzer: No history best, using success result from last step")
+        logger.info("Summarizer: No history best, using success result from last step")
         target_data = last_analysis
         plan_used = state.get("plan")
         source_type = "success"
     
     else:
-        logger.info("Final Analyzer: All attempts failed")
+        logger.info("Summarizer: All attempts failed")
         source_type = "failure"
 
     # 3. Construct Prompt
@@ -883,7 +887,10 @@ def final_analyzer_node(state: AgentState) -> dict:
             - **Dissociation**: `is_dissociated == True`
         """
     else:
-        fail_reason = last_analysis.get("message", "No stable configuration found.")
+        fail_reason = state.get("validation_error") or last_analysis.get(
+            "message",
+            "No stable configuration found.",
+        )
         final_prompt = f"""
         You are an error reporting assistant.
         Task: Politely inform the user that after multiple attempts, no stable adsorption configuration meeting the requirements was found.
@@ -895,12 +902,29 @@ def final_analyzer_node(state: AgentState) -> dict:
     response = llm.invoke([HumanMessage(content=final_prompt)])
     input_tokens, output_tokens = extract_token_usage(response)
     
-    logger.info("Final Report Generated")
-    return {
+    logger.info("Summarizer response generated")
+    payload = {
         "messages": [AIMessage(content=response.content)],
         "total_input_tokens": state.get("total_input_tokens", 0) + input_tokens,
         "total_output_tokens": state.get("total_output_tokens", 0) + output_tokens,
     }
+    if should_end_after_summarizer(state):
+        try:
+            from adsmind.agent.reporting import write_summarizer_report
+
+            report_artifacts = write_summarizer_report(
+                state=state,
+                final_text=response.content,
+                target_data=target_data,
+                plan_used=plan_used,
+                source_type=source_type,
+            )
+            payload.update(report_artifacts)
+            logger.info("Summarizer report written to %s", report_artifacts.get("summary_report_file"))
+        except Exception as report_error:
+            logger.error("Summarizer report generation failed: %s", report_error)
+            payload["visualization_error"] = f"Summarizer report generation failed: {report_error}"
+    return payload
 
 # --- 4. Define Graph Logic Flow (Edges) ---
 def route_after_validation(state: AgentState) -> str:
@@ -909,10 +933,10 @@ def route_after_validation(state: AgentState) -> str:
         validation_retry_count = int(state.get("validation_retry_count", 0) or 0)
         if validation_retry_count >= get_max_attempts(state):
             logger.info(
-                "Decision: Reached validation retry limit (%s). Going to Final Analyzer.",
+                "Decision: Reached validation retry limit (%s). Going to Summarizer.",
                 validation_retry_count,
             )
-            return "final_analyzer"
+            return "summarizer"
         logger.info("Decision: Plan failed, returning to Planner ")
         return "planner"
     
@@ -920,43 +944,55 @@ def route_after_validation(state: AgentState) -> str:
     plan_json = state.get("plan", {})
     solution = plan_json.get("solution", {})
     if solution.get("action") == "terminate":
-        logger.info("Decision: Planner requested termination, going to Final Analyzer ")
-        return "final_analyzer"  # Skip Tool Executor, go directly to report
+        logger.info("Decision: Planner requested termination, going to Summarizer ")
+        return "summarizer"  # Skip Tool Executor, go directly to report
     
     else:
         logger.info("Decision: Plan passed, going to Tool Executor ")
-        return "tool_executor"
+    return "tool_executor"
+
+
+def should_end_after_summarizer(state: AgentState) -> bool:
+    """
+    Return whether the summarizer should terminate the graph after this pass.
+    """
+    # 1. Priority Check: If previous Planner decided to terminate, and we just finished Summarizer,
+    #    then we must end the process now.
+    plan_solution = state.get("plan", {}).get("solution", {})
+    if plan_solution.get("action") == "terminate":
+        return True
+
+    validation_retry_count = int(state.get("validation_retry_count", 0) or 0)
+    if state.get("validation_error") and validation_retry_count >= get_max_attempts(state):
+        return True
+
+    try:
+        analysis_data = json.loads(state.get("analysis_json", "{}"))
+        if analysis_data.get("status") == "fatal_error":
+            return True
+    except Exception:
+        pass
+
+    current_history = state.get("history", [])
+    total_attempts = len(current_history) + validation_retry_count
+    return total_attempts >= get_max_attempts(state)
+
 
 def route_after_analysis(state: AgentState) -> str:
     """
     Simplified Router: Generates rich history and decides next step.
     """
-    logger.info("Python Decision Branch 3 (Analyzer)")
+    logger.info("Python Decision Branch 3 (Summarizer)")
 
-    # 1. Priority Check: If previous Planner decided to terminate, and we just finished Final Analyzer,
-    #    then we must end the process now.
-    plan_solution = state.get("plan", {}).get("solution", {})
-    if plan_solution.get("action") == "terminate":
-        logger.info("Decision: Termination signal detected (Terminate Action), process ending normally. ")
-        return "end"
-
-    try:
-        analysis_data = json.loads(state.get("analysis_json", "{}"))
-        if analysis_data.get("status") == "fatal_error":
-            return "end"
-    except Exception:
-        pass
-
-    # 5. Decision Logic
-    current_history = state.get("history", [])
-    validation_retry_count = int(state.get("validation_retry_count", 0) or 0)
-    total_attempts = len(current_history) + validation_retry_count
-    if total_attempts >= get_max_attempts(state):
+    if should_end_after_summarizer(state):
+        current_history = state.get("history", [])
+        validation_retry_count = int(state.get("validation_retry_count", 0) or 0)
+        total_attempts = len(current_history) + validation_retry_count
         logger.info(
-            "Decision: Reached %s total attempts limit (%s tool attempts + %s validation retries). Process ending. ",
-            total_attempts,
+            "Decision: Summarizer terminal condition reached (%s tool attempts + %s validation retries = %s total). Process ending. ",
             len(current_history),
             validation_retry_count,
+            total_attempts,
         )
         return "end"
     
@@ -970,18 +1006,18 @@ def get_agent_executor():
     workflow.add_node("planner", solution_planner_node)
     workflow.add_node("plan_validator", plan_validator_node) 
     workflow.add_node("tool_executor", tool_executor_node)
-    workflow.add_node("final_analyzer", final_analyzer_node)
+    workflow.add_node("summarizer", summarizer_node)
     workflow.set_entry_point("pre_processor")
     workflow.add_edge("pre_processor", "planner")
     workflow.add_edge("planner", "plan_validator")
-    workflow.add_edge("tool_executor", "final_analyzer")
+    workflow.add_edge("tool_executor", "summarizer")
     workflow.add_conditional_edges(
         "plan_validator",
         route_after_validation,
-        {"tool_executor": "tool_executor", "planner": "planner", "final_analyzer": "final_analyzer"}
+        {"tool_executor": "tool_executor", "planner": "planner", "summarizer": "summarizer"}
     )
     workflow.add_conditional_edges(
-        "final_analyzer",
+        "summarizer",
         route_after_analysis,
         {"planner": "planner", "end": END}
     )
@@ -1051,7 +1087,11 @@ def _prepare_initial_state(
         "best_result": None,
         "best_dissociated_result": None,
         "attempted_keys": [],
-        "available_sites_description": None
+        "available_sites_description": None,
+        "summary_report_file": None,
+        "best_configuration_png": None,
+        "iteration_energy_curve_png": None,
+        "visualization_error": None,
     }
 
 def parse_args():

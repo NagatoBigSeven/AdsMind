@@ -40,7 +40,7 @@ class TestToolsPackage(unittest.TestCase):
 
     def test_analyze_surface_sites_returns_inventory(self):
         analysis = tools.analyze_surface_sites(
-            str(ROOT / "benchmark_slabs" / "01_Mo3Pd_111.xyz")
+            str(ROOT / "datasets" / "cmu-20" / "01_Mo3Pd_111.xyz")
         )
         self.assertIn("surface_composition", analysis)
         self.assertIn("available_sites_description", analysis)
