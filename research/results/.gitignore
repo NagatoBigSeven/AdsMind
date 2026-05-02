@@ -5,6 +5,7 @@
 # ── Top-level summaries & paper data ──
 !*.csv
 !*.json
+!*.md
 !*.tex
 
 # ── Analysis directory ──
@@ -13,6 +14,12 @@
 
 # Canonical merged raw result directories
 !canonical_raw/
+!canonical_raw/**/result.json
+!canonical_raw/**/*.md
+!canonical_raw/**/*.json
+!canonical_raw/**/*.csv
+!canonical_raw/**/
+# Canonical raw result directories, including controls and legacy archived raw inputs
 !canonical_raw/*
 !canonical_raw/*/
 !canonical_raw/*/*.csv
@@ -25,110 +32,12 @@
 !canonical_raw/*/*/*/
 !canonical_raw/*/*/*/result.json
 # ── Dataset directories ──
-!gemini_ablation_v1/
-!xai_ablation_v2/
-!openai_gpt54_ablation_v1/
-!anthropic_sonnet46_ablation_v1/
-!cmu_v1_gemini_one_shot/
-!cmu_v1_xai_progressive_one_shot/
-!cmu_v1_openai_gpt54_one_shot/
-!cmu_v1_openai_gpt54_one_shot_retry/
-!cmu_v1_anthropic_sonnet46_one_shot/
-!cmu_v1_gemini_one_shot_epfl_control/
-!cmu_v1_xai_progressive_one_shot_epfl_control/
-!ocd_gmae_rep50_v1_gemini_one_shot/
-!ocd_gmae_rep50_v1_xai_grok4_one_shot/
-!ocd_gmae_rep50_v1_openai_gpt54_one_shot/
-!ocd_gmae_rep50_v1_anthropic_sonnet46_one_shot/
-!ocd_gmae_gemini_ablation_v2/
-!ocd_gmae_xai_grok4_ablation_v1/
-!ocd_gmae_openai_gpt54_ablation_v1/
-!ocd_gmae_anthropic_sonnet46_ablation_v1/
 
 # Dataset-level summaries
-!gemini_ablation_v1/*.csv
-!gemini_ablation_v1/*.json
-!xai_ablation_v2/*.csv
-!xai_ablation_v2/*.json
-!openai_gpt54_ablation_v1/*.csv
-!openai_gpt54_ablation_v1/*.json
-!anthropic_sonnet46_ablation_v1/*.csv
-!anthropic_sonnet46_ablation_v1/*.json
-!cmu_v1_gemini_one_shot/*.csv
-!cmu_v1_gemini_one_shot/*.json
-!cmu_v1_xai_progressive_one_shot/*.csv
-!cmu_v1_xai_progressive_one_shot/*.json
-!cmu_v1_openai_gpt54_one_shot/*.csv
-!cmu_v1_openai_gpt54_one_shot/*.json
-!cmu_v1_openai_gpt54_one_shot_retry/*.csv
-!cmu_v1_openai_gpt54_one_shot_retry/*.json
-!cmu_v1_anthropic_sonnet46_one_shot/*.csv
-!cmu_v1_anthropic_sonnet46_one_shot/*.json
-!cmu_v1_gemini_one_shot_epfl_control/*.csv
-!cmu_v1_gemini_one_shot_epfl_control/*.json
-!cmu_v1_xai_progressive_one_shot_epfl_control/*.csv
-!cmu_v1_xai_progressive_one_shot_epfl_control/*.json
-!cmu_v1_xai_progressive_one_shot/paper_comparison/
-!cmu_v1_xai_progressive_one_shot/paper_comparison/*.csv
-!cmu_v1_xai_progressive_one_shot/paper_comparison/*.json
-!ocd_gmae_gemini_ablation_v2/*.csv
-!ocd_gmae_gemini_ablation_v2/*.json
-!ocd_gmae_xai_grok4_ablation_v1/*.csv
-!ocd_gmae_xai_grok4_ablation_v1/*.json
-!ocd_gmae_openai_gpt54_ablation_v1/*.csv
-!ocd_gmae_openai_gpt54_ablation_v1/*.json
-!ocd_gmae_anthropic_sonnet46_ablation_v1/*.csv
-!ocd_gmae_anthropic_sonnet46_ablation_v1/*.json
 
 # Ablation: variant dirs + case dirs + result.json only
-!gemini_ablation_v1/*/
-!gemini_ablation_v1/*/*/
-!gemini_ablation_v1/*/*/result.json
-!xai_ablation_v2/*/
-!xai_ablation_v2/*/*/
-!xai_ablation_v2/*/*/result.json
-!openai_gpt54_ablation_v1/*/
-!openai_gpt54_ablation_v1/*/*/
-!openai_gpt54_ablation_v1/*/*/result.json
-!anthropic_sonnet46_ablation_v1/*/
-!anthropic_sonnet46_ablation_v1/*/*/
-!anthropic_sonnet46_ablation_v1/*/*/result.json
-!ocd_gmae_gemini_ablation_v2/*/
-!ocd_gmae_gemini_ablation_v2/*/*/
-!ocd_gmae_gemini_ablation_v2/*/*/result.json
-!ocd_gmae_xai_grok4_ablation_v1/*/
-!ocd_gmae_xai_grok4_ablation_v1/*/*/
-!ocd_gmae_xai_grok4_ablation_v1/*/*/result.json
-!ocd_gmae_openai_gpt54_ablation_v1/*/
-!ocd_gmae_openai_gpt54_ablation_v1/*/*/
-!ocd_gmae_openai_gpt54_ablation_v1/*/*/result.json
-!ocd_gmae_anthropic_sonnet46_ablation_v1/*/
-!ocd_gmae_anthropic_sonnet46_ablation_v1/*/*/
-!ocd_gmae_anthropic_sonnet46_ablation_v1/*/*/result.json
 
 # One-shot: case dirs + result.json only
-!cmu_v1_gemini_one_shot/*/
-!cmu_v1_gemini_one_shot/*/result.json
-!cmu_v1_xai_progressive_one_shot/*/
-!cmu_v1_xai_progressive_one_shot/*/result.json
-!cmu_v1_openai_gpt54_one_shot/*/
-!cmu_v1_openai_gpt54_one_shot/*/result.json
-!cmu_v1_openai_gpt54_one_shot_retry/*/
-!cmu_v1_openai_gpt54_one_shot_retry/*/result.json
-!cmu_v1_anthropic_sonnet46_one_shot/*/
-!cmu_v1_anthropic_sonnet46_one_shot/*/result.json
-!cmu_v1_gemini_one_shot_epfl_control/*/
-!cmu_v1_gemini_one_shot_epfl_control/*/result.json
-!cmu_v1_xai_progressive_one_shot_epfl_control/*/
-!cmu_v1_xai_progressive_one_shot_epfl_control/*/result.json
-!ocd_gmae_rep50_v1_gemini_one_shot/*/
-!ocd_gmae_rep50_v1_gemini_one_shot/*/result.json
-!ocd_gmae_rep50_v1_xai_grok4_one_shot/*/
-!ocd_gmae_rep50_v1_xai_grok4_one_shot/*/result.json
-!ocd_gmae_rep50_v1_openai_gpt54_one_shot/*/
-!ocd_gmae_rep50_v1_openai_gpt54_one_shot/*/result.json
-!ocd_gmae_rep50_v1_anthropic_sonnet46_one_shot/*/
-!ocd_gmae_rep50_v1_anthropic_sonnet46_one_shot/*/result.json
 
 # Explicitly exclude per-run artifacts that leak through dir unignore
 **/config.json
@@ -136,33 +45,11 @@
 **/agent_log.txt
 **/artifacts/
 
-# ── Adsorb-Agent MACE comparison ──
-!adsorbagent_mace_gpt4o/
-!adsorbagent_mace_gpt4o/*.json
-
-# ── Supplementary ablation experiments ──
-!random_baseline_n20/
-!random_baseline_n20/*.csv
-!random_baseline_n20/*.json
-!random_baseline_n20/*/
-!random_baseline_n20/*/result.json
-!heuristic_baseline/
-!heuristic_baseline/*.csv
-!heuristic_baseline/*.json
-!heuristic_baseline/*/
-!heuristic_baseline/*/result.json
-!mace_large_gpt54/
-!mace_large_gpt54/*.csv
-!mace_large_gpt54/*.json
-!mace_large_gpt54/*/
-!mace_large_gpt54/*/*/
-!mace_large_gpt54/*/*/result.json
+# ── Adsorb-Agent MACE comparison (paper-cited, kept at root) ──
 !adsorbagent_mace_gpt54/
 !adsorbagent_mace_gpt54/*.csv
 !adsorbagent_mace_gpt54/*.json
 
-# ── Multi-seed experiment ──
-!multiseed_gpt54/
-!multiseed_gpt54/*/
-!multiseed_gpt54/*/*.csv
-!multiseed_gpt54/*/*.json
+# Note: adsorbagent_mace_gpt4o, mace_large_gpt54, multiseed_gpt54 moved into
+# canonical_raw/auxiliary_raw/ on 2026-04-30 (see MIGRATION.md). They are
+# whitelisted there via the canonical_raw/** rules above.

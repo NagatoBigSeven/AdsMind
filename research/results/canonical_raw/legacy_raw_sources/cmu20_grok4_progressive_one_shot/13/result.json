@@ -1,0 +1,201 @@
+{
+  "case_id": "13",
+  "case_metadata": {
+    "case_id": "13",
+    "slab_file": "benchmark_slabs/13_Ag_100.xyz",
+    "smiles": "[OH]",
+    "user_request": "Find the lowest-energy adsorption configuration for hydroxyl radical on the provided surface.",
+    "surface_family": "monometallic",
+    "adsorbate_name": "OH",
+    "miller_index": "(100)",
+    "reaction_class": "ORR",
+    "ablation_candidate": "FALSE",
+    "notes": "Prior runs labeled all final sites as desorbed"
+  },
+  "status": "success",
+  "best_energy_eV": -2.376443862915039,
+  "iteration_count": 1,
+  "max_attempts": 1,
+  "final_site_type": "bridge",
+  "converged_tag": false,
+  "wall_clock_sec": 121.14131033298327,
+  "total_input_tokens": 4968,
+  "total_output_tokens": 1529,
+  "artifact_paths": {
+    "BEST_OH_bridge_E-2.376": "research/results/canonical_raw/legacy_raw_sources/cmu20_grok4_progressive_one_shot/13/artifacts/BEST_OH_bridge_E-2.376.xyz",
+    "BEST_OH_bridge_E-2.376.xyz": "research/results/canonical_raw/legacy_raw_sources/cmu20_grok4_progressive_one_shot/13/artifacts/BEST_OH_bridge_E-2.376.xyz",
+    "best_structure_file": "research/results/canonical_raw/legacy_raw_sources/cmu20_grok4_progressive_one_shot/13/artifacts/BEST_OH_bridge_E-2.376.xyz",
+    "conformers_[OH]": "research/results/canonical_raw/legacy_raw_sources/cmu20_grok4_progressive_one_shot/13/artifacts/conformers_[OH].traj",
+    "conformers_[OH].traj": "research/results/canonical_raw/legacy_raw_sources/cmu20_grok4_progressive_one_shot/13/artifacts/conformers_[OH].traj",
+    "final": "research/results/canonical_raw/legacy_raw_sources/cmu20_grok4_progressive_one_shot/13/artifacts/final.xyz",
+    "final.xyz": "research/results/canonical_raw/legacy_raw_sources/cmu20_grok4_progressive_one_shot/13/artifacts/final.xyz",
+    "relaxation": "research/results/canonical_raw/legacy_raw_sources/cmu20_grok4_progressive_one_shot/13/artifacts/relaxation.traj",
+    "relaxation.traj": "research/results/canonical_raw/legacy_raw_sources/cmu20_grok4_progressive_one_shot/13/artifacts/relaxation.traj",
+    "relaxation_trajectory_file": "research/results/canonical_raw/legacy_raw_sources/cmu20_grok4_progressive_one_shot/13/artifacts/relaxation.traj"
+  },
+  "best_result": {
+    "most_stable_energy_eV": -2.376443862915039,
+    "analysis_json": {
+      "status": "success",
+      "message": "Most stable config adsorption energy: -2.3764 eV. Target Atom: O (from plan index 0, global index 36 in relaxed structure). -> Nearest: Ag (Index 33), Distance: 2.226 Å (Threshold: 3.06), Bound: True. Bonded Surface Atoms: Ag-2.226Å, Ag-2.236Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: False (Planned ['Ag', 'Ag'] -> Actual ['Ag', 'Ag']).",
+      "most_stable_energy_eV": -2.376443862915039,
+      "target_adsorbate_atom": "O",
+      "target_adsorbate_atom_index": 36,
+      "bonded_surface_atoms": [
+        {
+          "symbol": "Ag",
+          "index": 33,
+          "distance": 2.226
+        },
+        {
+          "symbol": "Ag",
+          "index": 9,
+          "distance": 2.236
+        }
+      ],
+      "nearest_slab_atom": "Ag",
+      "nearest_slab_atom_index": 33,
+      "final_bond_distance_A": 2.226,
+      "estimated_covalent_cutoff_A": 2.321,
+      "is_covalently_bound": true,
+      "reaction_detected": false,
+      "is_dissociated": false,
+      "n_components": 1,
+      "bond_change_count": 0,
+      "site_analysis": {
+        "planned_site_type": "bridge",
+        "planned_connectivity": 2,
+        "actual_site_type": "bridge",
+        "actual_connectivity": 2,
+        "is_chemical_slip": false,
+        "planned_symbols": [
+          "Ag",
+          "Ag"
+        ],
+        "actual_symbols": [
+          "Ag",
+          "Ag"
+        ],
+        "site_fingerprint": "Ag33-Ag9"
+      },
+      "best_structure_file": "outputs/13-7ba73c48/BEST_OH_bridge_E-2.376.xyz",
+      "generated_conformers_file": "outputs/13-7ba73c48/conformers_[OH].traj",
+      "relaxation_trajectory_file": "outputs/13-7ba73c48/final.xyz",
+      "session_id": "13-7ba73c48"
+    },
+    "plan": {
+      "reasoning": "Step 0: SMILES Consistency Check. The SMILES is [OH], identified as hydroxyl radical. The heavy atom list shows index 0: O, SP3, degree 0, radical_electrons 1, formal_charge 0. This matches a radical species with the unpaired electron on O. No hybridization mismatch with user request. Radical check: index 0 has radical_electrons > 0, suitable for ReactiveSpecies.\nStep 1: Analyze Old Plans. History is None, so no previous attempts, successes, failures, or tags. No unstable sites identified. No convergence signals. Surface is homogeneous Ag(100), so sites are equivalent within types.\nStep 2: Formulate New Plan. Goal is lowest energy adsorption. For OH radical on Ag(100), typical stable sites include ontop, bridge, and hollow-4. Since history is empty, start with the likely most stable site: bridge, as OH often prefers bridge on FCC(100) metals due to coordination. Avoid unstable sites: none identified. Use canonical site_type 'bridge'. Propose new plan distinct from history (none). Hard limit is 1 attempt, but since this is the first, proceed with continue; termination conditions not met.\nStep 3: Analyze Request. User's intent is to find the lowest-energy adsorption configuration of hydroxyl radical on Ag(100), systematically testing sites.\nStep 4: Analyze Adsorbate. SMILES [OH]: hydroxyl radical (•OH). Major functional group: hydroxy radical. Heavy atom: O at index 0 with radical. Binding via O (index 0).\nStep 5: Analyze Surface. Ag(100) with sites: ontop (Ag), bridge (Ag-Ag), hollow-4 (Ag-Ag-Ag-Ag), 5-fold (Ag-Ag-Ag-Ag-Ag). Plan for existing sites; start with bridge.\nStep 6: Formulate Plan. Select bridge site for initial test, single-point binding via O (radical atom). adsorbate_type: ReactiveSpecies (radical). surface_binding_atoms: ['Ag', 'Ag'] for bridge. adsorbate_binding_indices: [0] (O). Defaults for other parameters.\nNo multi-point adsorption needed; limit to 1 binding index.",
+      "adsorbate_type": "ReactiveSpecies",
+      "solution": {
+        "action": "continue",
+        "site_type": "bridge",
+        "surface_binding_atoms": [
+          "Ag",
+          "Ag"
+        ],
+        "adsorbate_binding_indices": [
+          0
+        ],
+        "relax_top_n": 1,
+        "touch_sphere_size": 2,
+        "overlap_thr": 0.1,
+        "conformers_per_site_cap": 4
+      }
+    },
+    "result_type": "Perfect"
+  },
+  "last_analysis": {
+    "status": "success",
+    "message": "Most stable config adsorption energy: -2.3764 eV. Target Atom: O (from plan index 0, global index 36 in relaxed structure). -> Nearest: Ag (Index 33), Distance: 2.226 Å (Threshold: 3.06), Bound: True. Bonded Surface Atoms: Ag-2.226Å, Ag-2.236Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: False (Planned ['Ag', 'Ag'] -> Actual ['Ag', 'Ag']).",
+    "most_stable_energy_eV": -2.376443862915039,
+    "target_adsorbate_atom": "O",
+    "target_adsorbate_atom_index": 36,
+    "bonded_surface_atoms": [
+      {
+        "symbol": "Ag",
+        "index": 33,
+        "distance": 2.226
+      },
+      {
+        "symbol": "Ag",
+        "index": 9,
+        "distance": 2.236
+      }
+    ],
+    "nearest_slab_atom": "Ag",
+    "nearest_slab_atom_index": 33,
+    "final_bond_distance_A": 2.226,
+    "estimated_covalent_cutoff_A": 2.321,
+    "is_covalently_bound": true,
+    "reaction_detected": false,
+    "is_dissociated": false,
+    "n_components": 1,
+    "bond_change_count": 0,
+    "site_analysis": {
+      "planned_site_type": "bridge",
+      "planned_connectivity": 2,
+      "actual_site_type": "bridge",
+      "actual_connectivity": 2,
+      "is_chemical_slip": false,
+      "planned_symbols": [
+        "Ag",
+        "Ag"
+      ],
+      "actual_symbols": [
+        "Ag",
+        "Ag"
+      ],
+      "site_fingerprint": "Ag33-Ag9"
+    },
+    "best_structure_file": "outputs/13-7ba73c48/BEST_OH_bridge_E-2.376.xyz",
+    "generated_conformers_file": "outputs/13-7ba73c48/conformers_[OH].traj",
+    "relaxation_trajectory_file": "outputs/13-7ba73c48/final.xyz",
+    "session_id": "13-7ba73c48"
+  },
+  "attempt_records": [
+    {
+      "attempt_index": 1,
+      "plan": {
+        "reasoning": "Step 0: SMILES Consistency Check. The SMILES is [OH], identified as hydroxyl radical. The heavy atom list shows index 0: O, SP3, degree 0, radical_electrons 1, formal_charge 0. This matches a radical species with the unpaired electron on O. No hybridization mismatch with user request. Radical check: index 0 has radical_electrons > 0, suitable for ReactiveSpecies.\nStep 1: Analyze Old Plans. History is None, so no previous attempts, successes, failures, or tags. No unstable sites identified. No convergence signals. Surface is homogeneous Ag(100), so sites are equivalent within types.\nStep 2: Formulate New Plan. Goal is lowest energy adsorption. For OH radical on Ag(100), typical stable sites include ontop, bridge, and hollow-4. Since history is empty, start with the likely most stable site: bridge, as OH often prefers bridge on FCC(100) metals due to coordination. Avoid unstable sites: none identified. Use canonical site_type 'bridge'. Propose new plan distinct from history (none). Hard limit is 1 attempt, but since this is the first, proceed with continue; termination conditions not met.\nStep 3: Analyze Request. User's intent is to find the lowest-energy adsorption configuration of hydroxyl radical on Ag(100), systematically testing sites.\nStep 4: Analyze Adsorbate. SMILES [OH]: hydroxyl radical (•OH). Major functional group: hydroxy radical. Heavy atom: O at index 0 with radical. Binding via O (index 0).\nStep 5: Analyze Surface. Ag(100) with sites: ontop (Ag), bridge (Ag-Ag), hollow-4 (Ag-Ag-Ag-Ag), 5-fold (Ag-Ag-Ag-Ag-Ag). Plan for existing sites; start with bridge.\nStep 6: Formulate Plan. Select bridge site for initial test, single-point binding via O (radical atom). adsorbate_type: ReactiveSpecies (radical). surface_binding_atoms: ['Ag', 'Ag'] for bridge. adsorbate_binding_indices: [0] (O). Defaults for other parameters.\nNo multi-point adsorption needed; limit to 1 binding index.",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "bridge",
+          "surface_binding_atoms": [
+            "Ag",
+            "Ag"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "bridge|Ag,Ag|0|ReactiveSpecies|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -2.376443862915039,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": false,
+      "planned_site_type": "bridge",
+      "actual_site_type": "bridge",
+      "best_structure_file": "outputs/13-7ba73c48/BEST_OH_bridge_E-2.376.xyz",
+      "generated_conformers_file": "outputs/13-7ba73c48/conformers_[OH].traj",
+      "relaxation_trajectory_file": "outputs/13-7ba73c48/final.xyz",
+      "message": "Most stable config adsorption energy: -2.3764 eV. Target Atom: O (from plan index 0, global index 36 in relaxed structure). -> Nearest: Ag (Index 33), Distance: 2.226 Å (Threshold: 3.06), Bound: True. Bonded Surface Atoms: Ag-2.226Å, Ag-2.236Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: False (Planned ['Ag', 'Ag'] -> Actual ['Ag', 'Ag']).",
+      "history_entry": "【✅ Perfect Adsorption】 bridge @ ['Ag', 'Ag'] (Index [0]) -> Site: bridge (Ag,Ag) [🌟 New Best] | E=-2.376 eV"
+    }
+  ],
+  "history": [
+    "【✅ Perfect Adsorption】 bridge @ ['Ag', 'Ag'] (Index [0]) -> Site: bridge (Ag,Ag) [🌟 New Best] | E=-2.376 eV"
+  ],
+  "error": null,
+  "perfect_count": 1,
+  "dissociation_count": 0,
+  "rearrangement_count": 0,
+  "calc_failure_count": 0,
+  "chemical_slip_count": 0
+}

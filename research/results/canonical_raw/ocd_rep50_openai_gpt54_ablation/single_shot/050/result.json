@@ -1,0 +1,194 @@
+{
+  "case_id": "050",
+  "case_metadata": {
+    "case_id": "050",
+    "slab_file": "research/agent_eval/generated_slabs/ocd_gmae_rep50/050_ocd_794_Ni38Se40_CH2_C.xyz",
+    "smiles": "[CH2]C",
+    "user_request": "Find the lowest-energy adsorption configuration for the adsorbate with SMILES [CH2]C on the provided surface.",
+    "surface_family": "compound",
+    "adsorbate_name": "[CH2]C",
+    "miller_index": "",
+    "reaction_class": "GENERALIZATION",
+    "ablation_candidate": "FALSE",
+    "notes": "OCD-GMAE source key=794; original_ads_smi=[CH2]C; surface_formula=Ni38Se40; y_relaxed=-3.938025 eV; site=[54]",
+    "source_key": "794",
+    "original_ads_smi": "[CH2]C",
+    "surface_formula": "Ni38Se40",
+    "surface_elements": "Ni;Se",
+    "bare_slab_atoms": "78",
+    "adsorbate_atoms": "7",
+    "y_relaxed": "-3.938025",
+    "site_indices": "54",
+    "selection_bucket": "small_organic"
+  },
+  "status": "success",
+  "best_energy_eV": -11.695274353027344,
+  "iteration_count": 1,
+  "max_attempts": 1,
+  "final_site_type": "ontop",
+  "converged_tag": false,
+  "wall_clock_sec": 338.75818983092904,
+  "total_input_tokens": 3626,
+  "total_output_tokens": 944,
+  "artifact_paths": {
+    "BEST_CH2C_ontop_E-11.695": "research/results/canonical_raw/ocd_rep50_openai_gpt54_ablation/single_shot/050/artifacts/BEST_CH2C_ontop_E-11.695.xyz",
+    "BEST_CH2C_ontop_E-11.695.xyz": "research/results/canonical_raw/ocd_rep50_openai_gpt54_ablation/single_shot/050/artifacts/BEST_CH2C_ontop_E-11.695.xyz",
+    "best_structure_file": "research/results/canonical_raw/ocd_rep50_openai_gpt54_ablation/single_shot/050/artifacts/BEST_CH2C_ontop_E-11.695.xyz",
+    "conformers_[CH2]C": "research/results/canonical_raw/ocd_rep50_openai_gpt54_ablation/single_shot/050/artifacts/conformers_[CH2]C.traj",
+    "conformers_[CH2]C.traj": "research/results/canonical_raw/ocd_rep50_openai_gpt54_ablation/single_shot/050/artifacts/conformers_[CH2]C.traj",
+    "final": "research/results/canonical_raw/ocd_rep50_openai_gpt54_ablation/single_shot/050/artifacts/final.xyz",
+    "final.xyz": "research/results/canonical_raw/ocd_rep50_openai_gpt54_ablation/single_shot/050/artifacts/final.xyz",
+    "relaxation": "research/results/canonical_raw/ocd_rep50_openai_gpt54_ablation/single_shot/050/artifacts/relaxation.traj",
+    "relaxation.traj": "research/results/canonical_raw/ocd_rep50_openai_gpt54_ablation/single_shot/050/artifacts/relaxation.traj",
+    "relaxation_trajectory_file": "research/results/canonical_raw/ocd_rep50_openai_gpt54_ablation/single_shot/050/artifacts/relaxation.traj"
+  },
+  "best_result": {
+    "most_stable_energy_eV": -11.695274353027344,
+    "analysis_json": {
+      "status": "success",
+      "message": "Most stable config adsorption energy: -11.6953 eV. Target Atom: C (from plan index 0, global index 78 in relaxed structure). -> Nearest: Ni (Index 34), Distance: 1.963 Å (Threshold: 2.9), Bound: True. Bonded Surface Atoms: Ni-1.963Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: False (Planned ['Ni'] -> Actual ['Ni']).",
+      "most_stable_energy_eV": -11.695274353027344,
+      "target_adsorbate_atom": "C",
+      "target_adsorbate_atom_index": 78,
+      "bonded_surface_atoms": [
+        {
+          "symbol": "Ni",
+          "index": 34,
+          "distance": 1.963
+        }
+      ],
+      "nearest_slab_atom": "Ni",
+      "nearest_slab_atom_index": 34,
+      "final_bond_distance_A": 1.963,
+      "estimated_covalent_cutoff_A": 2.2,
+      "is_covalently_bound": true,
+      "reaction_detected": false,
+      "is_dissociated": false,
+      "n_components": 1,
+      "bond_change_count": 0,
+      "site_analysis": {
+        "planned_site_type": "ontop",
+        "planned_connectivity": 1,
+        "actual_site_type": "ontop",
+        "actual_connectivity": 1,
+        "is_chemical_slip": false,
+        "planned_symbols": [
+          "Ni"
+        ],
+        "actual_symbols": [
+          "Ni"
+        ],
+        "site_fingerprint": "Ni34"
+      },
+      "best_structure_file": "outputs/050-b9b72e3a/BEST_CH2C_ontop_E-11.695.xyz",
+      "generated_conformers_file": "outputs/050-b9b72e3a/conformers_[CH2]C.traj",
+      "relaxation_trajectory_file": "outputs/050-b9b72e3a/final.xyz",
+      "session_id": "050-b9b72e3a"
+    },
+    "plan": {
+      "reasoning": "No history exists, so I must choose the best initial high-probability chemisorption plan. SMILES [CH2]C corresponds to an ethyl radical-like species with two carbon atoms. From the provided atom list, atom 0 is C, SP3, degree 1, with 1 radical electron; atom 1 is C, SP3, degree 1, with 0 radical electrons. There is no SMILES consistency issue here: the reactive center is clearly atom 0, and only atom 0 is valid for ReactiveSpecies binding. Therefore adsorption should be planned through carbon index 0, not the saturated carbon index 1. On a Ni/Se surface, the radical carbon should preferentially bind to the more metallic Ni rather than Se, so the most physically reasonable first trial is a C-radical bound atop Ni. This uses one adsorbate binding atom and matches the ontop rule. Since only one attempt is allowed, I should prioritize the chemically strongest likely site rather than a weaker Se site or more speculative bridge/hollow starting geometry.",
+      "adsorbate_type": "ReactiveSpecies",
+      "solution": {
+        "action": "continue",
+        "site_type": "ontop",
+        "surface_binding_atoms": [
+          "Ni"
+        ],
+        "adsorbate_binding_indices": [
+          0
+        ],
+        "relax_top_n": 1,
+        "touch_sphere_size": 2,
+        "overlap_thr": 0.1,
+        "conformers_per_site_cap": 4
+      }
+    },
+    "result_type": "Perfect"
+  },
+  "last_analysis": {
+    "status": "success",
+    "message": "Most stable config adsorption energy: -11.6953 eV. Target Atom: C (from plan index 0, global index 78 in relaxed structure). -> Nearest: Ni (Index 34), Distance: 1.963 Å (Threshold: 2.9), Bound: True. Bonded Surface Atoms: Ni-1.963Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: False (Planned ['Ni'] -> Actual ['Ni']).",
+    "most_stable_energy_eV": -11.695274353027344,
+    "target_adsorbate_atom": "C",
+    "target_adsorbate_atom_index": 78,
+    "bonded_surface_atoms": [
+      {
+        "symbol": "Ni",
+        "index": 34,
+        "distance": 1.963
+      }
+    ],
+    "nearest_slab_atom": "Ni",
+    "nearest_slab_atom_index": 34,
+    "final_bond_distance_A": 1.963,
+    "estimated_covalent_cutoff_A": 2.2,
+    "is_covalently_bound": true,
+    "reaction_detected": false,
+    "is_dissociated": false,
+    "n_components": 1,
+    "bond_change_count": 0,
+    "site_analysis": {
+      "planned_site_type": "ontop",
+      "planned_connectivity": 1,
+      "actual_site_type": "ontop",
+      "actual_connectivity": 1,
+      "is_chemical_slip": false,
+      "planned_symbols": [
+        "Ni"
+      ],
+      "actual_symbols": [
+        "Ni"
+      ],
+      "site_fingerprint": "Ni34"
+    },
+    "best_structure_file": "outputs/050-b9b72e3a/BEST_CH2C_ontop_E-11.695.xyz",
+    "generated_conformers_file": "outputs/050-b9b72e3a/conformers_[CH2]C.traj",
+    "relaxation_trajectory_file": "outputs/050-b9b72e3a/final.xyz",
+    "session_id": "050-b9b72e3a"
+  },
+  "attempt_records": [
+    {
+      "attempt_index": 1,
+      "plan": {
+        "reasoning": "No history exists, so I must choose the best initial high-probability chemisorption plan. SMILES [CH2]C corresponds to an ethyl radical-like species with two carbon atoms. From the provided atom list, atom 0 is C, SP3, degree 1, with 1 radical electron; atom 1 is C, SP3, degree 1, with 0 radical electrons. There is no SMILES consistency issue here: the reactive center is clearly atom 0, and only atom 0 is valid for ReactiveSpecies binding. Therefore adsorption should be planned through carbon index 0, not the saturated carbon index 1. On a Ni/Se surface, the radical carbon should preferentially bind to the more metallic Ni rather than Se, so the most physically reasonable first trial is a C-radical bound atop Ni. This uses one adsorbate binding atom and matches the ontop rule. Since only one attempt is allowed, I should prioritize the chemically strongest likely site rather than a weaker Se site or more speculative bridge/hollow starting geometry.",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "ontop",
+          "surface_binding_atoms": [
+            "Ni"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "ontop|Ni|0|ReactiveSpecies|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -11.695274353027344,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": false,
+      "planned_site_type": "ontop",
+      "actual_site_type": "ontop",
+      "best_structure_file": "outputs/050-b9b72e3a/BEST_CH2C_ontop_E-11.695.xyz",
+      "generated_conformers_file": "outputs/050-b9b72e3a/conformers_[CH2]C.traj",
+      "relaxation_trajectory_file": "outputs/050-b9b72e3a/final.xyz",
+      "message": "Most stable config adsorption energy: -11.6953 eV. Target Atom: C (from plan index 0, global index 78 in relaxed structure). -> Nearest: Ni (Index 34), Distance: 1.963 Å (Threshold: 2.9), Bound: True. Bonded Surface Atoms: Ni-1.963Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: False (Planned ['Ni'] -> Actual ['Ni']).",
+      "history_entry": "【✅ Perfect Adsorption】 ontop @ ['Ni'] (Index [0]) -> Site: ontop (Ni) [🌟 New Best] | E=-11.695 eV"
+    }
+  ],
+  "history": [
+    "【✅ Perfect Adsorption】 ontop @ ['Ni'] (Index [0]) -> Site: ontop (Ni) [🌟 New Best] | E=-11.695 eV"
+  ],
+  "error": null,
+  "perfect_count": 1,
+  "dissociation_count": 0,
+  "rearrangement_count": 0,
+  "calc_failure_count": 0,
+  "chemical_slip_count": 0
+}

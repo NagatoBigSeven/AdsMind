@@ -1,0 +1,317 @@
+{
+  "case_id": "14",
+  "case_metadata": {
+    "case_id": "14",
+    "slab_file": "benchmark_slabs/14_CoPt_111.xyz",
+    "smiles": "[OH]",
+    "user_request": "Find the lowest-energy adsorption configuration for hydroxyl radical on the provided surface.",
+    "surface_family": "intermetallic",
+    "adsorbate_name": "OH",
+    "miller_index": "(111)",
+    "reaction_class": "ORR",
+    "ablation_candidate": "TRUE",
+    "notes": "Bimetallic ORR benchmark; DFT handoff target"
+  },
+  "status": "success",
+  "best_energy_eV": -3.45790958404541,
+  "iteration_count": 4,
+  "max_attempts": 5,
+  "final_site_type": "bridge",
+  "converged_tag": true,
+  "wall_clock_sec": 347.4352705106139,
+  "total_input_tokens": 22708,
+  "total_output_tokens": 5236,
+  "artifact_paths": {
+    "BEST_OH_bridge_E-3.457": "research/results/canonical_raw/controls/multiseed_gpt54_cmu20_seed47_full/full/14/artifacts/BEST_OH_bridge_E-3.457.xyz",
+    "BEST_OH_bridge_E-3.457.xyz": "research/results/canonical_raw/controls/multiseed_gpt54_cmu20_seed47_full/full/14/artifacts/BEST_OH_bridge_E-3.457.xyz",
+    "best_structure_file": "research/results/canonical_raw/controls/multiseed_gpt54_cmu20_seed47_full/full/14/artifacts/BEST_OH_hollow_to_bridge_E-3.427.xyz",
+    "BEST_OH_bridge_E-3.458": "research/results/canonical_raw/controls/multiseed_gpt54_cmu20_seed47_full/full/14/artifacts/BEST_OH_bridge_E-3.458.xyz",
+    "BEST_OH_bridge_E-3.458.xyz": "research/results/canonical_raw/controls/multiseed_gpt54_cmu20_seed47_full/full/14/artifacts/BEST_OH_bridge_E-3.458.xyz",
+    "BEST_OH_hollow_to_bridge_E-3.424": "research/results/canonical_raw/controls/multiseed_gpt54_cmu20_seed47_full/full/14/artifacts/BEST_OH_hollow_to_bridge_E-3.424.xyz",
+    "BEST_OH_hollow_to_bridge_E-3.424.xyz": "research/results/canonical_raw/controls/multiseed_gpt54_cmu20_seed47_full/full/14/artifacts/BEST_OH_hollow_to_bridge_E-3.424.xyz",
+    "BEST_OH_hollow_to_bridge_E-3.427": "research/results/canonical_raw/controls/multiseed_gpt54_cmu20_seed47_full/full/14/artifacts/BEST_OH_hollow_to_bridge_E-3.427.xyz",
+    "BEST_OH_hollow_to_bridge_E-3.427.xyz": "research/results/canonical_raw/controls/multiseed_gpt54_cmu20_seed47_full/full/14/artifacts/BEST_OH_hollow_to_bridge_E-3.427.xyz",
+    "conformers_[OH]": "research/results/canonical_raw/controls/multiseed_gpt54_cmu20_seed47_full/full/14/artifacts/conformers_[OH].traj",
+    "conformers_[OH].traj": "research/results/canonical_raw/controls/multiseed_gpt54_cmu20_seed47_full/full/14/artifacts/conformers_[OH].traj",
+    "final": "research/results/canonical_raw/controls/multiseed_gpt54_cmu20_seed47_full/full/14/artifacts/final.xyz",
+    "final.xyz": "research/results/canonical_raw/controls/multiseed_gpt54_cmu20_seed47_full/full/14/artifacts/final.xyz",
+    "relaxation": "research/results/canonical_raw/controls/multiseed_gpt54_cmu20_seed47_full/full/14/artifacts/relaxation.traj",
+    "relaxation.traj": "research/results/canonical_raw/controls/multiseed_gpt54_cmu20_seed47_full/full/14/artifacts/relaxation.traj",
+    "relaxation_trajectory_file": "research/results/canonical_raw/controls/multiseed_gpt54_cmu20_seed47_full/full/14/artifacts/relaxation.traj"
+  },
+  "best_result": {
+    "most_stable_energy_eV": -3.45790958404541,
+    "analysis_json": {
+      "status": "success",
+      "message": "Most stable config adsorption energy: -3.4579 eV. Target Atom: O (from plan index 0, global index 72 in relaxed structure). -> Nearest: Pt (Index 35), Distance: 1.956 Å (Threshold: 2.929), Bound: True. Bonded Surface Atoms: Pt-1.956Å, Co-2.309Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: False (Planned ['Co', 'Pt'] -> Actual ['Co', 'Pt']).",
+      "most_stable_energy_eV": -3.45790958404541,
+      "target_adsorbate_atom": "O",
+      "target_adsorbate_atom_index": 72,
+      "bonded_surface_atoms": [
+        {
+          "symbol": "Pt",
+          "index": 35,
+          "distance": 1.956
+        },
+        {
+          "symbol": "Co",
+          "index": 64,
+          "distance": 2.309
+        }
+      ],
+      "nearest_slab_atom": "Pt",
+      "nearest_slab_atom_index": 35,
+      "final_bond_distance_A": 1.956,
+      "estimated_covalent_cutoff_A": 2.222,
+      "is_covalently_bound": true,
+      "reaction_detected": false,
+      "is_dissociated": false,
+      "n_components": 1,
+      "bond_change_count": 0,
+      "site_analysis": {
+        "planned_site_type": "bridge",
+        "planned_connectivity": 2,
+        "actual_site_type": "bridge",
+        "actual_connectivity": 2,
+        "is_chemical_slip": false,
+        "planned_symbols": [
+          "Co",
+          "Pt"
+        ],
+        "actual_symbols": [
+          "Co",
+          "Pt"
+        ],
+        "site_fingerprint": "Pt35-Co64"
+      },
+      "best_structure_file": "outputs/14-ce601f92/BEST_OH_bridge_E-3.458.xyz",
+      "generated_conformers_file": "outputs/14-ce601f92/conformers_[OH].traj",
+      "relaxation_trajectory_file": "outputs/14-ce601f92/final.xyz",
+      "session_id": "14-ce601f92"
+    },
+    "plan": {
+      "reasoning": "SMILES consistency check: adsorbate is [OH], i.e. hydroxyl radical. The provided atom list contains only heavy atom index 0 = O, hybridization SP3, radical_electrons = 1, so ReactiveSpecies adsorption through O is chemically consistent. History analysis: two hollow-site trials were already performed, specifically Co-Co-Pt and Co-Pt-Pt hollows. In both cases the adsorbate spontaneously slipped to a Co-Pt bridge, proving both hollow types are unstable for this adsorbate on this surface and must not be tested again. The best energy so far is -3.427 eV from the Co-Pt-Pt hollow attempt, but the actual stable motif was again Co-Pt bridge. Since major hollow high-symmetry sites have both collapsed to the same bridge chemistry, the most systematic unexplored high-symmetry plan is to directly test the Co-Pt bridge site itself rather than reattempt forbidden hollows. User intent is to find the lowest-energy adsorption configuration for hydroxyl on CoPt(111). For OH radical on a transition-metal alloy surface, O-centered binding is expected; bridge Co-Pt is strongly suggested by the relaxation history and may be the true minimum or near-minimum. No termination tag such as [🔄 Converged to known best] is present in history, so a direct Co-Pt bridge test is still justified.",
+      "adsorbate_type": "ReactiveSpecies",
+      "solution": {
+        "action": "continue",
+        "site_type": "bridge",
+        "surface_binding_atoms": [
+          "Co",
+          "Pt"
+        ],
+        "adsorbate_binding_indices": [
+          0
+        ],
+        "relax_top_n": 1,
+        "touch_sphere_size": 2,
+        "overlap_thr": 0.1,
+        "conformers_per_site_cap": 4
+      }
+    },
+    "result_type": "Perfect"
+  },
+  "last_analysis": {
+    "status": "success",
+    "message": "Most stable config adsorption energy: -3.4571 eV. Target Atom: O (from plan index 0, global index 72 in relaxed structure). -> Nearest: Pt (Index 35), Distance: 1.957 Å (Threshold: 2.929), Bound: True. Bonded Surface Atoms: Pt-1.957Å, Co-2.314Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Co', 'Co'] -> Actual ['Co', 'Pt']).",
+    "most_stable_energy_eV": -3.457146644592285,
+    "target_adsorbate_atom": "O",
+    "target_adsorbate_atom_index": 72,
+    "bonded_surface_atoms": [
+      {
+        "symbol": "Pt",
+        "index": 35,
+        "distance": 1.957
+      },
+      {
+        "symbol": "Co",
+        "index": 64,
+        "distance": 2.314
+      }
+    ],
+    "nearest_slab_atom": "Pt",
+    "nearest_slab_atom_index": 35,
+    "final_bond_distance_A": 1.957,
+    "estimated_covalent_cutoff_A": 2.222,
+    "is_covalently_bound": true,
+    "reaction_detected": false,
+    "is_dissociated": false,
+    "n_components": 1,
+    "bond_change_count": 0,
+    "site_analysis": {
+      "planned_site_type": "bridge",
+      "planned_connectivity": 2,
+      "actual_site_type": "bridge",
+      "actual_connectivity": 2,
+      "is_chemical_slip": true,
+      "planned_symbols": [
+        "Co",
+        "Co"
+      ],
+      "actual_symbols": [
+        "Co",
+        "Pt"
+      ],
+      "site_fingerprint": "Pt35-Co64"
+    },
+    "best_structure_file": "outputs/14-ce601f92/BEST_OH_bridge_E-3.457.xyz",
+    "generated_conformers_file": "outputs/14-ce601f92/conformers_[OH].traj",
+    "relaxation_trajectory_file": "outputs/14-ce601f92/final.xyz",
+    "session_id": "14-ce601f92"
+  },
+  "attempt_records": [
+    {
+      "attempt_index": 1,
+      "plan": {
+        "reasoning": "SMILES consistency check: the adsorbate is [OH], i.e. hydroxyl radical. The provided atom list contains one heavy atom, O at index 0, hybridization SP3, with 1 radical electron and formal charge 0. This is fully consistent with a reactive OH species, so ReactiveSpecies is appropriate and the binding atom can validly be O index 0. There is no prior history, so no sites have been tested yet and there are no known unstable motifs or duplicate convergences. For hydroxyl on late transition-metal alloy (111) surfaces, the chemically most plausible low-energy motif is O-down adsorption with the H pointing away from the surface. OH commonly prefers high-coordination sites or strong-binding metal atoms, but as an initial systematic choice on a CoPt alloy, a hollow site containing more oxophilic Co is a strong first candidate. Among the available hollow-3 motifs, Co-Co-Pt should generally bind O more strongly than Co-Pt-Pt because of the higher Co content. The user’s core intent is to find the lowest-energy adsorption configuration, so the best initial plan is to probe the likely strongest chemisorption environment first rather than a weaker Pt ontop site. The site naming must use the canonical label 'hollow', while the detailed local composition is captured in surface_binding_atoms. Adsorbate binding should be monodentate through O index 0.",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "hollow",
+          "surface_binding_atoms": [
+            "Co",
+            "Co",
+            "Pt"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "hollow|Co,Co,Pt|0|ReactiveSpecies|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -3.42397403717041,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": true,
+      "planned_site_type": "hollow",
+      "actual_site_type": "bridge",
+      "best_structure_file": "outputs/14-ce601f92/BEST_OH_hollow_to_bridge_E-3.424.xyz",
+      "generated_conformers_file": "outputs/14-ce601f92/conformers_[OH].traj",
+      "relaxation_trajectory_file": "outputs/14-ce601f92/final.xyz",
+      "message": "Most stable config adsorption energy: -3.4240 eV. Target Atom: O (from plan index 0, global index 72 in relaxed structure). -> Nearest: Pt (Index 30), Distance: 1.954 Å (Threshold: 2.929), Bound: True. Bonded Surface Atoms: Pt-1.954Å, Co-2.275Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Co', 'Co', 'Pt'] -> Actual ['Co', 'Pt']).",
+      "history_entry": "【✅ Perfect Adsorption】 hollow @ ['Co', 'Co', 'Pt'] (Index [0]) -> ⚠️【Unstable Site Warning】⚠️: Planned hollow (Co-Co-Pt) is unstable, adsorbate spontaneously slipped to bridge (Co-Pt).This means Co-Co-Pt has insufficient affinity for this adsorbate. Please **FORBID** testing Co-Co-Pt type sites again! [🌟 New Best] | E=-3.424 eV"
+    },
+    {
+      "attempt_index": 2,
+      "plan": {
+        "reasoning": "SMILES consistency check: the adsorbate is [OH], i.e. hydroxyl radical. The provided atom list contains one heavy atom, O at index 0, hybridization SP3, radical_electrons = 1, formal charge 0. This is fully consistent with a radical OH species, so adsorption should be treated as ReactiveSpecies, and the binding atom must be O index 0. History analysis: one prior successful attempt started from hollow on Co-Co-Pt and relaxed to bridge Co-Pt with E = -3.424 eV. Because the record explicitly states an unstable-site warning and instructs to FORBID Co-Co-Pt hollow, that hollow environment is invalid for future testing. No bond-change failure is reported; instead it discovered that Co-Pt bridge is favorable. There is no [🔄 Converged to known best] tag, so termination is not required. Since only one effective chemisorbed motif has been identified so far, and the surface is heterogeneous (Co/Pt alloy), a lower-energy site may still exist at another high-symmetry environment. For OH on transition-metal alloys, O-centered adsorption commonly prefers high-coordination or metal-specific bridge/ontop environments depending on oxophilicity; Co-rich contacts can bind O-containing radicals more strongly than Pt-rich ones. Since Co-Co-Pt hollow is forbidden as unstable, the most systematic unexplored candidates are Pt-containing hollow Co-Pt-Pt, and bridges Co-Co or Pt-Pt, plus ontop Co/Pt. To pursue a likely stronger O-metal interaction while remaining distinct from the prior relaxed Co-Pt bridge result, the best new plan is hollow at Co-Pt-Pt using the radical O atom. User intent is to find the lowest-energy adsorption configuration for hydroxyl on this CoPt(111) slab, so we should continue exploring a new chemically plausible high-symmetry site rather than terminate.",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "hollow",
+          "surface_binding_atoms": [
+            "Co",
+            "Pt",
+            "Pt"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "hollow|Co,Pt,Pt|0|ReactiveSpecies|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -3.427117347717285,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": true,
+      "planned_site_type": "hollow",
+      "actual_site_type": "bridge",
+      "best_structure_file": "outputs/14-ce601f92/BEST_OH_hollow_to_bridge_E-3.427.xyz",
+      "generated_conformers_file": "outputs/14-ce601f92/conformers_[OH].traj",
+      "relaxation_trajectory_file": "outputs/14-ce601f92/final.xyz",
+      "message": "Most stable config adsorption energy: -3.4271 eV. Target Atom: O (from plan index 0, global index 72 in relaxed structure). -> Nearest: Pt (Index 71), Distance: 1.958 Å (Threshold: 2.929), Bound: True. Bonded Surface Atoms: Pt-1.958Å, Co-2.344Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Co', 'Pt', 'Pt'] -> Actual ['Co', 'Pt']).",
+      "history_entry": "【✅ Perfect Adsorption】 hollow @ ['Co', 'Pt', 'Pt'] (Index [0]) -> ⚠️【Unstable Site Warning】⚠️: Planned hollow (Co-Pt-Pt) is unstable, adsorbate spontaneously slipped to bridge (Co-Pt).This means Co-Pt-Pt has insufficient affinity for this adsorbate. Please **FORBID** testing Co-Pt-Pt type sites again! [🌟 New Best] | E=-3.427 eV"
+    },
+    {
+      "attempt_index": 3,
+      "plan": {
+        "reasoning": "SMILES consistency check: adsorbate is [OH], i.e. hydroxyl radical. The provided atom list contains only heavy atom index 0 = O, hybridization SP3, radical_electrons = 1, so ReactiveSpecies adsorption through O is chemically consistent. History analysis: two hollow-site trials were already performed, specifically Co-Co-Pt and Co-Pt-Pt hollows. In both cases the adsorbate spontaneously slipped to a Co-Pt bridge, proving both hollow types are unstable for this adsorbate on this surface and must not be tested again. The best energy so far is -3.427 eV from the Co-Pt-Pt hollow attempt, but the actual stable motif was again Co-Pt bridge. Since major hollow high-symmetry sites have both collapsed to the same bridge chemistry, the most systematic unexplored high-symmetry plan is to directly test the Co-Pt bridge site itself rather than reattempt forbidden hollows. User intent is to find the lowest-energy adsorption configuration for hydroxyl on CoPt(111). For OH radical on a transition-metal alloy surface, O-centered binding is expected; bridge Co-Pt is strongly suggested by the relaxation history and may be the true minimum or near-minimum. No termination tag such as [🔄 Converged to known best] is present in history, so a direct Co-Pt bridge test is still justified.",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "bridge",
+          "surface_binding_atoms": [
+            "Co",
+            "Pt"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "bridge|Co,Pt|0|ReactiveSpecies|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -3.45790958404541,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": false,
+      "planned_site_type": "bridge",
+      "actual_site_type": "bridge",
+      "best_structure_file": "outputs/14-ce601f92/BEST_OH_bridge_E-3.458.xyz",
+      "generated_conformers_file": "outputs/14-ce601f92/conformers_[OH].traj",
+      "relaxation_trajectory_file": "outputs/14-ce601f92/final.xyz",
+      "message": "Most stable config adsorption energy: -3.4579 eV. Target Atom: O (from plan index 0, global index 72 in relaxed structure). -> Nearest: Pt (Index 35), Distance: 1.956 Å (Threshold: 2.929), Bound: True. Bonded Surface Atoms: Pt-1.956Å, Co-2.309Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: False (Planned ['Co', 'Pt'] -> Actual ['Co', 'Pt']).",
+      "history_entry": "【✅ Perfect Adsorption】 bridge @ ['Co', 'Pt'] (Index [0]) -> Site: bridge (Co,Pt) [🌟 New Best] | E=-3.458 eV"
+    },
+    {
+      "attempt_index": 4,
+      "plan": {
+        "reasoning": "SMILES consistency check: the adsorbate is [OH], i.e. hydroxyl radical. The provided atom list contains one heavy atom, O at index 0, hybridization SP3, with radical_electrons = 1. Therefore this must be treated as ReactiveSpecies, and the only valid binding atom is O index 0. No SMILES/user-description inconsistency is present. History analysis: tested hollow Co-Co-Pt and hollow Co-Pt-Pt, and both were explicitly reported as unstable because the adsorbate slipped to bridge Co-Pt. These hollow site types are therefore invalid and must not be tested again. A direct bridge Co-Pt test was then successful and currently gives the best energy, -3.458 eV. No ontop Co, ontop Pt, bridge Co-Co, or bridge Pt-Pt plans have been tested yet. However, OH on transition-metal alloy surfaces generally binds strongly through O and often prefers bridge or ontop depending on local metal identity; since the heterobimetallic bridge Co-Pt is already more stable than both attempted hollows, there is still a reasonable possibility that a more strongly coordinating homometallic bridge, especially Co-Co, could be lower in energy on this alloy. This is a genuinely new plan and does not repeat any forbidden or already tested site. User intent is to find the lowest-energy OH adsorption configuration on the given CoPt(111) slab. Based on the available sites and prior results, the most systematic next step is to test O-bound OH at the untested Co-Co bridge site.",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "bridge",
+          "surface_binding_atoms": [
+            "Co",
+            "Co"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "bridge|Co,Co|0|ReactiveSpecies|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -3.457146644592285,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": true,
+      "planned_site_type": "bridge",
+      "actual_site_type": "bridge",
+      "best_structure_file": "outputs/14-ce601f92/BEST_OH_bridge_E-3.457.xyz",
+      "generated_conformers_file": "outputs/14-ce601f92/conformers_[OH].traj",
+      "relaxation_trajectory_file": "outputs/14-ce601f92/final.xyz",
+      "message": "Most stable config adsorption energy: -3.4571 eV. Target Atom: O (from plan index 0, global index 72 in relaxed structure). -> Nearest: Pt (Index 35), Distance: 1.957 Å (Threshold: 2.929), Bound: True. Bonded Surface Atoms: Pt-1.957Å, Co-2.314Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Co', 'Co'] -> Actual ['Co', 'Pt']).",
+      "history_entry": "【✅ Perfect Adsorption】 bridge @ ['Co', 'Co'] (Index [0]) -> ⚠️【Unstable Site Warning】⚠️: Planned bridge (Co-Co) is unstable, adsorbate spontaneously slipped to bridge (Co-Pt).This means Co-Co has insufficient affinity for this adsorbate. Please **FORBID** testing Co-Co type sites again! [🔄 Converged to known best] | E=-3.457 eV"
+    }
+  ],
+  "history": [
+    "【✅ Perfect Adsorption】 hollow @ ['Co', 'Co', 'Pt'] (Index [0]) -> ⚠️【Unstable Site Warning】⚠️: Planned hollow (Co-Co-Pt) is unstable, adsorbate spontaneously slipped to bridge (Co-Pt).This means Co-Co-Pt has insufficient affinity for this adsorbate. Please **FORBID** testing Co-Co-Pt type sites again! [🌟 New Best] | E=-3.424 eV",
+    "【✅ Perfect Adsorption】 hollow @ ['Co', 'Pt', 'Pt'] (Index [0]) -> ⚠️【Unstable Site Warning】⚠️: Planned hollow (Co-Pt-Pt) is unstable, adsorbate spontaneously slipped to bridge (Co-Pt).This means Co-Pt-Pt has insufficient affinity for this adsorbate. Please **FORBID** testing Co-Pt-Pt type sites again! [🌟 New Best] | E=-3.427 eV",
+    "【✅ Perfect Adsorption】 bridge @ ['Co', 'Pt'] (Index [0]) -> Site: bridge (Co,Pt) [🌟 New Best] | E=-3.458 eV",
+    "【✅ Perfect Adsorption】 bridge @ ['Co', 'Co'] (Index [0]) -> ⚠️【Unstable Site Warning】⚠️: Planned bridge (Co-Co) is unstable, adsorbate spontaneously slipped to bridge (Co-Pt).This means Co-Co has insufficient affinity for this adsorbate. Please **FORBID** testing Co-Co type sites again! [🔄 Converged to known best] | E=-3.457 eV"
+  ],
+  "error": null,
+  "perfect_count": 4,
+  "dissociation_count": 0,
+  "rearrangement_count": 0,
+  "calc_failure_count": 0,
+  "chemical_slip_count": 3
+}

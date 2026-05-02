@@ -18,9 +18,9 @@ from research.agent_eval.prepare_ocd_gmae import (
     write_outputs,
 )
 
-DEFAULT_MANIFEST_PATH = Path("research/agent_eval/manifests/ocd_gmae_rep50_manifest.csv")
-DEFAULT_SLAB_DIR = Path("research/agent_eval/generated_slabs/ocd_gmae_rep50")
-DEFAULT_SUMMARY_PATH = Path("research/agent_eval/manifests/ocd_gmae_rep50_manifest_selection.json")
+DEFAULT_MANIFEST_PATH = Path("research/agent_eval/manifests/ocd_gmae_representative50_manifest.csv")
+DEFAULT_SLAB_DIR = Path("research/agent_eval/generated_slabs/ocd_gmae_representative50")
+DEFAULT_SUMMARY_PATH = Path("research/agent_eval/manifests/ocd_gmae_representative50_manifest_selection.json")
 DEFAULT_CASES = 50
 DEFAULT_ENERGY_BINS = 5
 DEFAULT_MAX_PER_SMILES = 5

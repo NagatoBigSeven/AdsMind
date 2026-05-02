@@ -1,0 +1,250 @@
+{
+  "case_id": "005",
+  "case_metadata": {
+    "case_id": "005",
+    "slab_file": "research/agent_eval/generated_slabs/ocd_gmae/005_ocd_530_Co32Y48_NH.xyz",
+    "smiles": "[NH]",
+    "user_request": "Find the lowest-energy adsorption configuration for the adsorbate with SMILES [NH] on the provided surface.",
+    "surface_family": "intermetallic",
+    "adsorbate_name": "[NH]",
+    "miller_index": "",
+    "reaction_class": "GENERALIZATION",
+    "ablation_candidate": "FALSE",
+    "notes": "OCD-GMAE source key=530; original_ads_smi=[NH]; surface_formula=Co32Y48; y_relaxed=-2.517605 eV; site=[65, 66, 77]",
+    "source_key": "530",
+    "original_ads_smi": "[NH]",
+    "surface_formula": "Co32Y48",
+    "surface_elements": "Co;Y",
+    "bare_slab_atoms": "80",
+    "adsorbate_atoms": "2",
+    "y_relaxed": "-2.517605",
+    "site_indices": "65;66;77",
+    "selection_bucket": "small_n_species"
+  },
+  "status": "success",
+  "best_energy_eV": -10.011088371276855,
+  "iteration_count": 1,
+  "max_attempts": 1,
+  "final_site_type": "hollow (FCC/No-Subsurf)",
+  "converged_tag": false,
+  "wall_clock_sec": 52.464224833995104,
+  "total_input_tokens": 4051,
+  "total_output_tokens": 3741,
+  "artifact_paths": {
+    "BEST_NH_hollow_to_hollow_FCC-No-Subsurf_E-10.011": "research/results/canonical_raw/ocd24_gemini_one_shot/005/artifacts/BEST_NH_hollow_to_hollow_FCC-No-Subsurf_E-10.011.xyz",
+    "BEST_NH_hollow_to_hollow_FCC-No-Subsurf_E-10.011.xyz": "research/results/canonical_raw/ocd24_gemini_one_shot/005/artifacts/BEST_NH_hollow_to_hollow_FCC-No-Subsurf_E-10.011.xyz",
+    "best_structure_file": "research/results/canonical_raw/ocd24_gemini_one_shot/005/artifacts/BEST_NH_hollow_to_hollow_FCC-No-Subsurf_E-10.011.xyz",
+    "conformers_[NH]": "research/results/canonical_raw/ocd24_gemini_one_shot/005/artifacts/conformers_[NH].traj",
+    "conformers_[NH].traj": "research/results/canonical_raw/ocd24_gemini_one_shot/005/artifacts/conformers_[NH].traj",
+    "final": "research/results/canonical_raw/ocd24_gemini_one_shot/005/artifacts/final.xyz",
+    "final.xyz": "research/results/canonical_raw/ocd24_gemini_one_shot/005/artifacts/final.xyz",
+    "relaxation": "research/results/canonical_raw/ocd24_gemini_one_shot/005/artifacts/relaxation.traj",
+    "relaxation.traj": "research/results/canonical_raw/ocd24_gemini_one_shot/005/artifacts/relaxation.traj",
+    "relaxation_trajectory_file": "research/results/canonical_raw/ocd24_gemini_one_shot/005/artifacts/relaxation.traj"
+  },
+  "best_result": {
+    "most_stable_energy_eV": -10.011088371276855,
+    "analysis_json": {
+      "status": "success",
+      "message": "Most stable config adsorption energy: -10.0111 eV. Target Atom: N (from plan index 0, global index 80 in relaxed structure). -> Nearest: Co (Index 28), Distance: 2.079 Å (Threshold: 2.856), Bound: True. Bonded Surface Atoms: Co-2.079Å, Co-2.166Å, Y-2.381Å, Y-2.421Å, Y-2.492Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Co', 'Co', 'Y'] -> Actual ['Co', 'Co', 'Y', 'Y', 'Y']).",
+      "most_stable_energy_eV": -10.011088371276855,
+      "target_adsorbate_atom": "N",
+      "target_adsorbate_atom_index": 80,
+      "bonded_surface_atoms": [
+        {
+          "symbol": "Co",
+          "index": 28,
+          "distance": 2.079
+        },
+        {
+          "symbol": "Co",
+          "index": 22,
+          "distance": 2.166
+        },
+        {
+          "symbol": "Y",
+          "index": 61,
+          "distance": 2.381
+        },
+        {
+          "symbol": "Y",
+          "index": 75,
+          "distance": 2.421
+        },
+        {
+          "symbol": "Y",
+          "index": 67,
+          "distance": 2.492
+        }
+      ],
+      "nearest_slab_atom": "Co",
+      "nearest_slab_atom_index": 28,
+      "final_bond_distance_A": 2.079,
+      "estimated_covalent_cutoff_A": 2.167,
+      "is_covalently_bound": true,
+      "reaction_detected": false,
+      "is_dissociated": false,
+      "n_components": 1,
+      "bond_change_count": 0,
+      "site_analysis": {
+        "planned_site_type": "hollow",
+        "planned_connectivity": 3,
+        "actual_site_type": "hollow (FCC/No-Subsurf)",
+        "actual_connectivity": 5,
+        "is_chemical_slip": true,
+        "planned_symbols": [
+          "Co",
+          "Co",
+          "Y"
+        ],
+        "actual_symbols": [
+          "Co",
+          "Co",
+          "Y",
+          "Y",
+          "Y"
+        ],
+        "site_fingerprint": "Co28-Co22-Y61-Y75-Y67"
+      },
+      "best_structure_file": "outputs/005-1b9af60f/BEST_NH_hollow_to_hollow_FCC-No-Subsurf_E-10.011.xyz",
+      "generated_conformers_file": "outputs/005-1b9af60f/conformers_[NH].traj",
+      "relaxation_trajectory_file": "outputs/005-1b9af60f/final.xyz",
+      "session_id": "005-1b9af60f"
+    },
+    "plan": {
+      "reasoning": "The user wants to find the lowest energy adsorption site for the imidogen radical ([NH]) on a Co-Y alloy surface. This is the first attempt, so I will start with a high-coordination site, which is often the most stable for small radical adsorbates. The provided analysis of the SMILES '[NH]' shows that the nitrogen atom (index 0) has 2 radical electrons, making it a reactive species. Therefore, the `adsorbate_type` should be 'ReactiveSpecies'. I will test a 3-fold hollow site composed of two Cobalt atoms and one Yttrium atom ('Co-Co-Y'). This site is chosen to explore the interaction with a mixed-metal environment, which is a promising candidate for strong binding on an alloy surface. The nitrogen atom will be the binding atom.",
+      "adsorbate_type": "ReactiveSpecies",
+      "solution": {
+        "action": "continue",
+        "site_type": "hollow",
+        "surface_binding_atoms": [
+          "Co",
+          "Co",
+          "Y"
+        ],
+        "adsorbate_binding_indices": [
+          0
+        ],
+        "relax_top_n": 1,
+        "touch_sphere_size": 2,
+        "overlap_thr": 0.1,
+        "conformers_per_site_cap": 4
+      }
+    },
+    "result_type": "Perfect"
+  },
+  "last_analysis": {
+    "status": "success",
+    "message": "Most stable config adsorption energy: -10.0111 eV. Target Atom: N (from plan index 0, global index 80 in relaxed structure). -> Nearest: Co (Index 28), Distance: 2.079 Å (Threshold: 2.856), Bound: True. Bonded Surface Atoms: Co-2.079Å, Co-2.166Å, Y-2.381Å, Y-2.421Å, Y-2.492Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Co', 'Co', 'Y'] -> Actual ['Co', 'Co', 'Y', 'Y', 'Y']).",
+    "most_stable_energy_eV": -10.011088371276855,
+    "target_adsorbate_atom": "N",
+    "target_adsorbate_atom_index": 80,
+    "bonded_surface_atoms": [
+      {
+        "symbol": "Co",
+        "index": 28,
+        "distance": 2.079
+      },
+      {
+        "symbol": "Co",
+        "index": 22,
+        "distance": 2.166
+      },
+      {
+        "symbol": "Y",
+        "index": 61,
+        "distance": 2.381
+      },
+      {
+        "symbol": "Y",
+        "index": 75,
+        "distance": 2.421
+      },
+      {
+        "symbol": "Y",
+        "index": 67,
+        "distance": 2.492
+      }
+    ],
+    "nearest_slab_atom": "Co",
+    "nearest_slab_atom_index": 28,
+    "final_bond_distance_A": 2.079,
+    "estimated_covalent_cutoff_A": 2.167,
+    "is_covalently_bound": true,
+    "reaction_detected": false,
+    "is_dissociated": false,
+    "n_components": 1,
+    "bond_change_count": 0,
+    "site_analysis": {
+      "planned_site_type": "hollow",
+      "planned_connectivity": 3,
+      "actual_site_type": "hollow (FCC/No-Subsurf)",
+      "actual_connectivity": 5,
+      "is_chemical_slip": true,
+      "planned_symbols": [
+        "Co",
+        "Co",
+        "Y"
+      ],
+      "actual_symbols": [
+        "Co",
+        "Co",
+        "Y",
+        "Y",
+        "Y"
+      ],
+      "site_fingerprint": "Co28-Co22-Y61-Y75-Y67"
+    },
+    "best_structure_file": "outputs/005-1b9af60f/BEST_NH_hollow_to_hollow_FCC-No-Subsurf_E-10.011.xyz",
+    "generated_conformers_file": "outputs/005-1b9af60f/conformers_[NH].traj",
+    "relaxation_trajectory_file": "outputs/005-1b9af60f/final.xyz",
+    "session_id": "005-1b9af60f"
+  },
+  "attempt_records": [
+    {
+      "attempt_index": 1,
+      "plan": {
+        "reasoning": "The user wants to find the lowest energy adsorption site for the imidogen radical ([NH]) on a Co-Y alloy surface. This is the first attempt, so I will start with a high-coordination site, which is often the most stable for small radical adsorbates. The provided analysis of the SMILES '[NH]' shows that the nitrogen atom (index 0) has 2 radical electrons, making it a reactive species. Therefore, the `adsorbate_type` should be 'ReactiveSpecies'. I will test a 3-fold hollow site composed of two Cobalt atoms and one Yttrium atom ('Co-Co-Y'). This site is chosen to explore the interaction with a mixed-metal environment, which is a promising candidate for strong binding on an alloy surface. The nitrogen atom will be the binding atom.",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "hollow",
+          "surface_binding_atoms": [
+            "Co",
+            "Co",
+            "Y"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "hollow|Co,Co,Y|0|ReactiveSpecies|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -10.011088371276855,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": true,
+      "planned_site_type": "hollow",
+      "actual_site_type": "hollow (FCC/No-Subsurf)",
+      "best_structure_file": "outputs/005-1b9af60f/BEST_NH_hollow_to_hollow_FCC-No-Subsurf_E-10.011.xyz",
+      "generated_conformers_file": "outputs/005-1b9af60f/conformers_[NH].traj",
+      "relaxation_trajectory_file": "outputs/005-1b9af60f/final.xyz",
+      "message": "Most stable config adsorption energy: -10.0111 eV. Target Atom: N (from plan index 0, global index 80 in relaxed structure). -> Nearest: Co (Index 28), Distance: 2.079 Å (Threshold: 2.856), Bound: True. Bonded Surface Atoms: Co-2.079Å, Co-2.166Å, Y-2.381Å, Y-2.421Å, Y-2.492Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Co', 'Co', 'Y'] -> Actual ['Co', 'Co', 'Y', 'Y', 'Y']).",
+      "history_entry": "【✅ Perfect Adsorption】 hollow @ ['Co', 'Co', 'Y'] (Index [0]) -> ⚠️【Unstable Site Warning】⚠️: Planned hollow (Co-Co-Y) is unstable, adsorbate spontaneously slipped to hollow (FCC/No-Subsurf) (Co-Co-Y-Y-Y).This means Co-Co-Y has insufficient affinity for this adsorbate. Please **FORBID** testing Co-Co-Y type sites again! [🌟 New Best] | E=-10.011 eV"
+    }
+  ],
+  "history": [
+    "【✅ Perfect Adsorption】 hollow @ ['Co', 'Co', 'Y'] (Index [0]) -> ⚠️【Unstable Site Warning】⚠️: Planned hollow (Co-Co-Y) is unstable, adsorbate spontaneously slipped to hollow (FCC/No-Subsurf) (Co-Co-Y-Y-Y).This means Co-Co-Y has insufficient affinity for this adsorbate. Please **FORBID** testing Co-Co-Y type sites again! [🌟 New Best] | E=-10.011 eV"
+  ],
+  "error": null,
+  "perfect_count": 1,
+  "dissociation_count": 0,
+  "rearrangement_count": 0,
+  "calc_failure_count": 0,
+  "chemical_slip_count": 1
+}

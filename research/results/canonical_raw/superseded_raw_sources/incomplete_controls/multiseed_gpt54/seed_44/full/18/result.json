@@ -1,0 +1,285 @@
+{
+  "case_id": "18",
+  "case_metadata": {
+    "case_id": "18",
+    "slab_file": "benchmark_slabs/18_Al3Zr_101.xyz",
+    "smiles": "CC=O",
+    "user_request": "Find the lowest-energy adsorption configuration for acetaldehyde on the provided surface.",
+    "surface_family": "intermetallic",
+    "adsorbate_name": "OCHCH3",
+    "miller_index": "(101)",
+    "reaction_class": "COMPLEX",
+    "ablation_candidate": "FALSE",
+    "notes": "Best-available reconstruction from sanitized filename CC_O and formula C2H4O"
+  },
+  "status": "success",
+  "best_energy_eV": -2.889484405517578,
+  "iteration_count": 3,
+  "max_attempts": 5,
+  "final_site_type": "hollow (FCC/No-Subsurf)",
+  "converged_tag": false,
+  "wall_clock_sec": 200.1956744156778,
+  "total_input_tokens": 17631,
+  "total_output_tokens": 5294,
+  "artifact_paths": {
+    "BEST_CC_O_hollow_to_hollow_HCP-Subsurf-Atom_E-2.408": "research/results/multiseed_gpt54/seed_44/full/18/artifacts/BEST_CC_O_hollow_to_hollow_HCP-Subsurf-Atom_E-2.408.xyz",
+    "BEST_CC_O_hollow_to_hollow_HCP-Subsurf-Atom_E-2.408.xyz": "research/results/multiseed_gpt54/seed_44/full/18/artifacts/BEST_CC_O_hollow_to_hollow_HCP-Subsurf-Atom_E-2.408.xyz",
+    "best_structure_file": "research/results/multiseed_gpt54/seed_44/full/18/artifacts/BEST_CC_O_ontop_to_hollow_FCC-No-Subsurf_E-2.889.xyz",
+    "BEST_CC_O_ontop_to_bridge_E-2.460": "research/results/multiseed_gpt54/seed_44/full/18/artifacts/BEST_CC_O_ontop_to_bridge_E-2.460.xyz",
+    "BEST_CC_O_ontop_to_bridge_E-2.460.xyz": "research/results/multiseed_gpt54/seed_44/full/18/artifacts/BEST_CC_O_ontop_to_bridge_E-2.460.xyz",
+    "BEST_CC_O_ontop_to_hollow_FCC-No-Subsurf_E-2.889": "research/results/multiseed_gpt54/seed_44/full/18/artifacts/BEST_CC_O_ontop_to_hollow_FCC-No-Subsurf_E-2.889.xyz",
+    "BEST_CC_O_ontop_to_hollow_FCC-No-Subsurf_E-2.889.xyz": "research/results/multiseed_gpt54/seed_44/full/18/artifacts/BEST_CC_O_ontop_to_hollow_FCC-No-Subsurf_E-2.889.xyz",
+    "conformers_CC_O": "research/results/multiseed_gpt54/seed_44/full/18/artifacts/conformers_CC_O.traj",
+    "conformers_CC_O.traj": "research/results/multiseed_gpt54/seed_44/full/18/artifacts/conformers_CC_O.traj",
+    "final": "research/results/multiseed_gpt54/seed_44/full/18/artifacts/final.xyz",
+    "final.xyz": "research/results/multiseed_gpt54/seed_44/full/18/artifacts/final.xyz",
+    "relaxation": "research/results/multiseed_gpt54/seed_44/full/18/artifacts/relaxation.traj",
+    "relaxation.traj": "research/results/multiseed_gpt54/seed_44/full/18/artifacts/relaxation.traj",
+    "relaxation_trajectory_file": "research/results/multiseed_gpt54/seed_44/full/18/artifacts/relaxation.traj"
+  },
+  "best_result": {
+    "most_stable_energy_eV": -2.889484405517578,
+    "analysis_json": {
+      "status": "success",
+      "message": "Most stable config adsorption energy: -2.8895 eV. Target Atom: O (from plan index 2, global index 48 in relaxed structure). -> Nearest: Al (Index 0), Distance: 2.2 Å (Threshold: 2.712), Bound: True. Bonded Surface Atoms: Al-2.2Å, Al-2.224Å, Al-2.233Å, Zr-2.293Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Zr'] -> Actual ['Al', 'Al', 'Al', 'Zr']).",
+      "most_stable_energy_eV": -2.889484405517578,
+      "target_adsorbate_atom": "O",
+      "target_adsorbate_atom_index": 48,
+      "bonded_surface_atoms": [
+        {
+          "symbol": "Al",
+          "index": 0,
+          "distance": 2.2
+        },
+        {
+          "symbol": "Al",
+          "index": 8,
+          "distance": 2.224
+        },
+        {
+          "symbol": "Al",
+          "index": 34,
+          "distance": 2.233
+        },
+        {
+          "symbol": "Zr",
+          "index": 6,
+          "distance": 2.293
+        }
+      ],
+      "nearest_slab_atom": "Al",
+      "nearest_slab_atom_index": 0,
+      "final_bond_distance_A": 2.2,
+      "estimated_covalent_cutoff_A": 2.057,
+      "is_covalently_bound": true,
+      "reaction_detected": false,
+      "is_dissociated": false,
+      "n_components": 1,
+      "bond_change_count": 0,
+      "site_analysis": {
+        "planned_site_type": "ontop",
+        "planned_connectivity": 1,
+        "actual_site_type": "hollow (FCC/No-Subsurf)",
+        "actual_connectivity": 4,
+        "is_chemical_slip": true,
+        "planned_symbols": [
+          "Zr"
+        ],
+        "actual_symbols": [
+          "Al",
+          "Al",
+          "Al",
+          "Zr"
+        ],
+        "site_fingerprint": "Al0-Al8-Al34-Zr6"
+      },
+      "best_structure_file": "outputs/18-c12ef763/BEST_CC_O_ontop_to_hollow_FCC-No-Subsurf_E-2.889.xyz",
+      "generated_conformers_file": "outputs/18-c12ef763/conformers_CC_O.traj",
+      "relaxation_trajectory_file": "outputs/18-c12ef763/final.xyz",
+      "session_id": "18-c12ef763"
+    },
+    "plan": {
+      "reasoning": "No previous attempts exist, so I should propose the best chemically informed initial plan. SMILES consistency check: CC=O is acetaldehyde, containing a methyl carbon (index 0, SP3), a carbonyl carbon (index 1, SP2), and a carbonyl oxygen (index 2, SP2). This matches the user request for acetaldehyde; there is no mismatch. All listed atoms have radical_electrons = 0, so this must be treated as a stable Molecule, not a ReactiveSpecies. For intact molecular adsorption of acetaldehyde on an Al/Zr alloy surface, the most plausible donor site is the carbonyl oxygen lone pair. Binding through the methyl carbon is forbidden for Molecule adsorption because it is saturated, and binding through the carbonyl carbon as a neutral molecule is less natural than O-donation. On oxophilic/intermetallic surfaces containing Zr, the strongest initial interaction is likely O coordinated to a Zr ontop site due to stronger Lewis acid/oxophilic character of Zr relative to Al. Available sites permit ontop on Zr, which is therefore the most promising first low-energy trial. User intent is to find the lowest-energy adsorption configuration, so a systematic search should begin from the most chemically favorable high-symmetry site and then iterate if needed. Thus I select ontop adsorption with O atom index 2 on Zr.",
+      "adsorbate_type": "Molecule",
+      "solution": {
+        "action": "continue",
+        "site_type": "ontop",
+        "surface_binding_atoms": [
+          "Zr"
+        ],
+        "adsorbate_binding_indices": [
+          2
+        ],
+        "relax_top_n": 1,
+        "touch_sphere_size": 2,
+        "overlap_thr": 0.1,
+        "conformers_per_site_cap": 4
+      }
+    },
+    "result_type": "Perfect"
+  },
+  "last_analysis": {
+    "status": "success",
+    "message": "Most stable config adsorption energy: -2.4596 eV. Target Atom: O (from plan index 2, global index 48 in relaxed structure). -> Nearest: Al (Index 40), Distance: 1.86 Å (Threshold: 2.712), Bound: True. Bonded Surface Atoms: Al-1.86Å, Al-2.144Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Al'] -> Actual ['Al', 'Al']).",
+    "most_stable_energy_eV": -2.459552764892578,
+    "target_adsorbate_atom": "O",
+    "target_adsorbate_atom_index": 48,
+    "bonded_surface_atoms": [
+      {
+        "symbol": "Al",
+        "index": 40,
+        "distance": 1.86
+      },
+      {
+        "symbol": "Al",
+        "index": 18,
+        "distance": 2.144
+      }
+    ],
+    "nearest_slab_atom": "Al",
+    "nearest_slab_atom_index": 40,
+    "final_bond_distance_A": 1.86,
+    "estimated_covalent_cutoff_A": 2.057,
+    "is_covalently_bound": true,
+    "reaction_detected": false,
+    "is_dissociated": false,
+    "n_components": 1,
+    "bond_change_count": 0,
+    "site_analysis": {
+      "planned_site_type": "ontop",
+      "planned_connectivity": 1,
+      "actual_site_type": "bridge",
+      "actual_connectivity": 2,
+      "is_chemical_slip": true,
+      "planned_symbols": [
+        "Al"
+      ],
+      "actual_symbols": [
+        "Al",
+        "Al"
+      ],
+      "site_fingerprint": "Al40-Al18"
+    },
+    "best_structure_file": "outputs/18-c12ef763/BEST_CC_O_ontop_to_bridge_E-2.460.xyz",
+    "generated_conformers_file": "outputs/18-c12ef763/conformers_CC_O.traj",
+    "relaxation_trajectory_file": "outputs/18-c12ef763/final.xyz",
+    "session_id": "18-c12ef763"
+  },
+  "attempt_records": [
+    {
+      "attempt_index": 1,
+      "plan": {
+        "reasoning": "No previous attempts exist, so I should propose the best chemically informed initial plan. SMILES consistency check: CC=O is acetaldehyde, containing a methyl carbon (index 0, SP3), a carbonyl carbon (index 1, SP2), and a carbonyl oxygen (index 2, SP2). This matches the user request for acetaldehyde; there is no mismatch. All listed atoms have radical_electrons = 0, so this must be treated as a stable Molecule, not a ReactiveSpecies. For intact molecular adsorption of acetaldehyde on an Al/Zr alloy surface, the most plausible donor site is the carbonyl oxygen lone pair. Binding through the methyl carbon is forbidden for Molecule adsorption because it is saturated, and binding through the carbonyl carbon as a neutral molecule is less natural than O-donation. On oxophilic/intermetallic surfaces containing Zr, the strongest initial interaction is likely O coordinated to a Zr ontop site due to stronger Lewis acid/oxophilic character of Zr relative to Al. Available sites permit ontop on Zr, which is therefore the most promising first low-energy trial. User intent is to find the lowest-energy adsorption configuration, so a systematic search should begin from the most chemically favorable high-symmetry site and then iterate if needed. Thus I select ontop adsorption with O atom index 2 on Zr.",
+        "adsorbate_type": "Molecule",
+        "solution": {
+          "action": "continue",
+          "site_type": "ontop",
+          "surface_binding_atoms": [
+            "Zr"
+          ],
+          "adsorbate_binding_indices": [
+            2
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "ontop|Zr|2|Molecule|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -2.889484405517578,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": true,
+      "planned_site_type": "ontop",
+      "actual_site_type": "hollow (FCC/No-Subsurf)",
+      "best_structure_file": "outputs/18-c12ef763/BEST_CC_O_ontop_to_hollow_FCC-No-Subsurf_E-2.889.xyz",
+      "generated_conformers_file": "outputs/18-c12ef763/conformers_CC_O.traj",
+      "relaxation_trajectory_file": "outputs/18-c12ef763/final.xyz",
+      "message": "Most stable config adsorption energy: -2.8895 eV. Target Atom: O (from plan index 2, global index 48 in relaxed structure). -> Nearest: Al (Index 0), Distance: 2.2 Å (Threshold: 2.712), Bound: True. Bonded Surface Atoms: Al-2.2Å, Al-2.224Å, Al-2.233Å, Zr-2.293Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Zr'] -> Actual ['Al', 'Al', 'Al', 'Zr']).",
+      "history_entry": "【✅ Perfect Adsorption】 ontop @ ['Zr'] (Index [2]) -> ⚠️【Unstable Site Warning】⚠️: Planned ontop (Zr) is unstable, adsorbate spontaneously slipped to hollow (FCC/No-Subsurf) (Al-Al-Al-Zr).This means Zr has insufficient affinity for this adsorbate. Please **FORBID** testing Zr type sites again! [🌟 New Best] | E=-2.889 eV"
+    },
+    {
+      "attempt_index": 2,
+      "plan": {
+        "reasoning": "SMILES consistency check: CC=O is acetaldehyde, which matches the user's request. Heavy-atom indices are fixed as methyl C index 0 (SP3), carbonyl C index 1 (SP2), and O index 2 (SP2). This is a closed-shell molecule with no radical electrons on any atom, so it must be treated as Molecule, not ReactiveSpecies. For molecular adsorption, the chemically valid donor atom is the carbonyl oxygen (index 2); binding through the saturated methyl carbon is invalid, and ReactiveSpecies-style binding through carbon would also be invalid because radical_electrons = 0. History analysis: only one prior plan was tested, ontop on Zr using site type ontop @ ['Zr'], and it slipped to a hollow environment with energy -2.889 eV. The history explicitly states Zr-type sites are unstable/invalid for this adsorbate and must be forbidden going forward. Therefore I should not test ontop Zr or any Al-Zr bridge because that includes Zr as a direct planned site atom. The slipped final state indicates hollow-like Al-rich coordination may be favorable, so the most systematic unexplored high-symmetry option is the available hollow site composed of Al-Al-Zr, but with the adsorbate initially aligned through O toward the hollow ensemble rather than through Zr ontop. This is a completely new plan relative to the prior ontop-Zr attempt, respects the site list, and probes the likely favorable Al-rich pocket that the previous relaxation discovered. User intent is to find the lowest-energy adsorption configuration for acetaldehyde on this alloy surface. I will therefore test O-bound molecular adsorption at the hollow site.",
+        "adsorbate_type": "Molecule",
+        "solution": {
+          "action": "continue",
+          "site_type": "hollow",
+          "surface_binding_atoms": [
+            "Al",
+            "Al",
+            "Zr"
+          ],
+          "adsorbate_binding_indices": [
+            2
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "hollow|Al,Al,Zr|2|Molecule|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -2.4076194763183594,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": false,
+      "planned_site_type": "hollow",
+      "actual_site_type": "hollow (HCP/Subsurf-Atom)",
+      "best_structure_file": "outputs/18-c12ef763/BEST_CC_O_hollow_to_hollow_HCP-Subsurf-Atom_E-2.408.xyz",
+      "generated_conformers_file": "outputs/18-c12ef763/conformers_CC_O.traj",
+      "relaxation_trajectory_file": "outputs/18-c12ef763/final.xyz",
+      "message": "Most stable config adsorption energy: -2.4076 eV. Target Atom: O (from plan index 2, global index 48 in relaxed structure). -> Nearest: Al (Index 18), Distance: 2.104 Å (Threshold: 2.712), Bound: True. Bonded Surface Atoms: Al-2.104Å, Al-2.212Å, Zr-2.348Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: False (Planned ['Al', 'Al', 'Zr'] -> Actual ['Al', 'Al', 'Zr']).",
+      "history_entry": "【✅ Perfect Adsorption】 hollow @ ['Al', 'Al', 'Zr'] (Index [2]) -> ⚠️ Geometric Slip: hollow -> hollow (HCP/Subsurf-Atom) | E=-2.408 eV"
+    },
+    {
+      "attempt_index": 3,
+      "plan": {
+        "reasoning": "SMILES consistency check: CC=O corresponds to acetaldehyde, so the user description matches the SMILES. Heavy atoms are index 0 = methyl carbon (sp3), index 1 = carbonyl carbon (sp2), index 2 = oxygen (sp2). No radicals are present, so this must be treated as a Molecule, not a ReactiveSpecies. For molecular adsorption, the most chemically valid donor atom is the carbonyl oxygen at index 2; the saturated methyl carbon at index 0 is not a valid molecular binding atom, and the carbonyl carbon is less appropriate than O for donor-type adsorption on electropositive alloy sites. History analysis: two plans have already been tested. (1) ontop on Zr was attempted and explicitly flagged as unstable, with spontaneous slip to a hollow site and a clear instruction to forbid Zr-type sites again; therefore ontop-Zr and, more generally, Zr-targeted plans should be avoided. That slipped structure currently gives the best energy, -2.889 eV, but because the planned Zr site was unstable, it should not be retried. (2) hollow on Al-Al-Zr was tested and relaxed to a different hollow variant with weaker adsorption, -2.408 eV. No bond-change failure or dissociation is reported, so both are valid outcomes, but only the initial Zr site is explicitly invalidated. Convergence analysis: there is no [🔄 Converged to known best] tag, so termination is not mandatory. Also, major high-symmetry site classes have not all been tested yet: ontop-Al and bridge-Al-Al remain unexplored, while bridge-Al-Zr should be avoided because it includes Zr, which was flagged unstable for this adsorbate. User intent is to find the lowest-energy adsorption configuration for acetaldehyde on this Al/Zr surface. Given the oxyphilic/electropositive nature of Al-containing sites and the fact that O is the preferred binding atom, the best systematic next test is O-bound ontop on Al. This is a completely new plan, respects the prohibition against Zr sites, and may reveal whether a direct Al-O coordination is lower than the previously observed slipped hollow state.",
+        "adsorbate_type": "Molecule",
+        "solution": {
+          "action": "continue",
+          "site_type": "ontop",
+          "surface_binding_atoms": [
+            "Al"
+          ],
+          "adsorbate_binding_indices": [
+            2
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "ontop|Al|2|Molecule|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -2.459552764892578,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": true,
+      "planned_site_type": "ontop",
+      "actual_site_type": "bridge",
+      "best_structure_file": "outputs/18-c12ef763/BEST_CC_O_ontop_to_bridge_E-2.460.xyz",
+      "generated_conformers_file": "outputs/18-c12ef763/conformers_CC_O.traj",
+      "relaxation_trajectory_file": "outputs/18-c12ef763/final.xyz",
+      "message": "Most stable config adsorption energy: -2.4596 eV. Target Atom: O (from plan index 2, global index 48 in relaxed structure). -> Nearest: Al (Index 40), Distance: 1.86 Å (Threshold: 2.712), Bound: True. Bonded Surface Atoms: Al-1.86Å, Al-2.144Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Al'] -> Actual ['Al', 'Al']).",
+      "history_entry": "【✅ Perfect Adsorption】 ontop @ ['Al'] (Index [2]) -> ⚠️【Unstable Site Warning】⚠️: Planned ontop (Al) is unstable, adsorbate spontaneously slipped to bridge (Al-Al).This means Al has insufficient affinity for this adsorbate. Please **FORBID** testing Al type sites again! | E=-2.460 eV"
+    }
+  ],
+  "history": [
+    "【✅ Perfect Adsorption】 ontop @ ['Zr'] (Index [2]) -> ⚠️【Unstable Site Warning】⚠️: Planned ontop (Zr) is unstable, adsorbate spontaneously slipped to hollow (FCC/No-Subsurf) (Al-Al-Al-Zr).This means Zr has insufficient affinity for this adsorbate. Please **FORBID** testing Zr type sites again! [🌟 New Best] | E=-2.889 eV",
+    "【✅ Perfect Adsorption】 hollow @ ['Al', 'Al', 'Zr'] (Index [2]) -> ⚠️ Geometric Slip: hollow -> hollow (HCP/Subsurf-Atom) | E=-2.408 eV",
+    "【✅ Perfect Adsorption】 ontop @ ['Al'] (Index [2]) -> ⚠️【Unstable Site Warning】⚠️: Planned ontop (Al) is unstable, adsorbate spontaneously slipped to bridge (Al-Al).This means Al has insufficient affinity for this adsorbate. Please **FORBID** testing Al type sites again! | E=-2.460 eV"
+  ],
+  "error": null,
+  "perfect_count": 3,
+  "dissociation_count": 0,
+  "rearrangement_count": 0,
+  "calc_failure_count": 0,
+  "chemical_slip_count": 2
+}

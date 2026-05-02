@@ -15,9 +15,11 @@ from research.agent_eval.common import (
     resolve_runtime_flags,
     summarize_directory,
 )
-from research.agent_eval.compare_llm_ablation import main as compare_llm_ablation_main
+from research.agent_eval.compare_two_backend_ablation import (
+    main as compare_two_backend_ablation_main,
+)
 from research.agent_eval.compare_adsorbagent import main as compare_main
-from research.agent_eval.package_results import main as package_main
+from research.agent_eval.legacy_package_results import main as legacy_package_main
 from research.agent_eval.run_batch import main as run_batch_main
 from research.agent_eval.run_case import execute_case
 from research.agent_eval.summarize_runs import main as summarize_main
@@ -53,7 +55,7 @@ class TestAgentEvalTools(unittest.TestCase):
         )
         self.assertEqual(
             Path(state["slab_path"]),
-            ROOT / "benchmark_slabs" / "01_Mo3Pd_111.xyz",
+            ROOT / "slabs" / "benchmark" / "cmu_dataset" / "01_Mo3Pd_111.xyz",
         )
 
     def test_run_case_serializes_result_with_fake_executor(self):
@@ -290,7 +292,7 @@ class TestAgentEvalTools(unittest.TestCase):
             self.assertTrue((output_dir / "comparison.csv").exists())
             self.assertTrue((output_dir / "comparison_stats.json").exists())
 
-    def test_compare_llm_ablation_generates_outputs(self):
+    def test_compare_two_backend_ablation_generates_outputs(self):
         with tempfile.TemporaryDirectory() as tmpdir:
             left = Path(tmpdir) / "left.csv"
             right = Path(tmpdir) / "right.csv"
@@ -356,7 +358,7 @@ class TestAgentEvalTools(unittest.TestCase):
 
             output_csv = Path(tmpdir) / "comparison.csv"
             output_json = Path(tmpdir) / "comparison.json"
-            code = compare_llm_ablation_main(
+            code = compare_two_backend_ablation_main(
                 [
                     "--left-summary",
                     str(left),
@@ -379,7 +381,7 @@ class TestAgentEvalTools(unittest.TestCase):
             self.assertEqual(data["overall"]["row_count"], 2)
             self.assertEqual(data["largest_disagreement"]["variant"], "single_shot")
 
-    def test_package_results_builds_expected_directories(self):
+    def test_legacy_package_results_builds_expected_directories(self):
         with tempfile.TemporaryDirectory() as tmpdir:
             benchmark_dir = Path(tmpdir) / "benchmark"
             benchmark_dir.mkdir()
@@ -407,7 +409,7 @@ class TestAgentEvalTools(unittest.TestCase):
                 )
 
             output_dir = Path(tmpdir) / "package"
-            code = package_main(
+            code = legacy_package_main(
                 [
                     "--benchmark-dir",
                     str(benchmark_dir),

@@ -1,0 +1,222 @@
+{
+  "case_id": "029",
+  "case_metadata": {
+    "case_id": "029",
+    "slab_file": "research/agent_eval/generated_slabs/ocd_gmae_rep50/029_ocd_800_Co48Hf16_CH_O.xyz",
+    "smiles": "[CH]=O",
+    "user_request": "Find the lowest-energy adsorption configuration for the adsorbate with SMILES [CH]=O on the provided surface.",
+    "surface_family": "intermetallic",
+    "adsorbate_name": "[CH]=O",
+    "miller_index": "",
+    "reaction_class": "GENERALIZATION",
+    "ablation_candidate": "FALSE",
+    "notes": "OCD-GMAE source key=800; original_ads_smi=[CH]=O; surface_formula=Co48Hf16; y_relaxed=-2.212683 eV; site=[4, 12, 32]",
+    "source_key": "800",
+    "original_ads_smi": "[CH]=O",
+    "surface_formula": "Co48Hf16",
+    "surface_elements": "Co;Hf",
+    "bare_slab_atoms": "64",
+    "adsorbate_atoms": "3",
+    "y_relaxed": "-2.212683",
+    "site_indices": "4;12;32",
+    "selection_bucket": "small_organic"
+  },
+  "status": "success",
+  "best_energy_eV": -2.729450225830078,
+  "iteration_count": 1,
+  "max_attempts": 1,
+  "final_site_type": "hollow (HCP/Subsurf-Atom)",
+  "converged_tag": false,
+  "wall_clock_sec": 302.3799215629697,
+  "total_input_tokens": 4485,
+  "total_output_tokens": 1809,
+  "artifact_paths": {
+    "BEST_CH_O_bridge_to_hollow_HCP-Subsurf-Atom_E-2.729": "research/results/canonical_raw/ocd_rep50_anthropic_sonnet46_ablation/single_shot/029/artifacts/BEST_CH_O_bridge_to_hollow_HCP-Subsurf-Atom_E-2.729.xyz",
+    "BEST_CH_O_bridge_to_hollow_HCP-Subsurf-Atom_E-2.729.xyz": "research/results/canonical_raw/ocd_rep50_anthropic_sonnet46_ablation/single_shot/029/artifacts/BEST_CH_O_bridge_to_hollow_HCP-Subsurf-Atom_E-2.729.xyz",
+    "best_structure_file": "research/results/canonical_raw/ocd_rep50_anthropic_sonnet46_ablation/single_shot/029/artifacts/BEST_CH_O_bridge_to_hollow_HCP-Subsurf-Atom_E-2.729.xyz",
+    "conformers_[CH]_O": "research/results/canonical_raw/ocd_rep50_anthropic_sonnet46_ablation/single_shot/029/artifacts/conformers_[CH]_O.traj",
+    "conformers_[CH]_O.traj": "research/results/canonical_raw/ocd_rep50_anthropic_sonnet46_ablation/single_shot/029/artifacts/conformers_[CH]_O.traj",
+    "final": "research/results/canonical_raw/ocd_rep50_anthropic_sonnet46_ablation/single_shot/029/artifacts/final.xyz",
+    "final.xyz": "research/results/canonical_raw/ocd_rep50_anthropic_sonnet46_ablation/single_shot/029/artifacts/final.xyz",
+    "relaxation": "research/results/canonical_raw/ocd_rep50_anthropic_sonnet46_ablation/single_shot/029/artifacts/relaxation.traj",
+    "relaxation.traj": "research/results/canonical_raw/ocd_rep50_anthropic_sonnet46_ablation/single_shot/029/artifacts/relaxation.traj",
+    "relaxation_trajectory_file": "research/results/canonical_raw/ocd_rep50_anthropic_sonnet46_ablation/single_shot/029/artifacts/relaxation.traj"
+  },
+  "best_result": {
+    "most_stable_energy_eV": -2.729450225830078,
+    "analysis_json": {
+      "status": "success",
+      "message": "Most stable config adsorption energy: -2.7295 eV. Target Atom: C (from plan index 0, global index 64 in relaxed structure). -> Nearest: Co (Index 32), Distance: 2.002 Å (Threshold: 2.929), Bound: True. Bonded Surface Atoms: Co-2.002Å, Hf-2.497Å, Hf-2.701Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Co', 'Co'] -> Actual ['Co', 'Hf', 'Hf']).",
+      "most_stable_energy_eV": -2.729450225830078,
+      "target_adsorbate_atom": "C",
+      "target_adsorbate_atom_index": 64,
+      "bonded_surface_atoms": [
+        {
+          "symbol": "Co",
+          "index": 32,
+          "distance": 2.002
+        },
+        {
+          "symbol": "Hf",
+          "index": 12,
+          "distance": 2.497
+        },
+        {
+          "symbol": "Hf",
+          "index": 4,
+          "distance": 2.701
+        }
+      ],
+      "nearest_slab_atom": "Co",
+      "nearest_slab_atom_index": 32,
+      "final_bond_distance_A": 2.002,
+      "estimated_covalent_cutoff_A": 2.222,
+      "is_covalently_bound": true,
+      "reaction_detected": false,
+      "is_dissociated": false,
+      "n_components": 1,
+      "bond_change_count": 0,
+      "site_analysis": {
+        "planned_site_type": "bridge",
+        "planned_connectivity": 2,
+        "actual_site_type": "hollow (HCP/Subsurf-Atom)",
+        "actual_connectivity": 3,
+        "is_chemical_slip": true,
+        "planned_symbols": [
+          "Co",
+          "Co"
+        ],
+        "actual_symbols": [
+          "Co",
+          "Hf",
+          "Hf"
+        ],
+        "site_fingerprint": "Co32-Hf12-Hf4"
+      },
+      "best_structure_file": "outputs/029-db207a89/BEST_CH_O_bridge_to_hollow_HCP-Subsurf-Atom_E-2.729.xyz",
+      "generated_conformers_file": "outputs/029-db207a89/conformers_[CH]_O.traj",
+      "relaxation_trajectory_file": "outputs/029-db207a89/final.xyz",
+      "session_id": "029-db207a89"
+    },
+    "plan": {
+      "reasoning": "SMILES [CH]=O is the formyl radical (HCO·). RDKit analysis confirms: C (index 0) is SP2 hybridized with 1 radical electron, O (index 1) is SP2 with 0 radical electrons. This is a ReactiveSpecies since C has an unpaired electron.\n\nNo history exists, so this is the first attempt. The hard limit is 1 attempt, so I must choose the most promising configuration.\n\nAnalysis of the adsorbate: The formyl radical [CH]=O binds primarily through the carbon radical center (index 0). On transition metal surfaces, HCO typically adsorbs C-down at bridge or hollow sites, or C-down ontop. Given the Co-Hf alloy surface, Co sites are more reactive for C-containing radicals. A bridge site Co-Co is a strong candidate for C-down adsorption of the formyl radical, as bridge sites often provide optimal overlap with the radical carbon.\n\nPlan: ReactiveSpecies, C (index 0) binding at a Co-Co bridge site. This is the most physically motivated first attempt given:\n1. C has the radical electron (index 0)\n2. Co-Co bridge provides two metal centers for stabilization\n3. Bridge sites are commonly preferred for radical species like HCO on metal surfaces\n\nsite_type: bridge, surface_binding_atoms: ['Co', 'Co'], adsorbate_binding_indices: [0]",
+      "adsorbate_type": "ReactiveSpecies",
+      "solution": {
+        "action": "continue",
+        "site_type": "bridge",
+        "surface_binding_atoms": [
+          "Co",
+          "Co"
+        ],
+        "adsorbate_binding_indices": [
+          0
+        ],
+        "relax_top_n": 1,
+        "touch_sphere_size": 2,
+        "overlap_thr": 0.1,
+        "conformers_per_site_cap": 4
+      }
+    },
+    "result_type": "Perfect"
+  },
+  "last_analysis": {
+    "status": "success",
+    "message": "Most stable config adsorption energy: -2.7295 eV. Target Atom: C (from plan index 0, global index 64 in relaxed structure). -> Nearest: Co (Index 32), Distance: 2.002 Å (Threshold: 2.929), Bound: True. Bonded Surface Atoms: Co-2.002Å, Hf-2.497Å, Hf-2.701Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Co', 'Co'] -> Actual ['Co', 'Hf', 'Hf']).",
+    "most_stable_energy_eV": -2.729450225830078,
+    "target_adsorbate_atom": "C",
+    "target_adsorbate_atom_index": 64,
+    "bonded_surface_atoms": [
+      {
+        "symbol": "Co",
+        "index": 32,
+        "distance": 2.002
+      },
+      {
+        "symbol": "Hf",
+        "index": 12,
+        "distance": 2.497
+      },
+      {
+        "symbol": "Hf",
+        "index": 4,
+        "distance": 2.701
+      }
+    ],
+    "nearest_slab_atom": "Co",
+    "nearest_slab_atom_index": 32,
+    "final_bond_distance_A": 2.002,
+    "estimated_covalent_cutoff_A": 2.222,
+    "is_covalently_bound": true,
+    "reaction_detected": false,
+    "is_dissociated": false,
+    "n_components": 1,
+    "bond_change_count": 0,
+    "site_analysis": {
+      "planned_site_type": "bridge",
+      "planned_connectivity": 2,
+      "actual_site_type": "hollow (HCP/Subsurf-Atom)",
+      "actual_connectivity": 3,
+      "is_chemical_slip": true,
+      "planned_symbols": [
+        "Co",
+        "Co"
+      ],
+      "actual_symbols": [
+        "Co",
+        "Hf",
+        "Hf"
+      ],
+      "site_fingerprint": "Co32-Hf12-Hf4"
+    },
+    "best_structure_file": "outputs/029-db207a89/BEST_CH_O_bridge_to_hollow_HCP-Subsurf-Atom_E-2.729.xyz",
+    "generated_conformers_file": "outputs/029-db207a89/conformers_[CH]_O.traj",
+    "relaxation_trajectory_file": "outputs/029-db207a89/final.xyz",
+    "session_id": "029-db207a89"
+  },
+  "attempt_records": [
+    {
+      "attempt_index": 1,
+      "plan": {
+        "reasoning": "SMILES [CH]=O is the formyl radical (HCO·). RDKit analysis confirms: C (index 0) is SP2 hybridized with 1 radical electron, O (index 1) is SP2 with 0 radical electrons. This is a ReactiveSpecies since C has an unpaired electron.\n\nNo history exists, so this is the first attempt. The hard limit is 1 attempt, so I must choose the most promising configuration.\n\nAnalysis of the adsorbate: The formyl radical [CH]=O binds primarily through the carbon radical center (index 0). On transition metal surfaces, HCO typically adsorbs C-down at bridge or hollow sites, or C-down ontop. Given the Co-Hf alloy surface, Co sites are more reactive for C-containing radicals. A bridge site Co-Co is a strong candidate for C-down adsorption of the formyl radical, as bridge sites often provide optimal overlap with the radical carbon.\n\nPlan: ReactiveSpecies, C (index 0) binding at a Co-Co bridge site. This is the most physically motivated first attempt given:\n1. C has the radical electron (index 0)\n2. Co-Co bridge provides two metal centers for stabilization\n3. Bridge sites are commonly preferred for radical species like HCO on metal surfaces\n\nsite_type: bridge, surface_binding_atoms: ['Co', 'Co'], adsorbate_binding_indices: [0]",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "bridge",
+          "surface_binding_atoms": [
+            "Co",
+            "Co"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "bridge|Co,Co|0|ReactiveSpecies|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -2.729450225830078,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": true,
+      "planned_site_type": "bridge",
+      "actual_site_type": "hollow (HCP/Subsurf-Atom)",
+      "best_structure_file": "outputs/029-db207a89/BEST_CH_O_bridge_to_hollow_HCP-Subsurf-Atom_E-2.729.xyz",
+      "generated_conformers_file": "outputs/029-db207a89/conformers_[CH]_O.traj",
+      "relaxation_trajectory_file": "outputs/029-db207a89/final.xyz",
+      "message": "Most stable config adsorption energy: -2.7295 eV. Target Atom: C (from plan index 0, global index 64 in relaxed structure). -> Nearest: Co (Index 32), Distance: 2.002 Å (Threshold: 2.929), Bound: True. Bonded Surface Atoms: Co-2.002Å, Hf-2.497Å, Hf-2.701Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Co', 'Co'] -> Actual ['Co', 'Hf', 'Hf']).",
+      "history_entry": "【✅ Perfect Adsorption】 bridge @ ['Co', 'Co'] (Index [0]) -> ⚠️【Unstable Site Warning】⚠️: Planned bridge (Co-Co) is unstable, adsorbate spontaneously slipped to hollow (HCP/Subsurf-Atom) (Co-Hf-Hf).This means Co-Co has insufficient affinity for this adsorbate. Please **FORBID** testing Co-Co type sites again! [🌟 New Best] | E=-2.729 eV"
+    }
+  ],
+  "history": [
+    "【✅ Perfect Adsorption】 bridge @ ['Co', 'Co'] (Index [0]) -> ⚠️【Unstable Site Warning】⚠️: Planned bridge (Co-Co) is unstable, adsorbate spontaneously slipped to hollow (HCP/Subsurf-Atom) (Co-Hf-Hf).This means Co-Co has insufficient affinity for this adsorbate. Please **FORBID** testing Co-Co type sites again! [🌟 New Best] | E=-2.729 eV"
+  ],
+  "error": null,
+  "perfect_count": 1,
+  "dissociation_count": 0,
+  "rearrangement_count": 0,
+  "calc_failure_count": 0,
+  "chemical_slip_count": 1
+}
