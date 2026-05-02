@@ -2,6 +2,11 @@
 
 from __future__ import annotations
 
+import json
+import os
+import shutil
+import subprocess
+import tempfile
 from pathlib import Path
 from typing import Iterable
 
@@ -67,6 +72,144 @@ FALLBACK_COLORS = [
     "#9575cd",
 ]
 
+ELEMENT_RADII = {
+    "H": 0.22,
+    "C": 0.34,
+    "N": 0.34,
+    "O": 0.34,
+    "S": 0.40,
+    "P": 0.40,
+}
+
+DEFAULT_METAL_RADIUS = 0.46
+
+BLENDER_RENDER_SCRIPT = r"""
+import json
+import sys
+from pathlib import Path
+
+import bpy
+from mathutils import Vector
+
+
+def load_payload() -> dict:
+    try:
+        marker = sys.argv.index("--")
+    except ValueError:
+        raise SystemExit("Missing -- payload argument for AdsMind Blender renderer")
+    return json.loads(Path(sys.argv[marker + 1]).read_text(encoding="utf-8"))
+
+
+def hex_to_rgba(value: str) -> tuple[float, float, float, float]:
+    value = value.strip().lstrip("#")
+    return (
+        int(value[0:2], 16) / 255.0,
+        int(value[2:4], 16) / 255.0,
+        int(value[4:6], 16) / 255.0,
+        1.0,
+    )
+
+
+def display_rgba(value: str) -> tuple[float, float, float, float]:
+    r, g, b, a = hex_to_rgba(value)
+    return (
+        min(1.0, r * 1.28 + 0.06),
+        min(1.0, g * 1.28 + 0.06),
+        min(1.0, b * 1.28 + 0.06),
+        a,
+    )
+
+
+payload = load_payload()
+atoms = payload["atoms"]
+output = payload["output"]
+
+bpy.ops.object.select_all(action="SELECT")
+bpy.ops.object.delete()
+
+scene = bpy.context.scene
+scene.render.engine = "CYCLES"
+scene.cycles.samples = 128
+scene.cycles.use_denoising = True
+scene.render.film_transparent = True
+scene.render.resolution_x = int(payload.get("resolution", 1200))
+scene.render.resolution_y = int(payload.get("resolution", 1200))
+try:
+    scene.view_settings.view_transform = "Standard"
+    scene.view_settings.look = "None"
+except TypeError:
+    pass
+scene.view_settings.exposure = 0.35
+scene.view_settings.gamma = 1
+
+materials = {}
+coords = [Vector(atom["coord"]) for atom in atoms]
+center = sum(coords, Vector((0, 0, 0))) / max(len(coords), 1)
+for atom in atoms:
+    coord = Vector(atom["coord"]) - center
+    symbol = atom["symbol"]
+    if symbol not in materials:
+        mat = bpy.data.materials.new(f"mat_{symbol}")
+        mat.use_nodes = True
+        bsdf = mat.node_tree.nodes.get("Principled BSDF")
+        color = display_rgba(atom["color"])
+        bsdf.inputs["Base Color"].default_value = color
+        bsdf.inputs["Roughness"].default_value = 0.42
+        bsdf.inputs["Metallic"].default_value = 0.0
+        bsdf.inputs["Emission Color"].default_value = color
+        bsdf.inputs["Emission Strength"].default_value = 0.18
+        materials[symbol] = mat
+    bpy.ops.mesh.primitive_uv_sphere_add(
+        segments=48,
+        ring_count=24,
+        radius=float(atom["radius"]),
+        location=coord,
+    )
+    obj = bpy.context.object
+    obj.name = f"{symbol}_{atom['index']}"
+    obj.data.materials.append(materials[symbol])
+    bpy.ops.object.shade_smooth()
+
+xs = [float(v.x - center.x) for v in coords]
+ys = [float(v.y - center.y) for v in coords]
+zs = [float(v.z - center.z) for v in coords]
+span = max(max(xs) - min(xs), max(ys) - min(ys), max(zs) - min(zs), 1.0)
+
+bpy.ops.object.light_add(type="AREA", location=(0.2 * span, -0.9 * span, 2.25 * span))
+key = bpy.context.object
+key.name = "Key_Area_Light"
+key.data.energy = 700
+key.data.size = 5.0
+
+bpy.ops.object.light_add(type="AREA", location=(-1.4 * span, 1.1 * span, 1.15 * span))
+fill = bpy.context.object
+fill.name = "Fill_Area_Light"
+fill.data.energy = 180
+fill.data.size = 7.0
+
+bpy.ops.object.light_add(type="AREA", location=(1.1 * span, 1.0 * span, 1.6 * span))
+rim = bpy.context.object
+rim.name = "Rim_Area_Light"
+rim.data.energy = 120
+rim.data.size = 5.5
+
+bpy.ops.object.camera_add(location=(1.10 * span, -1.45 * span, 0.92 * span), rotation=(0, 0, 0))
+camera = bpy.context.object
+direction = Vector((0, 0, 0)) - camera.location
+camera.rotation_euler = direction.to_track_quat("-Z", "Y").to_euler()
+camera.data.type = "ORTHO"
+camera.data.ortho_scale = span * 1.75
+scene.camera = camera
+
+world = scene.world or bpy.data.worlds.new("World")
+scene.world = world
+world.color = (1.0, 1.0, 1.0)
+
+Path(output).parent.mkdir(parents=True, exist_ok=True)
+scene.render.filepath = output
+bpy.ops.render.render(write_still=True)
+"""
+
 
 def parse_xyz(path: Path | str) -> tuple[list[str], np.ndarray, str]:
     """Parse an XYZ file into symbols, coordinates, and comment text."""
@@ -117,7 +260,25 @@ def render_best_structure_png(
     elev: float = 24.0,
     azim: float = -54.0,
 ) -> Path:
-    """Render a transparent PNG snapshot of a relaxed adsorption structure."""
+    """Render a transparent PNG snapshot of a relaxed adsorption structure.
+
+    Blender is preferred for publication-facing reports. The matplotlib path is
+    retained as a dependency-light fallback for headless benchmark machines.
+    """
+    try:
+        return render_best_structure_blender(xyz_path, out_path)
+    except Exception:
+        return render_best_structure_matplotlib(xyz_path, out_path, elev=elev, azim=azim)
+
+
+def render_best_structure_matplotlib(
+    xyz_path: Path | str,
+    out_path: Path | str,
+    *,
+    elev: float = 24.0,
+    azim: float = -54.0,
+) -> Path:
+    """Render a lightweight matplotlib fallback snapshot."""
     import matplotlib
 
     matplotlib.use("Agg")
@@ -186,6 +347,94 @@ def render_best_structure_png(
     output.parent.mkdir(parents=True, exist_ok=True)
     fig.savefig(output, transparent=True, bbox_inches="tight", pad_inches=0)
     plt.close(fig)
+    return output
+
+
+def find_blender_executable(explicit_path: str | None = None) -> str | None:
+    """Locate Blender without making it a hard runtime dependency."""
+    if explicit_path:
+        return explicit_path
+    candidates = [
+        os.environ.get("ADSMIND_BLENDER_EXECUTABLE"),
+        shutil.which("blender"),
+        "/opt/homebrew/bin/blender",
+        "/usr/local/bin/blender",
+        "/Applications/Blender.app/Contents/MacOS/Blender",
+    ]
+    for candidate in candidates:
+        if not candidate:
+            continue
+        path = Path(candidate)
+        if ("/" in candidate or "\\" in candidate) and not path.exists():
+            continue
+        return candidate
+    return None
+
+
+def render_best_structure_blender(
+    xyz_path: Path | str,
+    out_path: Path | str,
+    *,
+    blender_executable: str | None = None,
+    timeout: int = 90,
+) -> Path:
+    """Render a publication-style atomistic snapshot with headless Blender."""
+    blender = find_blender_executable(blender_executable)
+    if not blender:
+        raise RuntimeError("Blender executable not found")
+    if not Path(blender).exists() and ("/" in blender or "\\" in blender):
+        raise RuntimeError(f"Blender executable not found: {blender}")
+
+    symbols, coords, _ = parse_xyz(xyz_path)
+    if len(symbols) == 0:
+        raise ValueError(f"Cannot render empty XYZ file: {xyz_path}")
+
+    atoms = []
+    for index, (symbol, coord) in enumerate(zip(symbols, coords)):
+        atoms.append(
+            {
+                "index": index,
+                "symbol": symbol,
+                "coord": [float(coord[0]), float(coord[1]), float(coord[2])],
+                "color": element_color(symbol),
+                "radius": ELEMENT_RADII.get(symbol, DEFAULT_METAL_RADIUS),
+            }
+        )
+
+    output = Path(out_path)
+    with tempfile.TemporaryDirectory(prefix="adsmind_blender_") as tmpdir:
+        tmp = Path(tmpdir)
+        script_path = tmp / "render_adsmind_structure.py"
+        payload_path = tmp / "payload.json"
+        script_path.write_text(BLENDER_RENDER_SCRIPT, encoding="utf-8")
+        payload_path.write_text(
+            json.dumps({"atoms": atoms, "output": str(output), "resolution": 1200}),
+            encoding="utf-8",
+        )
+        output.parent.mkdir(parents=True, exist_ok=True)
+        completed = subprocess.run(
+            [
+                blender,
+                "--background",
+                "--factory-startup",
+                "--python",
+                str(script_path),
+                "--",
+                str(payload_path),
+            ],
+            check=False,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.STDOUT,
+            text=True,
+            timeout=timeout,
+        )
+        if completed.returncode != 0:
+            raise RuntimeError(
+                "Blender render failed with exit code "
+                f"{completed.returncode}: {completed.stdout[-2000:]}"
+            )
+    if not output.exists() or output.stat().st_size == 0:
+        raise RuntimeError(f"Blender did not create a nonempty PNG: {output}")
     return output
 
 

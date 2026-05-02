@@ -6,7 +6,11 @@ from pathlib import Path
 from unittest.mock import patch
 
 from adsmind.agent.reporting import write_summarizer_report
-from adsmind.tools.visualization import render_best_structure_png
+from adsmind.tools.visualization import (
+    render_best_structure_blender,
+    render_best_structure_matplotlib,
+    render_best_structure_png,
+)
 
 
 class TestSummarizerReporting(unittest.TestCase):
@@ -26,6 +30,68 @@ class TestSummarizerReporting(unittest.TestCase):
             out = root / "best.png"
 
             render_best_structure_png(xyz, out)
+
+            self.assertTrue(out.exists())
+            self.assertGreater(out.stat().st_size, 0)
+
+    def test_render_best_structure_prefers_blender_then_falls_back(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            root = Path(tmpdir)
+            xyz = root / "best.xyz"
+            xyz.write_text(
+                "3\nfixture\n"
+                "Pt 0.0 0.0 0.0\n"
+                "Pt 2.7 0.0 0.0\n"
+                "H 1.35 0.0 1.05\n",
+                encoding="utf-8",
+            )
+            out = root / "best.png"
+
+            with patch("adsmind.tools.visualization.render_best_structure_blender") as blender:
+                blender.side_effect = RuntimeError("no blender")
+                with patch(
+                    "adsmind.tools.visualization.render_best_structure_matplotlib"
+                ) as fallback:
+                    fallback.return_value = out
+
+                    result = render_best_structure_png(xyz, out)
+
+            self.assertEqual(result, out)
+            blender.assert_called_once()
+            fallback.assert_called_once()
+
+    def test_blender_renderer_reports_missing_executable(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            root = Path(tmpdir)
+            xyz = root / "best.xyz"
+            xyz.write_text(
+                "3\nfixture\n"
+                "Pt 0.0 0.0 0.0\n"
+                "Pt 2.7 0.0 0.0\n"
+                "H 1.35 0.0 1.05\n",
+                encoding="utf-8",
+            )
+            with self.assertRaises(RuntimeError):
+                render_best_structure_blender(
+                    xyz,
+                    root / "best.png",
+                    blender_executable="/definitely/missing/blender",
+                )
+
+    def test_matplotlib_renderer_still_writes_nonempty_file(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            root = Path(tmpdir)
+            xyz = root / "best.xyz"
+            xyz.write_text(
+                "3\nfixture\n"
+                "Pt 0.0 0.0 0.0\n"
+                "Pt 2.7 0.0 0.0\n"
+                "H 1.35 0.0 1.05\n",
+                encoding="utf-8",
+            )
+            out = root / "fallback.png"
+
+            render_best_structure_matplotlib(xyz, out)
 
             self.assertTrue(out.exists())
             self.assertGreater(out.stat().st_size, 0)
