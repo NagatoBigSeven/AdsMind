@@ -225,6 +225,8 @@ def render_iteration_energy_curve(
     ax.set_facecolor((1, 1, 1, 0))
     ax.plot(attempts, plotted_energies, marker="o", color="#607d8b", label="Attempt")
     ax.plot(attempts, running_best, marker="s", color="#2e7d32", label="Running best")
+    ax.set_xlim(0.5, max(attempts) + 0.5)
+    ax.set_xticks(attempts)
     ax.set_xlabel("Iteration")
     ax.set_ylabel("Adsorption energy (eV)")
     ax.grid(True, alpha=0.25)
