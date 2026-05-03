@@ -21,24 +21,283 @@
     "site_indices": "11;19;41",
     "selection_bucket": "cmu_exact"
   },
-  "status": "error",
-  "best_energy_eV": null,
-  "iteration_count": 0,
+  "status": "success",
+  "best_energy_eV": -6.2310943603515625,
+  "iteration_count": 3,
   "max_attempts": 5,
-  "final_site_type": null,
+  "final_site_type": "hollow (HCP/Subsurf-Atom)",
   "converged_tag": false,
-  "wall_clock_sec": 2.139282751828432,
-  "total_input_tokens": 0,
-  "total_output_tokens": 0,
-  "artifact_paths": {},
-  "best_result": {},
-  "last_analysis": {},
-  "attempt_records": [],
-  "history": [],
-  "error": "Error code: 429 - {'code': 'Some resource has been exhausted', 'error': 'Your team 55587540-9f19-4f8e-a3d5-b1dc0e4b0a98 has either used all available credits or reached its monthly spending limit. To continue making API requests, please purchase more credits or raise your spending limit.'}",
-  "perfect_count": 0,
+  "wall_clock_sec": 3483.865063689649,
+  "total_input_tokens": 16825,
+  "total_output_tokens": 11479,
+  "artifact_paths": {
+    "BEST_OH_bridge_to_hollow_FCC-No-Subsurf_E-5.696": "research/results/canonical_raw/ocd_rep50_grok4_ablation/no_forbid/005/artifacts/BEST_OH_bridge_to_hollow_FCC-No-Subsurf_E-5.696.xyz",
+    "BEST_OH_bridge_to_hollow_FCC-No-Subsurf_E-5.696.xyz": "research/results/canonical_raw/ocd_rep50_grok4_ablation/no_forbid/005/artifacts/BEST_OH_bridge_to_hollow_FCC-No-Subsurf_E-5.696.xyz",
+    "best_structure_file": "research/results/canonical_raw/ocd_rep50_grok4_ablation/no_forbid/005/artifacts/BEST_OH_hollow_to_hollow_HCP-Subsurf-Atom_E-6.231.xyz",
+    "BEST_OH_bridge_to_hollow_HCP-Subsurf-Atom_E-6.046": "research/results/canonical_raw/ocd_rep50_grok4_ablation/no_forbid/005/artifacts/BEST_OH_bridge_to_hollow_HCP-Subsurf-Atom_E-6.046.xyz",
+    "BEST_OH_bridge_to_hollow_HCP-Subsurf-Atom_E-6.046.xyz": "research/results/canonical_raw/ocd_rep50_grok4_ablation/no_forbid/005/artifacts/BEST_OH_bridge_to_hollow_HCP-Subsurf-Atom_E-6.046.xyz",
+    "BEST_OH_hollow_to_hollow_HCP-Subsurf-Atom_E-6.231": "research/results/canonical_raw/ocd_rep50_grok4_ablation/no_forbid/005/artifacts/BEST_OH_hollow_to_hollow_HCP-Subsurf-Atom_E-6.231.xyz",
+    "BEST_OH_hollow_to_hollow_HCP-Subsurf-Atom_E-6.231.xyz": "research/results/canonical_raw/ocd_rep50_grok4_ablation/no_forbid/005/artifacts/BEST_OH_hollow_to_hollow_HCP-Subsurf-Atom_E-6.231.xyz",
+    "conformers_[OH]": "research/results/canonical_raw/ocd_rep50_grok4_ablation/no_forbid/005/artifacts/conformers_[OH].traj",
+    "conformers_[OH].traj": "research/results/canonical_raw/ocd_rep50_grok4_ablation/no_forbid/005/artifacts/conformers_[OH].traj",
+    "final": "research/results/canonical_raw/ocd_rep50_grok4_ablation/no_forbid/005/artifacts/final.xyz",
+    "final.xyz": "research/results/canonical_raw/ocd_rep50_grok4_ablation/no_forbid/005/artifacts/final.xyz",
+    "relaxation": "research/results/canonical_raw/ocd_rep50_grok4_ablation/no_forbid/005/artifacts/relaxation.traj",
+    "relaxation.traj": "research/results/canonical_raw/ocd_rep50_grok4_ablation/no_forbid/005/artifacts/relaxation.traj",
+    "relaxation_trajectory_file": "research/results/canonical_raw/ocd_rep50_grok4_ablation/no_forbid/005/artifacts/relaxation.traj"
+  },
+  "best_result": {
+    "most_stable_energy_eV": -6.2310943603515625,
+    "analysis_json": {
+      "status": "success",
+      "message": "Most stable config adsorption energy: -6.2311 eV. Target Atom: O (from plan index 0, global index 48 in relaxed structure). -> Nearest: Zr (Index 19), Distance: 2.129 Å (Threshold: 3.494), Bound: True. Bonded Surface Atoms: Zr-2.129Å, Zr-2.142Å, Pd-2.858Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Zr', 'Zr', 'Zr'] -> Actual ['Pd', 'Zr', 'Zr']).",
+      "most_stable_energy_eV": -6.2310943603515625,
+      "target_adsorbate_atom": "O",
+      "target_adsorbate_atom_index": 48,
+      "bonded_surface_atoms": [
+        {
+          "symbol": "Zr",
+          "index": 19,
+          "distance": 2.129
+        },
+        {
+          "symbol": "Zr",
+          "index": 3,
+          "distance": 2.142
+        },
+        {
+          "symbol": "Pd",
+          "index": 25,
+          "distance": 2.858
+        }
+      ],
+      "nearest_slab_atom": "Zr",
+      "nearest_slab_atom_index": 19,
+      "final_bond_distance_A": 2.129,
+      "estimated_covalent_cutoff_A": 2.651,
+      "is_covalently_bound": true,
+      "reaction_detected": false,
+      "is_dissociated": false,
+      "n_components": 1,
+      "bond_change_count": 0,
+      "site_analysis": {
+        "planned_site_type": "hollow",
+        "planned_connectivity": 3,
+        "actual_site_type": "hollow (HCP/Subsurf-Atom)",
+        "actual_connectivity": 3,
+        "is_chemical_slip": true,
+        "planned_symbols": [
+          "Zr",
+          "Zr",
+          "Zr"
+        ],
+        "actual_symbols": [
+          "Pd",
+          "Zr",
+          "Zr"
+        ],
+        "site_fingerprint": "Zr19-Zr3-Pd25"
+      },
+      "best_structure_file": "outputs/005-02cae54f/BEST_OH_hollow_to_hollow_HCP-Subsurf-Atom_E-6.231.xyz",
+      "generated_conformers_file": "outputs/005-02cae54f/conformers_[OH].traj",
+      "relaxation_trajectory_file": "outputs/005-02cae54f/final.xyz",
+      "session_id": "005-02cae54f"
+    },
+    "plan": {
+      "reasoning": "Step 0: SMILES Consistency Check. The SMILES is [OH], representing a hydroxyl radical. The heavy atom list shows O at index 0 with SP3 hybridization, degree 0, radical_electrons=1. This confirms it's a radical species with the unpaired electron on O. No mismatch with user description of hydroxyl radical. Proceed with ReactiveSpecies since radical_electrons > 0 on the binding atom.\nStep 1: Analyze Old Plans. Two attempts in history: (1) Bridge on ['Pd', 'Pd'] with index [0], slipped to hollow (FCC/No-Subsurf) Pd-Pd-Zr-Zr, E=-5.696 eV, new best at the time. (2) Bridge on ['Pd', 'Zr'] with index [0], slipped to hollow (HCP/Subsurf-Atom) Pd-Zr-Zr, E=-6.046 eV, current best. Both were successful adsorptions but unstable at planned sites, indicating bridges on Pd-Pd and Pd-Zr are thermodynamically unstable for this adsorbate. No failures like dissociation. No [🔄 Converged to known best] tag, so continue. The slipped configurations are geometrically distinct with different energies (-5.696 eV vs -6.046 eV), suggesting heterogeneity in the alloy surface. The lower energy at Pd-Zr-Zr (1 Pd, 2 Zr) compared to Pd-Pd-Zr-Zr (2 Pd, 2 Zr) implies sites with more Zr may have higher affinity and lower energy. Untested sites include bridge Zr-Zr, ontop Pd, ontop Zr, and direct hollow sites like Pd-Pd-Zr, Pd-Zr-Zr, Zr-Zr-Zr, Pd-Zr-Zr-Zr.\nStep 2: Formulate New Plan. Goal is lowest adsorption energy. Previous bridges slipped to hollows, with better energy at sites with more Zr. To systematically explore, propose a direct hollow on Zr-Zr-Zr (untested Hollow-3), as it has all Zr, potentially leading to even lower energy based on the trend. This is different from previous plans. If it converges to a known configuration, history will tag it; otherwise, it could be a new best. No need to terminate yet, as major sites remain untested and energies differ.\nStep 3: Analyze Request. User's core intent is to find the lowest-energy adsorption configuration for the hydroxyl radical on the surface, without specifying site or orientation.\nStep 4: Analyze Adsorbate. SMILES [OH]: Hydroxyl radical, major functional group is O-H with radical on O. Heavy atom: O at index 0 with radical_electrons=1. Binding via O (index 0).\nStep 5: Analyze Surface. Available sites include Hollow-3 Zr-Zr-Zr, which is suitable for testing.\nStep 6: Formulate Plan. Select hollow site on ['Zr', 'Zr', 'Zr'] with binding via adsorbate index [0]. Use ReactiveSpecies for radical. Defaults for other parameters.",
+      "adsorbate_type": "ReactiveSpecies",
+      "solution": {
+        "action": "continue",
+        "site_type": "hollow",
+        "surface_binding_atoms": [
+          "Zr",
+          "Zr",
+          "Zr"
+        ],
+        "adsorbate_binding_indices": [
+          0
+        ],
+        "relax_top_n": 1,
+        "touch_sphere_size": 2,
+        "overlap_thr": 0.1,
+        "conformers_per_site_cap": 4
+      }
+    },
+    "result_type": "Perfect"
+  },
+  "last_analysis": {
+    "status": "success",
+    "message": "Most stable config adsorption energy: -6.2311 eV. Target Atom: O (from plan index 0, global index 48 in relaxed structure). -> Nearest: Zr (Index 19), Distance: 2.129 Å (Threshold: 3.494), Bound: True. Bonded Surface Atoms: Zr-2.129Å, Zr-2.142Å, Pd-2.858Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Zr', 'Zr', 'Zr'] -> Actual ['Pd', 'Zr', 'Zr']).",
+    "most_stable_energy_eV": -6.2310943603515625,
+    "target_adsorbate_atom": "O",
+    "target_adsorbate_atom_index": 48,
+    "bonded_surface_atoms": [
+      {
+        "symbol": "Zr",
+        "index": 19,
+        "distance": 2.129
+      },
+      {
+        "symbol": "Zr",
+        "index": 3,
+        "distance": 2.142
+      },
+      {
+        "symbol": "Pd",
+        "index": 25,
+        "distance": 2.858
+      }
+    ],
+    "nearest_slab_atom": "Zr",
+    "nearest_slab_atom_index": 19,
+    "final_bond_distance_A": 2.129,
+    "estimated_covalent_cutoff_A": 2.651,
+    "is_covalently_bound": true,
+    "reaction_detected": false,
+    "is_dissociated": false,
+    "n_components": 1,
+    "bond_change_count": 0,
+    "site_analysis": {
+      "planned_site_type": "hollow",
+      "planned_connectivity": 3,
+      "actual_site_type": "hollow (HCP/Subsurf-Atom)",
+      "actual_connectivity": 3,
+      "is_chemical_slip": true,
+      "planned_symbols": [
+        "Zr",
+        "Zr",
+        "Zr"
+      ],
+      "actual_symbols": [
+        "Pd",
+        "Zr",
+        "Zr"
+      ],
+      "site_fingerprint": "Zr19-Zr3-Pd25"
+    },
+    "best_structure_file": "outputs/005-02cae54f/BEST_OH_hollow_to_hollow_HCP-Subsurf-Atom_E-6.231.xyz",
+    "generated_conformers_file": "outputs/005-02cae54f/conformers_[OH].traj",
+    "relaxation_trajectory_file": "outputs/005-02cae54f/final.xyz",
+    "session_id": "005-02cae54f"
+  },
+  "attempt_records": [
+    {
+      "attempt_index": 1,
+      "plan": {
+        "reasoning": "Step 0: SMILES Consistency Check. The SMILES is [OH], representing a hydroxyl radical. The provided RDKit heavy atom list shows only O at index 0 with SP3 hybridization, degree 0, radical_electrons 1, formal_charge 0. This is consistent with OH radical, where O is the heavy atom and has an unpaired electron. H is likely implicit as a light atom, not indexed in the heavy atom list. Hybridization matches (SP3 for OH). Radical check: O has radical_electrons > 0, so ReactiveSpecies is appropriate for planning adsorption via the radical oxygen.\nStep 1: Analyze Old Plans. History is None, so no previous attempts, successes, failures, or tags. No unstable sites identified yet. No convergence signals. This is the initial plan.\nStep 2: Formulate New Plan. Goal is to find the lowest adsorption energy configuration. Since history is empty, propose an initial plan. For OH radical on metal surfaces like Pd, bridge sites are often stable for oxygen adsorption. Start with a Pd-Pd bridge site, as Pd is likely more active for binding. Use ReactiveSpecies for the radical. Physical consistency: No issues yet.\nStep 3: Analyze Request. User's core intent is to find the lowest-energy adsorption configuration for the hydroxyl radical on the provided PdZr surface.\nStep 4: Analyze Adsorbate. SMILES [OH]: Major functional group is hydroxyl radical. Heavy atom: O at index 0 with radical. Binding will be via O (index 0).\nStep 5: Analyze Surface. Available sites include Bridge: Pd-Pd, Pd-Zr, Zr-Zr. Pd-Pd bridge exists and is a reasonable starting point.\nStep 6: Formulate Plan. Select bridge site with Pd-Pd for surface_binding_atoms. Bind via adsorbate index 0 (O). Defaults for other parameters.",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "bridge",
+          "surface_binding_atoms": [
+            "Pd",
+            "Pd"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "bridge|Pd,Pd|0|ReactiveSpecies|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -5.6955413818359375,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": true,
+      "planned_site_type": "bridge",
+      "actual_site_type": "hollow (FCC/No-Subsurf)",
+      "best_structure_file": "outputs/005-02cae54f/BEST_OH_bridge_to_hollow_FCC-No-Subsurf_E-5.696.xyz",
+      "generated_conformers_file": "outputs/005-02cae54f/conformers_[OH].traj",
+      "relaxation_trajectory_file": "outputs/005-02cae54f/final.xyz",
+      "message": "Most stable config adsorption energy: -5.6955 eV. Target Atom: O (from plan index 0, global index 48 in relaxed structure). -> Nearest: Zr (Index 11), Distance: 2.034 Å (Threshold: 3.494), Bound: True. Bonded Surface Atoms: Zr-2.034Å, Pd-2.314Å, Pd-2.437Å, Zr-3.411Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Pd', 'Pd'] -> Actual ['Pd', 'Pd', 'Zr', 'Zr']).",
+      "history_entry": "【✅ Perfect Adsorption】 bridge @ ['Pd', 'Pd'] (Index [0]) -> ⚠️【Unstable Site Warning】⚠️: Planned bridge (Pd-Pd) is unstable, adsorbate spontaneously slipped to hollow (FCC/No-Subsurf) (Pd-Pd-Zr-Zr).This means Pd-Pd has insufficient affinity for this adsorbate. [🌟 New Best] | E=-5.696 eV"
+    },
+    {
+      "attempt_index": 2,
+      "plan": {
+        "reasoning": "Step 0: SMILES Consistency Check. The SMILES is [OH], representing a hydroxyl radical. The provided heavy atom index list shows only index 0 for O with SP3 hybridization, degree 0, and radical_electrons=1. This confirms it's a radical species with the unpaired electron on O. No mismatch with user request for hydroxyl radical. Proceed with ReactiveSpecies since radical_electrons >0 on the binding atom.\nStep 1: Analyze Old Plans. One previous attempt: Planned bridge on Pd-Pd (index [0]), but it was unstable and slipped to a hollow site (Pd-Pd-Zr-Zr), likely a Hollow-4 type, with adsorption energy -5.696 eV. This is marked as a new best but with an unstable site warning, indicating Pd-Pd bridge has insufficient affinity. No other attempts in history. No termination signals like [🔄 Converged to known best]. Surface is heterogeneous Pd-Zr alloy, so different site compositions may yield different energies.\nStep 2: Formulate New Plan. Goal is lowest energy configuration. Previous plan converged to a hollow site with E=-5.696 eV, but was unstable from bridge Pd-Pd. To explore systematically, propose a new, different plan: bridge on Pd-Zr, as this mixed site may offer better affinity due to Zr's oxophilicity for OH. This differs from previous Pd-Pd bridge. If it slips again, it may reveal more about stability. Do not repeat previous plans. Remaining attempts available within 5-limit.\nStep 3: Analyze Request. User's core intent is to find the lowest-energy adsorption configuration for hydroxyl radical on the provided Pd-Zr surface.\nStep 4: Analyze Adsorbate. SMILES [OH]: Hydroxyl radical, major functional group is O-H with radical on O. Heavy atom: O at index 0 with radical_electrons=1. Binding via O (index 0).\nStep 5: Analyze Surface. Available bridge sites include Pd-Zr, which is distinct from previous Pd-Pd.\nStep 6: Formulate Plan. Select bridge site on Pd-Zr, binding via O (index 0). Default parameters.",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "bridge",
+          "surface_binding_atoms": [
+            "Pd",
+            "Zr"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "bridge|Pd,Zr|0|ReactiveSpecies|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -6.0458221435546875,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": true,
+      "planned_site_type": "bridge",
+      "actual_site_type": "hollow (HCP/Subsurf-Atom)",
+      "best_structure_file": "outputs/005-02cae54f/BEST_OH_bridge_to_hollow_HCP-Subsurf-Atom_E-6.046.xyz",
+      "generated_conformers_file": "outputs/005-02cae54f/conformers_[OH].traj",
+      "relaxation_trajectory_file": "outputs/005-02cae54f/final.xyz",
+      "message": "Most stable config adsorption energy: -6.0458 eV. Target Atom: O (from plan index 0, global index 48 in relaxed structure). -> Nearest: Zr (Index 3), Distance: 2.074 Å (Threshold: 3.494), Bound: True. Bonded Surface Atoms: Zr-2.074Å, Pd-2.191Å, Zr-2.555Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Pd', 'Zr'] -> Actual ['Pd', 'Zr', 'Zr']).",
+      "history_entry": "【✅ Perfect Adsorption】 bridge @ ['Pd', 'Zr'] (Index [0]) -> ⚠️【Unstable Site Warning】⚠️: Planned bridge (Pd-Zr) is unstable, adsorbate spontaneously slipped to hollow (HCP/Subsurf-Atom) (Pd-Zr-Zr).This means Pd-Zr has insufficient affinity for this adsorbate. [🌟 New Best] | E=-6.046 eV"
+    },
+    {
+      "attempt_index": 3,
+      "plan": {
+        "reasoning": "Step 0: SMILES Consistency Check. The SMILES is [OH], representing a hydroxyl radical. The heavy atom list shows O at index 0 with SP3 hybridization, degree 0, radical_electrons=1. This confirms it's a radical species with the unpaired electron on O. No mismatch with user description of hydroxyl radical. Proceed with ReactiveSpecies since radical_electrons > 0 on the binding atom.\nStep 1: Analyze Old Plans. Two attempts in history: (1) Bridge on ['Pd', 'Pd'] with index [0], slipped to hollow (FCC/No-Subsurf) Pd-Pd-Zr-Zr, E=-5.696 eV, new best at the time. (2) Bridge on ['Pd', 'Zr'] with index [0], slipped to hollow (HCP/Subsurf-Atom) Pd-Zr-Zr, E=-6.046 eV, current best. Both were successful adsorptions but unstable at planned sites, indicating bridges on Pd-Pd and Pd-Zr are thermodynamically unstable for this adsorbate. No failures like dissociation. No [🔄 Converged to known best] tag, so continue. The slipped configurations are geometrically distinct with different energies (-5.696 eV vs -6.046 eV), suggesting heterogeneity in the alloy surface. The lower energy at Pd-Zr-Zr (1 Pd, 2 Zr) compared to Pd-Pd-Zr-Zr (2 Pd, 2 Zr) implies sites with more Zr may have higher affinity and lower energy. Untested sites include bridge Zr-Zr, ontop Pd, ontop Zr, and direct hollow sites like Pd-Pd-Zr, Pd-Zr-Zr, Zr-Zr-Zr, Pd-Zr-Zr-Zr.\nStep 2: Formulate New Plan. Goal is lowest adsorption energy. Previous bridges slipped to hollows, with better energy at sites with more Zr. To systematically explore, propose a direct hollow on Zr-Zr-Zr (untested Hollow-3), as it has all Zr, potentially leading to even lower energy based on the trend. This is different from previous plans. If it converges to a known configuration, history will tag it; otherwise, it could be a new best. No need to terminate yet, as major sites remain untested and energies differ.\nStep 3: Analyze Request. User's core intent is to find the lowest-energy adsorption configuration for the hydroxyl radical on the surface, without specifying site or orientation.\nStep 4: Analyze Adsorbate. SMILES [OH]: Hydroxyl radical, major functional group is O-H with radical on O. Heavy atom: O at index 0 with radical_electrons=1. Binding via O (index 0).\nStep 5: Analyze Surface. Available sites include Hollow-3 Zr-Zr-Zr, which is suitable for testing.\nStep 6: Formulate Plan. Select hollow site on ['Zr', 'Zr', 'Zr'] with binding via adsorbate index [0]. Use ReactiveSpecies for radical. Defaults for other parameters.",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "hollow",
+          "surface_binding_atoms": [
+            "Zr",
+            "Zr",
+            "Zr"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "hollow|Zr,Zr,Zr|0|ReactiveSpecies|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -6.2310943603515625,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": true,
+      "planned_site_type": "hollow",
+      "actual_site_type": "hollow (HCP/Subsurf-Atom)",
+      "best_structure_file": "outputs/005-02cae54f/BEST_OH_hollow_to_hollow_HCP-Subsurf-Atom_E-6.231.xyz",
+      "generated_conformers_file": "outputs/005-02cae54f/conformers_[OH].traj",
+      "relaxation_trajectory_file": "outputs/005-02cae54f/final.xyz",
+      "message": "Most stable config adsorption energy: -6.2311 eV. Target Atom: O (from plan index 0, global index 48 in relaxed structure). -> Nearest: Zr (Index 19), Distance: 2.129 Å (Threshold: 3.494), Bound: True. Bonded Surface Atoms: Zr-2.129Å, Zr-2.142Å, Pd-2.858Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Zr', 'Zr', 'Zr'] -> Actual ['Pd', 'Zr', 'Zr']).",
+      "history_entry": "【✅ Perfect Adsorption】 hollow @ ['Zr', 'Zr', 'Zr'] (Index [0]) -> ⚠️【Unstable Site Warning】⚠️: Planned hollow (Zr-Zr-Zr) is unstable, adsorbate spontaneously slipped to hollow (HCP/Subsurf-Atom) (Pd-Zr-Zr).This means Zr-Zr-Zr has insufficient affinity for this adsorbate. [🌟 New Best] | E=-6.231 eV"
+    }
+  ],
+  "history": [
+    "【✅ Perfect Adsorption】 bridge @ ['Pd', 'Pd'] (Index [0]) -> ⚠️【Unstable Site Warning】⚠️: Planned bridge (Pd-Pd) is unstable, adsorbate spontaneously slipped to hollow (FCC/No-Subsurf) (Pd-Pd-Zr-Zr).This means Pd-Pd has insufficient affinity for this adsorbate. [🌟 New Best] | E=-5.696 eV",
+    "【✅ Perfect Adsorption】 bridge @ ['Pd', 'Zr'] (Index [0]) -> ⚠️【Unstable Site Warning】⚠️: Planned bridge (Pd-Zr) is unstable, adsorbate spontaneously slipped to hollow (HCP/Subsurf-Atom) (Pd-Zr-Zr).This means Pd-Zr has insufficient affinity for this adsorbate. [🌟 New Best] | E=-6.046 eV",
+    "【✅ Perfect Adsorption】 hollow @ ['Zr', 'Zr', 'Zr'] (Index [0]) -> ⚠️【Unstable Site Warning】⚠️: Planned hollow (Zr-Zr-Zr) is unstable, adsorbate spontaneously slipped to hollow (HCP/Subsurf-Atom) (Pd-Zr-Zr).This means Zr-Zr-Zr has insufficient affinity for this adsorbate. [🌟 New Best] | E=-6.231 eV"
+  ],
+  "error": null,
+  "perfect_count": 3,
   "dissociation_count": 0,
   "rearrangement_count": 0,
   "calc_failure_count": 0,
-  "chemical_slip_count": 0
+  "chemical_slip_count": 3,
+  "best_structure_file": "research/results/canonical_raw/ocd_rep50_grok4_ablation/no_forbid/005/artifacts/BEST_OH_hollow_to_hollow_HCP-Subsurf-Atom_E-6.231.xyz"
 }
