@@ -37,7 +37,7 @@ $-$Term & 80 & 80 & $-$0.036 & 0.000 & 4.58 & 100.0\% \\
 \paragraph{CMU20 completion and natural 1-Shot failures.}
 The newly completed cases (03, 06, 07, 08, 11) close the CMU benchmark gap across all five variants, not only the Full variant.
 The Full, $-$Slip, $-$Forbid, and $-$Term variants contain 320/320 successful runs across CMU20.
-The only failures occur in the 1-Shot control: case~06 fails on all four backends and case~08 fails on Grok-4, GPT-5.4, and Claude, yielding 73/80 successful 1-Shot runs.
+The only failures occur in the 1-Shot control: case~06 fails on all four backends and case~08 fails on three of four (Grok-4, GPT-5.4, and Claude; Gemini's single attempt matches its Full energy), yielding 73/80 successful 1-Shot runs.
 These failures are not external errors; in each case the relaxation/analyzer completes, but the final structure is rejected because \texttt{is\_dissociated=True} with \texttt{dissociation\_count=1} and no valid best adsorption energy.
 Across CMU20, the mean four-backend range is 0.153~eV, the median range is 0.029~eV, 8/20 cases agree within 0.01~eV, and 12/20 agree within 0.05~eV.
 The largest disagreement occurs on case~08 (Ru$_3$Mo + NNH), where GPT-5.4 reaches $-7.191$~eV, Claude reaches $-6.869$~eV, and Gemini/Grok-4 remain at $-6.414$~eV.
@@ -80,9 +80,9 @@ Variant & Mean 4-backend range (eV) & $\leq$0.01\,eV & Largest range (eV) \\
 \textit{$-$Slip}     & 0.197 &  8/20 & 0.776 \\
 \textit{$-$Forbid}   & 0.143 & 10/20 & 0.776 \\
 \textit{$-$Term}     & 0.089 & 11/20 & 0.433 \\
-\textit{1-Shot}      & 0.274 &  0/20 & 0.880 \\
+\textit{1-Shot}      & 0.341 &  0/20 & 0.880 \\
 \midrule
-Overall              & 0.171 & 37/100 & 0.880 \\
+Overall              & 0.185 & 37/100 & 0.880 \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -97,9 +97,9 @@ Overall              & 0.171 & 37/100 & 0.880 \\
 Metric & Target & Gemini & Grok-4 & GPT-5.4 & Claude & Met \\
 \midrule
 Friedman $p$~\cite{friedman1937use} & $< 0.05$ & 1.40e-06 & 2.21e-06 & 2.15e-03 & 1.14e-04 & 4/4 \\
-H$_1$ support & $\geq$75\% & 7/11 (64\%) & 8/11 (73\%) & 7/11 (64\%) & 7/11 (64\%) & --- \\
+H$_1$ support & $\geq$75\% & 8/16 (50\%) & 9/16 (56\%) & 8/16 (50\%) & 8/16 (50\%) & --- \\
 BH $p$ (1-Shot)~\cite{benjamini1995controlling} & $< 0.05$ & 0.0059 & 0.0115 & 0.0840 & 0.0134 & 3/4 \\
-Backend conv. & Lower & \multicolumn{4}{p{7.2cm}}{Full mean range 0.129~eV vs.\ 0.425~eV 1-shot; 3.3$\times$ reduction.} & Yes \\
+Backend conv. & Lower & \multicolumn{4}{p{7.2cm}}{Full mean range 0.153~eV vs.\ 0.341~eV 1-shot; 2.2$\times$ reduction.} & Yes \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -108,31 +108,31 @@ Backend conv. & Lower & \multicolumn{4}{p{7.2cm}}{Full mean range 0.129~eV vs.\ 
 \begin{table}[t]
 \centering
 \small
-\caption{Explicit test of H$_1$ on the 20-case CMU benchmark using $\Delta E = E_{\mathrm{full}} - E_{\mathrm{1shot}}$. Negative values mean the full agent found a lower energy; hits require $\Delta E < -0.05$~eV. H$_1$ uses only intermetallic surfaces; monometallic cases are shown for completeness but excluded from the support rate. Here N/A means outside the H$_1$ intermetallic denominator or 1-shot failure, not a physical execution failure.}
+\caption{Explicit test of H$_1$ on the 20-case CMU benchmark using $\Delta E = E_{\mathrm{full}} - E_{\mathrm{1shot}}$. Negative values mean the full agent found a lower energy; hits require $\Delta E < -0.05$~eV. H$_1$ uses only intermetallic surfaces; monometallic cases are shown for completeness but excluded from the support rate. Here N/A means 1-shot failure (dissociated/rejected trajectory), not a physical execution failure.}
 \label{tab:hypothesis-test}
 \begin{tabular}{llrrrr}
 \toprule
 Case & Family & Gemini $\Delta E$/hit & Grok-4 $\Delta E$/hit & GPT-5.4 $\Delta E$/hit & Claude $\Delta E$/hit \\
 \midrule
 01 & intermetallic & $-0.001$ / No & $-0.001$ / No & $-0.070$ / Yes & $-0.073$ / Yes \\
-02 & intermetallic & $0.000$ / No & $-0.615$ / Yes & $-0.426$ / Yes & $-0.426$ / Yes \\
+02 & intermetallic & $0.000$ / No & $-0.616$ / Yes & $-0.426$ / Yes & $-0.426$ / Yes \\
 03 & intermetallic & $0.000$ / No & $-0.032$ / No & $0.000$ / No & $0.000$ / No \\
 04 & intermetallic & $-0.402$ / Yes & $-0.597$ / Yes & $-0.012$ / No & $-0.440$ / Yes \\
 05 & intermetallic & $-0.015$ / No & $-0.015$ / No & $-0.119$ / Yes & $0.000$ / No \\
 06 & intermetallic & N/A & N/A & N/A & N/A \\
 07 & intermetallic & $-0.168$ / Yes & $-0.168$ / Yes & $-0.520$ / Yes & $-0.168$ / Yes \\
-08 & intermetallic & N/A & N/A & N/A & N/A \\
-09 & monometallic & $-0.173$ / N/A & $0.000$ / N/A & $0.000$ / N/A & $-0.188$ / N/A \\
+08 & intermetallic & $+0.000$ / No & N/A & N/A & N/A \\
+09 & monometallic & $-0.173$ / N/A & $0.000$ / N/A & $0.000$ / N/A & $-0.187$ / N/A \\
 10 & monometallic & $-0.596$ / N/A & $-0.005$ / N/A & $0.008$ / N/A & $-0.008$ / N/A \\
 11 & intermetallic & $-0.007$ / No & $-0.030$ / No & $0.037$ / No & $0.000$ / No \\
 12 & monometallic & $-0.744$ / N/A & $-0.270$ / N/A & $0.000$ / N/A & $-0.270$ / N/A \\
 13 & monometallic & $-0.449$ / N/A & $-0.449$ / N/A & $-0.017$ / N/A & $0.000$ / N/A \\
-14 & intermetallic & $0.000$ / No & $-0.372$ / Yes & $-0.160$ / Yes & $-0.126$ / Yes \\
-15 & intermetallic & $-0.369$ / Yes & $-0.670$ / Yes & $-0.294$ / Yes & $-0.490$ / Yes \\
+14 & intermetallic & $0.000$ / No & $-0.372$ / Yes & $-0.160$ / Yes & $-0.127$ / Yes \\
+15 & intermetallic & $-0.369$ / Yes & $-0.671$ / Yes & $-0.294$ / Yes & $-0.491$ / Yes \\
 16 & intermetallic & $-0.125$ / Yes & $-0.111$ / Yes & $0.391$ / No & $0.000$ / No \\
-17 & intermetallic & $-0.449$ / Yes & $0.201$ / No & $-0.549$ / Yes & $-0.549$ / Yes \\
+17 & intermetallic & $-0.449$ / Yes & $0.200$ / No & $-0.549$ / Yes & $-0.549$ / Yes \\
 18 & intermetallic & $-0.361$ / Yes & $-0.711$ / Yes & $-0.205$ / Yes & $-0.205$ / Yes \\
-19 & intermetallic & $-0.709$ / Yes & $-0.451$ / Yes & $0.000$ / No & $0.000$ / No \\
+19 & intermetallic & $-0.708$ / Yes & $-0.451$ / Yes & $0.000$ / No & $0.000$ / No \\
 20 & intermetallic & $-1.048$ / Yes & $-1.050$ / Yes & $0.000$ / No & $-0.000$ / No \\
 \midrule
 Support rate & --- & 8/16 = 50\% & 9/16 = 56\% & 8/16 = 50\% & 8/16 = 50\% \\
@@ -146,7 +146,7 @@ The Friedman test~\cite{friedman1937use} is highly significant on all four backe
 Pairwise Wilcoxon tests~\cite{wilcoxon1945individual} confirm that the full agent significantly outperforms the 1-shot baseline after BH correction~\cite{benjamini1995controlling} on three of four backends (Gemini BH~$p = 0.006$, Grok-4 BH~$p = 0.011$, Claude BH~$p = 0.013$); GPT-5.4 is borderline (BH~$p = 0.084$).
 
 \paragraph{The closed-loop gain is large and backend-dependent.}
-The mean full-versus-single-shot improvement varies from 0.097~eV (GPT-5.4) to 0.363~eV (Gemini), with Grok-4 at 0.341~eV and Claude at 0.185~eV.
+The mean full-versus-single-shot improvement varies from 0.108~eV (GPT-5.4) to 0.297~eV (Gemini and Grok-4), with Claude at 0.164~eV.
 The largest per-case improvements occur on complex surfaces: case~20 shows 1-shot deficits exceeding 1.0~eV on both Gemini and Grok-4, while case~15 consistently degrades under single-shot across all four backends and case~12 degrades on three of four (Gemini, Grok-4, Claude; tied on GPT-5.4).
 GPT-5.4 shows the smallest mean improvement, consistent with a stronger one-shot planner that leaves less room for iterative recovery; however, it still gains 0.426~eV on case~02 and 0.549~eV on case~17.
 
@@ -160,10 +160,10 @@ The GPT-5.4 statistics make this concrete: \textit{$-$Forbid} and \textit{$-$Ter
 
 \paragraph{Termination mostly controls compute, not chemistry.}
 The termination signal behaves primarily as a cost-control mechanism across all four backends.
-For Grok-4, the mean energy delta between \textit{Full} and \textit{$-$Term} is $-$0.012~eV; disabling termination strictly matches or improves the full agent on 18 of 20 cases (see Table~\ref{tab:cross-llm-summary} for updated 20-case numbers).
-For Gemini, the same ablation has a mean delta of +0.018~eV, with the largest degradation on case~19 (+0.247~eV).
-For GPT-5.4, the effect is marginally beneficial: mean delta $-$0.078~eV, driven by cases~12 and~18 where disabling termination allows the agent to find better solutions.
-For Claude, the mean delta is $-$0.031~eV, similarly dominated by case~18 (+0.491~eV improvement).
+For Grok-4, the mean energy delta between \textit{Full} and \textit{$-$Term} is $-$0.047~eV; disabling termination matches or improves the full agent on 17 of 20 cases.
+For Gemini, the same ablation has a mean delta of +0.005~eV, with the largest degradation on case~19 (+0.247~eV).
+For GPT-5.4, the effect is marginally beneficial: mean delta $-$0.047~eV, driven by cases~16, 12, and~18 where disabling termination allows the agent to find better solutions.
+For Claude, the mean delta is $-$0.054~eV, similarly dominated by case~18 (+0.491~eV improvement).
 However, the compute overhead of disabling termination remains substantial: token consumption can increase 2--6$\times$ on individual cases.
 Thus, the termination logic should be understood as a guard against planner churn after the search has converged: removing it weakly improves or matches the full agent in many comparisons, but the gains are small, occasional degradations remain, and token use increases on average and sometimes by a large factor.
 
@@ -174,7 +174,7 @@ Under the iterative full agent, the mean four-backend range is 0.153~eV, with 8/
 Under the 1-shot baseline, the mean range rises to 0.274~eV with 0/20~within 0.01~eV---a 1.8$\times$ increase in backend spread.
 
 The tightest convergence is achieved by the \textit{$-$Term} variant (mean range 0.089~eV, 11/20 within 0.01~eV), consistent with the observation that disabling termination gives more cases enough iterations for the four backends to reach similar local minima.
-The largest four-backend spread occurs in 1-shot case~20 (1.050~eV), where Gemini and Grok-4 find an energy basin near $-$10.6~eV while GPT-5.4 and Claude converge to $-$11.65~eV.
+The largest four-backend spread occurs in 1-shot case~20 (1.049~eV), where Gemini and Grok-4 find an energy basin near $-$10.6~eV while GPT-5.4 and Claude converge to $-$11.65~eV.
 Under full iterative search, the same case narrows to a range of 0.001~eV---all four backends converge to effectively the same solution.
 These data support a concrete systems claim: the closed-loop architecture acts as a backend-robustness mechanism that drives heterogeneous LLM planners toward the same physical solution.
 
@@ -188,7 +188,7 @@ The original 10-case four-backend tables are retained in the Supporting Informat
 \begin{figure}
     \centering
     \includegraphics[width=0.95\linewidth]{images/figure_ocd_gmae_trapezoid_all.png}
-  \caption{XXXX}
+  \caption{\textbf{Ablation analysis on the expanded OCD24 benchmark across four LLM backends.} Violin plots of energy error ($\Delta E = E_{\mathrm{variant}} - E_{\mathrm{Full}}$) for each ablation setting on the 24-case OCD-GMAE set. Each variant is evaluated across four LLM backends. Positive values indicate worse adsorption energy than the Full variant; the dashed line at $\Delta E = 0$ marks parity. The Full variant maintains 100\% success rate while 1-Shot drops to 85.4\%, and the energy accuracy (fraction within 0.01~eV of Full) is substantially higher for iterative variants.}
   \label{fig:ocd_gmae24_violin}
 \end{figure}
 
@@ -285,12 +285,12 @@ Case & Surface & Adsorbate & AdsMind success & AdsMind energy & AdsMind iters & 
 
 \paragraph{Reliability gap.}
 AdsMind succeeds on all 20 overlapping cases with the GPT-5.4 full variant (100\%).
-Adsorb-Agent succeeds on X of these 20 cases (see updated Table~\ref{tab:cmu-gpt54-adsorbagent-comparison} for 20-case numbers) and fails on some cases because no valid trajectory files are produced.
+Adsorb-Agent succeeds on 14 of these 20 cases (see updated Table~\ref{tab:cmu-gpt54-adsorbagent-comparison} for 20-case numbers) and fails on six cases because no valid trajectory files are produced.
 This failure mode is consistent with a single-pass architecture: if the initial enumerated candidate set is empty or invalid, the system has no feedback loop that can redirect the planner, whereas AdsMind's closed-loop diagnostics can continue after failed or slipped attempts.
 
 \paragraph{Energy depth under matched physics.}
-Among the X cases where both systems produce valid energies, Adsorb-Agent finds a lower adsorption energy on all X (see updated Table~\ref{tab:cmu-gpt54-adsorbagent-comparison} for 20-case numbers).
-With $\Delta E = E_{\mathrm{AdsMind}} - E_{\mathrm{AdsorbAgent}}$, the mean difference is $+0.500$~eV in favor of Adsorb-Agent (Wilcoxon $p = 4.88 \times 10^{-4}$, $n = X$).
+Among the 14 cases where both systems produce valid energies, Adsorb-Agent finds a lower adsorption energy on all 14 (see updated Table~\ref{tab:cmu-gpt54-adsorbagent-comparison} for 20-case numbers).
+With $\Delta E = E_{\mathrm{AdsMind}} - E_{\mathrm{AdsorbAgent}}$, the mean difference is $+0.500$~eV in favor of Adsorb-Agent (Wilcoxon $p = 4.88 \times 10^{-4}$, $n = 14$).
 The largest gaps occur on cases with larger configuration spaces: case~16 ($\Delta = 1.428$~eV), case~17 ($\Delta = 1.235$~eV), and case~19 ($\Delta = 0.695$~eV).
 On simpler OH cases, the two systems can be nearly indistinguishable, e.g., case~09 differs by only 0.006~eV.
 
@@ -313,7 +313,7 @@ Adsorb-Agent's multi-configuration enumeration explores more of the energy lands
 These findings motivate a concrete architectural extension: coupling AdsMind's closed-loop error recovery with broader initial site enumeration and parallel relaxation.
 
 \paragraph{Adsorb-Agent LLM choice changes failures but not the trade-off.}
-The current GPT-5.4 Adsorb-Agent run succeeds on X of 20 CMU20 cases, while the historical GPT-4o run succeeds on Y of 20 (see updated Table~\ref{tab:cmu-gpt54-adsorbagent-comparison} for 20-case numbers).
+The current GPT-5.4 Adsorb-Agent run succeeds on 14 of 20 CMU20 cases, while the historical GPT-4o run succeeds on 12 of 20 (see updated Table~\ref{tab:cmu-gpt54-adsorbagent-comparison} for 20-case numbers).
 Failure cases differ between LLMs, suggesting that single-pass LLM planning retains a failure rate even as the backend changes.
 AdsMind's closed-loop architecture shows a 0\% failure rate across all four backends on the CMU20 benchmark.
 

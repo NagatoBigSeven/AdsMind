@@ -22,25 +22,27 @@ Traditional approaches to adsorption configuration search rely on exhaustive DFT
 These methods require many energy evaluations, each costing hundreds to thousands of CPU-hours, and scale poorly to the complex alloy and multimetallic surfaces of greatest practical interest~\cite{greeley2017design}.
 Crucially, these workflows demand substantial expert knowledge to set up and interpret: convergence failures, spin-state sensitivity, and basis-set selection require manual intervention and iterative debugging that cannot be easily automated~\cite{stamatakis2011first}.
 As a result, routine adsorption studies on a single surface can consume weeks of specialist time, making high-throughput screening across composition space impractical without large computational teams~\cite{ulissi2017toward}.
-% [AI task: please consider refine the transition here]
+This persistent bottleneck has motivated both large-scale benchmark datasets to standardize evaluation and efforts to automate the search strategy itself.
 Benchmark datasets such as OC20~\cite{zitnick2020introduction} and OC22~\cite{tran2023oc22} have catalyzed progress by providing standardized evaluation protocols, yet the fundamental search problem remains.
 
 %\subsection{Machine learning surrogates and the remaining search problem}
-With the development of deep learning, machine learning force fields (MLFFs) such as MACE/MACE-MP~\cite{batatia2022mace,batatia2023foundation}, CHGNet~\cite{deng2023chgnet}, and EquiformerV2~\cite{liao2023equiformerv2} have dramatically reduced the per-evaluation cost, achieving near-DFT accuracy at orders-of-magnitude speedup.
+Fueled by these large-scale benchmark datasets, machine learning force fields (MLFFs) such as MACE/MACE-MP~\cite{batatia2022mace,batatia2023foundation}, CHGNet~\cite{deng2023chgnet}, and EquiformerV2~\cite{liao2023equiformerv2} have dramatically reduced the per-evaluation cost, achieving near-DFT accuracy at orders-of-magnitude speedup.
 However, MLFFs solve only the \textit{fast energy evaluation} problem; they do not address the upstream \textit{search strategy} problem of deciding which configurations to evaluate.
-% [AI task: please consider refine the transition here. hint: the evaluation mode includes two type, open-loop and close-loop]
-Deep-learning-assisted configuration generators---graph neural networks that predict site stability~\cite{reiser2022gnn,gasteiger2022gemnet}, diffusion models that propose crystal structures~\cite{xie2022cdvae,zeni2025mattergen}---remain open-loop: once trained, they cannot adapt based on new calculation results.
-This architectural limitation causes systematic failures on surfaces where training-data coverage is sparse, precisely the complex compositions where better search is most needed.% [AI task: please consider add citation of the phenomenon here]
+Search strategies in computational materials science can be broadly categorized as \textit{open-loop} or \textit{closed-loop}.
+In open-loop strategies, the search policy is fixed before evaluation and cannot adapt based on new calculation results.
+In closed-loop strategies, each evaluation result feeds back into the search policy, enabling adaptive exploration.
+Most current deep-learning-assisted configuration generators---graph neural networks that predict site stability~\cite{reiser2022gnn,gasteiger2022gemnet}, diffusion models that propose crystal structures~\cite{xie2022cdvae,zeni2025mattergen}---remain open-loop: once trained, they cannot adapt based on new calculation results.
+This architectural limitation suggests these models cannot recover when their initial proposals miss stable configurations \cite{abolhasani2023rise}, highlighting the need for closed-loop feedback mechanisms that can adapt based on physical evaluation results. 
 Large-scale open-loop efforts exemplify both the potential and the ceiling of this paradigm: GNoME~\cite{merchant2023gnome} discovered 2.2~million new crystal structures via GNN-guided screening, yet the pipeline cannot self-correct when its initial guesses miss stable configurations.
 This search-strategy bottleneck is fundamentally a \textit{reasoning} problem: deciding which candidate configurations deserve evaluation requires chemical intuition that fixed computational pipelines cannot provide.
 
-Large language models---which encode broad chemical knowledge and can perform compositional reasoning---have emerged as a natural candidate for this reasoning role.
+Large language models---which encode broad chemical knowledge and can perform compositional reasoning~\cite{mirza2024chembench,bran2024chemcrow}---have emerged as a natural candidate for this reasoning role.
 LLM agents have recently been applied to diverse materials discovery tasks~\cite{zimmermann2025llm,yang2026quasar,stewart2026graphagents,chandrasekhar2026catalyst,weietal2025agentic}, and closed-loop autonomous systems such as A-Lab~\cite{szymanski2023alab} have demonstrated the power of feeding experimental feedback back into the planning loop.
 Foundational demonstrations---ChemCrow~\cite{bran2024chemcrow} (tool-augmented LLM for synthesis planning), Coscientist~\cite{boiko2023autonomous} (autonomous chemistry experimentation), and early closed-loop retrosynthesis agents~\cite{schwaller2020predicting}---have established that LLM agents can coordinate multi-step chemical workflows, validating the premise that LLM-driven reasoning can replace manual expert intervention.
-However, most existing LLM-based systems for surface science operate in open-loop or semi-autonomous modes; closed-loop agentic systems that couple LLM reasoning with physical feedback remain relatively unexplored for adsorption configuration search.
-% [AI task: please refine the logic of introducing the open-loop architecture and close-loop here, together with previous related task]
-For adsorption config search specifically, Adsorb-Agent was designed with a single-pass LLM planner and EquiformerV2~\cite{ock2026adsorbagent}, which enables it to generate plausible adsorption hypotheses from natural-language surface descriptions and execute fast physical simulation.
-Adsorb-Agent demonstrated that an LLM agent can propose initial site selections and enumerate configurations, reducing the effective search space relative to naive DFT sweeps.
+However, existing LLM-based systems for surface science, most notably Adsorb-Agent~\cite{ock2026adsorbagent}, operate in a single-pass regime.
+Adsorb-Agent employs a single-pass LLM planner with EquiformerV2 to generate plausible adsorption hypotheses from natural-language surface descriptions and enumerate configurations, reducing the effective search space relative to naive DFT sweeps.
+However, the feedback from physical evaluations is not systematically fed back to the LLM to correct its reasoning, leaving the loop open.
+Closed-loop agentic systems that couple LLM reasoning with physical feedback remain relatively unexplored for adsorption configuration search.
 
 %\subsection{Limitations of open-loop LLM agents}
 However, existing LLM agents for adsorption search, including Adsorb-Agent, operate in a \textit{single-pass} regime: the LLM proposes configurations, relaxations execute, the lowest-energy result is reported, and the LLM is never informed of the physical outcome.
@@ -67,8 +69,7 @@ Three mechanisms implement this feedback cycle:
     \item \textbf{Autonomous termination.} The agent monitors whether successive iterations converge to the same best energy and terminates early when further exploration is unlikely to improve the result.
 \end{enumerate}
 
-% [AI task: please check if we have any description of such concepts in other sections, and give suggestion on keeping it or removing it]
-We frame this design through a sequential-decision lens~\cite{kochenderfer2015decision,astrom1965optimal,sutton2018reinforcement}: adsorption configuration search is analogous to a partially observable Markov decision process (POMDP), where the PES is the hidden state, each relaxation is an observation, and the planner's next proposal is conditioned on the full history of prior observations.
+We frame this design through a sequential-decision lens~\cite{kochenderfer2015decision,astrom1965optimal,sutton2018reinforcement}: adsorption configuration search is analogous to a partially observable Markov decision process (POMDP), where the potential energy surface (PES) is the hidden state, each relaxation is an observation, and the planner's next proposal is conditioned on the full history of prior observations.
 Open-loop methods use a fixed policy $\pi(a \mid s)$ that cannot adapt after deployment; AdsMind approximates a history-dependent policy $\pi(a \mid h_t)$ through the LLM's in-context learning, without explicit reward engineering or policy optimization.
 
 On the currently complete evaluation tracks, this closed-loop design yields a consistent reliability advantage across chemically broader surfaces (Section~\ref{sec:results}).
@@ -79,7 +80,7 @@ The main value of closing the loop is not deeper basin discovery, but a reproduc
 This work makes three contributions:
 (i)~the first study to run four distinct LLM backends on an identical closed-loop search pipeline;
 (ii)~head-to-head comparison against non-LLM baselines (random, heuristic) and an LLM baseline (Adsorb-Agent) under \textit{matched} MACE-MP-0 physics;
-(iii)~explicit reporting of negative results on energy-depth to clarify the *[operating envelope]* in which closed-loop LLM reasoning adds value. % [AI task: what is the "operating envelope"? please refine the concept here.]
+(iii)~explicit reporting of negative results on energy-depth to clarify the \textit{operating envelope}---the conditions under which closed-loop LLM reasoning improves reliability without necessarily finding the global energy minimum---in which this architecture adds value.
 
 
 A central finding is that AdsMind does not deliver the deepest energy basins on complex surfaces: broader initial sampling strategies consistently reach lower minima when they succeed.

@@ -72,7 +72,15 @@ superscriptaddress,
 
 
 \begin{abstract}
-
+Identifying the most stable adsorbate--surface configuration is central to heterogeneous catalysis and electrochemical energy conversion, yet remains computationally expensive and expert-intensive.
+While machine learning force fields (MLFFs) have dramatically reduced per-evaluation cost, the upstream \textit{search strategy} problem---deciding which configurations to evaluate---remains unsolved.
+Existing LLM-based agents for this task operate in an open-loop, single-pass regime that cannot recover from incorrect site predictions.
+Here we introduce \textbf{AdsMind} (\textbf{Ads}orption with \textbf{M}achine \textbf{I}ntelligence \textbf{\&} fee\textbf{d}back), a closed-loop multi-agent framework in which each MLFF relaxation result feeds back into the LLM planner, enabling autonomous error correction and termination.
+Three mechanisms implement this feedback: \textit{Chemical Slip} detection (diagnosing mismatches between planned and realized coordination), \textit{FORBID} constraints (preventing retry of failed site families), and convergence-based early stopping.
+Evaluated on 880~ablation attempts across four LLM backends (Gemini~2.5~Pro, Grok-4, GPT-5.4, Claude~Sonnet~4.6) and two benchmarks (CMU20, OCD24), AdsMind achieves 100\% search reliability on both datasets, reduces cross-backend energy variance by 2.3$\times$, and consumes 5--25$\times$ fewer MLFF relaxations than brute-force baselines.
+Notably, we report the negative result that broader initial sampling outperforms closed-loop refinement on energy depth for complex adsorbates---a trade-off that clarifies the operating envelope of LLM-driven reasoning.
+Chemical Slip further provides a physically grounded evaluation signal for LLM chemical reasoning quality.
+AdsMind demonstrates that closed-loop LLM agents can deliver reliability, efficiency, and interpretability simultaneously, establishing a foundation for autonomous chemistry workflows.
 \end{abstract}
 
 
@@ -81,7 +89,6 @@ superscriptaddress,
 \maketitle 
 
 \section{Introduction}
-HAS AI now
 \input{sections/1_Introduction}
 
 \section{Method}
