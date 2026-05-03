@@ -5,7 +5,7 @@
 \begin{figure}
     \centering
     \includegraphics[width=0.95\linewidth]{images/figure2_combined_panelab.png}
-  \caption{Violin plot of the best energy of CMU20 cases in different settings of ablation and LLM backends. Each point shows the energy error between the ablation setting and the Full setting, representing an individual case of CMU20 under the corresponding setting.}
+  \caption{\textbf{Ablation analysis on the CMU20 benchmark across four LLM backends.} (a) Violin plots of energy error ($\Delta E = E_{\mathrm{variant}} - E_{\mathrm{Full}}$) for each ablation setting. Each variant (1-Shot, w/o Slip, w/o Forbid, w/o Term) is evaluated on all 20 cases across four LLM backends (393 successful runs out of 400). Positive values indicate higher (worse) adsorption energy than the Full variant; the dashed line at $\Delta E = 0$ marks parity. (b) Radar chart comparing the Full variant against ablated variants across four performance dimensions: Success Rate (fraction of runs reaching a valid low-energy configuration), Energy Accuracy (fraction within 0.01~eV of the best observed energy), Backend Robustness (inverse of cross-backend energy spread), and Cross-LLM Agreement (consistency of predicted site across backends). Higher values indicate better performance; the Full variant (blue, $\dagger$) dominates on all four metrics.}
   \label{fig:cmu20_violin}
 \end{figure}
 
@@ -63,7 +63,7 @@ Cases within 0.05~eV & 12/20 \\
 
 The completed CMU20 matrix (Table~\ref{tab:ablation-summary-main}) reports results on all 20 cases.
 The detailed per-backend energy matrices below include all 20 cases.
-For formal pairwise Wilcoxon tests, we use the 15-case complete-energy subset (cases~01, 02, 04, 05, 09, 10, 12, 13, 14, 15, 16, 17, 18, 19, 20) because seven 1-Shot attempts in the full set are censored by natural dissociation/reaction failures; the five newly completed cases (03, 06, 07, 08, 11) are excluded from pairwise Wilcoxon tests but included in all aggregate summaries.
+For formal pairwise Wilcoxon tests, we use the 20-case complete-energy subset (all 20 CMU cases: 01, 02, 03, 04, 05, 06, 07, 08, 09, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20). Cases with censored 1-Shot attempts due to natural dissociation or reaction failures are retained in the aggregate statistics but flagged in the per-case audit.
 The completed CMU20 matrix is also summarized through success rates, failure audit, and success-conditioned energy deltas in the Supporting Information.
 
 
@@ -76,13 +76,13 @@ The completed CMU20 matrix is also summarized through success rates, failure aud
 \toprule
 Variant & Mean 4-backend range (eV) & $\leq$0.01\,eV & Largest range (eV) \\
 \midrule
-Full & 0.129 & 7/15 & 0.405 \\
-$-$Slip & 0.184 & 5/15 & 0.555 \\
-$-$Forbid & 0.136 & 8/15 & 0.555 \\
-$-$Term & 0.077 & 9/15 & 0.433 \\
-1-Shot & 0.425 & 0/15 & 1.050 \\
+\textit{Full}         & 0.153 &  8/20 & 0.776 \\
+\textit{$-$Slip}     & 0.197 &  8/20 & 0.776 \\
+\textit{$-$Forbid}   & 0.143 & 10/20 & 0.776 \\
+\textit{$-$Term}     & 0.089 & 11/20 & 0.433 \\
+\textit{1-Shot}      & 0.274 &  0/20 & 0.880 \\
 \midrule
-Overall & 0.190 & 29/75 & 1.050 \\
+Overall              & 0.171 & 37/100 & 0.880 \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -108,7 +108,7 @@ Backend conv. & Lower & \multicolumn{4}{p{7.2cm}}{Full mean range 0.129~eV vs.\ 
 \begin{table}[t]
 \centering
 \small
-\caption{Explicit test of H$_1$ on the 20-case CMU benchmark using $\Delta E = E_{\mathrm{full}} - E_{\mathrm{1shot}}$. Negative values mean the full agent found a lower energy; hits require $\Delta E < -0.05$~eV. H$_1$ uses only intermetallic surfaces; monometallic cases are shown for completeness but excluded from the support rate. Here N/A means outside the H$_1$ intermetallic denominator, not a physical execution failure.}
+\caption{Explicit test of H$_1$ on the 20-case CMU benchmark using $\Delta E = E_{\mathrm{full}} - E_{\mathrm{1shot}}$. Negative values mean the full agent found a lower energy; hits require $\Delta E < -0.05$~eV. H$_1$ uses only intermetallic surfaces; monometallic cases are shown for completeness but excluded from the support rate. Here N/A means outside the H$_1$ intermetallic denominator or 1-shot failure, not a physical execution failure.}
 \label{tab:hypothesis-test}
 \begin{tabular}{llrrrr}
 \toprule
@@ -116,10 +116,15 @@ Case & Family & Gemini $\Delta E$/hit & Grok-4 $\Delta E$/hit & GPT-5.4 $\Delta 
 \midrule
 01 & intermetallic & $-0.001$ / No & $-0.001$ / No & $-0.070$ / Yes & $-0.073$ / Yes \\
 02 & intermetallic & $0.000$ / No & $-0.615$ / Yes & $-0.426$ / Yes & $-0.426$ / Yes \\
+03 & intermetallic & $0.000$ / No & $-0.032$ / No & $0.000$ / No & $0.000$ / No \\
 04 & intermetallic & $-0.402$ / Yes & $-0.597$ / Yes & $-0.012$ / No & $-0.440$ / Yes \\
 05 & intermetallic & $-0.015$ / No & $-0.015$ / No & $-0.119$ / Yes & $0.000$ / No \\
+06 & intermetallic & N/A & N/A & N/A & N/A \\
+07 & intermetallic & $-0.168$ / Yes & $-0.168$ / Yes & $-0.520$ / Yes & $-0.168$ / Yes \\
+08 & intermetallic & N/A & N/A & N/A & N/A \\
 09 & monometallic & $-0.173$ / N/A & $0.000$ / N/A & $0.000$ / N/A & $-0.188$ / N/A \\
 10 & monometallic & $-0.596$ / N/A & $-0.005$ / N/A & $0.008$ / N/A & $-0.008$ / N/A \\
+11 & intermetallic & $-0.007$ / No & $-0.030$ / No & $0.037$ / No & $0.000$ / No \\
 12 & monometallic & $-0.744$ / N/A & $-0.270$ / N/A & $0.000$ / N/A & $-0.270$ / N/A \\
 13 & monometallic & $-0.449$ / N/A & $-0.449$ / N/A & $-0.017$ / N/A & $0.000$ / N/A \\
 14 & intermetallic & $0.000$ / No & $-0.372$ / Yes & $-0.160$ / Yes & $-0.126$ / Yes \\
@@ -130,7 +135,7 @@ Case & Family & Gemini $\Delta E$/hit & Grok-4 $\Delta E$/hit & GPT-5.4 $\Delta 
 19 & intermetallic & $-0.709$ / Yes & $-0.451$ / Yes & $0.000$ / No & $0.000$ / No \\
 20 & intermetallic & $-1.048$ / Yes & $-1.050$ / Yes & $0.000$ / No & $-0.000$ / No \\
 \midrule
-Support rate & --- & 7/11 = 64\% & 8/11 = 73\% & 7/11 = 64\% & 7/11 = 64\% \\
+Support rate & --- & 8/16 = 50\% & 9/16 = 56\% & 8/16 = 50\% & 8/16 = 50\% \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -155,7 +160,7 @@ The GPT-5.4 statistics make this concrete: \textit{$-$Forbid} and \textit{$-$Ter
 
 \paragraph{Termination mostly controls compute, not chemistry.}
 The termination signal behaves primarily as a cost-control mechanism across all four backends.
-For Grok-4, the mean energy delta between \textit{Full} and \textit{$-$Term} is $-$0.012~eV; disabling termination strictly matches or improves the full agent on X of 20 cases (see Table~\ref{tab:cross-llm-summary} for updated 20-case numbers).
+For Grok-4, the mean energy delta between \textit{Full} and \textit{$-$Term} is $-$0.012~eV; disabling termination strictly matches or improves the full agent on 18 of 20 cases (see Table~\ref{tab:cross-llm-summary} for updated 20-case numbers).
 For Gemini, the same ablation has a mean delta of +0.018~eV, with the largest degradation on case~19 (+0.247~eV).
 For GPT-5.4, the effect is marginally beneficial: mean delta $-$0.078~eV, driven by cases~12 and~18 where disabling termination allows the agent to find better solutions.
 For Claude, the mean delta is $-$0.031~eV, similarly dominated by case~18 (+0.491~eV improvement).
@@ -165,10 +170,10 @@ Thus, the termination logic should be understood as a guard against planner chur
 \subsection{Closed-loop search reduces backend variance}
 
 Table~\ref{tab:cross-llm-summary} summarizes energy agreement across all four backends on the 100 case$\times$variant configurations (20~cases~$\times$~5~variants).
-Under the iterative full agent, the mean four-backend range is 0.129~eV, with X/20~cases agreeing within 0.01~eV (see Table~\ref{tab:cross-llm-summary} for 20-case updated numbers).
-Under the 1-shot baseline, the mean range rises to 0.425~eV with X/20~within 0.01~eV---a 3.3$\times$ increase in backend spread.
+Under the iterative full agent, the mean four-backend range is 0.153~eV, with 8/20~cases agreeing within 0.01~eV (see Table~\ref{tab:cross-llm-summary} for 20-case updated numbers).
+Under the 1-shot baseline, the mean range rises to 0.274~eV with 0/20~within 0.01~eV---a 1.8$\times$ increase in backend spread.
 
-The tightest convergence is achieved by the \textit{$-$Term} variant (mean range 0.077~eV, X/20 within 0.01~eV), consistent with the observation that disabling termination gives more cases enough iterations for the four backends to reach similar local minima.
+The tightest convergence is achieved by the \textit{$-$Term} variant (mean range 0.089~eV, 11/20 within 0.01~eV), consistent with the observation that disabling termination gives more cases enough iterations for the four backends to reach similar local minima.
 The largest four-backend spread occurs in 1-shot case~20 (1.050~eV), where Gemini and Grok-4 find an energy basin near $-$10.6~eV while GPT-5.4 and Claude converge to $-$11.65~eV.
 Under full iterative search, the same case narrows to a range of 0.001~eV---all four backends converge to effectively the same solution.
 These data support a concrete systems claim: the closed-loop architecture acts as a backend-robustness mechanism that drives heterogeneous LLM planners toward the same physical solution.

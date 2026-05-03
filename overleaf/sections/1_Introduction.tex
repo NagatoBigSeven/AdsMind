@@ -38,7 +38,7 @@ Large language models---which encode broad chemical knowledge and can perform co
 LLM agents have recently been applied to diverse materials discovery tasks~\cite{zimmermann2025llm,yang2026quasar,stewart2026graphagents,chandrasekhar2026catalyst,weietal2025agentic}, and closed-loop autonomous systems such as A-Lab~\cite{szymanski2023alab} have demonstrated the power of feeding experimental feedback back into the planning loop.
 Foundational demonstrations---ChemCrow~\cite{bran2024chemcrow} (tool-augmented LLM for synthesis planning), Coscientist~\cite{boiko2023autonomous} (autonomous chemistry experimentation), and early closed-loop retrosynthesis agents~\cite{schwaller2020predicting}---have established that LLM agents can coordinate multi-step chemical workflows, validating the premise that LLM-driven reasoning can replace manual expert intervention.
 However, most existing LLM-based systems for surface science operate in open-loop or semi-autonomous modes; closed-loop agentic systems that couple LLM reasoning with physical feedback remain relatively unexplored for adsorption configuration search.
-% [AI task: please refine the logic of introducing the open-loop]
+% [AI task: please refine the logic of introducing the open-loop architecture and close-loop here, together with previous related task]
 For adsorption config search specifically, Adsorb-Agent was designed with a single-pass LLM planner and EquiformerV2~\cite{ock2026adsorbagent}, which enables it to generate plausible adsorption hypotheses from natural-language surface descriptions and execute fast physical simulation.
 Adsorb-Agent demonstrated that an LLM agent can propose initial site selections and enumerate configurations, reducing the effective search space relative to naive DFT sweeps.
 
@@ -67,6 +67,7 @@ Three mechanisms implement this feedback cycle:
     \item \textbf{Autonomous termination.} The agent monitors whether successive iterations converge to the same best energy and terminates early when further exploration is unlikely to improve the result.
 \end{enumerate}
 
+% [AI task: please check if we have any description of such concepts in other sections, and give suggestion on keeping it or removing it]
 We frame this design through a sequential-decision lens~\cite{kochenderfer2015decision,astrom1965optimal,sutton2018reinforcement}: adsorption configuration search is analogous to a partially observable Markov decision process (POMDP), where the PES is the hidden state, each relaxation is an observation, and the planner's next proposal is conditioned on the full history of prior observations.
 Open-loop methods use a fixed policy $\pi(a \mid s)$ that cannot adapt after deployment; AdsMind approximates a history-dependent policy $\pi(a \mid h_t)$ through the LLM's in-context learning, without explicit reward engineering or policy optimization.
 
@@ -78,7 +79,8 @@ The main value of closing the loop is not deeper basin discovery, but a reproduc
 This work makes three contributions:
 (i)~the first study to run four distinct LLM backends on an identical closed-loop search pipeline;
 (ii)~head-to-head comparison against non-LLM baselines (random, heuristic) and an LLM baseline (Adsorb-Agent) under \textit{matched} MACE-MP-0 physics;
-(iii)~explicit reporting of negative results on energy-depth to clarify the operating envelope in which closed-loop LLM reasoning adds value.
+(iii)~explicit reporting of negative results on energy-depth to clarify the *[operating envelope]* in which closed-loop LLM reasoning adds value. % [AI task: what is the "operating envelope"? please refine the concept here.]
+
 
 A central finding is that AdsMind does not deliver the deepest energy basins on complex surfaces: broader initial sampling strategies consistently reach lower minima when they succeed.
 This trade-off---reliability and efficiency versus depth of exploration---frames the paper's central message.

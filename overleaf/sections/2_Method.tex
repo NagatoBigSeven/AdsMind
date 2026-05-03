@@ -4,19 +4,19 @@
 To identify the most stable adsorption configuration and energy, AdsMind implements a closed-loop agent architecture with five core modules: \textbf{Planner}, \textbf{Validator}, \textbf{Executor}, \textbf{Analyzer}, and \textbf{Summarizer} (Figure~\ref{fig:pipeline}). 
 In each iteration, the \textbf{Planner} proposes a structured adsorption hypothesis, which the \textbf{Validator} checks before physical execution. 
 The \textbf{Executor} relaxes the structure, and the \textbf{Analyzer} interprets the post-relaxation coordinates to guide the next iteration.
-A\textbf{Summarizer} acts as the report-and-routing node after each physical execution or explicit termination. It either returns control to the planner when the search should continue, or emits the final report of the best configuration once the terminate action occurs or the budget is exhausted. The following sections explain the pipeline and modules in detail.
+\textbf{Summarizer} acts as the report-and-routing node after each physical execution or explicit termination. It either returns control to the \textbf{Planner} when the search should continue, or emits the final report of the best configuration once the terminate action occurs or the budget is exhausted. The following sections explain the pipeline and modules in detail.
 
 \subsection{Planner and Validator: Adsorption Hypothesis Generation}
 
 At the beginning of the analysis, the user provides a request prompt together with the corresponding adsorbate SMILES string and surface slab file.
-At the onset of each iteration, the planner proposes a structured adsorption hypothesis in JSON format, including the canonical site type---%
+At the onset of each iteration, the \textbf{Planner} proposes a structured adsorption hypothesis in JSON format, including the canonical site type---%
 \textit{ontop} (one surface atom),
 \textit{bridge} (two adjacent surface atoms), or
 \textit{hollow} (three or more surface atoms)---
 the intended surface symbols, and the adsorbate binding indices~\cite{norskov2004density,shriver2006inorganic}.
 
-In our closed-loop architecture, the updated context from other modules is entered into the planner prompt, providing physical feedback and performance analysis from previous hypotheses.
-The planner prompt is assembled from conditional sections rather than a monolithic, fixed template. Three runtime switches control the agentic feedback exposed to the language model:
+In our closed-loop architecture, the updated context from other modules is entered into the \textbf{Planner} prompt, providing physical feedback and performance analysis from previous hypotheses.
+The \textbf{Planner} prompt is assembled from conditional sections rather than a monolithic, fixed template. Three runtime switches control the agentic feedback exposed to the language model:
 \textit{Slip feedback} (enables slip-conditioned guidance) determines whether prior slips are framed as explicit evidence that the originally planned site is unstable.
 \textit{FORBID} (explicit negative constraint) determines whether slipped or otherwise failed site intents are converted into an explicit prohibition in the planner history, preventing retry of the same failed site family.
 \textit{Termination} determines whether convergence-to-known-best signals are surfaced to the planner and whether the planner is allowed to stop early after repeated convergence.
@@ -34,8 +34,8 @@ Hypotheses failing these checks elicit an immediate penalty feedback prompt, dir
 
 %% Executor
 With the validated adsorption hypothesis, we perform physical simulation to evaluate the adsorption energy and performance. 
-In AdsMind, the tool executor instantiates the accepted plan on the slab, performs physical relaxation, and returns a structured post-relaxation analysis rather than only a scalar energy.
-The analyzer records whether the final structure remained bound, whether dissociation or rearrangement occurred, and whether the realized coordination environment differs from the planner's intent. These deviations are logged as slip diagnostics. The code-level \textit{Chemical Slip} flag is reserved for cases where relaxation realizes a different surface-symbol fingerprint than the planner requested; canonical site-family mismatch is retained separately as a geometric/site slip signal in the search history.
+In AdsMind, the \textbf{Executor} instantiates the accepted plan on the slab, performs physical relaxation, and returns a structured post-relaxation analysis rather than only a scalar energy.
+The \textbf{Analyzer} records whether the final structure remained bound, whether dissociation or rearrangement occurred, and whether the realized coordination environment differs from the \textbf{Planner}'s intent. These deviations are logged as slip diagnostics. The code-level \textit{Chemical Slip} flag is reserved for cases where relaxation realizes a different surface-symbol fingerprint than the planner requested; canonical site-family mismatch is retained separately as a geometric/site slip signal in the search history.
 
 Before the physical simulation, the proposal is pre-processed by being translated into an atomistic starting structure through a surrogate-SMILES geometry layer. 
 This layer maps the selected binding atom(s) to proxy adsorption markers and constructs physically valid initial placements for \textit{ontop}, \textit{bridge}, and \textit{hollow} adsorption.
@@ -45,7 +45,7 @@ In the benchmark configuration, the default cap is eight filtered surface coordi
 A two-step evaluation procedure is then employed.
 Candidate structures are first screened with the MACE-MP calculator used by the active protocol to discard pathological configurations and rank promising candidates by screened energy. This screening stage can optionally include a short Langevin molecular-dynamics warmup, but the warmup is disabled (\texttt{md\_steps=0}) in the primary CPU benchmark. The best surviving candidate (\texttt{relax\_top\_n=1}) is then fully relaxed and analyzed.
 
-The post-relaxation analysis reconstructs the actual local coordination environment, detects dissociation and bond changes, and writes structured artifacts that can be consumed directly by the next planning step or by offline benchmark tooling.
+The post-relaxation analysis reconstructs the actual local coordination environment, detects dissociation and bond changes, and writes structured artifacts that can be consumed directly by the next \textbf{Planner} step or by offline benchmark tooling.
 
 The physical engine uses the MACE equivariant message-passing architecture and the MACE-MP foundation model~\cite{batatia2022mace,batatia2023foundation} as the surrogate calculator.
 
@@ -77,9 +77,9 @@ where $R_i$ and $R_j$ are the covalent radii of the atoms. For intramolecular di
     \item \textbf{Dissociation:} Computed via the connected components of the adsorbate subgraph. If the number of components exceeds one, intramolecular dissociation is flagged.
     \item \textbf{Coordination Environment:} By identifying all surface atoms $k$ bonded to the targeted adsorbate anchor atom $a$ ($A_{ak} = 1$), the actual site type is classified into \textit{ontop} ($\sum_k A_{ak} = 1$), \textit{bridge} ($\sum_k A_{ak} = 2$), or \textit{hollow} ($\sum_k A_{ak} \ge 3$).
 \end{itemize}
-If the realized site type or surface-symbol fingerprint differs from the planner's intent, the slip diagnostic is logged.
+If the realized site type or surface-symbol fingerprint differs from the \textbf{Planner}'s intent, the slip diagnostic is logged.
 
-The analyzer then updates the running memory with the adsorption energy, bond integrity, and slip status, enabling dynamic adjustment of the exploration strategy.
+The \textbf{Analyzer} then updates the running memory with the adsorption energy, bond integrity, and slip status, enabling dynamic adjustment of the exploration strategy.
 
 \subsection{Ablation Studies and Experimental Setup}
 
