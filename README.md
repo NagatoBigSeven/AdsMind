@@ -1,5 +1,5 @@
 <p style="text-align: center;">
-  <img src="https://raw.githubusercontent.com/AI4QC/AdsMind/main/assets/adsmind_concept.png" alt="Project logo" width="80%"/>
+  <img src="https://raw.githubusercontent.com/AI4QC/AdsMind/main/assets/concept.png" alt="Project logo" width="80%"/>
 </p>
 
 <br>
