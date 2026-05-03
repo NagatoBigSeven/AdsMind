@@ -117,7 +117,7 @@ The agent will:
 **Inputs:**
 
 - SMILES: `O=C=O`
-- Slab: `examples/slabs/cu_slab_211.xyz` (included in repo)
+- Slab: `datasets/samples/cu_slab_211.xyz` (included in repo)
 - Query: "Find the most stable binding configuration for CO2"
 
 **What happens:**

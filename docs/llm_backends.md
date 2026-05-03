@@ -129,12 +129,15 @@ Access multiple AI providers through a unified API.
 1. Get API key from [OpenRouter](https://openrouter.ai)
 2. Set `OPENROUTER_API_KEY` or enter in the app
 
-**Available Models:**
+**Available Models:** any model from [OpenRouter's catalog](https://openrouter.ai/models). For reference, the frozen experiment configs in
+`research/agent_eval/configs/` route to:
 
-- `google/gemini-3-pro-preview`
-- `openai/gpt-5.2-pro`
-- `anthropic/claude-opus-4.5`
-- Any model from [OpenRouter's catalog](https://openrouter.ai/models)
+- `google/gemini-2.5-pro`
+- `x-ai/grok-4`
+- `anthropic/claude-sonnet-4.6`
+- (GPT-5.4 is reached through OpenAI's official endpoint, not OpenRouter)
+
+Pin a specific model id in your config; do not rely on a moving "latest" alias.
 
 ## Local Backends
 

@@ -27,7 +27,8 @@ twine check dist/*
 
 - Runtime code lives under `adsmind/`
 - Tests live under `tests/`
-- Research and manuscript assets live under `research/` and `paper/`
+- Research scripts live under `research/`
+- Manuscript source lives under `overleaf/`
 
 ## Expectations
 

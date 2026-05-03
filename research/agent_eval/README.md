@@ -16,8 +16,11 @@ research infrastructure, not a logbook of local runs.
   routes.
 - `generated_slabs/`: derived slab files for OCD-GMAE manifests. This is not
   the full OCD-GMAE dataset; see `generated_slabs/README.md`.
-- `benchmark_slabs/`: compatibility symlink to `slabs/benchmark/cmu_dataset/`
-  for historical CMU manifest paths.
+- CMU benchmark slabs are committed under `datasets/cmu-20/` at the repo root
+  (20 `.xyz` files matching `manifests/cmu_manifest.csv` rows). Older
+  `cmu_manifest.csv` paths still use the `benchmark_slabs/<file>` form and
+  expect a local symlink → `datasets/cmu-20/`; see
+  `research/results/MIGRATION.md` for the path rewrite plan.
 
 OCD-GMAE manifest generation expects an LMDB dataset path via
 `--lmdb-path` or `OCD_GMAE_LMDB_PATH`; no machine-specific default path is
