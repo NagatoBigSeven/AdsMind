@@ -146,7 +146,7 @@ class TestBenchmarkFiles(unittest.TestCase):
     
     def setUp(self):
         """Find benchmark directory."""
-        self.benchmark_dir = Path(__file__).parent.parent / "benchmark_slabs"
+        self.benchmark_dir = Path(__file__).parent.parent / "datasets" / "cmu-20"
     
     def test_benchmark_xyz_files_readable(self):
         """Ensure all benchmark XYZ files can still be read."""

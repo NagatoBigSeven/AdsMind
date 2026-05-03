@@ -42,7 +42,7 @@ class TestRankOneShotBackendSpread(unittest.TestCase):
             common_rows = [
                 {
                     "case_id": "01",
-                    "slab_file": "benchmark_slabs/01.xyz",
+                    "slab_file": "datasets/cmu-20/01.xyz",
                     "smiles": "[H]",
                     "adsorbate_name": "H",
                     "surface_family": "intermetallic",
@@ -50,7 +50,7 @@ class TestRankOneShotBackendSpread(unittest.TestCase):
                 },
                 {
                     "case_id": "02",
-                    "slab_file": "benchmark_slabs/02.xyz",
+                    "slab_file": "datasets/cmu-20/02.xyz",
                     "smiles": "[OH]",
                     "adsorbate_name": "OH",
                     "surface_family": "monometallic",
@@ -120,7 +120,7 @@ class TestRankOneShotBackendSpread(unittest.TestCase):
             rows = [
                 {
                     "case_id": "01",
-                    "slab_file": "benchmark_slabs/01.xyz",
+                    "slab_file": "datasets/cmu-20/01.xyz",
                     "smiles": "[H]",
                     "adsorbate_name": "H",
                     "surface_family": "intermetallic",
@@ -130,7 +130,7 @@ class TestRankOneShotBackendSpread(unittest.TestCase):
                 },
                 {
                     "case_id": "02",
-                    "slab_file": "benchmark_slabs/02.xyz",
+                    "slab_file": "datasets/cmu-20/02.xyz",
                     "smiles": "[OH]",
                     "adsorbate_name": "OH",
                     "surface_family": "monometallic",

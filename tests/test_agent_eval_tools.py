@@ -229,7 +229,7 @@ class TestAgentEvalTools(unittest.TestCase):
                 writer.writerow(
                     {
                         "case_id": "01",
-                        "slab_file": "benchmark_slabs/01_Mo3Pd_111.xyz",
+                        "slab_file": "datasets/cmu-20/01_Mo3Pd_111.xyz",
                         "adsorbate_name": "H",
                         "best_energy_eV": "-2.5",
                         "iteration_count": "3",
@@ -241,7 +241,7 @@ class TestAgentEvalTools(unittest.TestCase):
                 writer.writerow(
                     {
                         "case_id": "02",
-                        "slab_file": "benchmark_slabs/02_Mo3Pd_111.xyz",
+                        "slab_file": "datasets/cmu-20/02_Mo3Pd_111.xyz",
                         "adsorbate_name": "NNH",
                         "best_energy_eV": "-3.9",
                         "iteration_count": "5",
