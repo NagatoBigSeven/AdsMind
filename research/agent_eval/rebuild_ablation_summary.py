@@ -62,7 +62,7 @@ def rebuild(
             if isinstance(e, (int, float)):
                 full_energy[cid] = float(e)
 
-    # If single_shot not in ablation dir, try one_shot_dir
+    # If one_shot/single_shot is not in ablation dir, try one_shot_dir.
     one_shot_energy: Dict[str, float] = {}
     if one_shot_dir:
         for cid in case_ids:
@@ -75,9 +75,11 @@ def rebuild(
 
     for variant in variants:
         for cid in case_ids:
-            # single_shot: prefer ablation dir, fallback to one_shot_dir
-            if variant == "single_shot":
+            if variant in {"one_shot", "single_shot"}:
                 rpath = ablation_dir / variant / cid / "result.json"
+                if not rpath.exists():
+                    alternate = "single_shot" if variant == "one_shot" else "one_shot"
+                    rpath = ablation_dir / alternate / cid / "result.json"
                 if not rpath.exists() and one_shot_dir:
                     rpath = one_shot_dir / cid / "result.json"
             else:
@@ -168,9 +170,9 @@ def rebuild(
 def main(argv: Optional[list[str]] = None) -> int:
     parser = argparse.ArgumentParser(description="Rebuild ablation summary from result.json files.")
     parser.add_argument("--ablation-dir", required=True, help="Ablation output directory")
-    parser.add_argument("--one-shot-dir", default=None, help="One-shot results directory (for single_shot fallback)")
+    parser.add_argument("--one-shot-dir", default=None, help="One-shot results directory fallback")
     parser.add_argument("--cases", default="01,02,09,14,19")
-    parser.add_argument("--variants", default="full,no_slip,no_forbid,no_termination,single_shot")
+    parser.add_argument("--variants", default="full,no_slip,no_forbid,no_termination,one_shot")
     args = parser.parse_args(argv)
 
     ablation_dir = Path(args.ablation_dir)

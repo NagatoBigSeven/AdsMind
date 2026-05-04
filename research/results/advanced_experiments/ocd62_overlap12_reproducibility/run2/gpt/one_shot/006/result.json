@@ -1,0 +1,141 @@
+{
+  "case_id": "006",
+  "case_metadata": {
+    "case_id": "006",
+    "slab_file": "datasets/ocd62_overlap12/006_ocd_362_In18N18Ti36_O_N.xyz",
+    "smiles": "O=N",
+    "user_request": "Find the lowest-energy adsorption configuration for the adsorbate with SMILES O=N on the provided surface.",
+    "surface_family": "intermetallic",
+    "adsorbate_name": "O=N",
+    "miller_index": "",
+    "reaction_class": "GENERALIZATION",
+    "ablation_candidate": "FALSE",
+    "notes": "OCD id=362; adsorbate=O=N; surface_formula=In18N18Ti36; y_relaxed=-1.779823 eV; site=61;62;65; OCD62 seq_id=029; overlap12 reproducibility case",
+    "surface_formula": "In18N18Ti36",
+    "surface_elements": "In;N;Ti",
+    "bare_slab_atoms": "72",
+    "adsorbate_atoms": "3",
+    "y_relaxed": "-1.779823",
+    "site_indices": "61;62;65"
+  },
+  "status": "failed",
+  "best_energy_eV": null,
+  "iteration_count": 1,
+  "max_attempts": 1,
+  "final_site_type": null,
+  "converged_tag": false,
+  "wall_clock_sec": 408.0959266535938,
+  "total_input_tokens": 3569,
+  "total_output_tokens": 1197,
+  "artifact_paths": {
+    "BEST_O_N_ontop_to_hollow_HCP-Subsurf-Atom_DISS_E-11.352": "research/results/advanced_experiments/ocd62_overlap12_reproducibility/run2/gpt/one_shot/006/artifacts/BEST_O_N_ontop_to_hollow_HCP-Subsurf-Atom_DISS_E-11.352.xyz",
+    "BEST_O_N_ontop_to_hollow_HCP-Subsurf-Atom_DISS_E-11.352.xyz": "research/results/advanced_experiments/ocd62_overlap12_reproducibility/run2/gpt/one_shot/006/artifacts/BEST_O_N_ontop_to_hollow_HCP-Subsurf-Atom_DISS_E-11.352.xyz",
+    "best_structure_file": "research/results/advanced_experiments/ocd62_overlap12_reproducibility/run2/gpt/one_shot/006/artifacts/BEST_O_N_ontop_to_hollow_HCP-Subsurf-Atom_DISS_E-11.352.xyz",
+    "conformers_O_N": "research/results/advanced_experiments/ocd62_overlap12_reproducibility/run2/gpt/one_shot/006/artifacts/conformers_O_N.traj",
+    "conformers_O_N.traj": "research/results/advanced_experiments/ocd62_overlap12_reproducibility/run2/gpt/one_shot/006/artifacts/conformers_O_N.traj",
+    "final": "research/results/advanced_experiments/ocd62_overlap12_reproducibility/run2/gpt/one_shot/006/artifacts/final.xyz",
+    "final.xyz": "research/results/advanced_experiments/ocd62_overlap12_reproducibility/run2/gpt/one_shot/006/artifacts/final.xyz",
+    "relaxation": "research/results/advanced_experiments/ocd62_overlap12_reproducibility/run2/gpt/one_shot/006/artifacts/relaxation.traj",
+    "relaxation.traj": "research/results/advanced_experiments/ocd62_overlap12_reproducibility/run2/gpt/one_shot/006/artifacts/relaxation.traj",
+    "relaxation_trajectory_file": "research/results/advanced_experiments/ocd62_overlap12_reproducibility/run2/gpt/one_shot/006/artifacts/relaxation.traj"
+  },
+  "best_result": {},
+  "last_analysis": {
+    "status": "success",
+    "message": "Most stable config adsorption energy: -11.3518 eV. Target Atom: N (from plan index 1, global index 72 in relaxed structure). -> Nearest: Ti (Index 60), Distance: 1.94 Å (Threshold: 3.35), Bound: True. Bonded Surface Atoms: Ti-1.94Å, Ti-2.014Å, Ti-2.04Å. Is Bound: True. Reactivity Change Detected: True (Bond Changes: 1). Chemical Slip: True (Planned ['Ti'] -> Actual ['Ti', 'Ti', 'Ti']).",
+    "most_stable_energy_eV": -11.351791381835938,
+    "target_adsorbate_atom": "N",
+    "target_adsorbate_atom_index": 72,
+    "bonded_surface_atoms": [
+      {
+        "symbol": "Ti",
+        "index": 60,
+        "distance": 1.94
+      },
+      {
+        "symbol": "Ti",
+        "index": 64,
+        "distance": 2.014
+      },
+      {
+        "symbol": "Ti",
+        "index": 63,
+        "distance": 2.04
+      }
+    ],
+    "nearest_slab_atom": "Ti",
+    "nearest_slab_atom_index": 60,
+    "final_bond_distance_A": 1.94,
+    "estimated_covalent_cutoff_A": 2.541,
+    "is_covalently_bound": true,
+    "reaction_detected": true,
+    "is_dissociated": true,
+    "n_components": 2,
+    "bond_change_count": 1,
+    "site_analysis": {
+      "planned_site_type": "ontop",
+      "planned_connectivity": 1,
+      "actual_site_type": "hollow (HCP/Subsurf-Atom)",
+      "actual_connectivity": 3,
+      "is_chemical_slip": true,
+      "planned_symbols": [
+        "Ti"
+      ],
+      "actual_symbols": [
+        "Ti",
+        "Ti",
+        "Ti"
+      ],
+      "site_fingerprint": "Ti60-Ti64-Ti63"
+    },
+    "best_structure_file": "outputs/009-53ffba68/BEST_O_N_ontop_to_hollow_HCP-Subsurf-Atom_DISS_E-11.352.xyz",
+    "generated_conformers_file": "outputs/009-53ffba68/conformers_O_N.traj",
+    "relaxation_trajectory_file": "outputs/009-53ffba68/final.xyz",
+    "session_id": "009-53ffba68"
+  },
+  "attempt_records": [
+    {
+      "attempt_index": 1,
+      "plan": {
+        "reasoning": "No previous attempts exist, so I need to choose the single best physically motivated initial adsorption plan. The adsorbate SMILES O=N corresponds to nitric oxide written as a neutral closed-shell representation here. From the provided atom list, atom 0 is O (SP2, degree 1, radical_electrons 0) and atom 1 is N (SP2, degree 1, radical_electrons 0). There is no SMILES/user-description inconsistency to flag, and because both atoms have radical_electrons = 0, this should be treated as a Molecule rather than a ReactiveSpecies. For molecular adsorption, the donor/binding atom should be chemically sensible. For NO-like species on metal-containing surfaces, N-end coordination is generally more favorable than O-end coordination because N is the better donor and more commonly forms stronger chemisorption to electropositive/transition-metal surface atoms. The surface contains Ti, In, and N; among these, Ti is the most likely strong adsorption center for NO due to its transition-metal character and oxophilic/nitrophilic reactivity, whereas ontop surface N is less plausible as an adsorption center and In is typically weaker than Ti. With only one allowed attempt, the best initial low-energy guess is therefore N-down adsorption on an ontop Ti site. This uses a valid single binding index and matches the ontop site rule.",
+        "adsorbate_type": "Molecule",
+        "solution": {
+          "action": "continue",
+          "site_type": "ontop",
+          "surface_binding_atoms": [
+            "Ti"
+          ],
+          "adsorbate_binding_indices": [
+            1
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "ontop|Ti|1|Molecule|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -11.351791381835938,
+      "bond_change_count": 1,
+      "is_dissociated": true,
+      "is_chemical_slip": true,
+      "planned_site_type": "ontop",
+      "actual_site_type": "hollow (HCP/Subsurf-Atom)",
+      "best_structure_file": "outputs/009-53ffba68/BEST_O_N_ontop_to_hollow_HCP-Subsurf-Atom_DISS_E-11.352.xyz",
+      "generated_conformers_file": "outputs/009-53ffba68/conformers_O_N.traj",
+      "relaxation_trajectory_file": "outputs/009-53ffba68/final.xyz",
+      "message": "Most stable config adsorption energy: -11.3518 eV. Target Atom: N (from plan index 1, global index 72 in relaxed structure). -> Nearest: Ti (Index 60), Distance: 1.94 Å (Threshold: 3.35), Bound: True. Bonded Surface Atoms: Ti-1.94Å, Ti-2.014Å, Ti-2.04Å. Is Bound: True. Reactivity Change Detected: True (Bond Changes: 1). Chemical Slip: True (Planned ['Ti'] -> Actual ['Ti', 'Ti', 'Ti']).",
+      "history_entry": "【❌ Dissociated】 ontop @ ['Ti'] (Index [1]) -> Site: hollow (HCP/Subsurf-Atom) (Ti,Ti,Ti) | E=-11.352 eV"
+    }
+  ],
+  "history": [
+    "【❌ Dissociated】 ontop @ ['Ti'] (Index [1]) -> Site: hollow (HCP/Subsurf-Atom) (Ti,Ti,Ti) | E=-11.352 eV"
+  ],
+  "error": null,
+  "perfect_count": 0,
+  "dissociation_count": 1,
+  "rearrangement_count": 0,
+  "calc_failure_count": 0,
+  "chemical_slip_count": 1
+}

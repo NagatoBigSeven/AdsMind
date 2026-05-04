@@ -1,0 +1,191 @@
+{
+  "case_id": "023",
+  "case_metadata": {
+    "case_id": "023",
+    "slab_file": "datasets/ocd62/023_ocd_252_Ag60Ga20_C_O_C.xyz",
+    "smiles": "C(=O)C",
+    "user_request": "Find the lowest-energy adsorption configuration for the adsorbate with SMILES C(=O)C on the provided surface.",
+    "surface_family": "intermetallic",
+    "adsorbate_name": "C(=O)C",
+    "miller_index": "",
+    "reaction_class": "GENERALIZATION",
+    "ablation_candidate": "FALSE",
+    "notes": "OCD id=252; adsorbate=C(=O)C; surface_formula=Ag60Ga20; y_relaxed=-2.988905 eV; site=3",
+    "surface_formula": "Ag60Ga20",
+    "surface_elements": "Ag;Ga",
+    "bare_slab_atoms": "80",
+    "adsorbate_atoms": "7",
+    "y_relaxed": "-2.988905",
+    "site_indices": "3"
+  },
+  "status": "success",
+  "best_energy_eV": -3.4162750244140625,
+  "iteration_count": 1,
+  "max_attempts": 1,
+  "final_site_type": "ontop",
+  "converged_tag": false,
+  "wall_clock_sec": 654.4456336908042,
+  "total_input_tokens": 3791,
+  "total_output_tokens": 961,
+  "artifact_paths": {
+    "BEST_C(_O)C_ontop_E-3.416": "research/results/basic_experiments/ocd62/gpt/one_shot/023/artifacts/BEST_C(_O)C_ontop_E-3.416.xyz",
+    "BEST_C(_O)C_ontop_E-3.416.xyz": "research/results/basic_experiments/ocd62/gpt/one_shot/023/artifacts/BEST_C(_O)C_ontop_E-3.416.xyz",
+    "best_structure_file": "research/results/basic_experiments/ocd62/gpt/one_shot/023/artifacts/BEST_C(_O)C_ontop_E-3.416.xyz",
+    "conformers_C(_O)C": "research/results/basic_experiments/ocd62/gpt/one_shot/023/artifacts/conformers_C(_O)C.traj",
+    "conformers_C(_O)C.traj": "research/results/basic_experiments/ocd62/gpt/one_shot/023/artifacts/conformers_C(_O)C.traj",
+    "final": "research/results/basic_experiments/ocd62/gpt/one_shot/023/artifacts/final.xyz",
+    "final.xyz": "research/results/basic_experiments/ocd62/gpt/one_shot/023/artifacts/final.xyz",
+    "relaxation": "research/results/basic_experiments/ocd62/gpt/one_shot/023/artifacts/relaxation.traj",
+    "relaxation.traj": "research/results/basic_experiments/ocd62/gpt/one_shot/023/artifacts/relaxation.traj",
+    "relaxation_trajectory_file": "research/results/basic_experiments/ocd62/gpt/one_shot/023/artifacts/relaxation.traj"
+  },
+  "best_result": {
+    "most_stable_energy_eV": -3.4162750244140625,
+    "analysis_json": {
+      "status": "success",
+      "message": "Most stable config adsorption energy: -3.4163 eV. Target Atom: O (from plan index 1, global index 80 in relaxed structure). -> Nearest: Ga (Index 3), Distance: 2.089 Å (Threshold: 2.726), Bound: True. Bonded Surface Atoms: Ga-2.089Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: False (Planned ['Ga'] -> Actual ['Ga']).",
+      "most_stable_energy_eV": -3.4162750244140625,
+      "target_adsorbate_atom": "O",
+      "target_adsorbate_atom_index": 80,
+      "bonded_surface_atoms": [
+        {
+          "symbol": "Ga",
+          "index": 3,
+          "distance": 2.089
+        }
+      ],
+      "nearest_slab_atom": "Ga",
+      "nearest_slab_atom_index": 3,
+      "final_bond_distance_A": 2.089,
+      "estimated_covalent_cutoff_A": 2.068,
+      "is_covalently_bound": true,
+      "reaction_detected": false,
+      "is_dissociated": false,
+      "n_components": 1,
+      "bond_change_count": 0,
+      "site_analysis": {
+        "planned_site_type": "ontop",
+        "planned_connectivity": 1,
+        "actual_site_type": "ontop",
+        "actual_connectivity": 1,
+        "is_chemical_slip": false,
+        "planned_symbols": [
+          "Ga"
+        ],
+        "actual_symbols": [
+          "Ga"
+        ],
+        "site_fingerprint": "Ga3"
+      },
+      "best_structure_file": "outputs/034-ca477b3c/BEST_C(_O)C_ontop_E-3.416.xyz",
+      "generated_conformers_file": "outputs/034-ca477b3c/conformers_C(_O)C.traj",
+      "relaxation_trajectory_file": "outputs/034-ca477b3c/final.xyz",
+      "session_id": "034-ca477b3c"
+    },
+    "plan": {
+      "reasoning": "No history is available, so this must be the best initial chemically informed trial. The SMILES C(=O)C corresponds to acetaldehyde-like ketene? Checking the provided atom list strictly: index 0 is an SP2 carbon with degree 2, index 1 is an SP2 oxygen with degree 1, and index 2 is an SP3 carbon with degree 1. This is a neutral closed-shell adsorbate with no radical electrons on any heavy atom, so it must be treated as a Molecule, not a ReactiveSpecies. The most plausible donor atom for molecular adsorption is the carbonyl oxygen at index 1 because it has lone pairs; binding through the methyl carbon (index 2) would be chemically invalid for Molecule adsorption, and reactive-species logic cannot be used because radical_electrons are zero. The carbonyl carbon at index 0 is electrophilic rather than a normal lone-pair donor, so O-bound adsorption is the safest and most physically consistent first plan. On Ag/Ga alloy surfaces, oxophilic Ga is expected to interact more strongly with oxygen than Ag, so the most promising initial low-energy motif is O atop a Ga atom. Since there is only one allowed attempt, the highest-value starting point is an ontop Ga trial through adsorbate index 1.",
+      "adsorbate_type": "Molecule",
+      "solution": {
+        "action": "continue",
+        "site_type": "ontop",
+        "surface_binding_atoms": [
+          "Ga"
+        ],
+        "adsorbate_binding_indices": [
+          1
+        ],
+        "relax_top_n": 1,
+        "touch_sphere_size": 2,
+        "overlap_thr": 0.1,
+        "conformers_per_site_cap": 4
+      }
+    },
+    "result_type": "Perfect"
+  },
+  "last_analysis": {
+    "status": "success",
+    "message": "Most stable config adsorption energy: -3.4163 eV. Target Atom: O (from plan index 1, global index 80 in relaxed structure). -> Nearest: Ga (Index 3), Distance: 2.089 Å (Threshold: 2.726), Bound: True. Bonded Surface Atoms: Ga-2.089Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: False (Planned ['Ga'] -> Actual ['Ga']).",
+    "most_stable_energy_eV": -3.4162750244140625,
+    "target_adsorbate_atom": "O",
+    "target_adsorbate_atom_index": 80,
+    "bonded_surface_atoms": [
+      {
+        "symbol": "Ga",
+        "index": 3,
+        "distance": 2.089
+      }
+    ],
+    "nearest_slab_atom": "Ga",
+    "nearest_slab_atom_index": 3,
+    "final_bond_distance_A": 2.089,
+    "estimated_covalent_cutoff_A": 2.068,
+    "is_covalently_bound": true,
+    "reaction_detected": false,
+    "is_dissociated": false,
+    "n_components": 1,
+    "bond_change_count": 0,
+    "site_analysis": {
+      "planned_site_type": "ontop",
+      "planned_connectivity": 1,
+      "actual_site_type": "ontop",
+      "actual_connectivity": 1,
+      "is_chemical_slip": false,
+      "planned_symbols": [
+        "Ga"
+      ],
+      "actual_symbols": [
+        "Ga"
+      ],
+      "site_fingerprint": "Ga3"
+    },
+    "best_structure_file": "outputs/034-ca477b3c/BEST_C(_O)C_ontop_E-3.416.xyz",
+    "generated_conformers_file": "outputs/034-ca477b3c/conformers_C(_O)C.traj",
+    "relaxation_trajectory_file": "outputs/034-ca477b3c/final.xyz",
+    "session_id": "034-ca477b3c"
+  },
+  "attempt_records": [
+    {
+      "attempt_index": 1,
+      "plan": {
+        "reasoning": "No history is available, so this must be the best initial chemically informed trial. The SMILES C(=O)C corresponds to acetaldehyde-like ketene? Checking the provided atom list strictly: index 0 is an SP2 carbon with degree 2, index 1 is an SP2 oxygen with degree 1, and index 2 is an SP3 carbon with degree 1. This is a neutral closed-shell adsorbate with no radical electrons on any heavy atom, so it must be treated as a Molecule, not a ReactiveSpecies. The most plausible donor atom for molecular adsorption is the carbonyl oxygen at index 1 because it has lone pairs; binding through the methyl carbon (index 2) would be chemically invalid for Molecule adsorption, and reactive-species logic cannot be used because radical_electrons are zero. The carbonyl carbon at index 0 is electrophilic rather than a normal lone-pair donor, so O-bound adsorption is the safest and most physically consistent first plan. On Ag/Ga alloy surfaces, oxophilic Ga is expected to interact more strongly with oxygen than Ag, so the most promising initial low-energy motif is O atop a Ga atom. Since there is only one allowed attempt, the highest-value starting point is an ontop Ga trial through adsorbate index 1.",
+        "adsorbate_type": "Molecule",
+        "solution": {
+          "action": "continue",
+          "site_type": "ontop",
+          "surface_binding_atoms": [
+            "Ga"
+          ],
+          "adsorbate_binding_indices": [
+            1
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "ontop|Ga|1|Molecule|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -3.4162750244140625,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": false,
+      "planned_site_type": "ontop",
+      "actual_site_type": "ontop",
+      "best_structure_file": "outputs/034-ca477b3c/BEST_C(_O)C_ontop_E-3.416.xyz",
+      "generated_conformers_file": "outputs/034-ca477b3c/conformers_C(_O)C.traj",
+      "relaxation_trajectory_file": "outputs/034-ca477b3c/final.xyz",
+      "message": "Most stable config adsorption energy: -3.4163 eV. Target Atom: O (from plan index 1, global index 80 in relaxed structure). -> Nearest: Ga (Index 3), Distance: 2.089 Å (Threshold: 2.726), Bound: True. Bonded Surface Atoms: Ga-2.089Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: False (Planned ['Ga'] -> Actual ['Ga']).",
+      "history_entry": "【✅ Perfect Adsorption】 ontop @ ['Ga'] (Index [1]) -> Site: ontop (Ga) [🌟 New Best] | E=-3.416 eV"
+    }
+  ],
+  "history": [
+    "【✅ Perfect Adsorption】 ontop @ ['Ga'] (Index [1]) -> Site: ontop (Ga) [🌟 New Best] | E=-3.416 eV"
+  ],
+  "error": null,
+  "perfect_count": 1,
+  "dissociation_count": 0,
+  "rearrangement_count": 0,
+  "calc_failure_count": 0,
+  "chemical_slip_count": 0
+}

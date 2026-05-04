@@ -14,9 +14,7 @@ research infrastructure, not a logbook of local runs.
 
 ## Script Map
 
-The recommended entrypoints are grouped by role. Older command names are kept
-as compatibility wrappers when renaming would otherwise break historical notes
-or external runbooks.
+The recommended entrypoints are grouped by role.
 
 | Role | Script | Status | Use |
 |---|---|---|---|
@@ -40,14 +38,9 @@ or external runbooks.
 | DFT alignment | `render_dft_alignment_snapshots.py` | Current CLI | Render quick PNG snapshots for DFT-alignment packages. |
 | Figures | `render_panel_b_assets.py` | Current CLI | Render Panel B structure thumbnails/contact sheets. |
 | Narrow comparison | `compare_two_backend_ablation.py` | Auxiliary CLI | Compare exactly two backend ablation tables; not the main 4-backend analysis. |
-| Legacy handoff | `legacy_prepare_topk_dft_handoff.py` | Legacy CLI | Older top-k DFT handoff workflow; current DFT workflow is `export_dft_iteration_alignment.py`. |
-| Legacy packaging | `legacy_package_results.py` | Legacy CLI | Pre-`canonical_raw` packaging workflow; keep only for old runbooks. |
-
-Compatibility wrappers retained for older commands:
+Compatibility wrappers retained for renamed analysis helpers:
 `compare_llm_ablation.py`, `summarize_multi_backend_ablation.py`,
-`rank_one_shot_ranges.py`, `evaluate_ocd_gmae_ground_truth.py`,
-`merge_split_result_dirs.py`, `prepare_dft_validation.py`, and
-`package_results.py`.
+`rank_one_shot_ranges.py`, and `evaluate_ocd_gmae_ground_truth.py`.
 
 ## Core Commands
 
@@ -68,7 +61,7 @@ python -m research.agent_eval.run_ablation \
   --config research/agent_eval/configs/frozen_config_gemini25pro_vertexai.json \
   --output research/results/example_gemini_ablation \
   --cases 01,02,09,14,19 \
-  --variants full,no_slip,no_forbid,no_termination,single_shot
+  --variants full,no_slip,no_forbid,no_termination,one_shot
 ```
 
 Rebuild summaries from existing result directories:
@@ -88,12 +81,12 @@ Aggregate a 4-backend ablation table:
 
 ```bash
 python -m research.agent_eval.aggregate_ablation_across_backends \
-  --summary gemini=research/results/canonical_raw/cmu20/gemini_ablation/ablation_summary.csv \
-  --summary grok4=research/results/canonical_raw/cmu20/grok4_ablation/ablation_summary.csv \
-  --summary gpt54=research/results/canonical_raw/cmu20/openai_gpt54_ablation/ablation_summary.csv \
-  --summary claude=research/results/canonical_raw/cmu20/anthropic_sonnet46_ablation/ablation_summary.csv \
-  --output-csv research/results/analysis/cmu20_multi_backend_ablation_summary.csv \
-  --output-json research/results/analysis/cmu20_multi_backend_ablation_summary.json
+  --summary gpt=research/results/basic_experiments/cmu20/gpt/all_variants_summary.csv \
+  --summary claude=research/results/basic_experiments/cmu20/claude/all_variants_summary.csv \
+  --summary gemini=research/results/basic_experiments/cmu20/gemini/all_variants_summary.csv \
+  --summary grok=research/results/basic_experiments/cmu20/grok/all_variants_summary.csv \
+  --output-csv research/results/basic_experiments/cmu20/summaries/ablation_4backend.csv \
+  --output-json research/results/basic_experiments/cmu20/summaries/ablation_4backend.json
 ```
 
 ## Results

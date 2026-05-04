@@ -41,7 +41,7 @@ def main(argv: Optional[list[str]] = None) -> int:
     parser.add_argument("--cases", default="01,02,09,14,19", help="Comma-separated case ids")
     parser.add_argument(
         "--variants",
-        default="full,no_slip,no_forbid,no_termination,single_shot",
+        default="full,no_slip,no_forbid,no_termination,one_shot",
         help="Comma-separated ablation variants",
     )
     parser.add_argument("--api-key", default=None, help="Optional explicit API key override")

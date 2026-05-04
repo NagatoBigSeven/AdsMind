@@ -1,0 +1,191 @@
+{
+  "case_id": "027",
+  "case_metadata": {
+    "case_id": "027",
+    "slab_file": "datasets/ocd62/027_ocd_338_Se72Ta36_N.xyz",
+    "smiles": "N",
+    "user_request": "Find the lowest-energy adsorption configuration for the adsorbate with SMILES N on the provided surface.",
+    "surface_family": "compound",
+    "adsorbate_name": "N",
+    "miller_index": "",
+    "reaction_class": "GENERALIZATION",
+    "ablation_candidate": "FALSE",
+    "notes": "OCD id=338; adsorbate=N; surface_formula=Se72Ta36; y_relaxed=-2.190186 eV; site=105",
+    "surface_formula": "Se72Ta36",
+    "surface_elements": "Se;Ta",
+    "bare_slab_atoms": "108",
+    "adsorbate_atoms": "4",
+    "y_relaxed": "-2.190186",
+    "site_indices": "105"
+  },
+  "status": "success",
+  "best_energy_eV": -7.403881072998047,
+  "iteration_count": 1,
+  "max_attempts": 1,
+  "final_site_type": "ontop",
+  "converged_tag": false,
+  "wall_clock_sec": 582.9588158875704,
+  "total_input_tokens": 3955,
+  "total_output_tokens": 1536,
+  "artifact_paths": {
+    "BEST_N_ontop_E-7.404": "research/results/basic_experiments/ocd62/claude/one_shot/027/artifacts/BEST_N_ontop_E-7.404.xyz",
+    "BEST_N_ontop_E-7.404.xyz": "research/results/basic_experiments/ocd62/claude/one_shot/027/artifacts/BEST_N_ontop_E-7.404.xyz",
+    "best_structure_file": "research/results/basic_experiments/ocd62/claude/one_shot/027/artifacts/BEST_N_ontop_E-7.404.xyz",
+    "conformers_N": "research/results/basic_experiments/ocd62/claude/one_shot/027/artifacts/conformers_N.traj",
+    "conformers_N.traj": "research/results/basic_experiments/ocd62/claude/one_shot/027/artifacts/conformers_N.traj",
+    "final": "research/results/basic_experiments/ocd62/claude/one_shot/027/artifacts/final.xyz",
+    "final.xyz": "research/results/basic_experiments/ocd62/claude/one_shot/027/artifacts/final.xyz",
+    "relaxation": "research/results/basic_experiments/ocd62/claude/one_shot/027/artifacts/relaxation.traj",
+    "relaxation.traj": "research/results/basic_experiments/ocd62/claude/one_shot/027/artifacts/relaxation.traj",
+    "relaxation_trajectory_file": "research/results/basic_experiments/ocd62/claude/one_shot/027/artifacts/relaxation.traj"
+  },
+  "best_result": {
+    "most_stable_energy_eV": -7.403881072998047,
+    "analysis_json": {
+      "status": "success",
+      "message": "Most stable config adsorption energy: -7.4039 eV. Target Atom: N (from plan index 0, global index 108 in relaxed structure). -> Nearest: Ta (Index 103), Distance: 2.102 Å (Threshold: 3.494), Bound: True. Bonded Surface Atoms: Ta-2.102Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: False (Planned ['Ta'] -> Actual ['Ta']).",
+      "most_stable_energy_eV": -7.403881072998047,
+      "target_adsorbate_atom": "N",
+      "target_adsorbate_atom_index": 108,
+      "bonded_surface_atoms": [
+        {
+          "symbol": "Ta",
+          "index": 103,
+          "distance": 2.102
+        }
+      ],
+      "nearest_slab_atom": "Ta",
+      "nearest_slab_atom_index": 103,
+      "final_bond_distance_A": 2.102,
+      "estimated_covalent_cutoff_A": 2.651,
+      "is_covalently_bound": true,
+      "reaction_detected": false,
+      "is_dissociated": false,
+      "n_components": 1,
+      "bond_change_count": 0,
+      "site_analysis": {
+        "planned_site_type": "ontop",
+        "planned_connectivity": 1,
+        "actual_site_type": "ontop",
+        "actual_connectivity": 1,
+        "is_chemical_slip": false,
+        "planned_symbols": [
+          "Ta"
+        ],
+        "actual_symbols": [
+          "Ta"
+        ],
+        "site_fingerprint": "Ta103"
+      },
+      "best_structure_file": "outputs/006-f0792472/BEST_N_ontop_E-7.404.xyz",
+      "generated_conformers_file": "outputs/006-f0792472/conformers_N.traj",
+      "relaxation_trajectory_file": "outputs/006-f0792472/final.xyz",
+      "session_id": "006-f0792472"
+    },
+    "plan": {
+      "reasoning": "SMILES Consistency Check: The SMILES 'N' represents ammonia (NH3). The RDKit analysis shows a single heavy atom: N at index 0, with SP3 hybridization, degree 0 (no heavy atom neighbors), 0 radical electrons, and 0 formal charge. This is a complete, stable molecule (NH3) with a lone pair on nitrogen, making it suitable for 'Molecule' type adsorption via the nitrogen lone pair.\n\nNo history exists, so this is the first attempt.\n\nAdsorbate Analysis: NH3 is a classic lone-pair donor. The nitrogen atom (index 0) has a lone pair and will coordinate to the surface through N. The most favorable adsorption is typically ontop at a metal site (Ta in this case, as Ta is the transition metal and more reactive than Se).\n\nSurface Analysis: Available sites include ontop Ta, ontop Se, bridge Se-Ta, bridge Ta-Ta, bridge Se-Se, hollow Se-Se-Ta, hollow Se-Ta-Ta, hollow Se-Se-Se-Ta, hollow Se-Se-Ta-Ta. For NH3 adsorption, the ontop Ta site is the most physically motivated choice: Ta is a transition metal with available d-orbitals that can accept the N lone pair, and ontop coordination is the canonical binding mode for NH3 on metal surfaces.\n\nPlan: Use ontop Ta site, binding through N (index 0). This is the most likely lowest-energy configuration for NH3 on a TaSe2-type surface. adsorbate_type is 'Molecule' since NH3 is a stable closed-shell molecule with a lone pair.",
+      "adsorbate_type": "Molecule",
+      "solution": {
+        "action": "continue",
+        "site_type": "ontop",
+        "surface_binding_atoms": [
+          "Ta"
+        ],
+        "adsorbate_binding_indices": [
+          0
+        ],
+        "relax_top_n": 1,
+        "touch_sphere_size": 2,
+        "overlap_thr": 0.1,
+        "conformers_per_site_cap": 4
+      }
+    },
+    "result_type": "Perfect"
+  },
+  "last_analysis": {
+    "status": "success",
+    "message": "Most stable config adsorption energy: -7.4039 eV. Target Atom: N (from plan index 0, global index 108 in relaxed structure). -> Nearest: Ta (Index 103), Distance: 2.102 Å (Threshold: 3.494), Bound: True. Bonded Surface Atoms: Ta-2.102Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: False (Planned ['Ta'] -> Actual ['Ta']).",
+    "most_stable_energy_eV": -7.403881072998047,
+    "target_adsorbate_atom": "N",
+    "target_adsorbate_atom_index": 108,
+    "bonded_surface_atoms": [
+      {
+        "symbol": "Ta",
+        "index": 103,
+        "distance": 2.102
+      }
+    ],
+    "nearest_slab_atom": "Ta",
+    "nearest_slab_atom_index": 103,
+    "final_bond_distance_A": 2.102,
+    "estimated_covalent_cutoff_A": 2.651,
+    "is_covalently_bound": true,
+    "reaction_detected": false,
+    "is_dissociated": false,
+    "n_components": 1,
+    "bond_change_count": 0,
+    "site_analysis": {
+      "planned_site_type": "ontop",
+      "planned_connectivity": 1,
+      "actual_site_type": "ontop",
+      "actual_connectivity": 1,
+      "is_chemical_slip": false,
+      "planned_symbols": [
+        "Ta"
+      ],
+      "actual_symbols": [
+        "Ta"
+      ],
+      "site_fingerprint": "Ta103"
+    },
+    "best_structure_file": "outputs/006-f0792472/BEST_N_ontop_E-7.404.xyz",
+    "generated_conformers_file": "outputs/006-f0792472/conformers_N.traj",
+    "relaxation_trajectory_file": "outputs/006-f0792472/final.xyz",
+    "session_id": "006-f0792472"
+  },
+  "attempt_records": [
+    {
+      "attempt_index": 1,
+      "plan": {
+        "reasoning": "SMILES Consistency Check: The SMILES 'N' represents ammonia (NH3). The RDKit analysis shows a single heavy atom: N at index 0, with SP3 hybridization, degree 0 (no heavy atom neighbors), 0 radical electrons, and 0 formal charge. This is a complete, stable molecule (NH3) with a lone pair on nitrogen, making it suitable for 'Molecule' type adsorption via the nitrogen lone pair.\n\nNo history exists, so this is the first attempt.\n\nAdsorbate Analysis: NH3 is a classic lone-pair donor. The nitrogen atom (index 0) has a lone pair and will coordinate to the surface through N. The most favorable adsorption is typically ontop at a metal site (Ta in this case, as Ta is the transition metal and more reactive than Se).\n\nSurface Analysis: Available sites include ontop Ta, ontop Se, bridge Se-Ta, bridge Ta-Ta, bridge Se-Se, hollow Se-Se-Ta, hollow Se-Ta-Ta, hollow Se-Se-Se-Ta, hollow Se-Se-Ta-Ta. For NH3 adsorption, the ontop Ta site is the most physically motivated choice: Ta is a transition metal with available d-orbitals that can accept the N lone pair, and ontop coordination is the canonical binding mode for NH3 on metal surfaces.\n\nPlan: Use ontop Ta site, binding through N (index 0). This is the most likely lowest-energy configuration for NH3 on a TaSe2-type surface. adsorbate_type is 'Molecule' since NH3 is a stable closed-shell molecule with a lone pair.",
+        "adsorbate_type": "Molecule",
+        "solution": {
+          "action": "continue",
+          "site_type": "ontop",
+          "surface_binding_atoms": [
+            "Ta"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "ontop|Ta|0|Molecule|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -7.403881072998047,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": false,
+      "planned_site_type": "ontop",
+      "actual_site_type": "ontop",
+      "best_structure_file": "outputs/006-f0792472/BEST_N_ontop_E-7.404.xyz",
+      "generated_conformers_file": "outputs/006-f0792472/conformers_N.traj",
+      "relaxation_trajectory_file": "outputs/006-f0792472/final.xyz",
+      "message": "Most stable config adsorption energy: -7.4039 eV. Target Atom: N (from plan index 0, global index 108 in relaxed structure). -> Nearest: Ta (Index 103), Distance: 2.102 Å (Threshold: 3.494), Bound: True. Bonded Surface Atoms: Ta-2.102Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: False (Planned ['Ta'] -> Actual ['Ta']).",
+      "history_entry": "【✅ Perfect Adsorption】 ontop @ ['Ta'] (Index [0]) -> Site: ontop (Ta) | E=-7.404 eV"
+    }
+  ],
+  "history": [
+    "【✅ Perfect Adsorption】 ontop @ ['Ta'] (Index [0]) -> Site: ontop (Ta) | E=-7.404 eV"
+  ],
+  "error": null,
+  "perfect_count": 1,
+  "dissociation_count": 0,
+  "rearrangement_count": 0,
+  "calc_failure_count": 0,
+  "chemical_slip_count": 0
+}

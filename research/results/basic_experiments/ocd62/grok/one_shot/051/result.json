@@ -1,0 +1,228 @@
+{
+  "case_id": "051",
+  "case_metadata": {
+    "case_id": "051",
+    "slab_file": "datasets/ocd62/051_ocd_775_Na12Pb36_H.xyz",
+    "smiles": "[H]",
+    "user_request": "Find the lowest-energy adsorption configuration for atomic hydrogen on the provided surface.",
+    "surface_family": "intermetallic",
+    "adsorbate_name": "H",
+    "miller_index": "",
+    "reaction_class": "HER",
+    "ablation_candidate": "FALSE",
+    "notes": "OCD id=775; adsorbate=[H]; surface_formula=Na12Pb36; y_relaxed=0.597914 eV; site=7;26;47",
+    "surface_formula": "Na12Pb36",
+    "surface_elements": "Na;Pb",
+    "bare_slab_atoms": "48",
+    "adsorbate_atoms": "1",
+    "y_relaxed": "0.597914",
+    "site_indices": "7;26;47"
+  },
+  "status": "success",
+  "best_energy_eV": -3.086521863937378,
+  "iteration_count": 1,
+  "max_attempts": 1,
+  "final_site_type": "hollow (FCC/No-Subsurf)",
+  "converged_tag": false,
+  "wall_clock_sec": 177.66073731333017,
+  "total_input_tokens": 4735,
+  "total_output_tokens": 1265,
+  "artifact_paths": {
+    "BEST_H_ontop_to_hollow_FCC-No-Subsurf_E-3.087": "research/results/basic_experiments/ocd62/grok/one_shot/051/artifacts/BEST_H_ontop_to_hollow_FCC-No-Subsurf_E-3.087.xyz",
+    "BEST_H_ontop_to_hollow_FCC-No-Subsurf_E-3.087.xyz": "research/results/basic_experiments/ocd62/grok/one_shot/051/artifacts/BEST_H_ontop_to_hollow_FCC-No-Subsurf_E-3.087.xyz",
+    "best_structure_file": "research/results/basic_experiments/ocd62/grok/one_shot/051/artifacts/BEST_H_ontop_to_hollow_FCC-No-Subsurf_E-3.087.xyz",
+    "conformers_[H]": "research/results/basic_experiments/ocd62/grok/one_shot/051/artifacts/conformers_[H].traj",
+    "conformers_[H].traj": "research/results/basic_experiments/ocd62/grok/one_shot/051/artifacts/conformers_[H].traj",
+    "final": "research/results/basic_experiments/ocd62/grok/one_shot/051/artifacts/final.xyz",
+    "final.xyz": "research/results/basic_experiments/ocd62/grok/one_shot/051/artifacts/final.xyz",
+    "relaxation": "research/results/basic_experiments/ocd62/grok/one_shot/051/artifacts/relaxation.traj",
+    "relaxation.traj": "research/results/basic_experiments/ocd62/grok/one_shot/051/artifacts/relaxation.traj",
+    "relaxation_trajectory_file": "research/results/basic_experiments/ocd62/grok/one_shot/051/artifacts/relaxation.traj"
+  },
+  "best_result": {
+    "most_stable_energy_eV": -3.086521863937378,
+    "analysis_json": {
+      "status": "success",
+      "message": "Most stable config adsorption energy: -3.0865 eV. Target Atom: H (from plan index 0, global index 48 in relaxed structure). -> Nearest: Pb (Index 20), Distance: 2.253 Å (Threshold: 2.566), Bound: True. Bonded Surface Atoms: Pb-2.253Å, Na-2.354Å, Pb-2.446Å, Na-2.515Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Pb'] -> Actual ['Na', 'Na', 'Pb', 'Pb']).",
+      "most_stable_energy_eV": -3.086521863937378,
+      "target_adsorbate_atom": "H",
+      "target_adsorbate_atom_index": 48,
+      "bonded_surface_atoms": [
+        {
+          "symbol": "Pb",
+          "index": 20,
+          "distance": 2.253
+        },
+        {
+          "symbol": "Na",
+          "index": 4,
+          "distance": 2.354
+        },
+        {
+          "symbol": "Pb",
+          "index": 14,
+          "distance": 2.446
+        },
+        {
+          "symbol": "Na",
+          "index": 2,
+          "distance": 2.515
+        }
+      ],
+      "nearest_slab_atom": "Pb",
+      "nearest_slab_atom_index": 20,
+      "final_bond_distance_A": 2.253,
+      "estimated_covalent_cutoff_A": 1.947,
+      "is_covalently_bound": true,
+      "reaction_detected": false,
+      "is_dissociated": false,
+      "n_components": 1,
+      "bond_change_count": 0,
+      "site_analysis": {
+        "planned_site_type": "ontop",
+        "planned_connectivity": 1,
+        "actual_site_type": "hollow (FCC/No-Subsurf)",
+        "actual_connectivity": 4,
+        "is_chemical_slip": true,
+        "planned_symbols": [
+          "Pb"
+        ],
+        "actual_symbols": [
+          "Na",
+          "Na",
+          "Pb",
+          "Pb"
+        ],
+        "site_fingerprint": "Pb20-Na4-Pb14-Na2"
+      },
+      "best_structure_file": "outputs/003-edcbaa7a/BEST_H_ontop_to_hollow_FCC-No-Subsurf_E-3.087.xyz",
+      "generated_conformers_file": "outputs/003-edcbaa7a/conformers_[H].traj",
+      "relaxation_trajectory_file": "outputs/003-edcbaa7a/final.xyz",
+      "session_id": "003-edcbaa7a"
+    },
+    "plan": {
+      "reasoning": "SMILES [H] represents atomic hydrogen, which is a radical with one unpaired electron. The heavy atom list is empty since hydrogen is not a heavy atom, but the adsorbate has a single atom at index 0. This should be treated as 'ReactiveSpecies' for adsorption via the radical center. The user requests the lowest-energy adsorption configuration for atomic hydrogen. History is none, so this is the first attempt. To systematically explore, start with an ontop site on Pb, as Pb is a major component of the surface and ontop is a common site for atomic adsorbates. Available sites include ontop Pb. Adsorbate binding index is [0] for the single H atom. Since it's the first plan and the process aims to iterate, action is 'continue'. Note the hard limit of 1 attempt, but proceeding with initial plan.",
+      "adsorbate_type": "ReactiveSpecies",
+      "solution": {
+        "action": "continue",
+        "site_type": "ontop",
+        "surface_binding_atoms": [
+          "Pb"
+        ],
+        "adsorbate_binding_indices": [
+          0
+        ],
+        "relax_top_n": 1,
+        "touch_sphere_size": 2,
+        "overlap_thr": 0.1,
+        "conformers_per_site_cap": 4
+      }
+    },
+    "result_type": "Perfect"
+  },
+  "last_analysis": {
+    "status": "success",
+    "message": "Most stable config adsorption energy: -3.0865 eV. Target Atom: H (from plan index 0, global index 48 in relaxed structure). -> Nearest: Pb (Index 20), Distance: 2.253 Å (Threshold: 2.566), Bound: True. Bonded Surface Atoms: Pb-2.253Å, Na-2.354Å, Pb-2.446Å, Na-2.515Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Pb'] -> Actual ['Na', 'Na', 'Pb', 'Pb']).",
+    "most_stable_energy_eV": -3.086521863937378,
+    "target_adsorbate_atom": "H",
+    "target_adsorbate_atom_index": 48,
+    "bonded_surface_atoms": [
+      {
+        "symbol": "Pb",
+        "index": 20,
+        "distance": 2.253
+      },
+      {
+        "symbol": "Na",
+        "index": 4,
+        "distance": 2.354
+      },
+      {
+        "symbol": "Pb",
+        "index": 14,
+        "distance": 2.446
+      },
+      {
+        "symbol": "Na",
+        "index": 2,
+        "distance": 2.515
+      }
+    ],
+    "nearest_slab_atom": "Pb",
+    "nearest_slab_atom_index": 20,
+    "final_bond_distance_A": 2.253,
+    "estimated_covalent_cutoff_A": 1.947,
+    "is_covalently_bound": true,
+    "reaction_detected": false,
+    "is_dissociated": false,
+    "n_components": 1,
+    "bond_change_count": 0,
+    "site_analysis": {
+      "planned_site_type": "ontop",
+      "planned_connectivity": 1,
+      "actual_site_type": "hollow (FCC/No-Subsurf)",
+      "actual_connectivity": 4,
+      "is_chemical_slip": true,
+      "planned_symbols": [
+        "Pb"
+      ],
+      "actual_symbols": [
+        "Na",
+        "Na",
+        "Pb",
+        "Pb"
+      ],
+      "site_fingerprint": "Pb20-Na4-Pb14-Na2"
+    },
+    "best_structure_file": "outputs/003-edcbaa7a/BEST_H_ontop_to_hollow_FCC-No-Subsurf_E-3.087.xyz",
+    "generated_conformers_file": "outputs/003-edcbaa7a/conformers_[H].traj",
+    "relaxation_trajectory_file": "outputs/003-edcbaa7a/final.xyz",
+    "session_id": "003-edcbaa7a"
+  },
+  "attempt_records": [
+    {
+      "attempt_index": 1,
+      "plan": {
+        "reasoning": "SMILES [H] represents atomic hydrogen, which is a radical with one unpaired electron. The heavy atom list is empty since hydrogen is not a heavy atom, but the adsorbate has a single atom at index 0. This should be treated as 'ReactiveSpecies' for adsorption via the radical center. The user requests the lowest-energy adsorption configuration for atomic hydrogen. History is none, so this is the first attempt. To systematically explore, start with an ontop site on Pb, as Pb is a major component of the surface and ontop is a common site for atomic adsorbates. Available sites include ontop Pb. Adsorbate binding index is [0] for the single H atom. Since it's the first plan and the process aims to iterate, action is 'continue'. Note the hard limit of 1 attempt, but proceeding with initial plan.",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "ontop",
+          "surface_binding_atoms": [
+            "Pb"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "ontop|Pb|0|ReactiveSpecies|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -3.086521863937378,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": true,
+      "planned_site_type": "ontop",
+      "actual_site_type": "hollow (FCC/No-Subsurf)",
+      "best_structure_file": "outputs/003-edcbaa7a/BEST_H_ontop_to_hollow_FCC-No-Subsurf_E-3.087.xyz",
+      "generated_conformers_file": "outputs/003-edcbaa7a/conformers_[H].traj",
+      "relaxation_trajectory_file": "outputs/003-edcbaa7a/final.xyz",
+      "message": "Most stable config adsorption energy: -3.0865 eV. Target Atom: H (from plan index 0, global index 48 in relaxed structure). -> Nearest: Pb (Index 20), Distance: 2.253 Å (Threshold: 2.566), Bound: True. Bonded Surface Atoms: Pb-2.253Å, Na-2.354Å, Pb-2.446Å, Na-2.515Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Pb'] -> Actual ['Na', 'Na', 'Pb', 'Pb']).",
+      "history_entry": "【✅ Perfect Adsorption】 ontop @ ['Pb'] (Index [0]) -> ⚠️【Unstable Site Warning】⚠️: Planned ontop (Pb) is unstable, adsorbate spontaneously slipped to hollow (FCC/No-Subsurf) (Na-Na-Pb-Pb).This means Pb has insufficient affinity for this adsorbate. Please **FORBID** testing Pb type sites again! [🌟 New Best] | E=-3.087 eV"
+    }
+  ],
+  "history": [
+    "【✅ Perfect Adsorption】 ontop @ ['Pb'] (Index [0]) -> ⚠️【Unstable Site Warning】⚠️: Planned ontop (Pb) is unstable, adsorbate spontaneously slipped to hollow (FCC/No-Subsurf) (Na-Na-Pb-Pb).This means Pb has insufficient affinity for this adsorbate. Please **FORBID** testing Pb type sites again! [🌟 New Best] | E=-3.087 eV"
+  ],
+  "error": null,
+  "perfect_count": 1,
+  "dissociation_count": 0,
+  "rearrangement_count": 0,
+  "calc_failure_count": 0,
+  "chemical_slip_count": 1,
+  "best_structure_file": "research/results/basic_experiments/ocd62/grok/one_shot/051/artifacts/BEST_H_ontop_to_hollow_FCC-No-Subsurf_E-3.087.xyz"
+}

@@ -1,0 +1,141 @@
+{
+  "case_id": "018",
+  "case_metadata": {
+    "case_id": "018",
+    "slab_file": "datasets/ocd62/018_ocd_192_Si8Ta16V24_N_N.xyz",
+    "smiles": "[N]=N",
+    "user_request": "Find the lowest-energy adsorption configuration for the adsorbate with SMILES [N]=N on the provided surface.",
+    "surface_family": "intermetallic",
+    "adsorbate_name": "[N]=N",
+    "miller_index": "",
+    "reaction_class": "GENERALIZATION",
+    "ablation_candidate": "FALSE",
+    "notes": "OCD id=192; adsorbate=[N]=N; surface_formula=Si8Ta16V24; y_relaxed=-2.085077 eV; site=5;7;23;25;27",
+    "surface_formula": "Si8Ta16V24",
+    "surface_elements": "Si;Ta;V",
+    "bare_slab_atoms": "48",
+    "adsorbate_atoms": "3",
+    "y_relaxed": "-2.085077",
+    "site_indices": "5;7;23;25;27"
+  },
+  "status": "failed",
+  "best_energy_eV": null,
+  "iteration_count": 1,
+  "max_attempts": 1,
+  "final_site_type": null,
+  "converged_tag": false,
+  "wall_clock_sec": 348.72301138192415,
+  "total_input_tokens": 4588,
+  "total_output_tokens": 1577,
+  "artifact_paths": {
+    "BEST_N_N_ontop_to_hollow_HCP-Subsurf-Atom_DISS_E-8.017": "research/results/basic_experiments/ocd62/claude/one_shot/018/artifacts/BEST_N_N_ontop_to_hollow_HCP-Subsurf-Atom_DISS_E-8.017.xyz",
+    "BEST_N_N_ontop_to_hollow_HCP-Subsurf-Atom_DISS_E-8.017.xyz": "research/results/basic_experiments/ocd62/claude/one_shot/018/artifacts/BEST_N_N_ontop_to_hollow_HCP-Subsurf-Atom_DISS_E-8.017.xyz",
+    "best_structure_file": "research/results/basic_experiments/ocd62/claude/one_shot/018/artifacts/BEST_N_N_ontop_to_hollow_HCP-Subsurf-Atom_DISS_E-8.017.xyz",
+    "conformers_[N]_N": "research/results/basic_experiments/ocd62/claude/one_shot/018/artifacts/conformers_[N]_N.traj",
+    "conformers_[N]_N.traj": "research/results/basic_experiments/ocd62/claude/one_shot/018/artifacts/conformers_[N]_N.traj",
+    "final": "research/results/basic_experiments/ocd62/claude/one_shot/018/artifacts/final.xyz",
+    "final.xyz": "research/results/basic_experiments/ocd62/claude/one_shot/018/artifacts/final.xyz",
+    "relaxation": "research/results/basic_experiments/ocd62/claude/one_shot/018/artifacts/relaxation.traj",
+    "relaxation.traj": "research/results/basic_experiments/ocd62/claude/one_shot/018/artifacts/relaxation.traj",
+    "relaxation_trajectory_file": "research/results/basic_experiments/ocd62/claude/one_shot/018/artifacts/relaxation.traj"
+  },
+  "best_result": {},
+  "last_analysis": {
+    "status": "success",
+    "message": "Most stable config adsorption energy: -8.0172 eV. Target Atom: N (from plan index 0, global index 48 in relaxed structure). -> Nearest: V (Index 24), Distance: 1.961 Å (Threshold: 3.248), Bound: True. Bonded Surface Atoms: V-1.961Å, V-2.061Å, V-2.085Å. Is Bound: True. Reactivity Change Detected: True (Bond Changes: 1). Chemical Slip: True (Planned ['V'] -> Actual ['V', 'V', 'V']).",
+    "most_stable_energy_eV": -8.01717758178711,
+    "target_adsorbate_atom": "N",
+    "target_adsorbate_atom_index": 48,
+    "bonded_surface_atoms": [
+      {
+        "symbol": "V",
+        "index": 24,
+        "distance": 1.961
+      },
+      {
+        "symbol": "V",
+        "index": 27,
+        "distance": 2.061
+      },
+      {
+        "symbol": "V",
+        "index": 23,
+        "distance": 2.085
+      }
+    ],
+    "nearest_slab_atom": "V",
+    "nearest_slab_atom_index": 24,
+    "final_bond_distance_A": 1.961,
+    "estimated_covalent_cutoff_A": 2.464,
+    "is_covalently_bound": true,
+    "reaction_detected": true,
+    "is_dissociated": true,
+    "n_components": 2,
+    "bond_change_count": 1,
+    "site_analysis": {
+      "planned_site_type": "ontop",
+      "planned_connectivity": 1,
+      "actual_site_type": "hollow (HCP/Subsurf-Atom)",
+      "actual_connectivity": 3,
+      "is_chemical_slip": true,
+      "planned_symbols": [
+        "V"
+      ],
+      "actual_symbols": [
+        "V",
+        "V",
+        "V"
+      ],
+      "site_fingerprint": "V24-V27-V23"
+    },
+    "best_structure_file": "outputs/014-6561ce2e/BEST_N_N_ontop_to_hollow_HCP-Subsurf-Atom_DISS_E-8.017.xyz",
+    "generated_conformers_file": "outputs/014-6561ce2e/conformers_[N]_N.traj",
+    "relaxation_trajectory_file": "outputs/014-6561ce2e/final.xyz",
+    "session_id": "014-6561ce2e"
+  },
+  "attempt_records": [
+    {
+      "attempt_index": 1,
+      "plan": {
+        "reasoning": "SMILES Consistency Check: The SMILES [N]=N represents diazene (N2H0 with a double bond), but RDKit parsed it as two nitrogen atoms each with SP2 hybridization. Atom 0 (N) has radical_electrons=1, and atom 1 (N) has radical_electrons=0. This is a reactive dinitrogen species (N2 radical/diradical fragment). Since atom 0 has an unpaired electron, this should be treated as ReactiveSpecies.\n\nAdsorbate Analysis: The molecule is N=N (diazene-like or N2 radical). Atom 0 (N, SP2, radical_electrons=1) is the reactive end. Atom 1 (N, SP2, radical_electrons=0) is the terminal nitrogen. The most chemically reasonable adsorption is end-on via atom 0 (the radical N) at an ontop site, or side-on via both N atoms at a bridge site.\n\nSurface Analysis: Available sites include ontop (V, Ta, Si), bridge (V-V, Ta-V, Si-V, Ta-Ta, Si-Ta), and hollow (V-V-V, Ta-V-V, Si-V-V, Ta-Ta-V, Si-Ta-V). V is typically the most catalytically active transition metal for N2 activation. For N2/diazene species, end-on adsorption at a V ontop site via the radical N (index 0) is a strong first choice, as vanadium is known to activate N-containing species.\n\nPlan: Start with ontop V site, binding through atom 0 (the radical N). This is the most physically motivated first attempt given the radical character of atom 0 and the catalytic activity of V. adsorbate_type is ReactiveSpecies due to radical_electrons=1 on atom 0.",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "ontop",
+          "surface_binding_atoms": [
+            "V"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "ontop|V|0|ReactiveSpecies|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -8.01717758178711,
+      "bond_change_count": 1,
+      "is_dissociated": true,
+      "is_chemical_slip": true,
+      "planned_site_type": "ontop",
+      "actual_site_type": "hollow (HCP/Subsurf-Atom)",
+      "best_structure_file": "outputs/014-6561ce2e/BEST_N_N_ontop_to_hollow_HCP-Subsurf-Atom_DISS_E-8.017.xyz",
+      "generated_conformers_file": "outputs/014-6561ce2e/conformers_[N]_N.traj",
+      "relaxation_trajectory_file": "outputs/014-6561ce2e/final.xyz",
+      "message": "Most stable config adsorption energy: -8.0172 eV. Target Atom: N (from plan index 0, global index 48 in relaxed structure). -> Nearest: V (Index 24), Distance: 1.961 Å (Threshold: 3.248), Bound: True. Bonded Surface Atoms: V-1.961Å, V-2.061Å, V-2.085Å. Is Bound: True. Reactivity Change Detected: True (Bond Changes: 1). Chemical Slip: True (Planned ['V'] -> Actual ['V', 'V', 'V']).",
+      "history_entry": "【❌ Dissociated】 ontop @ ['V'] (Index [0]) -> ⚠️【Unstable Site Warning】⚠️: Planned ontop (V) is unstable, adsorbate spontaneously slipped to hollow (HCP/Subsurf-Atom) (V-V-V).This means V has insufficient affinity for this adsorbate. Please **FORBID** testing V type sites again! | E=-8.017 eV"
+    }
+  ],
+  "history": [
+    "【❌ Dissociated】 ontop @ ['V'] (Index [0]) -> ⚠️【Unstable Site Warning】⚠️: Planned ontop (V) is unstable, adsorbate spontaneously slipped to hollow (HCP/Subsurf-Atom) (V-V-V).This means V has insufficient affinity for this adsorbate. Please **FORBID** testing V type sites again! | E=-8.017 eV"
+  ],
+  "error": null,
+  "perfect_count": 0,
+  "dissociation_count": 1,
+  "rearrangement_count": 0,
+  "calc_failure_count": 0,
+  "chemical_slip_count": 1
+}

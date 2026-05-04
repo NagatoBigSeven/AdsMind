@@ -1,0 +1,191 @@
+{
+  "case_id": "060",
+  "case_metadata": {
+    "case_id": "060",
+    "slab_file": "datasets/ocd62/060_ocd_876_S36Sn24_CH3.xyz",
+    "smiles": "[CH3]",
+    "user_request": "Find the lowest-energy adsorption configuration for the adsorbate with SMILES [CH3] on the provided surface.",
+    "surface_family": "compound",
+    "adsorbate_name": "[CH3]",
+    "miller_index": "",
+    "reaction_class": "GENERALIZATION",
+    "ablation_candidate": "FALSE",
+    "notes": "OCD id=876; adsorbate=[CH3]; surface_formula=S36Sn24; y_relaxed=-2.011142 eV; site=25",
+    "surface_formula": "S36Sn24",
+    "surface_elements": "S;Sn",
+    "bare_slab_atoms": "60",
+    "adsorbate_atoms": "4",
+    "y_relaxed": "-2.011142",
+    "site_indices": "25"
+  },
+  "status": "success",
+  "best_energy_eV": -7.671304702758789,
+  "iteration_count": 1,
+  "max_attempts": 1,
+  "final_site_type": "ontop",
+  "converged_tag": false,
+  "wall_clock_sec": 264.8318383358419,
+  "total_input_tokens": 4428,
+  "total_output_tokens": 1655,
+  "artifact_paths": {
+    "BEST_CH3_ontop_E-7.671": "research/results/basic_experiments/ocd62/claude/one_shot/060/artifacts/BEST_CH3_ontop_E-7.671.xyz",
+    "BEST_CH3_ontop_E-7.671.xyz": "research/results/basic_experiments/ocd62/claude/one_shot/060/artifacts/BEST_CH3_ontop_E-7.671.xyz",
+    "best_structure_file": "research/results/basic_experiments/ocd62/claude/one_shot/060/artifacts/BEST_CH3_ontop_E-7.671.xyz",
+    "conformers_[CH3]": "research/results/basic_experiments/ocd62/claude/one_shot/060/artifacts/conformers_[CH3].traj",
+    "conformers_[CH3].traj": "research/results/basic_experiments/ocd62/claude/one_shot/060/artifacts/conformers_[CH3].traj",
+    "final": "research/results/basic_experiments/ocd62/claude/one_shot/060/artifacts/final.xyz",
+    "final.xyz": "research/results/basic_experiments/ocd62/claude/one_shot/060/artifacts/final.xyz",
+    "relaxation": "research/results/basic_experiments/ocd62/claude/one_shot/060/artifacts/relaxation.traj",
+    "relaxation.traj": "research/results/basic_experiments/ocd62/claude/one_shot/060/artifacts/relaxation.traj",
+    "relaxation_trajectory_file": "research/results/basic_experiments/ocd62/claude/one_shot/060/artifacts/relaxation.traj"
+  },
+  "best_result": {
+    "most_stable_energy_eV": -7.671304702758789,
+    "analysis_json": {
+      "status": "success",
+      "message": "Most stable config adsorption energy: -7.6713 eV. Target Atom: C (from plan index 0, global index 60 in relaxed structure). -> Nearest: Sn (Index 5), Distance: 2.204 Å (Threshold: 3.117), Bound: True. Bonded Surface Atoms: Sn-2.204Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: False (Planned ['Sn'] -> Actual ['Sn']).",
+      "most_stable_energy_eV": -7.671304702758789,
+      "target_adsorbate_atom": "C",
+      "target_adsorbate_atom_index": 60,
+      "bonded_surface_atoms": [
+        {
+          "symbol": "Sn",
+          "index": 5,
+          "distance": 2.204
+        }
+      ],
+      "nearest_slab_atom": "Sn",
+      "nearest_slab_atom_index": 5,
+      "final_bond_distance_A": 2.204,
+      "estimated_covalent_cutoff_A": 2.365,
+      "is_covalently_bound": true,
+      "reaction_detected": false,
+      "is_dissociated": false,
+      "n_components": 1,
+      "bond_change_count": 0,
+      "site_analysis": {
+        "planned_site_type": "ontop",
+        "planned_connectivity": 1,
+        "actual_site_type": "ontop",
+        "actual_connectivity": 1,
+        "is_chemical_slip": false,
+        "planned_symbols": [
+          "Sn"
+        ],
+        "actual_symbols": [
+          "Sn"
+        ],
+        "site_fingerprint": "Sn5"
+      },
+      "best_structure_file": "outputs/046-ec688a0c/BEST_CH3_ontop_E-7.671.xyz",
+      "generated_conformers_file": "outputs/046-ec688a0c/conformers_[CH3].traj",
+      "relaxation_trajectory_file": "outputs/046-ec688a0c/final.xyz",
+      "session_id": "046-ec688a0c"
+    },
+    "plan": {
+      "reasoning": "Step 0 - SMILES Consistency Check: The SMILES [CH3] represents a methyl radical. The RDKit analysis confirms: index 0 is Carbon, SP3 hybridized, degree 0, radical_electrons = 1. This is indeed a radical species (ReactiveSpecies), consistent with the SMILES notation. No mismatch detected.\n\nStep 1 - Analyze Old Plans: No history exists (None). This is the first attempt.\n\nStep 2 - Formulate New Plan: Since [CH3] is a radical with one unpaired electron on carbon (index 0), it will bind through the carbon atom. The surface contains S and Sn atoms. For a methyl radical on a metal sulfide surface (SnS-type), Sn sites are typically more metallic and reactive toward carbon radicals compared to S sites. The ontop-Sn site is the most natural starting point for a single-atom radical binding, as it provides a direct C-Sn bond. This is the most common adsorption mode for CH3 radicals on metal-containing surfaces.\n\nStep 3 - Analyze Request: Find the lowest-energy adsorption configuration for [CH3] on the S-Sn surface.\n\nStep 4 - Analyze Adsorbate: Carbon at index 0, SP3, radical_electrons=1. This is a ReactiveSpecies. The binding atom is C at index 0.\n\nStep 5 - Analyze Surface: Available sites include ontop-Sn, ontop-S, bridge S-Sn, bridge S-S, bridge Sn-Sn, hollow S-S-Sn, hollow S-Sn-Sn. For a single radical carbon, ontop is the most appropriate site type (1 binding index = 1 surface atom). Sn is more electrophilic/metallic and expected to bind CH3 more strongly than S.\n\nStep 6 - Plan: site_type=ontop, surface_binding_atoms=['Sn'], adsorbate_binding_indices=[0]. This is the best initial guess for lowest energy configuration.",
+      "adsorbate_type": "ReactiveSpecies",
+      "solution": {
+        "action": "continue",
+        "site_type": "ontop",
+        "surface_binding_atoms": [
+          "Sn"
+        ],
+        "adsorbate_binding_indices": [
+          0
+        ],
+        "relax_top_n": 1,
+        "touch_sphere_size": 2,
+        "overlap_thr": 0.1,
+        "conformers_per_site_cap": 4
+      }
+    },
+    "result_type": "Perfect"
+  },
+  "last_analysis": {
+    "status": "success",
+    "message": "Most stable config adsorption energy: -7.6713 eV. Target Atom: C (from plan index 0, global index 60 in relaxed structure). -> Nearest: Sn (Index 5), Distance: 2.204 Å (Threshold: 3.117), Bound: True. Bonded Surface Atoms: Sn-2.204Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: False (Planned ['Sn'] -> Actual ['Sn']).",
+    "most_stable_energy_eV": -7.671304702758789,
+    "target_adsorbate_atom": "C",
+    "target_adsorbate_atom_index": 60,
+    "bonded_surface_atoms": [
+      {
+        "symbol": "Sn",
+        "index": 5,
+        "distance": 2.204
+      }
+    ],
+    "nearest_slab_atom": "Sn",
+    "nearest_slab_atom_index": 5,
+    "final_bond_distance_A": 2.204,
+    "estimated_covalent_cutoff_A": 2.365,
+    "is_covalently_bound": true,
+    "reaction_detected": false,
+    "is_dissociated": false,
+    "n_components": 1,
+    "bond_change_count": 0,
+    "site_analysis": {
+      "planned_site_type": "ontop",
+      "planned_connectivity": 1,
+      "actual_site_type": "ontop",
+      "actual_connectivity": 1,
+      "is_chemical_slip": false,
+      "planned_symbols": [
+        "Sn"
+      ],
+      "actual_symbols": [
+        "Sn"
+      ],
+      "site_fingerprint": "Sn5"
+    },
+    "best_structure_file": "outputs/046-ec688a0c/BEST_CH3_ontop_E-7.671.xyz",
+    "generated_conformers_file": "outputs/046-ec688a0c/conformers_[CH3].traj",
+    "relaxation_trajectory_file": "outputs/046-ec688a0c/final.xyz",
+    "session_id": "046-ec688a0c"
+  },
+  "attempt_records": [
+    {
+      "attempt_index": 1,
+      "plan": {
+        "reasoning": "Step 0 - SMILES Consistency Check: The SMILES [CH3] represents a methyl radical. The RDKit analysis confirms: index 0 is Carbon, SP3 hybridized, degree 0, radical_electrons = 1. This is indeed a radical species (ReactiveSpecies), consistent with the SMILES notation. No mismatch detected.\n\nStep 1 - Analyze Old Plans: No history exists (None). This is the first attempt.\n\nStep 2 - Formulate New Plan: Since [CH3] is a radical with one unpaired electron on carbon (index 0), it will bind through the carbon atom. The surface contains S and Sn atoms. For a methyl radical on a metal sulfide surface (SnS-type), Sn sites are typically more metallic and reactive toward carbon radicals compared to S sites. The ontop-Sn site is the most natural starting point for a single-atom radical binding, as it provides a direct C-Sn bond. This is the most common adsorption mode for CH3 radicals on metal-containing surfaces.\n\nStep 3 - Analyze Request: Find the lowest-energy adsorption configuration for [CH3] on the S-Sn surface.\n\nStep 4 - Analyze Adsorbate: Carbon at index 0, SP3, radical_electrons=1. This is a ReactiveSpecies. The binding atom is C at index 0.\n\nStep 5 - Analyze Surface: Available sites include ontop-Sn, ontop-S, bridge S-Sn, bridge S-S, bridge Sn-Sn, hollow S-S-Sn, hollow S-Sn-Sn. For a single radical carbon, ontop is the most appropriate site type (1 binding index = 1 surface atom). Sn is more electrophilic/metallic and expected to bind CH3 more strongly than S.\n\nStep 6 - Plan: site_type=ontop, surface_binding_atoms=['Sn'], adsorbate_binding_indices=[0]. This is the best initial guess for lowest energy configuration.",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "ontop",
+          "surface_binding_atoms": [
+            "Sn"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "ontop|Sn|0|ReactiveSpecies|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -7.671304702758789,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": false,
+      "planned_site_type": "ontop",
+      "actual_site_type": "ontop",
+      "best_structure_file": "outputs/046-ec688a0c/BEST_CH3_ontop_E-7.671.xyz",
+      "generated_conformers_file": "outputs/046-ec688a0c/conformers_[CH3].traj",
+      "relaxation_trajectory_file": "outputs/046-ec688a0c/final.xyz",
+      "message": "Most stable config adsorption energy: -7.6713 eV. Target Atom: C (from plan index 0, global index 60 in relaxed structure). -> Nearest: Sn (Index 5), Distance: 2.204 Å (Threshold: 3.117), Bound: True. Bonded Surface Atoms: Sn-2.204Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: False (Planned ['Sn'] -> Actual ['Sn']).",
+      "history_entry": "【✅ Perfect Adsorption】 ontop @ ['Sn'] (Index [0]) -> Site: ontop (Sn) [🌟 New Best] | E=-7.671 eV"
+    }
+  ],
+  "history": [
+    "【✅ Perfect Adsorption】 ontop @ ['Sn'] (Index [0]) -> Site: ontop (Sn) [🌟 New Best] | E=-7.671 eV"
+  ],
+  "error": null,
+  "perfect_count": 1,
+  "dissociation_count": 0,
+  "rearrangement_count": 0,
+  "calc_failure_count": 0,
+  "chemical_slip_count": 0
+}

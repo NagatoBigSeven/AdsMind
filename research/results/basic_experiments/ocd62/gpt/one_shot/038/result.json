@@ -1,0 +1,227 @@
+{
+  "case_id": "038",
+  "case_metadata": {
+    "case_id": "038",
+    "slab_file": "datasets/ocd62/038_ocd_552_Bi16Pd48_C_C_O.xyz",
+    "smiles": "C(C)O",
+    "user_request": "Find the lowest-energy adsorption configuration for the adsorbate with SMILES C(C)O on the provided surface.",
+    "surface_family": "intermetallic",
+    "adsorbate_name": "C(C)O",
+    "miller_index": "",
+    "reaction_class": "GENERALIZATION",
+    "ablation_candidate": "FALSE",
+    "notes": "OCD id=552; adsorbate=C(C)O; surface_formula=Bi16Pd48; y_relaxed=-3.833955 eV",
+    "surface_formula": "Bi16Pd48",
+    "surface_elements": "Bi;Pd",
+    "bare_slab_atoms": "64",
+    "adsorbate_atoms": "9",
+    "y_relaxed": "-3.833955",
+    "site_indices": ""
+  },
+  "status": "success",
+  "best_energy_eV": -3.2947616577148438,
+  "iteration_count": 1,
+  "max_attempts": 1,
+  "final_site_type": "hollow (HCP/Subsurf-Atom)",
+  "converged_tag": false,
+  "wall_clock_sec": 790.441273778677,
+  "total_input_tokens": 3854,
+  "total_output_tokens": 1108,
+  "artifact_paths": {
+    "BEST_C(C)O_ontop_to_hollow_HCP-Subsurf-Atom_E-3.295": "research/results/basic_experiments/ocd62/gpt/one_shot/038/artifacts/BEST_C(C)O_ontop_to_hollow_HCP-Subsurf-Atom_E-3.295.xyz",
+    "BEST_C(C)O_ontop_to_hollow_HCP-Subsurf-Atom_E-3.295.xyz": "research/results/basic_experiments/ocd62/gpt/one_shot/038/artifacts/BEST_C(C)O_ontop_to_hollow_HCP-Subsurf-Atom_E-3.295.xyz",
+    "best_structure_file": "research/results/basic_experiments/ocd62/gpt/one_shot/038/artifacts/BEST_C(C)O_ontop_to_hollow_HCP-Subsurf-Atom_E-3.295.xyz",
+    "conformers_C(C)O": "research/results/basic_experiments/ocd62/gpt/one_shot/038/artifacts/conformers_C(C)O.traj",
+    "conformers_C(C)O.traj": "research/results/basic_experiments/ocd62/gpt/one_shot/038/artifacts/conformers_C(C)O.traj",
+    "final": "research/results/basic_experiments/ocd62/gpt/one_shot/038/artifacts/final.xyz",
+    "final.xyz": "research/results/basic_experiments/ocd62/gpt/one_shot/038/artifacts/final.xyz",
+    "relaxation": "research/results/basic_experiments/ocd62/gpt/one_shot/038/artifacts/relaxation.traj",
+    "relaxation.traj": "research/results/basic_experiments/ocd62/gpt/one_shot/038/artifacts/relaxation.traj",
+    "relaxation_trajectory_file": "research/results/basic_experiments/ocd62/gpt/one_shot/038/artifacts/relaxation.traj"
+  },
+  "best_result": {
+    "most_stable_energy_eV": -3.2947616577148438,
+    "analysis_json": {
+      "status": "success",
+      "message": "Most stable config adsorption energy: -3.2948 eV. Target Atom: O (from plan index 2, global index 64 in relaxed structure). -> Nearest: Pd (Index 60), Distance: 2.169 Å (Threshold: 2.972), Bound: True. Bonded Surface Atoms: Pd-2.169Å, Pd-2.215Å, Pd-2.774Å, Pd-2.969Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Pd'] -> Actual ['Pd', 'Pd', 'Pd', 'Pd']).",
+      "most_stable_energy_eV": -3.2947616577148438,
+      "target_adsorbate_atom": "O",
+      "target_adsorbate_atom_index": 64,
+      "bonded_surface_atoms": [
+        {
+          "symbol": "Pd",
+          "index": 60,
+          "distance": 2.169
+        },
+        {
+          "symbol": "Pd",
+          "index": 43,
+          "distance": 2.215
+        },
+        {
+          "symbol": "Pd",
+          "index": 41,
+          "distance": 2.774
+        },
+        {
+          "symbol": "Pd",
+          "index": 54,
+          "distance": 2.969
+        }
+      ],
+      "nearest_slab_atom": "Pd",
+      "nearest_slab_atom_index": 60,
+      "final_bond_distance_A": 2.169,
+      "estimated_covalent_cutoff_A": 2.255,
+      "is_covalently_bound": true,
+      "reaction_detected": false,
+      "is_dissociated": false,
+      "n_components": 1,
+      "bond_change_count": 0,
+      "site_analysis": {
+        "planned_site_type": "ontop",
+        "planned_connectivity": 1,
+        "actual_site_type": "hollow (HCP/Subsurf-Atom)",
+        "actual_connectivity": 4,
+        "is_chemical_slip": true,
+        "planned_symbols": [
+          "Pd"
+        ],
+        "actual_symbols": [
+          "Pd",
+          "Pd",
+          "Pd",
+          "Pd"
+        ],
+        "site_fingerprint": "Pd60-Pd43-Pd41-Pd54"
+      },
+      "best_structure_file": "outputs/038-d581f121/BEST_C(C)O_ontop_to_hollow_HCP-Subsurf-Atom_E-3.295.xyz",
+      "generated_conformers_file": "outputs/038-d581f121/conformers_C(C)O.traj",
+      "relaxation_trajectory_file": "outputs/038-d581f121/final.xyz",
+      "session_id": "038-d581f121"
+    },
+    "plan": {
+      "reasoning": "SMILES consistency check: C(C)O is ethanol-like connectivity with heavy atoms C0-C1-O2. RDKit data show all heavy atoms are SP3 and have 0 radical electrons, so the SMILES is consistent with a saturated closed-shell molecule. Therefore this must be treated as a Molecule, not a ReactiveSpecies. For intact molecular adsorption, the chemically valid donor atom is O index 2 because it has lone pairs; saturated carbons 0 and 1 are not appropriate binding atoms for Molecule adsorption. There is no history, so I must choose the best initial high-probability low-energy configuration. For alcohols on late-transition-metal/alloy surfaces, the most likely intact adsorption mode is O-down coordination to a metal atom, usually stronger on Pd than on Bi because Pd is more able to accept donation and form a dative O-metal bond, while Bi is typically less favorable for strong alcohol binding. Given the available site list, an ontop Pd trial is the most physically reasonable first attempt. Hollow/bridge with a single O donor are possible but usually less direct as an initial intact molecular adsorption guess, and there is only one attempt available, so I should prioritize the most likely minimum candidate. User intent is to find the lowest-energy adsorption configuration for this adsorbate on the Bi/Pd surface; with no prior data, the best systematic initial plan is O-bound ethanol on Pd ontop.",
+      "adsorbate_type": "Molecule",
+      "solution": {
+        "action": "continue",
+        "site_type": "ontop",
+        "surface_binding_atoms": [
+          "Pd"
+        ],
+        "adsorbate_binding_indices": [
+          2
+        ],
+        "relax_top_n": 1,
+        "touch_sphere_size": 2,
+        "overlap_thr": 0.1,
+        "conformers_per_site_cap": 4
+      }
+    },
+    "result_type": "Perfect"
+  },
+  "last_analysis": {
+    "status": "success",
+    "message": "Most stable config adsorption energy: -3.2948 eV. Target Atom: O (from plan index 2, global index 64 in relaxed structure). -> Nearest: Pd (Index 60), Distance: 2.169 Å (Threshold: 2.972), Bound: True. Bonded Surface Atoms: Pd-2.169Å, Pd-2.215Å, Pd-2.774Å, Pd-2.969Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Pd'] -> Actual ['Pd', 'Pd', 'Pd', 'Pd']).",
+    "most_stable_energy_eV": -3.2947616577148438,
+    "target_adsorbate_atom": "O",
+    "target_adsorbate_atom_index": 64,
+    "bonded_surface_atoms": [
+      {
+        "symbol": "Pd",
+        "index": 60,
+        "distance": 2.169
+      },
+      {
+        "symbol": "Pd",
+        "index": 43,
+        "distance": 2.215
+      },
+      {
+        "symbol": "Pd",
+        "index": 41,
+        "distance": 2.774
+      },
+      {
+        "symbol": "Pd",
+        "index": 54,
+        "distance": 2.969
+      }
+    ],
+    "nearest_slab_atom": "Pd",
+    "nearest_slab_atom_index": 60,
+    "final_bond_distance_A": 2.169,
+    "estimated_covalent_cutoff_A": 2.255,
+    "is_covalently_bound": true,
+    "reaction_detected": false,
+    "is_dissociated": false,
+    "n_components": 1,
+    "bond_change_count": 0,
+    "site_analysis": {
+      "planned_site_type": "ontop",
+      "planned_connectivity": 1,
+      "actual_site_type": "hollow (HCP/Subsurf-Atom)",
+      "actual_connectivity": 4,
+      "is_chemical_slip": true,
+      "planned_symbols": [
+        "Pd"
+      ],
+      "actual_symbols": [
+        "Pd",
+        "Pd",
+        "Pd",
+        "Pd"
+      ],
+      "site_fingerprint": "Pd60-Pd43-Pd41-Pd54"
+    },
+    "best_structure_file": "outputs/038-d581f121/BEST_C(C)O_ontop_to_hollow_HCP-Subsurf-Atom_E-3.295.xyz",
+    "generated_conformers_file": "outputs/038-d581f121/conformers_C(C)O.traj",
+    "relaxation_trajectory_file": "outputs/038-d581f121/final.xyz",
+    "session_id": "038-d581f121"
+  },
+  "attempt_records": [
+    {
+      "attempt_index": 1,
+      "plan": {
+        "reasoning": "SMILES consistency check: C(C)O is ethanol-like connectivity with heavy atoms C0-C1-O2. RDKit data show all heavy atoms are SP3 and have 0 radical electrons, so the SMILES is consistent with a saturated closed-shell molecule. Therefore this must be treated as a Molecule, not a ReactiveSpecies. For intact molecular adsorption, the chemically valid donor atom is O index 2 because it has lone pairs; saturated carbons 0 and 1 are not appropriate binding atoms for Molecule adsorption. There is no history, so I must choose the best initial high-probability low-energy configuration. For alcohols on late-transition-metal/alloy surfaces, the most likely intact adsorption mode is O-down coordination to a metal atom, usually stronger on Pd than on Bi because Pd is more able to accept donation and form a dative O-metal bond, while Bi is typically less favorable for strong alcohol binding. Given the available site list, an ontop Pd trial is the most physically reasonable first attempt. Hollow/bridge with a single O donor are possible but usually less direct as an initial intact molecular adsorption guess, and there is only one attempt available, so I should prioritize the most likely minimum candidate. User intent is to find the lowest-energy adsorption configuration for this adsorbate on the Bi/Pd surface; with no prior data, the best systematic initial plan is O-bound ethanol on Pd ontop.",
+        "adsorbate_type": "Molecule",
+        "solution": {
+          "action": "continue",
+          "site_type": "ontop",
+          "surface_binding_atoms": [
+            "Pd"
+          ],
+          "adsorbate_binding_indices": [
+            2
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "ontop|Pd|2|Molecule|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -3.2947616577148438,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": true,
+      "planned_site_type": "ontop",
+      "actual_site_type": "hollow (HCP/Subsurf-Atom)",
+      "best_structure_file": "outputs/038-d581f121/BEST_C(C)O_ontop_to_hollow_HCP-Subsurf-Atom_E-3.295.xyz",
+      "generated_conformers_file": "outputs/038-d581f121/conformers_C(C)O.traj",
+      "relaxation_trajectory_file": "outputs/038-d581f121/final.xyz",
+      "message": "Most stable config adsorption energy: -3.2948 eV. Target Atom: O (from plan index 2, global index 64 in relaxed structure). -> Nearest: Pd (Index 60), Distance: 2.169 Å (Threshold: 2.972), Bound: True. Bonded Surface Atoms: Pd-2.169Å, Pd-2.215Å, Pd-2.774Å, Pd-2.969Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Pd'] -> Actual ['Pd', 'Pd', 'Pd', 'Pd']).",
+      "history_entry": "【✅ Perfect Adsorption】 ontop @ ['Pd'] (Index [2]) -> ⚠️【Unstable Site Warning】⚠️: Planned ontop (Pd) is unstable, adsorbate spontaneously slipped to hollow (HCP/Subsurf-Atom) (Pd-Pd-Pd-Pd).This means Pd has insufficient affinity for this adsorbate. Please **FORBID** testing Pd type sites again! [🌟 New Best] | E=-3.295 eV"
+    }
+  ],
+  "history": [
+    "【✅ Perfect Adsorption】 ontop @ ['Pd'] (Index [2]) -> ⚠️【Unstable Site Warning】⚠️: Planned ontop (Pd) is unstable, adsorbate spontaneously slipped to hollow (HCP/Subsurf-Atom) (Pd-Pd-Pd-Pd).This means Pd has insufficient affinity for this adsorbate. Please **FORBID** testing Pd type sites again! [🌟 New Best] | E=-3.295 eV"
+  ],
+  "error": null,
+  "perfect_count": 1,
+  "dissociation_count": 0,
+  "rearrangement_count": 0,
+  "calc_failure_count": 0,
+  "chemical_slip_count": 1
+}

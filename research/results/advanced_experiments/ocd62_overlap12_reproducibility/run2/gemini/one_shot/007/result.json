@@ -1,0 +1,147 @@
+{
+  "case_id": "007",
+  "case_metadata": {
+    "case_id": "007",
+    "slab_file": "datasets/ocd62_overlap12/007_ocd_479_Ni6Sc36Te12_OH.xyz",
+    "smiles": "[OH]",
+    "user_request": "Find the lowest-energy adsorption configuration for hydroxyl radical on the provided surface.",
+    "surface_family": "intermetallic",
+    "adsorbate_name": "OH",
+    "miller_index": "",
+    "reaction_class": "ORR",
+    "ablation_candidate": "FALSE",
+    "notes": "OCD id=479; adsorbate=[OH]; surface_formula=Ni6Sc36Te12; y_relaxed=-2.695426 eV; site=27;28;30; OCD62 seq_id=032; overlap12 reproducibility case",
+    "surface_formula": "Ni6Sc36Te12",
+    "surface_elements": "Ni;Sc;Te",
+    "bare_slab_atoms": "54",
+    "adsorbate_atoms": "2",
+    "y_relaxed": "-2.695426",
+    "site_indices": "27;28;30"
+  },
+  "status": "failed",
+  "best_energy_eV": null,
+  "iteration_count": 1,
+  "max_attempts": 1,
+  "final_site_type": null,
+  "converged_tag": false,
+  "wall_clock_sec": 283.19258404150605,
+  "total_input_tokens": 3696,
+  "total_output_tokens": 983,
+  "artifact_paths": {
+    "BEST_OH_ontop_to_hollow_HCP-Subsurf-Atom_DISS_E-9.476": "research/results/advanced_experiments/ocd62_overlap12_reproducibility/run2/gemini/one_shot/007/artifacts/BEST_OH_ontop_to_hollow_HCP-Subsurf-Atom_DISS_E-9.476.xyz",
+    "BEST_OH_ontop_to_hollow_HCP-Subsurf-Atom_DISS_E-9.476.xyz": "research/results/advanced_experiments/ocd62_overlap12_reproducibility/run2/gemini/one_shot/007/artifacts/BEST_OH_ontop_to_hollow_HCP-Subsurf-Atom_DISS_E-9.476.xyz",
+    "best_structure_file": "research/results/advanced_experiments/ocd62_overlap12_reproducibility/run2/gemini/one_shot/007/artifacts/BEST_OH_ontop_to_hollow_HCP-Subsurf-Atom_DISS_E-9.476.xyz",
+    "conformers_[OH]": "research/results/advanced_experiments/ocd62_overlap12_reproducibility/run2/gemini/one_shot/007/artifacts/conformers_[OH].traj",
+    "conformers_[OH].traj": "research/results/advanced_experiments/ocd62_overlap12_reproducibility/run2/gemini/one_shot/007/artifacts/conformers_[OH].traj",
+    "final": "research/results/advanced_experiments/ocd62_overlap12_reproducibility/run2/gemini/one_shot/007/artifacts/final.xyz",
+    "final.xyz": "research/results/advanced_experiments/ocd62_overlap12_reproducibility/run2/gemini/one_shot/007/artifacts/final.xyz",
+    "relaxation": "research/results/advanced_experiments/ocd62_overlap12_reproducibility/run2/gemini/one_shot/007/artifacts/relaxation.traj",
+    "relaxation.traj": "research/results/advanced_experiments/ocd62_overlap12_reproducibility/run2/gemini/one_shot/007/artifacts/relaxation.traj",
+    "relaxation_trajectory_file": "research/results/advanced_experiments/ocd62_overlap12_reproducibility/run2/gemini/one_shot/007/artifacts/relaxation.traj"
+  },
+  "best_result": {},
+  "last_analysis": {
+    "status": "success",
+    "message": "Most stable config adsorption energy: -9.4764 eV. Target Atom: O (from plan index 0, global index 54 in relaxed structure). -> Nearest: Sc (Index 35), Distance: 1.837 Å (Threshold: 3.422), Bound: True. Bonded Surface Atoms: Sc-1.837Å, Sc-2.026Å, Sc-2.239Å, Sc-2.425Å. Is Bound: True. Reactivity Change Detected: True (Bond Changes: 1). Chemical Slip: True (Planned ['Sc'] -> Actual ['Sc', 'Sc', 'Sc', 'Sc']).",
+    "most_stable_energy_eV": -9.476402282714844,
+    "target_adsorbate_atom": "O",
+    "target_adsorbate_atom_index": 54,
+    "bonded_surface_atoms": [
+      {
+        "symbol": "Sc",
+        "index": 35,
+        "distance": 1.837
+      },
+      {
+        "symbol": "Sc",
+        "index": 32,
+        "distance": 2.026
+      },
+      {
+        "symbol": "Sc",
+        "index": 30,
+        "distance": 2.239
+      },
+      {
+        "symbol": "Sc",
+        "index": 24,
+        "distance": 2.425
+      }
+    ],
+    "nearest_slab_atom": "Sc",
+    "nearest_slab_atom_index": 35,
+    "final_bond_distance_A": 1.837,
+    "estimated_covalent_cutoff_A": 2.596,
+    "is_covalently_bound": true,
+    "reaction_detected": true,
+    "is_dissociated": true,
+    "n_components": 2,
+    "bond_change_count": 1,
+    "site_analysis": {
+      "planned_site_type": "ontop",
+      "planned_connectivity": 1,
+      "actual_site_type": "hollow (HCP/Subsurf-Atom)",
+      "actual_connectivity": 4,
+      "is_chemical_slip": true,
+      "planned_symbols": [
+        "Sc"
+      ],
+      "actual_symbols": [
+        "Sc",
+        "Sc",
+        "Sc",
+        "Sc"
+      ],
+      "site_fingerprint": "Sc35-Sc32-Sc30-Sc24"
+    },
+    "best_structure_file": "outputs/002-8618e835/BEST_OH_ontop_to_hollow_HCP-Subsurf-Atom_DISS_E-9.476.xyz",
+    "generated_conformers_file": "outputs/002-8618e835/conformers_[OH].traj",
+    "relaxation_trajectory_file": "outputs/002-8618e835/final.xyz",
+    "session_id": "002-8618e835"
+  },
+  "attempt_records": [
+    {
+      "attempt_index": 1,
+      "plan": {
+        "reasoning": "This is the first attempt to find the lowest energy adsorption site for a hydroxyl radical ([OH]) on the Ni-Sc-Te surface. The provided SMILES, [OH], corresponds to a radical species, as confirmed by the RDKit analysis which shows the oxygen atom (index 0) has one radical electron. Therefore, the `adsorbate_type` should be `ReactiveSpecies`. The binding will occur through this oxygen atom. Among the available surface elements (Ni, Sc, Te), Scandium (Sc) is a highly oxophilic element, meaning it has a strong affinity for oxygen. It is chemically intuitive to predict a strong bond between the oxygen of the hydroxyl radical and a surface Sc atom. Therefore, I will start by exploring the on-top adsorption site on a Scandium atom, as this is a very promising candidate for a low-energy configuration.",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "ontop",
+          "surface_binding_atoms": [
+            "Sc"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "ontop|Sc|0|ReactiveSpecies|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -9.476402282714844,
+      "bond_change_count": 1,
+      "is_dissociated": true,
+      "is_chemical_slip": true,
+      "planned_site_type": "ontop",
+      "actual_site_type": "hollow (HCP/Subsurf-Atom)",
+      "best_structure_file": "outputs/002-8618e835/BEST_OH_ontop_to_hollow_HCP-Subsurf-Atom_DISS_E-9.476.xyz",
+      "generated_conformers_file": "outputs/002-8618e835/conformers_[OH].traj",
+      "relaxation_trajectory_file": "outputs/002-8618e835/final.xyz",
+      "message": "Most stable config adsorption energy: -9.4764 eV. Target Atom: O (from plan index 0, global index 54 in relaxed structure). -> Nearest: Sc (Index 35), Distance: 1.837 Å (Threshold: 3.422), Bound: True. Bonded Surface Atoms: Sc-1.837Å, Sc-2.026Å, Sc-2.239Å, Sc-2.425Å. Is Bound: True. Reactivity Change Detected: True (Bond Changes: 1). Chemical Slip: True (Planned ['Sc'] -> Actual ['Sc', 'Sc', 'Sc', 'Sc']).",
+      "history_entry": "【❌ Dissociated】 ontop @ ['Sc'] (Index [0]) -> Site: hollow (HCP/Subsurf-Atom) (Sc,Sc,Sc,Sc) | E=-9.476 eV"
+    }
+  ],
+  "history": [
+    "【❌ Dissociated】 ontop @ ['Sc'] (Index [0]) -> Site: hollow (HCP/Subsurf-Atom) (Sc,Sc,Sc,Sc) | E=-9.476 eV"
+  ],
+  "error": null,
+  "perfect_count": 0,
+  "dissociation_count": 1,
+  "rearrangement_count": 0,
+  "calc_failure_count": 0,
+  "chemical_slip_count": 1
+}

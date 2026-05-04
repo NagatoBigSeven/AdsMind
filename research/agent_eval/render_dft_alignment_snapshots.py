@@ -139,7 +139,7 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
         "--case-dir",
-        default="research/results/analysis/dft_iteration_alignment/case_01",
+        default="research/results/advanced_experiments/dft_iteration_alignment/cmu20_case01",
         help="DFT alignment case directory containing structures/.",
     )
     args = parser.parse_args()

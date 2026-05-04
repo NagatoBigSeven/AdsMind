@@ -1,0 +1,223 @@
+{
+  "case_id": "022",
+  "case_metadata": {
+    "case_id": "022",
+    "slab_file": "datasets/ocd62/022_ocd_242_Fe20Mn20P20_NH2.xyz",
+    "smiles": "[NH2]",
+    "user_request": "Find the lowest-energy adsorption configuration for the adsorbate with SMILES [NH2] on the provided surface.",
+    "surface_family": "intermetallic",
+    "adsorbate_name": "[NH2]",
+    "miller_index": "",
+    "reaction_class": "GENERALIZATION",
+    "ablation_candidate": "FALSE",
+    "notes": "OCD id=242; adsorbate=[NH2]; surface_formula=Fe20Mn20P20; y_relaxed=-1.886377 eV; site=10;24",
+    "surface_formula": "Fe20Mn20P20",
+    "surface_elements": "Fe;Mn;P",
+    "bare_slab_atoms": "60",
+    "adsorbate_atoms": "3",
+    "y_relaxed": "-1.886377",
+    "site_indices": "10;24"
+  },
+  "status": "success",
+  "best_energy_eV": -3.3670387268066406,
+  "iteration_count": 1,
+  "max_attempts": 1,
+  "final_site_type": "hollow (HCP/Subsurf-Atom)",
+  "converged_tag": false,
+  "wall_clock_sec": 370.12319449335337,
+  "total_input_tokens": 4401,
+  "total_output_tokens": 1857,
+  "artifact_paths": {
+    "BEST_NH2_hollow_to_hollow_HCP-Subsurf-Atom_E-3.367": "research/results/basic_experiments/ocd62/claude/one_shot/022/artifacts/BEST_NH2_hollow_to_hollow_HCP-Subsurf-Atom_E-3.367.xyz",
+    "BEST_NH2_hollow_to_hollow_HCP-Subsurf-Atom_E-3.367.xyz": "research/results/basic_experiments/ocd62/claude/one_shot/022/artifacts/BEST_NH2_hollow_to_hollow_HCP-Subsurf-Atom_E-3.367.xyz",
+    "best_structure_file": "research/results/basic_experiments/ocd62/claude/one_shot/022/artifacts/BEST_NH2_hollow_to_hollow_HCP-Subsurf-Atom_E-3.367.xyz",
+    "conformers_[NH2]": "research/results/basic_experiments/ocd62/claude/one_shot/022/artifacts/conformers_[NH2].traj",
+    "conformers_[NH2].traj": "research/results/basic_experiments/ocd62/claude/one_shot/022/artifacts/conformers_[NH2].traj",
+    "final": "research/results/basic_experiments/ocd62/claude/one_shot/022/artifacts/final.xyz",
+    "final.xyz": "research/results/basic_experiments/ocd62/claude/one_shot/022/artifacts/final.xyz",
+    "relaxation": "research/results/basic_experiments/ocd62/claude/one_shot/022/artifacts/relaxation.traj",
+    "relaxation.traj": "research/results/basic_experiments/ocd62/claude/one_shot/022/artifacts/relaxation.traj",
+    "relaxation_trajectory_file": "research/results/basic_experiments/ocd62/claude/one_shot/022/artifacts/relaxation.traj"
+  },
+  "best_result": {
+    "most_stable_energy_eV": -3.3670387268066406,
+    "analysis_json": {
+      "status": "success",
+      "message": "Most stable config adsorption energy: -3.3670 eV. Target Atom: N (from plan index 0, global index 60 in relaxed structure). -> Nearest: P (Index 54), Distance: 1.808 Å (Threshold: 2.581), Bound: True. Bonded Surface Atoms: P-1.808Å, Mn-2.029Å, Fe-2.785Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: False (Planned ['Fe', 'Mn', 'P'] -> Actual ['Fe', 'Mn', 'P']).",
+      "most_stable_energy_eV": -3.3670387268066406,
+      "target_adsorbate_atom": "N",
+      "target_adsorbate_atom_index": 60,
+      "bonded_surface_atoms": [
+        {
+          "symbol": "P",
+          "index": 54,
+          "distance": 1.808
+        },
+        {
+          "symbol": "Mn",
+          "index": 9,
+          "distance": 2.029
+        },
+        {
+          "symbol": "Fe",
+          "index": 24,
+          "distance": 2.785
+        }
+      ],
+      "nearest_slab_atom": "P",
+      "nearest_slab_atom_index": 54,
+      "final_bond_distance_A": 1.808,
+      "estimated_covalent_cutoff_A": 1.958,
+      "is_covalently_bound": true,
+      "reaction_detected": false,
+      "is_dissociated": false,
+      "n_components": 1,
+      "bond_change_count": 0,
+      "site_analysis": {
+        "planned_site_type": "hollow",
+        "planned_connectivity": 3,
+        "actual_site_type": "hollow (HCP/Subsurf-Atom)",
+        "actual_connectivity": 3,
+        "is_chemical_slip": false,
+        "planned_symbols": [
+          "Fe",
+          "Mn",
+          "P"
+        ],
+        "actual_symbols": [
+          "Fe",
+          "Mn",
+          "P"
+        ],
+        "site_fingerprint": "P54-Mn9-Fe24"
+      },
+      "best_structure_file": "outputs/021-d1796e39/BEST_NH2_hollow_to_hollow_HCP-Subsurf-Atom_E-3.367.xyz",
+      "generated_conformers_file": "outputs/021-d1796e39/conformers_[NH2].traj",
+      "relaxation_trajectory_file": "outputs/021-d1796e39/final.xyz",
+      "session_id": "021-d1796e39"
+    },
+    "plan": {
+      "reasoning": "Step 0 - SMILES Consistency Check: The SMILES [NH2] represents an NH2 radical. The RDKit analysis confirms: index 0 is N, SP3 hybridized, degree 0 (no heavy atom neighbors), radical_electrons = 1, formal_charge = 0. This is indeed a reactive radical species (NH2 fragment). No inconsistency detected.\n\nStep 1 - History Analysis: No previous attempts. This is the first plan.\n\nStep 2 & 3 - Analyze Request: Find the lowest-energy adsorption configuration for NH2 radical on Fe20Mn20P20 surface.\n\nStep 4 - Adsorbate Analysis: [NH2] is an NH2 radical with N at index 0 having 1 unpaired electron. This is a ReactiveSpecies. The N atom is the binding atom (index 0). Since it has a radical electron, it will bind to the surface through N.\n\nStep 5 - Surface Analysis: Available sites include ontop (Fe, Mn, P), bridge (Fe-Fe, Fe-Mn, Fe-P, Mn-Mn, Mn-P, P-P), hollow-3 (Fe-Fe-P, Fe-Mn-P, Fe-P-P, Mn-Mn-P), hollow-4 (Fe-Mn-Mn-P, Mn-Mn-P-P). For NH2 radicals on transition metal surfaces, hollow sites typically provide the strongest binding due to maximum coordination. On Fe-containing surfaces, NH2 often binds strongly at hollow sites. The Fe-Mn-P hollow site is a chemically diverse hollow site that could provide strong binding through multiple metal interactions.\n\nStep 6 - Formulate Plan: Given this is the only attempt (hard limit = 1), I should choose the most promising site. NH2 radicals on transition metal surfaces typically prefer hollow sites for maximum coordination. I'll choose the Fe-Mn-P hollow-3 site as it involves two transition metals (Fe and Mn) and P, which is a common and chemically interesting hollow site on this alloy surface. The N atom (index 0) will bind at this hollow site with adsorbate_binding_indices = [0].",
+      "adsorbate_type": "ReactiveSpecies",
+      "solution": {
+        "action": "continue",
+        "site_type": "hollow",
+        "surface_binding_atoms": [
+          "Fe",
+          "Mn",
+          "P"
+        ],
+        "adsorbate_binding_indices": [
+          0
+        ],
+        "relax_top_n": 1,
+        "touch_sphere_size": 2,
+        "overlap_thr": 0.1,
+        "conformers_per_site_cap": 4
+      }
+    },
+    "result_type": "Perfect"
+  },
+  "last_analysis": {
+    "status": "success",
+    "message": "Most stable config adsorption energy: -3.3670 eV. Target Atom: N (from plan index 0, global index 60 in relaxed structure). -> Nearest: P (Index 54), Distance: 1.808 Å (Threshold: 2.581), Bound: True. Bonded Surface Atoms: P-1.808Å, Mn-2.029Å, Fe-2.785Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: False (Planned ['Fe', 'Mn', 'P'] -> Actual ['Fe', 'Mn', 'P']).",
+    "most_stable_energy_eV": -3.3670387268066406,
+    "target_adsorbate_atom": "N",
+    "target_adsorbate_atom_index": 60,
+    "bonded_surface_atoms": [
+      {
+        "symbol": "P",
+        "index": 54,
+        "distance": 1.808
+      },
+      {
+        "symbol": "Mn",
+        "index": 9,
+        "distance": 2.029
+      },
+      {
+        "symbol": "Fe",
+        "index": 24,
+        "distance": 2.785
+      }
+    ],
+    "nearest_slab_atom": "P",
+    "nearest_slab_atom_index": 54,
+    "final_bond_distance_A": 1.808,
+    "estimated_covalent_cutoff_A": 1.958,
+    "is_covalently_bound": true,
+    "reaction_detected": false,
+    "is_dissociated": false,
+    "n_components": 1,
+    "bond_change_count": 0,
+    "site_analysis": {
+      "planned_site_type": "hollow",
+      "planned_connectivity": 3,
+      "actual_site_type": "hollow (HCP/Subsurf-Atom)",
+      "actual_connectivity": 3,
+      "is_chemical_slip": false,
+      "planned_symbols": [
+        "Fe",
+        "Mn",
+        "P"
+      ],
+      "actual_symbols": [
+        "Fe",
+        "Mn",
+        "P"
+      ],
+      "site_fingerprint": "P54-Mn9-Fe24"
+    },
+    "best_structure_file": "outputs/021-d1796e39/BEST_NH2_hollow_to_hollow_HCP-Subsurf-Atom_E-3.367.xyz",
+    "generated_conformers_file": "outputs/021-d1796e39/conformers_[NH2].traj",
+    "relaxation_trajectory_file": "outputs/021-d1796e39/final.xyz",
+    "session_id": "021-d1796e39"
+  },
+  "attempt_records": [
+    {
+      "attempt_index": 1,
+      "plan": {
+        "reasoning": "Step 0 - SMILES Consistency Check: The SMILES [NH2] represents an NH2 radical. The RDKit analysis confirms: index 0 is N, SP3 hybridized, degree 0 (no heavy atom neighbors), radical_electrons = 1, formal_charge = 0. This is indeed a reactive radical species (NH2 fragment). No inconsistency detected.\n\nStep 1 - History Analysis: No previous attempts. This is the first plan.\n\nStep 2 & 3 - Analyze Request: Find the lowest-energy adsorption configuration for NH2 radical on Fe20Mn20P20 surface.\n\nStep 4 - Adsorbate Analysis: [NH2] is an NH2 radical with N at index 0 having 1 unpaired electron. This is a ReactiveSpecies. The N atom is the binding atom (index 0). Since it has a radical electron, it will bind to the surface through N.\n\nStep 5 - Surface Analysis: Available sites include ontop (Fe, Mn, P), bridge (Fe-Fe, Fe-Mn, Fe-P, Mn-Mn, Mn-P, P-P), hollow-3 (Fe-Fe-P, Fe-Mn-P, Fe-P-P, Mn-Mn-P), hollow-4 (Fe-Mn-Mn-P, Mn-Mn-P-P). For NH2 radicals on transition metal surfaces, hollow sites typically provide the strongest binding due to maximum coordination. On Fe-containing surfaces, NH2 often binds strongly at hollow sites. The Fe-Mn-P hollow site is a chemically diverse hollow site that could provide strong binding through multiple metal interactions.\n\nStep 6 - Formulate Plan: Given this is the only attempt (hard limit = 1), I should choose the most promising site. NH2 radicals on transition metal surfaces typically prefer hollow sites for maximum coordination. I'll choose the Fe-Mn-P hollow-3 site as it involves two transition metals (Fe and Mn) and P, which is a common and chemically interesting hollow site on this alloy surface. The N atom (index 0) will bind at this hollow site with adsorbate_binding_indices = [0].",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "hollow",
+          "surface_binding_atoms": [
+            "Fe",
+            "Mn",
+            "P"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "hollow|Fe,Mn,P|0|ReactiveSpecies|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -3.3670387268066406,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": false,
+      "planned_site_type": "hollow",
+      "actual_site_type": "hollow (HCP/Subsurf-Atom)",
+      "best_structure_file": "outputs/021-d1796e39/BEST_NH2_hollow_to_hollow_HCP-Subsurf-Atom_E-3.367.xyz",
+      "generated_conformers_file": "outputs/021-d1796e39/conformers_[NH2].traj",
+      "relaxation_trajectory_file": "outputs/021-d1796e39/final.xyz",
+      "message": "Most stable config adsorption energy: -3.3670 eV. Target Atom: N (from plan index 0, global index 60 in relaxed structure). -> Nearest: P (Index 54), Distance: 1.808 Å (Threshold: 2.581), Bound: True. Bonded Surface Atoms: P-1.808Å, Mn-2.029Å, Fe-2.785Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: False (Planned ['Fe', 'Mn', 'P'] -> Actual ['Fe', 'Mn', 'P']).",
+      "history_entry": "【✅ Perfect Adsorption】 hollow @ ['Fe', 'Mn', 'P'] (Index [0]) -> ⚠️ Geometric Slip: hollow -> hollow (HCP/Subsurf-Atom) | E=-3.367 eV"
+    }
+  ],
+  "history": [
+    "【✅ Perfect Adsorption】 hollow @ ['Fe', 'Mn', 'P'] (Index [0]) -> ⚠️ Geometric Slip: hollow -> hollow (HCP/Subsurf-Atom) | E=-3.367 eV"
+  ],
+  "error": null,
+  "perfect_count": 1,
+  "dissociation_count": 0,
+  "rearrangement_count": 0,
+  "calc_failure_count": 0,
+  "chemical_slip_count": 0
+}

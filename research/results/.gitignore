@@ -1,60 +1,40 @@
-# Default: ignore everything, then whitelist
+# Ignore result files by default, then allow the curated result structure.
 *
 !.gitignore
+!README.md
+!README_CN.md
 
-# ── Top-level summaries & paper data ──
-!*.csv
-!*.json
-!*.md
-!*.tex
+!basic_experiments/
+!basic_experiments/**
+!advanced_experiments/
+!advanced_experiments/**
 
-# ── Analysis directory ──
-!analysis/
-!analysis/*
+# Keep lightweight, reviewable result records and summaries.
+!**/result.json
+!**/summary.csv
+!**/summary.json
+!**/*_summary.csv
+!**/*_summary.json
+!**/*_summaries.csv
+!**/*_stats.json
+!**/*.md
+!**/*.tex
+!**/*.py
+!**/*.sh
 
-# ── Reproducible plotting deliverables ──
-!plotting/
-!plotting/**/
-!plotting/**/*.md
-!plotting/**/*.py
-!plotting/**/*.csv
-!plotting/**/*.png
-!plotting/**/*.pdf
-
-# Canonical merged raw result directories
-!canonical_raw/
-!canonical_raw/**/result.json
-!canonical_raw/**/*.md
-!canonical_raw/**/*.json
-!canonical_raw/**/*.csv
-!canonical_raw/**/
-# Canonical raw result directories, including controls and legacy archived raw inputs
-!canonical_raw/*
-!canonical_raw/*/
-!canonical_raw/*/*.csv
-!canonical_raw/*/*.json
-!canonical_raw/*/*.md
-!canonical_raw/*/source_summaries/
-!canonical_raw/*/source_summaries/*
-!canonical_raw/*/*/
-!canonical_raw/*/*/result.json
-!canonical_raw/*/*/*/
-!canonical_raw/*/*/*/result.json
-# ── Dataset directories ──
-
-# Dataset-level summaries
-
-# Ablation: variant dirs + case dirs + result.json only
-
-# One-shot: case dirs + result.json only
-
-# Explicitly exclude per-run artifacts that leak through dir unignore
+# Keep the local directory layout usable without committing heavy artifacts.
+**/.DS_Store
+**/agent_log.txt
 **/config.json
 **/comparison_snapshot.json
-**/agent_log.txt
 **/artifacts/
-
-# ── Adsorb-Agent MACE comparison (paper-cited, kept at root) ──
-!adsorbagent_mace_gpt54/
-!adsorbagent_mace_gpt54/*.csv
-!adsorbagent_mace_gpt54/*.json
+**/traj/
+**/*.traj
+**/*.xyz
+**/*.pkl
+**/*.yaml
+**/*.txt
+**/*.png
+**/*.svg
+**/*.pdf
+**/*.zip

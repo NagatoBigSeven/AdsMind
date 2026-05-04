@@ -13,8 +13,12 @@ from typing import Any, Iterable
 
 
 ROOT = Path(__file__).resolve().parents[2]
-CANONICAL_RAW = ROOT / "research" / "results" / "canonical_raw"
-ADVANCED_DIR = ROOT / "research" / "results" / "advanced_tests"
+RESULTS_ROOT = ROOT / "research" / "results"
+BASIC_ROOT = RESULTS_ROOT / "basic_experiments"
+ADVANCED_ROOT = RESULTS_ROOT / "advanced_experiments"
+OCD62_SUMMARY_DIR = BASIC_ROOT / "ocd62" / "summaries"
+OVERLAP12_ROOT = ADVANCED_ROOT / "ocd62_overlap12_reproducibility"
+OVERLAP12_SUMMARY_DIR = OVERLAP12_ROOT / "summaries"
 DATASET_DIR = ROOT / "datasets" / "ocd62"
 OVERLAP_MANIFEST = (
     ROOT
@@ -24,14 +28,17 @@ OVERLAP_MANIFEST = (
 )
 REPRO_RUNS_DATASET = "ocd62_overlap12"
 
-BACKENDS = ("gemini", "grok4", "openai_gpt54", "anthropic_sonnet46")
-VARIANTS = ("full", "no_slip", "no_forbid", "no_termination", "single_shot")
+BACKENDS = ("gpt", "claude", "gemini", "grok")
+VARIANTS = ("full", "no_slip", "no_forbid", "no_termination", "one_shot")
+VARIANT_ALIASES = {
+    "one_shot": {"one_shot", "single_shot"},
+}
 REPRO_RUN_DIRS = {
     1: "run1",
     2: "run2",
     3: "run3",
 }
-OUTLIER_KEYS = {("grok4", "full", 16), ("grok4", "no_forbid", 16)}
+OUTLIER_KEYS = {("grok", "full", 16), ("grok", "no_forbid", 16)}
 OUTLIER_THRESHOLD_EV = -10_000.0
 
 
@@ -90,28 +97,32 @@ def ocd_id(row: dict[str, str]) -> str:
     return row.get("ocd_id", "")
 
 
-def ablation_dir(dataset: str, backend: str) -> Path:
-    return CANONICAL_RAW / dataset / f"{backend}_ablation"
+def backend_dir(dataset: str, backend: str) -> Path:
+    return BASIC_ROOT / dataset / backend
 
 
 def run_dir(dataset: str, backend: str, variant: str, case_id: str) -> Path:
-    return ablation_dir(dataset, backend) / variant / case_id
+    return backend_dir(dataset, backend) / variant / case_id
 
 
 def summary_path(dataset: str, backend: str) -> Path:
-    return ablation_dir(dataset, backend) / "ablation_summary.csv"
+    return backend_dir(dataset, backend) / "all_variants_summary.csv"
 
 
-def repro_ablation_dir(run_name: str, backend: str) -> Path:
-    return CANONICAL_RAW / REPRO_RUNS_DATASET / run_name / f"{backend}_ablation"
+def repro_backend_dir(run_name: str, backend: str) -> Path:
+    return OVERLAP12_ROOT / run_name / backend
 
 
 def repro_summary_path(run_name: str, backend: str) -> Path:
-    return repro_ablation_dir(run_name, backend) / "ablation_summary.csv"
+    return repro_backend_dir(run_name, backend) / "all_variants_summary.csv"
 
 
 def repro_run_dir(run_name: str, backend: str, variant: str, case_id: str) -> Path:
-    return repro_ablation_dir(run_name, backend) / variant / case_id
+    return repro_backend_dir(run_name, backend) / variant / case_id
+
+
+def normalize_variant(value: str) -> str:
+    return "one_shot" if value == "single_shot" else value
 
 
 def load_summary(dataset: str, backend: str) -> dict[tuple[str, str], dict[str, Any]]:
@@ -121,7 +132,7 @@ def load_summary(dataset: str, backend: str) -> dict[tuple[str, str], dict[str, 
     out: dict[tuple[str, str], dict[str, Any]] = {}
     for row in read_csv(path):
         case_id = row.get("case_id", "").zfill(3)
-        variant = row.get("variant", "")
+        variant = normalize_variant(row.get("variant", ""))
         if case_id and variant:
             normalized = dict(row)
             normalized["case_id"] = case_id
@@ -137,7 +148,7 @@ def load_repro_summary(run_name: str, backend: str) -> dict[tuple[str, str], dic
     out: dict[tuple[str, str], dict[str, Any]] = {}
     for row in read_csv(path):
         case_id = row.get("case_id", "").zfill(3)
-        variant = row.get("variant", "")
+        variant = normalize_variant(row.get("variant", ""))
         if case_id and variant:
             normalized = dict(row)
             normalized["case_id"] = case_id
@@ -336,7 +347,7 @@ def write_outputs(write_n3: bool) -> None:
         "tokens_used",
     ]
     unified = unified_rows()
-    write_csv(ADVANCED_DIR / "ocd62_ablation_4backend.csv", unified, unified_fields)
+    write_csv(OCD62_SUMMARY_DIR / "ablation_4backend.csv", unified, unified_fields)
 
     n2 = paired_rows(2)
     n2_fields = [
@@ -352,9 +363,9 @@ def write_outputs(write_n3: bool) -> None:
         "range_eV",
         "agreement_class",
     ]
-    write_csv(ADVANCED_DIR / "ocd62_overlap12_reproducibility_n2.csv", n2, n2_fields)
+    write_csv(OVERLAP12_SUMMARY_DIR / "reproducibility_n2.csv", n2, n2_fields)
     report_n2 = reproducibility_report(n2, 2)
-    (ADVANCED_DIR / "ocd62_overlap12_reproducibility_n2.md").write_text(report_n2, encoding="utf-8")
+    (OVERLAP12_SUMMARY_DIR / "reproducibility_n2.md").write_text(report_n2, encoding="utf-8")
 
     if write_n3:
         missing = [
@@ -366,9 +377,9 @@ def write_outputs(write_n3: bool) -> None:
             raise FileNotFoundError(f"RUN3 summaries missing for: {', '.join(missing)}")
         n3 = paired_rows(3)
         n3_fields = n2_fields[:7] + ["e_run1", "e_run2", "e_run3", "range_eV", "e_min", "std_eV", "agreement_class"]
-        write_csv(ADVANCED_DIR / "ocd62_overlap12_reproducibility_n3.csv", n3, n3_fields)
+        write_csv(OVERLAP12_SUMMARY_DIR / "reproducibility_n3.csv", n3, n3_fields)
         report_n3 = reproducibility_report(n3, 3)
-        (ADVANCED_DIR / "ocd62_overlap12_reproducibility_n3.md").write_text(report_n3, encoding="utf-8")
+        (OVERLAP12_SUMMARY_DIR / "reproducibility_n3.md").write_text(report_n3, encoding="utf-8")
 
 
 def main(argv: list[str] | None = None) -> int:

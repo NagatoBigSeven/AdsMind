@@ -1,0 +1,293 @@
+{
+  "case_id": "05",
+  "case_metadata": {
+    "case_id": "05",
+    "slab_file": "datasets/cmu20/05_Cu3Ag_111.xyz",
+    "smiles": "[H]",
+    "user_request": "Find the lowest-energy adsorption configuration for atomic hydrogen on the provided surface.",
+    "surface_family": "intermetallic",
+    "adsorbate_name": "H",
+    "miller_index": "(111)",
+    "reaction_class": "HER",
+    "ablation_candidate": "FALSE",
+    "notes": "Cu3Ag hydrogen benchmark"
+  },
+  "status": "success",
+  "best_energy_eV": -2.9406325817108154,
+  "iteration_count": 3,
+  "max_attempts": 5,
+  "final_site_type": "hollow (HCP/Subsurf-Atom)",
+  "converged_tag": false,
+  "wall_clock_sec": 226.84964139387012,
+  "total_input_tokens": 16578,
+  "total_output_tokens": 4650,
+  "artifact_paths": {
+    "BEST_H_bridge_to_hollow_HCP-Subsurf-Atom_E-2.878": "research/results/advanced_experiments/gpt54_multiseed_cmu20/seed46_full/full/05/artifacts/BEST_H_bridge_to_hollow_HCP-Subsurf-Atom_E-2.878.xyz",
+    "BEST_H_bridge_to_hollow_HCP-Subsurf-Atom_E-2.878.xyz": "research/results/advanced_experiments/gpt54_multiseed_cmu20/seed46_full/full/05/artifacts/BEST_H_bridge_to_hollow_HCP-Subsurf-Atom_E-2.878.xyz",
+    "best_structure_file": "research/results/advanced_experiments/gpt54_multiseed_cmu20/seed46_full/full/05/artifacts/BEST_H_hollow_to_hollow_HCP-Subsurf-Atom_E-2.941.xyz",
+    "BEST_H_hollow_to_hollow_HCP-Subsurf-Atom_E-2.883": "research/results/advanced_experiments/gpt54_multiseed_cmu20/seed46_full/full/05/artifacts/BEST_H_hollow_to_hollow_HCP-Subsurf-Atom_E-2.883.xyz",
+    "BEST_H_hollow_to_hollow_HCP-Subsurf-Atom_E-2.883.xyz": "research/results/advanced_experiments/gpt54_multiseed_cmu20/seed46_full/full/05/artifacts/BEST_H_hollow_to_hollow_HCP-Subsurf-Atom_E-2.883.xyz",
+    "BEST_H_hollow_to_hollow_HCP-Subsurf-Atom_E-2.941": "research/results/advanced_experiments/gpt54_multiseed_cmu20/seed46_full/full/05/artifacts/BEST_H_hollow_to_hollow_HCP-Subsurf-Atom_E-2.941.xyz",
+    "BEST_H_hollow_to_hollow_HCP-Subsurf-Atom_E-2.941.xyz": "research/results/advanced_experiments/gpt54_multiseed_cmu20/seed46_full/full/05/artifacts/BEST_H_hollow_to_hollow_HCP-Subsurf-Atom_E-2.941.xyz",
+    "conformers_[H]": "research/results/advanced_experiments/gpt54_multiseed_cmu20/seed46_full/full/05/artifacts/conformers_[H].traj",
+    "conformers_[H].traj": "research/results/advanced_experiments/gpt54_multiseed_cmu20/seed46_full/full/05/artifacts/conformers_[H].traj",
+    "final": "research/results/advanced_experiments/gpt54_multiseed_cmu20/seed46_full/full/05/artifacts/final.xyz",
+    "final.xyz": "research/results/advanced_experiments/gpt54_multiseed_cmu20/seed46_full/full/05/artifacts/final.xyz",
+    "relaxation": "research/results/advanced_experiments/gpt54_multiseed_cmu20/seed46_full/full/05/artifacts/relaxation.traj",
+    "relaxation.traj": "research/results/advanced_experiments/gpt54_multiseed_cmu20/seed46_full/full/05/artifacts/relaxation.traj",
+    "relaxation_trajectory_file": "research/results/advanced_experiments/gpt54_multiseed_cmu20/seed46_full/full/05/artifacts/relaxation.traj"
+  },
+  "best_result": {
+    "most_stable_energy_eV": -2.9406325817108154,
+    "analysis_json": {
+      "status": "success",
+      "message": "Most stable config adsorption energy: -2.9406 eV. Target Atom: H (from plan index 0, global index 64 in relaxed structure). -> Nearest: Cu (Index 53), Distance: 1.716 Å (Threshold: 2.364), Bound: True. Bonded Surface Atoms: Cu-1.716Å, Cu-1.735Å, Cu-1.74Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: False (Planned ['Cu', 'Cu', 'Cu'] -> Actual ['Cu', 'Cu', 'Cu']).",
+      "most_stable_energy_eV": -2.9406325817108154,
+      "target_adsorbate_atom": "H",
+      "target_adsorbate_atom_index": 64,
+      "bonded_surface_atoms": [
+        {
+          "symbol": "Cu",
+          "index": 53,
+          "distance": 1.716
+        },
+        {
+          "symbol": "Cu",
+          "index": 51,
+          "distance": 1.735
+        },
+        {
+          "symbol": "Cu",
+          "index": 49,
+          "distance": 1.74
+        }
+      ],
+      "nearest_slab_atom": "Cu",
+      "nearest_slab_atom_index": 53,
+      "final_bond_distance_A": 1.716,
+      "estimated_covalent_cutoff_A": 1.793,
+      "is_covalently_bound": true,
+      "reaction_detected": false,
+      "is_dissociated": false,
+      "n_components": 1,
+      "bond_change_count": 0,
+      "site_analysis": {
+        "planned_site_type": "hollow",
+        "planned_connectivity": 3,
+        "actual_site_type": "hollow (HCP/Subsurf-Atom)",
+        "actual_connectivity": 3,
+        "is_chemical_slip": false,
+        "planned_symbols": [
+          "Cu",
+          "Cu",
+          "Cu"
+        ],
+        "actual_symbols": [
+          "Cu",
+          "Cu",
+          "Cu"
+        ],
+        "site_fingerprint": "Cu53-Cu51-Cu49"
+      },
+      "best_structure_file": "outputs/05-a2b50f56/BEST_H_hollow_to_hollow_HCP-Subsurf-Atom_E-2.941.xyz",
+      "generated_conformers_file": "outputs/05-a2b50f56/conformers_[H].traj",
+      "relaxation_trajectory_file": "outputs/05-a2b50f56/final.xyz",
+      "session_id": "05-a2b50f56"
+    },
+    "plan": {
+      "reasoning": "SMILES consistency check: the adsorbate is [H], i.e., atomic hydrogen, which is a radical species rather than a closed-shell molecule. There is no mismatch between the user request and the SMILES. For atomic hydrogen, the intended binding atom is the single H atom, which is the radical center, so classifying this as ReactiveSpecies is chemically consistent. History analysis: there are no previous attempts, so no sites have yet been tested and no instability or convergence information exists. User intent is to identify the lowest-energy adsorption configuration for atomic H on a Cu3Ag(111)-type alloy surface. For H on coinage/alloy metal (111) surfaces, high-coordination sites are commonly competitive or preferred, and because this is the first attempt, the most systematic initial choice is a high-symmetry hollow environment. Surface analysis shows available hollow environments include Ag-Cu-Cu, Cu-Cu-Cu, and Ag-Cu-Cu-Cu, but the JSON site type must be the canonical 'hollow'. Since Cu generally binds H more strongly than Ag, the Cu-rich hollow-3 environment Cu-Cu-Cu is the most physically motivated first trial among the listed sites. Adsorbate analysis: the provided heavy atom index list is empty because hydrogen is not a heavy atom, but the adsorbate still consists of a single atom; the only chemically valid binding index is the sole H atom at index 0. Using one binding index is allowed for a hollow-site placement of a monatomic reactive species. This is therefore the best initial plan.",
+      "adsorbate_type": "ReactiveSpecies",
+      "solution": {
+        "action": "continue",
+        "site_type": "hollow",
+        "surface_binding_atoms": [
+          "Cu",
+          "Cu",
+          "Cu"
+        ],
+        "adsorbate_binding_indices": [
+          0
+        ],
+        "relax_top_n": 1,
+        "touch_sphere_size": 2,
+        "overlap_thr": 0.1,
+        "conformers_per_site_cap": 4
+      }
+    },
+    "result_type": "Perfect"
+  },
+  "last_analysis": {
+    "status": "success",
+    "message": "Most stable config adsorption energy: -2.8783 eV. Target Atom: H (from plan index 0, global index 64 in relaxed structure). -> Nearest: Cu (Index 27), Distance: 1.659 Å (Threshold: 2.364), Bound: True. Bonded Surface Atoms: Cu-1.659Å, Cu-1.701Å, Ag-2.355Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Cu', 'Cu'] -> Actual ['Ag', 'Cu', 'Cu']).",
+    "most_stable_energy_eV": -2.878300428390503,
+    "target_adsorbate_atom": "H",
+    "target_adsorbate_atom_index": 64,
+    "bonded_surface_atoms": [
+      {
+        "symbol": "Cu",
+        "index": 27,
+        "distance": 1.659
+      },
+      {
+        "symbol": "Cu",
+        "index": 19,
+        "distance": 1.701
+      },
+      {
+        "symbol": "Ag",
+        "index": 60,
+        "distance": 2.355
+      }
+    ],
+    "nearest_slab_atom": "Cu",
+    "nearest_slab_atom_index": 27,
+    "final_bond_distance_A": 1.659,
+    "estimated_covalent_cutoff_A": 1.793,
+    "is_covalently_bound": true,
+    "reaction_detected": false,
+    "is_dissociated": false,
+    "n_components": 1,
+    "bond_change_count": 0,
+    "site_analysis": {
+      "planned_site_type": "bridge",
+      "planned_connectivity": 2,
+      "actual_site_type": "hollow (HCP/Subsurf-Atom)",
+      "actual_connectivity": 3,
+      "is_chemical_slip": true,
+      "planned_symbols": [
+        "Cu",
+        "Cu"
+      ],
+      "actual_symbols": [
+        "Ag",
+        "Cu",
+        "Cu"
+      ],
+      "site_fingerprint": "Cu27-Cu19-Ag60"
+    },
+    "best_structure_file": "outputs/05-a2b50f56/BEST_H_bridge_to_hollow_HCP-Subsurf-Atom_E-2.878.xyz",
+    "generated_conformers_file": "outputs/05-a2b50f56/conformers_[H].traj",
+    "relaxation_trajectory_file": "outputs/05-a2b50f56/final.xyz",
+    "session_id": "05-a2b50f56"
+  },
+  "attempt_records": [
+    {
+      "attempt_index": 1,
+      "plan": {
+        "reasoning": "SMILES consistency check: the adsorbate is [H], i.e., atomic hydrogen, which is a radical species rather than a closed-shell molecule. There is no mismatch between the user request and the SMILES. For atomic hydrogen, the intended binding atom is the single H atom, which is the radical center, so classifying this as ReactiveSpecies is chemically consistent. History analysis: there are no previous attempts, so no sites have yet been tested and no instability or convergence information exists. User intent is to identify the lowest-energy adsorption configuration for atomic H on a Cu3Ag(111)-type alloy surface. For H on coinage/alloy metal (111) surfaces, high-coordination sites are commonly competitive or preferred, and because this is the first attempt, the most systematic initial choice is a high-symmetry hollow environment. Surface analysis shows available hollow environments include Ag-Cu-Cu, Cu-Cu-Cu, and Ag-Cu-Cu-Cu, but the JSON site type must be the canonical 'hollow'. Since Cu generally binds H more strongly than Ag, the Cu-rich hollow-3 environment Cu-Cu-Cu is the most physically motivated first trial among the listed sites. Adsorbate analysis: the provided heavy atom index list is empty because hydrogen is not a heavy atom, but the adsorbate still consists of a single atom; the only chemically valid binding index is the sole H atom at index 0. Using one binding index is allowed for a hollow-site placement of a monatomic reactive species. This is therefore the best initial plan.",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "hollow",
+          "surface_binding_atoms": [
+            "Cu",
+            "Cu",
+            "Cu"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "hollow|Cu,Cu,Cu|0|ReactiveSpecies|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -2.9406325817108154,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": false,
+      "planned_site_type": "hollow",
+      "actual_site_type": "hollow (HCP/Subsurf-Atom)",
+      "best_structure_file": "outputs/05-a2b50f56/BEST_H_hollow_to_hollow_HCP-Subsurf-Atom_E-2.941.xyz",
+      "generated_conformers_file": "outputs/05-a2b50f56/conformers_[H].traj",
+      "relaxation_trajectory_file": "outputs/05-a2b50f56/final.xyz",
+      "message": "Most stable config adsorption energy: -2.9406 eV. Target Atom: H (from plan index 0, global index 64 in relaxed structure). -> Nearest: Cu (Index 53), Distance: 1.716 Å (Threshold: 2.364), Bound: True. Bonded Surface Atoms: Cu-1.716Å, Cu-1.735Å, Cu-1.74Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: False (Planned ['Cu', 'Cu', 'Cu'] -> Actual ['Cu', 'Cu', 'Cu']).",
+      "history_entry": "【✅ Perfect Adsorption】 hollow @ ['Cu', 'Cu', 'Cu'] (Index [0]) -> ⚠️ Geometric Slip: hollow -> hollow (HCP/Subsurf-Atom) [🌟 New Best] | E=-2.941 eV"
+    },
+    {
+      "attempt_index": 2,
+      "plan": {
+        "reasoning": "SMILES consistency check: the adsorbate is [H], i.e. atomic hydrogen, a radical species with one unpaired electron, so it should be treated as ReactiveSpecies. There is no hybridization mismatch issue here. The provided heavy atom index list is empty because hydrogen is not a heavy atom, but the adsorbate still contains one atom; for atomic hydrogen the only chemically valid binding atom is the single H atom, so the adsorption must use that sole atom as the binding center. History analysis: one successful plan has already been tested, namely hollow with surface_binding_atoms ['Cu','Cu','Cu'] at index [0], which relaxed to an HCP/subsurface-influenced hollow geometry and gave E = -2.941 eV, currently the best result. There is no tag indicating [🔄 Converged to known best], no chemical slip, and only one site family/environment has been explored so far. Therefore termination is not justified. To systematically search for a lower-energy H adsorption state on this heterogeneous Cu-Ag(111)-like alloy surface, the next most chemically plausible distinct high-symmetry environment is another hollow site containing Ag, since alloying can significantly perturb H binding. Among listed available sites, the distinct untested hollow environments are Ag-Cu-Cu and Ag-Cu-Cu-Cu; under the canonical naming restriction both map to site_type='hollow'. For atomic H on close-packed metal surfaces, threefold hollows are generally more standard and physically motivated than forcing a four-atom hollow label, so the best next trial is the mixed threefold hollow Ag-Cu-Cu environment. User intent is to find the lowest-energy adsorption configuration for atomic hydrogen, so we should continue systematic exploration of untested high-symmetry sites rather than stop after a single Cu3 hollow result.",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "hollow",
+          "surface_binding_atoms": [
+            "Ag",
+            "Cu",
+            "Cu"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "hollow|Ag,Cu,Cu|0|ReactiveSpecies|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -2.8834731578826904,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": false,
+      "planned_site_type": "hollow",
+      "actual_site_type": "hollow (HCP/Subsurf-Atom)",
+      "best_structure_file": "outputs/05-a2b50f56/BEST_H_hollow_to_hollow_HCP-Subsurf-Atom_E-2.883.xyz",
+      "generated_conformers_file": "outputs/05-a2b50f56/conformers_[H].traj",
+      "relaxation_trajectory_file": "outputs/05-a2b50f56/final.xyz",
+      "message": "Most stable config adsorption energy: -2.8835 eV. Target Atom: H (from plan index 0, global index 64 in relaxed structure). -> Nearest: Cu (Index 27), Distance: 1.663 Å (Threshold: 2.364), Bound: True. Bonded Surface Atoms: Cu-1.663Å, Cu-1.692Å, Ag-2.383Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: False (Planned ['Ag', 'Cu', 'Cu'] -> Actual ['Ag', 'Cu', 'Cu']).",
+      "history_entry": "【✅ Perfect Adsorption】 hollow @ ['Ag', 'Cu', 'Cu'] (Index [0]) -> ⚠️ Geometric Slip: hollow -> hollow (HCP/Subsurf-Atom) | E=-2.883 eV"
+    },
+    {
+      "attempt_index": 3,
+      "plan": {
+        "reasoning": "SMILES consistency check: the adsorbate is [H], i.e., atomic hydrogen. This is a radical species, so ReactiveSpecies is appropriate. There is no alkyl/hybridization mismatch to warn about. For [H], the binding atom is the hydrogen atom itself and it has an unpaired electron, satisfying the ReactiveSpecies requirement. History analysis: two hollow-site trials have already been performed successfully: hollow on ['Cu','Cu','Cu'] gave the current best energy of -2.941 eV after relaxing to an HCP/subsurface-associated hollow geometry, and hollow on ['Ag','Cu','Cu'] gave -2.883 eV, also slipping to a similar hollow class. No chemical slip or bond-change failure is reported, so these are valid results. The tested hollow environments show Cu-rich hollow is better than mixed Ag-Cu-Cu hollow by 0.058 eV, suggesting H prefers Cu-rich coordination. Since major hollow motifs have already been sampled and both converge to the same hollow family, the most plausible remaining lower-energy candidate is a Cu-rich bridge site rather than another hollow already tested. Available bridge environments are Ag-Cu and Cu-Cu; Cu-Cu is the more chemically reasonable next trial because H generally binds more strongly to Cu than Ag on this alloy surface. The user intent is to identify the lowest-energy adsorption configuration for atomic hydrogen, so the plan should systematically test the best remaining high-symmetry Cu-rich site not yet attempted. Adsorbate analysis: the provided heavy atom index list is empty because hydrogen is not a heavy atom, but the adsorbate still consists of a single H atom; the only chemically valid binding index is 0 for that atom. Surface analysis: allowed canonical site names are ontop, bridge, hollow. I will therefore propose a new bridge plan on Cu-Cu, distinct from prior hollow trials.",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "bridge",
+          "surface_binding_atoms": [
+            "Cu",
+            "Cu"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "bridge|Cu,Cu|0|ReactiveSpecies|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -2.878300428390503,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": true,
+      "planned_site_type": "bridge",
+      "actual_site_type": "hollow (HCP/Subsurf-Atom)",
+      "best_structure_file": "outputs/05-a2b50f56/BEST_H_bridge_to_hollow_HCP-Subsurf-Atom_E-2.878.xyz",
+      "generated_conformers_file": "outputs/05-a2b50f56/conformers_[H].traj",
+      "relaxation_trajectory_file": "outputs/05-a2b50f56/final.xyz",
+      "message": "Most stable config adsorption energy: -2.8783 eV. Target Atom: H (from plan index 0, global index 64 in relaxed structure). -> Nearest: Cu (Index 27), Distance: 1.659 Å (Threshold: 2.364), Bound: True. Bonded Surface Atoms: Cu-1.659Å, Cu-1.701Å, Ag-2.355Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Cu', 'Cu'] -> Actual ['Ag', 'Cu', 'Cu']).",
+      "history_entry": "【✅ Perfect Adsorption】 bridge @ ['Cu', 'Cu'] (Index [0]) -> ⚠️【Unstable Site Warning】⚠️: Planned bridge (Cu-Cu) is unstable, adsorbate spontaneously slipped to hollow (HCP/Subsurf-Atom) (Ag-Cu-Cu).This means Cu-Cu has insufficient affinity for this adsorbate. Please **FORBID** testing Cu-Cu type sites again! | E=-2.878 eV"
+    }
+  ],
+  "history": [
+    "【✅ Perfect Adsorption】 hollow @ ['Cu', 'Cu', 'Cu'] (Index [0]) -> ⚠️ Geometric Slip: hollow -> hollow (HCP/Subsurf-Atom) [🌟 New Best] | E=-2.941 eV",
+    "【✅ Perfect Adsorption】 hollow @ ['Ag', 'Cu', 'Cu'] (Index [0]) -> ⚠️ Geometric Slip: hollow -> hollow (HCP/Subsurf-Atom) | E=-2.883 eV",
+    "【✅ Perfect Adsorption】 bridge @ ['Cu', 'Cu'] (Index [0]) -> ⚠️【Unstable Site Warning】⚠️: Planned bridge (Cu-Cu) is unstable, adsorbate spontaneously slipped to hollow (HCP/Subsurf-Atom) (Ag-Cu-Cu).This means Cu-Cu has insufficient affinity for this adsorbate. Please **FORBID** testing Cu-Cu type sites again! | E=-2.878 eV"
+  ],
+  "error": null,
+  "perfect_count": 3,
+  "dissociation_count": 0,
+  "rearrangement_count": 0,
+  "calc_failure_count": 0,
+  "chemical_slip_count": 1
+}

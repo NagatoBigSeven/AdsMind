@@ -10,32 +10,34 @@ import pandas as pd
 
 
 ROOT = Path(__file__).resolve().parents[2]
-CANONICAL = ROOT / "research" / "results" / "canonical_raw"
-BASIC_DIR = ROOT / "research" / "results" / "basic_tests"
+RESULTS_ROOT = ROOT / "research" / "results"
+BASIC_ROOT = RESULTS_ROOT / "basic_experiments"
+BASIC_SUMMARY_DIR = BASIC_ROOT / "summaries"
 OCD62_MANIFEST = ROOT / "datasets" / "ocd62" / "ocd62_manifest.csv"
 
-BACKENDS = ["gemini", "grok4", "openai_gpt54", "anthropic_sonnet46"]
+BACKENDS = ["gpt", "claude", "gemini", "grok"]
+VARIANT_ALIASES = {
+    "one_shot": {"one_shot", "single_shot"},
+}
 
 DATASETS = {
     "cmu20": {
         "n_cases": 20,
         "case_width": 2,
-        "random_dir": "cmu20/random_baseline_n20",
-        "heuristic_dir": "cmu20/heuristic_baseline",
     },
     "ocd62": {
         "n_cases": 62,
         "case_width": 3,
-        "random_dir": "ocd62/random_baseline_n20",
-        "heuristic_dir": "ocd62/heuristic_baseline",
     },
 }
 
 
-def ablation_dir(dataset: str, backend: str) -> Path:
-    if dataset in {"cmu20", "ocd62"}:
-        return CANONICAL / dataset / f"{backend}_ablation"
-    return CANONICAL / f"{dataset}_{backend}_ablation"
+def dataset_summary_dir(dataset: str) -> Path:
+    return BASIC_ROOT / dataset / "summaries"
+
+
+def backend_dir(dataset: str, backend: str) -> Path:
+    return BASIC_ROOT / dataset / backend
 
 
 def case_ids(dataset: str) -> list[str]:
@@ -63,7 +65,7 @@ def pad_case_id(value: object, dataset: str) -> str:
 
 
 def result_json_path(dataset: str, backend: str, variant: str, case_id: str) -> Path:
-    return ablation_dir(dataset, backend) / variant / case_id / "result.json"
+    return backend_dir(dataset, backend) / variant / case_id / "result.json"
 
 
 def load_ocd62_manifest() -> pd.DataFrame:
@@ -115,9 +117,10 @@ def load_metadata(dataset: str, case_id: str) -> dict[str, object]:
 
 
 def load_adsmind_backend_rows(dataset: str, backend: str, variant: str) -> pd.DataFrame:
-    path = ablation_dir(dataset, backend) / "ablation_summary.csv"
+    path = backend_dir(dataset, backend) / "all_variants_summary.csv"
     df = read_csv(path)
-    subset = df[df["variant"] == variant].copy()
+    accepted_variants = VARIANT_ALIASES.get(variant, {variant})
+    subset = df[df["variant"].isin(accepted_variants)].copy()
     out = pd.DataFrame(
         {
             "case_id": subset["case_id"].map(lambda value: pad_case_id(value, dataset)),
@@ -147,12 +150,12 @@ def add_adsmind_columns(table: pd.DataFrame, dataset: str, variant: str, prefix:
     table[f"{prefix}_energy"] = table[f"{prefix}_energy_mean4"]
     table[f"{prefix}_relax"] = table[relax_cols].mean(axis=1, skipna=True)
     table[f"{prefix}_success"] = table[success_cols].mean(axis=1, skipna=True)
-    table[f"{prefix}_success_any4"] = table[success_cols].any(axis=1)
-    table[f"{prefix}_success_all4"] = table[success_cols].all(axis=1)
+    table[f"{prefix}_success_any4"] = table[success_cols].fillna(False).any(axis=1)
+    table[f"{prefix}_success_all4"] = table[success_cols].fillna(False).all(axis=1)
 
 
 def add_random_columns(table: pd.DataFrame, dataset: str) -> None:
-    path = CANONICAL / DATASETS[dataset]["random_dir"] / "summary.csv"
+    path = BASIC_ROOT / dataset / "baselines" / "random_n20" / "summary.csv"
     df = read_csv(path)
     df["case_id"] = df["case_id"].map(lambda value: pad_case_id(value, dataset))
     df["energy"] = to_num(df["best_energy"])
@@ -166,7 +169,7 @@ def add_random_columns(table: pd.DataFrame, dataset: str) -> None:
 
 
 def add_heuristic_columns(table: pd.DataFrame, dataset: str) -> None:
-    path = CANONICAL / DATASETS[dataset]["heuristic_dir"] / "summary.csv"
+    path = BASIC_ROOT / dataset / "baselines" / "heuristic" / "summary.csv"
     df = read_csv(path)
     df["case_id"] = df["case_id"].map(lambda value: pad_case_id(value, dataset))
     df["energy"] = to_num(df["best_energy"])
@@ -188,7 +191,13 @@ def add_adsorbagent_columns(table: pd.DataFrame, dataset: str) -> None:
     if dataset != "cmu20":
         return
 
-    path = ROOT / "research" / "results" / "adsorbagent_mace_gpt54" / "adsorbagent_mace_summary.csv"
+    path = (
+        BASIC_ROOT
+        / "cmu20"
+        / "baselines"
+        / "adsorbagent_mace_mp0_small_gpt54"
+        / "summary.csv"
+    )
     df = read_csv(path)
     df["case_id"] = df["case_id"].map(lambda value: pad_case_id(value, dataset))
     df["energy"] = to_num(df["best_adsorption_energy_eV"])
@@ -206,7 +215,7 @@ def build_dataset_table(dataset: str) -> pd.DataFrame:
     rows = [load_metadata(dataset, case_id) for case_id in case_ids(dataset)]
     table = pd.DataFrame(rows)
 
-    add_adsmind_columns(table, dataset, "single_shot", "adsmind_1shot")
+    add_adsmind_columns(table, dataset, "one_shot", "adsmind_1shot")
     add_adsmind_columns(table, dataset, "full", "adsmind_full")
     add_random_columns(table, dataset)
     add_heuristic_columns(table, dataset)
@@ -374,7 +383,8 @@ def write_publication_tables(summary: pd.DataFrame) -> None:
             f"{row['Relax/case']} | {row['Success']} | {row['Mean E (eV)']} | {row['Median E (eV)']} |"
         )
     md_lines.append("")
-    (BASIC_DIR / "method_comparison_table.md").write_text("\n".join(md_lines), encoding="utf-8")
+    BASIC_SUMMARY_DIR.mkdir(parents=True, exist_ok=True)
+    (BASIC_SUMMARY_DIR / "method_comparison_table.md").write_text("\n".join(md_lines), encoding="utf-8")
 
     tex_lines = [
         "% Draft table for human merge. Generated by research/analysis/build_method_comparison_table.py.",
@@ -394,10 +404,10 @@ def write_publication_tables(summary: pd.DataFrame) -> None:
             f"{row['Relax/case']} & {success} & {row['Mean E (eV)']} & {row['Median E (eV)']} \\\\"
         )
     tex_lines.extend(["\\bottomrule", "\\end{tabular}", "\\end{table}", ""])
-    (BASIC_DIR / "method_comparison_table.tex").write_text("\n".join(tex_lines), encoding="utf-8")
+    (BASIC_SUMMARY_DIR / "method_comparison_table.tex").write_text("\n".join(tex_lines), encoding="utf-8")
 
 
-def summarize_basic_tests(tables: dict[str, pd.DataFrame]) -> pd.DataFrame:
+def summarize_cross_dataset_basic_tests(tables: dict[str, pd.DataFrame]) -> pd.DataFrame:
     rows: list[dict[str, object]] = []
     for dataset, table in tables.items():
         full_success_cols = [f"adsmind_full_{backend}_success" for backend in BACKENDS]
@@ -442,50 +452,9 @@ def summarize_basic_tests(tables: dict[str, pd.DataFrame]) -> pd.DataFrame:
     return pd.DataFrame(rows)
 
 
-def write_basic_test_report(basic: pd.DataFrame) -> None:
-    BASIC_DIR.mkdir(parents=True, exist_ok=True)
-    basic.to_csv(BASIC_DIR / "full_vs_1shot_summary.csv", index=False)
-    lines = [
-        "# Basic Test Summary",
-        "",
-        "This table covers Full vs 1-Shot reliability, success-conditioned energy deltas, cross-backend range, and random/heuristic cost baselines.",
-        "",
-        "Delta is defined as `E_1shot - E_full` on paired successful backend-case runs; positive values mean AdsMind Full reached a lower-energy configuration.",
-        "",
-        "| Dataset | n cases | Full success | 1-Shot success | Paired successes | Mean delta (eV) | Median delta (eV) | Full backend range (eV) | 1-Shot backend range (eV) | Random cost | Heuristic cost |",
-        "|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|",
-    ]
-    for _, row in basic.iterrows():
-        lines.append(
-            f"| {display_dataset(row['dataset'])} | {int(row['n_cases'])} | "
-            f"{int(row['full_success_runs'])}/{int(row['full_total_runs'])} ({fmt_percent(row['full_success_rate'])}) | "
-            f"{int(row['one_shot_success_runs'])}/{int(row['one_shot_total_runs'])} ({fmt_percent(row['one_shot_success_rate'])}) | "
-            f"{int(row['paired_full_vs_1shot_successes'])} | "
-            f"{fmt_float(row['mean_delta_1shot_minus_full_eV'], 3)} | "
-            f"{fmt_float(row['median_delta_1shot_minus_full_eV'], 3)} | "
-            f"{fmt_float(row['full_mean_4backend_range_eV'], 3)} | "
-            f"{fmt_float(row['one_shot_mean_4backend_range_eV'], 3)} | "
-            f"{fmt_float(row['random_n20_mean_relax'], 2)} | "
-            f"{fmt_float(row['heuristic_mean_relax'], 2)} |"
-        )
-    lines.append("")
-    (BASIC_DIR / "README.md").write_text(
-        "\n".join(
-            [
-                "# Basic Tests",
-                "",
-                "Paper-facing basic-test outputs. The benchmark names used here are `CMU20` and `OCD62`.",
-                "",
-                "Files:",
-                "",
-                "- `full_vs_1shot_summary.csv`: Full vs 1-Shot reliability, energy deltas, backend ranges, and random/heuristic cost summaries.",
-                "- `method_comparison_summary.csv`: Brute-force/open-loop/iterative method comparison for CMU20 and OCD62.",
-                "- `method_comparison_table.md` and `method_comparison_table.tex`: human-facing drafts of the same method comparison.",
-                "",
-            ]
-        ),
-        encoding="utf-8",
-    )
+def write_basic_test_summary(basic: pd.DataFrame) -> None:
+    BASIC_SUMMARY_DIR.mkdir(parents=True, exist_ok=True)
+    basic.to_csv(BASIC_SUMMARY_DIR / "full_vs_one_shot_summary.csv", index=False)
 
 
 def validate_outputs(tables: dict[str, pd.DataFrame], summary: pd.DataFrame) -> None:
@@ -498,18 +467,21 @@ def validate_outputs(tables: dict[str, pd.DataFrame], summary: pd.DataFrame) -> 
 
 
 def main() -> None:
-    BASIC_DIR.mkdir(parents=True, exist_ok=True)
+    BASIC_ROOT.mkdir(parents=True, exist_ok=True)
+    BASIC_SUMMARY_DIR.mkdir(parents=True, exist_ok=True)
 
     tables = {dataset: build_dataset_table(dataset) for dataset in DATASETS}
     for dataset, table in tables.items():
-        public_path = BASIC_DIR / f"{display_dataset(dataset).lower()}_method_comparison.csv"
+        output_dir = dataset_summary_dir(dataset)
+        output_dir.mkdir(parents=True, exist_ok=True)
+        public_path = output_dir / "method_comparison.csv"
         table.to_csv(public_path, index=False)
         print(f"Wrote {public_path.relative_to(ROOT)} ({len(table)} rows)")
 
     summary = summarize_tables(tables)
-    summary.to_csv(BASIC_DIR / "method_comparison_summary.csv", index=False)
+    summary.to_csv(BASIC_SUMMARY_DIR / "method_comparison_summary.csv", index=False)
     write_publication_tables(summary)
-    write_basic_test_report(summarize_basic_tests(tables))
+    write_basic_test_summary(summarize_cross_dataset_basic_tests(tables))
     validate_outputs(tables, summary)
 
 

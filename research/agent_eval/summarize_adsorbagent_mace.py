@@ -405,7 +405,7 @@ def main(argv: Optional[List[str]] = None) -> int:
         args.steps,
     )
     args.output_dir.mkdir(parents=True, exist_ok=True)
-    summary_path = args.output_dir / "adsorbagent_mace_summary.csv"
+    summary_path = args.output_dir / "summary.csv"
     write_csv(summary_path, adsorbagent_rows, SUMMARY_FIELDS)
 
     comparison_rows, stats_payload = compare_with_adsmind(adsorbagent_rows, args.adsmind_summary)

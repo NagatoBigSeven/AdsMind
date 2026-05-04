@@ -84,6 +84,12 @@ ABLATED_VARIANTS = {
         "enable_termination": False,
         "max_attempts": 1,
     },
+    "one_shot": {
+        "enable_slip_feedback": False,
+        "enable_forbid": False,
+        "enable_termination": False,
+        "max_attempts": 1,
+    },
 }
 
 

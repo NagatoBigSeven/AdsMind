@@ -28,13 +28,13 @@ from PIL import Image, ImageDraw, ImageFont
 
 
 ROOT = Path(__file__).resolve().parents[2]
-OUT_DIR = ROOT / "research/results/analysis/panel_b_assets_20260429"
+OUT_DIR = ROOT / "research/results/advanced_experiments/panel_b_structure_assets/panel_b_assets_20260429"
 
 CMU_MANIFEST = ROOT / "datasets/cmu20/cmu20_manifest.csv"
 OCD62_MANIFEST = ROOT / "datasets/ocd62/ocd62_manifest.csv"
 
-CMU_MAIN_RESULT = ROOT / "research/results/canonical_raw/cmu20/openai_gpt54_ablation/full"
-OCD62_RESULT = ROOT / "research/results/canonical_raw/ocd62/openai_gpt54_ablation/full"
+CMU_MAIN_RESULT = ROOT / "research/results/basic_experiments/cmu20/gpt/full"
+OCD62_RESULT = ROOT / "research/results/basic_experiments/ocd62/gpt/full"
 
 BACKEND_LABEL = "GPT-5.4"
 VARIANT_LABEL = "Full"
@@ -397,8 +397,8 @@ def write_readme(manifest_rows: list[dict[str, str]], selected_count: int) -> No
                 "",
                 "Source convention:",
                 "",
-                f"- CMU20 thumbnails use {BACKEND_LABEL} {VARIANT_LABEL} relaxed structures from `canonical_raw/cmu20/openai_gpt54_ablation/full`.",
-                f"- OCD62 thumbnails use {BACKEND_LABEL} {VARIANT_LABEL} relaxed structures from `canonical_raw/ocd62/openai_gpt54_ablation/full`.",
+                f"- CMU20 thumbnails use {BACKEND_LABEL} {VARIANT_LABEL} relaxed structures from `basic_experiments/cmu20/gpt/full`.",
+                f"- OCD62 thumbnails use {BACKEND_LABEL} {VARIANT_LABEL} relaxed structures from `basic_experiments/ocd62/gpt/full`.",
                 f"- Force field/checkpoint label for these rendered structures: {CHECKPOINT_LABEL}.",
                 "- Individual PNGs use transparent backgrounds.",
                 "- Contact sheets are white-background previews for quick review; use individual PNGs for figure assembly.",
@@ -410,7 +410,7 @@ def write_readme(manifest_rows: list[dict[str, str]], selected_count: int) -> No
                 f"- `ocd62_selected/`: {selected_count} OCD62 thumbnails for Panel B coverage.",
                 "- `contact_sheets/`: preview sheets.",
                 "- `manifest.csv`: source/result path and metadata for every rendered asset.",
-                "- `panel_b_assets_20260429.zip`: zip archive for WeChat/group handoff.",
+                "- `panel_b_assets_20260429.zip`: zipped asset bundle for group handoff.",
                 "",
                 "Caveat:",
                 "",
@@ -433,7 +433,7 @@ def write_handoff_message() -> None:
                 "",
                 "素材包路径：",
                 "",
-                "`research/results/analysis/panel_b_assets_20260429/panel_b_assets_20260429.zip`",
+                "`research/results/advanced_experiments/panel_b_structure_assets/panel_b_assets_20260429/panel_b_assets_20260429.zip`",
                 "",
                 "里面有：",
                 "",
@@ -529,11 +529,11 @@ def main() -> None:
     write_handoff_message()
 
     zip_path = OUT_DIR / "panel_b_assets_20260429.zip"
-    with zipfile.ZipFile(zip_path, "w", compression=zipfile.ZIP_DEFLATED) as archive:
+    with zipfile.ZipFile(zip_path, "w", compression=zipfile.ZIP_DEFLATED) as zip_handle:
         for path in OUT_DIR.rglob("*"):
             if path == zip_path or path.is_dir():
                 continue
-            archive.write(path, path.relative_to(OUT_DIR.parent))
+            zip_handle.write(path, path.relative_to(OUT_DIR.parent))
 
     print(f"Wrote {OUT_DIR}")
     print(f"CMU20 images: {len(contact_cmu)}")

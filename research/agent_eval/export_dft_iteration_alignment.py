@@ -18,13 +18,13 @@ from typing import Any, Dict, Iterable, List, Optional, Tuple
 
 
 DEFAULT_RUNS = [
-    ("Gemini_2.5_Pro", "research/results/canonical_raw/cmu20/gemini_ablation/full"),
-    ("GPT_5.4", "research/results/canonical_raw/cmu20/openai_gpt54_ablation/full"),
+    ("Gemini_2.5_Pro", "research/results/basic_experiments/cmu20/gemini/full"),
+    ("GPT_5.4", "research/results/basic_experiments/cmu20/gpt/full"),
     (
         "Claude_Sonnet_4.6",
-        "research/results/canonical_raw/cmu20/anthropic_sonnet46_ablation/full",
+        "research/results/basic_experiments/cmu20/claude/full",
     ),
-    ("Grok_4", "research/results/canonical_raw/cmu20/grok4_ablation/full"),
+    ("Grok_4", "research/results/basic_experiments/cmu20/grok/full"),
 ]
 
 
@@ -595,7 +595,10 @@ def parse_run(value: str) -> Tuple[str, str]:
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--case-id", default="01")
-    parser.add_argument("--output", default="research/results/analysis/dft_iteration_alignment/case_01")
+    parser.add_argument(
+        "--output",
+        default="research/results/advanced_experiments/dft_iteration_alignment/cmu20_case01",
+    )
     parser.add_argument(
         "--run",
         action="append",

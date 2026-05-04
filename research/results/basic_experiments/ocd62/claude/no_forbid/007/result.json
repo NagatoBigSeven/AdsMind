@@ -1,0 +1,346 @@
+{
+  "case_id": "007",
+  "case_metadata": {
+    "case_id": "007",
+    "slab_file": "datasets/ocd62/007_ocd_84_Mo18S72W18_O_N.xyz",
+    "smiles": "O=N",
+    "user_request": "Find the lowest-energy adsorption configuration for the adsorbate with SMILES O=N on the provided surface.",
+    "surface_family": "intermetallic",
+    "adsorbate_name": "O=N",
+    "miller_index": "",
+    "reaction_class": "GENERALIZATION",
+    "ablation_candidate": "FALSE",
+    "notes": "OCD id=84; adsorbate=O=N; surface_formula=Mo18S72W18; y_relaxed=-1.778516 eV; site=18",
+    "surface_formula": "Mo18S72W18",
+    "surface_elements": "Mo;S;W",
+    "bare_slab_atoms": "108",
+    "adsorbate_atoms": "3",
+    "y_relaxed": "-1.778516",
+    "site_indices": "18"
+  },
+  "status": "success",
+  "best_energy_eV": -19.950759887695312,
+  "iteration_count": 5,
+  "max_attempts": 5,
+  "final_site_type": "ontop",
+  "converged_tag": false,
+  "wall_clock_sec": 3501.207764558494,
+  "total_input_tokens": 25017,
+  "total_output_tokens": 7973,
+  "artifact_paths": {
+    "BEST_O_N_bridge_E-19.925": "research/results/basic_experiments/ocd62/claude/no_forbid/007/artifacts/BEST_O_N_bridge_E-19.925.xyz",
+    "BEST_O_N_bridge_E-19.925.xyz": "research/results/basic_experiments/ocd62/claude/no_forbid/007/artifacts/BEST_O_N_bridge_E-19.925.xyz",
+    "best_structure_file": "research/results/basic_experiments/ocd62/claude/no_forbid/007/artifacts/BEST_O_N_ontop_E-19.726.xyz",
+    "BEST_O_N_bridge_to_ontop_E-19.951": "research/results/basic_experiments/ocd62/claude/no_forbid/007/artifacts/BEST_O_N_bridge_to_ontop_E-19.951.xyz",
+    "BEST_O_N_bridge_to_ontop_E-19.951.xyz": "research/results/basic_experiments/ocd62/claude/no_forbid/007/artifacts/BEST_O_N_bridge_to_ontop_E-19.951.xyz",
+    "BEST_O_N_hollow_to_ontop_E-19.752": "research/results/basic_experiments/ocd62/claude/no_forbid/007/artifacts/BEST_O_N_hollow_to_ontop_E-19.752.xyz",
+    "BEST_O_N_hollow_to_ontop_E-19.752.xyz": "research/results/basic_experiments/ocd62/claude/no_forbid/007/artifacts/BEST_O_N_hollow_to_ontop_E-19.752.xyz",
+    "BEST_O_N_ontop_E-19.318": "research/results/basic_experiments/ocd62/claude/no_forbid/007/artifacts/BEST_O_N_ontop_E-19.318.xyz",
+    "BEST_O_N_ontop_E-19.318.xyz": "research/results/basic_experiments/ocd62/claude/no_forbid/007/artifacts/BEST_O_N_ontop_E-19.318.xyz",
+    "BEST_O_N_ontop_E-19.726": "research/results/basic_experiments/ocd62/claude/no_forbid/007/artifacts/BEST_O_N_ontop_E-19.726.xyz",
+    "BEST_O_N_ontop_E-19.726.xyz": "research/results/basic_experiments/ocd62/claude/no_forbid/007/artifacts/BEST_O_N_ontop_E-19.726.xyz",
+    "conformers_O_N": "research/results/basic_experiments/ocd62/claude/no_forbid/007/artifacts/conformers_O_N.traj",
+    "conformers_O_N.traj": "research/results/basic_experiments/ocd62/claude/no_forbid/007/artifacts/conformers_O_N.traj",
+    "final": "research/results/basic_experiments/ocd62/claude/no_forbid/007/artifacts/final.xyz",
+    "final.xyz": "research/results/basic_experiments/ocd62/claude/no_forbid/007/artifacts/final.xyz",
+    "relaxation": "research/results/basic_experiments/ocd62/claude/no_forbid/007/artifacts/relaxation.traj",
+    "relaxation.traj": "research/results/basic_experiments/ocd62/claude/no_forbid/007/artifacts/relaxation.traj",
+    "relaxation_trajectory_file": "research/results/basic_experiments/ocd62/claude/no_forbid/007/artifacts/relaxation.traj"
+  },
+  "best_result": {
+    "most_stable_energy_eV": -19.950759887695312,
+    "analysis_json": {
+      "status": "success",
+      "message": "Most stable config adsorption energy: -19.9508 eV. Target Atom: O (from plan index 0, global index 108 in relaxed structure). -> Nearest: Mo (Index 0), Distance: 3.059 Å (Threshold: 3.19), Bound: True. Bonded Surface Atoms: Mo-3.059Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Mo', 'S'] -> Actual ['Mo']).",
+      "most_stable_energy_eV": -19.950759887695312,
+      "target_adsorbate_atom": "O",
+      "target_adsorbate_atom_index": 108,
+      "bonded_surface_atoms": [
+        {
+          "symbol": "Mo",
+          "index": 0,
+          "distance": 3.059
+        }
+      ],
+      "nearest_slab_atom": "Mo",
+      "nearest_slab_atom_index": 0,
+      "final_bond_distance_A": 3.059,
+      "estimated_covalent_cutoff_A": 2.42,
+      "is_covalently_bound": true,
+      "reaction_detected": false,
+      "is_dissociated": false,
+      "n_components": 1,
+      "bond_change_count": 0,
+      "site_analysis": {
+        "planned_site_type": "bridge",
+        "planned_connectivity": 2,
+        "actual_site_type": "ontop",
+        "actual_connectivity": 1,
+        "is_chemical_slip": true,
+        "planned_symbols": [
+          "Mo",
+          "S"
+        ],
+        "actual_symbols": [
+          "Mo"
+        ],
+        "site_fingerprint": "Mo0"
+      },
+      "best_structure_file": "outputs/026-0a169f9a/BEST_O_N_bridge_to_ontop_E-19.951.xyz",
+      "generated_conformers_file": "outputs/026-0a169f9a/conformers_O_N.traj",
+      "relaxation_trajectory_file": "outputs/026-0a169f9a/final.xyz",
+      "session_id": "026-0a169f9a"
+    },
+    "plan": {
+      "reasoning": "Analysis of history: 4 attempts have been made. (1) ontop W via N (index 1): E=-19.318 eV. (2) ontop Mo via N (index 1): E=-19.726 eV. (3) bridge Mo-Mo via N (index 1): E=-19.925 eV [current best]. (4) hollow Mo-Mo-S via N (index 1): unstable, slipped to ontop Mo, E=-19.752 eV. The adsorbate is O=N (nitroso). Atom 0 is O (SP2, no radical), atom 1 is N (SP2, no radical). All previous attempts used N (index 1) as the binding atom. I should now try binding through O (index 0) to explore a different orientation. The O atom has lone pairs and can coordinate to metal surfaces. A promising untested configuration is bridge Mo-S with O as the binding atom, or ontop S with O. Given the surface has S, Mo, W sites, and bridge Mo-S is available, I will try bridge Mo-S with O (index 0) as the binding atom. This is chemically distinct from all previous attempts (different binding atom and different site). This could potentially give a lower energy configuration. The bridge Mo-S site is available and untested. Using O (index 0) as binding atom for a bridge Mo-S site is a valid new plan.",
+      "adsorbate_type": "Molecule",
+      "solution": {
+        "action": "continue",
+        "site_type": "bridge",
+        "surface_binding_atoms": [
+          "Mo",
+          "S"
+        ],
+        "adsorbate_binding_indices": [
+          0
+        ],
+        "relax_top_n": 1,
+        "touch_sphere_size": 2,
+        "overlap_thr": 0.1,
+        "conformers_per_site_cap": 4
+      }
+    },
+    "result_type": "Perfect"
+  },
+  "last_analysis": {
+    "status": "success",
+    "message": "Most stable config adsorption energy: -19.9508 eV. Target Atom: O (from plan index 0, global index 108 in relaxed structure). -> Nearest: Mo (Index 0), Distance: 3.059 Å (Threshold: 3.19), Bound: True. Bonded Surface Atoms: Mo-3.059Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Mo', 'S'] -> Actual ['Mo']).",
+    "most_stable_energy_eV": -19.950759887695312,
+    "target_adsorbate_atom": "O",
+    "target_adsorbate_atom_index": 108,
+    "bonded_surface_atoms": [
+      {
+        "symbol": "Mo",
+        "index": 0,
+        "distance": 3.059
+      }
+    ],
+    "nearest_slab_atom": "Mo",
+    "nearest_slab_atom_index": 0,
+    "final_bond_distance_A": 3.059,
+    "estimated_covalent_cutoff_A": 2.42,
+    "is_covalently_bound": true,
+    "reaction_detected": false,
+    "is_dissociated": false,
+    "n_components": 1,
+    "bond_change_count": 0,
+    "site_analysis": {
+      "planned_site_type": "bridge",
+      "planned_connectivity": 2,
+      "actual_site_type": "ontop",
+      "actual_connectivity": 1,
+      "is_chemical_slip": true,
+      "planned_symbols": [
+        "Mo",
+        "S"
+      ],
+      "actual_symbols": [
+        "Mo"
+      ],
+      "site_fingerprint": "Mo0"
+    },
+    "best_structure_file": "outputs/026-0a169f9a/BEST_O_N_bridge_to_ontop_E-19.951.xyz",
+    "generated_conformers_file": "outputs/026-0a169f9a/conformers_O_N.traj",
+    "relaxation_trajectory_file": "outputs/026-0a169f9a/final.xyz",
+    "session_id": "026-0a169f9a"
+  },
+  "attempt_records": [
+    {
+      "attempt_index": 1,
+      "plan": {
+        "reasoning": "Step 0 - SMILES Consistency Check: The SMILES is O=N, which represents nitroso (NO) with a double bond between O and N. Both atoms are SP2 hybridized with no radical electrons and no formal charges. This is a stable molecule (nitric oxide-like fragment, but formally written as O=N). Since there are no radical electrons, this should be treated as 'Molecule'. However, NO is typically a radical in reality - but per the RDKit analysis, radical_electrons = 0 for both atoms, so we proceed as Molecule.\n\nStep 1 - History Analysis: No previous attempts. This is the first plan.\n\nStep 2 - Adsorbate Analysis: O=N has two atoms: O (index 0, SP2, no radical) and N (index 1, SP2, no radical). NO typically binds through the N atom to metal surfaces, as N has a lone pair available for donation. The N end is the preferred binding atom for NO on transition metal surfaces.\n\nStep 3 - Surface Analysis: The surface contains S, Mo, and W atoms. Available sites include ontop (Mo, S, W), bridge (Mo-Mo, Mo-S, S-S, S-W, W-W), and hollow sites. For NO adsorption, metal sites (Mo or W) are preferred over S sites due to stronger metal-N interactions.\n\nStep 4 - Plan Formulation: As the first attempt, I will try N-end down adsorption on a W ontop site, as W is a strong transition metal that can form good bonds with N. This is a classic starting configuration for NO adsorption. Using ontop site with N (index 1) as the binding atom.\n\nAlternatively, Mo ontop is also a strong candidate. I'll start with W ontop since W is a heavier transition metal with potentially stronger binding. Using adsorbate_binding_indices = [1] for N atom, site_type = 'ontop', surface_binding_atoms = ['W'].",
+        "adsorbate_type": "Molecule",
+        "solution": {
+          "action": "continue",
+          "site_type": "ontop",
+          "surface_binding_atoms": [
+            "W"
+          ],
+          "adsorbate_binding_indices": [
+            1
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "ontop|W|1|Molecule|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -19.317611694335938,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": false,
+      "planned_site_type": "ontop",
+      "actual_site_type": "ontop",
+      "best_structure_file": "outputs/026-0a169f9a/BEST_O_N_ontop_E-19.318.xyz",
+      "generated_conformers_file": "outputs/026-0a169f9a/conformers_O_N.traj",
+      "relaxation_trajectory_file": "outputs/026-0a169f9a/final.xyz",
+      "message": "Most stable config adsorption energy: -19.3176 eV. Target Atom: N (from plan index 1, global index 108 in relaxed structure). -> Nearest: W (Index 25), Distance: 2.052 Å (Threshold: 3.378), Bound: True. Bonded Surface Atoms: W-2.052Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: False (Planned ['W'] -> Actual ['W']).",
+      "history_entry": "【✅ Perfect Adsorption】 ontop @ ['W'] (Index [1]) -> Site: ontop (W) [🌟 New Best] | E=-19.318 eV"
+    },
+    {
+      "attempt_index": 2,
+      "plan": {
+        "reasoning": "Analysis of history: We have one successful result - ontop @ W with N binding (index 1), E=-19.318 eV. This is the current best. Now I need to explore other configurations to see if a lower energy exists.\n\nAdsorbate O=N (nitrosyl): O is index 0 (SP2, degree 1), N is index 1 (SP2, degree 1). Both atoms are terminal with no radical electrons, so this is a 'Molecule'. The molecule can bind through either O or N end.\n\nThe history shows N-end binding on W ontop gave -19.318 eV. I should now try:\n1. O-end binding on W ontop (O index 0)\n2. N-end binding on Mo ontop\n3. Bridge configurations\n\nLet me try O-end binding on W ontop first, as the orientation change could give a different energy. Then try N-end on Mo. The surface has S, Mo, W atoms.\n\nNext plan: Try N-end (index 1) binding at ontop Mo site, since Mo is another metal center that could strongly bind NO. This is a completely different site from the W ontop already tested.\n\nActually, let me also consider: the molecule is O=N (nitroso), binding through N is typical for NO on metal surfaces. The W-ontop with N gave -19.318 eV. Let me try Mo-ontop with N binding to compare metal centers.",
+        "adsorbate_type": "Molecule",
+        "solution": {
+          "action": "continue",
+          "site_type": "ontop",
+          "surface_binding_atoms": [
+            "Mo"
+          ],
+          "adsorbate_binding_indices": [
+            1
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "ontop|Mo|1|Molecule|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -19.726181030273438,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": false,
+      "planned_site_type": "ontop",
+      "actual_site_type": "ontop",
+      "best_structure_file": "outputs/026-0a169f9a/BEST_O_N_ontop_E-19.726.xyz",
+      "generated_conformers_file": "outputs/026-0a169f9a/conformers_O_N.traj",
+      "relaxation_trajectory_file": "outputs/026-0a169f9a/final.xyz",
+      "message": "Most stable config adsorption energy: -19.7262 eV. Target Atom: N (from plan index 1, global index 108 in relaxed structure). -> Nearest: Mo (Index 0), Distance: 2.008 Å (Threshold: 3.262), Bound: True. Bonded Surface Atoms: Mo-2.008Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: False (Planned ['Mo'] -> Actual ['Mo']).",
+      "history_entry": "【✅ Perfect Adsorption】 ontop @ ['Mo'] (Index [1]) -> Site: ontop (Mo) [🌟 New Best] | E=-19.726 eV"
+    },
+    {
+      "attempt_index": 3,
+      "plan": {
+        "reasoning": "SMILES Consistency Check: O=N is nitrosyl (NO), with O at index 0 (SP2, no radical) and N at index 1 (SP2, no radical). This is a stable molecule with lone pairs on both O and N, so adsorbate_type is 'Molecule'.\n\nAnalysis of History:\n- ontop @ W (Index [1], N-down or O-down) -> E=-19.318 eV [Best W]\n- ontop @ Mo (Index [1], N-down) -> E=-19.726 eV [Current Best]\n\nBoth ontop sites have been tested. The Mo ontop is currently the best at -19.726 eV. I have not yet tested: bridge sites (Mo-Mo, Mo-S, S-S, S-W, W-W), hollow sites (Mo-Mo-S, Mo-S-S, S-S-W, S-W-W, S-S-W-W, S-S-W-W-W), or ontop S. I also have not tested O-down (index 0) adsorption on Mo or W.\n\nFor NO adsorption on transition metal surfaces, N-down binding is typically preferred (as seen in history with index [1] = N giving better energy than likely O-down). However, bridge sites can sometimes be more stable for NO.\n\nNext plan: Try bridge site Mo-Mo with N (index 1) as binding atom. This is a common and energetically favorable configuration for NO on metal surfaces. Mo-Mo bridge has not been tested yet and could potentially give lower energy than the ontop Mo result.\n\nSite alignment: bridge site with 1 adsorbate binding index is allowed per the rules.",
+        "adsorbate_type": "Molecule",
+        "solution": {
+          "action": "continue",
+          "site_type": "bridge",
+          "surface_binding_atoms": [
+            "Mo",
+            "Mo"
+          ],
+          "adsorbate_binding_indices": [
+            1
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "bridge|Mo,Mo|1|Molecule|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -19.925071716308594,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": false,
+      "planned_site_type": "bridge",
+      "actual_site_type": "bridge",
+      "best_structure_file": "outputs/026-0a169f9a/BEST_O_N_bridge_E-19.925.xyz",
+      "generated_conformers_file": "outputs/026-0a169f9a/conformers_O_N.traj",
+      "relaxation_trajectory_file": "outputs/026-0a169f9a/final.xyz",
+      "message": "Most stable config adsorption energy: -19.9251 eV. Target Atom: N (from plan index 1, global index 108 in relaxed structure). -> Nearest: Mo (Index 12), Distance: 2.157 Å (Threshold: 3.262), Bound: True. Bonded Surface Atoms: Mo-2.157Å, Mo-2.228Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: False (Planned ['Mo', 'Mo'] -> Actual ['Mo', 'Mo']).",
+      "history_entry": "【✅ Perfect Adsorption】 bridge @ ['Mo', 'Mo'] (Index [1]) -> Site: bridge (Mo,Mo) [🌟 New Best] | E=-19.925 eV"
+    },
+    {
+      "attempt_index": 4,
+      "plan": {
+        "reasoning": "Analysis of history: Three configurations have been tested successfully: (1) ontop W via N (index 1), E=-19.318 eV; (2) ontop Mo via N (index 1), E=-19.726 eV; (3) bridge Mo-Mo via N (index 1), E=-19.925 eV. The current best is bridge Mo-Mo at -19.925 eV. All tested so far use N (index 1) as the binding atom. I should now explore: (a) other bridge sites (Mo-S, S-W, W-W, S-S) and hollow sites, and (b) binding through O (index 0) instead of N. The adsorbate is NO (nitroso, O=N). Both O and N are SP2 with no radical electrons, so this is a Molecule. Next logical step: try bridge W-W site with N binding (index 1), as W-W bridge has not been tested and W is a different metal that may offer stronger binding. Alternatively, try hollow sites. Given the trend that Mo-Mo bridge (-19.925 eV) is better than Mo ontop (-19.726 eV) which is better than W ontop (-19.318 eV), exploring Mo-S bridge or hollow Mo-Mo-S could be promising. Let me try hollow Mo-Mo-S with N (index 1) as binding atom, as hollow sites often provide stronger binding for small molecules. The available hollow-3 sites include Mo-Mo-S, Mo-S-S, S-S-W, S-W-W. I'll try hollow Mo-Mo-S with N binding.",
+        "adsorbate_type": "Molecule",
+        "solution": {
+          "action": "continue",
+          "site_type": "hollow",
+          "surface_binding_atoms": [
+            "Mo",
+            "Mo",
+            "S"
+          ],
+          "adsorbate_binding_indices": [
+            1
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "hollow|Mo,Mo,S|1|Molecule|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -19.751548767089844,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": true,
+      "planned_site_type": "hollow",
+      "actual_site_type": "ontop",
+      "best_structure_file": "outputs/026-0a169f9a/BEST_O_N_hollow_to_ontop_E-19.752.xyz",
+      "generated_conformers_file": "outputs/026-0a169f9a/conformers_O_N.traj",
+      "relaxation_trajectory_file": "outputs/026-0a169f9a/final.xyz",
+      "message": "Most stable config adsorption energy: -19.7515 eV. Target Atom: N (from plan index 1, global index 108 in relaxed structure). -> Nearest: Mo (Index 0), Distance: 2.018 Å (Threshold: 3.262), Bound: True. Bonded Surface Atoms: Mo-2.018Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Mo', 'Mo', 'S'] -> Actual ['Mo']).",
+      "history_entry": "【✅ Perfect Adsorption】 hollow @ ['Mo', 'Mo', 'S'] (Index [1]) -> ⚠️【Unstable Site Warning】⚠️: Planned hollow (Mo-Mo-S) is unstable, adsorbate spontaneously slipped to ontop (Mo).This means Mo-Mo-S has insufficient affinity for this adsorbate. | E=-19.752 eV"
+    },
+    {
+      "attempt_index": 5,
+      "plan": {
+        "reasoning": "Analysis of history: 4 attempts have been made. (1) ontop W via N (index 1): E=-19.318 eV. (2) ontop Mo via N (index 1): E=-19.726 eV. (3) bridge Mo-Mo via N (index 1): E=-19.925 eV [current best]. (4) hollow Mo-Mo-S via N (index 1): unstable, slipped to ontop Mo, E=-19.752 eV. The adsorbate is O=N (nitroso). Atom 0 is O (SP2, no radical), atom 1 is N (SP2, no radical). All previous attempts used N (index 1) as the binding atom. I should now try binding through O (index 0) to explore a different orientation. The O atom has lone pairs and can coordinate to metal surfaces. A promising untested configuration is bridge Mo-S with O as the binding atom, or ontop S with O. Given the surface has S, Mo, W sites, and bridge Mo-S is available, I will try bridge Mo-S with O (index 0) as the binding atom. This is chemically distinct from all previous attempts (different binding atom and different site). This could potentially give a lower energy configuration. The bridge Mo-S site is available and untested. Using O (index 0) as binding atom for a bridge Mo-S site is a valid new plan.",
+        "adsorbate_type": "Molecule",
+        "solution": {
+          "action": "continue",
+          "site_type": "bridge",
+          "surface_binding_atoms": [
+            "Mo",
+            "S"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "bridge|Mo,S|0|Molecule|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -19.950759887695312,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": true,
+      "planned_site_type": "bridge",
+      "actual_site_type": "ontop",
+      "best_structure_file": "outputs/026-0a169f9a/BEST_O_N_bridge_to_ontop_E-19.951.xyz",
+      "generated_conformers_file": "outputs/026-0a169f9a/conformers_O_N.traj",
+      "relaxation_trajectory_file": "outputs/026-0a169f9a/final.xyz",
+      "message": "Most stable config adsorption energy: -19.9508 eV. Target Atom: O (from plan index 0, global index 108 in relaxed structure). -> Nearest: Mo (Index 0), Distance: 3.059 Å (Threshold: 3.19), Bound: True. Bonded Surface Atoms: Mo-3.059Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Mo', 'S'] -> Actual ['Mo']).",
+      "history_entry": "【✅ Perfect Adsorption】 bridge @ ['Mo', 'S'] (Index [0]) -> ⚠️【Unstable Site Warning】⚠️: Planned bridge (Mo-S) is unstable, adsorbate spontaneously slipped to ontop (Mo).This means Mo-S has insufficient affinity for this adsorbate. [🌟 New Best] | E=-19.951 eV"
+    }
+  ],
+  "history": [
+    "【✅ Perfect Adsorption】 ontop @ ['W'] (Index [1]) -> Site: ontop (W) [🌟 New Best] | E=-19.318 eV",
+    "【✅ Perfect Adsorption】 ontop @ ['Mo'] (Index [1]) -> Site: ontop (Mo) [🌟 New Best] | E=-19.726 eV",
+    "【✅ Perfect Adsorption】 bridge @ ['Mo', 'Mo'] (Index [1]) -> Site: bridge (Mo,Mo) [🌟 New Best] | E=-19.925 eV",
+    "【✅ Perfect Adsorption】 hollow @ ['Mo', 'Mo', 'S'] (Index [1]) -> ⚠️【Unstable Site Warning】⚠️: Planned hollow (Mo-Mo-S) is unstable, adsorbate spontaneously slipped to ontop (Mo).This means Mo-Mo-S has insufficient affinity for this adsorbate. | E=-19.752 eV",
+    "【✅ Perfect Adsorption】 bridge @ ['Mo', 'S'] (Index [0]) -> ⚠️【Unstable Site Warning】⚠️: Planned bridge (Mo-S) is unstable, adsorbate spontaneously slipped to ontop (Mo).This means Mo-S has insufficient affinity for this adsorbate. [🌟 New Best] | E=-19.951 eV"
+  ],
+  "error": null,
+  "perfect_count": 5,
+  "dissociation_count": 0,
+  "rearrangement_count": 0,
+  "calc_failure_count": 0,
+  "chemical_slip_count": 2
+}

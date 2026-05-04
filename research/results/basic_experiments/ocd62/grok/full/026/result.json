@@ -1,0 +1,350 @@
+{
+  "case_id": "026",
+  "case_metadata": {
+    "case_id": "026",
+    "slab_file": "datasets/ocd62/026_ocd_335_As40Ti40_C_O.xyz",
+    "smiles": "C[O]",
+    "user_request": "Find the lowest-energy adsorption configuration for the adsorbate with SMILES C[O] on the provided surface.",
+    "surface_family": "compound",
+    "adsorbate_name": "C[O]",
+    "miller_index": "",
+    "reaction_class": "GENERALIZATION",
+    "ablation_candidate": "FALSE",
+    "notes": "OCD id=335; adsorbate=C[O]; surface_formula=As40Ti40; y_relaxed=-2.485463 eV; site=37",
+    "surface_formula": "As40Ti40",
+    "surface_elements": "As;Ti",
+    "bare_slab_atoms": "80",
+    "adsorbate_atoms": "5",
+    "y_relaxed": "-2.485463",
+    "site_indices": "37"
+  },
+  "status": "success",
+  "best_energy_eV": -7.434551239013672,
+  "iteration_count": 5,
+  "max_attempts": 5,
+  "final_site_type": "ontop",
+  "converged_tag": false,
+  "wall_clock_sec": 1612.628683269024,
+  "total_input_tokens": 28728,
+  "total_output_tokens": 27622,
+  "artifact_paths": {
+    "BEST_CO_bridge_to_ontop_E-7.292": "research/results/basic_experiments/ocd62/grok/full/026/artifacts/BEST_CO_bridge_to_ontop_E-7.292.xyz",
+    "BEST_CO_bridge_to_ontop_E-7.292.xyz": "research/results/basic_experiments/ocd62/grok/full/026/artifacts/BEST_CO_bridge_to_ontop_E-7.292.xyz",
+    "best_structure_file": "research/results/basic_experiments/ocd62/grok/full/026/artifacts/BEST_CO_ontop_E-7.382.xyz",
+    "BEST_CO_hollow_to_ontop_E-7.392": "research/results/basic_experiments/ocd62/grok/full/026/artifacts/BEST_CO_hollow_to_ontop_E-7.392.xyz",
+    "BEST_CO_hollow_to_ontop_E-7.392.xyz": "research/results/basic_experiments/ocd62/grok/full/026/artifacts/BEST_CO_hollow_to_ontop_E-7.392.xyz",
+    "BEST_CO_hollow_to_ontop_ISO_E-7.435": "research/results/basic_experiments/ocd62/grok/full/026/artifacts/BEST_CO_hollow_to_ontop_ISO_E-7.435.xyz",
+    "BEST_CO_hollow_to_ontop_ISO_E-7.435.xyz": "research/results/basic_experiments/ocd62/grok/full/026/artifacts/BEST_CO_hollow_to_ontop_ISO_E-7.435.xyz",
+    "BEST_CO_ontop_E-7.242": "research/results/basic_experiments/ocd62/grok/full/026/artifacts/BEST_CO_ontop_E-7.242.xyz",
+    "BEST_CO_ontop_E-7.242.xyz": "research/results/basic_experiments/ocd62/grok/full/026/artifacts/BEST_CO_ontop_E-7.242.xyz",
+    "BEST_CO_ontop_E-7.382": "research/results/basic_experiments/ocd62/grok/full/026/artifacts/BEST_CO_ontop_E-7.382.xyz",
+    "BEST_CO_ontop_E-7.382.xyz": "research/results/basic_experiments/ocd62/grok/full/026/artifacts/BEST_CO_ontop_E-7.382.xyz",
+    "conformers_C[O]": "research/results/basic_experiments/ocd62/grok/full/026/artifacts/conformers_C[O].traj",
+    "conformers_C[O].traj": "research/results/basic_experiments/ocd62/grok/full/026/artifacts/conformers_C[O].traj",
+    "final": "research/results/basic_experiments/ocd62/grok/full/026/artifacts/final.xyz",
+    "final.xyz": "research/results/basic_experiments/ocd62/grok/full/026/artifacts/final.xyz",
+    "relaxation": "research/results/basic_experiments/ocd62/grok/full/026/artifacts/relaxation.traj",
+    "relaxation.traj": "research/results/basic_experiments/ocd62/grok/full/026/artifacts/relaxation.traj",
+    "relaxation_trajectory_file": "research/results/basic_experiments/ocd62/grok/full/026/artifacts/relaxation.traj"
+  },
+  "best_result": {
+    "most_stable_energy_eV": -7.434551239013672,
+    "analysis_json": {
+      "status": "success",
+      "message": "Most stable config adsorption energy: -7.4346 eV. Target Atom: O (from plan index 1, global index 80 in relaxed structure). -> Nearest: Ti (Index 13), Distance: 1.71 Å (Threshold: 3.277), Bound: True. Bonded Surface Atoms: Ti-1.71Å. Is Bound: True. Reactivity Change Detected: True (Bond Changes: 1). Chemical Slip: True (Planned ['As', 'Ti', 'Ti'] -> Actual ['Ti']).",
+      "most_stable_energy_eV": -7.434551239013672,
+      "target_adsorbate_atom": "O",
+      "target_adsorbate_atom_index": 80,
+      "bonded_surface_atoms": [
+        {
+          "symbol": "Ti",
+          "index": 13,
+          "distance": 1.71
+        }
+      ],
+      "nearest_slab_atom": "Ti",
+      "nearest_slab_atom_index": 13,
+      "final_bond_distance_A": 1.71,
+      "estimated_covalent_cutoff_A": 2.486,
+      "is_covalently_bound": true,
+      "reaction_detected": true,
+      "is_dissociated": false,
+      "n_components": 1,
+      "bond_change_count": 1,
+      "site_analysis": {
+        "planned_site_type": "hollow",
+        "planned_connectivity": 3,
+        "actual_site_type": "ontop",
+        "actual_connectivity": 1,
+        "is_chemical_slip": true,
+        "planned_symbols": [
+          "As",
+          "Ti",
+          "Ti"
+        ],
+        "actual_symbols": [
+          "Ti"
+        ],
+        "site_fingerprint": "Ti13"
+      },
+      "best_structure_file": "outputs/039-7c2ceca3/BEST_CO_hollow_to_ontop_ISO_E-7.435.xyz",
+      "generated_conformers_file": "outputs/039-7c2ceca3/conformers_C[O].traj",
+      "relaxation_trajectory_file": "outputs/039-7c2ceca3/final.xyz",
+      "session_id": "039-7c2ceca3"
+    },
+    "plan": {
+      "reasoning": "Step 0: SMILES Consistency Check. Atom list: C (index 0, SP3, degree 1, radical_electrons 0), O (index 1, SP3, degree 1, radical_electrons 1). This indicates a radical on O, consistent with SMILES C[O] representing a species like CH3O•. Hybridization matches saturated alkyl-like, no mismatch with user description. For ReactiveSpecies, binding atom 1 (O) has radical_electrons > 0.\nStep 1: Analyze Old Plans. Tested: ontop @ ['Ti'] via [1], successful, E=-7.242 eV. ontop @ ['As'] via [1], successful but slipped to ontop (Ti), E=-7.382 eV (better). Both converged to ontop Ti but with different energies (difference 0.14 eV > 0.05 eV), suggesting heterogeneity in Ti sites on the Ti-As surface. No failures or bond changes. Unstable Site Warning for ontop As, forbidding As type sites (pure As sites like ontop As). No [🔄 Converged to known best] tag, so continue. Since energies differ, suspect distinct environments; plan to explore other high-symmetry sites with Ti involvement.\nStep 2: Formulate New Plan. Goal: lowest energy. Avoid pure As sites. Tested ontop Ti/As, both relaxed to ontop Ti. To explore potentially lower energy via multi-atom sites, propose hollow with As-Ti-Ti (available, has two Ti, one As). This is mixed, not pure As, so not strictly forbidden; may relax to stable Ti-dominant binding or new low-energy config due to heterogeneity. Use ReactiveSpecies for radical. New plan differs from history (ontop).\nStep 3: Analyze Request. Find lowest-energy adsorption configuration for C[O] on surface.\nStep 4: Analyze Adsorbate. SMILES C[O]: functional group is C-O with radical on O. Heavy atoms: C(0), O(1). Bind via O (index 1) with radical.\nStep 5: Analyze Surface. Available hollow: As-As-As, As-As-Ti, As-Ti-Ti. Select As-Ti-Ti to maximize Ti involvement.\nStep 6: Formulate Plan. site_type: hollow, surface_binding_atoms: ['As', 'Ti', 'Ti'], adsorbate_binding_indices: [1] (O with radical), defaults for others.",
+      "adsorbate_type": "ReactiveSpecies",
+      "solution": {
+        "action": "continue",
+        "site_type": "hollow",
+        "surface_binding_atoms": [
+          "As",
+          "Ti",
+          "Ti"
+        ],
+        "adsorbate_binding_indices": [
+          1
+        ],
+        "relax_top_n": 1,
+        "touch_sphere_size": 2,
+        "overlap_thr": 0.1,
+        "conformers_per_site_cap": 4
+      }
+    },
+    "result_type": "Isomerized"
+  },
+  "last_analysis": {
+    "status": "success",
+    "message": "Most stable config adsorption energy: -7.2924 eV. Target Atom: O (from plan index 1, global index 80 in relaxed structure). -> Nearest: Ti (Index 7), Distance: 1.714 Å (Threshold: 3.277), Bound: True. Bonded Surface Atoms: Ti-1.714Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['As', 'Ti'] -> Actual ['Ti']).",
+    "most_stable_energy_eV": -7.292400360107422,
+    "target_adsorbate_atom": "O",
+    "target_adsorbate_atom_index": 80,
+    "bonded_surface_atoms": [
+      {
+        "symbol": "Ti",
+        "index": 7,
+        "distance": 1.714
+      }
+    ],
+    "nearest_slab_atom": "Ti",
+    "nearest_slab_atom_index": 7,
+    "final_bond_distance_A": 1.714,
+    "estimated_covalent_cutoff_A": 2.486,
+    "is_covalently_bound": true,
+    "reaction_detected": false,
+    "is_dissociated": false,
+    "n_components": 1,
+    "bond_change_count": 0,
+    "site_analysis": {
+      "planned_site_type": "bridge",
+      "planned_connectivity": 2,
+      "actual_site_type": "ontop",
+      "actual_connectivity": 1,
+      "is_chemical_slip": true,
+      "planned_symbols": [
+        "As",
+        "Ti"
+      ],
+      "actual_symbols": [
+        "Ti"
+      ],
+      "site_fingerprint": "Ti7"
+    },
+    "best_structure_file": "outputs/039-7c2ceca3/BEST_CO_bridge_to_ontop_E-7.292.xyz",
+    "generated_conformers_file": "outputs/039-7c2ceca3/conformers_C[O].traj",
+    "relaxation_trajectory_file": "outputs/039-7c2ceca3/final.xyz",
+    "session_id": "039-7c2ceca3"
+  },
+  "attempt_records": [
+    {
+      "attempt_index": 1,
+      "plan": {
+        "reasoning": "Step 0: SMILES Consistency Check. The provided atom list shows C (index 0, SP3, no radical) and O (index 1, SP3, radical_electrons:1). This matches a methoxy radical (CH3O•), where O has an unpaired electron. No hybridization mismatch with user request. For ReactiveSpecies, the binding atom O (index 1) has radical_electrons > 0, which is valid.\nStep 1: Analyze Old Plans. History is None, so no previous attempts, successes, failures, or tags. No unstable sites identified yet.\nStep 2: Formulate New Plan. Since this is the first attempt, propose an initial plan to start exploring. Goal is lowest adsorption energy. No convergence yet, so continue.\nStep 3: Analyze Request. User wants the lowest-energy adsorption configuration for the adsorbate C[O] on the provided surface.\nStep 4: Analyze Adsorbate. SMILES C[O] represents CH3O• (methoxy radical). Major functional group: alkoxy radical with unpaired electron on O (index 1). C (index 0) is saturated SP3 with no radical.\nStep 5: Analyze Surface. Surface composition: ['Ti', 'As']. Available sites include ontop on As or Ti, which are valid for planning.\nStep 6: Formulate Plan. For a radical species like CH3O•, use 'ReactiveSpecies'. It should adsorb via the O atom (index 1) with the unpaired electron. Start with ontop adsorption on Ti, as Ti often binds oxygen strongly in catalysis. site_type: 'ontop' with single binding index. surface_binding_atoms: ['Ti']. This is a new plan distinct from history (None). Defaults for other parameters.",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "ontop",
+          "surface_binding_atoms": [
+            "Ti"
+          ],
+          "adsorbate_binding_indices": [
+            1
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "ontop|Ti|1|ReactiveSpecies|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -7.241809844970703,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": false,
+      "planned_site_type": "ontop",
+      "actual_site_type": "ontop",
+      "best_structure_file": "outputs/039-7c2ceca3/BEST_CO_ontop_E-7.242.xyz",
+      "generated_conformers_file": "outputs/039-7c2ceca3/conformers_C[O].traj",
+      "relaxation_trajectory_file": "outputs/039-7c2ceca3/final.xyz",
+      "message": "Most stable config adsorption energy: -7.2418 eV. Target Atom: O (from plan index 1, global index 80 in relaxed structure). -> Nearest: Ti (Index 33), Distance: 1.728 Å (Threshold: 3.277), Bound: True. Bonded Surface Atoms: Ti-1.728Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: False (Planned ['Ti'] -> Actual ['Ti']).",
+      "history_entry": "【✅ Perfect Adsorption】 ontop @ ['Ti'] (Index [1]) -> Site: ontop (Ti) [🌟 New Best] | E=-7.242 eV"
+    },
+    {
+      "attempt_index": 2,
+      "plan": {
+        "reasoning": "Step 0: SMILES Consistency Check. The SMILES is C[O], parsed as CH3O with C (index 0, SP3, no radical) and O (index 1, SP3, radical_electrons=1). No hybridization mismatch with user request. For ReactiveSpecies, planned binding via index 1 (O) which has radical_electrons >0. Step 1: Analyze Old Plans. History shows one successful adsorption: ontop on Ti (surface_binding_atoms=['Ti'], adsorbate_binding_indices=[1]), E=-7.242 eV. No failures, no Chemical Slip, no convergence tags. This is the current best. Surface has heterogeneity with Ti and As atoms, so different environments may yield different energies. Step 2: Formulate New Plan. To find lower energy, propose a new plan different from history. Avoid repeating ontop Ti. Since adsorbate is a radical (CH3O•), use ReactiveSpecies with binding via O (index 1). Ontop on As is a logical next step to test binding to the other element, as it hasn't been tried and may have different affinity. Step 3: User intent is to find the lowest-energy configuration without specifics. Step 4: Adsorbate has methoxy radical, binding likely via O radical. Step 5: Surface has ontop sites on As and Ti; Ti tried, so try As. Step 6: Plan ontop on As, binding via O (index 1).",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "ontop",
+          "surface_binding_atoms": [
+            "As"
+          ],
+          "adsorbate_binding_indices": [
+            1
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "ontop|As|1|ReactiveSpecies|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -7.382495880126953,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": true,
+      "planned_site_type": "ontop",
+      "actual_site_type": "ontop",
+      "best_structure_file": "outputs/039-7c2ceca3/BEST_CO_ontop_E-7.382.xyz",
+      "generated_conformers_file": "outputs/039-7c2ceca3/conformers_C[O].traj",
+      "relaxation_trajectory_file": "outputs/039-7c2ceca3/final.xyz",
+      "message": "Most stable config adsorption energy: -7.3825 eV. Target Atom: O (from plan index 1, global index 80 in relaxed structure). -> Nearest: Ti (Index 3), Distance: 1.718 Å (Threshold: 3.277), Bound: True. Bonded Surface Atoms: Ti-1.718Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['As'] -> Actual ['Ti']).",
+      "history_entry": "【✅ Perfect Adsorption】 ontop @ ['As'] (Index [1]) -> ⚠️【Unstable Site Warning】⚠️: Planned ontop (As) is unstable, adsorbate spontaneously slipped to ontop (Ti).This means As has insufficient affinity for this adsorbate. Please **FORBID** testing As type sites again! [🌟 New Best] | E=-7.382 eV"
+    },
+    {
+      "attempt_index": 3,
+      "plan": {
+        "reasoning": "Step 0: SMILES Consistency Check. Atom list: C (index 0, SP3, degree 1, radical_electrons 0), O (index 1, SP3, degree 1, radical_electrons 1). This indicates a radical on O, consistent with SMILES C[O] representing a species like CH3O•. Hybridization matches saturated alkyl-like, no mismatch with user description. For ReactiveSpecies, binding atom 1 (O) has radical_electrons > 0.\nStep 1: Analyze Old Plans. Tested: ontop @ ['Ti'] via [1], successful, E=-7.242 eV. ontop @ ['As'] via [1], successful but slipped to ontop (Ti), E=-7.382 eV (better). Both converged to ontop Ti but with different energies (difference 0.14 eV > 0.05 eV), suggesting heterogeneity in Ti sites on the Ti-As surface. No failures or bond changes. Unstable Site Warning for ontop As, forbidding As type sites (pure As sites like ontop As). No [🔄 Converged to known best] tag, so continue. Since energies differ, suspect distinct environments; plan to explore other high-symmetry sites with Ti involvement.\nStep 2: Formulate New Plan. Goal: lowest energy. Avoid pure As sites. Tested ontop Ti/As, both relaxed to ontop Ti. To explore potentially lower energy via multi-atom sites, propose hollow with As-Ti-Ti (available, has two Ti, one As). This is mixed, not pure As, so not strictly forbidden; may relax to stable Ti-dominant binding or new low-energy config due to heterogeneity. Use ReactiveSpecies for radical. New plan differs from history (ontop).\nStep 3: Analyze Request. Find lowest-energy adsorption configuration for C[O] on surface.\nStep 4: Analyze Adsorbate. SMILES C[O]: functional group is C-O with radical on O. Heavy atoms: C(0), O(1). Bind via O (index 1) with radical.\nStep 5: Analyze Surface. Available hollow: As-As-As, As-As-Ti, As-Ti-Ti. Select As-Ti-Ti to maximize Ti involvement.\nStep 6: Formulate Plan. site_type: hollow, surface_binding_atoms: ['As', 'Ti', 'Ti'], adsorbate_binding_indices: [1] (O with radical), defaults for others.",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "hollow",
+          "surface_binding_atoms": [
+            "As",
+            "Ti",
+            "Ti"
+          ],
+          "adsorbate_binding_indices": [
+            1
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "hollow|As,Ti,Ti|1|ReactiveSpecies|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -7.434551239013672,
+      "bond_change_count": 1,
+      "is_dissociated": false,
+      "is_chemical_slip": true,
+      "planned_site_type": "hollow",
+      "actual_site_type": "ontop",
+      "best_structure_file": "outputs/039-7c2ceca3/BEST_CO_hollow_to_ontop_ISO_E-7.435.xyz",
+      "generated_conformers_file": "outputs/039-7c2ceca3/conformers_C[O].traj",
+      "relaxation_trajectory_file": "outputs/039-7c2ceca3/final.xyz",
+      "message": "Most stable config adsorption energy: -7.4346 eV. Target Atom: O (from plan index 1, global index 80 in relaxed structure). -> Nearest: Ti (Index 13), Distance: 1.71 Å (Threshold: 3.277), Bound: True. Bonded Surface Atoms: Ti-1.71Å. Is Bound: True. Reactivity Change Detected: True (Bond Changes: 1). Chemical Slip: True (Planned ['As', 'Ti', 'Ti'] -> Actual ['Ti']).",
+      "history_entry": "【⚠️ Rearrangement(BC=1)】 hollow @ ['As', 'Ti', 'Ti'] (Index [1]) -> ⚠️【Unstable Site Warning】⚠️: Planned hollow (As-Ti-Ti) is unstable, adsorbate spontaneously slipped to ontop (Ti).This means As-Ti-Ti has insufficient affinity for this adsorbate. Please **FORBID** testing As-Ti-Ti type sites again! [🌟 New Best] | E=-7.435 eV"
+    },
+    {
+      "attempt_index": 4,
+      "plan": {
+        "reasoning": "Step 0: SMILES Consistency Check. The SMILES is C[O], representing CH3O• with atoms C (index 0, SP3, no radical) and O (index 1, SP3, radical_electrons=1). Hybridization matches saturated. Radical on O confirmed for ReactiveSpecies.\nStep 1: Analyze Old Plans. Tested: ontop Ti (success, E=-7.242 eV), ontop As (slipped to ontop Ti, unstable, forbid As type sites, E=-7.382 eV), hollow As-Ti-Ti (rearrangement, slipped to ontop Ti, unstable, forbid As-Ti-Ti type sites, E=-7.435 eV). All converged to ontop Ti but with improving energies, suggesting possible heterogeneity in Ti sites or local minima. No [🔄 Converged to known best] tag, so not duplicate. Current best is -7.435 eV. No failed dissociations, but unstable sites noted. Avoid forbidden sites: no ontop As or pure As sites, no hollow As-Ti-Ti.\nStep 2: Formulate New Plan. Goal is lowest energy. Avoid unstable/forbidden sites. All attempts slip to ontop Ti, but energies differ slightly, indicating potential for better configurations. Available sites include hollow As-As-Ti, which is not explicitly forbidden (unlike As-Ti-Ti) and is mixed As-As-Ti. This could provide a new starting point to explore if it stabilizes or finds a lower energy minimum, possibly a true hollow or better Ti site. Adsorbate is radical, so use ReactiveSpecies.\nStep 3: User intent is to find the lowest-energy adsorption configuration for C[O] on the surface.\nStep 4: Adsorbate SMILES C[O] is methoxy radical (CH3O•), major functional group is alkoxy radical, binding likely via O (index 1) with unpaired electron.\nStep 5: Surface has Ti and As, available hollow sites: As-As-As, As-As-Ti, As-Ti-Ti. Plan for existing As-As-Ti to avoid forbidden.\nStep 6: Plan hollow site with ['As', 'As', 'Ti'], binding via O (index 1) as ReactiveSpecies. Defaults for other params.",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "hollow",
+          "surface_binding_atoms": [
+            "As",
+            "As",
+            "Ti"
+          ],
+          "adsorbate_binding_indices": [
+            1
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "hollow|As,As,Ti|1|ReactiveSpecies|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -7.392253875732422,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": true,
+      "planned_site_type": "hollow",
+      "actual_site_type": "ontop",
+      "best_structure_file": "outputs/039-7c2ceca3/BEST_CO_hollow_to_ontop_E-7.392.xyz",
+      "generated_conformers_file": "outputs/039-7c2ceca3/conformers_C[O].traj",
+      "relaxation_trajectory_file": "outputs/039-7c2ceca3/final.xyz",
+      "message": "Most stable config adsorption energy: -7.3923 eV. Target Atom: O (from plan index 1, global index 80 in relaxed structure). -> Nearest: Ti (Index 7), Distance: 1.718 Å (Threshold: 3.277), Bound: True. Bonded Surface Atoms: Ti-1.718Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['As', 'As', 'Ti'] -> Actual ['Ti']).",
+      "history_entry": "【✅ Perfect Adsorption】 hollow @ ['As', 'As', 'Ti'] (Index [1]) -> ⚠️【Unstable Site Warning】⚠️: Planned hollow (As-As-Ti) is unstable, adsorbate spontaneously slipped to ontop (Ti).This means As-As-Ti has insufficient affinity for this adsorbate. Please **FORBID** testing As-As-Ti type sites again! [⚠️ Energy Degenerate but Geometrically Distinct] | E=-7.392 eV"
+    },
+    {
+      "attempt_index": 5,
+      "plan": {
+        "reasoning": "Step 0: SMILES Consistency Check. The SMILES C[O] represents CH3O• (methoxy radical), with atoms C (index 0, SP3, degree 1, no radical) and O (index 1, SP3, degree 1, radical_electrons 1). Hybridization matches saturated species with radical on O. No mismatch with user description. For ReactiveSpecies, binding atom O (index 1) has radical_electrons > 0, valid.\nStep 1: Analyze Old Plans. Tested: ontop ['Ti'] (successful, E=-7.242 eV); ontop ['As'] (slipped to ontop Ti, E=-7.382 eV, forbid As type sites); hollow ['As','Ti','Ti'] (rearrangement BC=1, slipped to ontop Ti, E=-7.435 eV, forbid As-Ti-Ti, current best); hollow ['As','As','Ti'] (slipped to ontop Ti, E=-7.392 eV, forbid As-As-Ti, energy degenerate but geometrically distinct). All converged to ontop Ti configurations, but with varying energies and some geometrically distinct. Successes are perfect adsorptions, but many unstable with slips. No [🔄 Converged to known best] tag triggering immediate termination. Surface is heterogeneous (Ti-As alloy), so different Ti sites may have varying affinities, explaining energy differences. Remaining untested sites: hollow As-As-As, bridge As-As, bridge As-Ti. However, forbids apply to As-involving sites, but bridge As-Ti is not specifically forbidden and is mixed, potentially allowing exploration of new environments.\nStep 2: Formulate New Plan. Goal is lowest energy. All prior plans converged to ontop Ti, but with distinct geometries and energies up to -7.435 eV. To systematically check if lower energy exists, test untested bridge site. Avoid pure As sites (forbidden), but bridge As-Ti is mixed and may relax to a new low-energy ontop Ti or stable bridge. This is a new plan different from history. No strong reason to retry forbidden sites, but this is reasonable for completeness given attempt cap. If it converges to known, future termination expected. Use ReactiveSpecies for radical.\nStep 3: User Request Analysis. Core intent: find the lowest-energy adsorption configuration of C[O] on the surface, systematically testing sites.\nStep 4: Analyze Adsorbate. SMILES C[O] (CH3O•), major functional group: alkoxy radical. Binding likely via O (index 1) with unpaired electron. C (index 0) is saturated (no radical), so single-point binding via O.\nStep 5: Analyze Surface. Composition ['Ti', 'As'], available sites include bridge As-Ti, which is untested and exists.\nStep 6: Formulate Plan. Propose bridge site with ['As', 'Ti'], binding via O (index 1). Defaults for other params.",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "bridge",
+          "surface_binding_atoms": [
+            "As",
+            "Ti"
+          ],
+          "adsorbate_binding_indices": [
+            1
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "bridge|As,Ti|1|ReactiveSpecies|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -7.292400360107422,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": true,
+      "planned_site_type": "bridge",
+      "actual_site_type": "ontop",
+      "best_structure_file": "outputs/039-7c2ceca3/BEST_CO_bridge_to_ontop_E-7.292.xyz",
+      "generated_conformers_file": "outputs/039-7c2ceca3/conformers_C[O].traj",
+      "relaxation_trajectory_file": "outputs/039-7c2ceca3/final.xyz",
+      "message": "Most stable config adsorption energy: -7.2924 eV. Target Atom: O (from plan index 1, global index 80 in relaxed structure). -> Nearest: Ti (Index 7), Distance: 1.714 Å (Threshold: 3.277), Bound: True. Bonded Surface Atoms: Ti-1.714Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['As', 'Ti'] -> Actual ['Ti']).",
+      "history_entry": "【✅ Perfect Adsorption】 bridge @ ['As', 'Ti'] (Index [1]) -> ⚠️【Unstable Site Warning】⚠️: Planned bridge (As-Ti) is unstable, adsorbate spontaneously slipped to ontop (Ti).This means As-Ti has insufficient affinity for this adsorbate. Please **FORBID** testing As-Ti type sites again! | E=-7.292 eV"
+    }
+  ],
+  "history": [
+    "【✅ Perfect Adsorption】 ontop @ ['Ti'] (Index [1]) -> Site: ontop (Ti) [🌟 New Best] | E=-7.242 eV",
+    "【✅ Perfect Adsorption】 ontop @ ['As'] (Index [1]) -> ⚠️【Unstable Site Warning】⚠️: Planned ontop (As) is unstable, adsorbate spontaneously slipped to ontop (Ti).This means As has insufficient affinity for this adsorbate. Please **FORBID** testing As type sites again! [🌟 New Best] | E=-7.382 eV",
+    "【⚠️ Rearrangement(BC=1)】 hollow @ ['As', 'Ti', 'Ti'] (Index [1]) -> ⚠️【Unstable Site Warning】⚠️: Planned hollow (As-Ti-Ti) is unstable, adsorbate spontaneously slipped to ontop (Ti).This means As-Ti-Ti has insufficient affinity for this adsorbate. Please **FORBID** testing As-Ti-Ti type sites again! [🌟 New Best] | E=-7.435 eV",
+    "【✅ Perfect Adsorption】 hollow @ ['As', 'As', 'Ti'] (Index [1]) -> ⚠️【Unstable Site Warning】⚠️: Planned hollow (As-As-Ti) is unstable, adsorbate spontaneously slipped to ontop (Ti).This means As-As-Ti has insufficient affinity for this adsorbate. Please **FORBID** testing As-As-Ti type sites again! [⚠️ Energy Degenerate but Geometrically Distinct] | E=-7.392 eV",
+    "【✅ Perfect Adsorption】 bridge @ ['As', 'Ti'] (Index [1]) -> ⚠️【Unstable Site Warning】⚠️: Planned bridge (As-Ti) is unstable, adsorbate spontaneously slipped to ontop (Ti).This means As-Ti has insufficient affinity for this adsorbate. Please **FORBID** testing As-Ti type sites again! | E=-7.292 eV"
+  ],
+  "error": null,
+  "perfect_count": 4,
+  "dissociation_count": 0,
+  "rearrangement_count": 1,
+  "calc_failure_count": 0,
+  "chemical_slip_count": 4,
+  "best_structure_file": "research/results/basic_experiments/ocd62/grok/full/026/artifacts/BEST_CO_ontop_E-7.382.xyz"
+}
