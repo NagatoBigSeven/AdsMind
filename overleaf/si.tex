@@ -162,70 +162,31 @@ Claude & 1-Shot & 0.185 & 0.126 & 0.0033 & 0.0134 & 1.000 & [0.089, 0.286] & 0.5
 
 \section{Independent OCD-GMAE validation statistics}
 
-The original locked10 four-backend OCD package is retained below as the first complete-energy mechanism set.
-The current formal-ready expansion uses 24 OCD cases across all four LLM backends.
-The 24-case formal table is assembled from the audited locked10 subset (003, 004, 005, 012, 013, 015, 016, 019, 023, 024) plus the extra14 extension (001, 002, 006, 007, 008, 009, 010, 011, 014, 017, 018, 020, 021, 022).
-For 1-Shot, the same locked10+extra14 partition is used intentionally to avoid pooling duplicate historical reruns.
+The formal OCD-GMAE validation uses the OCD62 benchmark across all four LLM backends.
+The 12 repeated OCD62 cases are reported only as overlap12 reproducibility repeats.
 
 \begin{table}[h]
 \centering
 \scriptsize
-\caption{Expanded OCD24 five-variant ablation summary across four LLM backends. Positive $\Delta E = E_{\mathrm{variant}} - E_{\mathrm{full}}$ means the ablated variant is worse than Full. Mean and median $\Delta E$ are computed over successful runs only. Reach Full$+0.01$ counts runs within 0.01~eV of the same-backend Full result and keeps failures in the denominator.}
-\label{tab:si-ocd24-four-backend-summary}
+\caption{OCD62 five-variant ablation summary across four LLM backends. Positive $\Delta E = E_{\mathrm{variant}} - E_{\mathrm{full}}$ means the ablated variant is worse than Full. Mean and median $\Delta E$ are computed over successful paired runs only. Reach Full$+0.01$ keeps failures in the denominator.}
+\label{tab:si-ocd62-four-backend-summary}
 \begin{tabular}{lrrrrrr}
 \toprule
-Variant & Attempts & Successful & Failures & Mean $\Delta E$ & Median $\Delta E$ & Reach Full$+0.01$ \\
+Variant & Attempts & Successful & Failures & Mean $\Delta E$ & Median $\Delta E$ & Reach Full$+0.01$ \\ 
 \midrule
-Full & 96 & 96 & 0 & 0.000 & 0.000 & 96/96 \\
-$-$Slip & 96 & 96 & 0 & +0.013 & 0.000 & 63/96 \\
-$-$Forbid & 96 & 96 & 0 & +0.015 & 0.000 & 74/96 \\
-$-$Term & 96 & 95 & 1 & $-$0.013 & 0.000 & 71/96 \\
-1-Shot & 96 & 82 & 14 & +0.305 & 0.031 & 34/96 \\
+Full & 248 & 245 & 3 & 0.000 & 0.000 & 245/248 \\ 
+$-$Slip & 248 & 247 & 1 & +0.021 & 0.000 & 192/248 \\ 
+$-$Forbid & 248 & 246 & 2 & +0.020 & 0.000 & 194/248 \\ 
+$-$Term & 248 & 247 & 1 & $-$0.039 & 0.000 & 212/248 \\ 
+1-Shot & 248 & 222 & 26 & +0.329 & 0.067 & 89/248 \\ 
 \bottomrule
 \end{tabular}
 \end{table}
 
-Within the paired success-only view across four backends, 1-Shot reaches Full within 0.01~eV on only 34/96 attempted backend--case pairs, compared with 63/96 for $-$Slip, 74/96 for $-$Forbid, and 71/96 for $-$Term.
-The mean four-backend range is 0.244~eV for Full and 0.396~eV for 1-Shot over the 21 OCD24 cases with at least two successful one-shot backends.
-All 14 1-Shot failures and the single $-$Term failure are natural dissociation/reaction outcomes rather than external service or calculator errors.
-
-\begin{table}[h]
-\centering
-\small
-\caption{rep50 Full-versus-1-Shot summary across four LLM backends. Positive $\Delta E = E_{\mathrm{1shot}} - E_{\mathrm{full}}$ means the iterative Full run is lower in energy. Tie denotes $|\Delta E| \leq 0.01$~eV. The Overall row aggregates all backend-case pairs where both variants succeed.}
-\label{tab:si-rep50-four-backend-summary}
-\begin{tabular}{lrrrrrr}
-\toprule
-Backend & Paired successes & Mean $\Delta E$ & Median $\Delta E$ & Full lower & Tie & 1-Shot lower \\
-\midrule
-GPT-5.4 & 44 & +0.264 & 0.032 & 23 & 17 & 4 \\
-Claude & 45 & +0.357 & 0.035 & 26 & 19 & 0 \\
-Gemini & 43 & +0.414 & 0.113 & 28 & 11 & 4 \\
-Grok-4 & 46 & +0.422 & 0.166 & 32 & 14 & 0 \\
-Overall & 178 & +0.364 & 0.072 & 109 & 61 & 8 \\
-\bottomrule
-\end{tabular}
-\end{table}
-
-\begin{table}[h]
-\centering
-\small
-\caption{rep50 success rates by surface family across four LLM backends.}
-\label{tab:si-rep50-family-success}
-\begin{tabular}{lrr}
-\toprule
-Surface family & Full success & 1-Shot success \\
-\midrule
-compound & 40/40 & 38/40 \\
-intermetallic & 156/156 & 140/156 \\
-monometallic & 1/4 & 0/4 \\
-\bottomrule
-\end{tabular}
-\end{table}
-
-Across the four backends, Full succeeds on 197/200 rep50 runs while 1-Shot succeeds on 178/200.
-Across successful backend--case pairs, the mean and median one-shot-minus-full gaps are +0.364 and 0.072~eV, respectively, with Full lower on 109 paired comparisons, ties on 61, and 1-Shot lower on only 8.
-The Full four-backend agreement itself remains tight on rep50, with a mean range of 0.172~eV over the 49 cases having at least two successful Full runs.
+Across OCD62, Full succeeds on 245/248 runs while 1-Shot succeeds on 222/248.
+The mean four-backend range is 0.183~eV for Full and 0.316~eV for 1-Shot.
+The overlap12 N=2 reproducibility audit contains 240 paired comparisons, with 155/240 within 0.01~eV and two excluded numerical-collapse outliers.
+RUN3 is in progress as the third replicate for those 12 repeated cases.
 
 % ===== inlined from research/results/si4_ocd_gmae_ablation_statistics.tex =====
 \begin{table}[h]
@@ -533,7 +494,7 @@ Case & MACE-MP-0 small & MACE-MP-0 large & $\Delta$ & Diss. events & Flag \\
 \begin{table}[h]
 \centering
 \scriptsize
-\caption{MACE-MP-0 large sensitivity on 10 representative OCD-GMAE rep50 cases. This is a force-field stress test on chemistry outside the CMU set, not a replacement for the locked 10-case OCD-GMAE MACE-MP-0 small ablation matrix. Case~043 fails naturally through slip and dissociation; no external service or calculator error is recorded.}
+\caption{MACE-MP-0 large sensitivity on 10 OCD62 cases. This is a force-field stress test on chemistry outside the CMU set, not a replacement for the locked 10-case OCD-GMAE MACE-MP-0 small ablation matrix. Case~043 fails naturally through slip and dissociation; no external service or calculator error is recorded.}
 \label{tab:si-mace-large-ocd-rep10}
 \resizebox{\textwidth}{!}{%
 \begin{tabular}{llllrrr}

@@ -1,0 +1,312 @@
+{
+  "case_id": "15",
+  "case_metadata": {
+    "case_id": "15",
+    "slab_file": "datasets/cmu20/15_Cu6Ga2_100.xyz",
+    "smiles": "[CH2]CO",
+    "user_request": "Find the lowest-energy adsorption configuration for the 2-hydroxyethyl radical on the provided surface.",
+    "surface_family": "intermetallic",
+    "adsorbate_name": "CH2CH2OH",
+    "miller_index": "(100)",
+    "reaction_class": "COMPLEX",
+    "ablation_candidate": "FALSE",
+    "notes": "Resolved from prior AdsMind outputs; local evidence matches formula C2H5O"
+  },
+  "status": "success",
+  "best_energy_eV": -3.257709503173828,
+  "iteration_count": 5,
+  "max_attempts": 5,
+  "final_site_type": "bridge",
+  "converged_tag": false,
+  "wall_clock_sec": 1932.9288878068328,
+  "total_input_tokens": 28470,
+  "total_output_tokens": 8246,
+  "artifact_paths": {
+    "BEST_CH2CO_bridge_E-2.358": "research/results/canonical_raw/cmu20/grok4_ablation/full/15/artifacts/BEST_CH2CO_bridge_E-2.358.xyz",
+    "BEST_CH2CO_bridge_E-2.358.xyz": "research/results/canonical_raw/cmu20/grok4_ablation/full/15/artifacts/BEST_CH2CO_bridge_E-2.358.xyz",
+    "best_structure_file": "research/results/canonical_raw/cmu20/grok4_ablation/full/15/artifacts/BEST_CH2CO_ontop_E-2.964.xyz",
+    "BEST_CH2CO_hollow_to_bridge_E-3.258": "research/results/canonical_raw/cmu20/grok4_ablation/full/15/artifacts/BEST_CH2CO_hollow_to_bridge_E-3.258.xyz",
+    "BEST_CH2CO_hollow_to_bridge_E-3.258.xyz": "research/results/canonical_raw/cmu20/grok4_ablation/full/15/artifacts/BEST_CH2CO_hollow_to_bridge_E-3.258.xyz",
+    "BEST_CH2CO_hollow_to_ontop_E-2.768": "research/results/canonical_raw/cmu20/grok4_ablation/full/15/artifacts/BEST_CH2CO_hollow_to_ontop_E-2.768.xyz",
+    "BEST_CH2CO_hollow_to_ontop_E-2.768.xyz": "research/results/canonical_raw/cmu20/grok4_ablation/full/15/artifacts/BEST_CH2CO_hollow_to_ontop_E-2.768.xyz",
+    "BEST_CH2CO_ontop_E-2.964": "research/results/canonical_raw/cmu20/grok4_ablation/full/15/artifacts/BEST_CH2CO_ontop_E-2.964.xyz",
+    "BEST_CH2CO_ontop_E-2.964.xyz": "research/results/canonical_raw/cmu20/grok4_ablation/full/15/artifacts/BEST_CH2CO_ontop_E-2.964.xyz",
+    "conformers_[CH2]CO": "research/results/canonical_raw/cmu20/grok4_ablation/full/15/artifacts/conformers_[CH2]CO.traj",
+    "conformers_[CH2]CO.traj": "research/results/canonical_raw/cmu20/grok4_ablation/full/15/artifacts/conformers_[CH2]CO.traj",
+    "final": "research/results/canonical_raw/cmu20/grok4_ablation/full/15/artifacts/final.xyz",
+    "final.xyz": "research/results/canonical_raw/cmu20/grok4_ablation/full/15/artifacts/final.xyz",
+    "relaxation": "research/results/canonical_raw/cmu20/grok4_ablation/full/15/artifacts/relaxation.traj",
+    "relaxation.traj": "research/results/canonical_raw/cmu20/grok4_ablation/full/15/artifacts/relaxation.traj",
+    "relaxation_trajectory_file": "research/results/canonical_raw/cmu20/grok4_ablation/full/15/artifacts/relaxation.traj"
+  },
+  "best_result": {
+    "most_stable_energy_eV": -3.257709503173828,
+    "analysis_json": {
+      "status": "success",
+      "message": "Most stable config adsorption energy: -3.2577 eV. Target Atom: C (from plan index 0, global index 64 in relaxed structure). -> Nearest: Cu (Index 10), Distance: 2.057 Å (Threshold: 3.016), Bound: True. Bonded Surface Atoms: Cu-2.057Å, Cu-2.175Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Cu', 'Cu', 'Cu', 'Cu'] -> Actual ['Cu', 'Cu']).",
+      "most_stable_energy_eV": -3.257709503173828,
+      "target_adsorbate_atom": "C",
+      "target_adsorbate_atom_index": 64,
+      "bonded_surface_atoms": [
+        {
+          "symbol": "Cu",
+          "index": 10,
+          "distance": 2.057
+        },
+        {
+          "symbol": "Cu",
+          "index": 44,
+          "distance": 2.175
+        }
+      ],
+      "nearest_slab_atom": "Cu",
+      "nearest_slab_atom_index": 10,
+      "final_bond_distance_A": 2.057,
+      "estimated_covalent_cutoff_A": 2.288,
+      "is_covalently_bound": true,
+      "reaction_detected": false,
+      "is_dissociated": false,
+      "n_components": 1,
+      "bond_change_count": 0,
+      "site_analysis": {
+        "planned_site_type": "hollow",
+        "planned_connectivity": 4,
+        "actual_site_type": "bridge",
+        "actual_connectivity": 2,
+        "is_chemical_slip": true,
+        "planned_symbols": [
+          "Cu",
+          "Cu",
+          "Cu",
+          "Cu"
+        ],
+        "actual_symbols": [
+          "Cu",
+          "Cu"
+        ],
+        "site_fingerprint": "Cu10-Cu44"
+      },
+      "best_structure_file": "outputs/15-e39ff27c/BEST_CH2CO_hollow_to_bridge_E-3.258.xyz",
+      "generated_conformers_file": "outputs/15-e39ff27c/conformers_[CH2]CO.traj",
+      "relaxation_trajectory_file": "outputs/15-e39ff27c/final.xyz",
+      "session_id": "15-e39ff27c"
+    },
+    "plan": {
+      "reasoning": "Step 0: SMILES Consistency Check. The SMILES [CH2]CO represents the 2-hydroxyethyl radical, with a radical at carbon index 0 (radical_electrons=1, SP3 hybridization). The user description matches the SMILES as a radical. For ReactiveSpecies, binding via atoms with unpaired electrons, which is index 0.\nStep 1: Analyze Old Plans. History shows two successful adsorptions: ontop on Cu via adsorbate index [0] with E=-2.964 eV (current best), and bridge on Cu-Cu via [0] with E=-2.358 eV. No failures, no 'Chemical Slip', no convergence tags like [🔄 Converged to known best] or [⚠️ Energy Degenerate but Geometrically Distinct]. No unstable sites noted. Ontop has lower energy than bridge. Surface is heterogeneous (Cu-Ga alloy), but available sites are all Cu-based. Tested sites are ontop (Cu) and bridge (Cu-Cu); hollow sites remain untested. Energies differ significantly, suggesting possible heterogeneity, but since site_fingerprints aren't detailed, proceed to unexplored site types.\nStep 2: Formulate New Plan. Goal is lowest adsorption energy. Propose a new plan different from history: test hollow site, as ontop and bridge are already tested. Choose hollow-4 (Cu-Cu-Cu-Cu) since the surface is (100), where 4-fold hollows are relevant. Avoid repeating tested sites. No evidence of instability in prior sites. Use ReactiveSpecies for the radical, binding via index 0 (the radical carbon). Single binding point, as only one atom has unpaired electrons. Do not propose multi-point binding for ReactiveSpecies unless all indices have radicals. Available sites limit to Cu combinations; no Ga-involved sites listed, so stick to that.\nStep 3: Analyze Request. User's intent is to find the lowest-energy adsorption configuration for the 2-hydroxyethyl radical on the surface.\nStep 4: Analyze Adsorbate. SMILES [CH2]CO: 2-hydroxyethyl radical (•CH2-CH2-OH). Major functional group: alcohol (OH), with radical at terminal carbon (index 0). Atom list confirms index 0 (C, radical), index 1 (C), index 2 (O). Binding for ReactiveSpecies via index 0.\nStep 5: Analyze Surface. Available sites: bridge (Cu-Cu), hollow-3 (Cu-Cu-Cu), ontop (Cu), hollow-4 (Cu-Cu-Cu-Cu). Plan only for these combinations. Surface is Cu-Ga alloy, but sites are Cu-only.\nStep 6: Formulate Plan. Select hollow site_type with surface_binding_atoms ['Cu', 'Cu', 'Cu', 'Cu'] (hollow-4), adsorbate_binding_indices [0]. Defaults for other parameters.\nNo termination: hollow sites untested, no convergence tags, attempts <5.",
+      "adsorbate_type": "ReactiveSpecies",
+      "solution": {
+        "action": "continue",
+        "site_type": "hollow",
+        "surface_binding_atoms": [
+          "Cu",
+          "Cu",
+          "Cu",
+          "Cu"
+        ],
+        "adsorbate_binding_indices": [
+          0
+        ],
+        "relax_top_n": 1,
+        "touch_sphere_size": 2,
+        "overlap_thr": 0.1,
+        "conformers_per_site_cap": 4
+      }
+    },
+    "result_type": "Perfect"
+  },
+  "last_analysis": {
+    "status": "error",
+    "message": "Tool execution failed: No sites of type 'ontop' containing ['Ga'] found."
+  },
+  "attempt_records": [
+    {
+      "attempt_index": 1,
+      "plan": {
+        "reasoning": "Step 0: SMILES Consistency Check. The atom list shows a radical on carbon index 0 (radical_electrons: 1), with SP3 hybridization for all atoms. This matches the user's description of the 2-hydroxyethyl radical, which is a saturated alkyl radical. No mismatch. For ReactiveSpecies, the binding atom 0 has unpaired electrons, which is confirmed.\nStep 1: Analyze Old Plans. History is None, so no previous attempts, successes, failures, or tags. No unstable sites identified yet. No convergence signals.\nStep 2: Formulate New Plan. This is the first attempt. The goal is to find the lowest energy adsorption configuration by testing different sites systematically. Start with the simplest and common site for radical adsorption: ontop via the radical carbon. Avoid repeating plans (none exist). No evidence of instability or heterogeneity requiring fine-tuning yet.\nStep 3: Analyze Request. The user wants the lowest-energy adsorption configuration for the 2-hydroxyethyl radical on the surface, without specifying site or orientation.\nStep 4: Analyze Adsorbate. SMILES [CH2]CO represents •CH2-CH2-OH, with major functional groups: alkyl radical at C0 and hydroxyl at O2. Binding via C0 (index 0) as it has the unpaired electron.\nStep 5: Analyze Surface. Available sites are Cu-based: ontop Cu, bridge Cu-Cu, hollow-3 Cu-Cu-Cu, hollow-4 Cu-Cu-Cu-Cu. No Ga sites listed, so plan for Cu sites.\nStep 6: Formulate Plan. Use ReactiveSpecies since it's a radical. Bind via index 0 (radical center). Start with ontop site for initial testing. surface_binding_atoms ['Cu'] matches available ontop Cu. Single binding index aligns with ontop requirements.",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "ontop",
+          "surface_binding_atoms": [
+            "Cu"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "ontop|Cu|0|ReactiveSpecies|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -2.9636917114257812,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": false,
+      "planned_site_type": "ontop",
+      "actual_site_type": "ontop",
+      "best_structure_file": "outputs/15-e39ff27c/BEST_CH2CO_ontop_E-2.964.xyz",
+      "generated_conformers_file": "outputs/15-e39ff27c/conformers_[CH2]CO.traj",
+      "relaxation_trajectory_file": "outputs/15-e39ff27c/final.xyz",
+      "message": "Most stable config adsorption energy: -2.9637 eV. Target Atom: C (from plan index 0, global index 64 in relaxed structure). -> Nearest: Cu (Index 44), Distance: 1.965 Å (Threshold: 3.016), Bound: True. Bonded Surface Atoms: Cu-1.965Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: False (Planned ['Cu'] -> Actual ['Cu']).",
+      "history_entry": "【✅ Perfect Adsorption】 ontop @ ['Cu'] (Index [0]) -> Site: ontop (Cu) [🌟 New Best] | E=-2.964 eV"
+    },
+    {
+      "attempt_index": 2,
+      "plan": {
+        "reasoning": "Step 0: SMILES Consistency Check. The SMILES [CH2]CO represents the 2-hydroxyethyl radical (•CH2-CH2-OH), with atoms: index 0 (C, SP3, radical_electrons=1), index 1 (C, SP3, no radical), index 2 (O, SP3, no radical). This matches the user description of a radical. Hybridization is all SP3, consistent with a saturated alkyl radical. For ReactiveSpecies, planned binding via index 0, which has radical_electrons > 0.\nStep 1: Analyze Old Plans. History shows one successful attempt: ontop on Cu via adsorbate index [0], with E = -2.964 eV. No failures, no slips, no convergence tags like [🔄 Converged to known best] or [⚠️ Energy Degenerate but Geometrically Distinct]. No unstable sites noted. This is the current best. Surface is Cu-Ga alloy, but available sites are Cu-only, suggesting possible heterogeneity, but only one result so far, no energy variations to compare.\nStep 2: Formulate New Plan. Goal is lowest energy configuration. Previous was ontop on Cu via radical C (index 0). To systematically explore, propose a new site type: bridge on Cu-Cu via index 0. This is different from the history. Avoid repeating ontop. No evidence of instability in ontop. Do not invent unreasonable plans; bridge is a logical next step for radical adsorption on metal surfaces. Hard attempt limit is 5; this is likely attempt 2, so continue.\nStep 3: Analyze Request. User's core intent is to find the lowest-energy adsorption configuration for the 2-hydroxyethyl radical on the surface, without specifying site or orientation.\nStep 4: Analyze Adsorbate. SMILES [CH2]CO: 2-hydroxyethyl radical with major functional groups - alkyl radical at C0 and hydroxy at O2. Binding planned via radical C (index 0).\nStep 5: Analyze Surface. Available sites include bridge Cu-Cu, which matches the plan. No Ga sites listed, so stick to Cu-Cu.\nStep 6: Formulate Plan. Use ReactiveSpecies for radical. Site: bridge. Surface atoms: ['Cu', 'Cu']. Adsorbate indices: [0] (radical carbon). Defaults for other parameters.",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "bridge",
+          "surface_binding_atoms": [
+            "Cu",
+            "Cu"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "bridge|Cu,Cu|0|ReactiveSpecies|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -2.357654571533203,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": false,
+      "planned_site_type": "bridge",
+      "actual_site_type": "bridge",
+      "best_structure_file": "outputs/15-e39ff27c/BEST_CH2CO_bridge_E-2.358.xyz",
+      "generated_conformers_file": "outputs/15-e39ff27c/conformers_[CH2]CO.traj",
+      "relaxation_trajectory_file": "outputs/15-e39ff27c/final.xyz",
+      "message": "Most stable config adsorption energy: -2.3577 eV. Target Atom: C (from plan index 0, global index 64 in relaxed structure). -> Nearest: Cu (Index 12), Distance: 2.046 Å (Threshold: 3.016), Bound: True. Bonded Surface Atoms: Cu-2.046Å, Cu-2.259Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: False (Planned ['Cu', 'Cu'] -> Actual ['Cu', 'Cu']).",
+      "history_entry": "【✅ Perfect Adsorption】 bridge @ ['Cu', 'Cu'] (Index [0]) -> Site: bridge (Cu,Cu) | E=-2.358 eV"
+    },
+    {
+      "attempt_index": 3,
+      "plan": {
+        "reasoning": "Step 0: SMILES Consistency Check. The SMILES [CH2]CO represents the 2-hydroxyethyl radical, with a radical at carbon index 0 (radical_electrons=1, SP3 hybridization). The user description matches the SMILES as a radical. For ReactiveSpecies, binding via atoms with unpaired electrons, which is index 0.\nStep 1: Analyze Old Plans. History shows two successful adsorptions: ontop on Cu via adsorbate index [0] with E=-2.964 eV (current best), and bridge on Cu-Cu via [0] with E=-2.358 eV. No failures, no 'Chemical Slip', no convergence tags like [🔄 Converged to known best] or [⚠️ Energy Degenerate but Geometrically Distinct]. No unstable sites noted. Ontop has lower energy than bridge. Surface is heterogeneous (Cu-Ga alloy), but available sites are all Cu-based. Tested sites are ontop (Cu) and bridge (Cu-Cu); hollow sites remain untested. Energies differ significantly, suggesting possible heterogeneity, but since site_fingerprints aren't detailed, proceed to unexplored site types.\nStep 2: Formulate New Plan. Goal is lowest adsorption energy. Propose a new plan different from history: test hollow site, as ontop and bridge are already tested. Choose hollow-4 (Cu-Cu-Cu-Cu) since the surface is (100), where 4-fold hollows are relevant. Avoid repeating tested sites. No evidence of instability in prior sites. Use ReactiveSpecies for the radical, binding via index 0 (the radical carbon). Single binding point, as only one atom has unpaired electrons. Do not propose multi-point binding for ReactiveSpecies unless all indices have radicals. Available sites limit to Cu combinations; no Ga-involved sites listed, so stick to that.\nStep 3: Analyze Request. User's intent is to find the lowest-energy adsorption configuration for the 2-hydroxyethyl radical on the surface.\nStep 4: Analyze Adsorbate. SMILES [CH2]CO: 2-hydroxyethyl radical (•CH2-CH2-OH). Major functional group: alcohol (OH), with radical at terminal carbon (index 0). Atom list confirms index 0 (C, radical), index 1 (C), index 2 (O). Binding for ReactiveSpecies via index 0.\nStep 5: Analyze Surface. Available sites: bridge (Cu-Cu), hollow-3 (Cu-Cu-Cu), ontop (Cu), hollow-4 (Cu-Cu-Cu-Cu). Plan only for these combinations. Surface is Cu-Ga alloy, but sites are Cu-only.\nStep 6: Formulate Plan. Select hollow site_type with surface_binding_atoms ['Cu', 'Cu', 'Cu', 'Cu'] (hollow-4), adsorbate_binding_indices [0]. Defaults for other parameters.\nNo termination: hollow sites untested, no convergence tags, attempts <5.",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "hollow",
+          "surface_binding_atoms": [
+            "Cu",
+            "Cu",
+            "Cu",
+            "Cu"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "hollow|Cu,Cu,Cu,Cu|0|ReactiveSpecies|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -3.257709503173828,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": true,
+      "planned_site_type": "hollow",
+      "actual_site_type": "bridge",
+      "best_structure_file": "outputs/15-e39ff27c/BEST_CH2CO_hollow_to_bridge_E-3.258.xyz",
+      "generated_conformers_file": "outputs/15-e39ff27c/conformers_[CH2]CO.traj",
+      "relaxation_trajectory_file": "outputs/15-e39ff27c/final.xyz",
+      "message": "Most stable config adsorption energy: -3.2577 eV. Target Atom: C (from plan index 0, global index 64 in relaxed structure). -> Nearest: Cu (Index 10), Distance: 2.057 Å (Threshold: 3.016), Bound: True. Bonded Surface Atoms: Cu-2.057Å, Cu-2.175Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Cu', 'Cu', 'Cu', 'Cu'] -> Actual ['Cu', 'Cu']).",
+      "history_entry": "【✅ Perfect Adsorption】 hollow @ ['Cu', 'Cu', 'Cu', 'Cu'] (Index [0]) -> ⚠️【Unstable Site Warning】⚠️: Planned hollow (Cu-Cu-Cu-Cu) is unstable, adsorbate spontaneously slipped to bridge (Cu-Cu).This means Cu-Cu-Cu-Cu has insufficient affinity for this adsorbate. Please **FORBID** testing Cu-Cu-Cu-Cu type sites again! [🌟 New Best] | E=-3.258 eV"
+    },
+    {
+      "attempt_index": 4,
+      "plan": {
+        "reasoning": "Step 0: SMILES Consistency Check. The SMILES [CH2]CO represents the 2-hydroxyethyl radical, with atom 0 (C, SP3, radical_electrons=1), atom 1 (C, SP3), atom 2 (O, SP3). This matches the user description. Hybridization is SP3 for all, no mismatch. For ReactiveSpecies, planned binding via atom 0 which has radical_electrons > 0.\nStep 1: Analyze Old Plans. Tested: ontop ['Cu'] E=-2.964 eV (success), bridge ['Cu','Cu'] E=-2.358 eV (success), hollow ['Cu','Cu','Cu','Cu'] E=-3.258 eV (success but unstable, slipped to bridge; forbid Cu-Cu-Cu-Cu sites). All succeeded as perfect adsorptions, no failures or bond changes. Current best is -3.258 eV. No convergence tags like [🔄 Converged to known best]. The slipped hollow converged to a bridge with lower energy than the direct bridge, suggesting heterogeneous bridge sites possibly due to Ga presence, but available sites limit to listed Cu combinations. Hollow-3 Cu-Cu-Cu not tested yet. No termination needed as not all major sites tested.\nStep 2: Formulate New Plan. Goal is lowest energy. Avoid forbidden Cu-Cu-Cu-Cu. Propose untried hollow-3 ['Cu','Cu','Cu']. Since slipped hollow-4 was unstable but gave low energy after slip, hollow-3 may be stable or reveal better. Different from history plans. No need to invent; systematic next step.\nStep 3: Analyze Request. User's intent is to find the lowest-energy adsorption configuration of the 2-hydroxyethyl radical, likely via the radical carbon.\nStep 4: Analyze Adsorbate. SMILES [CH2]CO: •CH2-CH2-OH. Functional groups: alkyl radical, hydroxyl. Binding via radical C (index 0).\nStep 5: Analyze Surface. Available sites include Hollow-3: Cu-Cu-Cu, which is untried and not forbidden.\nStep 6: Formulate Plan. Use ReactiveSpecies for radical. Bind via [0] (has radical). Hollow site with 1 binding index is allowed.",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "hollow",
+          "surface_binding_atoms": [
+            "Cu",
+            "Cu",
+            "Cu"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "hollow|Cu,Cu,Cu|0|ReactiveSpecies|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -2.768177032470703,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": true,
+      "planned_site_type": "hollow",
+      "actual_site_type": "ontop",
+      "best_structure_file": "outputs/15-e39ff27c/BEST_CH2CO_hollow_to_ontop_E-2.768.xyz",
+      "generated_conformers_file": "outputs/15-e39ff27c/conformers_[CH2]CO.traj",
+      "relaxation_trajectory_file": "outputs/15-e39ff27c/final.xyz",
+      "message": "Most stable config adsorption energy: -2.7682 eV. Target Atom: C (from plan index 0, global index 64 in relaxed structure). -> Nearest: Cu (Index 44), Distance: 1.976 Å (Threshold: 3.016), Bound: True. Bonded Surface Atoms: Cu-1.976Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Cu', 'Cu', 'Cu'] -> Actual ['Cu']).",
+      "history_entry": "【✅ Perfect Adsorption】 hollow @ ['Cu', 'Cu', 'Cu'] (Index [0]) -> ⚠️【Unstable Site Warning】⚠️: Planned hollow (Cu-Cu-Cu) is unstable, adsorbate spontaneously slipped to ontop (Cu).This means Cu-Cu-Cu has insufficient affinity for this adsorbate. Please **FORBID** testing Cu-Cu-Cu type sites again! | E=-2.768 eV"
+    },
+    {
+      "attempt_index": 5,
+      "plan": {
+        "reasoning": "Step 0: SMILES Consistency Check. The SMILES [CH2]CO represents the 2-hydroxyethyl radical (•CH2CH2OH), with atom 0 (C) having radical_electrons=1, hybridization SP3, matching the user's description of a radical. No mismatch. For ReactiveSpecies, planned binding via index 0, which has unpaired electrons.\nStep 1: Analyze Old Plans. Tested sites: ontop Cu (E=-2.964 eV), bridge Cu-Cu (E=-2.358 eV), hollow Cu-Cu-Cu-Cu (slipped to bridge Cu-Cu, E=-3.258 eV, new best, forbid Cu-Cu-Cu-Cu sites), hollow Cu-Cu-Cu (slipped to ontop Cu, E=-2.768 eV, forbid Cu-Cu-Cu sites). All succeeded as adsorptions but hollows were unstable and slipped. Current best: -3.258 eV. All used adsorbate index [0] (likely the radical C). No failures due to dissociation. No convergence tags like [🔄 Converged to known best]. Due to alloy surface (Cu-Ga), heterogeneity may exist. The slipped bridge has lower energy than direct bridge, suggesting different environments for same site type. Available sites list only Cu-based, but surface includes Ga, so explore Ga-involved sites for potential lower energy.\nStep 2: Formulate New Plan. Avoid forbidden Cu-only hollow sites. Propose new plan different from history: ontop on Ga, binding via radical C (index 0), to check if Ga site gives lower energy due to different chemistry.\nStep 3: Analyze Request. User's intent: lowest-energy adsorption configuration of the radical on the surface, likely via the radical site but systematically explore.\nStep 4: Analyze Adsorbate. SMILES [CH2]CO: functional groups - alkyl radical and hydroxyl. Atoms: 0 (C radical), 1 (C), 2 (O). Binding via 0 for ReactiveSpecies.\nStep 5: Analyze Surface. Composition Cu and Ga; available sites Cu-only, but plan Ga to explore heterogeneity.\nStep 6: Formulate Plan. New: ontop Ga via index 0. Defaults for other params. History has 4 attempts, limit 5, so continue.",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "ontop",
+          "surface_binding_atoms": [
+            "Ga"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "ontop|Ga|0|ReactiveSpecies|2.0",
+      "status": "error",
+      "most_stable_energy_eV": null,
+      "bond_change_count": null,
+      "is_dissociated": null,
+      "is_chemical_slip": null,
+      "planned_site_type": null,
+      "actual_site_type": null,
+      "best_structure_file": null,
+      "generated_conformers_file": null,
+      "relaxation_trajectory_file": null,
+      "message": "Tool execution failed: No sites of type 'ontop' containing ['Ga'] found.",
+      "history_entry": "【Calculation Failed】 ontop @ ['Ga'] (Index [0]) -> Reason: Tool execution failed: No sites of type 'ontop' containing ['Ga'] found."
+    }
+  ],
+  "history": [
+    "【✅ Perfect Adsorption】 ontop @ ['Cu'] (Index [0]) -> Site: ontop (Cu) [🌟 New Best] | E=-2.964 eV",
+    "【✅ Perfect Adsorption】 bridge @ ['Cu', 'Cu'] (Index [0]) -> Site: bridge (Cu,Cu) | E=-2.358 eV",
+    "【✅ Perfect Adsorption】 hollow @ ['Cu', 'Cu', 'Cu', 'Cu'] (Index [0]) -> ⚠️【Unstable Site Warning】⚠️: Planned hollow (Cu-Cu-Cu-Cu) is unstable, adsorbate spontaneously slipped to bridge (Cu-Cu).This means Cu-Cu-Cu-Cu has insufficient affinity for this adsorbate. Please **FORBID** testing Cu-Cu-Cu-Cu type sites again! [🌟 New Best] | E=-3.258 eV",
+    "【✅ Perfect Adsorption】 hollow @ ['Cu', 'Cu', 'Cu'] (Index [0]) -> ⚠️【Unstable Site Warning】⚠️: Planned hollow (Cu-Cu-Cu) is unstable, adsorbate spontaneously slipped to ontop (Cu).This means Cu-Cu-Cu has insufficient affinity for this adsorbate. Please **FORBID** testing Cu-Cu-Cu type sites again! | E=-2.768 eV",
+    "【Calculation Failed】 ontop @ ['Ga'] (Index [0]) -> Reason: Tool execution failed: No sites of type 'ontop' containing ['Ga'] found."
+  ],
+  "error": null,
+  "perfect_count": 4,
+  "dissociation_count": 0,
+  "rearrangement_count": 0,
+  "calc_failure_count": 1,
+  "chemical_slip_count": 2
+}

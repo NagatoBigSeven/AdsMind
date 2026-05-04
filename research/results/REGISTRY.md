@@ -38,15 +38,15 @@ metadata or a short note in `MIGRATION.md`.
 
 ## Current Audit Signals
 
-As of Round 4:
+As of the current CMU20/OCD62 cleanup:
 
-- `RUN_REGISTRY.csv` has 42 rows.
-- `ANALYSIS_REGISTRY.csv` has 65 rows.
+- `RUN_REGISTRY.csv` has 29 rows.
+- `ANALYSIS_REGISTRY.csv` has 39 rows.
 - 4 run rows are flagged with `mixed_model_ids`; these contain multiple
   embedded model identifiers across per-case `config.json` snapshots and should
   be inspected before aggregating by model.
-- 17 analysis rows carry a `date_token` naming flag.
-- 5 analysis rows still contain host-specific paths in historical JSON/CSV/MD
+- 0 analysis rows carry a `date_token` naming flag.
+- 0 analysis rows still contain host-specific paths in JSON/CSV/MD
   content. These are outside canonical raw data and are tracked in
   `ANALYSIS_REGISTRY.csv` via `host_path_match_count`.
 

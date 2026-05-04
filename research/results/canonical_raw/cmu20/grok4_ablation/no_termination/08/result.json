@@ -1,0 +1,326 @@
+{
+  "case_id": "08",
+  "case_metadata": {
+    "case_id": "08",
+    "slab_file": "datasets/cmu20/08_Ru3Mo_111.xyz",
+    "smiles": "[N]=[NH]",
+    "user_request": "Find the lowest-energy adsorption configuration for NNH on the provided surface.",
+    "surface_family": "intermetallic",
+    "adsorbate_name": "NNH",
+    "miller_index": "(111)",
+    "reaction_class": "NRR",
+    "ablation_candidate": "FALSE",
+    "notes": "Ru3Mo NNH benchmark; strongest prior energy"
+  },
+  "status": "success",
+  "best_energy_eV": -7.190608978271484,
+  "iteration_count": 4,
+  "max_attempts": 5,
+  "final_site_type": "hollow (HCP/Subsurf-Atom)",
+  "converged_tag": false,
+  "wall_clock_sec": 2902.688191961497,
+  "total_input_tokens": 23438,
+  "total_output_tokens": 7404,
+  "artifact_paths": {
+    "BEST_N_NH_bridge_E-6.414": "research/results/canonical_raw/cmu20/grok4_ablation/no_termination/08/artifacts/BEST_N_NH_bridge_E-6.414.xyz",
+    "BEST_N_NH_bridge_E-6.414.xyz": "research/results/canonical_raw/cmu20/grok4_ablation/no_termination/08/artifacts/BEST_N_NH_bridge_E-6.414.xyz",
+    "best_structure_file": "research/results/canonical_raw/cmu20/grok4_ablation/no_termination/08/artifacts/BEST_N_NH_ontop_to_hollow_HCP-Subsurf-Atom_DISS_E-8.036.xyz",
+    "BEST_N_NH_bridge_to_hollow_HCP-Subsurf-Atom_E-7.191": "research/results/canonical_raw/cmu20/grok4_ablation/no_termination/08/artifacts/BEST_N_NH_bridge_to_hollow_HCP-Subsurf-Atom_E-7.191.xyz",
+    "BEST_N_NH_bridge_to_hollow_HCP-Subsurf-Atom_E-7.191.xyz": "research/results/canonical_raw/cmu20/grok4_ablation/no_termination/08/artifacts/BEST_N_NH_bridge_to_hollow_HCP-Subsurf-Atom_E-7.191.xyz",
+    "BEST_N_NH_ontop_DISS_E-8.466": "research/results/canonical_raw/cmu20/grok4_ablation/no_termination/08/artifacts/BEST_N_NH_ontop_DISS_E-8.466.xyz",
+    "BEST_N_NH_ontop_DISS_E-8.466.xyz": "research/results/canonical_raw/cmu20/grok4_ablation/no_termination/08/artifacts/BEST_N_NH_ontop_DISS_E-8.466.xyz",
+    "BEST_N_NH_ontop_to_hollow_HCP-Subsurf-Atom_DISS_E-8.036": "research/results/canonical_raw/cmu20/grok4_ablation/no_termination/08/artifacts/BEST_N_NH_ontop_to_hollow_HCP-Subsurf-Atom_DISS_E-8.036.xyz",
+    "BEST_N_NH_ontop_to_hollow_HCP-Subsurf-Atom_DISS_E-8.036.xyz": "research/results/canonical_raw/cmu20/grok4_ablation/no_termination/08/artifacts/BEST_N_NH_ontop_to_hollow_HCP-Subsurf-Atom_DISS_E-8.036.xyz",
+    "conformers_[N]_[NH]": "research/results/canonical_raw/cmu20/grok4_ablation/no_termination/08/artifacts/conformers_[N]_[NH].traj",
+    "conformers_[N]_[NH].traj": "research/results/canonical_raw/cmu20/grok4_ablation/no_termination/08/artifacts/conformers_[N]_[NH].traj",
+    "final": "research/results/canonical_raw/cmu20/grok4_ablation/no_termination/08/artifacts/final.xyz",
+    "final.xyz": "research/results/canonical_raw/cmu20/grok4_ablation/no_termination/08/artifacts/final.xyz",
+    "relaxation": "research/results/canonical_raw/cmu20/grok4_ablation/no_termination/08/artifacts/relaxation.traj",
+    "relaxation.traj": "research/results/canonical_raw/cmu20/grok4_ablation/no_termination/08/artifacts/relaxation.traj",
+    "relaxation_trajectory_file": "research/results/canonical_raw/cmu20/grok4_ablation/no_termination/08/artifacts/relaxation.traj"
+  },
+  "best_result": {
+    "most_stable_energy_eV": -7.190608978271484,
+    "analysis_json": {
+      "status": "success",
+      "message": "Most stable config adsorption energy: -7.1906 eV. Target Atom: N (from plan index 0, global index 96 in relaxed structure). -> Nearest: Ru (Index 83), Distance: 1.986 Å (Threshold: 3.146), Bound: True. Bonded Surface Atoms: Ru-1.986Å, Ru-2.027Å, Mo-2.143Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Mo', 'Ru'] -> Actual ['Mo', 'Ru', 'Ru']).",
+      "most_stable_energy_eV": -7.190608978271484,
+      "target_adsorbate_atom": "N",
+      "target_adsorbate_atom_index": 96,
+      "bonded_surface_atoms": [
+        {
+          "symbol": "Ru",
+          "index": 83,
+          "distance": 1.986
+        },
+        {
+          "symbol": "Ru",
+          "index": 41,
+          "distance": 2.027
+        },
+        {
+          "symbol": "Mo",
+          "index": 76,
+          "distance": 2.143
+        }
+      ],
+      "nearest_slab_atom": "Ru",
+      "nearest_slab_atom_index": 83,
+      "final_bond_distance_A": 1.986,
+      "estimated_covalent_cutoff_A": 2.387,
+      "is_covalently_bound": true,
+      "reaction_detected": false,
+      "is_dissociated": false,
+      "n_components": 1,
+      "bond_change_count": 0,
+      "site_analysis": {
+        "planned_site_type": "bridge",
+        "planned_connectivity": 2,
+        "actual_site_type": "hollow (HCP/Subsurf-Atom)",
+        "actual_connectivity": 3,
+        "is_chemical_slip": true,
+        "planned_symbols": [
+          "Mo",
+          "Ru"
+        ],
+        "actual_symbols": [
+          "Mo",
+          "Ru",
+          "Ru"
+        ],
+        "site_fingerprint": "Ru83-Ru41-Mo76"
+      },
+      "best_structure_file": "outputs/08-b086c21c/BEST_N_NH_bridge_to_hollow_HCP-Subsurf-Atom_E-7.191.xyz",
+      "generated_conformers_file": "outputs/08-b086c21c/conformers_[N]_[NH].traj",
+      "relaxation_trajectory_file": "outputs/08-b086c21c/final.xyz",
+      "session_id": "08-b086c21c"
+    },
+    "plan": {
+      "reasoning": "Step 0: SMILES Consistency Check. The SMILES is [N]=[NH], representing NNH with atoms at index 0 (N, SP2, radical_electrons=1) and index 1 (N, SP2, radical_electrons=0). This matches the user request for NNH. No mismatch in hybridization or saturation with the request. For ReactiveSpecies, binding atoms must have unpaired electrons; index 0 does, index 1 does not.\nStep 1: Analyze Old Plans. Tested: (1) Bridge on Ru-Ru, resulted in slip to Ru-Ru-Ru-Ru (unstable for planned site, forbid Ru-Ru type sites), marked as perfect adsorption with E=-6.414 eV. (2) Ontop on Mo, slipped to hollow Mo-Ru-Ru, dissociated (unstable, forbid Mo type sites), E=-8.036 eV. (3) Ontop on Ru, dissociated, E=-8.466 eV. Succeeded: One perfect adsorption (though with slip warning) at E=-6.414 eV. Failed: Two dissociated cases. The successful case has the highest (least negative) energy, but it's the only non-dissociated. Dissociated cases have lower energies but are invalid for intact adsorption. Surface is heterogeneous alloy, so mixed sites may behave differently. Avoid forbidden Ru-Ru and Mo types; interpret 'Mo type' as pure Mo sites like ontop Mo, but mixed sites like Mo-Ru may be viable.\nStep 2: Formulate New Plan. Goal is lowest energy intact adsorption. The only stable config so far is -6.414 eV (slipped to Ru4 site). To find potentially lower energy, propose new site avoiding forbidden types. Since Ru-Ru bridge is forbidden and ontop Mo/Ru failed, try bridge Mo-Ru, which is mixed and available. No strong reason to retry forbidden sites. Use canonical site_type 'bridge'.\nStep 3: Analyze Request. User's core intent is to find the lowest-energy adsorption configuration for NNH on the surface, meaning stable, intact chemisorption.\nStep 4: Analyze Adsorbate. SMILES [N]=[NH]: Diazene radical with N=N double bond, radical on N at index 0, H on N at index 1. Major functional group: azo (N=N). Suitable for adsorption via the radical end (index 0) as ReactiveSpecies.\nStep 5: Analyze Surface. Available sites include bridge Mo-Ru, which is mixed composition and not explicitly forbidden (unlike pure Ru-Ru or pure Mo).\nStep 6: Formulate Plan. Select ReactiveSpecies since it's a radical species. Bind via index 0 (has unpaired electrons). Use bridge site with 1 binding index (allowed). Surface binding atoms ['Mo', 'Ru']. This is different from all previous plans (bridge Ru-Ru, ontop Mo, ontop Ru). Hard attempt limit is 5; this is attempt 4, so continue.",
+      "adsorbate_type": "ReactiveSpecies",
+      "solution": {
+        "action": "continue",
+        "site_type": "bridge",
+        "surface_binding_atoms": [
+          "Mo",
+          "Ru"
+        ],
+        "adsorbate_binding_indices": [
+          0
+        ],
+        "relax_top_n": 1,
+        "touch_sphere_size": 2,
+        "overlap_thr": 0.1,
+        "conformers_per_site_cap": 4
+      }
+    },
+    "result_type": "Perfect"
+  },
+  "last_analysis": {
+    "status": "success",
+    "message": "Most stable config adsorption energy: -7.1906 eV. Target Atom: N (from plan index 0, global index 96 in relaxed structure). -> Nearest: Ru (Index 83), Distance: 1.986 Å (Threshold: 3.146), Bound: True. Bonded Surface Atoms: Ru-1.986Å, Ru-2.027Å, Mo-2.143Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Mo', 'Ru'] -> Actual ['Mo', 'Ru', 'Ru']).",
+    "most_stable_energy_eV": -7.190608978271484,
+    "target_adsorbate_atom": "N",
+    "target_adsorbate_atom_index": 96,
+    "bonded_surface_atoms": [
+      {
+        "symbol": "Ru",
+        "index": 83,
+        "distance": 1.986
+      },
+      {
+        "symbol": "Ru",
+        "index": 41,
+        "distance": 2.027
+      },
+      {
+        "symbol": "Mo",
+        "index": 76,
+        "distance": 2.143
+      }
+    ],
+    "nearest_slab_atom": "Ru",
+    "nearest_slab_atom_index": 83,
+    "final_bond_distance_A": 1.986,
+    "estimated_covalent_cutoff_A": 2.387,
+    "is_covalently_bound": true,
+    "reaction_detected": false,
+    "is_dissociated": false,
+    "n_components": 1,
+    "bond_change_count": 0,
+    "site_analysis": {
+      "planned_site_type": "bridge",
+      "planned_connectivity": 2,
+      "actual_site_type": "hollow (HCP/Subsurf-Atom)",
+      "actual_connectivity": 3,
+      "is_chemical_slip": true,
+      "planned_symbols": [
+        "Mo",
+        "Ru"
+      ],
+      "actual_symbols": [
+        "Mo",
+        "Ru",
+        "Ru"
+      ],
+      "site_fingerprint": "Ru83-Ru41-Mo76"
+    },
+    "best_structure_file": "outputs/08-b086c21c/BEST_N_NH_bridge_to_hollow_HCP-Subsurf-Atom_E-7.191.xyz",
+    "generated_conformers_file": "outputs/08-b086c21c/conformers_[N]_[NH].traj",
+    "relaxation_trajectory_file": "outputs/08-b086c21c/final.xyz",
+    "session_id": "08-b086c21c"
+  },
+  "attempt_records": [
+    {
+      "attempt_index": 1,
+      "plan": {
+        "reasoning": "Step 0: SMILES Consistency Check. The atom list shows two N atoms, both with SP2 hybridization. The user requested NNH, which matches the SMILES [N]=[NH]. No mismatch with saturated alkyl. Atom 0 has radical_electrons=1, atom 1 has 0. If planning ReactiveSpecies, binding must use atoms with radical>0.\nStep 1: Analyze Old Plans. History is None, no previous attempts.\nStep 2: Formulate New Plan. Since no history, propose an initial plan to start systematic search for lowest energy. Avoid unstable sites (none identified yet). Use canonical site types.\nStep 3: Analyze Request. User wants the lowest-energy adsorption configuration for NNH on the Ru3Mo(111) surface.\nStep 4: Analyze Adsorbate. SMILES [N]=[NH] represents NNH with a double bond (N0=N1H), where atom 0 (N) has a radical electron, atom 1 (N) does not. Major functional group: N=N double bond with H on atom 1. This is an unsaturated radical species, but for adsorption modes like side-on, treat as Molecule similar to ethylene (pi-bond adsorption).\nStep 5: Analyze Surface. Available sites include bridges like Mo-Ru and Ru-Ru, suitable for side-on adsorption.\nStep 6: Formulate Plan. NNH can adsorb side-on via the N=N bond, analogous to C=C in the example. Use 'Molecule' type for this mode, binding both atoms [0,1] to a bridge site. Start with Ru-Ru bridge, as Ru is common in catalysis. This is a new plan. Site_type 'bridge' aligns with len(adsorbate_binding_indices)=2. Defaults for other parameters.",
+        "adsorbate_type": "Molecule",
+        "solution": {
+          "action": "continue",
+          "site_type": "bridge",
+          "surface_binding_atoms": [
+            "Ru",
+            "Ru"
+          ],
+          "adsorbate_binding_indices": [
+            0,
+            1
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "bridge|Ru,Ru|0,1|Molecule|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -6.414363861083984,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": true,
+      "planned_site_type": "bridge",
+      "actual_site_type": "bridge",
+      "best_structure_file": "outputs/08-b086c21c/BEST_N_NH_bridge_E-6.414.xyz",
+      "generated_conformers_file": "outputs/08-b086c21c/conformers_[N]_[NH].traj",
+      "relaxation_trajectory_file": "outputs/08-b086c21c/final.xyz",
+      "message": "Most stable config adsorption energy: -6.4144 eV. Target Atom 1: N (from plan index 0, global index 96). -> Nearest: Ru (Index 37), Distance: 1.924 Å (Threshold: 2.387), Bound: True. Target Atom 2: N (from plan index 1, global index 97). -> Nearest: Ru (Index 41), Distance: 2.604 Å (Threshold: 2.387), Bound: False. Bonded Surface Atoms: N(96)-Ru(1.888Å), N(96)-Ru(2.025Å), N(97)-Ru(2.069Å), N(97)-Ru(3.076Å). Is Bound: False. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Ru', 'Ru'] -> Actual ['Ru', 'Ru', 'Ru', 'Ru']).",
+      "history_entry": "【✅ Perfect Adsorption】 bridge @ ['Ru', 'Ru'] (Index [0, 1]) -> ⚠️【Unstable Site Warning】⚠️: Planned bridge (Ru-Ru) is unstable, adsorbate spontaneously slipped to bridge (Ru-Ru-Ru-Ru).This means Ru-Ru has insufficient affinity for this adsorbate. Please **FORBID** testing Ru-Ru type sites again! | E=-6.414 eV"
+    },
+    {
+      "attempt_index": 2,
+      "plan": {
+        "reasoning": "Step 0: SMILES Consistency Check. The SMILES is [N]=[NH], with atoms N (index 0, SP2, radical_electrons=1) and N (index 1, SP2, radical_electrons=0). This matches a diazenyl radical species. No mismatch with user description of NNH. For ReactiveSpecies, if planned, binding atoms must have radical_electrons >0.\nStep 1: Analyze Old Plans. One previous attempt: bridge on Ru-Ru, which was unstable and slipped to a Ru-Ru-Ru-Ru configuration, with E=-6.414 eV. This is considered successful but with an unstable site warning, forbidding further testing of Ru-Ru type sites (specifically bridge Ru-Ru). No other attempts. The slipped configuration suggests preference for a higher coordination site, but we must avoid forbidden sites.\nStep 2: Formulate New Plan. Goal is lowest adsorption energy. Previous was bridge Ru-Ru (likely side-on), unstable. To systematically test, propose a new configuration: end-on adsorption via the radical N (index 0) on ontop Mo, as Mo may provide stronger binding than Ru, and this avoids forbidden Ru-Ru. Use ReactiveSpecies since the adsorbate is a radical, binding via atom with unpaired electrons. This is different from previous. If this doesn't yield lower energy, future attempts can explore hollow sites with Mo involvement.\nStep 3: User intent is to find the lowest-energy adsorption configuration for NNH.\nStep 4: Adsorbate [N]=[NH] is a linear diazenyl radical with N=N double bond, radical on index 0 N, H on index 1 N (implied).\nStep 5: Surface is Ru3Mo(111) with Mo and Ru sites; available bridges include Mo-Ru (not forbidden).\nStep 6: Plan ontop on Mo, binding index 0.",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "ontop",
+          "surface_binding_atoms": [
+            "Mo"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "ontop|Mo|0|ReactiveSpecies|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -8.03615951538086,
+      "bond_change_count": 1,
+      "is_dissociated": true,
+      "is_chemical_slip": true,
+      "planned_site_type": "ontop",
+      "actual_site_type": "hollow (HCP/Subsurf-Atom)",
+      "best_structure_file": "outputs/08-b086c21c/BEST_N_NH_ontop_to_hollow_HCP-Subsurf-Atom_DISS_E-8.036.xyz",
+      "generated_conformers_file": "outputs/08-b086c21c/conformers_[N]_[NH].traj",
+      "relaxation_trajectory_file": "outputs/08-b086c21c/final.xyz",
+      "message": "Most stable config adsorption energy: -8.0362 eV. Target Atom: N (from plan index 0, global index 96 in relaxed structure). -> Nearest: Ru (Index 37), Distance: 1.938 Å (Threshold: 3.146), Bound: True. Bonded Surface Atoms: Ru-1.938Å, Mo-2.181Å, Ru-3.073Å. Is Bound: True. Reactivity Change Detected: True (Bond Changes: 1). Chemical Slip: True (Planned ['Mo'] -> Actual ['Mo', 'Ru', 'Ru']).",
+      "history_entry": "【❌ Dissociated】 ontop @ ['Mo'] (Index [0]) -> ⚠️【Unstable Site Warning】⚠️: Planned ontop (Mo) is unstable, adsorbate spontaneously slipped to hollow (HCP/Subsurf-Atom) (Mo-Ru-Ru).This means Mo has insufficient affinity for this adsorbate. Please **FORBID** testing Mo type sites again! | E=-8.036 eV"
+    },
+    {
+      "attempt_index": 3,
+      "plan": {
+        "reasoning": "Step 0: SMILES Consistency Check. The SMILES is [N]=[NH], RDKit analysis shows atoms: index 0 (N, SP2, degree 1, radical_electrons 1), index 1 (N, SP2, degree 1, radical_electrons 0). No mismatch with user description of NNH. For ReactiveSpecies, binding atoms must have radical_electrons > 0, so index 0 qualifies, index 1 does not.\nStep 1: Analyze Old Plans. Two previous attempts: 1. Bridge on Ru-Ru, slipped to bridge Ru-Ru-Ru-Ru, marked as perfect but unstable, E=-6.414 eV, forbid Ru-Ru type sites. 2. Ontop on Mo, slipped to hollow Mo-Ru-Ru, dissociated (failure), E=-8.036 eV, forbid Mo type sites. Succeeded: one (slipped but perfect), failed: one (dissociated). Learning: Avoid Ru-Ru and pure Mo sites due to instability. Surface is heterogeneous alloy, mixed sites like Mo-Ru may differ.\nStep 2: Formulate New Plan. Goal is lowest energy stable adsorption. Avoid forbidden sites. Previous lowest is -6.414 eV (slipped), but seek better. Propose new plan different from history.\nStep 3: Analyze Request. Find lowest-energy adsorption configuration for NNH, no specific orientation/site mentioned, so systematically test.\nStep 4: Analyze Adsorbate. SMILES [N]=[NH], likely •N=NH radical. Functional group: azo-like with radical on N (index 0). Binding via index 0 for ReactiveSpecies.\nStep 5: Analyze Surface. Available sites include mixed like Mo-Ru bridge, Mo-Ru-Ru hollow-3. Avoid pure Ru-Ru and pure Mo.\nStep 6: Formulate Plan. Use ReactiveSpecies since radical species. Bind via index 0 (has radical). Try ontop Ru, as it's single Ru (not forbidden Ru-Ru type), different from previous ontop Mo and bridge Ru-Ru. Site_type ontop, surface_binding_atoms ['Ru'], adsorbate_binding_indices [0]. Defaults for others.",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "ontop",
+          "surface_binding_atoms": [
+            "Ru"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "ontop|Ru|0|ReactiveSpecies|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -8.46615219116211,
+      "bond_change_count": 1,
+      "is_dissociated": true,
+      "is_chemical_slip": false,
+      "planned_site_type": "ontop",
+      "actual_site_type": "ontop",
+      "best_structure_file": "outputs/08-b086c21c/BEST_N_NH_ontop_DISS_E-8.466.xyz",
+      "generated_conformers_file": "outputs/08-b086c21c/conformers_[N]_[NH].traj",
+      "relaxation_trajectory_file": "outputs/08-b086c21c/final.xyz",
+      "message": "Most stable config adsorption energy: -8.4662 eV. Target Atom: N (from plan index 0, global index 96 in relaxed structure). -> Nearest: Ru (Index 35), Distance: 1.841 Å (Threshold: 3.146), Bound: True. Bonded Surface Atoms: Ru-1.841Å. Is Bound: True. Reactivity Change Detected: True (Bond Changes: 1). Chemical Slip: False (Planned ['Ru'] -> Actual ['Ru']).",
+      "history_entry": "【❌ Dissociated】 ontop @ ['Ru'] (Index [0]) -> Site: ontop (Ru) | E=-8.466 eV"
+    },
+    {
+      "attempt_index": 4,
+      "plan": {
+        "reasoning": "Step 0: SMILES Consistency Check. The SMILES is [N]=[NH], representing NNH with atoms at index 0 (N, SP2, radical_electrons=1) and index 1 (N, SP2, radical_electrons=0). This matches the user request for NNH. No mismatch in hybridization or saturation with the request. For ReactiveSpecies, binding atoms must have unpaired electrons; index 0 does, index 1 does not.\nStep 1: Analyze Old Plans. Tested: (1) Bridge on Ru-Ru, resulted in slip to Ru-Ru-Ru-Ru (unstable for planned site, forbid Ru-Ru type sites), marked as perfect adsorption with E=-6.414 eV. (2) Ontop on Mo, slipped to hollow Mo-Ru-Ru, dissociated (unstable, forbid Mo type sites), E=-8.036 eV. (3) Ontop on Ru, dissociated, E=-8.466 eV. Succeeded: One perfect adsorption (though with slip warning) at E=-6.414 eV. Failed: Two dissociated cases. The successful case has the highest (least negative) energy, but it's the only non-dissociated. Dissociated cases have lower energies but are invalid for intact adsorption. Surface is heterogeneous alloy, so mixed sites may behave differently. Avoid forbidden Ru-Ru and Mo types; interpret 'Mo type' as pure Mo sites like ontop Mo, but mixed sites like Mo-Ru may be viable.\nStep 2: Formulate New Plan. Goal is lowest energy intact adsorption. The only stable config so far is -6.414 eV (slipped to Ru4 site). To find potentially lower energy, propose new site avoiding forbidden types. Since Ru-Ru bridge is forbidden and ontop Mo/Ru failed, try bridge Mo-Ru, which is mixed and available. No strong reason to retry forbidden sites. Use canonical site_type 'bridge'.\nStep 3: Analyze Request. User's core intent is to find the lowest-energy adsorption configuration for NNH on the surface, meaning stable, intact chemisorption.\nStep 4: Analyze Adsorbate. SMILES [N]=[NH]: Diazene radical with N=N double bond, radical on N at index 0, H on N at index 1. Major functional group: azo (N=N). Suitable for adsorption via the radical end (index 0) as ReactiveSpecies.\nStep 5: Analyze Surface. Available sites include bridge Mo-Ru, which is mixed composition and not explicitly forbidden (unlike pure Ru-Ru or pure Mo).\nStep 6: Formulate Plan. Select ReactiveSpecies since it's a radical species. Bind via index 0 (has unpaired electrons). Use bridge site with 1 binding index (allowed). Surface binding atoms ['Mo', 'Ru']. This is different from all previous plans (bridge Ru-Ru, ontop Mo, ontop Ru). Hard attempt limit is 5; this is attempt 4, so continue.",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "bridge",
+          "surface_binding_atoms": [
+            "Mo",
+            "Ru"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "bridge|Mo,Ru|0|ReactiveSpecies|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -7.190608978271484,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": true,
+      "planned_site_type": "bridge",
+      "actual_site_type": "hollow (HCP/Subsurf-Atom)",
+      "best_structure_file": "outputs/08-b086c21c/BEST_N_NH_bridge_to_hollow_HCP-Subsurf-Atom_E-7.191.xyz",
+      "generated_conformers_file": "outputs/08-b086c21c/conformers_[N]_[NH].traj",
+      "relaxation_trajectory_file": "outputs/08-b086c21c/final.xyz",
+      "message": "Most stable config adsorption energy: -7.1906 eV. Target Atom: N (from plan index 0, global index 96 in relaxed structure). -> Nearest: Ru (Index 83), Distance: 1.986 Å (Threshold: 3.146), Bound: True. Bonded Surface Atoms: Ru-1.986Å, Ru-2.027Å, Mo-2.143Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Mo', 'Ru'] -> Actual ['Mo', 'Ru', 'Ru']).",
+      "history_entry": "【✅ Perfect Adsorption】 bridge @ ['Mo', 'Ru'] (Index [0]) -> ⚠️【Unstable Site Warning】⚠️: Planned bridge (Mo-Ru) is unstable, adsorbate spontaneously slipped to hollow (HCP/Subsurf-Atom) (Mo-Ru-Ru).This means Mo-Ru has insufficient affinity for this adsorbate. Please **FORBID** testing Mo-Ru type sites again! | E=-7.191 eV"
+    }
+  ],
+  "history": [
+    "【✅ Perfect Adsorption】 bridge @ ['Ru', 'Ru'] (Index [0, 1]) -> ⚠️【Unstable Site Warning】⚠️: Planned bridge (Ru-Ru) is unstable, adsorbate spontaneously slipped to bridge (Ru-Ru-Ru-Ru).This means Ru-Ru has insufficient affinity for this adsorbate. Please **FORBID** testing Ru-Ru type sites again! | E=-6.414 eV",
+    "【❌ Dissociated】 ontop @ ['Mo'] (Index [0]) -> ⚠️【Unstable Site Warning】⚠️: Planned ontop (Mo) is unstable, adsorbate spontaneously slipped to hollow (HCP/Subsurf-Atom) (Mo-Ru-Ru).This means Mo has insufficient affinity for this adsorbate. Please **FORBID** testing Mo type sites again! | E=-8.036 eV",
+    "【❌ Dissociated】 ontop @ ['Ru'] (Index [0]) -> Site: ontop (Ru) | E=-8.466 eV",
+    "【✅ Perfect Adsorption】 bridge @ ['Mo', 'Ru'] (Index [0]) -> ⚠️【Unstable Site Warning】⚠️: Planned bridge (Mo-Ru) is unstable, adsorbate spontaneously slipped to hollow (HCP/Subsurf-Atom) (Mo-Ru-Ru).This means Mo-Ru has insufficient affinity for this adsorbate. Please **FORBID** testing Mo-Ru type sites again! | E=-7.191 eV"
+  ],
+  "error": null,
+  "perfect_count": 2,
+  "dissociation_count": 2,
+  "rearrangement_count": 0,
+  "calc_failure_count": 0,
+  "chemical_slip_count": 3
+}

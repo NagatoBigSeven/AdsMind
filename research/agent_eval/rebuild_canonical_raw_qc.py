@@ -3,8 +3,7 @@
 
 The CSV is intentionally derived from files on disk instead of maintained by
 hand. It records row counts, case counts, variant counts, and the presence of
-raw `result.json`/trajectory payloads for every active canonical raw source.
-Superseded raw sources are excluded.
+raw `result.json`/trajectory payloads for every active canonical result set.
 """
 
 from __future__ import annotations
@@ -125,12 +124,22 @@ def result_artifact_ref_stats(path: Path) -> dict[str, int]:
 
 
 def infer_kind(name: str, rel: Path) -> str:
-    if rel.parts[0] == "legacy_raw_sources":
-        return "legacy_one_shot_or_control"
-    if rel.parts[0] == "controls":
+    if "controls" in rel.parts:
         return "active_control"
-    if rel.parts[0] == "auxiliary_raw":
-        return "active_auxiliary"
+    if rel.parts[0] == "cmu20" and name.endswith("_ablation"):
+        return "ablation"
+    if rel.parts[0] == "cmu20" and "random_baseline" in name:
+        return "baseline_random"
+    if rel.parts[0] == "cmu20" and "heuristic_baseline" in name:
+        return "baseline_heuristic"
+    if rel.parts[0] == "ocd62" and name.endswith("_ablation"):
+        return "ablation"
+    if rel.parts[0] == "ocd62_overlap12" and name.endswith("_ablation"):
+        return "reproducibility_ablation"
+    if rel.parts[0] == "ocd62" and "random_baseline" in name:
+        return "baseline_random"
+    if rel.parts[0] == "ocd62" and "heuristic_baseline" in name:
+        return "baseline_heuristic"
     if name.endswith("_ablation"):
         return "ablation"
     if name.endswith("_one_shot"):
@@ -142,15 +151,13 @@ def infer_kind(name: str, rel: Path) -> str:
     return "other"
 
 
-def infer_dataset(name: str) -> str:
-    if name.startswith("cmu20") or "_cmu20" in name:
+def infer_dataset(name: str, rel: Path) -> str:
+    if rel.parts[0] == "cmu20" or name.startswith("cmu20") or "_cmu20" in name:
         return "CMU20"
-    if name.startswith("ocd24") or "_ocd24" in name:
-        return "OCD-GMAE-24"
-    if name.startswith("ocd_rep50") or "ocd_rep" in name:
-        return "OCD-GMAE-rep50"
-    if "dft_viz_case01" in name:
-        return "CMU20-case01"
+    if rel.parts[0] == "ocd62" or "_ocd62" in name:
+        return "OCD62"
+    if rel.parts[0] in {"ocd62", "ocd62_overlap12"}:
+        return "OCD62"
     return ""
 
 
@@ -172,36 +179,37 @@ def infer_backend(name: str) -> str:
     return ""
 
 
-def expected_summary_rows(name: str, summary_file: str) -> str:
-    if name.startswith("cmu20_") and name.endswith("_ablation"):
+def expected_summary_rows(name: str, rel: Path, summary_file: str) -> str:
+    if rel.parts[0] == "cmu20" and name.endswith("_ablation"):
         return "100"
-    if name.startswith("ocd24_") and name.endswith("_ablation"):
-        return "120"
-    if name.startswith("ocd_rep50_") and name.endswith("_ablation") and summary_file == "ablation_summary.csv":
-        return "200"
-    if name.startswith("ocd_rep50_") and name.endswith("_ablation") and summary_file == "single_shot_summary.csv":
-        return "50"
-    if name.startswith("cmu20_") and ("baseline" in name or name.endswith("_one_shot")):
+    if rel.parts[0] == "cmu20" and ("baseline" in name or name.endswith("_one_shot")):
         return "20"
-    if name.startswith("ocd24_") and ("baseline" in name or name.endswith("_one_shot")):
-        return "24"
-    if name.startswith("ocd_rep50_") and "baseline" in name:
-        return "50"
-    if name.startswith("mace_large_gpt54_cmu20_full"):
-        return "20"
-    if name.startswith("mace_large_gpt54_ocd_rep10_full"):
-        return "10"
-    if name.startswith("multiseed_gpt54_cmu20_seed"):
-        return "20"
-    if name.startswith("adsorbagent_single_config_gpt54_cmu20"):
-        return "20"
+    if "controls" in rel.parts and rel.parts[0] == "cmu20":
+        if name.startswith("mace_large_gpt54"):
+            return "20"
+        if name.startswith("multiseed_gpt54"):
+            return "20"
+        if name.startswith("adsorbagent_single_config_gpt54"):
+            return "20"
+    if "controls" in rel.parts and rel.parts[0] == "ocd62":
+        if name.startswith("mace_large_gpt54"):
+            return "10"
+    if rel.parts[0] == "ocd62":
+        if name.endswith("_ablation"):
+            return "310"
+        if name == "random_baseline_n20":
+            return "62"
+        if name == "heuristic_baseline":
+            return "62"
+    if rel.parts[0] == "ocd62_overlap12" and name.endswith("_ablation"):
+        return "60"
     return ""
 
 
 def add_entry(data_dir: Path, rows: list[dict[str, str]]) -> None:
     rel = data_dir.relative_to(ROOT)
     name = data_dir.name
-    if "superseded_raw_sources" in rel.parts or "source_summaries" in rel.parts:
+    if "source_summaries" in rel.parts:
         return
 
     summary_candidates = [
@@ -219,7 +227,7 @@ def add_entry(data_dir: Path, rows: list[dict[str, str]]) -> None:
             {
                 "canonical_dir": str(rel),
                 "kind": infer_kind(name, rel),
-                "dataset": infer_dataset(name),
+                "dataset": infer_dataset(name, rel),
                 "backend": infer_backend(name),
                 "summary_file": summary_file,
                 "summary_rows": "",
@@ -249,28 +257,31 @@ def add_entry(data_dir: Path, rows: list[dict[str, str]]) -> None:
     single_rows = count_rows(data_dir / "single_shot_summary.csv") if (data_dir / "single_shot_summary.csv").exists() else ""
 
     note = ""
-    if name.startswith("ocd_rep50_") and name.endswith("_ablation"):
+    if rel.parts[0] == "cmu20" and name.endswith("_ablation"):
         note = (
-            "ablation_summary.csv contains full/no_slip/no_forbid/no_termination; "
-            "independent single-shot rows are in single_shot_summary.csv. "
-            "Main manuscript currently uses Full+1-Shot for rep50."
+            "CMU20 ablation result set with 20 cases and five variants; "
+            "single-shot rows are also mirrored in single_shot_summary.csv."
         )
+    if rel.parts[0] == "ocd62" and name.endswith("_ablation"):
+        note = (
+            "OCD62 ablation result set with 62 cases and five variants; "
+            "single-shot rows are also mirrored in single_shot_summary.csv."
+        )
+    if rel.parts[0] == "ocd62_overlap12":
+        note = "OCD62 overlap12-only reproducibility repeat; not a separate benchmark."
     if name.startswith("adsorbagent_single_config"):
         note = "Active AA single-config control; CatalystAIgent-style raw files, not AdsMind result.json layout."
-    if rel.parts[0] == "legacy_raw_sources":
-        note = "Legacy/provenance one-shot or control source; not the primary 5-variant ablation source."
-
     artifact_stats = result_artifact_ref_stats(data_dir)
 
     rows.append(
         {
             "canonical_dir": str(rel),
             "kind": infer_kind(name, rel),
-            "dataset": infer_dataset(name),
+            "dataset": infer_dataset(name, rel),
             "backend": infer_backend(name),
             "summary_file": main.name,
             "summary_rows": count_rows(main),
-            "expected_summary_rows": expected_summary_rows(name, main.name),
+            "expected_summary_rows": expected_summary_rows(name, rel, main.name),
             "single_shot_summary_rows": single_rows,
             "observed_case_count": str(len(cases)),
             "observed_variant_count": str(len(variants)),
@@ -297,11 +308,18 @@ def main() -> None:
 
     rows: list[dict[str, str]] = []
     for data_dir in sorted(path for path in ROOT.iterdir() if path.is_dir()):
-        if data_dir.name == "superseded_raw_sources":
-            continue
-        if data_dir.name in {"controls", "auxiliary_raw", "legacy_raw_sources"}:
-            for child in sorted(path for path in data_dir.iterdir() if path.is_dir()):
-                add_entry(child, rows)
+        if data_dir.name in {"cmu20", "ocd62", "ocd62_overlap12"}:
+            if data_dir.name in {"cmu20", "ocd62"}:
+                for child in sorted(path for path in data_dir.iterdir() if path.is_dir()):
+                    if child.name == "controls":
+                        for control in sorted(path for path in child.iterdir() if path.is_dir()):
+                            add_entry(control, rows)
+                    else:
+                        add_entry(child, rows)
+            else:
+                for run_dir in sorted(path for path in data_dir.iterdir() if path.is_dir()):
+                    for child in sorted(path for path in run_dir.iterdir() if path.is_dir()):
+                        add_entry(child, rows)
         else:
             add_entry(data_dir, rows)
 

@@ -1,0 +1,370 @@
+{
+  "case_id": "049",
+  "case_metadata": {
+    "case_id": "049",
+    "slab_file": "datasets/ocd62/049_ocd_747_As24V36_CH2_C.xyz",
+    "smiles": "[CH2]C",
+    "user_request": "Find the lowest-energy adsorption configuration for the adsorbate with SMILES [CH2]C on the provided surface.",
+    "surface_family": "compound",
+    "adsorbate_name": "[CH2]C",
+    "miller_index": "",
+    "reaction_class": "GENERALIZATION",
+    "ablation_candidate": "FALSE",
+    "notes": "OCD id=747; adsorbate=[CH2]C; surface_formula=As24V36; y_relaxed=-5.613152 eV; site=31;33",
+    "surface_formula": "As24V36",
+    "surface_elements": "As;V",
+    "bare_slab_atoms": "60",
+    "adsorbate_atoms": "7",
+    "y_relaxed": "-5.613152",
+    "site_indices": "31;33"
+  },
+  "status": "success",
+  "best_energy_eV": -8.628105163574219,
+  "iteration_count": 5,
+  "max_attempts": 5,
+  "final_site_type": "hollow (HCP/Subsurf-Atom)",
+  "converged_tag": false,
+  "wall_clock_sec": 464.0305028818548,
+  "total_input_tokens": 22542,
+  "total_output_tokens": 5814,
+  "artifact_paths": {
+    "BEST_CH2C_bridge_to_hollow_HCP-Subsurf-Atom_E-8.249": "research/results/canonical_raw/ocd62/openai_gpt54_ablation/no_termination/049/artifacts/BEST_CH2C_bridge_to_hollow_HCP-Subsurf-Atom_E-8.249.xyz",
+    "BEST_CH2C_bridge_to_hollow_HCP-Subsurf-Atom_E-8.249.xyz": "research/results/canonical_raw/ocd62/openai_gpt54_ablation/no_termination/049/artifacts/BEST_CH2C_bridge_to_hollow_HCP-Subsurf-Atom_E-8.249.xyz",
+    "best_structure_file": "research/results/canonical_raw/ocd62/openai_gpt54_ablation/no_termination/049/artifacts/BEST_CH2C_ontop_to_hollow_HCP-Subsurf-Atom_E-7.730.xyz",
+    "BEST_CH2C_bridge_to_hollow_HCP-Subsurf-Atom_E-8.628": "research/results/canonical_raw/ocd62/openai_gpt54_ablation/no_termination/049/artifacts/BEST_CH2C_bridge_to_hollow_HCP-Subsurf-Atom_E-8.628.xyz",
+    "BEST_CH2C_bridge_to_hollow_HCP-Subsurf-Atom_E-8.628.xyz": "research/results/canonical_raw/ocd62/openai_gpt54_ablation/no_termination/049/artifacts/BEST_CH2C_bridge_to_hollow_HCP-Subsurf-Atom_E-8.628.xyz",
+    "BEST_CH2C_hollow_to_hollow_FCC-No-Subsurf_E-7.530": "research/results/canonical_raw/ocd62/openai_gpt54_ablation/no_termination/049/artifacts/BEST_CH2C_hollow_to_hollow_FCC-No-Subsurf_E-7.530.xyz",
+    "BEST_CH2C_hollow_to_hollow_FCC-No-Subsurf_E-7.530.xyz": "research/results/canonical_raw/ocd62/openai_gpt54_ablation/no_termination/049/artifacts/BEST_CH2C_hollow_to_hollow_FCC-No-Subsurf_E-7.530.xyz",
+    "BEST_CH2C_ontop_to_bridge_E-7.621": "research/results/canonical_raw/ocd62/openai_gpt54_ablation/no_termination/049/artifacts/BEST_CH2C_ontop_to_bridge_E-7.621.xyz",
+    "BEST_CH2C_ontop_to_bridge_E-7.621.xyz": "research/results/canonical_raw/ocd62/openai_gpt54_ablation/no_termination/049/artifacts/BEST_CH2C_ontop_to_bridge_E-7.621.xyz",
+    "BEST_CH2C_ontop_to_hollow_HCP-Subsurf-Atom_E-7.730": "research/results/canonical_raw/ocd62/openai_gpt54_ablation/no_termination/049/artifacts/BEST_CH2C_ontop_to_hollow_HCP-Subsurf-Atom_E-7.730.xyz",
+    "BEST_CH2C_ontop_to_hollow_HCP-Subsurf-Atom_E-7.730.xyz": "research/results/canonical_raw/ocd62/openai_gpt54_ablation/no_termination/049/artifacts/BEST_CH2C_ontop_to_hollow_HCP-Subsurf-Atom_E-7.730.xyz",
+    "conformers_[CH2]C": "research/results/canonical_raw/ocd62/openai_gpt54_ablation/no_termination/049/artifacts/conformers_[CH2]C.traj",
+    "conformers_[CH2]C.traj": "research/results/canonical_raw/ocd62/openai_gpt54_ablation/no_termination/049/artifacts/conformers_[CH2]C.traj",
+    "final": "research/results/canonical_raw/ocd62/openai_gpt54_ablation/no_termination/049/artifacts/final.xyz",
+    "final.xyz": "research/results/canonical_raw/ocd62/openai_gpt54_ablation/no_termination/049/artifacts/final.xyz",
+    "relaxation": "research/results/canonical_raw/ocd62/openai_gpt54_ablation/no_termination/049/artifacts/relaxation.traj",
+    "relaxation.traj": "research/results/canonical_raw/ocd62/openai_gpt54_ablation/no_termination/049/artifacts/relaxation.traj",
+    "relaxation_trajectory_file": "research/results/canonical_raw/ocd62/openai_gpt54_ablation/no_termination/049/artifacts/relaxation.traj"
+  },
+  "best_result": {
+    "most_stable_energy_eV": -8.628105163574219,
+    "analysis_json": {
+      "status": "success",
+      "message": "Most stable config adsorption energy: -8.6281 eV. Target Atom: C (from plan index 0, global index 60 in relaxed structure). -> Nearest: V (Index 25), Distance: 2.062 Å (Threshold: 3.32), Bound: True. Bonded Surface Atoms: V-2.062Å, V-2.717Å, V-3.089Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['As', 'V'] -> Actual ['V', 'V', 'V']).",
+      "most_stable_energy_eV": -8.628105163574219,
+      "target_adsorbate_atom": "C",
+      "target_adsorbate_atom_index": 60,
+      "bonded_surface_atoms": [
+        {
+          "symbol": "V",
+          "index": 25,
+          "distance": 2.062
+        },
+        {
+          "symbol": "V",
+          "index": 24,
+          "distance": 2.717
+        },
+        {
+          "symbol": "V",
+          "index": 35,
+          "distance": 3.089
+        }
+      ],
+      "nearest_slab_atom": "V",
+      "nearest_slab_atom_index": 25,
+      "final_bond_distance_A": 2.062,
+      "estimated_covalent_cutoff_A": 2.519,
+      "is_covalently_bound": true,
+      "reaction_detected": false,
+      "is_dissociated": false,
+      "n_components": 1,
+      "bond_change_count": 0,
+      "site_analysis": {
+        "planned_site_type": "bridge",
+        "planned_connectivity": 2,
+        "actual_site_type": "hollow (HCP/Subsurf-Atom)",
+        "actual_connectivity": 3,
+        "is_chemical_slip": true,
+        "planned_symbols": [
+          "As",
+          "V"
+        ],
+        "actual_symbols": [
+          "V",
+          "V",
+          "V"
+        ],
+        "site_fingerprint": "V25-V24-V35"
+      },
+      "best_structure_file": "outputs/049-65115bd8/BEST_CH2C_bridge_to_hollow_HCP-Subsurf-Atom_E-8.628.xyz",
+      "generated_conformers_file": "outputs/049-65115bd8/conformers_[CH2]C.traj",
+      "relaxation_trajectory_file": "outputs/049-65115bd8/final.xyz",
+      "session_id": "049-65115bd8"
+    },
+    "plan": {
+      "reasoning": "SMILES consistency check: the adsorbate is [CH2]C, i.e. an ethyl-like radical fragment. RDKit heavy-atom list shows atom 0 is C, SP3, with 1 radical electron; atom 1 is C, SP3, with 0 radical electrons. Therefore adsorption as a ReactiveSpecies must use atom 0 as the binding atom. No hybridization mismatch is present relative to the SMILES, and atom 0 is the only chemically valid radical binding center. History analysis: tested plans were ontop V, ontop As, hollow As-V-V, and bridge V-V. All four showed chemical slip/unstable-site warnings, so the initially planned site types/environments must be treated as invalid for further testing. The best energy observed so far is -8.249 eV, but it came from a planned V-V bridge that slipped to a different hollow V-V-V environment, so the planned V-V bridge itself is not a valid stable target. Since V, As, As-V-V, and V-V were explicitly forbidden by the history, the remaining untested physically allowed site chemistries from the provided site list are bridge As-As, bridge As-V, and hollow As-As-V, plus hollow-4 As-As-V-V. For a carbon radical on a mixed V/As surface, a mixed-metal bridge is a sensible next systematic test because it explores heterogeneity without repeating a forbidden pure-element site. Among remaining options, bridge As-V is a conservative next plan: it is distinct from all previous plans, uses only one adsorbate binding atom as appropriate for a carbon radical, and probes a mixed local ensemble that could stabilize the radical differently from the already-failed pure As or pure V local motifs. User intent is to keep searching for the lowest-energy adsorption configuration, so the correct action is to continue with a new untested site.",
+      "adsorbate_type": "ReactiveSpecies",
+      "solution": {
+        "action": "continue",
+        "site_type": "bridge",
+        "surface_binding_atoms": [
+          "As",
+          "V"
+        ],
+        "adsorbate_binding_indices": [
+          0
+        ],
+        "relax_top_n": 1,
+        "touch_sphere_size": 2,
+        "overlap_thr": 0.1,
+        "conformers_per_site_cap": 4
+      }
+    },
+    "result_type": "Perfect"
+  },
+  "last_analysis": {
+    "status": "success",
+    "message": "Most stable config adsorption energy: -8.6281 eV. Target Atom: C (from plan index 0, global index 60 in relaxed structure). -> Nearest: V (Index 25), Distance: 2.062 Å (Threshold: 3.32), Bound: True. Bonded Surface Atoms: V-2.062Å, V-2.717Å, V-3.089Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['As', 'V'] -> Actual ['V', 'V', 'V']).",
+    "most_stable_energy_eV": -8.628105163574219,
+    "target_adsorbate_atom": "C",
+    "target_adsorbate_atom_index": 60,
+    "bonded_surface_atoms": [
+      {
+        "symbol": "V",
+        "index": 25,
+        "distance": 2.062
+      },
+      {
+        "symbol": "V",
+        "index": 24,
+        "distance": 2.717
+      },
+      {
+        "symbol": "V",
+        "index": 35,
+        "distance": 3.089
+      }
+    ],
+    "nearest_slab_atom": "V",
+    "nearest_slab_atom_index": 25,
+    "final_bond_distance_A": 2.062,
+    "estimated_covalent_cutoff_A": 2.519,
+    "is_covalently_bound": true,
+    "reaction_detected": false,
+    "is_dissociated": false,
+    "n_components": 1,
+    "bond_change_count": 0,
+    "site_analysis": {
+      "planned_site_type": "bridge",
+      "planned_connectivity": 2,
+      "actual_site_type": "hollow (HCP/Subsurf-Atom)",
+      "actual_connectivity": 3,
+      "is_chemical_slip": true,
+      "planned_symbols": [
+        "As",
+        "V"
+      ],
+      "actual_symbols": [
+        "V",
+        "V",
+        "V"
+      ],
+      "site_fingerprint": "V25-V24-V35"
+    },
+    "best_structure_file": "outputs/049-65115bd8/BEST_CH2C_bridge_to_hollow_HCP-Subsurf-Atom_E-8.628.xyz",
+    "generated_conformers_file": "outputs/049-65115bd8/conformers_[CH2]C.traj",
+    "relaxation_trajectory_file": "outputs/049-65115bd8/final.xyz",
+    "session_id": "049-65115bd8"
+  },
+  "attempt_records": [
+    {
+      "attempt_index": 1,
+      "plan": {
+        "reasoning": "No prior attempts exist, so this is the initial systematic trial. The user wants the lowest-energy adsorption configuration for [CH2]C on an As/V surface, so the correct strategy is to begin with the most chemically plausible strongest-binding motif. From the provided atom list, atom 0 is C, SP3, degree 1, with 1 radical electron; atom 1 is C, SP3, degree 1, with 0 radical electrons. Therefore the adsorbate is a reactive alkyl radical centered at atom 0, and any ReactiveSpecies adsorption must bind through index 0 only. There is no SMILES/user-description mismatch to warn about beyond noting this is a radical fragment, not a closed-shell saturated alkane. On a heterogeneous As/V surface, the more electropositive and typically more strongly adsorbing metal-like V site is the best first guess over As for radical carbon binding. For an initial search, an ontop configuration on V is the most physically sensible and simplest low-energy starting point before exploring bridge or hollow motifs. This respects the available site list and uses a valid radical binding atom.",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "ontop",
+          "surface_binding_atoms": [
+            "V"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "ontop|V|0|ReactiveSpecies|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -7.621421813964844,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": true,
+      "planned_site_type": "ontop",
+      "actual_site_type": "bridge",
+      "best_structure_file": "outputs/049-65115bd8/BEST_CH2C_ontop_to_bridge_E-7.621.xyz",
+      "generated_conformers_file": "outputs/049-65115bd8/conformers_[CH2]C.traj",
+      "relaxation_trajectory_file": "outputs/049-65115bd8/final.xyz",
+      "message": "Most stable config adsorption energy: -7.6214 eV. Target Atom: C (from plan index 0, global index 60 in relaxed structure). -> Nearest: V (Index 24), Distance: 2.08 Å (Threshold: 3.32), Bound: True. Bonded Surface Atoms: V-2.08Å, V-2.601Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['V'] -> Actual ['V', 'V']).",
+      "history_entry": "【✅ Perfect Adsorption】 ontop @ ['V'] (Index [0]) -> ⚠️【Unstable Site Warning】⚠️: Planned ontop (V) is unstable, adsorbate spontaneously slipped to bridge (V-V).This means V has insufficient affinity for this adsorbate. Please **FORBID** testing V type sites again! | E=-7.621 eV"
+    },
+    {
+      "attempt_index": 2,
+      "plan": {
+        "reasoning": "SMILES consistency check: the adsorbate is [CH2]C, i.e. an ethyl-type radical fragment. The provided atom list shows atom 0 is C, SP3, degree 1, with 1 radical electron; atom 1 is C, SP3, degree 1, with 0 radical electrons. This is internally consistent with a radical centered on atom 0, so adsorption should be treated as ReactiveSpecies and only atom 0 is a valid binding index. History analysis: one prior attempt planned ontop on V, but the adsorbate spontaneously slipped to bridge V-V with E = -7.621 eV. The unstable-site warning explicitly states ontop V is invalid and V-type sites should be forbidden going forward. Therefore I should avoid any plan involving V as the intended site atom composition, including ontop V and preferably V-containing bridge/hollow motifs unless there is a strong reason otherwise. User intent is to find the lowest-energy adsorption configuration systematically for this adsorbate on the As/V surface. For a carbon-centered alkyl radical on a mixed metalloid/metal surface, strong chemisorption is expected through the radical carbon. Since V-centered plans are now disfavored by history, the most sensible unexplored alternative is to test adsorption at an As-only site. Among remaining canonical options, ontop As is the cleanest new trial and directly probes whether the radical carbon prefers a single As bond rather than the previously observed V-V bridge motif. This is completely new relative to the prior plan. I will therefore bind atom 0 to an As ontop site.",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "ontop",
+          "surface_binding_atoms": [
+            "As"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "ontop|As|0|ReactiveSpecies|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -7.730339050292969,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": true,
+      "planned_site_type": "ontop",
+      "actual_site_type": "hollow (HCP/Subsurf-Atom)",
+      "best_structure_file": "outputs/049-65115bd8/BEST_CH2C_ontop_to_hollow_HCP-Subsurf-Atom_E-7.730.xyz",
+      "generated_conformers_file": "outputs/049-65115bd8/conformers_[CH2]C.traj",
+      "relaxation_trajectory_file": "outputs/049-65115bd8/final.xyz",
+      "message": "Most stable config adsorption energy: -7.7303 eV. Target Atom: C (from plan index 0, global index 60 in relaxed structure). -> Nearest: V (Index 27), Distance: 2.181 Å (Threshold: 3.32), Bound: True. Bonded Surface Atoms: V-2.181Å, V-2.181Å, V-2.459Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['As'] -> Actual ['V', 'V', 'V']).",
+      "history_entry": "【✅ Perfect Adsorption】 ontop @ ['As'] (Index [0]) -> ⚠️【Unstable Site Warning】⚠️: Planned ontop (As) is unstable, adsorbate spontaneously slipped to hollow (HCP/Subsurf-Atom) (V-V-V).This means As has insufficient affinity for this adsorbate. Please **FORBID** testing As type sites again! | E=-7.730 eV"
+    },
+    {
+      "attempt_index": 3,
+      "plan": {
+        "reasoning": "SMILES consistency check: the adsorbate is [CH2]C, i.e. an ethyl-type radical fragment. The provided atom list shows atom 0 is C, SP3, degree 1, with 1 radical electron; atom 1 is C, SP3, degree 1, with 0 radical electrons. This is internally consistent with a reactive radical centered at atom 0, so adsorption should use ReactiveSpecies and bind through atom 0 only. History analysis: two prior plans were tested, both ontop. Planned ontop on V was unstable and slipped to bridge V-V with E = -7.621 eV, so V ontop is invalid and V-type ontop should not be retried. Planned ontop on As was unstable and slipped to a hollow V-V-V-like environment with E = -7.730 eV, so As ontop is also invalid and As-type ontop should not be retried. Since the As ontop trial relaxed into a hollow environment and gave the lower energy of the two, hollow motifs appear more favorable than ontop/bridge for this radical on this mixed As-V surface. Per the instructions, I should avoid retesting site types already identified as unstable in their original form, and propose a completely new plan not present in history. The user’s core intent is to locate the lowest-energy adsorption configuration for [CH2]C on this slab. For a carbon-centered alkyl radical on a heterogeneous metalloid/metal surface, a multi-coordinated hollow site is physically sensible because the singly occupied carbon can be stabilized by coordination to multiple nearby surface atoms. Among available explicit site combinations, hollow-3 As-V-V is especially attractive because the previous spontaneous relaxation from As ontop moved toward a V-rich hollow environment, suggesting V-rich hollow coordination is favorable, while still respecting the prohibition on retrying ontop V or ontop As. I therefore choose a new canonical hollow plan with surface_binding_atoms matching an available hollow-3 site, and bind only through radical atom 0. This is distinct from both previous ontop plans.",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "hollow",
+          "surface_binding_atoms": [
+            "As",
+            "V",
+            "V"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "hollow|As,V,V|0|ReactiveSpecies|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -7.530479431152344,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": true,
+      "planned_site_type": "hollow",
+      "actual_site_type": "hollow (FCC/No-Subsurf)",
+      "best_structure_file": "outputs/049-65115bd8/BEST_CH2C_hollow_to_hollow_FCC-No-Subsurf_E-7.530.xyz",
+      "generated_conformers_file": "outputs/049-65115bd8/conformers_[CH2]C.traj",
+      "relaxation_trajectory_file": "outputs/049-65115bd8/final.xyz",
+      "message": "Most stable config adsorption energy: -7.5305 eV. Target Atom: C (from plan index 0, global index 60 in relaxed structure). -> Nearest: V (Index 35), Distance: 2.201 Å (Threshold: 3.32), Bound: True. Bonded Surface Atoms: V-2.201Å, V-2.27Å, V-2.371Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['As', 'V', 'V'] -> Actual ['V', 'V', 'V']).",
+      "history_entry": "【✅ Perfect Adsorption】 hollow @ ['As', 'V', 'V'] (Index [0]) -> ⚠️【Unstable Site Warning】⚠️: Planned hollow (As-V-V) is unstable, adsorbate spontaneously slipped to hollow (FCC/No-Subsurf) (V-V-V).This means As-V-V has insufficient affinity for this adsorbate. Please **FORBID** testing As-V-V type sites again! | E=-7.530 eV"
+    },
+    {
+      "attempt_index": 4,
+      "plan": {
+        "reasoning": "SMILES consistency check: the adsorbate is [CH2]C, i.e. an ethyl-like radical fragment. The provided heavy-atom list shows atom 0 is C, SP3, degree 1, with 1 radical electron; atom 1 is C, SP3, degree 1, with 0 radical electrons. There is no mismatch with a saturated alkyl request because the species is clearly an open-shell radical, and for ReactiveSpecies adsorption the only chemically valid binding atom is index 0. History analysis: three plans were already tested. Ontop on V was unstable and slipped to bridge V-V at -7.621 eV, so V ontop should be forbidden. Ontop on As was unstable and slipped to a V-only hollow-like site at -7.730 eV, so As ontop should be forbidden. Hollow on As-V-V was unstable and slipped to a V-only hollow-like site at -7.530 eV, so As-V-V hollow should be forbidden. The best energy observed so far is from the run that slipped from As ontop into a V-rich hollow environment, indicating this adsorbate prefers multi-coordinated V ensembles rather than As-containing or single-atom ontop sites. Therefore the next physically sensible unexplored plan is to directly target a V-only bridge site, since V-V bridge is explicitly available and was only reached indirectly before, not planned directly. This is distinct from all prior planned configurations and respects the instruction to avoid unstable site types already identified. User intent is to find the lowest-energy adsorption configuration, so we should continue systematic exploration of the most promising V-rich motifs. Adsorbate analysis: as a radical fragment, classify as ReactiveSpecies and bind through atom 0 only, since atom 1 has no unpaired electron. Surface analysis: allowed remaining untested site combinations include bridge As-As, bridge As-V, bridge V-V, hollow As-As-V, hollow As-As-V-V; among these, V-V bridge is the most chemically plausible given the prior slips toward V-rich motifs.",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "bridge",
+          "surface_binding_atoms": [
+            "V",
+            "V"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "bridge|V,V|0|ReactiveSpecies|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -8.249320983886719,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": true,
+      "planned_site_type": "bridge",
+      "actual_site_type": "hollow (HCP/Subsurf-Atom)",
+      "best_structure_file": "outputs/049-65115bd8/BEST_CH2C_bridge_to_hollow_HCP-Subsurf-Atom_E-8.249.xyz",
+      "generated_conformers_file": "outputs/049-65115bd8/conformers_[CH2]C.traj",
+      "relaxation_trajectory_file": "outputs/049-65115bd8/final.xyz",
+      "message": "Most stable config adsorption energy: -8.2493 eV. Target Atom: C (from plan index 0, global index 60 in relaxed structure). -> Nearest: V (Index 25), Distance: 2.029 Å (Threshold: 3.32), Bound: True. Bonded Surface Atoms: V-2.029Å, V-2.29Å, V-2.346Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['V', 'V'] -> Actual ['V', 'V', 'V']).",
+      "history_entry": "【✅ Perfect Adsorption】 bridge @ ['V', 'V'] (Index [0]) -> ⚠️【Unstable Site Warning】⚠️: Planned bridge (V-V) is unstable, adsorbate spontaneously slipped to hollow (HCP/Subsurf-Atom) (V-V-V).This means V-V has insufficient affinity for this adsorbate. Please **FORBID** testing V-V type sites again! | E=-8.249 eV"
+    },
+    {
+      "attempt_index": 5,
+      "plan": {
+        "reasoning": "SMILES consistency check: the adsorbate is [CH2]C, i.e. an ethyl-like radical fragment. RDKit heavy-atom list shows atom 0 is C, SP3, with 1 radical electron; atom 1 is C, SP3, with 0 radical electrons. Therefore adsorption as a ReactiveSpecies must use atom 0 as the binding atom. No hybridization mismatch is present relative to the SMILES, and atom 0 is the only chemically valid radical binding center. History analysis: tested plans were ontop V, ontop As, hollow As-V-V, and bridge V-V. All four showed chemical slip/unstable-site warnings, so the initially planned site types/environments must be treated as invalid for further testing. The best energy observed so far is -8.249 eV, but it came from a planned V-V bridge that slipped to a different hollow V-V-V environment, so the planned V-V bridge itself is not a valid stable target. Since V, As, As-V-V, and V-V were explicitly forbidden by the history, the remaining untested physically allowed site chemistries from the provided site list are bridge As-As, bridge As-V, and hollow As-As-V, plus hollow-4 As-As-V-V. For a carbon radical on a mixed V/As surface, a mixed-metal bridge is a sensible next systematic test because it explores heterogeneity without repeating a forbidden pure-element site. Among remaining options, bridge As-V is a conservative next plan: it is distinct from all previous plans, uses only one adsorbate binding atom as appropriate for a carbon radical, and probes a mixed local ensemble that could stabilize the radical differently from the already-failed pure As or pure V local motifs. User intent is to keep searching for the lowest-energy adsorption configuration, so the correct action is to continue with a new untested site.",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "bridge",
+          "surface_binding_atoms": [
+            "As",
+            "V"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "bridge|As,V|0|ReactiveSpecies|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -8.628105163574219,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": true,
+      "planned_site_type": "bridge",
+      "actual_site_type": "hollow (HCP/Subsurf-Atom)",
+      "best_structure_file": "outputs/049-65115bd8/BEST_CH2C_bridge_to_hollow_HCP-Subsurf-Atom_E-8.628.xyz",
+      "generated_conformers_file": "outputs/049-65115bd8/conformers_[CH2]C.traj",
+      "relaxation_trajectory_file": "outputs/049-65115bd8/final.xyz",
+      "message": "Most stable config adsorption energy: -8.6281 eV. Target Atom: C (from plan index 0, global index 60 in relaxed structure). -> Nearest: V (Index 25), Distance: 2.062 Å (Threshold: 3.32), Bound: True. Bonded Surface Atoms: V-2.062Å, V-2.717Å, V-3.089Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['As', 'V'] -> Actual ['V', 'V', 'V']).",
+      "history_entry": "【✅ Perfect Adsorption】 bridge @ ['As', 'V'] (Index [0]) -> ⚠️【Unstable Site Warning】⚠️: Planned bridge (As-V) is unstable, adsorbate spontaneously slipped to hollow (HCP/Subsurf-Atom) (V-V-V).This means As-V has insufficient affinity for this adsorbate. Please **FORBID** testing As-V type sites again! | E=-8.628 eV"
+    }
+  ],
+  "history": [
+    "【✅ Perfect Adsorption】 ontop @ ['V'] (Index [0]) -> ⚠️【Unstable Site Warning】⚠️: Planned ontop (V) is unstable, adsorbate spontaneously slipped to bridge (V-V).This means V has insufficient affinity for this adsorbate. Please **FORBID** testing V type sites again! | E=-7.621 eV",
+    "【✅ Perfect Adsorption】 ontop @ ['As'] (Index [0]) -> ⚠️【Unstable Site Warning】⚠️: Planned ontop (As) is unstable, adsorbate spontaneously slipped to hollow (HCP/Subsurf-Atom) (V-V-V).This means As has insufficient affinity for this adsorbate. Please **FORBID** testing As type sites again! | E=-7.730 eV",
+    "【✅ Perfect Adsorption】 hollow @ ['As', 'V', 'V'] (Index [0]) -> ⚠️【Unstable Site Warning】⚠️: Planned hollow (As-V-V) is unstable, adsorbate spontaneously slipped to hollow (FCC/No-Subsurf) (V-V-V).This means As-V-V has insufficient affinity for this adsorbate. Please **FORBID** testing As-V-V type sites again! | E=-7.530 eV",
+    "【✅ Perfect Adsorption】 bridge @ ['V', 'V'] (Index [0]) -> ⚠️【Unstable Site Warning】⚠️: Planned bridge (V-V) is unstable, adsorbate spontaneously slipped to hollow (HCP/Subsurf-Atom) (V-V-V).This means V-V has insufficient affinity for this adsorbate. Please **FORBID** testing V-V type sites again! | E=-8.249 eV",
+    "【✅ Perfect Adsorption】 bridge @ ['As', 'V'] (Index [0]) -> ⚠️【Unstable Site Warning】⚠️: Planned bridge (As-V) is unstable, adsorbate spontaneously slipped to hollow (HCP/Subsurf-Atom) (V-V-V).This means As-V has insufficient affinity for this adsorbate. Please **FORBID** testing As-V type sites again! | E=-8.628 eV"
+  ],
+  "error": null,
+  "perfect_count": 5,
+  "dissociation_count": 0,
+  "rearrangement_count": 0,
+  "calc_failure_count": 0,
+  "chemical_slip_count": 5
+}

@@ -6,25 +6,11 @@ research infrastructure, not a logbook of local runs.
 
 ## Authoritative Inputs
 
-- `manifests/cmu_manifest.csv`: CMU benchmark case definitions.
-- `manifests/ocd_gmae_subset24_manifest.csv`: 24-case OCD-GMAE
-  validation subset used for the full ablation matrix.
-- `manifests/ocd_gmae_representative50_manifest.csv`: 50-case OCD-GMAE
-  representative subset used for broader one-shot/generalisation checks.
+- `datasets/cmu20/cmu20_manifest.csv`: CMU20 benchmark case definitions.
+- `datasets/ocd62/ocd62_manifest.csv`: OCD62 benchmark case definitions.
+- `datasets/ocd62_overlap12/overlap12_manifest.csv`: overlap12 reproducibility input.
 - `configs/frozen_config*.json`: backend-specific locked experiment configs.
-  See `configs/README.md` for public routes versus provenance-only proxy
-  routes.
-- `generated_slabs/`: derived slab files for OCD-GMAE manifests. This is not
-  the full OCD-GMAE dataset; see `generated_slabs/README.md`.
-- CMU benchmark slabs are committed under `datasets/cmu-20/` at the repo root
-  (20 `.xyz` files matching `manifests/cmu_manifest.csv` rows). Older
-  `cmu_manifest.csv` paths still use the `benchmark_slabs/<file>` form and
-  expect a local symlink → `datasets/cmu-20/`; see
-  `research/results/MIGRATION.md` for the path rewrite plan.
-
-OCD-GMAE manifest generation expects an LMDB dataset path via
-`--lmdb-path` or `OCD_GMAE_LMDB_PATH`; no machine-specific default path is
-stored in the repository.
+  See `configs/README.md`.
 
 ## Script Map
 
@@ -53,10 +39,7 @@ or external runbooks.
 | DFT alignment | `export_dft_iteration_alignment.py` | Current CLI | Export per-iteration AdsMind trajectories for DFT comparison. |
 | DFT alignment | `render_dft_alignment_snapshots.py` | Current CLI | Render quick PNG snapshots for DFT-alignment packages. |
 | Figures | `render_panel_b_assets.py` | Current CLI | Render Panel B structure thumbnails/contact sheets. |
-| Manifest generation | `prepare_ocd_gmae.py` | Reproducibility CLI | Build the 24-case OCD-GMAE manifest from an LMDB source. |
-| Manifest generation | `prepare_ocd_gmae_representative.py` | Reproducibility CLI | Build the 50-case OCD-GMAE representative manifest from an LMDB source. |
 | Narrow comparison | `compare_two_backend_ablation.py` | Auxiliary CLI | Compare exactly two backend ablation tables; not the main 4-backend analysis. |
-| Maintenance | `maintenance_merge_split_result_dirs.py` | Maintenance CLI | Merge split historical result directories into `canonical_raw/`. |
 | Legacy handoff | `legacy_prepare_topk_dft_handoff.py` | Legacy CLI | Older top-k DFT handoff workflow; current DFT workflow is `export_dft_iteration_alignment.py`. |
 | Legacy packaging | `legacy_package_results.py` | Legacy CLI | Pre-`canonical_raw` packaging workflow; keep only for old runbooks. |
 
@@ -72,16 +55,16 @@ Run a manifest sequentially:
 
 ```bash
 python -m research.agent_eval.run_batch \
-  --manifest research/agent_eval/manifests/cmu_manifest.csv \
+  --manifest datasets/cmu20/cmu20_manifest.csv \
   --config research/agent_eval/configs/frozen_config_gemini25pro_vertexai_one_shot.json \
-  --output research/results/canonical_raw/legacy_raw_sources/cmu20_gemini_one_shot
+  --output research/results/example_cmu20_gemini_one_shot
 ```
 
 Run an ablation matrix:
 
 ```bash
 python -m research.agent_eval.run_ablation \
-  --manifest research/agent_eval/manifests/cmu_manifest.csv \
+  --manifest datasets/cmu20/cmu20_manifest.csv \
   --config research/agent_eval/configs/frozen_config_gemini25pro_vertexai.json \
   --output research/results/example_gemini_ablation \
   --cases 01,02,09,14,19 \
@@ -92,23 +75,23 @@ Rebuild summaries from existing result directories:
 
 ```bash
 python -m research.agent_eval.summarize_runs \
-  --output research/results/canonical_raw/legacy_raw_sources/cmu20_gemini_one_shot
+  --output research/results/example_cmu20_gemini_one_shot
 ```
 
 ```bash
 python -m research.agent_eval.rebuild_ablation_summary \
   --ablation-dir research/results/example_gemini_ablation \
-  --one-shot-dir research/results/canonical_raw/legacy_raw_sources/cmu20_gemini_one_shot
+  --one-shot-dir research/results/example_cmu20_gemini_one_shot
 ```
 
 Aggregate a 4-backend ablation table:
 
 ```bash
 python -m research.agent_eval.aggregate_ablation_across_backends \
-  --summary gemini=research/results/canonical_raw/cmu20_gemini_ablation/ablation_summary.csv \
-  --summary grok4=research/results/canonical_raw/cmu20_grok4_ablation/ablation_summary.csv \
-  --summary gpt54=research/results/canonical_raw/cmu20_openai_gpt54_ablation/ablation_summary.csv \
-  --summary claude=research/results/canonical_raw/cmu20_anthropic_sonnet46_ablation/ablation_summary.csv \
+  --summary gemini=research/results/canonical_raw/cmu20/gemini_ablation/ablation_summary.csv \
+  --summary grok4=research/results/canonical_raw/cmu20/grok4_ablation/ablation_summary.csv \
+  --summary gpt54=research/results/canonical_raw/cmu20/openai_gpt54_ablation/ablation_summary.csv \
+  --summary claude=research/results/canonical_raw/cmu20/anthropic_sonnet46_ablation/ablation_summary.csv \
   --output-csv research/results/analysis/cmu20_multi_backend_ablation_summary.csv \
   --output-json research/results/analysis/cmu20_multi_backend_ablation_summary.json
 ```

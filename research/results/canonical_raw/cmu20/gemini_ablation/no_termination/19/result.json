@@ -1,0 +1,388 @@
+{
+  "case_id": "19",
+  "case_metadata": {
+    "case_id": "19",
+    "slab_file": "datasets/cmu20/19_Hf2Zn6_110.xyz",
+    "smiles": "CC=O",
+    "user_request": "Find the lowest-energy adsorption configuration for acetaldehyde on the provided surface.",
+    "surface_family": "intermetallic",
+    "adsorbate_name": "OCHCH3",
+    "miller_index": "(110)",
+    "reaction_class": "COMPLEX",
+    "ablation_candidate": "TRUE",
+    "notes": "Best-available reconstruction from sanitized filename CC_O and formula C2H4O; large-adsorbate ablation candidate"
+  },
+  "status": "success",
+  "best_energy_eV": -3.5939178466796875,
+  "iteration_count": 5,
+  "max_attempts": 5,
+  "final_site_type": "bridge",
+  "converged_tag": false,
+  "wall_clock_sec": 702.1030044159852,
+  "total_input_tokens": 24320,
+  "total_output_tokens": 19801,
+  "artifact_paths": {},
+  "best_result": {
+    "most_stable_energy_eV": -3.5939178466796875,
+    "analysis_json": {
+      "status": "success",
+      "message": "Most stable config adsorption energy: -3.5939 eV. Target Atom 1: C (from plan index 1, global index 64). -> Nearest: Hf (Index 16), Distance: 2.277 Å (Threshold: 2.761), Bound: True. Target Atom 2: O (from plan index 2, global index 65). -> Nearest: Hf (Index 18), Distance: 2.206 Å (Threshold: 2.651), Bound: True. Bonded Surface Atoms: O(65)-Hf(1.914Å), C(64)-Hf(2.42Å), C(64)-Hf(2.759Å), O(65)-Hf(3.329Å). Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Hf', 'Hf'] -> Actual ['Hf', 'Hf', 'Hf', 'Hf']).",
+      "most_stable_energy_eV": -3.5939178466796875,
+      "bonded_surface_atoms": [
+        {
+          "adsorbate_atom": "O(65)",
+          "adsorbate_atom_index": 65,
+          "symbol": "Hf",
+          "index": 18,
+          "distance": 1.914
+        },
+        {
+          "adsorbate_atom": "C(64)",
+          "adsorbate_atom_index": 64,
+          "symbol": "Hf",
+          "index": 16,
+          "distance": 2.42
+        },
+        {
+          "adsorbate_atom": "C(64)",
+          "adsorbate_atom_index": 64,
+          "symbol": "Hf",
+          "index": 18,
+          "distance": 2.759
+        },
+        {
+          "adsorbate_atom": "O(65)",
+          "adsorbate_atom_index": 65,
+          "symbol": "Hf",
+          "index": 16,
+          "distance": 3.329
+        }
+      ],
+      "final_bond_distance_A": 1.914,
+      "is_covalently_bound": true,
+      "atom_1": {
+        "symbol": "C",
+        "global_index": 64,
+        "distance_A": 2.277,
+        "is_bound": true
+      },
+      "atom_2": {
+        "symbol": "O",
+        "global_index": 65,
+        "distance_A": 2.206,
+        "is_bound": true
+      },
+      "reaction_detected": false,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "n_components": 1,
+      "site_analysis": {
+        "planned_site_type": "bridge",
+        "planned_connectivity": 2,
+        "actual_site_type": "bridge",
+        "actual_connectivity": 2,
+        "is_chemical_slip": true,
+        "planned_symbols": [
+          "Hf",
+          "Hf"
+        ],
+        "actual_symbols": [
+          "Hf",
+          "Hf",
+          "Hf",
+          "Hf"
+        ],
+        "site_fingerprint": "Hf18-Hf16-Hf18-Hf16"
+      },
+      "best_structure_file": "outputs/19-d8019786/BEST_CC_O_bridge_E-3.594.xyz",
+      "generated_conformers_file": "outputs/19-d8019786/conformers_CC_O.traj",
+      "relaxation_trajectory_file": "outputs/19-d8019786/final.xyz",
+      "session_id": "19-d8019786"
+    },
+    "plan": {
+      "reasoning": "0. **SMILES Consistency Check**: The SMILES `CC=O` corresponds to acetaldehyde. The provided atom list with C(SP3), C(SP2), and O(SP2) is consistent with this molecule. No radicals are present, so `adsorbate_type` will be `Molecule`.\n1. **Analyze Old Plans**: I have successfully tested two configurations:\n   - **ontop @ Hf**: This yielded the current lowest energy of E = -3.132 eV. This is a strong chemisorption, likely through the carbonyl oxygen.\n   - **bridge @ Hf-Zn**: This site proved to be unstable, with the adsorbate slipping to a different site. The energy was -3.071 eV. Crucially, this result indicates that Hf-Zn bridge sites are unfavorable for this adsorbate, and I must avoid them in future plans.\n2. **Formulate New Plan**: My goal is to find a configuration with energy lower than -3.132 eV. The high affinity for the Hf site suggests that other sites involving Hf are promising. I have not yet tested a bidentate adsorption mode where the entire C=O functional group interacts with the surface. This is a common and often strong binding mode for carbonyls.\n3. **Analyze Request**: The user wants the lowest-energy adsorption configuration.\n4. **Analyze Adsorbate**: The key functional group is the carbonyl C=O. The indices for these atoms are 1 (C, SP2) and 2 (O, SP2).\n5. **Analyze Surface**: The list of available sites includes `[Bridge]: Hf-Hf`. Given the demonstrated high reactivity of Hf atoms from the ontop test, a Hf-Hf bridge site is an excellent candidate for strong bidentate C=O adsorption.\n6. **Formulate Plan**: I will propose a bidentate adsorption of the C=O group onto a Hf-Hf bridge site. This explores a new binding mode (bidentate) on a promising, untested site type.\n   - `site_type`: \"bridge\"\n   - `surface_binding_atoms`: [\"Hf\", \"Hf\"]\n   - `adsorbate_binding_indices`: [1, 2] (representing the carbonyl C and O atoms)",
+      "adsorbate_type": "Molecule",
+      "solution": {
+        "action": "continue",
+        "site_type": "bridge",
+        "surface_binding_atoms": [
+          "Hf",
+          "Hf"
+        ],
+        "adsorbate_binding_indices": [
+          1,
+          2
+        ],
+        "relax_top_n": 1,
+        "touch_sphere_size": 2,
+        "overlap_thr": 0.1,
+        "conformers_per_site_cap": 4
+      }
+    },
+    "result_type": "Perfect"
+  },
+  "last_analysis": {
+    "status": "success",
+    "message": "Most stable config adsorption energy: -3.0967 eV. Target Atom 1: C (from plan index 1, global index 64). -> Nearest: Zn (Index 30), Distance: 2.258 Å (Threshold: 2.178), Bound: False. Target Atom 2: O (from plan index 2, global index 65). -> Nearest: Hf (Index 50), Distance: 2.056 Å (Threshold: 2.651), Bound: True. Bonded Surface Atoms: O(65)-Hf(1.903Å), C(64)-Zn(2.144Å), C(64)-Hf(2.683Å). Is Bound: False. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Hf', 'Zn', 'Zn'] -> Actual ['Hf', 'Hf', 'Zn']).",
+    "most_stable_energy_eV": -3.0966949462890625,
+    "bonded_surface_atoms": [
+      {
+        "adsorbate_atom": "O(65)",
+        "adsorbate_atom_index": 65,
+        "symbol": "Hf",
+        "index": 50,
+        "distance": 1.903
+      },
+      {
+        "adsorbate_atom": "C(64)",
+        "adsorbate_atom_index": 64,
+        "symbol": "Zn",
+        "index": 30,
+        "distance": 2.144
+      },
+      {
+        "adsorbate_atom": "C(64)",
+        "adsorbate_atom_index": 64,
+        "symbol": "Hf",
+        "index": 50,
+        "distance": 2.683
+      }
+    ],
+    "final_bond_distance_A": 1.903,
+    "is_covalently_bound": false,
+    "atom_1": {
+      "symbol": "C",
+      "global_index": 64,
+      "distance_A": 2.258,
+      "is_bound": false
+    },
+    "atom_2": {
+      "symbol": "O",
+      "global_index": 65,
+      "distance_A": 2.056,
+      "is_bound": true
+    },
+    "reaction_detected": false,
+    "bond_change_count": 0,
+    "is_dissociated": false,
+    "n_components": 1,
+    "site_analysis": {
+      "planned_site_type": "hollow",
+      "planned_connectivity": 3,
+      "actual_site_type": "bridge",
+      "actual_connectivity": 2,
+      "is_chemical_slip": true,
+      "planned_symbols": [
+        "Hf",
+        "Zn",
+        "Zn"
+      ],
+      "actual_symbols": [
+        "Hf",
+        "Hf",
+        "Zn"
+      ],
+      "site_fingerprint": "Hf50-Zn30-Hf50"
+    },
+    "best_structure_file": "outputs/19-d8019786/BEST_CC_O_hollow_to_bridge_E-3.097.xyz",
+    "generated_conformers_file": "outputs/19-d8019786/conformers_CC_O.traj",
+    "relaxation_trajectory_file": "outputs/19-d8019786/final.xyz",
+    "session_id": "19-d8019786"
+  },
+  "attempt_records": [
+    {
+      "attempt_index": 1,
+      "plan": {
+        "reasoning": "The user wants to find the lowest energy adsorption configuration for acetaldehyde (CC=O) on a Hf2Zn6(110) surface. This is the first attempt, as the history is empty. I will start by proposing the most chemically intuitive configuration. Acetaldehyde has a polar carbonyl group (C=O). The oxygen atom (index 2) possesses lone pairs, making it a strong Lewis base, which can readily donate electron density to an acidic surface metal site. The surface contains both Hf and Zn. Generally, Hafnium (Hf) is more oxophilic than Zinc (Zn), meaning it forms stronger bonds with oxygen. Therefore, a promising initial configuration is the acetaldehyde molecule binding through its oxygen atom to an ontop Hf site. This corresponds to an η¹(O) binding mode. I will select the ontop site type, specify 'Hf' as the surface binding atom, and use index 2 for the adsorbate binding atom (oxygen).",
+        "adsorbate_type": "Molecule",
+        "solution": {
+          "action": "continue",
+          "site_type": "ontop",
+          "surface_binding_atoms": [
+            "Hf"
+          ],
+          "adsorbate_binding_indices": [
+            2
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "ontop|Hf|2|Molecule|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -3.1324996948242188,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": false,
+      "planned_site_type": "ontop",
+      "actual_site_type": "ontop",
+      "best_structure_file": "outputs/19-d8019786/BEST_CC_O_ontop_E-3.132.xyz",
+      "generated_conformers_file": "outputs/19-d8019786/conformers_CC_O.traj",
+      "relaxation_trajectory_file": "outputs/19-d8019786/final.xyz",
+      "message": "Most stable config adsorption energy: -3.1325 eV. Target Atom: O (from plan index 2, global index 64 in relaxed structure). -> Nearest: Hf (Index 18), Distance: 1.947 Å (Threshold: 3.494), Bound: True. Bonded Surface Atoms: Hf-1.947Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: False (Planned ['Hf'] -> Actual ['Hf']).",
+      "history_entry": "【✅ Perfect Adsorption】 ontop @ ['Hf'] (Index [2]) -> Site: ontop (Hf) | E=-3.132 eV"
+    },
+    {
+      "attempt_index": 2,
+      "plan": {
+        "reasoning": "The previous attempt successfully found a stable configuration for acetaldehyde on an ontop Hf site, binding through the oxygen atom (index 2) with a strong adsorption energy of -3.132 eV. This corresponds to an η¹(O) coordination mode. To systematically search for the global minimum, I will now explore a different, chemically distinct binding mode. A very common and often strong binding configuration for aldehydes and ketones is the η²(C,O) side-on mode, where both the carbonyl carbon (index 1) and oxygen (index 2) interact with the surface. A bridge site is geometrically ideal for this two-atom interaction. I will test this η²(C,O) mode on a Hf-Zn bridge site, as this site type is available and allows the adsorbate to interact with both types of surface metal atoms simultaneously.",
+        "adsorbate_type": "Molecule",
+        "solution": {
+          "action": "continue",
+          "site_type": "bridge",
+          "surface_binding_atoms": [
+            "Hf",
+            "Zn"
+          ],
+          "adsorbate_binding_indices": [
+            1,
+            2
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "bridge|Hf,Zn|1,2|Molecule|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -3.0713958740234375,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": true,
+      "planned_site_type": "bridge",
+      "actual_site_type": "bridge",
+      "best_structure_file": "outputs/19-d8019786/BEST_CC_O_bridge_E-3.071.xyz",
+      "generated_conformers_file": "outputs/19-d8019786/conformers_CC_O.traj",
+      "relaxation_trajectory_file": "outputs/19-d8019786/final.xyz",
+      "message": "Most stable config adsorption energy: -3.0714 eV. Target Atom 1: C (from plan index 1, global index 64). -> Nearest: Zn (Index 62), Distance: 2.212 Å (Threshold: 2.178), Bound: False. Target Atom 2: O (from plan index 2, global index 65). -> Nearest: Zn (Index 62), Distance: 2.981 Å (Threshold: 2.068), Bound: False. Bonded Surface Atoms: O(65)-Hf(1.889Å), C(64)-Zn(2.11Å), C(64)-Hf(2.637Å). Is Bound: False. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Hf', 'Zn'] -> Actual ['Hf', 'Hf', 'Zn']).",
+      "history_entry": "【✅ Perfect Adsorption】 bridge @ ['Hf', 'Zn'] (Index [1, 2]) -> ⚠️【Unstable Site Warning】⚠️: Planned bridge (Hf-Zn) is unstable, adsorbate spontaneously slipped to bridge (Hf-Hf-Zn).This means Hf-Zn has insufficient affinity for this adsorbate. Please **FORBID** testing Hf-Zn type sites again! | E=-3.071 eV"
+    },
+    {
+      "attempt_index": 3,
+      "plan": {
+        "reasoning": "0. **SMILES Consistency Check**: The SMILES `CC=O` corresponds to acetaldehyde. The provided atom list with C(SP3), C(SP2), and O(SP2) is consistent with this molecule. No radicals are present, so `adsorbate_type` will be `Molecule`.\n1. **Analyze Old Plans**: I have successfully tested two configurations:\n   - **ontop @ Hf**: This yielded the current lowest energy of E = -3.132 eV. This is a strong chemisorption, likely through the carbonyl oxygen.\n   - **bridge @ Hf-Zn**: This site proved to be unstable, with the adsorbate slipping to a different site. The energy was -3.071 eV. Crucially, this result indicates that Hf-Zn bridge sites are unfavorable for this adsorbate, and I must avoid them in future plans.\n2. **Formulate New Plan**: My goal is to find a configuration with energy lower than -3.132 eV. The high affinity for the Hf site suggests that other sites involving Hf are promising. I have not yet tested a bidentate adsorption mode where the entire C=O functional group interacts with the surface. This is a common and often strong binding mode for carbonyls.\n3. **Analyze Request**: The user wants the lowest-energy adsorption configuration.\n4. **Analyze Adsorbate**: The key functional group is the carbonyl C=O. The indices for these atoms are 1 (C, SP2) and 2 (O, SP2).\n5. **Analyze Surface**: The list of available sites includes `[Bridge]: Hf-Hf`. Given the demonstrated high reactivity of Hf atoms from the ontop test, a Hf-Hf bridge site is an excellent candidate for strong bidentate C=O adsorption.\n6. **Formulate Plan**: I will propose a bidentate adsorption of the C=O group onto a Hf-Hf bridge site. This explores a new binding mode (bidentate) on a promising, untested site type.\n   - `site_type`: \"bridge\"\n   - `surface_binding_atoms`: [\"Hf\", \"Hf\"]\n   - `adsorbate_binding_indices`: [1, 2] (representing the carbonyl C and O atoms)",
+        "adsorbate_type": "Molecule",
+        "solution": {
+          "action": "continue",
+          "site_type": "bridge",
+          "surface_binding_atoms": [
+            "Hf",
+            "Hf"
+          ],
+          "adsorbate_binding_indices": [
+            1,
+            2
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "bridge|Hf,Hf|1,2|Molecule|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -3.5939178466796875,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": true,
+      "planned_site_type": "bridge",
+      "actual_site_type": "bridge",
+      "best_structure_file": "outputs/19-d8019786/BEST_CC_O_bridge_E-3.594.xyz",
+      "generated_conformers_file": "outputs/19-d8019786/conformers_CC_O.traj",
+      "relaxation_trajectory_file": "outputs/19-d8019786/final.xyz",
+      "message": "Most stable config adsorption energy: -3.5939 eV. Target Atom 1: C (from plan index 1, global index 64). -> Nearest: Hf (Index 16), Distance: 2.277 Å (Threshold: 2.761), Bound: True. Target Atom 2: O (from plan index 2, global index 65). -> Nearest: Hf (Index 18), Distance: 2.206 Å (Threshold: 2.651), Bound: True. Bonded Surface Atoms: O(65)-Hf(1.914Å), C(64)-Hf(2.42Å), C(64)-Hf(2.759Å), O(65)-Hf(3.329Å). Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Hf', 'Hf'] -> Actual ['Hf', 'Hf', 'Hf', 'Hf']).",
+      "history_entry": "【✅ Perfect Adsorption】 bridge @ ['Hf', 'Hf'] (Index [1, 2]) -> ⚠️【Unstable Site Warning】⚠️: Planned bridge (Hf-Hf) is unstable, adsorbate spontaneously slipped to bridge (Hf-Hf-Hf-Hf).This means Hf-Hf has insufficient affinity for this adsorbate. Please **FORBID** testing Hf-Hf type sites again! | E=-3.594 eV"
+    },
+    {
+      "attempt_index": 4,
+      "plan": {
+        "reasoning": "0. **SMILES Consistency Check**: The SMILES `CC=O` corresponds to acetaldehyde. The provided atom list with SP2 hybridization for the carbonyl C and O atoms is consistent with this structure. No radical electrons are present, so `adsorbate_type` will be `Molecule`.\n\n1. **Analyze Old Plans**: I have performed three calculations so far. \n   - `ontop @ Hf`: E = -3.132 eV. A stable configuration.\n   - `bridge @ Hf-Zn`: Slipped to a higher-coordination site. E = -3.071 eV. The Hf-Zn bridge site is marked as unstable and forbidden for future attempts.\n   - `bridge @ Hf-Hf`: Slipped to a higher-coordination site. E = -3.594 eV. This is the current lowest energy. The Hf-Hf bridge site is also marked as unstable and forbidden.\n   - **Learning Conclusion**: The results, especially the slips from bridge sites to higher-coordination sites, strongly suggest that acetaldehyde prefers to bind at sites with more than two surface atoms, particularly involving Hf. The current best energy of -3.594 eV confirms that strong interactions are possible.\n\n2. **Formulate New Plan**: My goal is to find a configuration with an energy lower than -3.594 eV. Based on the previous results, exploring hollow sites is the most logical next step. The adsorbate, acetaldehyde, has a polar C=O bond which can bind in an η²-(C,O) fashion, interacting with multiple surface atoms simultaneously. This binding mode is well-suited for a hollow site.\n\n3. **Analyze Request**: The user wants to find the lowest-energy adsorption configuration for acetaldehyde.\n\n4. **Analyze Adsorbate**: The key functional group is the carbonyl C=O. The binding will involve the SP2 carbon (index 1) and the SP2 oxygen (index 2). I will plan for an η²-(C,O) side-on adsorption.\n\n5. **Analyze Surface**: The list of available sites includes `[Hollow-4]: Hf-Hf-Zn-Zn`. This site is an excellent candidate because it offers high coordination and involves two Hf atoms, which have shown strong reactivity in previous attempts. This site is ideal for testing the proposed η²-(C,O) binding mode.\n\n6. **Formulate Plan**: I will propose placing the acetaldehyde molecule with its C=O group over the `Hf-Hf-Zn-Zn` hollow site.\n   - `site_type`: `hollow`\n   - `surface_binding_atoms`: `['Hf', 'Hf', 'Zn', 'Zn']`\n   - `adsorbate_binding_indices`: `[1, 2]` (for the C and O of the carbonyl group)\n   - `adsorbate_type`: `Molecule`",
+        "adsorbate_type": "Molecule",
+        "solution": {
+          "action": "continue",
+          "site_type": "hollow",
+          "surface_binding_atoms": [
+            "Hf",
+            "Hf",
+            "Zn",
+            "Zn"
+          ],
+          "adsorbate_binding_indices": [
+            1,
+            2
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "hollow|Hf,Hf,Zn,Zn|1,2|Molecule|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -1.3214569091796875,
+      "bond_change_count": 1,
+      "is_dissociated": true,
+      "is_chemical_slip": true,
+      "planned_site_type": "hollow",
+      "actual_site_type": "hollow (HCP/Subsurf-Atom)",
+      "best_structure_file": "outputs/19-d8019786/BEST_CC_O_hollow_to_hollow_HCP-Subsurf-Atom_DISS_E-1.321.xyz",
+      "generated_conformers_file": "outputs/19-d8019786/conformers_CC_O.traj",
+      "relaxation_trajectory_file": "outputs/19-d8019786/final.xyz",
+      "message": "Most stable config adsorption energy: -1.3215 eV. Target Atom 1: C (from plan index 1, global index 64). -> Nearest: Zn (Index 30), Distance: 2.354 Å (Threshold: 2.178), Bound: False. Target Atom 2: O (from plan index 2, global index 65). -> Nearest: Zn (Index 30), Distance: 2.095 Å (Threshold: 2.068), Bound: False. Bonded Surface Atoms: O(65)-Zn(2.021Å), C(64)-Zn(2.227Å), C(64)-Hf(2.917Å), C(64)-Hf(3.325Å), C(64)-Hf(3.6Å). Is Bound: False. Reactivity Change Detected: True (Bond Changes: 1). Chemical Slip: True (Planned ['Hf', 'Hf', 'Zn', 'Zn'] -> Actual ['Hf', 'Hf', 'Hf', 'Zn', 'Zn']).",
+      "history_entry": "【❌ Dissociated】 hollow @ ['Hf', 'Hf', 'Zn', 'Zn'] (Index [1, 2]) -> ⚠️【Unstable Site Warning】⚠️: Planned hollow (Hf-Hf-Zn-Zn) is unstable, adsorbate spontaneously slipped to hollow (HCP/Subsurf-Atom) (Hf-Hf-Hf-Zn-Zn).This means Hf-Hf-Zn-Zn has insufficient affinity for this adsorbate. Please **FORBID** testing Hf-Hf-Zn-Zn type sites again! | E=-1.321 eV"
+    },
+    {
+      "attempt_index": 5,
+      "plan": {
+        "reasoning": "0. **SMILES Consistency Check:** The SMILES `CC=O` corresponds to acetaldehyde. The provided atom list with C(SP3), C(SP2), and O(SP2) is correct. The molecule is not a radical.\n\n1. **Analyze Old Plans:**\n   - The current best energy is E=-3.594 eV, which was found when an initial `bridge @ ['Hf', 'Hf']` plan spontaneously slipped to a more stable multi-atom site. This indicates that multi-atom sites, particularly those involving multiple Hf atoms, are highly favorable.\n   - A stable `ontop @ ['Hf']` configuration was found at E=-3.132 eV, which is less stable than the slipped configuration.\n   - Several site types have been identified as unstable for this adsorbate and are now forbidden: `bridge (Hf-Zn)`, `bridge (Hf-Hf)`, and `hollow (Hf-Hf-Zn-Zn)`. I must not propose these again.\n\n2. **Formulate New Plan:**\n   - My goal is to find a configuration with energy lower than -3.594 eV.\n   - The available, untested sites are: `ontop (Zn)`, `bridge (Zn-Zn)`, `hollow-3 (Hf-Zn-Zn)`, `hollow-3 (Zn-Zn-Zn)`, and `hollow-4 (Zn-Zn-Zn-Zn)`.\n   - Given the high affinity for Hf observed in previous runs, the `hollow-3 (Hf-Zn-Zn)` site is the most promising candidate among the remaining options. Sites involving only Zn are likely to be less favorable.\n\n3. **Analyze Adsorbate (CC=O):**\n   - The key binding points are the carbonyl oxygen (index 2, with lone pairs) and the carbonyl carbon (index 1). The C=O double bond (indices 1 and 2) can also bind in a side-on (η²) fashion.\n\n4. **Propose New Configuration:**\n   - I will test the most promising remaining site: `hollow-3 (Hf-Zn-Zn)`.\n   - I will use a bidentate, side-on binding mode involving both the carbonyl carbon and oxygen (η²-C,O) to maximize interaction with the multi-atom hollow site. This is a different binding orientation than the likely monodentate (O-down) modes tested previously.\n   - This leads to the following plan: `site_type: hollow`, `surface_binding_atoms: ['Hf', 'Zn', 'Zn']`, `adsorbate_binding_indices: [1, 2]`.\n   - This plan is chemically sound, has not been tested before, and targets the most promising available site based on previous results.",
+        "adsorbate_type": "Molecule",
+        "solution": {
+          "action": "continue",
+          "site_type": "hollow",
+          "surface_binding_atoms": [
+            "Hf",
+            "Zn",
+            "Zn"
+          ],
+          "adsorbate_binding_indices": [
+            1,
+            2
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "hollow|Hf,Zn,Zn|1,2|Molecule|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -3.0966949462890625,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": true,
+      "planned_site_type": "hollow",
+      "actual_site_type": "bridge",
+      "best_structure_file": "outputs/19-d8019786/BEST_CC_O_hollow_to_bridge_E-3.097.xyz",
+      "generated_conformers_file": "outputs/19-d8019786/conformers_CC_O.traj",
+      "relaxation_trajectory_file": "outputs/19-d8019786/final.xyz",
+      "message": "Most stable config adsorption energy: -3.0967 eV. Target Atom 1: C (from plan index 1, global index 64). -> Nearest: Zn (Index 30), Distance: 2.258 Å (Threshold: 2.178), Bound: False. Target Atom 2: O (from plan index 2, global index 65). -> Nearest: Hf (Index 50), Distance: 2.056 Å (Threshold: 2.651), Bound: True. Bonded Surface Atoms: O(65)-Hf(1.903Å), C(64)-Zn(2.144Å), C(64)-Hf(2.683Å). Is Bound: False. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Hf', 'Zn', 'Zn'] -> Actual ['Hf', 'Hf', 'Zn']).",
+      "history_entry": "【✅ Perfect Adsorption】 hollow @ ['Hf', 'Zn', 'Zn'] (Index [1, 2]) -> ⚠️【Unstable Site Warning】⚠️: Planned hollow (Hf-Zn-Zn) is unstable, adsorbate spontaneously slipped to bridge (Hf-Hf-Zn).This means Hf-Zn-Zn has insufficient affinity for this adsorbate. Please **FORBID** testing Hf-Zn-Zn type sites again! | E=-3.097 eV"
+    }
+  ],
+  "history": [
+    "【✅ Perfect Adsorption】 ontop @ ['Hf'] (Index [2]) -> Site: ontop (Hf) | E=-3.132 eV",
+    "【✅ Perfect Adsorption】 bridge @ ['Hf', 'Zn'] (Index [1, 2]) -> ⚠️【Unstable Site Warning】⚠️: Planned bridge (Hf-Zn) is unstable, adsorbate spontaneously slipped to bridge (Hf-Hf-Zn).This means Hf-Zn has insufficient affinity for this adsorbate. Please **FORBID** testing Hf-Zn type sites again! | E=-3.071 eV",
+    "【✅ Perfect Adsorption】 bridge @ ['Hf', 'Hf'] (Index [1, 2]) -> ⚠️【Unstable Site Warning】⚠️: Planned bridge (Hf-Hf) is unstable, adsorbate spontaneously slipped to bridge (Hf-Hf-Hf-Hf).This means Hf-Hf has insufficient affinity for this adsorbate. Please **FORBID** testing Hf-Hf type sites again! | E=-3.594 eV",
+    "【❌ Dissociated】 hollow @ ['Hf', 'Hf', 'Zn', 'Zn'] (Index [1, 2]) -> ⚠️【Unstable Site Warning】⚠️: Planned hollow (Hf-Hf-Zn-Zn) is unstable, adsorbate spontaneously slipped to hollow (HCP/Subsurf-Atom) (Hf-Hf-Hf-Zn-Zn).This means Hf-Hf-Zn-Zn has insufficient affinity for this adsorbate. Please **FORBID** testing Hf-Hf-Zn-Zn type sites again! | E=-1.321 eV",
+    "【✅ Perfect Adsorption】 hollow @ ['Hf', 'Zn', 'Zn'] (Index [1, 2]) -> ⚠️【Unstable Site Warning】⚠️: Planned hollow (Hf-Zn-Zn) is unstable, adsorbate spontaneously slipped to bridge (Hf-Hf-Zn).This means Hf-Zn-Zn has insufficient affinity for this adsorbate. Please **FORBID** testing Hf-Zn-Zn type sites again! | E=-3.097 eV"
+  ],
+  "error": null,
+  "perfect_count": 4,
+  "dissociation_count": 1,
+  "rearrangement_count": 0,
+  "calc_failure_count": 0,
+  "chemical_slip_count": 4
+}

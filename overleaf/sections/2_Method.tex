@@ -90,8 +90,7 @@ All agent-side benchmark runs in this manuscript use frozen experiment configura
 
 The original locked CMU statistical package used 15 cases (01--02, 04--05, 09--10, 12--20), and the current manuscript revision extends the CMU ablation audit to the full 20-case manifest. This CMU set spans atomic adsorbates (H), small multi-atom intermediates (OH and NNH), and larger intermediates (CH$_2$CH$_2$OH, OCHCH$_3$, and ONN(CH$_3$)$_2$) across intermetallic and monometallic surfaces. Full runs use a maximum of five attempts. The 1-shot baseline uses the same tooling and physical backend but restricts the planner to a single attempt, allowing us to isolate the value of closed-loop refinement from the value of the base planner alone. Experiments are launched from frozen configurations with fixed seeds and structured result serialization for reproducibility.
 
-For the expanded OCD-GMAE validation, we assemble an audited 24-case set (OCD24) from the original locked 10-subset plus a 14-case extension.
-The formal OCD24 statistics use all four reasoning backends in the same five-variant matrix.
-Separately, we evaluate an independently selected 50-case representative OCD-GMAE slice (rep50) as a broader Full-versus-1-Shot generalization study.
-OCD24 and rep50 are not nested subsets: they overlap on 12 source records, and their case identifiers are local to each manifest.
+For the OCD-GMAE validation, we use a single 62-case OCD62 benchmark.
+The formal OCD62 statistics use all four reasoning backends in the same five-variant matrix, yielding 1240 backend--case--variant attempts.
+The 12 repeated OCD62 cases are reserved for overlap12 reproducibility analysis and are not treated as a separate benchmark.
 For these expanded analyses, natural chemistry failures are retained in success-rate and reach-Full statistics, while energy deltas are computed only on runs with valid relaxed adsorption energies.

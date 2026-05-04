@@ -1,0 +1,273 @@
+{
+  "case_id": "042",
+  "case_metadata": {
+    "case_id": "042",
+    "slab_file": "datasets/ocd62/042_ocd_614_Na8Pb24_NH2.xyz",
+    "smiles": "[NH2]",
+    "user_request": "Find the lowest-energy adsorption configuration for the adsorbate with SMILES [NH2] on the provided surface.",
+    "surface_family": "intermetallic",
+    "adsorbate_name": "[NH2]",
+    "miller_index": "",
+    "reaction_class": "GENERALIZATION",
+    "ablation_candidate": "FALSE",
+    "notes": "OCD id=614; adsorbate=[NH2]; surface_formula=Na8Pb24; y_relaxed=-0.260645 eV; site=1;11",
+    "surface_formula": "Na8Pb24",
+    "surface_elements": "Na;Pb",
+    "bare_slab_atoms": "32",
+    "adsorbate_atoms": "3",
+    "y_relaxed": "-0.260645",
+    "site_indices": "1;11"
+  },
+  "status": "success",
+  "best_energy_eV": -3.283937454223633,
+  "iteration_count": 4,
+  "max_attempts": 5,
+  "final_site_type": "bridge",
+  "converged_tag": false,
+  "wall_clock_sec": 1040.6521738693118,
+  "total_input_tokens": 28152,
+  "total_output_tokens": 7217,
+  "artifact_paths": {
+    "BEST_NH2_bridge_to_hollow_HCP-Subsurf-Atom_E-2.936": "research/results/canonical_raw/ocd62/grok4_ablation/full/042/artifacts/BEST_NH2_bridge_to_hollow_HCP-Subsurf-Atom_E-2.936.xyz",
+    "BEST_NH2_bridge_to_hollow_HCP-Subsurf-Atom_E-2.936.xyz": "research/results/canonical_raw/ocd62/grok4_ablation/full/042/artifacts/BEST_NH2_bridge_to_hollow_HCP-Subsurf-Atom_E-2.936.xyz",
+    "best_structure_file": "research/results/canonical_raw/ocd62/grok4_ablation/full/042/artifacts/BEST_NH2_ontop_to_bridge_E-3.284.xyz",
+    "BEST_NH2_ontop_to_bridge_E-3.283": "research/results/canonical_raw/ocd62/grok4_ablation/full/042/artifacts/BEST_NH2_ontop_to_bridge_E-3.283.xyz",
+    "BEST_NH2_ontop_to_bridge_E-3.283.xyz": "research/results/canonical_raw/ocd62/grok4_ablation/full/042/artifacts/BEST_NH2_ontop_to_bridge_E-3.283.xyz",
+    "BEST_NH2_ontop_to_bridge_E-3.284": "research/results/canonical_raw/ocd62/grok4_ablation/full/042/artifacts/BEST_NH2_ontop_to_bridge_E-3.284.xyz",
+    "BEST_NH2_ontop_to_bridge_E-3.284.xyz": "research/results/canonical_raw/ocd62/grok4_ablation/full/042/artifacts/BEST_NH2_ontop_to_bridge_E-3.284.xyz",
+    "conformers_[NH2]": "research/results/canonical_raw/ocd62/grok4_ablation/full/042/artifacts/conformers_[NH2].traj",
+    "conformers_[NH2].traj": "research/results/canonical_raw/ocd62/grok4_ablation/full/042/artifacts/conformers_[NH2].traj",
+    "final": "research/results/canonical_raw/ocd62/grok4_ablation/full/042/artifacts/final.xyz",
+    "final.xyz": "research/results/canonical_raw/ocd62/grok4_ablation/full/042/artifacts/final.xyz",
+    "relaxation": "research/results/canonical_raw/ocd62/grok4_ablation/full/042/artifacts/relaxation.traj",
+    "relaxation.traj": "research/results/canonical_raw/ocd62/grok4_ablation/full/042/artifacts/relaxation.traj",
+    "relaxation_trajectory_file": "research/results/canonical_raw/ocd62/grok4_ablation/full/042/artifacts/relaxation.traj"
+  },
+  "best_result": {
+    "most_stable_energy_eV": -3.283937454223633,
+    "analysis_json": {
+      "status": "success",
+      "message": "Most stable config adsorption energy: -3.2839 eV. Target Atom: N (from plan index 0, global index 32 in relaxed structure). -> Nearest: Pb (Index 29), Distance: 2.26 Å (Threshold: 3.146), Bound: True. Bonded Surface Atoms: Pb-2.26Å, Na-2.324Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Na'] -> Actual ['Na', 'Pb']).",
+      "most_stable_energy_eV": -3.283937454223633,
+      "target_adsorbate_atom": "N",
+      "target_adsorbate_atom_index": 32,
+      "bonded_surface_atoms": [
+        {
+          "symbol": "Pb",
+          "index": 29,
+          "distance": 2.26
+        },
+        {
+          "symbol": "Na",
+          "index": 3,
+          "distance": 2.324
+        }
+      ],
+      "nearest_slab_atom": "Pb",
+      "nearest_slab_atom_index": 29,
+      "final_bond_distance_A": 2.26,
+      "estimated_covalent_cutoff_A": 2.387,
+      "is_covalently_bound": true,
+      "reaction_detected": false,
+      "is_dissociated": false,
+      "n_components": 1,
+      "bond_change_count": 0,
+      "site_analysis": {
+        "planned_site_type": "ontop",
+        "planned_connectivity": 1,
+        "actual_site_type": "bridge",
+        "actual_connectivity": 2,
+        "is_chemical_slip": true,
+        "planned_symbols": [
+          "Na"
+        ],
+        "actual_symbols": [
+          "Na",
+          "Pb"
+        ],
+        "site_fingerprint": "Pb29-Na3"
+      },
+      "best_structure_file": "outputs/011-98c2cb30/BEST_NH2_ontop_to_bridge_E-3.284.xyz",
+      "generated_conformers_file": "outputs/011-98c2cb30/conformers_[NH2].traj",
+      "relaxation_trajectory_file": "outputs/011-98c2cb30/final.xyz",
+      "session_id": "011-98c2cb30"
+    },
+    "plan": {
+      "reasoning": "Step 0: SMILES Consistency Check. The SMILES [NH2] represents NH2 radical with N at index 0, SP3 hybridization, radical_electrons=1. This matches a radical species, so use 'ReactiveSpecies'. No mismatch with user description.\nStep 1: Analyze Old Plans. One previous attempt: Planned ontop at ['Pb'] (Index [0]), but it slipped to bridge (Na-Pb) with energy -3.283 eV. This is marked as Unstable Site Warning for Pb ontop, forbidding further testing of Pb type sites. The slipped configuration is the current best at bridge Na-Pb. No other attempts. No convergence or duplicate tags, so continue.\nStep 2: Formulate New Plan. Avoid Pb type sites as per warning, meaning no ontop Pb. The stable slipped site is bridge Na-Pb, but to find potentially lower energy, test ontop Na, which hasn't been tried and is allowed. Available sites support ontop Na. If it slips or gives higher energy, we can assess. This is different from the previous plan.\nStep 3: User intent is to find the lowest-energy adsorption configuration.\nStep 4: Adsorbate [NH2] is a radical, binds via N (index 0) with unpaired electron.\nStep 5: Surface has ontop Na/Pb and bridge Na-Pb; forbid Pb types, so prioritize ontop Na.\nStep 6: Plan ontop at Na, binding via N index 0. Use default parameters.",
+      "adsorbate_type": "ReactiveSpecies",
+      "solution": {
+        "action": "continue",
+        "site_type": "ontop",
+        "surface_binding_atoms": [
+          "Na"
+        ],
+        "adsorbate_binding_indices": [
+          0
+        ],
+        "relax_top_n": 1,
+        "touch_sphere_size": 2,
+        "overlap_thr": 0.1,
+        "conformers_per_site_cap": 4
+      }
+    },
+    "result_type": "Perfect"
+  },
+  "last_analysis": {
+    "status": "error",
+    "message": "Tool execution failed: No sites of type 'hollow' containing ['Na', 'Na', 'Pb'] found."
+  },
+  "attempt_records": [
+    {
+      "attempt_index": 1,
+      "plan": {
+        "reasoning": "SMILES [NH2] represents the NH2 radical with the unpaired electron on nitrogen (index 0, radical_electrons: 1). This is a ReactiveSpecies suitable for adsorption via the radical center. History is None, so this is the first attempt. Available sites include ontop Na and Pb, and bridge Na-Pb. No hollow sites mentioned, so focus on ontop and bridge. NH2 typically adsorbs monodentate via N. Start with ontop Pb, as Pb may provide stronger binding than Na in this Pb-Na surface. surface_binding_atoms ['Pb'] for ontop Pb, adsorbate_binding_indices [0] for N. This is a new plan to begin systematic testing.",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "ontop",
+          "surface_binding_atoms": [
+            "Pb"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "ontop|Pb|0|ReactiveSpecies|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -3.282930374145508,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": true,
+      "planned_site_type": "ontop",
+      "actual_site_type": "bridge",
+      "best_structure_file": "outputs/011-98c2cb30/BEST_NH2_ontop_to_bridge_E-3.283.xyz",
+      "generated_conformers_file": "outputs/011-98c2cb30/conformers_[NH2].traj",
+      "relaxation_trajectory_file": "outputs/011-98c2cb30/final.xyz",
+      "message": "Most stable config adsorption energy: -3.2829 eV. Target Atom: N (from plan index 0, global index 32 in relaxed structure). -> Nearest: Pb (Index 11), Distance: 2.249 Å (Threshold: 3.146), Bound: True. Bonded Surface Atoms: Pb-2.249Å, Na-2.325Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Pb'] -> Actual ['Na', 'Pb']).",
+      "history_entry": "【✅ Perfect Adsorption】 ontop @ ['Pb'] (Index [0]) -> ⚠️【Unstable Site Warning】⚠️: Planned ontop (Pb) is unstable, adsorbate spontaneously slipped to bridge (Na-Pb).This means Pb has insufficient affinity for this adsorbate. Please **FORBID** testing Pb type sites again! [🌟 New Best] | E=-3.283 eV"
+    },
+    {
+      "attempt_index": 2,
+      "plan": {
+        "reasoning": "Step 0: SMILES Consistency Check. The SMILES [NH2] represents NH2 radical with N at index 0, SP3 hybridization, radical_electrons=1. This matches a radical species, so use 'ReactiveSpecies'. No mismatch with user description.\nStep 1: Analyze Old Plans. One previous attempt: Planned ontop at ['Pb'] (Index [0]), but it slipped to bridge (Na-Pb) with energy -3.283 eV. This is marked as Unstable Site Warning for Pb ontop, forbidding further testing of Pb type sites. The slipped configuration is the current best at bridge Na-Pb. No other attempts. No convergence or duplicate tags, so continue.\nStep 2: Formulate New Plan. Avoid Pb type sites as per warning, meaning no ontop Pb. The stable slipped site is bridge Na-Pb, but to find potentially lower energy, test ontop Na, which hasn't been tried and is allowed. Available sites support ontop Na. If it slips or gives higher energy, we can assess. This is different from the previous plan.\nStep 3: User intent is to find the lowest-energy adsorption configuration.\nStep 4: Adsorbate [NH2] is a radical, binds via N (index 0) with unpaired electron.\nStep 5: Surface has ontop Na/Pb and bridge Na-Pb; forbid Pb types, so prioritize ontop Na.\nStep 6: Plan ontop at Na, binding via N index 0. Use default parameters.",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "ontop",
+          "surface_binding_atoms": [
+            "Na"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "ontop|Na|0|ReactiveSpecies|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -3.283937454223633,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": true,
+      "planned_site_type": "ontop",
+      "actual_site_type": "bridge",
+      "best_structure_file": "outputs/011-98c2cb30/BEST_NH2_ontop_to_bridge_E-3.284.xyz",
+      "generated_conformers_file": "outputs/011-98c2cb30/conformers_[NH2].traj",
+      "relaxation_trajectory_file": "outputs/011-98c2cb30/final.xyz",
+      "message": "Most stable config adsorption energy: -3.2839 eV. Target Atom: N (from plan index 0, global index 32 in relaxed structure). -> Nearest: Pb (Index 29), Distance: 2.26 Å (Threshold: 3.146), Bound: True. Bonded Surface Atoms: Pb-2.26Å, Na-2.324Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Na'] -> Actual ['Na', 'Pb']).",
+      "history_entry": "【✅ Perfect Adsorption】 ontop @ ['Na'] (Index [0]) -> ⚠️【Unstable Site Warning】⚠️: Planned ontop (Na) is unstable, adsorbate spontaneously slipped to bridge (Na-Pb).This means Na has insufficient affinity for this adsorbate. Please **FORBID** testing Na type sites again! [🌟 New Best] | E=-3.284 eV"
+    },
+    {
+      "attempt_index": 3,
+      "plan": {
+        "reasoning": "Step 0: SMILES Consistency Check. The SMILES is [NH2], representing NH2 radical. The RDKit analysis shows index 0: N (SP3, radical_electrons=1). This matches a radical species with unpaired electron on N. No hybridization mismatch with user request. Radical check: Yes, index 0 has radical_electrons > 0, suitable for ReactiveSpecies.\nStep 1: Analyze Old Plans. Two previous attempts: ontop @ ['Pb'] (Index [0]) slipped to bridge (Na-Pb), E=-3.283 eV; ontop @ ['Na'] (Index [0]) slipped to bridge (Na-Pb), E=-3.284 eV. Both succeeded in adsorption but with Unstable Site Warning, indicating ontop sites are unstable and slipped to bridge. Instructions forbid testing Pb type sites and Na type sites again, which refers to ontop Pb and ontop Na. No failed attempts (no dissociation or bond changes mentioned). Energies are very similar (difference <0.05 eV, likely noise), and both converged to the same site type (bridge Na-Pb), but no [🔄 Converged to known best] tag, so not terminating yet. No [⚠️ Energy Degenerate but Geometrically Distinct] tag. Surface is heterogeneous (Na, Pb alloy), but both ontop attempts slipped to bridge with similar energies. Major ontop sites tested; bridge not directly tested.\nStep 2: Formulate New Plan. Goal is lowest energy configuration. Previous plans converged to bridge (Na-Pb), indicating it's stable. Directly test bridge to confirm and potentially find the true minimum without slipping. Avoid forbidden ontop sites. No hollow sites listed in available sites, so not planning hollow. This is a new plan different from previous ontop plans. Hard attempt limit is 5; this would be attempt 3.\nStep 3: Analyze Request. User's intent: Find lowest-energy adsorption configuration for [NH2] on the surface.\nStep 4: Analyze Adsorbate. SMILES [NH2]: NH2 radical, major functional group is amine radical. Binding via N (index 0) with unpaired electron.\nStep 5: Analyze Surface. Available sites: ontop Na/Pb (forbidden now), bridge Na-Pb. Plan for existing bridge Na-Pb.\nStep 6: Formulate Plan. Select bridge site with surface_binding_atoms ['Na', 'Pb']. Adsorbate binds via N (index 0), monodentate (len=1 allowed for bridge). Use ReactiveSpecies due to radical. Defaults for other parameters.",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "bridge",
+          "surface_binding_atoms": [
+            "Na",
+            "Pb"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "bridge|Na,Pb|0|ReactiveSpecies|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -2.9362449645996094,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": true,
+      "planned_site_type": "bridge",
+      "actual_site_type": "hollow (HCP/Subsurf-Atom)",
+      "best_structure_file": "outputs/011-98c2cb30/BEST_NH2_bridge_to_hollow_HCP-Subsurf-Atom_E-2.936.xyz",
+      "generated_conformers_file": "outputs/011-98c2cb30/conformers_[NH2].traj",
+      "relaxation_trajectory_file": "outputs/011-98c2cb30/final.xyz",
+      "message": "Most stable config adsorption energy: -2.9362 eV. Target Atom: N (from plan index 0, global index 32 in relaxed structure). -> Nearest: Pb (Index 24), Distance: 2.447 Å (Threshold: 3.146), Bound: True. Bonded Surface Atoms: Pb-2.447Å, Na-2.463Å, Na-2.506Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Na', 'Pb'] -> Actual ['Na', 'Na', 'Pb']).",
+      "history_entry": "【✅ Perfect Adsorption】 bridge @ ['Na', 'Pb'] (Index [0]) -> ⚠️【Unstable Site Warning】⚠️: Planned bridge (Na-Pb) is unstable, adsorbate spontaneously slipped to hollow (HCP/Subsurf-Atom) (Na-Na-Pb).This means Na-Pb has insufficient affinity for this adsorbate. Please **FORBID** testing Na-Pb type sites again! | E=-2.936 eV"
+    },
+    {
+      "attempt_index": 4,
+      "plan": {
+        "reasoning": "Step 0: SMILES Consistency Check. The SMILES is [NH2], representing NH2 radical. RDKit analysis shows atom at index 0: N (SP3, radical_electrons=1). This is a radical species, suitable for 'ReactiveSpecies' adsorption via the N atom with unpaired electron.\nStep 1: Analyze Old Plans. Three attempts in history: (1) ontop Pb (Index 0) slipped to bridge Na-Pb, E=-3.283 eV, new best, forbid Pb type sites. (2) ontop Na (Index 0) slipped to bridge Na-Pb, E=-3.284 eV, new best, forbid Na type sites. (3) bridge Na-Pb (Index 0) slipped to hollow (Na-Na-Pb), E=-2.936 eV, forbid Na-Pb type sites. All attempts succeeded in adsorption but with instability (slipping). Current best energy is -3.284 eV from slipped ontop Na to bridge. The slipped configurations from ontop are to bridge with low energies (~ -3.28 eV), while direct bridge slipped to hollow with higher energy (-2.936 eV). No [🔄 Converged to known best] tag, so geometries are distinct. All available site types (ontop Na/Pb, bridge Na-Pb) are now forbidden due to instability. Surface is heterogeneous (Na-Pb alloy), suggesting possible distinct environments. Energies differ significantly between slipped bridge (~ -3.28 eV) and slipped hollow (-2.936 eV), indicating heterogeneity.\nNo failures due to dissociation or bond changes; all are perfect adsorptions but unstable. No termination signal. Since all lower-coordination sites are forbidden and slipped to higher coordination, I need to explore the hollow site directly, as indicated by the slip in the bridge attempt.\nStep 2: Formulate New Plan. Avoid forbidden sites (ontop Na/Pb, bridge Na-Pb). Propose hollow site based on slip description (Na-Na-Pb). This is a new plan, distinct from history. Goal is lowest energy; current best is -3.284 eV, but testing hollow directly may yield a stable lower-energy configuration or confirm degeneracy. Physical consistency: Energies suggest the slipped bridge is stable and low-energy, but since bridge is forbidden, hollow is the logical next step. Site naming: Use 'hollow'.\nStep 3: User Request. Find lowest-energy adsorption configuration for [NH2] on the surface.\nStep 4: Analyze Adsorbate. SMILES [NH2]: NH2 radical, major functional group is amine radical. Binding via N (index 0) with radical electron.\nStep 5: Analyze Surface. Available sites: ontop Na/Pb, bridge Na-Pb, but all forbidden. Proposing hollow Na-Na-Pb based on slip history to explore further.\nStep 6: Formulate Plan. Use 'ReactiveSpecies' for radical. Bind via N (index 0). Hollow site with surface atoms ['Na', 'Na', 'Pb'] (3 surface atoms allowed for hollow, but adsorbate binding points=1, which is permitted). Default parameters.",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "hollow",
+          "surface_binding_atoms": [
+            "Na",
+            "Na",
+            "Pb"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "hollow|Na,Na,Pb|0|ReactiveSpecies|2.0",
+      "status": "error",
+      "most_stable_energy_eV": null,
+      "bond_change_count": null,
+      "is_dissociated": null,
+      "is_chemical_slip": null,
+      "planned_site_type": null,
+      "actual_site_type": null,
+      "best_structure_file": null,
+      "generated_conformers_file": null,
+      "relaxation_trajectory_file": null,
+      "message": "Tool execution failed: No sites of type 'hollow' containing ['Na', 'Na', 'Pb'] found.",
+      "history_entry": "【Calculation Failed】 hollow @ ['Na', 'Na', 'Pb'] (Index [0]) -> Reason: Tool execution failed: No sites of type 'hollow' containing ['Na', 'Na', 'Pb'] found."
+    }
+  ],
+  "history": [
+    "【✅ Perfect Adsorption】 ontop @ ['Pb'] (Index [0]) -> ⚠️【Unstable Site Warning】⚠️: Planned ontop (Pb) is unstable, adsorbate spontaneously slipped to bridge (Na-Pb).This means Pb has insufficient affinity for this adsorbate. Please **FORBID** testing Pb type sites again! [🌟 New Best] | E=-3.283 eV",
+    "【✅ Perfect Adsorption】 ontop @ ['Na'] (Index [0]) -> ⚠️【Unstable Site Warning】⚠️: Planned ontop (Na) is unstable, adsorbate spontaneously slipped to bridge (Na-Pb).This means Na has insufficient affinity for this adsorbate. Please **FORBID** testing Na type sites again! [🌟 New Best] | E=-3.284 eV",
+    "【✅ Perfect Adsorption】 bridge @ ['Na', 'Pb'] (Index [0]) -> ⚠️【Unstable Site Warning】⚠️: Planned bridge (Na-Pb) is unstable, adsorbate spontaneously slipped to hollow (HCP/Subsurf-Atom) (Na-Na-Pb).This means Na-Pb has insufficient affinity for this adsorbate. Please **FORBID** testing Na-Pb type sites again! | E=-2.936 eV",
+    "【Calculation Failed】 hollow @ ['Na', 'Na', 'Pb'] (Index [0]) -> Reason: Tool execution failed: No sites of type 'hollow' containing ['Na', 'Na', 'Pb'] found."
+  ],
+  "error": null,
+  "perfect_count": 3,
+  "dissociation_count": 0,
+  "rearrangement_count": 0,
+  "calc_failure_count": 1,
+  "chemical_slip_count": 3,
+  "best_structure_file": "research/results/canonical_raw/ocd62/grok4_ablation/full/042/artifacts/BEST_NH2_ontop_to_bridge_E-3.284.xyz"
+}

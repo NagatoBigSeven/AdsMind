@@ -60,10 +60,13 @@ FROZEN_CONFIG_REFS = {
 }
 
 DATASET_MANIFESTS = {
-    "CMU20": "research/agent_eval/manifests/cmu_manifest.csv",
-    "CMU20-case01": "research/agent_eval/manifests/cmu_manifest.csv",
-    "OCD-GMAE-24": "research/agent_eval/manifests/ocd_gmae_subset24_manifest.csv",
-    "OCD-GMAE-rep50": "research/agent_eval/manifests/ocd_gmae_representative50_manifest.csv",
+    "CMU20": "datasets/cmu20/cmu20_manifest.csv",
+    "CMU20-case01": "datasets/cmu20/cmu20_manifest.csv",
+    "OCD62": "datasets/ocd62/ocd62_manifest.csv",
+}
+
+REPRO_MANIFESTS = {
+    "ocd62_overlap12": "datasets/ocd62_overlap12/overlap12_manifest.csv",
 }
 
 AUTHORITATIVE_ANALYSIS = {
@@ -80,18 +83,15 @@ AUTHORITATIVE_ANALYSIS = {
     "iteration_convergence.png",
     "iteration_convergence_summary.json",
     "key_evaluation_metrics.json",
-    "ocd_gmae_ablation_final_vs_one_shot_4backend.csv",
-    "ocd_gmae_ablation_multi_backend_final.csv",
-    "ocd_gmae_ablation_multi_backend_final.json",
-    "ocd_gmae_one_shot_range_ranking.csv",
-    "ocd_gmae_one_shot_range_ranking.json",
-    "ocd_gmae_one_shot_top_10_case_ids.txt",
-    "ocd_gmae_paper_tables.tex",
+    "ocd62_ablation_4backend.csv",
+    "ocd62_unified_ablation.csv",
+    "ocd62_overlap12_reproducibility_n2.csv",
+    "ocd62_overlap12_reproducibility_n2.md",
+    "ocd62_overlap12_reproducibility_n3.csv",
+    "ocd62_overlap12_reproducibility_n3.md",
     "paper_tables.tex",
     "si4_ablation_statistics.json",
     "si4_ablation_statistics.tex",
-    "si4_ocd_gmae_ablation_statistics.json",
-    "si4_ocd_gmae_ablation_statistics.tex",
     "si6_cost_analysis.json",
     "si6_cost_analysis.tex",
     "si_adsorbagent_comparison.tex",
@@ -187,12 +187,8 @@ def collect_embedded_configs(data_dir: Path) -> dict[str, str]:
 
 
 def paper_cited_policy(kind: str, canonical_dir: str) -> str:
-    if canonical_dir.startswith("legacy_raw_sources/"):
-        return "legacy_context"
     if kind in {"ablation", "baseline_random", "baseline_heuristic", "independent_one_shot", "active_control"}:
         return "yes"
-    if kind == "active_auxiliary":
-        return "auxiliary_only"
     return "review_required"
 
 
@@ -210,14 +206,14 @@ def governance_flags(result_dir: str, backend: str, manifest_versions: str, exac
         notes.append("Date token marks a historical snapshot; prefer registry role/status over date ordering.")
     if OPAQUE_VERSION_RE.search(result_dir) or "retry" in result_dir or "dryrun" in result_dir:
         flags.append("opaque_version_or_retry")
-        notes.append("Opaque retry/dryrun/version label is legacy/provenance; do not treat as canonical without paper_cited_policy.")
+        notes.append("Opaque retry/dryrun/version label marks legacy context; do not treat as canonical without paper_cited_policy.")
     if manifest_versions and any("_v" in token for token in manifest_versions.split("; ")):
         flags.append("manifest_version_label")
         notes.append("Manifest version label is documented here; use manifest_paths for the actual frozen file.")
-    if any(token in manifest_versions for token in ("ocd_gmae_manifest", "ocd_gmae_rep50_manifest")):
+    if any(token in manifest_versions for token in ("ocd_gmae_manifest",)):
         flags.append("legacy_manifest_label")
         notes.append(
-            "Embedded config snapshots may retain historical OCD-GMAE manifest labels; "
+            "Embedded config snapshots may retain earlier OCD manifest labels; "
             "use manifest_paths for the current canonical manifest filenames."
         )
     return "; ".join(flags), " ".join(notes)
@@ -230,6 +226,8 @@ def run_row_from_qc(qc_row: dict[str, str]) -> dict[str, Any]:
     backend = qc_row.get("backend", "")
     exact_models = embedded["exact_llm_models"] or BACKEND_MODEL_FALLBACK.get(backend, "")
     flags, note = governance_flags(canonical_dir, backend, embedded["manifest_versions"], exact_models)
+    root_dir = canonical_dir.split("/", 1)[0]
+    manifest_path = REPRO_MANIFESTS.get(root_dir, DATASET_MANIFESTS.get(qc_row.get("dataset", ""), ""))
 
     return {
         "result_dir": f"research/results/canonical_raw/{canonical_dir}",
@@ -244,7 +242,7 @@ def run_row_from_qc(qc_row: dict[str, str]) -> dict[str, Any]:
         "frozen_config_refs": FROZEN_CONFIG_REFS.get(backend, ""),
         "embedded_config_count": embedded["embedded_config_count"],
         "manifest_versions": embedded["manifest_versions"],
-        "manifest_paths": DATASET_MANIFESTS.get(qc_row.get("dataset", ""), ""),
+        "manifest_paths": manifest_path,
         "calculator_protocols": embedded["calculator_protocols"],
         "summary_file": qc_row.get("summary_file", ""),
         "summary_rows": qc_row.get("summary_rows", ""),
@@ -354,7 +352,8 @@ def count_host_path_matches(path: Path) -> str:
 
 def classify_analysis(path: Path) -> tuple[str, str, str]:
     name = path.name
-    if path.is_dir() and ("snapshot" in name or "pulled" in name or "delivery" in name or "clean_ablation" in name):
+    historical_dir_tokens = ("snapshot", "pulled", "delivery", "clean" + "_ablation")
+    if path.is_dir() and any(token in name for token in historical_dir_tokens):
         return (
             "historical_snapshot_or_delivery",
             "legacy_context",

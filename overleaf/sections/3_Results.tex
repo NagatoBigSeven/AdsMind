@@ -178,75 +178,44 @@ The largest four-backend spread occurs in 1-shot case~20 (1.049~eV), where Gemin
 Under full iterative search, the same case narrows to a range of 0.001~eV---all four backends converge to effectively the same solution.
 These data support a concrete systems claim: the closed-loop architecture acts as a backend-robustness mechanism that drives heterogeneous LLM planners toward the same physical solution.
 
-\subsection{Independent validation on expanded OCD-GMAE chemistry}
+\subsection{Independent validation on OCD62 chemistry}
 
-To test whether the CMU conclusions survive broader chemistry, we expanded the OCD-GMAE validation package from the original locked 10 cases to an audited 24-case set by combining the locked10 subset with an extra14 extension.
-The formal expanded analysis now uses all four reasoning backends in the same 24-case, five-variant matrix (480 attempts total).
-External service failures are excluded at the raw-attempt audit stage; the retained matrix contains no external failures, and all reported failures are natural dissociation/reaction outcomes.
-The original 10-case four-backend tables are retained in the Supporting Information as the first complete-energy mechanism package.
+To test whether the CMU conclusions survive broader chemistry, we evaluate a single OCD62 benchmark across four reasoning backends and five ablation variants.
+The clean matrix contains 1240 backend--case--variant attempts.
+Natural dissociation/reaction outcomes are retained in success-rate denominators, while energy deltas are computed on valid relaxed adsorption energies.
 
-\begin{figure}
-    \centering
-    \includegraphics[width=0.95\linewidth]{images/figure_ocd_gmae_trapezoid_all.png}
-  \caption{\textbf{Ablation analysis on the expanded OCD24 benchmark across four LLM backends.} Violin plots of energy error ($\Delta E = E_{\mathrm{variant}} - E_{\mathrm{Full}}$) for each ablation setting on the 24-case OCD-GMAE set. Each variant is evaluated across four LLM backends. Positive values indicate worse adsorption energy than the Full variant; the dashed line at $\Delta E = 0$ marks parity. The Full variant maintains 100\% success rate while 1-Shot drops to 85.4\%, and the energy accuracy (fraction within 0.01~eV of Full) is substantially higher for iterative variants.}
-  \label{fig:ocd_gmae24_violin}
-\end{figure}
+egin{figure}
+    centering
+    includegraphics[width=0.95linewidth]{images/figure_ocd_gmae_trapezoid_all.png}
+  caption{	extbf{Ablation analysis on the OCD62 benchmark across four LLM backends.} Violin plots of energy error ($\Delta E = E_{\mathrm{variant}} - E_{\mathrm{Full}}$) for each ablation setting on the 62-case OCD-GMAE benchmark. Positive values indicate worse adsorption energy than the Full variant; the dashed line at $\Delta E = 0$ marks parity.}
+  label{fig:ocd62_violin}
+end{figure}
 
-\begin{table}[t]
-\centering
-\scriptsize
-\caption{Expanded OCD24 five-variant ablation summary across four LLM backends. The 24-case table combines the audited locked10 subset with the extra14 extension. $\Delta E = E_{\mathrm{variant}} - E_{\mathrm{full}}$ for the same backend and case; positive values mean worse adsorption energy than Full. Mean and median $\Delta E$ are computed over successful runs only, while natural failures remain in the success-rate denominator.}
-\label{tab:ocd24-four-backend-summary}
-\begin{tabular}{lrrrrrr}
-\toprule
-Variant & Attempts & Successful & Mean $\Delta E$ (eV) & Median $\Delta E$ (eV) & Reach Full$+0.01$ & Success rate \\
-\midrule
-Full & 96 & 96 & +0.000 & 0.000 & 96/96 & 100.0\% \\
-$-$Slip & 96 & 96 & +0.013 & 0.000 & 63/96 & 100.0\% \\
-$-$Forbid & 96 & 96 & +0.015 & 0.000 & 74/96 & 100.0\% \\
-$-$Term & 96 & 95 & $-$0.013 & 0.000 & 71/96 & 99.0\% \\
-1-Shot & 96 & 82 & +0.305 & 0.031 & 34/96 & 85.4\% \\
-\bottomrule
-\end{tabular}
-\end{table}
+egin{table}[t]
+centering
+scriptsize
+caption{OCD62 five-variant ablation summary across four LLM backends. $\Delta E = E_{\mathrm{variant}} - E_{\mathrm{full}}$ for the same backend and case; positive values mean worse adsorption energy than Full. Mean and median $\Delta E$ are computed over successful paired runs only, while natural failures remain in the success-rate denominator.}
+label{tab:ocd62-four-backend-summary}
+egin{tabular}{lrrrrrr}
+	oprule
+Variant & Attempts & Successful & Mean $\Delta E$ (eV) & Median $\Delta E$ (eV) & Reach Full$+0.01$ & Success rate \\ 
+midrule
+Full & 248 & 245 & +0.000 & 0.000 & 245/248 & 98.8\% \\ 
+$-$Slip & 248 & 247 & +0.021 & 0.000 & 192/248 & 99.6\% \\ 
+$-$Forbid & 248 & 246 & +0.020 & 0.000 & 194/248 & 99.2\% \\ 
+$-$Term & 248 & 247 & $-$0.039 & 0.000 & 212/248 & 99.6\% \\ 
+1-Shot & 248 & 222 & +0.329 & 0.067 & 89/248 & 89.5\% \\ 
+ottomrule
+end{tabular}
+end{table}
 
-The closed-loop reliability signal persists on the expanded OCD24 set.
-Full succeeds on all 96/96 runs, while the open-loop 1-Shot control succeeds on only 82/96.
-The 14 1-Shot failures and the single $-$Term failure are all natural dissociation/reaction outcomes rather than external service or calculator errors.
-In the paired success-only view, 1-Shot reaches Full within 0.01~eV on only 34/96 attempted backend--case pairs, compared with 63/96 for $-$Slip, 74/96 for $-$Forbid, and 71/96 for $-$Term.
-Cross-backend agreement also improves under iteration: the mean four-backend range is 0.244~eV for Full but 0.396~eV for 1-Shot over the 21 OCD24 cases with at least two successful one-shot backends.
-Notably, $-$Term is slightly better than Full in the success-only mean ($\Delta E = -0.013$~eV), reinforcing the CMU observation that guardrails and stopping rules can over-prune or stop early even when the full architecture remains the most reliable default.
+The closed-loop reliability signal persists on OCD62.
+Full succeeds on 245/248 runs, while the open-loop 1-Shot control succeeds on 222/248.
+On backend--case pairs where both Full and 1-Shot succeed, the mean one-shot-minus-full gap is +0.329~eV and the median is 0.067~eV.
+Cross-backend agreement also improves under iteration: the mean four-backend range is 0.183~eV for Full versus 0.316~eV for 1-Shot.
+The 12 repeated OCD62 cases are analyzed separately as overlap12 reproducibility repeats; the current N=2 audit gives 155/240 paired comparisons within 0.01~eV, with RUN3 in progress as the third replicate.
 
-\subsection{Broader rep50 generalization favors iterative search}
-
-We then compared Full and 1-Shot on a separately selected broader 50-case representative slice of OCD-GMAE.
-This rep50 set is not a superset of OCD24; it is an independent coverage-oriented sample with partial source-key overlap.
-The clean four-backend matrix contains 400 attempts and no external failures; natural failures are retained in the success-rate denominator.
-
-\begin{table}[t]
-\centering
-\scriptsize
-\caption{Separately selected broader rep50 Full-versus-1-Shot comparison across four LLM backends. Positive $\Delta E = E_{\mathrm{1shot}} - E_{\mathrm{full}}$ means the iterative Full run is lower in energy. Tie denotes $|\Delta E| \leq 0.01$~eV.}
-\label{tab:rep50-four-backend-summary}
-\begin{tabular}{lrrrrrr}
-\toprule
-Backend & Paired successes & Mean $\Delta E$ (eV) & Median $\Delta E$ (eV) & Full lower & Tie & 1-Shot lower \\
-\midrule
-GPT-5.4 & 44 & +0.264 & 0.032 & 23 & 17 & 4 \\
-Claude & 45 & +0.357 & 0.035 & 26 & 19 & 0 \\
-Gemini & 43 & +0.414 & 0.113 & 28 & 11 & 4 \\
-Grok-4 & 46 & +0.422 & 0.166 & 32 & 14 & 0 \\
-Overall & 178 & +0.364 & 0.072 & 109 & 61 & 8 \\
-\bottomrule
-\end{tabular}
-\end{table}
-
-Across these four backends, Full succeeds on 197/200 runs while 1-Shot succeeds on 178/200.
-On backend-case pairs where both variants succeed, the mean one-shot-minus-full gap is +0.364~eV and the median is 0.072~eV, with Full lower on 109 paired comparisons and 1-Shot lower on only 8.
-The family breakdown shows that Full succeeds on 40/40 compound and 156/156 intermetallic runs, whereas 1-Shot drops to 38/40 and 140/156; the monometallic slice remains difficult for both (Full 1/4, 1-Shot 0/4).
-Finally, the Full four-backend agreement itself is tight on this broader chemistry set, with a mean range of 0.172~eV over the 49 rep50 cases having at least two successful Full backends.
-
-\subsection{Comparison with Adsorb-Agent under identical physics}
+subsection{Comparison with Adsorb-Agent under identical physics}
 
 To isolate the effect of search strategy from the choice of force field, we forked the open-source Adsorb-Agent codebase~\cite{adsorbagent} and replaced its EquiformerV2~\cite{liao2023equiformerv2} relaxation backend with the same MACE-MP-0 small (CPU, float32, dispersion disabled) calculator used for the primary benchmark and matched comparisons.
 All remaining protocol parameters were locked to AdsMind's settings: BFGS optimizer, $f_\mathrm{max} = 0.10$~eV/\AA, 200 steps, and identical \textsc{FixAtoms} constraints (bottom third of slab atoms fixed).
@@ -349,5 +318,5 @@ Repeating the GPT-5.4 Full variant on all 20 CMU cases with MACE-MP-0 large (GPU
 All 20 CMU rows produce retained summary results, but the mean absolute shift relative to the MACE-MP-0 small GPT-5.4 run is 1.255~eV (0.834~eV if the anomalous case~20 is excluded), and no case remains within 0.01~eV.
 Fifteen cases become more stable under MACE-MP-0 large and five become less stable.
 Cases~06, 16, 17, and 20 show dissociation events during the MACE-MP-0 large runs; case~20 is the most important sensitivity case because a retained non-dissociated best structure appears at $-2.402$~eV while a later dissociated analysis reaches a much lower unretained energy.
-On a separate 10-case OCD-rep50 representative set, MACE-MP-0 large succeeds on 9/10 cases; case~043 fails naturally with chemical slip and dissociation, not because of an external service or calculator error.
+On a 10-case OCD62 sensitivity slice, MACE-MP-0 large succeeds on 9/10 cases; case~043 fails naturally with chemical slip and dissociation, not because of an external service or calculator error.
 These shifts do not change the qualitative systems conclusion from the MACE-MP-0 small benchmark: primary comparisons must remain within the locked MACE-MP-0 small protocol, and AdsMind's strength is reliable closed-loop recovery with a small relaxation budget rather than force-field-independent deepest-basin discovery.

@@ -1,0 +1,298 @@
+{
+  "case_id": "011",
+  "case_metadata": {
+    "case_id": "011",
+    "slab_file": "datasets/ocd62/011_ocd_105_Se48Sn48_CO.xyz",
+    "smiles": "CO",
+    "user_request": "Find the lowest-energy adsorption configuration for the adsorbate with SMILES CO on the provided surface.",
+    "surface_family": "compound",
+    "adsorbate_name": "CO",
+    "miller_index": "",
+    "reaction_class": "GENERALIZATION",
+    "ablation_candidate": "FALSE",
+    "notes": "OCD id=105; adsorbate=CO; surface_formula=Se48Sn48; y_relaxed=-1.719915 eV; site=72",
+    "surface_formula": "Se48Sn48",
+    "surface_elements": "Se;Sn",
+    "bare_slab_atoms": "96",
+    "adsorbate_atoms": "6",
+    "y_relaxed": "-1.719915",
+    "site_indices": "72"
+  },
+  "status": "success",
+  "best_energy_eV": -4.36711311340332,
+  "iteration_count": 4,
+  "max_attempts": 5,
+  "final_site_type": "ontop",
+  "converged_tag": false,
+  "wall_clock_sec": 411.67613973096013,
+  "total_input_tokens": 19545,
+  "total_output_tokens": 5184,
+  "artifact_paths": {
+    "BEST_CO_bridge_to_ontop_E-4.209": "research/results/canonical_raw/ocd62/openai_gpt54_ablation/no_slip/011/artifacts/BEST_CO_bridge_to_ontop_E-4.209.xyz",
+    "BEST_CO_bridge_to_ontop_E-4.209.xyz": "research/results/canonical_raw/ocd62/openai_gpt54_ablation/no_slip/011/artifacts/BEST_CO_bridge_to_ontop_E-4.209.xyz",
+    "best_structure_file": "research/results/canonical_raw/ocd62/openai_gpt54_ablation/no_slip/011/artifacts/BEST_CO_ontop_to_hollow_inferred_E-3.899.xyz",
+    "BEST_CO_hollow_to_bridge_DISS_E-3.734": "research/results/canonical_raw/ocd62/openai_gpt54_ablation/no_slip/011/artifacts/BEST_CO_hollow_to_bridge_DISS_E-3.734.xyz",
+    "BEST_CO_hollow_to_bridge_DISS_E-3.734.xyz": "research/results/canonical_raw/ocd62/openai_gpt54_ablation/no_slip/011/artifacts/BEST_CO_hollow_to_bridge_DISS_E-3.734.xyz",
+    "BEST_CO_ontop_E-4.367": "research/results/canonical_raw/ocd62/openai_gpt54_ablation/no_slip/011/artifacts/BEST_CO_ontop_E-4.367.xyz",
+    "BEST_CO_ontop_E-4.367.xyz": "research/results/canonical_raw/ocd62/openai_gpt54_ablation/no_slip/011/artifacts/BEST_CO_ontop_E-4.367.xyz",
+    "BEST_CO_ontop_to_hollow_inferred_E-3.899": "research/results/canonical_raw/ocd62/openai_gpt54_ablation/no_slip/011/artifacts/BEST_CO_ontop_to_hollow_inferred_E-3.899.xyz",
+    "BEST_CO_ontop_to_hollow_inferred_E-3.899.xyz": "research/results/canonical_raw/ocd62/openai_gpt54_ablation/no_slip/011/artifacts/BEST_CO_ontop_to_hollow_inferred_E-3.899.xyz",
+    "conformers_CO": "research/results/canonical_raw/ocd62/openai_gpt54_ablation/no_slip/011/artifacts/conformers_CO.traj",
+    "conformers_CO.traj": "research/results/canonical_raw/ocd62/openai_gpt54_ablation/no_slip/011/artifacts/conformers_CO.traj",
+    "final": "research/results/canonical_raw/ocd62/openai_gpt54_ablation/no_slip/011/artifacts/final.xyz",
+    "final.xyz": "research/results/canonical_raw/ocd62/openai_gpt54_ablation/no_slip/011/artifacts/final.xyz",
+    "relaxation": "research/results/canonical_raw/ocd62/openai_gpt54_ablation/no_slip/011/artifacts/relaxation.traj",
+    "relaxation.traj": "research/results/canonical_raw/ocd62/openai_gpt54_ablation/no_slip/011/artifacts/relaxation.traj",
+    "relaxation_trajectory_file": "research/results/canonical_raw/ocd62/openai_gpt54_ablation/no_slip/011/artifacts/relaxation.traj"
+  },
+  "best_result": {
+    "most_stable_energy_eV": -4.36711311340332,
+    "analysis_json": {
+      "status": "success",
+      "message": "Most stable config adsorption energy: -4.3671 eV. Target Atom: O (from plan index 1, global index 96 in relaxed structure). -> Nearest: Sn (Index 48), Distance: 2.27 Å (Threshold: 2.972), Bound: True. Bonded Surface Atoms: Sn-2.27Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: False (Planned ['Sn'] -> Actual ['Sn']).",
+      "most_stable_energy_eV": -4.36711311340332,
+      "target_adsorbate_atom": "O",
+      "target_adsorbate_atom_index": 96,
+      "bonded_surface_atoms": [
+        {
+          "symbol": "Sn",
+          "index": 48,
+          "distance": 2.27
+        }
+      ],
+      "nearest_slab_atom": "Sn",
+      "nearest_slab_atom_index": 48,
+      "final_bond_distance_A": 2.27,
+      "estimated_covalent_cutoff_A": 2.255,
+      "is_covalently_bound": true,
+      "reaction_detected": false,
+      "is_dissociated": false,
+      "n_components": 1,
+      "bond_change_count": 0,
+      "site_analysis": {
+        "planned_site_type": "ontop",
+        "planned_connectivity": 1,
+        "actual_site_type": "ontop",
+        "actual_connectivity": 1,
+        "is_chemical_slip": false,
+        "planned_symbols": [
+          "Sn"
+        ],
+        "actual_symbols": [
+          "Sn"
+        ],
+        "site_fingerprint": "Sn48"
+      },
+      "best_structure_file": "outputs/035-bcd0bd7f/BEST_CO_ontop_E-4.367.xyz",
+      "generated_conformers_file": "outputs/035-bcd0bd7f/conformers_CO.traj",
+      "relaxation_trajectory_file": "outputs/035-bcd0bd7f/final.xyz",
+      "session_id": "035-bcd0bd7f"
+    },
+    "plan": {
+      "reasoning": "SMILES consistency check: the provided adsorbate is CO with heavy atoms indexed as 0:C and 1:O. Both atoms are listed as degree 1, formal charge 0, radical_electrons 0. There is no user-description/SMILES mismatch to resolve, and this is not a radical, so the adsorbate type should be Molecule rather than ReactiveSpecies. For molecular CO adsorption on a chalcogenide/alloy-like Se/Sn surface, the chemically most plausible donor end is the O atom because this neutral methanol-like SMILES representation has saturated C and O centers and O provides the better lone-pair donor for dative adsorption. History is empty, so no sites or orientations have been tested yet. Therefore I should choose the best initial high-symmetry trial rather than terminate. On a heterogeneous Se/Sn surface, cation-like Sn sites are typically more favorable adsorption centers than Se for neutral donor molecules, so the most reasonable first attempt is O-down adsorption at an ontop Sn site. This respects the site list, uses a single adsorbate binding atom for an ontop site, and starts from the chemically strongest likely interaction before broader site exploration.",
+      "adsorbate_type": "Molecule",
+      "solution": {
+        "action": "continue",
+        "site_type": "ontop",
+        "surface_binding_atoms": [
+          "Sn"
+        ],
+        "adsorbate_binding_indices": [
+          1
+        ],
+        "relax_top_n": 1,
+        "touch_sphere_size": 2,
+        "overlap_thr": 0.1,
+        "conformers_per_site_cap": 4
+      }
+    },
+    "result_type": "Perfect"
+  },
+  "last_analysis": {
+    "status": "success",
+    "message": "Most stable config adsorption energy: -3.8985 eV. Target Atom: O (from plan index 1, global index 96 in relaxed structure). -> Nearest: Se (Index 5), Distance: 3.031 Å (Threshold: 2.697), Bound: False. Bonded Surface Atoms: None. Is Bound: False. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: False (Planned ['Se'] -> Actual []).",
+    "most_stable_energy_eV": -3.8985462188720703,
+    "target_adsorbate_atom": "O",
+    "target_adsorbate_atom_index": 96,
+    "bonded_surface_atoms": [],
+    "nearest_slab_atom": "Se",
+    "nearest_slab_atom_index": 5,
+    "final_bond_distance_A": 3.031,
+    "estimated_covalent_cutoff_A": 2.046,
+    "is_covalently_bound": false,
+    "reaction_detected": false,
+    "is_dissociated": false,
+    "n_components": 1,
+    "bond_change_count": 0,
+    "site_analysis": {
+      "planned_site_type": "ontop",
+      "planned_connectivity": 1,
+      "actual_site_type": "hollow (inferred)",
+      "actual_connectivity": 3,
+      "is_chemical_slip": false,
+      "planned_symbols": [
+        "Se"
+      ],
+      "actual_symbols": [],
+      "site_fingerprint": ""
+    },
+    "best_structure_file": "outputs/035-bcd0bd7f/BEST_CO_ontop_to_hollow_inferred_E-3.899.xyz",
+    "generated_conformers_file": "outputs/035-bcd0bd7f/conformers_CO.traj",
+    "relaxation_trajectory_file": "outputs/035-bcd0bd7f/final.xyz",
+    "session_id": "035-bcd0bd7f"
+  },
+  "attempt_records": [
+    {
+      "attempt_index": 1,
+      "plan": {
+        "reasoning": "SMILES consistency check: the provided adsorbate is CO with heavy atoms indexed as 0:C and 1:O. Both atoms are listed as degree 1, formal charge 0, radical_electrons 0. There is no user-description/SMILES mismatch to resolve, and this is not a radical, so the adsorbate type should be Molecule rather than ReactiveSpecies. For molecular CO adsorption on a chalcogenide/alloy-like Se/Sn surface, the chemically most plausible donor end is the O atom because this neutral methanol-like SMILES representation has saturated C and O centers and O provides the better lone-pair donor for dative adsorption. History is empty, so no sites or orientations have been tested yet. Therefore I should choose the best initial high-symmetry trial rather than terminate. On a heterogeneous Se/Sn surface, cation-like Sn sites are typically more favorable adsorption centers than Se for neutral donor molecules, so the most reasonable first attempt is O-down adsorption at an ontop Sn site. This respects the site list, uses a single adsorbate binding atom for an ontop site, and starts from the chemically strongest likely interaction before broader site exploration.",
+        "adsorbate_type": "Molecule",
+        "solution": {
+          "action": "continue",
+          "site_type": "ontop",
+          "surface_binding_atoms": [
+            "Sn"
+          ],
+          "adsorbate_binding_indices": [
+            1
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "ontop|Sn|1|Molecule|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -4.36711311340332,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": false,
+      "planned_site_type": "ontop",
+      "actual_site_type": "ontop",
+      "best_structure_file": "outputs/035-bcd0bd7f/BEST_CO_ontop_E-4.367.xyz",
+      "generated_conformers_file": "outputs/035-bcd0bd7f/conformers_CO.traj",
+      "relaxation_trajectory_file": "outputs/035-bcd0bd7f/final.xyz",
+      "message": "Most stable config adsorption energy: -4.3671 eV. Target Atom: O (from plan index 1, global index 96 in relaxed structure). -> Nearest: Sn (Index 48), Distance: 2.27 Å (Threshold: 2.972), Bound: True. Bonded Surface Atoms: Sn-2.27Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: False (Planned ['Sn'] -> Actual ['Sn']).",
+      "history_entry": "【✅ Perfect Adsorption】 ontop @ ['Sn'] (Index [1]) -> Site: ontop (Sn) [🌟 New Best] | E=-4.367 eV"
+    },
+    {
+      "attempt_index": 2,
+      "plan": {
+        "reasoning": "SMILES consistency check: the provided adsorbate is CO, and the given heavy-atom list contains C(index 0) and O(index 1), both marked SP3, degree 1, with 0 radical electrons and 0 formal charge. There is no user-description/SMILES mismatch to resolve here, and this is not a radical, so the correct adsorbate type is Molecule, not ReactiveSpecies. For molecular adsorption, I should choose a chemically valid donor atom; for CO represented as neutral methanol-like single-bonded CO in this parser context, O(index 1) is the safest lone-pair donor choice. History analysis: only one successful plan has been tested so far, ontop on Sn using one binding atom, with adsorption energy -4.367 eV and marked new best. No convergence-to-known-best tag is present, so I should not terminate. Because only one major site has been explored, it is still systematic and worthwhile to test a distinct high-symmetry site rather than stopping. To avoid repeating the known successful plan, I will choose a completely new plan. Surface analysis: allowed sites are bridge (Se-Se, Se-Sn, Sn-Sn), ontop (Se, Sn), hollow (Se-Se-Sn, Se-Se-Sn-Sn). Since Sn ontop is already very favorable, a mixed Se-Sn bridge is a logical next candidate on this heterogeneous Se/Sn surface because alloy bridge environments can sometimes outperform ontop through cooperative interaction. User intent is to find the lowest-energy adsorption configuration overall, so broad but physically sensible exploration of untested high-symmetry sites is appropriate. I will therefore propose a bridge trial on Se-Sn with one molecular binding atom, O index 1, which satisfies the site-alignment rules and gives a distinct plan from the prior Sn-ontop attempt.",
+        "adsorbate_type": "Molecule",
+        "solution": {
+          "action": "continue",
+          "site_type": "bridge",
+          "surface_binding_atoms": [
+            "Se",
+            "Sn"
+          ],
+          "adsorbate_binding_indices": [
+            1
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "bridge|Se,Sn|1|Molecule|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -4.208980560302734,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": true,
+      "planned_site_type": "bridge",
+      "actual_site_type": "ontop",
+      "best_structure_file": "outputs/035-bcd0bd7f/BEST_CO_bridge_to_ontop_E-4.209.xyz",
+      "generated_conformers_file": "outputs/035-bcd0bd7f/conformers_CO.traj",
+      "relaxation_trajectory_file": "outputs/035-bcd0bd7f/final.xyz",
+      "message": "Most stable config adsorption energy: -4.2090 eV. Target Atom: O (from plan index 1, global index 96 in relaxed structure). -> Nearest: Sn (Index 48), Distance: 2.443 Å (Threshold: 2.972), Bound: True. Bonded Surface Atoms: Sn-2.443Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Se', 'Sn'] -> Actual ['Sn']).",
+      "history_entry": "【✅ Perfect Adsorption】 bridge @ ['Se', 'Sn'] (Index [1]) -> Site: ontop (Sn) | E=-4.209 eV"
+    },
+    {
+      "attempt_index": 3,
+      "plan": {
+        "reasoning": "SMILES consistency check: the provided adsorbate is CO with heavy atoms C(index 0) and O(index 1), both reported as SP3, degree 1, radical_electrons 0, formal_charge 0. There is no user-description/SMILES mismatch to flag, and this is not a radical, so ReactiveSpecies is inappropriate. For a stable molecule, the chemically reasonable donor atom is O via its lone pairs; C in methanol-like CO is saturated here and should not be used as the molecular binding atom under the stated rules. History analysis: two successful plans exist. ontop on Sn with one binding atom gave the current best energy of -4.367 eV. A bridge Se-Sn trial relaxed to the same actual site family, ontop(Sn), with higher energy -4.209 eV, indicating the Sn environment is favorable and that some non-ontop initializations may collapse toward Sn-ontop. No [🔄 Converged to known best] tag is present, so termination is not mandatory. Also, not all major high-symmetry site classes have been tested: no ontop on Se and no hollow attempt are recorded. Because the surface is heterogeneous (Se/Sn alloy-like), a chemically distinct Se-centered environment could still exist, but O donor molecules generally prefer the more electropositive/cationic site, which is likely Sn rather than Se. Since bridge Se-Sn already slid to Sn-ontop, the most systematic remaining high-symmetry test with realistic chance is a Sn-containing hollow environment rather than weak Se-ontop. The available hollow motifs are Se-Se-Sn and Se-Se-Sn-Sn; under the canonical naming restriction this maps to site_type hollow. For a closed-shell molecule, use single-point O coordination into the hollow region to test whether multicoordination to surrounding Sn/Se lowers energy relative to ontop Sn. User intent is to identify the lowest-energy adsorption configuration for CO on this Se/Sn surface, so the next plan should probe an untested high-symmetry site with plausible stronger stabilization while remaining distinct from previous plans.",
+        "adsorbate_type": "Molecule",
+        "solution": {
+          "action": "continue",
+          "site_type": "hollow",
+          "surface_binding_atoms": [
+            "Se",
+            "Se",
+            "Sn",
+            "Sn"
+          ],
+          "adsorbate_binding_indices": [
+            1
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "hollow|Se,Se,Sn,Sn|1|Molecule|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -3.7341880798339844,
+      "bond_change_count": 1,
+      "is_dissociated": true,
+      "is_chemical_slip": true,
+      "planned_site_type": "hollow",
+      "actual_site_type": "bridge",
+      "best_structure_file": "outputs/035-bcd0bd7f/BEST_CO_hollow_to_bridge_DISS_E-3.734.xyz",
+      "generated_conformers_file": "outputs/035-bcd0bd7f/conformers_CO.traj",
+      "relaxation_trajectory_file": "outputs/035-bcd0bd7f/final.xyz",
+      "message": "Most stable config adsorption energy: -3.7342 eV. Target Atom: O (from plan index 1, global index 96 in relaxed structure). -> Nearest: Sn (Index 51), Distance: 2.162 Å (Threshold: 2.972), Bound: True. Bonded Surface Atoms: Sn-2.162Å, Sn-2.185Å. Is Bound: True. Reactivity Change Detected: True (Bond Changes: 1). Chemical Slip: True (Planned ['Se', 'Se', 'Sn', 'Sn'] -> Actual ['Sn', 'Sn']).",
+      "history_entry": "【❌ Dissociated】 hollow @ ['Se', 'Se', 'Sn', 'Sn'] (Index [1]) -> Site: bridge (Sn,Sn) | E=-3.734 eV"
+    },
+    {
+      "attempt_index": 4,
+      "plan": {
+        "reasoning": "SMILES consistency check: the adsorbate is CO with heavy atoms C(index 0) and O(index 1), both reported as SP3 by the provided RDKit analysis. There is no mismatch with any separate user description, and this is a closed-shell species with zero radical electrons on both atoms, so it should be treated as a Molecule, not a ReactiveSpecies. For molecular adsorption, chemically valid donor atoms are C and O; for methanol-like CO, the oxygen lone pair is the most natural donor to a cationic/metallic Sn site, while C-binding is less likely for this SMILES than for carbon monoxide written as [C-]#[O+]. History analysis: tested plans include ontop on Sn using one binding atom and it gave the best successful adsorption so far at -4.367 eV; a bridge Se-Sn attempt relaxed to ontop Sn at -4.209 eV; a hollow Se-Se-Sn-Sn attempt dissociated/fell to bridge Sn-Sn at -3.734 eV and is therefore a failure. No convergence tag [🔄 Converged to known best] is present, so termination is not mandated. Major high-symmetry motifs are not fully exhausted yet: ontop Se, bridge Se-Se, bridge Sn-Sn, and hollow Se-Se-Sn remain unexplored. Since ontop Sn is already strongly favorable, the most systematic next step is to probe chemical heterogeneity by changing the surface atom identity while keeping a simple one-point molecular adsorption motif. Because the adsorbate is CO interpreted from the given atom list as C-O single-bonded closed-shell molecule, the oxygen atom (index 1) is the most appropriate molecular binding atom. Thus a new and distinct plan is O-down adsorption at ontop Se, which has not been tested before.",
+        "adsorbate_type": "Molecule",
+        "solution": {
+          "action": "continue",
+          "site_type": "ontop",
+          "surface_binding_atoms": [
+            "Se"
+          ],
+          "adsorbate_binding_indices": [
+            1
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "ontop|Se|1|Molecule|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -3.8985462188720703,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": false,
+      "planned_site_type": "ontop",
+      "actual_site_type": "hollow (inferred)",
+      "best_structure_file": "outputs/035-bcd0bd7f/BEST_CO_ontop_to_hollow_inferred_E-3.899.xyz",
+      "generated_conformers_file": "outputs/035-bcd0bd7f/conformers_CO.traj",
+      "relaxation_trajectory_file": "outputs/035-bcd0bd7f/final.xyz",
+      "message": "Most stable config adsorption energy: -3.8985 eV. Target Atom: O (from plan index 1, global index 96 in relaxed structure). -> Nearest: Se (Index 5), Distance: 3.031 Å (Threshold: 2.697), Bound: False. Bonded Surface Atoms: None. Is Bound: False. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: False (Planned ['Se'] -> Actual []).",
+      "history_entry": "【✅ Perfect Adsorption】 ontop @ ['Se'] (Index [1]) -> ⚠️ Geometric Slip: ontop -> hollow (inferred) | E=-3.899 eV"
+    }
+  ],
+  "history": [
+    "【✅ Perfect Adsorption】 ontop @ ['Sn'] (Index [1]) -> Site: ontop (Sn) [🌟 New Best] | E=-4.367 eV",
+    "【✅ Perfect Adsorption】 bridge @ ['Se', 'Sn'] (Index [1]) -> Site: ontop (Sn) | E=-4.209 eV",
+    "【❌ Dissociated】 hollow @ ['Se', 'Se', 'Sn', 'Sn'] (Index [1]) -> Site: bridge (Sn,Sn) | E=-3.734 eV",
+    "【✅ Perfect Adsorption】 ontop @ ['Se'] (Index [1]) -> ⚠️ Geometric Slip: ontop -> hollow (inferred) | E=-3.899 eV"
+  ],
+  "error": null,
+  "perfect_count": 3,
+  "dissociation_count": 1,
+  "rearrangement_count": 0,
+  "calc_failure_count": 0,
+  "chemical_slip_count": 2
+}

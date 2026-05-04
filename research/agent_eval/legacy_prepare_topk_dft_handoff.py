@@ -222,7 +222,7 @@ def write_templates(output_dir: Path) -> None:
 def main(argv: Optional[List[str]] = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--cases", required=True)
-    parser.add_argument("--manifest", default="research/agent_eval/manifests/cmu_manifest.csv")
+    parser.add_argument("--manifest", default="datasets/cmu20/cmu20_manifest.csv")
     parser.add_argument("--adsmind-dir", required=True)
     parser.add_argument("--adsorbagent-dir", required=True)
     parser.add_argument("--random-dir", required=True)

@@ -30,13 +30,11 @@ from PIL import Image, ImageDraw, ImageFont
 ROOT = Path(__file__).resolve().parents[2]
 OUT_DIR = ROOT / "research/results/analysis/panel_b_assets_20260429"
 
-CMU_MANIFEST = ROOT / "research/agent_eval/manifests/cmu_manifest.csv"
-OCD_REP50_MANIFEST = (
-    ROOT / "research/agent_eval/manifests/ocd_gmae_representative50_manifest.csv"
-)
+CMU_MANIFEST = ROOT / "datasets/cmu20/cmu20_manifest.csv"
+OCD62_MANIFEST = ROOT / "datasets/ocd62/ocd62_manifest.csv"
 
-CMU_MAIN_RESULT = ROOT / "research/results/canonical_raw/cmu20_openai_gpt54_ablation/full"
-OCD_REP50_RESULT = ROOT / "research/results/canonical_raw/ocd_rep50_openai_gpt54_ablation/full"
+CMU_MAIN_RESULT = ROOT / "research/results/canonical_raw/cmu20/openai_gpt54_ablation/full"
+OCD62_RESULT = ROOT / "research/results/canonical_raw/ocd62/openai_gpt54_ablation/full"
 
 BACKEND_LABEL = "GPT-5.4"
 VARIANT_LABEL = "Full"
@@ -352,17 +350,17 @@ def cmu_rows() -> list[AssetRow]:
 
 def ocd_rows() -> list[AssetRow]:
     rows = []
-    for row in read_csv(OCD_REP50_MANIFEST):
+    for row in read_csv(OCD62_MANIFEST):
         case_id = row["case_id"]
         rows.append(
             AssetRow(
-                dataset="OCD-GMAE rep50",
+                dataset="OCD62",
                 case_id=case_id,
                 surface=row["surface_formula"],
                 adsorbate=row["adsorbate_name"],
                 reaction_class=row["reaction_class"],
-                selection_bucket=row["selection_bucket"],
-                result_dir=OCD_REP50_RESULT / case_id,
+                selection_bucket="overlap12" if row.get("is_overlap12") == "TRUE" else "ocd62",
+                result_dir=OCD62_RESULT / case_id,
                 adsorbate_atoms=int(row["adsorbate_atoms"]),
                 selected_for_panel_b=False,
             )
@@ -372,27 +370,20 @@ def ocd_rows() -> list[AssetRow]:
 
 def select_ocd_examples(rows: list[AssetRow]) -> set[str]:
     selected: list[str] = []
-    by_bucket = {"small_n_species": [], "small_organic": []}
+    seen_adsorbates: set[str] = set()
     for row in rows:
-        if row.selection_bucket in by_bucket:
-            by_bucket[row.selection_bucket].append(row)
-    # Ten examples from each non-CMU bucket gives a compact, visually diverse
-    # coverage panel without treating the 6 CMU-like rep50 rows as new chemistry.
-    for bucket in ("small_n_species", "small_organic"):
-        seen_adsorbates: set[str] = set()
-        for row in by_bucket[bucket]:
-            if row.adsorbate in seen_adsorbates and len(seen_adsorbates) < 8:
-                continue
+        if row.adsorbate in seen_adsorbates and len(seen_adsorbates) < 12:
+            continue
+        selected.append(row.case_id)
+        seen_adsorbates.add(row.adsorbate)
+        if len(selected) >= 20:
+            break
+    for row in rows:
+        if len(selected) >= 20:
+            break
+        if row.case_id not in selected:
             selected.append(row.case_id)
-            seen_adsorbates.add(row.adsorbate)
-            if len([case for case in selected if case in {r.case_id for r in by_bucket[bucket]}]) >= 10:
-                break
-        for row in by_bucket[bucket]:
-            if row.case_id not in selected:
-                selected.append(row.case_id)
-            if len([case for case in selected if case in {r.case_id for r in by_bucket[bucket]}]) >= 10:
-                break
-    return set(selected[:20])
+    return set(selected)
 
 
 def write_readme(manifest_rows: list[dict[str, str]], selected_count: int) -> None:
@@ -406,8 +397,8 @@ def write_readme(manifest_rows: list[dict[str, str]], selected_count: int) -> No
                 "",
                 "Source convention:",
                 "",
-                f"- CMU20 thumbnails use {BACKEND_LABEL} {VARIANT_LABEL} relaxed structures from `canonical_raw/cmu20_openai_gpt54_ablation/full`.",
-                f"- OCD-GMAE thumbnails use {BACKEND_LABEL} {VARIANT_LABEL} relaxed structures from `canonical_raw/ocd_rep50_openai_gpt54_ablation/full`.",
+                f"- CMU20 thumbnails use {BACKEND_LABEL} {VARIANT_LABEL} relaxed structures from `canonical_raw/cmu20/openai_gpt54_ablation/full`.",
+                f"- OCD62 thumbnails use {BACKEND_LABEL} {VARIANT_LABEL} relaxed structures from `canonical_raw/ocd62/openai_gpt54_ablation/full`.",
                 f"- Force field/checkpoint label for these rendered structures: {CHECKPOINT_LABEL}.",
                 "- Individual PNGs use transparent backgrounds.",
                 "- Contact sheets are white-background previews for quick review; use individual PNGs for figure assembly.",
@@ -415,8 +406,8 @@ def write_readme(manifest_rows: list[dict[str, str]], selected_count: int) -> No
                 "Contents:",
                 "",
                 "- `cmu20/`: 20 CMU benchmark thumbnails.",
-                "- `ocd_rep50_all/`: all 50 OCD-GMAE rep50 thumbnails.",
-                f"- `ocd_rep50_selected/`: {selected_count} non-CMU-selected OCD-GMAE thumbnails for Panel B coverage.",
+                "- `ocd62_all/`: all OCD62 thumbnails.",
+                f"- `ocd62_selected/`: {selected_count} OCD62 thumbnails for Panel B coverage.",
                 "- `contact_sheets/`: preview sheets.",
                 "- `manifest.csv`: source/result path and metadata for every rendered asset.",
                 "- `panel_b_assets_20260429.zip`: zip archive for WeChat/group handoff.",
@@ -438,7 +429,7 @@ def write_handoff_message() -> None:
             [
                 "# WeChat Handoff Message",
                 "",
-                "老师、师兄，我这边先把 Panel B 可能用到的结构素材整理出来了，包括 CMU20 全部 20 个体系，以及 OCD-GMAE rep50 中 20 个和 CMU 不同的代表体系；另外也保留了 OCD-GMAE rep50 全 50 个体系的单图，方便后面挑选。",
+                "老师、师兄，我这边先把 Panel B 可能用到的结构素材整理出来了，包括 CMU20 全部 20 个体系，以及 OCD62 中 20 个代表体系；另外也保留了 OCD62 全部体系的单图，方便后面挑选。",
                 "",
                 "素材包路径：",
                 "",
@@ -447,8 +438,8 @@ def write_handoff_message() -> None:
                 "里面有：",
                 "",
                 "- `cmu20/`：CMU20 全部 20 个 relaxed adsorption structure，透明背景 PNG。",
-                "- `ocd_rep50_selected/`：20 个非 CMU-like 的 OCD-GMAE 代表体系，透明背景 PNG。",
-                "- `ocd_rep50_all/`：OCD-GMAE rep50 全 50 个体系，透明背景 PNG。",
+                "- `ocd62_selected/`：20 个 OCD62 代表体系，透明背景 PNG。",
+                "- `ocd62_all/`：OCD62 全部体系，透明背景 PNG。",
                 "- `contact_sheets/`：两张预览图，方便快速看整体效果。",
                 "- `manifest.csv`：每张图对应的 case、surface、adsorbate、source result path 和 best energy。",
                 "",
@@ -475,7 +466,7 @@ def main() -> None:
 
     for row in cmu + ocd:
         selected = row.dataset == "CMU20" or row.case_id in selected_ocd
-        section = "cmu20" if row.dataset == "CMU20" else "ocd_rep50_all"
+        section = "cmu20" if row.dataset == "CMU20" else "ocd62_all"
         xyz_path = best_xyz(row.result_dir)
         result = load_result(row.result_dir)
         png_name = f"{row.case_id}_{row.surface}_{row.adsorbate}".replace("/", "-")
@@ -505,7 +496,7 @@ def main() -> None:
         if row.dataset == "CMU20":
             contact_cmu.append(contact_record)
         elif selected:
-            selected_dir = OUT_DIR / "ocd_rep50_selected"
+            selected_dir = OUT_DIR / "ocd62_selected"
             selected_dir.mkdir(exist_ok=True)
             selected_path = selected_dir / png_path.name
             shutil.copy2(png_path, selected_path)
@@ -530,8 +521,8 @@ def main() -> None:
     )
     contact_sheet(
         contact_ocd_selected,
-        OUT_DIR / "contact_sheets/ocd_rep50_selected_contact_sheet.png",
-        "OCD-GMAE rep50 selected non-CMU coverage",
+        OUT_DIR / "contact_sheets/ocd62_selected_contact_sheet.png",
+        "OCD62 selected coverage",
         columns=5,
     )
     write_readme(manifest_rows, len(contact_ocd_selected))
@@ -546,8 +537,8 @@ def main() -> None:
 
     print(f"Wrote {OUT_DIR}")
     print(f"CMU20 images: {len(contact_cmu)}")
-    print(f"OCD-GMAE all images: {len(ocd)}")
-    print(f"OCD-GMAE selected images: {len(contact_ocd_selected)}")
+    print(f"OCD62 all images: {len(ocd)}")
+    print(f"OCD62 selected images: {len(contact_ocd_selected)}")
     print(f"Manifest rows: {len(manifest_rows)}")
     print(f"Zip: {zip_path}")
 

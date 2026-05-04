@@ -23,18 +23,10 @@ def backend_label(path: Path) -> str:
     """Create a compact backend label from an ablation directory name."""
     name = path.name
     replacements = {
-        "cmu20_gemini_ablation": "gemini",
-        "cmu20_grok4_ablation": "grok4",
-        "cmu20_openai_gpt54_ablation": "openai_gpt54",
-        "cmu20_anthropic_sonnet46_ablation": "anthropic_sonnet46",
-        "ocd24_gemini_ablation": "gemini",
-        "ocd24_grok4_ablation": "grok4",
-        "ocd24_openai_gpt54_ablation": "openai_gpt54",
-        "ocd24_anthropic_sonnet46_ablation": "anthropic_sonnet46",
-        "ocd_rep50_gemini_ablation": "gemini",
-        "ocd_rep50_grok4_ablation": "grok4",
-        "ocd_rep50_openai_gpt54_ablation": "openai_gpt54",
-        "ocd_rep50_anthropic_sonnet46_ablation": "anthropic_sonnet46",
+        "gemini_ablation": "gemini",
+        "grok4_ablation": "grok4",
+        "openai_gpt54_ablation": "openai_gpt54",
+        "anthropic_sonnet46_ablation": "anthropic_sonnet46",
     }
     return replacements.get(name, name)
 

@@ -1,0 +1,30 @@
+{
+  "llm_backend": "anthropic",
+  "llm_model": "claude-sonnet-4-6",
+  "llm_base_url": "https://api.anthropic.com/v1/",
+  "llm_api_key_env_var": "ANTHROPIC_API_KEY",
+  "temperature": 0.0,
+  "max_tokens": 4096,
+  "timeout_sec": 120,
+  "max_retries": 5,
+  "relaxation_mode": "standard",
+  "calculator_backend": "mace",
+  "mace_device": "cpu",
+  "mace_precision": "float32",
+  "mace_model": "small",
+  "mace_use_dispersion": false,
+  "fmax": 0.1,
+  "random_seed": 42,
+  "platform": "EPFL-LIACPC12-cpu-float32",
+  "manifest_version": "ocd62_overlap12_run3_manifest_v1",
+  "transport_variant": "anthropic-official-openai-compatible",
+  "user_request_mode": "per-case explicit request string from datasets/ocd62_overlap12/overlap12_manifest.csv",
+  "notes": [
+    "Official Anthropic route through Anthropic's OpenAI-compatible Chat Completions endpoint.",
+    "This config is for the Claude Sonnet 4.6 full/ablation runs.",
+    "The model is set to the stable alias claude-sonnet-4-6; record the resolved model id from each result config for provenance.",
+    "This config preserves the same physics protocol as Gemini, Grok-4, and GPT-5.4: MACE small on CPU with float32 precision and no dispersion.",
+    "API key is read from the ANTHROPIC_API_KEY environment variable.",
+    "OCD62 overlap12 RUN3 reproducibility rerun: 12 overlap cases, all five ablation variants, no base-matrix rerun."
+  ]
+}

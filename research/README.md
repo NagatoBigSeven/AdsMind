@@ -25,7 +25,7 @@ downloaded PDFs, or private meeting notes here. Keep public research outputs in
   current ablation draft figure from curated CSV inputs.
 - `generate_slabs.py`: legacy script that fetches the CMU-20 benchmark slabs
   from FAIR-Chem/OCP. The fetched slabs are now committed at
-  `datasets/cmu-20/`, so this script is only needed if you want to
+  `datasets/cmu20/`, so this script is only needed if you want to
   re-derive them from source.
 
 ## Dependencies
@@ -37,8 +37,7 @@ downloaded PDFs, or private meeting notes here. Keep public research outputs in
 ## Outputs
 
 - Generated figures are written to `research/images/`
-- `generate_slabs.py` writes to `benchmark_slabs/` when re-deriving; the
-  committed working copy lives at `datasets/cmu-20/`.
+- Re-derived CMU20 slabs should be written directly under `datasets/cmu20/`.
 
 ## Public-Release Policy
 

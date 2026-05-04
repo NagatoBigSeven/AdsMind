@@ -1,0 +1,415 @@
+{
+  "case_id": "20",
+  "case_metadata": {
+    "case_id": "20",
+    "slab_file": "datasets/cmu20/20_Bi2Ti6_211.xyz",
+    "smiles": "CN(C)N=O",
+    "user_request": "Find the lowest-energy adsorption configuration for dimethylnitrosamine on the provided surface.",
+    "surface_family": "intermetallic",
+    "adsorbate_name": "ONN(CH3)2",
+    "miller_index": "(211)",
+    "reaction_class": "COMPLEX",
+    "ablation_candidate": "FALSE",
+    "notes": "Recovered from top-level results artifacts; case directory is empty and needs archival repair"
+  },
+  "status": "success",
+  "best_energy_eV": -2.401681452881924,
+  "iteration_count": 5,
+  "max_attempts": 5,
+  "final_site_type": "ontop",
+  "converged_tag": false,
+  "wall_clock_sec": 1669.8919288739562,
+  "total_input_tokens": 25009,
+  "total_output_tokens": 6940,
+  "artifact_paths": {
+    "BEST_CN(C)N_O_bridge_DISS_E-10.972": "research/results/canonical_raw/cmu20/controls/mace_large_gpt54_cmu20_full/full/20/artifacts/BEST_CN(C)N_O_bridge_DISS_E-10.972.xyz",
+    "BEST_CN(C)N_O_bridge_DISS_E-10.972.xyz": "research/results/canonical_raw/cmu20/controls/mace_large_gpt54_cmu20_full/full/20/artifacts/BEST_CN(C)N_O_bridge_DISS_E-10.972.xyz",
+    "best_structure_file": "research/results/canonical_raw/cmu20/controls/mace_large_gpt54_cmu20_full/full/20/artifacts/BEST_CN(C)N_O_ontop_to_hollow_FCC-No-Subsurf_DISS_E-9.515.xyz",
+    "BEST_CN(C)N_O_bridge_to_ontop_E-2.402": "research/results/canonical_raw/cmu20/controls/mace_large_gpt54_cmu20_full/full/20/artifacts/BEST_CN(C)N_O_bridge_to_ontop_E-2.402.xyz",
+    "BEST_CN(C)N_O_bridge_to_ontop_E-2.402.xyz": "research/results/canonical_raw/cmu20/controls/mace_large_gpt54_cmu20_full/full/20/artifacts/BEST_CN(C)N_O_bridge_to_ontop_E-2.402.xyz",
+    "BEST_CN(C)N_O_hollow_to_hollow_HCP-Subsurf-Atom_DISS_E-11.197": "research/results/canonical_raw/cmu20/controls/mace_large_gpt54_cmu20_full/full/20/artifacts/BEST_CN(C)N_O_hollow_to_hollow_HCP-Subsurf-Atom_DISS_E-11.197.xyz",
+    "BEST_CN(C)N_O_hollow_to_hollow_HCP-Subsurf-Atom_DISS_E-11.197.xyz": "research/results/canonical_raw/cmu20/controls/mace_large_gpt54_cmu20_full/full/20/artifacts/BEST_CN(C)N_O_hollow_to_hollow_HCP-Subsurf-Atom_DISS_E-11.197.xyz",
+    "BEST_CN(C)N_O_ontop_to_hollow_FCC-No-Subsurf_DISS_E-8.367": "research/results/canonical_raw/cmu20/controls/mace_large_gpt54_cmu20_full/full/20/artifacts/BEST_CN(C)N_O_ontop_to_hollow_FCC-No-Subsurf_DISS_E-8.367.xyz",
+    "BEST_CN(C)N_O_ontop_to_hollow_FCC-No-Subsurf_DISS_E-8.367.xyz": "research/results/canonical_raw/cmu20/controls/mace_large_gpt54_cmu20_full/full/20/artifacts/BEST_CN(C)N_O_ontop_to_hollow_FCC-No-Subsurf_DISS_E-8.367.xyz",
+    "BEST_CN(C)N_O_ontop_to_hollow_FCC-No-Subsurf_DISS_E-9.515": "research/results/canonical_raw/cmu20/controls/mace_large_gpt54_cmu20_full/full/20/artifacts/BEST_CN(C)N_O_ontop_to_hollow_FCC-No-Subsurf_DISS_E-9.515.xyz",
+    "BEST_CN(C)N_O_ontop_to_hollow_FCC-No-Subsurf_DISS_E-9.515.xyz": "research/results/canonical_raw/cmu20/controls/mace_large_gpt54_cmu20_full/full/20/artifacts/BEST_CN(C)N_O_ontop_to_hollow_FCC-No-Subsurf_DISS_E-9.515.xyz",
+    "conformers_CN(C)N_O": "research/results/canonical_raw/cmu20/controls/mace_large_gpt54_cmu20_full/full/20/artifacts/conformers_CN(C)N_O.traj",
+    "conformers_CN(C)N_O.traj": "research/results/canonical_raw/cmu20/controls/mace_large_gpt54_cmu20_full/full/20/artifacts/conformers_CN(C)N_O.traj",
+    "final": "research/results/canonical_raw/cmu20/controls/mace_large_gpt54_cmu20_full/full/20/artifacts/final.xyz",
+    "final.xyz": "research/results/canonical_raw/cmu20/controls/mace_large_gpt54_cmu20_full/full/20/artifacts/final.xyz",
+    "relaxation": "research/results/canonical_raw/cmu20/controls/mace_large_gpt54_cmu20_full/full/20/artifacts/relaxation.traj",
+    "relaxation.traj": "research/results/canonical_raw/cmu20/controls/mace_large_gpt54_cmu20_full/full/20/artifacts/relaxation.traj",
+    "relaxation_trajectory_file": "research/results/canonical_raw/cmu20/controls/mace_large_gpt54_cmu20_full/full/20/artifacts/relaxation.traj"
+  },
+  "best_result": {
+    "most_stable_energy_eV": -2.401681452881924,
+    "analysis_json": {
+      "status": "success",
+      "message": "Most stable config adsorption energy: -2.4017 eV. Target Atom: O (from plan index 4, global index 64 in relaxed structure). -> Nearest: Bi (Index 2), Distance: 2.722 Å (Threshold: 3.103), Bound: True. Bonded Surface Atoms: Bi-2.722Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Bi', 'Bi'] -> Actual ['Bi']).",
+      "most_stable_energy_eV": -2.401681452881924,
+      "target_adsorbate_atom": "O",
+      "target_adsorbate_atom_index": 64,
+      "bonded_surface_atoms": [
+        {
+          "symbol": "Bi",
+          "index": 2,
+          "distance": 2.722
+        }
+      ],
+      "nearest_slab_atom": "Bi",
+      "nearest_slab_atom_index": 2,
+      "final_bond_distance_A": 2.722,
+      "estimated_covalent_cutoff_A": 2.354,
+      "is_covalently_bound": true,
+      "reaction_detected": false,
+      "is_dissociated": false,
+      "n_components": 1,
+      "bond_change_count": 0,
+      "site_analysis": {
+        "planned_site_type": "bridge",
+        "planned_connectivity": 2,
+        "actual_site_type": "ontop",
+        "actual_connectivity": 1,
+        "is_chemical_slip": true,
+        "planned_symbols": [
+          "Bi",
+          "Bi"
+        ],
+        "actual_symbols": [
+          "Bi"
+        ],
+        "site_fingerprint": "Bi2"
+      },
+      "best_structure_file": "outputs/20-6043c879/BEST_CN(C)N_O_bridge_to_ontop_E-2.402.xyz",
+      "generated_conformers_file": "outputs/20-6043c879/conformers_CN(C)N_O.traj",
+      "relaxation_trajectory_file": "outputs/20-6043c879/final.xyz",
+      "session_id": "20-6043c879"
+    },
+    "plan": {
+      "reasoning": "SMILES consistency check: CN(C)N=O corresponds to dimethylnitrosamine, with heavy atoms C(0)-N(1)-C(2)-N(3)-O(4). The two methyl carbons are SP3, while the nitrosamine N(1), nitroso N(3), and O(4) are SP2. There is no mismatch with the user description. Radical check: all listed atoms have radical_electrons = 0, so this must be treated as a closed-shell Molecule, not a ReactiveSpecies. History analysis: one prior attempt was ontop on Ti using surface atom index 4, and it failed by chemical slip/dissociation, ending at a Ti-only hollow-like environment with an unstable-site warning. Per instruction, Ti-type sites should be forbidden for future tests. Therefore I should avoid ontop Ti, bridge Ti-Ti, hollow Ti-Ti-Ti, and also avoid Bi-Ti or Bi-Bi-Ti / Bi-Ti-Ti unless there is a strong reason; the history specifically says Ti has insufficient affinity for this adsorbate, so the safest new chemically distinct plan is to use a Bi-only site. User intent is to find the lowest-energy molecular adsorption configuration on Bi2Ti6(211). For dimethylnitrosamine, the most plausible donor atoms are the nitroso O(4) and nitroso N(3); O is typically the strongest lone-pair donor toward oxophilic/main-group surface sites, while the tertiary amine-like N(1) is less suitable because its lone pair is conjugated into the N=O group. Since Ti sites are disallowed, a Bi-centered motif is the best remaining unexplored family. To maximize interaction while staying within allowed site types, a Bi-Bi bridge with O-bound molecular adsorption is a reasonable next systematic test; bridge allows the molecule to tilt and possibly engage the N=O group favorably without forcing contact to Ti. I choose a single binding index [4] because this is a closed-shell molecule and O is the most chemically valid donor atom.",
+      "adsorbate_type": "Molecule",
+      "solution": {
+        "action": "continue",
+        "site_type": "bridge",
+        "surface_binding_atoms": [
+          "Bi",
+          "Bi"
+        ],
+        "adsorbate_binding_indices": [
+          4
+        ],
+        "relax_top_n": 1,
+        "touch_sphere_size": 2,
+        "overlap_thr": 0.1,
+        "conformers_per_site_cap": 4
+      }
+    },
+    "result_type": "Perfect"
+  },
+  "last_analysis": {
+    "status": "success",
+    "message": "Most stable config adsorption energy: -11.1974 eV. Target Atom 1: N (from plan index 3, global index 64). -> Nearest: Ti (Index 62), Distance: 1.605 Å (Threshold: 2.541), Bound: True. Target Atom 2: O (from plan index 4, global index 65). -> Nearest: Ti (Index 54), Distance: 1.162 Å (Threshold: 2.486), Bound: True. Bonded Surface Atoms: N(64)-Ti(1.997Å), N(64)-Ti(2.027Å), O(65)-Ti(2.054Å), O(65)-Ti(2.057Å), O(65)-Ti(2.084Å), O(65)-Ti(2.087Å), N(64)-Ti(2.204Å), O(65)-Ti(2.235Å), O(65)-Bi(2.785Å). Is Bound: True. Reactivity Change Detected: True (Bond Changes: 1). Chemical Slip: True (Planned ['Bi', 'Bi', 'Ti'] -> Actual ['Bi', 'Ti', 'Ti', 'Ti', 'Ti', 'Ti', 'Ti', 'Ti', 'Ti']).",
+    "most_stable_energy_eV": -11.197399796901529,
+    "bonded_surface_atoms": [
+      {
+        "adsorbate_atom": "N(64)",
+        "adsorbate_atom_index": 64,
+        "symbol": "Ti",
+        "index": 40,
+        "distance": 1.997
+      },
+      {
+        "adsorbate_atom": "N(64)",
+        "adsorbate_atom_index": 64,
+        "symbol": "Ti",
+        "index": 62,
+        "distance": 2.027
+      },
+      {
+        "adsorbate_atom": "O(65)",
+        "adsorbate_atom_index": 65,
+        "symbol": "Ti",
+        "index": 46,
+        "distance": 2.054
+      },
+      {
+        "adsorbate_atom": "O(65)",
+        "adsorbate_atom_index": 65,
+        "symbol": "Ti",
+        "index": 54,
+        "distance": 2.057
+      },
+      {
+        "adsorbate_atom": "O(65)",
+        "adsorbate_atom_index": 65,
+        "symbol": "Ti",
+        "index": 47,
+        "distance": 2.084
+      },
+      {
+        "adsorbate_atom": "O(65)",
+        "adsorbate_atom_index": 65,
+        "symbol": "Ti",
+        "index": 63,
+        "distance": 2.087
+      },
+      {
+        "adsorbate_atom": "N(64)",
+        "adsorbate_atom_index": 64,
+        "symbol": "Ti",
+        "index": 54,
+        "distance": 2.204
+      },
+      {
+        "adsorbate_atom": "O(65)",
+        "adsorbate_atom_index": 65,
+        "symbol": "Ti",
+        "index": 57,
+        "distance": 2.235
+      },
+      {
+        "adsorbate_atom": "O(65)",
+        "adsorbate_atom_index": 65,
+        "symbol": "Bi",
+        "index": 34,
+        "distance": 2.785
+      }
+    ],
+    "final_bond_distance_A": 1.997,
+    "is_covalently_bound": true,
+    "atom_1": {
+      "symbol": "N",
+      "global_index": 64,
+      "distance_A": 1.605,
+      "is_bound": true
+    },
+    "atom_2": {
+      "symbol": "O",
+      "global_index": 65,
+      "distance_A": 1.162,
+      "is_bound": true
+    },
+    "reaction_detected": true,
+    "bond_change_count": 1,
+    "is_dissociated": true,
+    "n_components": 3,
+    "site_analysis": {
+      "planned_site_type": "hollow",
+      "planned_connectivity": 3,
+      "actual_site_type": "hollow (HCP/Subsurf-Atom)",
+      "actual_connectivity": 8,
+      "is_chemical_slip": true,
+      "planned_symbols": [
+        "Bi",
+        "Bi",
+        "Ti"
+      ],
+      "actual_symbols": [
+        "Bi",
+        "Ti",
+        "Ti",
+        "Ti",
+        "Ti",
+        "Ti",
+        "Ti",
+        "Ti",
+        "Ti"
+      ],
+      "site_fingerprint": "Ti40-Ti62-Ti46-Ti54-Ti47-Ti63-Ti54-Ti57-Bi34"
+    },
+    "best_structure_file": "outputs/20-6043c879/BEST_CN(C)N_O_hollow_to_hollow_HCP-Subsurf-Atom_DISS_E-11.197.xyz",
+    "generated_conformers_file": "outputs/20-6043c879/conformers_CN(C)N_O.traj",
+    "relaxation_trajectory_file": "outputs/20-6043c879/final.xyz",
+    "session_id": "20-6043c879"
+  },
+  "attempt_records": [
+    {
+      "attempt_index": 1,
+      "plan": {
+        "reasoning": "No history exists, so this is the initial plan. The user wants the lowest-energy adsorption configuration for dimethylnitrosamine on a Bi/Ti-containing surface, so the first trial should target the most chemically plausible donor atom and the likely stronger Lewis-acidic surface center. SMILES consistency check: CN(C)N=O corresponds to dimethylnitrosamine, and the provided atom list is internally consistent. There is no mismatch with a saturated alkyl description that would force a warning. Radical check: all listed atoms have radical_electrons = 0, so this must be treated as a closed-shell Molecule, not a ReactiveSpecies. Adsorbate analysis: the key functional group is nitrosamine N-N=O. The best donor atoms for molecular adsorption are the nitroso oxygen (index 4) and potentially the terminal nitroso nitrogen (index 3). The tertiary amine-like nitrogen at index 1 is less suitable because its lone pair is strongly delocalized into the N-N=O system. For oxide/complex mixed-metal surfaces, O-down coordination to exposed metal cations is a common strong initial motif. Surface analysis: available sites are hollow, bridge, and ontop over Bi and/or Ti ensembles. Ti is expected to be the more oxophilic adsorption center than Bi, so an O-on-Ti initial guess is the most reasonable first systematic trial. To respect the site rules and choose a chemically clean starting point, use a single-point molecular adsorption through atom index 4 at an ontop Ti site.",
+        "adsorbate_type": "Molecule",
+        "solution": {
+          "action": "continue",
+          "site_type": "ontop",
+          "surface_binding_atoms": [
+            "Ti"
+          ],
+          "adsorbate_binding_indices": [
+            4
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "ontop|Ti|4|Molecule|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -9.5154162173761,
+      "bond_change_count": 1,
+      "is_dissociated": true,
+      "is_chemical_slip": true,
+      "planned_site_type": "ontop",
+      "actual_site_type": "hollow (FCC/No-Subsurf)",
+      "best_structure_file": "outputs/20-6043c879/BEST_CN(C)N_O_ontop_to_hollow_FCC-No-Subsurf_DISS_E-9.515.xyz",
+      "generated_conformers_file": "outputs/20-6043c879/conformers_CN(C)N_O.traj",
+      "relaxation_trajectory_file": "outputs/20-6043c879/final.xyz",
+      "message": "Most stable config adsorption energy: -9.5154 eV. Target Atom: O (from plan index 4, global index 64 in relaxed structure). -> Nearest: Ti (Index 62), Distance: 1.955 Å (Threshold: 3.277), Bound: True. Bonded Surface Atoms: Ti-1.955Å, Ti-1.989Å, Ti-1.994Å, Ti-3.183Å. Is Bound: True. Reactivity Change Detected: True (Bond Changes: 1). Chemical Slip: True (Planned ['Ti'] -> Actual ['Ti', 'Ti', 'Ti', 'Ti']).",
+      "history_entry": "【❌ Dissociated】 ontop @ ['Ti'] (Index [4]) -> ⚠️【Unstable Site Warning】⚠️: Planned ontop (Ti) is unstable, adsorbate spontaneously slipped to hollow (FCC/No-Subsurf) (Ti-Ti-Ti-Ti).This means Ti has insufficient affinity for this adsorbate. Please **FORBID** testing Ti type sites again! | E=-9.515 eV"
+    },
+    {
+      "attempt_index": 2,
+      "plan": {
+        "reasoning": "SMILES consistency check: CN(C)N=O corresponds to dimethylnitrosamine, with heavy atoms C(0)-N(1)-C(2)-N(3)-O(4). The two methyl carbons are SP3, while the nitrosamine N(1), nitroso N(3), and O(4) are SP2. There is no mismatch with the user description. Radical check: all listed atoms have radical_electrons = 0, so this must be treated as a closed-shell Molecule, not a ReactiveSpecies. History analysis: one prior attempt was ontop on Ti using surface atom index 4, and it failed by chemical slip/dissociation, ending at a Ti-only hollow-like environment with an unstable-site warning. Per instruction, Ti-type sites should be forbidden for future tests. Therefore I should avoid ontop Ti, bridge Ti-Ti, hollow Ti-Ti-Ti, and also avoid Bi-Ti or Bi-Bi-Ti / Bi-Ti-Ti unless there is a strong reason; the history specifically says Ti has insufficient affinity for this adsorbate, so the safest new chemically distinct plan is to use a Bi-only site. User intent is to find the lowest-energy molecular adsorption configuration on Bi2Ti6(211). For dimethylnitrosamine, the most plausible donor atoms are the nitroso O(4) and nitroso N(3); O is typically the strongest lone-pair donor toward oxophilic/main-group surface sites, while the tertiary amine-like N(1) is less suitable because its lone pair is conjugated into the N=O group. Since Ti sites are disallowed, a Bi-centered motif is the best remaining unexplored family. To maximize interaction while staying within allowed site types, a Bi-Bi bridge with O-bound molecular adsorption is a reasonable next systematic test; bridge allows the molecule to tilt and possibly engage the N=O group favorably without forcing contact to Ti. I choose a single binding index [4] because this is a closed-shell molecule and O is the most chemically valid donor atom.",
+        "adsorbate_type": "Molecule",
+        "solution": {
+          "action": "continue",
+          "site_type": "bridge",
+          "surface_binding_atoms": [
+            "Bi",
+            "Bi"
+          ],
+          "adsorbate_binding_indices": [
+            4
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "bridge|Bi,Bi|4|Molecule|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -2.401681452881924,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": true,
+      "planned_site_type": "bridge",
+      "actual_site_type": "ontop",
+      "best_structure_file": "outputs/20-6043c879/BEST_CN(C)N_O_bridge_to_ontop_E-2.402.xyz",
+      "generated_conformers_file": "outputs/20-6043c879/conformers_CN(C)N_O.traj",
+      "relaxation_trajectory_file": "outputs/20-6043c879/final.xyz",
+      "message": "Most stable config adsorption energy: -2.4017 eV. Target Atom: O (from plan index 4, global index 64 in relaxed structure). -> Nearest: Bi (Index 2), Distance: 2.722 Å (Threshold: 3.103), Bound: True. Bonded Surface Atoms: Bi-2.722Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Bi', 'Bi'] -> Actual ['Bi']).",
+      "history_entry": "【✅ Perfect Adsorption】 bridge @ ['Bi', 'Bi'] (Index [4]) -> ⚠️【Unstable Site Warning】⚠️: Planned bridge (Bi-Bi) is unstable, adsorbate spontaneously slipped to ontop (Bi).This means Bi-Bi has insufficient affinity for this adsorbate. Please **FORBID** testing Bi-Bi type sites again! [🌟 New Best] | E=-2.402 eV"
+    },
+    {
+      "attempt_index": 3,
+      "plan": {
+        "reasoning": "SMILES consistency check: the adsorbate is dimethylnitrosamine, CN(C)N=O. The heavy-atom list is consistent with a neutral nitrosamine: two methyl carbons (indices 0 and 2, SP3), amine-like N attached to both methyls and the nitroso group (index 1, SP2), nitroso N (index 3, SP2), and O (index 4, SP2). There is no mismatch between the user description and the SMILES. There are no radical electrons on any atom, so this must be treated as a Molecule, not a ReactiveSpecies. For molecular adsorption, the chemically sensible donor atoms are the nitroso O (index 4) and potentially the nitroso/amine nitrogens, but O is typically the strongest lone-pair donor to oxophilic surface centers.\n\nHistory analysis: two plans exist. (1) ontop on Ti using adsorbate index 4 failed by dissociation/slip to a Ti-rich hollow and was explicitly flagged as unstable; additionally the instruction says to forbid Ti type sites again. Because this attempt involved bond-change behavior, it is a failure and Ti-type sites should not be retried. (2) bridge on Bi-Bi using index 4 slipped to Bi ontop and was explicitly flagged as unstable for Bi-Bi; thus Bi-Bi bridge should also be forbidden. The successful relaxed state so far is effectively O-down ontop on Bi with E = -2.402 eV, which is the current best. No convergence-to-known-best tag is present, so termination is not yet mandatory.\n\nTo propose a completely new plan, I must avoid: ontop Ti, any Ti-containing site if following the explicit forbid-Ti guidance conservatively, and bridge Bi-Bi. Remaining chemically distinct high-symmetry options that do not violate the history most directly are Bi ontop (explicitly, rather than via slip) and possibly Bi-containing hollow/bridge mixed sites. However, because Ti sites were explicitly forbidden after the first run, mixed Bi-Ti bridge or Bi-Bi-Ti / Bi-Ti-Ti hollow would still involve Ti and risk violating the instruction. Therefore the safest and most systematic remaining distinct plan is direct ontop adsorption on Bi using the nitroso oxygen lone pair.\n\nUser intent: find the lowest-energy adsorption configuration for dimethylnitrosamine on this Bi/Ti oxide surface. Given the prior slip from Bi-Bi bridge to Bi ontop, the thermodynamic minimum among Bi-only motifs likely involves Bi ontop. Running it directly is justified to verify whether that slipped geometry is indeed the stable minimum rather than an artifact of starting geometry.\n\nAdsorbate analysis: nitrosamine functional group N-N=O; strongest donor atom is O index 4. Nitrogen indices 1 and 3 are possible weaker donors, but O-first exploration is more physically motivated and also aligns with the prior best result. Site alignment rule requires one binding index for ontop, which is satisfied.\n\nSurface analysis: allowed canonical site names are ontop/bridge/hollow. Ontop Bi exists in the site list and has not yet been directly tested as an initial plan. This is different from the prior initial plans and remains the most rational next attempt under the site restrictions and forbiddance history.",
+        "adsorbate_type": "Molecule",
+        "solution": {
+          "action": "continue",
+          "site_type": "ontop",
+          "surface_binding_atoms": [
+            "Bi"
+          ],
+          "adsorbate_binding_indices": [
+            4
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "ontop|Bi|4|Molecule|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -8.366576007374277,
+      "bond_change_count": 1,
+      "is_dissociated": true,
+      "is_chemical_slip": true,
+      "planned_site_type": "ontop",
+      "actual_site_type": "hollow (FCC/No-Subsurf)",
+      "best_structure_file": "outputs/20-6043c879/BEST_CN(C)N_O_ontop_to_hollow_FCC-No-Subsurf_DISS_E-8.367.xyz",
+      "generated_conformers_file": "outputs/20-6043c879/conformers_CN(C)N_O.traj",
+      "relaxation_trajectory_file": "outputs/20-6043c879/final.xyz",
+      "message": "Most stable config adsorption energy: -8.3666 eV. Target Atom: O (from plan index 4, global index 64 in relaxed structure). -> Nearest: Ti (Index 19), Distance: 1.966 Å (Threshold: 3.277), Bound: True. Bonded Surface Atoms: Ti-1.966Å, Ti-1.99Å, Ti-1.999Å. Is Bound: True. Reactivity Change Detected: True (Bond Changes: 1). Chemical Slip: True (Planned ['Bi'] -> Actual ['Ti', 'Ti', 'Ti']).",
+      "history_entry": "【❌ Dissociated】 ontop @ ['Bi'] (Index [4]) -> ⚠️【Unstable Site Warning】⚠️: Planned ontop (Bi) is unstable, adsorbate spontaneously slipped to hollow (FCC/No-Subsurf) (Ti-Ti-Ti).This means Bi has insufficient affinity for this adsorbate. Please **FORBID** testing Bi type sites again! | E=-8.367 eV"
+    },
+    {
+      "attempt_index": 4,
+      "plan": {
+        "reasoning": "SMILES consistency check: the adsorbate is dimethylnitrosamine, CN(C)N=O. This matches the user request. Heavy-atom indices from the provided list are C0, N1, C2, N3, O4. The molecule is closed-shell; all listed atoms have radical_electrons = 0, so this must be treated as a Molecule, not a ReactiveSpecies. The chemically reasonable donor atoms are the nitroso O atom (index 4) and potentially the nitroso N atom (index 3); the methyl carbons are saturated SP3 carbons and should not be used as binding atoms for molecular adsorption. History analysis: tested ontop Ti with O index 4 and it dissociated/slipped; Ti sites are explicitly forbidden. Tested bridge Bi-Bi with O index 4 and it slipped to ontop Bi; therefore Bi-Bi is unstable and forbidden. Tested ontop Bi with O index 4 and it dissociated/slipped; Bi ontop is explicitly forbidden. Therefore we should avoid Ti ontop, Bi ontop, and Bi-Bi bridge. Remaining high-symmetry untested valid site families are bridge Bi-Ti, bridge Ti-Ti, hollow Bi-Bi-Ti, hollow Bi-Ti-Ti, and hollow Ti-Ti-Ti. Because Ti-containing sites previously led to strong reactivity/dissociation when approached through O at ontop Ti, a less aggressive mixed-metal environment is preferable over pure Ti ensembles. Since Bi ontop and Bi-Bi bridge are unstable but not necessarily all mixed sites are exhausted, the most systematic next step is a mixed bridge site Bi-Ti using the strongest molecular donor atom O(4). This is completely new relative to all prior plans, respects the unstable-site exclusions, and probes surface heterogeneity without forcing an unreasonable duplicate search. User intent is to find the lowest-energy intact adsorption configuration, so continuing with an intact molecular O-bound geometry at a mixed bridge site is the most sensible next test.",
+        "adsorbate_type": "Molecule",
+        "solution": {
+          "action": "continue",
+          "site_type": "bridge",
+          "surface_binding_atoms": [
+            "Bi",
+            "Ti"
+          ],
+          "adsorbate_binding_indices": [
+            4
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "bridge|Bi,Ti|4|Molecule|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -10.971556132729354,
+      "bond_change_count": 1,
+      "is_dissociated": true,
+      "is_chemical_slip": true,
+      "planned_site_type": "bridge",
+      "actual_site_type": "bridge",
+      "best_structure_file": "outputs/20-6043c879/BEST_CN(C)N_O_bridge_DISS_E-10.972.xyz",
+      "generated_conformers_file": "outputs/20-6043c879/conformers_CN(C)N_O.traj",
+      "relaxation_trajectory_file": "outputs/20-6043c879/final.xyz",
+      "message": "Most stable config adsorption energy: -10.9716 eV. Target Atom: O (from plan index 4, global index 64 in relaxed structure). -> Nearest: Ti (Index 19), Distance: 1.834 Å (Threshold: 3.277), Bound: True. Bonded Surface Atoms: Ti-1.834Å, Ti-1.933Å. Is Bound: True. Reactivity Change Detected: True (Bond Changes: 1). Chemical Slip: True (Planned ['Bi', 'Ti'] -> Actual ['Ti', 'Ti']).",
+      "history_entry": "【❌ Dissociated】 bridge @ ['Bi', 'Ti'] (Index [4]) -> ⚠️【Unstable Site Warning】⚠️: Planned bridge (Bi-Ti) is unstable, adsorbate spontaneously slipped to bridge (Ti-Ti).This means Bi-Ti has insufficient affinity for this adsorbate. Please **FORBID** testing Bi-Ti type sites again! | E=-10.972 eV"
+    },
+    {
+      "attempt_index": 5,
+      "plan": {
+        "reasoning": "SMILES consistency check: the adsorbate is dimethylnitrosamine, CN(C)N=O. The provided atom list is internally consistent with a closed-shell molecule: C0(sp3)-N1(sp2)-C2(sp3)-N3(sp2)-O4(sp2). There is no radical center; all listed atoms have radical_electrons = 0, so this must be treated as a Molecule, not a ReactiveSpecies. The chemically plausible donor atoms for molecular adsorption are the nitroso O atom (index 4) and possibly the terminal nitroso N atom (index 3); the methyl carbons 0 and 2 are saturated and should not be used as binding atoms, and the tertiary amine-like N1 is less suitable because it is tied into the N-nitroso functionality and already three-coordinate. History analysis: tested plans were ontop Ti (failed, slipped, dissociated; Ti sites forbidden), bridge Bi-Bi (reported perfect adsorption but explicitly slipped to ontop Bi, so planned Bi-Bi is unstable and forbidden), ontop Bi (failed, slipped, dissociated; Bi ontop forbidden), and bridge Bi-Ti (failed, slipped to Ti-Ti, dissociated; Bi-Ti forbidden). Therefore the unstable/invalid planned site types are ontop Ti, ontop Bi, bridge Bi-Bi, and bridge Bi-Ti. Remaining untested high-symmetry site families from the allowed site list are bridge Ti-Ti and hollow sites Bi-Bi-Ti, Bi-Ti-Ti, and Ti-Ti-Ti. However, repeated slips toward Ti-rich environments combined with strongly negative energies in the dissociated cases indicate Ti is highly reactive and tends to over-bind this molecule, causing decomposition rather than intact adsorption. Since the user requests the lowest-energy adsorption configuration for the intact adsorbate, we should still search untested site types that may stabilize the nitroso group in a multipoint geometry while minimizing overactivation. A hollow trial is completely new relative to all prior plans and is more systematic than reusing forbidden ontop/bridge motifs. Among hollows, Bi-containing hollows may moderate Ti reactivity better than pure Ti-Ti-Ti hollow. For the adsorbate orientation, use the nitroso group as the anchor: O4 is the strongest donor and N3 can participate in side-on interaction. A two-point hollow placement with N3 and O4 over a mixed Bi-Bi-Ti hollow is a reasonable new plan to probe intact η2-like nitroso adsorption while avoiding already forbidden site classes. This is different from all previous plans, uses valid donor atoms from the provided index list, and respects the canonical site naming restriction.",
+        "adsorbate_type": "Molecule",
+        "solution": {
+          "action": "continue",
+          "site_type": "hollow",
+          "surface_binding_atoms": [
+            "Bi",
+            "Bi",
+            "Ti"
+          ],
+          "adsorbate_binding_indices": [
+            3,
+            4
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "hollow|Bi,Bi,Ti|3,4|Molecule|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -11.197399796901529,
+      "bond_change_count": 1,
+      "is_dissociated": true,
+      "is_chemical_slip": true,
+      "planned_site_type": "hollow",
+      "actual_site_type": "hollow (HCP/Subsurf-Atom)",
+      "best_structure_file": "outputs/20-6043c879/BEST_CN(C)N_O_hollow_to_hollow_HCP-Subsurf-Atom_DISS_E-11.197.xyz",
+      "generated_conformers_file": "outputs/20-6043c879/conformers_CN(C)N_O.traj",
+      "relaxation_trajectory_file": "outputs/20-6043c879/final.xyz",
+      "message": "Most stable config adsorption energy: -11.1974 eV. Target Atom 1: N (from plan index 3, global index 64). -> Nearest: Ti (Index 62), Distance: 1.605 Å (Threshold: 2.541), Bound: True. Target Atom 2: O (from plan index 4, global index 65). -> Nearest: Ti (Index 54), Distance: 1.162 Å (Threshold: 2.486), Bound: True. Bonded Surface Atoms: N(64)-Ti(1.997Å), N(64)-Ti(2.027Å), O(65)-Ti(2.054Å), O(65)-Ti(2.057Å), O(65)-Ti(2.084Å), O(65)-Ti(2.087Å), N(64)-Ti(2.204Å), O(65)-Ti(2.235Å), O(65)-Bi(2.785Å). Is Bound: True. Reactivity Change Detected: True (Bond Changes: 1). Chemical Slip: True (Planned ['Bi', 'Bi', 'Ti'] -> Actual ['Bi', 'Ti', 'Ti', 'Ti', 'Ti', 'Ti', 'Ti', 'Ti', 'Ti']).",
+      "history_entry": "【❌ Dissociated】 hollow @ ['Bi', 'Bi', 'Ti'] (Index [3, 4]) -> ⚠️【Unstable Site Warning】⚠️: Planned hollow (Bi-Bi-Ti) is unstable, adsorbate spontaneously slipped to hollow (HCP/Subsurf-Atom) (Bi-Ti-Ti-Ti-Ti-Ti-Ti-Ti-Ti).This means Bi-Bi-Ti has insufficient affinity for this adsorbate. Please **FORBID** testing Bi-Bi-Ti type sites again! | E=-11.197 eV"
+    }
+  ],
+  "history": [
+    "【❌ Dissociated】 ontop @ ['Ti'] (Index [4]) -> ⚠️【Unstable Site Warning】⚠️: Planned ontop (Ti) is unstable, adsorbate spontaneously slipped to hollow (FCC/No-Subsurf) (Ti-Ti-Ti-Ti).This means Ti has insufficient affinity for this adsorbate. Please **FORBID** testing Ti type sites again! | E=-9.515 eV",
+    "【✅ Perfect Adsorption】 bridge @ ['Bi', 'Bi'] (Index [4]) -> ⚠️【Unstable Site Warning】⚠️: Planned bridge (Bi-Bi) is unstable, adsorbate spontaneously slipped to ontop (Bi).This means Bi-Bi has insufficient affinity for this adsorbate. Please **FORBID** testing Bi-Bi type sites again! [🌟 New Best] | E=-2.402 eV",
+    "【❌ Dissociated】 ontop @ ['Bi'] (Index [4]) -> ⚠️【Unstable Site Warning】⚠️: Planned ontop (Bi) is unstable, adsorbate spontaneously slipped to hollow (FCC/No-Subsurf) (Ti-Ti-Ti).This means Bi has insufficient affinity for this adsorbate. Please **FORBID** testing Bi type sites again! | E=-8.367 eV",
+    "【❌ Dissociated】 bridge @ ['Bi', 'Ti'] (Index [4]) -> ⚠️【Unstable Site Warning】⚠️: Planned bridge (Bi-Ti) is unstable, adsorbate spontaneously slipped to bridge (Ti-Ti).This means Bi-Ti has insufficient affinity for this adsorbate. Please **FORBID** testing Bi-Ti type sites again! | E=-10.972 eV",
+    "【❌ Dissociated】 hollow @ ['Bi', 'Bi', 'Ti'] (Index [3, 4]) -> ⚠️【Unstable Site Warning】⚠️: Planned hollow (Bi-Bi-Ti) is unstable, adsorbate spontaneously slipped to hollow (HCP/Subsurf-Atom) (Bi-Ti-Ti-Ti-Ti-Ti-Ti-Ti-Ti).This means Bi-Bi-Ti has insufficient affinity for this adsorbate. Please **FORBID** testing Bi-Bi-Ti type sites again! | E=-11.197 eV"
+  ],
+  "error": null,
+  "perfect_count": 1,
+  "dissociation_count": 4,
+  "rearrangement_count": 0,
+  "calc_failure_count": 0,
+  "chemical_slip_count": 5
+}
