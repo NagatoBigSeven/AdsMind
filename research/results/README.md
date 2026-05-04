@@ -6,14 +6,20 @@ The active result tree is organized by experiment type first.
 research/results/
   basic_experiments/
     cmu20/
-      gpt|claude|gemini|grok/
+      openai_gpt54_mace_mp0_small/
+      anthropic_claude_sonnet46_mace_mp0_small/
+      google_vertexai_gemini25pro_mace_mp0_small/
+      xai_grok4_0709_mace_mp0_small/
         one_shot|full|no_slip|no_termination|no_forbid/
           summary.csv
           <case_id>/result.json
       baselines/
       summaries/
     ocd62/
-      gpt|claude|gemini|grok/
+      openai_gpt54_mace_mp0_small/
+      anthropic_claude_sonnet46_mace_mp0_small/
+      google_vertexai_gemini25pro_mace_mp0_small/
+      xai_grok4_0709_mace_mp0_small/
         one_shot|full|no_slip|no_termination|no_forbid/
           summary.csv
           <case_id>/result.json
@@ -21,6 +27,10 @@ research/results/
       summaries/
     summaries/
   advanced_experiments/
+    mechanism/
+    reproducibility/
+    model_sensitivity/
+    case_studies/
 ```
 
 ## Basic Experiments
@@ -28,7 +38,11 @@ research/results/
 Basic experiments are the matched CMU20 and OCD62 evaluation matrix:
 
 - datasets: `cmu20`, `ocd62`
-- LLM backends: `gpt`, `claude`, `gemini`, `grok`
+- LLM/force-field directories:
+  `openai_gpt54_mace_mp0_small`,
+  `anthropic_claude_sonnet46_mace_mp0_small`,
+  `google_vertexai_gemini25pro_mace_mp0_small`,
+  `xai_grok4_0709_mace_mp0_small`
 - variants: `one_shot`, `full`, `no_slip`, `no_termination`, `no_forbid`
 
 Each backend has `all_variants_summary.csv` for the full backend table. Each
@@ -47,7 +61,7 @@ Dataset-level summaries:
 
 Baselines live under each dataset's `baselines/` directory. CMU20 also includes
 the matched Adsorb-Agent MACE-MP-0 small control at
-`basic_experiments/cmu20/baselines/adsorbagent_mace_mp0_small_gpt54/`.
+`basic_experiments/cmu20/baselines/adsorbagent_openai_gpt54_mace_mp0_small/`.
 
 Note: CMU20 `one_shot` summary tables contain all 20 cases. Some failed or
 historically missing one-shot runs have no artifact directory; use
@@ -55,16 +69,28 @@ historically missing one-shot runs have no artifact directory; use
 
 ## Advanced Experiments
 
-Advanced experiments contain smaller or deeper studies that are not the main
-matched CMU20/OCD62 matrix:
+Advanced experiments are organized by research question rather than by the
+main dataset/backend/variant matrix:
 
-- `ocd62_overlap12_reproducibility/`: repeated runs on the 12 overlapping OCD62 cases.
-- `mace_force_field_sensitivity/`: MACE-MP-0 large sensitivity checks.
-- `adsorbagent_single_config_stress/`: Adsorb-Agent single-config stress test.
-- `gpt54_multiseed_cmu20/`: GPT-5.4 full-run seed sensitivity.
+- `mechanism/ablation_effects/`: paired Full vs ablated-mechanism statistics,
+  backend agreement, and reach-Full tables.
+- `mechanism/chemical_slip_interpretability/`: chemical-slip interpretation
+  tables and trajectories.
+- `reproducibility/ocd62_overlap12/`: repeated runs on the 12 overlapping OCD62
+  cases, including the RUN3 landing directory.
+- `reproducibility/cmu20_openai_gpt54_mace_mp0_small_multiseed/`:
+  GPT-5.4 CMU20 full-run seed sensitivity under MACE-MP-0 small.
+- `model_sensitivity/mace_mp0_large/`: MACE-MP-0 large force-field sensitivity,
+  split by dataset, backend, and variant.
+  `ocd62_sample10` is a manifest-listed subset of OCD62, and all 10 cases are
+  already present in the OCD62 basic-experiment matrix.
+- `case_studies/dft_iteration_alignment/`: CMU20 case-level trajectory exports
+  for DFT alignment.
+- `case_studies/iteration_convergence/`: per-iteration running-best energy
+  curves.
 
 RUN3 reproducibility outputs are expected under
-`advanced_experiments/ocd62_overlap12_reproducibility/run3/` after the remote
+`advanced_experiments/reproducibility/ocd62_overlap12/run3/` after the remote
 jobs finish. Then refresh with:
 
 ```bash

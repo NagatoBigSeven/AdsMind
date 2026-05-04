@@ -14,6 +14,7 @@ import json
 import math
 import re
 import shutil
+import sys
 import zipfile
 from dataclasses import dataclass
 from pathlib import Path
@@ -28,13 +29,18 @@ from PIL import Image, ImageDraw, ImageFont
 
 
 ROOT = Path(__file__).resolve().parents[2]
-OUT_DIR = ROOT / "research/results/advanced_experiments/panel_b_structure_assets/panel_b_assets_20260429"
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
+from research.agent_eval.experiment_identity import backend_result_dir
+
+OUT_DIR = ROOT / "research/figures/panel_b_structure_assets/panel_b_assets_20260429"
 
 CMU_MANIFEST = ROOT / "datasets/cmu20/cmu20_manifest.csv"
 OCD62_MANIFEST = ROOT / "datasets/ocd62/ocd62_manifest.csv"
 
-CMU_MAIN_RESULT = ROOT / "research/results/basic_experiments/cmu20/gpt/full"
-OCD62_RESULT = ROOT / "research/results/basic_experiments/ocd62/gpt/full"
+CMU_MAIN_RESULT = ROOT / "research/results/basic_experiments/cmu20" / backend_result_dir("gpt") / "full"
+OCD62_RESULT = ROOT / "research/results/basic_experiments/ocd62" / backend_result_dir("gpt") / "full"
 
 BACKEND_LABEL = "GPT-5.4"
 VARIANT_LABEL = "Full"
@@ -397,8 +403,8 @@ def write_readme(manifest_rows: list[dict[str, str]], selected_count: int) -> No
                 "",
                 "Source convention:",
                 "",
-                f"- CMU20 thumbnails use {BACKEND_LABEL} {VARIANT_LABEL} relaxed structures from `basic_experiments/cmu20/gpt/full`.",
-                f"- OCD62 thumbnails use {BACKEND_LABEL} {VARIANT_LABEL} relaxed structures from `basic_experiments/ocd62/gpt/full`.",
+                f"- CMU20 thumbnails use {BACKEND_LABEL} {VARIANT_LABEL} relaxed structures from `basic_experiments/cmu20/{backend_result_dir('gpt')}/full`.",
+                f"- OCD62 thumbnails use {BACKEND_LABEL} {VARIANT_LABEL} relaxed structures from `basic_experiments/ocd62/{backend_result_dir('gpt')}/full`.",
                 f"- Force field/checkpoint label for these rendered structures: {CHECKPOINT_LABEL}.",
                 "- Individual PNGs use transparent backgrounds.",
                 "- Contact sheets are white-background previews for quick review; use individual PNGs for figure assembly.",
@@ -433,7 +439,7 @@ def write_handoff_message() -> None:
                 "",
                 "素材包路径：",
                 "",
-                "`research/results/advanced_experiments/panel_b_structure_assets/panel_b_assets_20260429/panel_b_assets_20260429.zip`",
+                "`research/figures/panel_b_structure_assets/panel_b_assets_20260429/panel_b_assets_20260429.zip`",
                 "",
                 "里面有：",
                 "",

@@ -1,0 +1,191 @@
+{
+  "case_id": "061",
+  "case_metadata": {
+    "case_id": "061",
+    "slab_file": "datasets/ocd62/061_ocd_909_Mo36N36_N_O.xyz",
+    "smiles": "[N]=O",
+    "user_request": "Find the lowest-energy adsorption configuration for the adsorbate with SMILES [N]=O on the provided surface.",
+    "surface_family": "compound",
+    "adsorbate_name": "[N]=O",
+    "miller_index": "",
+    "reaction_class": "GENERALIZATION",
+    "ablation_candidate": "FALSE",
+    "notes": "OCD id=909; adsorbate=[N]=O; surface_formula=Mo36N36; y_relaxed=-3.208998 eV; site=8;11;32;35",
+    "surface_formula": "Mo36N36",
+    "surface_elements": "Mo;N",
+    "bare_slab_atoms": "72",
+    "adsorbate_atoms": "2",
+    "y_relaxed": "-3.208998",
+    "site_indices": "8;11;32;35"
+  },
+  "status": "success",
+  "best_energy_eV": -10.710975646972656,
+  "iteration_count": 1,
+  "max_attempts": 1,
+  "final_site_type": "ontop",
+  "converged_tag": false,
+  "wall_clock_sec": 494.5447435602546,
+  "total_input_tokens": 3488,
+  "total_output_tokens": 674,
+  "artifact_paths": {
+    "BEST_N_O_ontop_E-10.711": "research/results/basic_experiments/ocd62/google_vertexai_gemini25pro_mace_mp0_small/one_shot/061/artifacts/BEST_N_O_ontop_E-10.711.xyz",
+    "BEST_N_O_ontop_E-10.711.xyz": "research/results/basic_experiments/ocd62/google_vertexai_gemini25pro_mace_mp0_small/one_shot/061/artifacts/BEST_N_O_ontop_E-10.711.xyz",
+    "best_structure_file": "research/results/basic_experiments/ocd62/google_vertexai_gemini25pro_mace_mp0_small/one_shot/061/artifacts/BEST_N_O_ontop_E-10.711.xyz",
+    "conformers_[N]_O": "research/results/basic_experiments/ocd62/google_vertexai_gemini25pro_mace_mp0_small/one_shot/061/artifacts/conformers_[N]_O.traj",
+    "conformers_[N]_O.traj": "research/results/basic_experiments/ocd62/google_vertexai_gemini25pro_mace_mp0_small/one_shot/061/artifacts/conformers_[N]_O.traj",
+    "final": "research/results/basic_experiments/ocd62/google_vertexai_gemini25pro_mace_mp0_small/one_shot/061/artifacts/final.xyz",
+    "final.xyz": "research/results/basic_experiments/ocd62/google_vertexai_gemini25pro_mace_mp0_small/one_shot/061/artifacts/final.xyz",
+    "relaxation": "research/results/basic_experiments/ocd62/google_vertexai_gemini25pro_mace_mp0_small/one_shot/061/artifacts/relaxation.traj",
+    "relaxation.traj": "research/results/basic_experiments/ocd62/google_vertexai_gemini25pro_mace_mp0_small/one_shot/061/artifacts/relaxation.traj",
+    "relaxation_trajectory_file": "research/results/basic_experiments/ocd62/google_vertexai_gemini25pro_mace_mp0_small/one_shot/061/artifacts/relaxation.traj"
+  },
+  "best_result": {
+    "most_stable_energy_eV": -10.710975646972656,
+    "analysis_json": {
+      "status": "success",
+      "message": "Most stable config adsorption energy: -10.7110 eV. Target Atom: N (from plan index 0, global index 72 in relaxed structure). -> Nearest: Mo (Index 22), Distance: 1.83 Å (Threshold: 3.262), Bound: True. Bonded Surface Atoms: Mo-1.83Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: False (Planned ['Mo'] -> Actual ['Mo']).",
+      "most_stable_energy_eV": -10.710975646972656,
+      "target_adsorbate_atom": "N",
+      "target_adsorbate_atom_index": 72,
+      "bonded_surface_atoms": [
+        {
+          "symbol": "Mo",
+          "index": 22,
+          "distance": 1.83
+        }
+      ],
+      "nearest_slab_atom": "Mo",
+      "nearest_slab_atom_index": 22,
+      "final_bond_distance_A": 1.83,
+      "estimated_covalent_cutoff_A": 2.475,
+      "is_covalently_bound": true,
+      "reaction_detected": false,
+      "is_dissociated": false,
+      "n_components": 1,
+      "bond_change_count": 0,
+      "site_analysis": {
+        "planned_site_type": "ontop",
+        "planned_connectivity": 1,
+        "actual_site_type": "ontop",
+        "actual_connectivity": 1,
+        "is_chemical_slip": false,
+        "planned_symbols": [
+          "Mo"
+        ],
+        "actual_symbols": [
+          "Mo"
+        ],
+        "site_fingerprint": "Mo22"
+      },
+      "best_structure_file": "outputs/007-dfa6e980/BEST_N_O_ontop_E-10.711.xyz",
+      "generated_conformers_file": "outputs/007-dfa6e980/conformers_[N]_O.traj",
+      "relaxation_trajectory_file": "outputs/007-dfa6e980/final.xyz",
+      "session_id": "007-dfa6e980"
+    },
+    "plan": {
+      "reasoning": "This is the first attempt to find the lowest energy adsorption configuration for nitric oxide (NO) on the MoN surface. The SMILES string [N]=O represents a radical molecule where the unpaired electron is located on the nitrogen atom (index 0). This is confirmed by the provided atom analysis, which shows `radical_electrons: 1` for the nitrogen atom. Binding through a radical electron is typically strong, making it a primary candidate for the most stable adsorption. Therefore, I will use the `ReactiveSpecies` adsorbate type. Among the available sites, the ontop Mo site is a common and chemically intuitive starting point for adsorption of a small molecule like NO on a metal-containing surface. My first plan is to test the adsorption of NO via its nitrogen atom onto an ontop Mo site.",
+      "adsorbate_type": "ReactiveSpecies",
+      "solution": {
+        "action": "continue",
+        "site_type": "ontop",
+        "surface_binding_atoms": [
+          "Mo"
+        ],
+        "adsorbate_binding_indices": [
+          0
+        ],
+        "relax_top_n": 1,
+        "touch_sphere_size": 2,
+        "overlap_thr": 0.1,
+        "conformers_per_site_cap": 4
+      }
+    },
+    "result_type": "Perfect"
+  },
+  "last_analysis": {
+    "status": "success",
+    "message": "Most stable config adsorption energy: -10.7110 eV. Target Atom: N (from plan index 0, global index 72 in relaxed structure). -> Nearest: Mo (Index 22), Distance: 1.83 Å (Threshold: 3.262), Bound: True. Bonded Surface Atoms: Mo-1.83Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: False (Planned ['Mo'] -> Actual ['Mo']).",
+    "most_stable_energy_eV": -10.710975646972656,
+    "target_adsorbate_atom": "N",
+    "target_adsorbate_atom_index": 72,
+    "bonded_surface_atoms": [
+      {
+        "symbol": "Mo",
+        "index": 22,
+        "distance": 1.83
+      }
+    ],
+    "nearest_slab_atom": "Mo",
+    "nearest_slab_atom_index": 22,
+    "final_bond_distance_A": 1.83,
+    "estimated_covalent_cutoff_A": 2.475,
+    "is_covalently_bound": true,
+    "reaction_detected": false,
+    "is_dissociated": false,
+    "n_components": 1,
+    "bond_change_count": 0,
+    "site_analysis": {
+      "planned_site_type": "ontop",
+      "planned_connectivity": 1,
+      "actual_site_type": "ontop",
+      "actual_connectivity": 1,
+      "is_chemical_slip": false,
+      "planned_symbols": [
+        "Mo"
+      ],
+      "actual_symbols": [
+        "Mo"
+      ],
+      "site_fingerprint": "Mo22"
+    },
+    "best_structure_file": "outputs/007-dfa6e980/BEST_N_O_ontop_E-10.711.xyz",
+    "generated_conformers_file": "outputs/007-dfa6e980/conformers_[N]_O.traj",
+    "relaxation_trajectory_file": "outputs/007-dfa6e980/final.xyz",
+    "session_id": "007-dfa6e980"
+  },
+  "attempt_records": [
+    {
+      "attempt_index": 1,
+      "plan": {
+        "reasoning": "This is the first attempt to find the lowest energy adsorption configuration for nitric oxide (NO) on the MoN surface. The SMILES string [N]=O represents a radical molecule where the unpaired electron is located on the nitrogen atom (index 0). This is confirmed by the provided atom analysis, which shows `radical_electrons: 1` for the nitrogen atom. Binding through a radical electron is typically strong, making it a primary candidate for the most stable adsorption. Therefore, I will use the `ReactiveSpecies` adsorbate type. Among the available sites, the ontop Mo site is a common and chemically intuitive starting point for adsorption of a small molecule like NO on a metal-containing surface. My first plan is to test the adsorption of NO via its nitrogen atom onto an ontop Mo site.",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "ontop",
+          "surface_binding_atoms": [
+            "Mo"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "ontop|Mo|0|ReactiveSpecies|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -10.710975646972656,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": false,
+      "planned_site_type": "ontop",
+      "actual_site_type": "ontop",
+      "best_structure_file": "outputs/007-dfa6e980/BEST_N_O_ontop_E-10.711.xyz",
+      "generated_conformers_file": "outputs/007-dfa6e980/conformers_[N]_O.traj",
+      "relaxation_trajectory_file": "outputs/007-dfa6e980/final.xyz",
+      "message": "Most stable config adsorption energy: -10.7110 eV. Target Atom: N (from plan index 0, global index 72 in relaxed structure). -> Nearest: Mo (Index 22), Distance: 1.83 Å (Threshold: 3.262), Bound: True. Bonded Surface Atoms: Mo-1.83Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: False (Planned ['Mo'] -> Actual ['Mo']).",
+      "history_entry": "【✅ Perfect Adsorption】 ontop @ ['Mo'] (Index [0]) -> Site: ontop (Mo) | E=-10.711 eV"
+    }
+  ],
+  "history": [
+    "【✅ Perfect Adsorption】 ontop @ ['Mo'] (Index [0]) -> Site: ontop (Mo) | E=-10.711 eV"
+  ],
+  "error": null,
+  "perfect_count": 1,
+  "dissociation_count": 0,
+  "rearrangement_count": 0,
+  "calc_failure_count": 0,
+  "chemical_slip_count": 0
+}

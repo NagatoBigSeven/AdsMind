@@ -8,15 +8,19 @@ OCD62 cases. It is not a 62-case rerun.
 ## Scope
 
 - cases: 12 overlap cases from `datasets/ocd62_overlap12/overlap12_manifest.csv`
-- backends: `gpt`, `claude`, `gemini`, `grok`
+- backend keys accepted by the launcher: `gpt`, `claude`, `gemini`, `grok`
+- result directories encode the exact route/model and force field
 - variants: `full`, `no_slip`, `no_forbid`, `no_termination`, `one_shot`
 - total jobs: 240
 
 The runner writes to:
 
 ```text
-research/results/advanced_experiments/ocd62_overlap12_reproducibility/run3/
-  gpt|claude|gemini|grok/
+research/results/advanced_experiments/reproducibility/ocd62_overlap12/run3/
+  openai_gpt54_mace_mp0_small/
+  anthropic_claude_sonnet46_mace_mp0_small/
+  openrouter_gemini25pro_mace_mp0_small/
+  openrouter_xai_grok4_mace_mp0_small/
     full|no_slip|no_forbid|no_termination|one_shot/
 ```
 
@@ -29,8 +33,8 @@ Backend config snapshots stay under `research/agent_eval/configs/`:
 - OpenRouter Gemini: `ocd62_overlap12_run3_openrouter/frozen_config_ocd62_overlap12_run3_openrouter_gemini.json`
 - OpenRouter Grok: `ocd62_overlap12_run3_openrouter/frozen_config_ocd62_overlap12_run3_openrouter_grok4.json`
 
-The public result folders use short backend names. The launcher maps those names
-to the frozen config filenames internally.
+The CLI accepts short backend keys, but public result folders use full
+protocol names.
 
 ## Run
 
@@ -66,5 +70,5 @@ This rewrites:
 
 Expected summary outputs:
 
-- `research/results/advanced_experiments/ocd62_overlap12_reproducibility/summaries/reproducibility_n3.csv`
-- `research/results/advanced_experiments/ocd62_overlap12_reproducibility/summaries/reproducibility_n3.md`
+- `research/results/advanced_experiments/reproducibility/ocd62_overlap12/summaries/reproducibility_n3.csv`
+- `research/results/advanced_experiments/reproducibility/ocd62_overlap12/summaries/reproducibility_n3.md`

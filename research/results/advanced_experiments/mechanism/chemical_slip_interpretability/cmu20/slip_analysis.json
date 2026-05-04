@@ -1,0 +1,94 @@
+{
+  "overall_slip_rate": {
+    "google_vertexai_gemini25pro_mace_mp0_small": 0.6,
+    "xai_grok4_0709_mace_mp0_small": 0.6,
+    "openai_gpt54_mace_mp0_small": 0.6316,
+    "openai_gpt54_mace_mp0_small_n": "12/19",
+    "anthropic_claude_sonnet46_mace_mp0_small": 0.6667,
+    "anthropic_claude_sonnet46_mace_mp0_small_n": "12/18"
+  },
+  "by_surface_family": {
+    "intermetallic": {
+      "google_vertexai_gemini25pro_mace_mp0_small": 0.7333333333333333,
+      "xai_grok4_0709_mace_mp0_small": 0.7333333333333333,
+      "openai_gpt54_mace_mp0_small": 0.7143,
+      "openai_gpt54_mace_mp0_small_n": "10/14",
+      "anthropic_claude_sonnet46_mace_mp0_small": 0.7692,
+      "anthropic_claude_sonnet46_mace_mp0_small_n": "10/13"
+    },
+    "monometallic": {
+      "google_vertexai_gemini25pro_mace_mp0_small": 0.2,
+      "xai_grok4_0709_mace_mp0_small": 0.2,
+      "openai_gpt54_mace_mp0_small": 0.4,
+      "openai_gpt54_mace_mp0_small_n": "2/5",
+      "anthropic_claude_sonnet46_mace_mp0_small": 0.4,
+      "anthropic_claude_sonnet46_mace_mp0_small_n": "2/5"
+    }
+  },
+  "cross_backend_slip_agreement": {
+    "matching_cases": 18,
+    "total_cases": 20,
+    "rate": 0.9
+  },
+  "most_common_slip_pattern": "ontop -> hollow",
+  "slip_type_counts": {
+    "google_vertexai_gemini25pro_mace_mp0_small": {
+      "hard": 9,
+      "none": 8,
+      "soft": 3
+    },
+    "xai_grok4_0709_mace_mp0_small": {
+      "none": 8,
+      "hard": 10,
+      "soft": 2
+    }
+  },
+  "slip_vs_energy_correlation": {
+    "description": "Do slipped one-shot cases have better or worse energy?",
+    "slipped_mean_energy": -4.1703485151131945,
+    "non_slipped_mean_energy": -2.827943876385689,
+    "note": "Slip does not necessarily mean worse energy — it means the PES disagreed with the LLM's intuition"
+  },
+  "backend_metadata": {
+    "openai_gpt54_mace_mp0_small": {
+      "backend_key": "gpt",
+      "backend": "openai_gpt54_mace_mp0_small",
+      "llm_model": "gpt-5.4-2026-03-05",
+      "llm_route": "OpenAI official endpoint",
+      "force_field": "MACE-MP-0 small",
+      "calculator_backend": "mace",
+      "force_field_model": "mace_mp0",
+      "force_field_size": "small"
+    },
+    "anthropic_claude_sonnet46_mace_mp0_small": {
+      "backend_key": "claude",
+      "backend": "anthropic_claude_sonnet46_mace_mp0_small",
+      "llm_model": "claude-sonnet-4-6",
+      "llm_route": "Anthropic official endpoint",
+      "force_field": "MACE-MP-0 small",
+      "calculator_backend": "mace",
+      "force_field_model": "mace_mp0",
+      "force_field_size": "small"
+    },
+    "google_vertexai_gemini25pro_mace_mp0_small": {
+      "backend_key": "gemini",
+      "backend": "google_vertexai_gemini25pro_mace_mp0_small",
+      "llm_model": "gemini-2.5-pro",
+      "llm_route": "Google Vertex AI",
+      "force_field": "MACE-MP-0 small",
+      "calculator_backend": "mace",
+      "force_field_model": "mace_mp0",
+      "force_field_size": "small"
+    },
+    "xai_grok4_0709_mace_mp0_small": {
+      "backend_key": "grok",
+      "backend": "xai_grok4_0709_mace_mp0_small",
+      "llm_model": "grok-4-0709",
+      "llm_route": "xAI official endpoint",
+      "force_field": "MACE-MP-0 small",
+      "calculator_backend": "mace",
+      "force_field_model": "mace_mp0",
+      "force_field_size": "small"
+    }
+  }
+}

@@ -6,6 +6,7 @@ import argparse
 import csv
 import json
 import math
+import sys
 from collections import Counter
 from pathlib import Path
 from statistics import mean, pstdev
@@ -13,11 +14,16 @@ from typing import Any, Iterable
 
 
 ROOT = Path(__file__).resolve().parents[2]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
+from research.agent_eval.experiment_identity import BACKEND_KEYS, backend_identity, backend_result_dir, summary_metadata
+
 RESULTS_ROOT = ROOT / "research" / "results"
 BASIC_ROOT = RESULTS_ROOT / "basic_experiments"
 ADVANCED_ROOT = RESULTS_ROOT / "advanced_experiments"
 OCD62_SUMMARY_DIR = BASIC_ROOT / "ocd62" / "summaries"
-OVERLAP12_ROOT = ADVANCED_ROOT / "ocd62_overlap12_reproducibility"
+OVERLAP12_ROOT = ADVANCED_ROOT / "reproducibility/ocd62_overlap12"
 OVERLAP12_SUMMARY_DIR = OVERLAP12_ROOT / "summaries"
 DATASET_DIR = ROOT / "datasets" / "ocd62"
 OVERLAP_MANIFEST = (
@@ -28,7 +34,7 @@ OVERLAP_MANIFEST = (
 )
 REPRO_RUNS_DATASET = "ocd62_overlap12"
 
-BACKENDS = ("gpt", "claude", "gemini", "grok")
+BACKENDS = BACKEND_KEYS
 VARIANTS = ("full", "no_slip", "no_forbid", "no_termination", "one_shot")
 VARIANT_ALIASES = {
     "one_shot": {"one_shot", "single_shot"},
@@ -98,7 +104,7 @@ def ocd_id(row: dict[str, str]) -> str:
 
 
 def backend_dir(dataset: str, backend: str) -> Path:
-    return BASIC_ROOT / dataset / backend
+    return BASIC_ROOT / dataset / backend_result_dir(backend)
 
 
 def run_dir(dataset: str, backend: str, variant: str, case_id: str) -> Path:
@@ -110,7 +116,7 @@ def summary_path(dataset: str, backend: str) -> Path:
 
 
 def repro_backend_dir(run_name: str, backend: str) -> Path:
-    return OVERLAP12_ROOT / run_name / backend
+    return OVERLAP12_ROOT / run_name / backend_result_dir(backend, run_name=run_name)
 
 
 def repro_summary_path(run_name: str, backend: str) -> Path:
@@ -209,7 +215,7 @@ def unified_rows() -> list[dict[str, Any]]:
                         "ocd_id": ocd_id(meta),
                         "surface_formula": meta["surface_formula"],
                         "adsorbate": adsorbate_label(meta),
-                        "backend": backend,
+                        **summary_metadata(backend_identity(backend)),
                         "variant": variant,
                         "best_energy_eV": value_from_row(row, "best_energy"),
                         "success": "TRUE" if row_success(row) else "FALSE",
@@ -279,13 +285,14 @@ def paired_rows(run_count: int) -> list[dict[str, Any]]:
                     "ocd_id": current_ocd_id,
                     "surface_formula": meta["surface_formula"],
                     "adsorbate": adsorbate_label(meta),
-                    "backend": backend,
+                    **summary_metadata(backend_identity(backend, run_name=run_names[0])),
                     "variant": variant,
                     "range_eV": format_float(range_ev),
                     "agreement_class": agreement_class(range_ev, outlier=outlier),
                 }
                 for idx, value in enumerate(values, start=1):
                     row[f"e_run{idx}"] = format_float(value)
+                    row[f"run{idx}_backend"] = backend_result_dir(backend, run_name=REPRO_RUN_DIRS[idx])
                 if run_count == 3 and len(clean) >= 2:
                     row["e_min"] = format_float(min(clean))
                     row["std_eV"] = format_float(pstdev(clean))
@@ -334,7 +341,14 @@ def write_outputs(write_n3: bool) -> None:
         "ocd_id",
         "surface_formula",
         "adsorbate",
+        "backend_key",
         "backend",
+        "llm_model",
+        "llm_route",
+        "force_field",
+        "calculator_backend",
+        "force_field_model",
+        "force_field_size",
         "variant",
         "best_energy_eV",
         "success",
@@ -356,7 +370,16 @@ def write_outputs(write_n3: bool) -> None:
         "ocd_id",
         "surface_formula",
         "adsorbate",
+        "backend_key",
         "backend",
+        "run1_backend",
+        "run2_backend",
+        "llm_model",
+        "llm_route",
+        "force_field",
+        "calculator_backend",
+        "force_field_model",
+        "force_field_size",
         "variant",
         "e_run1",
         "e_run2",
@@ -376,7 +399,32 @@ def write_outputs(write_n3: bool) -> None:
         if missing:
             raise FileNotFoundError(f"RUN3 summaries missing for: {', '.join(missing)}")
         n3 = paired_rows(3)
-        n3_fields = n2_fields[:7] + ["e_run1", "e_run2", "e_run3", "range_eV", "e_min", "std_eV", "agreement_class"]
+        n3_fields = [
+            "case_id",
+            "ocd62_case_id",
+            "ocd_id",
+            "surface_formula",
+            "adsorbate",
+            "backend_key",
+            "backend",
+            "run1_backend",
+            "run2_backend",
+            "run3_backend",
+            "llm_model",
+            "llm_route",
+            "force_field",
+            "calculator_backend",
+            "force_field_model",
+            "force_field_size",
+            "variant",
+            "e_run1",
+            "e_run2",
+            "e_run3",
+            "range_eV",
+            "e_min",
+            "std_eV",
+            "agreement_class",
+        ]
         write_csv(OVERLAP12_SUMMARY_DIR / "reproducibility_n3.csv", n3, n3_fields)
         report_n3 = reproducibility_report(n3, 3)
         (OVERLAP12_SUMMARY_DIR / "reproducibility_n3.md").write_text(report_n3, encoding="utf-8")

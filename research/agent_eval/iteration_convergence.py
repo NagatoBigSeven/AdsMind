@@ -10,6 +10,8 @@ from typing import Any, Dict, List, Optional
 
 import numpy as np
 
+from research.agent_eval.experiment_identity import identity_from_path, summary_metadata
+
 
 ROOT = Path(__file__).resolve().parents[2]
 
@@ -20,15 +22,9 @@ def resolve_repo_path(raw: str | Path) -> Path:
 
 
 def backend_label(path: Path) -> str:
-    """Create a compact backend label from an ablation directory name."""
-    name = path.name
-    replacements = {
-        "gemini_ablation": "gemini",
-        "grok4_ablation": "grok4",
-        "openai_gpt54_ablation": "openai_gpt54",
-        "anthropic_sonnet46_ablation": "anthropic_sonnet46",
-    }
-    return replacements.get(name, name)
+    """Return the reproducible backend directory name for a run path."""
+    identity = identity_from_path(path)
+    return identity.result_dir if identity is not None else path.name
 
 
 def extract_convergence(result_json_path: Path) -> List[Optional[float]]:
@@ -141,13 +137,28 @@ def main(argv: Optional[List[str]] = None) -> int:
             case_id = result_path.parent.name.zfill(2)
             curve = extract_convergence(result_path)
             max_iters = max(max_iters, len(curve))
-            row: Dict[str, Any] = {"case_id": case_id, "backend": label}
+            identity = identity_from_path(ablation_dir)
+            row: Dict[str, Any] = {"case_id": case_id}
+            if identity is not None:
+                row.update(summary_metadata(identity))
+            else:
+                row["backend"] = label
             for idx, energy in enumerate(curve, start=1):
                 row[f"iter_{idx}"] = energy
             row["final_best"] = next((energy for energy in reversed(curve) if energy is not None), None)
             rows.append(row)
 
-    fieldnames = ["case_id", "backend"] + [f"iter_{idx}" for idx in range(1, max_iters + 1)] + ["final_best"]
+    fieldnames = [
+        "case_id",
+        "backend_key",
+        "backend",
+        "llm_model",
+        "llm_route",
+        "force_field",
+        "calculator_backend",
+        "force_field_model",
+        "force_field_size",
+    ] + [f"iter_{idx}" for idx in range(1, max_iters + 1)] + ["final_best"]
     for row in rows:
         for field in fieldnames:
             row.setdefault(field, "")

@@ -27,25 +27,6 @@ from research.agent_eval.common import (
 )
 
 
-OVERLAP_CASES = {
-    "01",
-    "02",
-    "04",
-    "05",
-    "09",
-    "10",
-    "12",
-    "13",
-    "14",
-    "15",
-    "16",
-    "17",
-    "18",
-    "19",
-    "20",
-}
-
-
 SUMMARY_FIELDS = [
     "case_id",
     "config_name",
@@ -320,7 +301,7 @@ def compare_with_adsmind(
     energy_differences: List[float] = []
     success_pairs = []
 
-    for case_id in sorted(OVERLAP_CASES & set(adsmind_rows) & set(competitor_rows)):
+    for case_id in sorted(set(adsmind_rows) & set(competitor_rows)):
         ours = adsmind_rows[case_id]
         theirs = competitor_rows[case_id]
         ours_energy = parse_optional_float(ours.get("best_energy", ""))

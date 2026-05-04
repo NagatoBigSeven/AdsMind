@@ -1,0 +1,211 @@
+{
+  "case_id": "010",
+  "case_metadata": {
+    "case_id": "010",
+    "slab_file": "datasets/ocd62_overlap12/010_ocd_596_Cr18Pt18_H.xyz",
+    "smiles": "[H]",
+    "user_request": "Find the lowest-energy adsorption configuration for atomic hydrogen on the provided surface.",
+    "surface_family": "intermetallic",
+    "adsorbate_name": "H",
+    "miller_index": "",
+    "reaction_class": "HER",
+    "ablation_candidate": "FALSE",
+    "notes": "OCD id=596; adsorbate=[H]; surface_formula=Cr18Pt18; y_relaxed=-1.602807 eV; site=28;34; OCD62 seq_id=041; overlap12 reproducibility case",
+    "surface_formula": "Cr18Pt18",
+    "surface_elements": "Cr;Pt",
+    "bare_slab_atoms": "36",
+    "adsorbate_atoms": "1",
+    "y_relaxed": "-1.602807",
+    "site_indices": "28;34"
+  },
+  "status": "success",
+  "best_energy_eV": -4.743168592453003,
+  "iteration_count": 1,
+  "max_attempts": 1,
+  "final_site_type": "bridge",
+  "converged_tag": false,
+  "wall_clock_sec": 179.80109361186624,
+  "total_input_tokens": 3279,
+  "total_output_tokens": 1036,
+  "artifact_paths": {
+    "BEST_H_hollow_to_bridge_E-4.743": "research/results/advanced_experiments/reproducibility/ocd62_overlap12/run2/openai_gpt54_mace_mp0_small/one_shot/010/artifacts/BEST_H_hollow_to_bridge_E-4.743.xyz",
+    "BEST_H_hollow_to_bridge_E-4.743.xyz": "research/results/advanced_experiments/reproducibility/ocd62_overlap12/run2/openai_gpt54_mace_mp0_small/one_shot/010/artifacts/BEST_H_hollow_to_bridge_E-4.743.xyz",
+    "best_structure_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12/run2/openai_gpt54_mace_mp0_small/one_shot/010/artifacts/BEST_H_hollow_to_bridge_E-4.743.xyz",
+    "conformers_[H]": "research/results/advanced_experiments/reproducibility/ocd62_overlap12/run2/openai_gpt54_mace_mp0_small/one_shot/010/artifacts/conformers_[H].traj",
+    "conformers_[H].traj": "research/results/advanced_experiments/reproducibility/ocd62_overlap12/run2/openai_gpt54_mace_mp0_small/one_shot/010/artifacts/conformers_[H].traj",
+    "final": "research/results/advanced_experiments/reproducibility/ocd62_overlap12/run2/openai_gpt54_mace_mp0_small/one_shot/010/artifacts/final.xyz",
+    "final.xyz": "research/results/advanced_experiments/reproducibility/ocd62_overlap12/run2/openai_gpt54_mace_mp0_small/one_shot/010/artifacts/final.xyz",
+    "relaxation": "research/results/advanced_experiments/reproducibility/ocd62_overlap12/run2/openai_gpt54_mace_mp0_small/one_shot/010/artifacts/relaxation.traj",
+    "relaxation.traj": "research/results/advanced_experiments/reproducibility/ocd62_overlap12/run2/openai_gpt54_mace_mp0_small/one_shot/010/artifacts/relaxation.traj",
+    "relaxation_trajectory_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12/run2/openai_gpt54_mace_mp0_small/one_shot/010/artifacts/relaxation.traj"
+  },
+  "best_result": {
+    "most_stable_energy_eV": -4.743168592453003,
+    "analysis_json": {
+      "status": "success",
+      "message": "Most stable config adsorption energy: -4.7432 eV. Target Atom: H (from plan index 0, global index 36 in relaxed structure). -> Nearest: Pt (Index 22), Distance: 1.75 Å (Threshold: 2.422), Bound: True. Bonded Surface Atoms: Pt-1.75Å, Pt-1.763Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Cr', 'Pt', 'Pt'] -> Actual ['Pt', 'Pt']).",
+      "most_stable_energy_eV": -4.743168592453003,
+      "target_adsorbate_atom": "H",
+      "target_adsorbate_atom_index": 36,
+      "bonded_surface_atoms": [
+        {
+          "symbol": "Pt",
+          "index": 22,
+          "distance": 1.75
+        },
+        {
+          "symbol": "Pt",
+          "index": 34,
+          "distance": 1.763
+        }
+      ],
+      "nearest_slab_atom": "Pt",
+      "nearest_slab_atom_index": 22,
+      "final_bond_distance_A": 1.75,
+      "estimated_covalent_cutoff_A": 1.837,
+      "is_covalently_bound": true,
+      "reaction_detected": false,
+      "is_dissociated": false,
+      "n_components": 1,
+      "bond_change_count": 0,
+      "site_analysis": {
+        "planned_site_type": "hollow",
+        "planned_connectivity": 3,
+        "actual_site_type": "bridge",
+        "actual_connectivity": 2,
+        "is_chemical_slip": true,
+        "planned_symbols": [
+          "Cr",
+          "Pt",
+          "Pt"
+        ],
+        "actual_symbols": [
+          "Pt",
+          "Pt"
+        ],
+        "site_fingerprint": "Pt22-Pt34"
+      },
+      "best_structure_file": "outputs/001-3b181d2c/BEST_H_hollow_to_bridge_E-4.743.xyz",
+      "generated_conformers_file": "outputs/001-3b181d2c/conformers_[H].traj",
+      "relaxation_trajectory_file": "outputs/001-3b181d2c/final.xyz",
+      "session_id": "001-3b181d2c"
+    },
+    "plan": {
+      "reasoning": "SMILES consistency check: the adsorbate is [H], i.e. atomic hydrogen, which is a radical species with one unpaired electron. There is no mismatch between the user request and the SMILES. The provided heavy atom index list is empty because hydrogen is not a heavy atom, but the adsorbate still contains a single atom; for atomic hydrogen the only chemically valid binding atom is that H atom, taken as index 0. Since this is a radical adsorbate, the correct adsorbate_type is ReactiveSpecies, and the binding index must be the radical H atom. History analysis: there are no previous attempts, so I must choose the best physically sensible initial plan. User intent: find the lowest-energy adsorption configuration for atomic H on a Cr-Pt alloy surface. For H on transition-metal alloy surfaces, the strongest adsorption commonly occurs at higher-coordination sites rather than ontop, and H often prefers Pt-containing hollow/bridge environments on close-packed alloy surfaces. Among the allowed site motifs, the mixed hollow Cr-Pt-Pt is a strong initial candidate because it offers high coordination and two Pt neighbors, which are often favorable for H stabilization while still reflecting alloy heterogeneity. Surface analysis confirms this is an allowed Hollow-3 site combination. I therefore propose a hollow trial using one H binding atom over a Cr-Pt-Pt threefold site. This is a single-point adsorption, which is consistent with the site rules for hollow adsorption.",
+      "adsorbate_type": "ReactiveSpecies",
+      "solution": {
+        "action": "continue",
+        "site_type": "hollow",
+        "surface_binding_atoms": [
+          "Cr",
+          "Pt",
+          "Pt"
+        ],
+        "adsorbate_binding_indices": [
+          0
+        ],
+        "relax_top_n": 1,
+        "touch_sphere_size": 2,
+        "overlap_thr": 0.1,
+        "conformers_per_site_cap": 4
+      }
+    },
+    "result_type": "Perfect"
+  },
+  "last_analysis": {
+    "status": "success",
+    "message": "Most stable config adsorption energy: -4.7432 eV. Target Atom: H (from plan index 0, global index 36 in relaxed structure). -> Nearest: Pt (Index 22), Distance: 1.75 Å (Threshold: 2.422), Bound: True. Bonded Surface Atoms: Pt-1.75Å, Pt-1.763Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Cr', 'Pt', 'Pt'] -> Actual ['Pt', 'Pt']).",
+    "most_stable_energy_eV": -4.743168592453003,
+    "target_adsorbate_atom": "H",
+    "target_adsorbate_atom_index": 36,
+    "bonded_surface_atoms": [
+      {
+        "symbol": "Pt",
+        "index": 22,
+        "distance": 1.75
+      },
+      {
+        "symbol": "Pt",
+        "index": 34,
+        "distance": 1.763
+      }
+    ],
+    "nearest_slab_atom": "Pt",
+    "nearest_slab_atom_index": 22,
+    "final_bond_distance_A": 1.75,
+    "estimated_covalent_cutoff_A": 1.837,
+    "is_covalently_bound": true,
+    "reaction_detected": false,
+    "is_dissociated": false,
+    "n_components": 1,
+    "bond_change_count": 0,
+    "site_analysis": {
+      "planned_site_type": "hollow",
+      "planned_connectivity": 3,
+      "actual_site_type": "bridge",
+      "actual_connectivity": 2,
+      "is_chemical_slip": true,
+      "planned_symbols": [
+        "Cr",
+        "Pt",
+        "Pt"
+      ],
+      "actual_symbols": [
+        "Pt",
+        "Pt"
+      ],
+      "site_fingerprint": "Pt22-Pt34"
+    },
+    "best_structure_file": "outputs/001-3b181d2c/BEST_H_hollow_to_bridge_E-4.743.xyz",
+    "generated_conformers_file": "outputs/001-3b181d2c/conformers_[H].traj",
+    "relaxation_trajectory_file": "outputs/001-3b181d2c/final.xyz",
+    "session_id": "001-3b181d2c"
+  },
+  "attempt_records": [
+    {
+      "attempt_index": 1,
+      "plan": {
+        "reasoning": "SMILES consistency check: the adsorbate is [H], i.e. atomic hydrogen, which is a radical species with one unpaired electron. There is no mismatch between the user request and the SMILES. The provided heavy atom index list is empty because hydrogen is not a heavy atom, but the adsorbate still contains a single atom; for atomic hydrogen the only chemically valid binding atom is that H atom, taken as index 0. Since this is a radical adsorbate, the correct adsorbate_type is ReactiveSpecies, and the binding index must be the radical H atom. History analysis: there are no previous attempts, so I must choose the best physically sensible initial plan. User intent: find the lowest-energy adsorption configuration for atomic H on a Cr-Pt alloy surface. For H on transition-metal alloy surfaces, the strongest adsorption commonly occurs at higher-coordination sites rather than ontop, and H often prefers Pt-containing hollow/bridge environments on close-packed alloy surfaces. Among the allowed site motifs, the mixed hollow Cr-Pt-Pt is a strong initial candidate because it offers high coordination and two Pt neighbors, which are often favorable for H stabilization while still reflecting alloy heterogeneity. Surface analysis confirms this is an allowed Hollow-3 site combination. I therefore propose a hollow trial using one H binding atom over a Cr-Pt-Pt threefold site. This is a single-point adsorption, which is consistent with the site rules for hollow adsorption.",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "hollow",
+          "surface_binding_atoms": [
+            "Cr",
+            "Pt",
+            "Pt"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "hollow|Cr,Pt,Pt|0|ReactiveSpecies|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -4.743168592453003,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": true,
+      "planned_site_type": "hollow",
+      "actual_site_type": "bridge",
+      "best_structure_file": "outputs/001-3b181d2c/BEST_H_hollow_to_bridge_E-4.743.xyz",
+      "generated_conformers_file": "outputs/001-3b181d2c/conformers_[H].traj",
+      "relaxation_trajectory_file": "outputs/001-3b181d2c/final.xyz",
+      "message": "Most stable config adsorption energy: -4.7432 eV. Target Atom: H (from plan index 0, global index 36 in relaxed structure). -> Nearest: Pt (Index 22), Distance: 1.75 Å (Threshold: 2.422), Bound: True. Bonded Surface Atoms: Pt-1.75Å, Pt-1.763Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Cr', 'Pt', 'Pt'] -> Actual ['Pt', 'Pt']).",
+      "history_entry": "【✅ Perfect Adsorption】 hollow @ ['Cr', 'Pt', 'Pt'] (Index [0]) -> Site: bridge (Pt,Pt) | E=-4.743 eV"
+    }
+  ],
+  "history": [
+    "【✅ Perfect Adsorption】 hollow @ ['Cr', 'Pt', 'Pt'] (Index [0]) -> Site: bridge (Pt,Pt) | E=-4.743 eV"
+  ],
+  "error": null,
+  "perfect_count": 1,
+  "dissociation_count": 0,
+  "rearrangement_count": 0,
+  "calc_failure_count": 0,
+  "chemical_slip_count": 1
+}

@@ -22,11 +22,20 @@ from scipy.stats import binomtest, bootstrap, rankdata
 from adsmind.agent.agent import _prepare_initial_state
 from adsmind.tools.common import ensure_output_dir
 from adsmind.utils.config import get_api_key_for_backend
+from research.agent_eval.experiment_identity import identity_from_path, summary_metadata
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 RUN_RECURSION_LIMIT = 50
 DEFAULT_RESULT_NAME = "result.json"
 SUMMARY_COLUMNS = [
+    "backend_key",
+    "backend",
+    "llm_model",
+    "llm_route",
+    "force_field",
+    "calculator_backend",
+    "force_field_model",
+    "force_field_size",
     "case_id",
     "slab_file",
     "smiles",
@@ -578,12 +587,15 @@ def summarize_directory(output_dir: Path | str) -> List[Dict[str, Any]]:
 def write_summary_csv(rows: Sequence[Dict[str, Any]], output_path: Path | str) -> Path:
     """Write summary rows to disk with a fixed column order."""
     output = resolve_repo_path(output_path)
+    identity = identity_from_path(output)
+    metadata = summary_metadata(identity) if identity is not None else {}
     output.parent.mkdir(parents=True, exist_ok=True)
     with output.open("w", encoding="utf-8", newline="") as handle:
         writer = csv.DictWriter(handle, fieldnames=SUMMARY_COLUMNS)
         writer.writeheader()
         for row in rows:
-            writer.writerow({column: row.get(column, "") for column in SUMMARY_COLUMNS})
+            enriched_row = {**metadata, **row}
+            writer.writerow({column: enriched_row.get(column, "") for column in SUMMARY_COLUMNS})
     return output
 
 

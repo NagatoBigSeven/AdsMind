@@ -1,0 +1,203 @@
+{
+  "case_id": "024",
+  "case_metadata": {
+    "case_id": "024",
+    "slab_file": "datasets/ocd62/024_ocd_275_Cd20Y20_C_O.xyz",
+    "smiles": "C[O]",
+    "user_request": "Find the lowest-energy adsorption configuration for the adsorbate with SMILES C[O] on the provided surface.",
+    "surface_family": "intermetallic",
+    "adsorbate_name": "C[O]",
+    "miller_index": "",
+    "reaction_class": "GENERALIZATION",
+    "ablation_candidate": "FALSE",
+    "notes": "OCD id=275; adsorbate=C[O]; surface_formula=Cd20Y20; y_relaxed=-3.624228 eV; site=10;11;24;34",
+    "surface_formula": "Cd20Y20",
+    "surface_elements": "Cd;Y",
+    "bare_slab_atoms": "40",
+    "adsorbate_atoms": "5",
+    "y_relaxed": "-3.624228",
+    "site_indices": "10;11;24;34"
+  },
+  "status": "success",
+  "best_energy_eV": -5.207887649536133,
+  "iteration_count": 1,
+  "max_attempts": 1,
+  "final_site_type": "bridge",
+  "converged_tag": false,
+  "wall_clock_sec": 70.58979403227568,
+  "total_input_tokens": 3325,
+  "total_output_tokens": 1038,
+  "artifact_paths": {
+    "BEST_CO_ontop_to_bridge_E-5.208": "research/results/basic_experiments/ocd62/openai_gpt54_mace_mp0_small/one_shot/024/artifacts/BEST_CO_ontop_to_bridge_E-5.208.xyz",
+    "BEST_CO_ontop_to_bridge_E-5.208.xyz": "research/results/basic_experiments/ocd62/openai_gpt54_mace_mp0_small/one_shot/024/artifacts/BEST_CO_ontop_to_bridge_E-5.208.xyz",
+    "best_structure_file": "research/results/basic_experiments/ocd62/openai_gpt54_mace_mp0_small/one_shot/024/artifacts/BEST_CO_ontop_to_bridge_E-5.208.xyz",
+    "conformers_C[O]": "research/results/basic_experiments/ocd62/openai_gpt54_mace_mp0_small/one_shot/024/artifacts/conformers_C[O].traj",
+    "conformers_C[O].traj": "research/results/basic_experiments/ocd62/openai_gpt54_mace_mp0_small/one_shot/024/artifacts/conformers_C[O].traj",
+    "final": "research/results/basic_experiments/ocd62/openai_gpt54_mace_mp0_small/one_shot/024/artifacts/final.xyz",
+    "final.xyz": "research/results/basic_experiments/ocd62/openai_gpt54_mace_mp0_small/one_shot/024/artifacts/final.xyz",
+    "relaxation": "research/results/basic_experiments/ocd62/openai_gpt54_mace_mp0_small/one_shot/024/artifacts/relaxation.traj",
+    "relaxation.traj": "research/results/basic_experiments/ocd62/openai_gpt54_mace_mp0_small/one_shot/024/artifacts/relaxation.traj",
+    "relaxation_trajectory_file": "research/results/basic_experiments/ocd62/openai_gpt54_mace_mp0_small/one_shot/024/artifacts/relaxation.traj"
+  },
+  "best_result": {
+    "most_stable_energy_eV": -5.207887649536133,
+    "analysis_json": {
+      "status": "success",
+      "message": "Most stable config adsorption energy: -5.2079 eV. Target Atom: O (from plan index 1, global index 40 in relaxed structure). -> Nearest: Y (Index 0), Distance: 2.137 Å (Threshold: 3.712), Bound: True. Bonded Surface Atoms: Y-2.137Å, Y-2.267Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Y'] -> Actual ['Y', 'Y']).",
+      "most_stable_energy_eV": -5.207887649536133,
+      "target_adsorbate_atom": "O",
+      "target_adsorbate_atom_index": 40,
+      "bonded_surface_atoms": [
+        {
+          "symbol": "Y",
+          "index": 0,
+          "distance": 2.137
+        },
+        {
+          "symbol": "Y",
+          "index": 1,
+          "distance": 2.267
+        }
+      ],
+      "nearest_slab_atom": "Y",
+      "nearest_slab_atom_index": 0,
+      "final_bond_distance_A": 2.137,
+      "estimated_covalent_cutoff_A": 2.816,
+      "is_covalently_bound": true,
+      "reaction_detected": false,
+      "is_dissociated": false,
+      "n_components": 1,
+      "bond_change_count": 0,
+      "site_analysis": {
+        "planned_site_type": "ontop",
+        "planned_connectivity": 1,
+        "actual_site_type": "bridge",
+        "actual_connectivity": 2,
+        "is_chemical_slip": true,
+        "planned_symbols": [
+          "Y"
+        ],
+        "actual_symbols": [
+          "Y",
+          "Y"
+        ],
+        "site_fingerprint": "Y0-Y1"
+      },
+      "best_structure_file": "outputs/014-f16ae221/BEST_CO_ontop_to_bridge_E-5.208.xyz",
+      "generated_conformers_file": "outputs/014-f16ae221/conformers_C[O].traj",
+      "relaxation_trajectory_file": "outputs/014-f16ae221/final.xyz",
+      "session_id": "014-f16ae221"
+    },
+    "plan": {
+      "reasoning": "No previous attempts exist, so I must propose the best physically sensible initial plan. The user's goal is to find the lowest-energy adsorption configuration for C[O] on the Cd-Y alloy surface. The SMILES consistency check shows atom 0 is C, SP3, degree 1, no radical electrons; atom 1 is O, SP3, degree 1, with 1 radical electron. Thus this is a methoxy-like radical species rather than a closed-shell alcohol or saturated alkyl. There is no hybridization mismatch with the SMILES itself. Because I plan adsorption through the oxygen-centered radical, the selected binding atom must be atom 1, which indeed has radical_electrons > 0, so ReactiveSpecies is the correct type. Chemically, an O-centered radical on an electropositive alloy surface should bind strongly through O. Among the available site chemistries, Y is expected to be more oxophilic than Cd, so an O-on-Y motif is the most promising first trial. With only one allowed attempt in this run, the most targeted low-energy initial guess is an ontop Y configuration using the oxygen radical center. This satisfies the site-alignment rule because ontop uses one adsorbate binding index.",
+      "adsorbate_type": "ReactiveSpecies",
+      "solution": {
+        "action": "continue",
+        "site_type": "ontop",
+        "surface_binding_atoms": [
+          "Y"
+        ],
+        "adsorbate_binding_indices": [
+          1
+        ],
+        "relax_top_n": 1,
+        "touch_sphere_size": 2,
+        "overlap_thr": 0.1,
+        "conformers_per_site_cap": 4
+      }
+    },
+    "result_type": "Perfect"
+  },
+  "last_analysis": {
+    "status": "success",
+    "message": "Most stable config adsorption energy: -5.2079 eV. Target Atom: O (from plan index 1, global index 40 in relaxed structure). -> Nearest: Y (Index 0), Distance: 2.137 Å (Threshold: 3.712), Bound: True. Bonded Surface Atoms: Y-2.137Å, Y-2.267Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Y'] -> Actual ['Y', 'Y']).",
+    "most_stable_energy_eV": -5.207887649536133,
+    "target_adsorbate_atom": "O",
+    "target_adsorbate_atom_index": 40,
+    "bonded_surface_atoms": [
+      {
+        "symbol": "Y",
+        "index": 0,
+        "distance": 2.137
+      },
+      {
+        "symbol": "Y",
+        "index": 1,
+        "distance": 2.267
+      }
+    ],
+    "nearest_slab_atom": "Y",
+    "nearest_slab_atom_index": 0,
+    "final_bond_distance_A": 2.137,
+    "estimated_covalent_cutoff_A": 2.816,
+    "is_covalently_bound": true,
+    "reaction_detected": false,
+    "is_dissociated": false,
+    "n_components": 1,
+    "bond_change_count": 0,
+    "site_analysis": {
+      "planned_site_type": "ontop",
+      "planned_connectivity": 1,
+      "actual_site_type": "bridge",
+      "actual_connectivity": 2,
+      "is_chemical_slip": true,
+      "planned_symbols": [
+        "Y"
+      ],
+      "actual_symbols": [
+        "Y",
+        "Y"
+      ],
+      "site_fingerprint": "Y0-Y1"
+    },
+    "best_structure_file": "outputs/014-f16ae221/BEST_CO_ontop_to_bridge_E-5.208.xyz",
+    "generated_conformers_file": "outputs/014-f16ae221/conformers_C[O].traj",
+    "relaxation_trajectory_file": "outputs/014-f16ae221/final.xyz",
+    "session_id": "014-f16ae221"
+  },
+  "attempt_records": [
+    {
+      "attempt_index": 1,
+      "plan": {
+        "reasoning": "No previous attempts exist, so I must propose the best physically sensible initial plan. The user's goal is to find the lowest-energy adsorption configuration for C[O] on the Cd-Y alloy surface. The SMILES consistency check shows atom 0 is C, SP3, degree 1, no radical electrons; atom 1 is O, SP3, degree 1, with 1 radical electron. Thus this is a methoxy-like radical species rather than a closed-shell alcohol or saturated alkyl. There is no hybridization mismatch with the SMILES itself. Because I plan adsorption through the oxygen-centered radical, the selected binding atom must be atom 1, which indeed has radical_electrons > 0, so ReactiveSpecies is the correct type. Chemically, an O-centered radical on an electropositive alloy surface should bind strongly through O. Among the available site chemistries, Y is expected to be more oxophilic than Cd, so an O-on-Y motif is the most promising first trial. With only one allowed attempt in this run, the most targeted low-energy initial guess is an ontop Y configuration using the oxygen radical center. This satisfies the site-alignment rule because ontop uses one adsorbate binding index.",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "ontop",
+          "surface_binding_atoms": [
+            "Y"
+          ],
+          "adsorbate_binding_indices": [
+            1
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "ontop|Y|1|ReactiveSpecies|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -5.207887649536133,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": true,
+      "planned_site_type": "ontop",
+      "actual_site_type": "bridge",
+      "best_structure_file": "outputs/014-f16ae221/BEST_CO_ontop_to_bridge_E-5.208.xyz",
+      "generated_conformers_file": "outputs/014-f16ae221/conformers_C[O].traj",
+      "relaxation_trajectory_file": "outputs/014-f16ae221/final.xyz",
+      "message": "Most stable config adsorption energy: -5.2079 eV. Target Atom: O (from plan index 1, global index 40 in relaxed structure). -> Nearest: Y (Index 0), Distance: 2.137 Å (Threshold: 3.712), Bound: True. Bonded Surface Atoms: Y-2.137Å, Y-2.267Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Y'] -> Actual ['Y', 'Y']).",
+      "history_entry": "【✅ Perfect Adsorption】 ontop @ ['Y'] (Index [1]) -> Site: bridge (Y,Y) | E=-5.208 eV"
+    }
+  ],
+  "history": [
+    "【✅ Perfect Adsorption】 ontop @ ['Y'] (Index [1]) -> Site: bridge (Y,Y) | E=-5.208 eV"
+  ],
+  "error": null,
+  "perfect_count": 1,
+  "dissociation_count": 0,
+  "rearrangement_count": 0,
+  "calc_failure_count": 0,
+  "chemical_slip_count": 1
+}

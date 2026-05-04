@@ -19,7 +19,6 @@ from research.agent_eval.compare_two_backend_ablation import (
     main as compare_two_backend_ablation_main,
 )
 from research.agent_eval.compare_adsorbagent import main as compare_main
-from research.agent_eval.legacy_package_results import main as legacy_package_main
 from research.agent_eval.run_batch import main as run_batch_main
 from research.agent_eval.run_case import execute_case
 from research.agent_eval.summarize_runs import main as summarize_main
@@ -383,47 +382,3 @@ class TestAgentEvalTools(unittest.TestCase):
             data = json.loads(output_json.read_text(encoding="utf-8"))
             self.assertEqual(data["overall"]["row_count"], 2)
             self.assertEqual(data["largest_disagreement"]["variant"], "single_shot")
-
-    def test_legacy_package_results_builds_expected_directories(self):
-        with tempfile.TemporaryDirectory() as tmpdir:
-            benchmark_dir = Path(tmpdir) / "benchmark"
-            benchmark_dir.mkdir()
-            summary_path = benchmark_dir / "summary.csv"
-            with summary_path.open("w", encoding="utf-8", newline="") as handle:
-                writer = csv.DictWriter(
-                    handle,
-                    fieldnames=[
-                        "case_id",
-                        "status",
-                        "best_energy_eV",
-                        "best_structure_file",
-                        "dissociation_count",
-                    ],
-                )
-                writer.writeheader()
-                writer.writerow(
-                    {
-                        "case_id": "01",
-                        "status": "success",
-                        "best_energy_eV": "-1.23",
-                        "best_structure_file": "",
-                        "dissociation_count": "0",
-                    }
-                )
-
-            output_dir = Path(tmpdir) / "package"
-            code = legacy_package_main(
-                [
-                    "--benchmark-dir",
-                    str(benchmark_dir),
-                    "--output",
-                    str(output_dir),
-                    "--manifest",
-                    str(MANIFEST),
-                    "--config",
-                    str(CONFIG),
-                ]
-            )
-            self.assertEqual(code, 0)
-            self.assertTrue((output_dir / "dft_handoff").exists())
-            self.assertTrue((output_dir / "si_package" / "SI-1_prompts").exists())

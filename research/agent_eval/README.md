@@ -38,9 +38,9 @@ The recommended entrypoints are grouped by role.
 | DFT alignment | `render_dft_alignment_snapshots.py` | Current CLI | Render quick PNG snapshots for DFT-alignment packages. |
 | Figures | `render_panel_b_assets.py` | Current CLI | Render Panel B structure thumbnails/contact sheets. |
 | Narrow comparison | `compare_two_backend_ablation.py` | Auxiliary CLI | Compare exactly two backend ablation tables; not the main 4-backend analysis. |
-Compatibility wrappers retained for renamed analysis helpers:
-`compare_llm_ablation.py`, `summarize_multi_backend_ablation.py`,
-`rank_one_shot_ranges.py`, and `evaluate_ocd_gmae_ground_truth.py`.
+
+Retired compatibility wrappers with old names were removed. Use the script
+names in the table above for new runs.
 
 ## Core Commands
 
@@ -81,10 +81,10 @@ Aggregate a 4-backend ablation table:
 
 ```bash
 python -m research.agent_eval.aggregate_ablation_across_backends \
-  --summary gpt=research/results/basic_experiments/cmu20/gpt/all_variants_summary.csv \
-  --summary claude=research/results/basic_experiments/cmu20/claude/all_variants_summary.csv \
-  --summary gemini=research/results/basic_experiments/cmu20/gemini/all_variants_summary.csv \
-  --summary grok=research/results/basic_experiments/cmu20/grok/all_variants_summary.csv \
+  --summary openai_gpt54_mace_mp0_small=research/results/basic_experiments/cmu20/openai_gpt54_mace_mp0_small/all_variants_summary.csv \
+  --summary anthropic_claude_sonnet46_mace_mp0_small=research/results/basic_experiments/cmu20/anthropic_claude_sonnet46_mace_mp0_small/all_variants_summary.csv \
+  --summary google_vertexai_gemini25pro_mace_mp0_small=research/results/basic_experiments/cmu20/google_vertexai_gemini25pro_mace_mp0_small/all_variants_summary.csv \
+  --summary xai_grok4_0709_mace_mp0_small=research/results/basic_experiments/cmu20/xai_grok4_0709_mace_mp0_small/all_variants_summary.csv \
   --output-csv research/results/basic_experiments/cmu20/summaries/ablation_4backend.csv \
   --output-json research/results/basic_experiments/cmu20/summaries/ablation_4backend.json
 ```

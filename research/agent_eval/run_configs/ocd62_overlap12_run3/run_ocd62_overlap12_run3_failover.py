@@ -12,9 +12,13 @@ import time
 from datetime import datetime, timezone
 from pathlib import Path
 
-
 ROOT = Path(__file__).resolve().parents[4]
-BACKENDS = ("gpt", "claude", "gemini", "grok")
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
+from research.agent_eval.experiment_identity import BACKEND_KEYS, backend_identity, backend_result_dir, summary_metadata
+
+BACKENDS = BACKEND_KEYS
 VARIANTS = ("full", "no_slip", "no_forbid", "no_termination", "one_shot")
 CASES = tuple(f"{idx:03d}" for idx in range(1, 13))
 OPENROUTER_BACKENDS = {"gemini", "grok"}
@@ -191,6 +195,7 @@ def success_result(output_root: Path, backend: str, variant: str, case_id: str, 
 def summarize_backend(output_root: Path, backend: str, variants: tuple[str, ...], cases: tuple[str, ...]) -> None:
     rows: list[dict[str, object]] = []
     full_energy_by_case: dict[str, float] = {}
+    metadata = summary_metadata(backend_identity(backend, run_name="run3"))
     for variant in variants:
         for case_id in cases:
             result_path = output_root / variant / case_id / "result.json"
@@ -208,6 +213,7 @@ def summarize_backend(output_root: Path, backend: str, variants: tuple[str, ...]
                 delta = float(best_energy) - full_energy_by_case[case_id]
             rows.append(
                 {
+                    **metadata,
                     "case_id": case_id,
                     "variant": variant,
                     "best_energy": best_energy,
@@ -230,6 +236,14 @@ def summarize_backend(output_root: Path, backend: str, variants: tuple[str, ...]
     summary_path = output_root / "all_variants_summary.csv"
     with summary_path.open("w", encoding="utf-8", newline="") as handle:
         fieldnames = [
+            "backend_key",
+            "backend",
+            "llm_model",
+            "llm_route",
+            "force_field",
+            "calculator_backend",
+            "force_field_model",
+            "force_field_size",
             "case_id",
             "variant",
             "best_energy",
@@ -338,7 +352,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--native-config-dir", default="research/agent_eval/configs/ocd62_overlap12_run3_native")
     parser.add_argument(
         "--output-base",
-        default="research/results/advanced_experiments/ocd62_overlap12_reproducibility/run3",
+        default="research/results/advanced_experiments/reproducibility/ocd62_overlap12/run3",
     )
     parser.add_argument("--log-dir", default="research/agent_eval/run_configs/ocd62_overlap12_run3/logs")
     parser.add_argument("--backends", default="all")
@@ -369,7 +383,7 @@ def main(argv: list[str] | None = None) -> int:
             openrouter_config_dir=openrouter_config_dir,
             native_config_dir=native_config_dir,
         )
-        output_root = output_base / backend
+        output_root = output_base / backend_result_dir(backend, run_name="run3")
         if not config.exists():
             raise FileNotFoundError(config)
         for variant in variants:

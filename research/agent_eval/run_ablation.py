@@ -19,6 +19,7 @@ from research.agent_eval.common import (
     normalise_case_ids,
     resolve_repo_path,
 )
+from research.agent_eval.experiment_identity import identity_from_path, summary_metadata
 from research.agent_eval.run_case import execute_case
 
 
@@ -53,6 +54,8 @@ def main(argv: Optional[list[str]] = None) -> int:
     repo_root = Path(__file__).resolve().parents[2]
     output_root = resolve_repo_path(args.output, repo_root=repo_root)
     output_root.mkdir(parents=True, exist_ok=True)
+    identity = identity_from_path(output_root)
+    metadata = summary_metadata(identity) if identity is not None else {}
 
     case_ids = normalise_case_ids(args.cases)
     variants = [item.strip() for item in args.variants.split(",") if item.strip()]
@@ -84,6 +87,7 @@ def main(argv: Optional[list[str]] = None) -> int:
                 delta = float(best_energy) - full_energy_by_case[case_id]
             summary_rows.append(
                 {
+                    **metadata,
                     "case_id": case_id,
                     "variant": variant,
                     "best_energy": best_energy,
@@ -109,6 +113,14 @@ def main(argv: Optional[list[str]] = None) -> int:
         summary_path,
         summary_rows,
         [
+            "backend_key",
+            "backend",
+            "llm_model",
+            "llm_route",
+            "force_field",
+            "calculator_backend",
+            "force_field_model",
+            "force_field_size",
             "case_id",
             "variant",
             "best_energy",

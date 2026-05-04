@@ -13,24 +13,63 @@ import csv
 import json
 import re
 import shutil
+import sys
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Optional, Tuple
 
+ROOT = Path(__file__).resolve().parents[2]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
+from research.agent_eval.experiment_identity import (
+    BACKEND_KEYS,
+    backend_identity,
+    backend_result_dir,
+    identity_from_label,
+    summary_metadata,
+)
 
 DEFAULT_RUNS = [
-    ("Gemini_2.5_Pro", "research/results/basic_experiments/cmu20/gemini/full"),
-    ("GPT_5.4", "research/results/basic_experiments/cmu20/gpt/full"),
     (
-        "Claude_Sonnet_4.6",
-        "research/results/basic_experiments/cmu20/claude/full",
-    ),
-    ("Grok_4", "research/results/basic_experiments/cmu20/grok/full"),
+        backend_result_dir(key),
+        f"research/results/basic_experiments/cmu20/{backend_result_dir(key)}/full",
+    )
+    for key in BACKEND_KEYS
 ]
+
+
+BACKEND_COLORS = {
+    backend_result_dir("gpt"): "#d62728",
+    backend_result_dir("claude"): "#9467bd",
+    backend_result_dir("gemini"): "#1f77b4",
+    backend_result_dir("grok"): "#2ca02c",
+}
+
+
+BACKEND_DISPLAY_NAMES = {
+    backend_identity(key).result_dir: backend_identity(key).display_name
+    for key in BACKEND_KEYS
+}
+
+
+def backend_display_label(backend_dir: str) -> str:
+    """Return a compact plot label while preserving full provenance in data files."""
+    identity = identity_from_label(backend_dir)
+    if identity is None:
+        return backend_dir
+    return f"{identity.display_name}\n{identity.llm_model}; {identity.force_field}"
 
 
 TRAJECTORY_FIELDS = [
     "case_id",
+    "backend_key",
     "backend",
+    "llm_model",
+    "llm_route",
+    "force_field",
+    "calculator_backend",
+    "force_field_model",
+    "force_field_size",
     "variant",
     "run_dir",
     "run_status",
@@ -61,7 +100,14 @@ TRAJECTORY_FIELDS = [
 
 ENERGY_FIELDS = [
     "case_id",
+    "backend_key",
     "backend",
+    "llm_model",
+    "llm_route",
+    "force_field",
+    "calculator_backend",
+    "force_field_model",
+    "force_field_size",
     "variant",
     "attempt_index",
     "mace_energy_eV",
@@ -77,7 +123,14 @@ ENERGY_FIELDS = [
 
 SUMMARY_FIELDS = [
     "case_id",
+    "backend_key",
     "backend",
+    "llm_model",
+    "llm_route",
+    "force_field",
+    "calculator_backend",
+    "force_field_model",
+    "force_field_size",
     "variant",
     "run_status",
     "iteration_count",
@@ -208,13 +261,16 @@ def copy_structure(source: Optional[Path], target_dir: Path, label: str) -> str:
 
 
 def collect_run(case_id: str, backend: str, run_dir_raw: str, output_dir: Path) -> Tuple[List[Dict[str, Any]], Dict[str, Any]]:
+    identity = identity_from_label(backend)
+    metadata = summary_metadata(identity) if identity is not None else {"backend": backend}
+    backend_dir = metadata.get("backend", backend)
     run_dir = resolve_path(run_dir_raw)
     result_dir = run_dir / case_id
     result_path = result_dir / "result.json"
     if not result_path.exists():
         summary = {
             "case_id": case_id,
-            "backend": backend,
+            **metadata,
             "variant": "full",
             "run_status": "missing",
         }
@@ -229,7 +285,7 @@ def collect_run(case_id: str, backend: str, run_dir_raw: str, output_dir: Path) 
 
     rows: List[Dict[str, Any]] = []
     successful: List[Dict[str, Any]] = []
-    structures_dir = output_dir / "structures" / clean_slug(backend)
+    structures_dir = output_dir / "structures" / clean_slug(backend_dir)
     for record in result.get("attempt_records", []):
         solution = record.get("plan", {}).get("solution", {})
         energy = record.get("most_stable_energy_eV")
@@ -255,7 +311,7 @@ def collect_run(case_id: str, backend: str, run_dir_raw: str, output_dir: Path) 
 
         row = {
             "case_id": case_id,
-            "backend": backend,
+            **metadata,
             "variant": "full",
             "run_dir": str(run_dir),
             "run_status": result.get("status", ""),
@@ -300,7 +356,7 @@ def collect_run(case_id: str, backend: str, run_dir_raw: str, output_dir: Path) 
 
     summary = {
         "case_id": case_id,
-        "backend": backend,
+        **metadata,
         "variant": "full",
         "run_status": result.get("status", ""),
         "iteration_count": result.get("iteration_count", ""),
@@ -382,13 +438,6 @@ def write_energy_curve_svg(output_dir: Path, rows: List[Dict[str, Any]]) -> None
     def y(energy: float) -> float:
         return top + (y_max - energy) / (y_max - y_min) * plot_h
 
-    colors = {
-        "Gemini_2.5_Pro": "#1f77b4",
-        "GPT_5.4": "#d62728",
-        "Claude_Sonnet_4.6": "#9467bd",
-        "Grok_4": "#2ca02c",
-    }
-
     svg: List[str] = [
         f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}">',
         '<rect width="100%" height="100%" fill="white"/>',
@@ -413,7 +462,7 @@ def write_energy_curve_svg(output_dir: Path, rows: List[Dict[str, Any]]) -> None
     legend_y = top + 20
     for backend, points in points_by_backend.items():
         points = sorted(points)
-        color = colors.get(backend, "#555")
+        color = BACKEND_COLORS.get(backend, "#555")
         path = " ".join(f"{x(a):.1f},{y(e):.1f}" for a, e, _ in points)
         svg.append(f'<polyline points="{path}" fill="none" stroke="{color}" stroke-width="2.4"/>')
         for attempt, energy, is_best in points:
@@ -425,8 +474,12 @@ def write_energy_curve_svg(output_dir: Path, rows: List[Dict[str, Any]]) -> None
             )
         svg.append(f'<line x1="{left + plot_w + 35}" y1="{legend_y}" x2="{left + plot_w + 62}" y2="{legend_y}" stroke="{color}" stroke-width="2.4"/>')
         svg.append(f'<circle cx="{left + plot_w + 48}" cy="{legend_y}" r="4" fill="{color}"/>')
-        svg.append(f'<text x="{left + plot_w + 72}" y="{legend_y + 5}" class="small">{backend}</text>')
-        legend_y += 26
+        for line_index, label_line in enumerate(backend_display_label(backend).splitlines()):
+            svg.append(
+                f'<text x="{left + plot_w + 72}" y="{legend_y + 5 + line_index * 14}" '
+                f'class="small">{label_line}</text>'
+            )
+        legend_y += 38
     svg.append("</svg>")
     (output_dir / "energy_curve.svg").write_text("\n".join(svg) + "\n", encoding="utf-8")
 
@@ -597,7 +650,7 @@ def main() -> int:
     parser.add_argument("--case-id", default="01")
     parser.add_argument(
         "--output",
-        default="research/results/advanced_experiments/dft_iteration_alignment/cmu20_case01",
+        default="research/results/advanced_experiments/case_studies/dft_iteration_alignment/cmu20/case01",
     )
     parser.add_argument(
         "--run",

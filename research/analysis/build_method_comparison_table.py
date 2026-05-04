@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import sys
 from pathlib import Path
 
 import numpy as np
@@ -10,12 +11,17 @@ import pandas as pd
 
 
 ROOT = Path(__file__).resolve().parents[2]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
+from research.agent_eval.experiment_identity import BACKEND_KEYS, backend_identity, backend_result_dir, summary_metadata
+
 RESULTS_ROOT = ROOT / "research" / "results"
 BASIC_ROOT = RESULTS_ROOT / "basic_experiments"
 BASIC_SUMMARY_DIR = BASIC_ROOT / "summaries"
 OCD62_MANIFEST = ROOT / "datasets" / "ocd62" / "ocd62_manifest.csv"
 
-BACKENDS = ["gpt", "claude", "gemini", "grok"]
+BACKENDS = list(BACKEND_KEYS)
 VARIANT_ALIASES = {
     "one_shot": {"one_shot", "single_shot"},
 }
@@ -37,7 +43,7 @@ def dataset_summary_dir(dataset: str) -> Path:
 
 
 def backend_dir(dataset: str, backend: str) -> Path:
-    return BASIC_ROOT / dataset / backend
+    return BASIC_ROOT / dataset / backend_result_dir(backend)
 
 
 def case_ids(dataset: str) -> list[str]:
@@ -66,6 +72,10 @@ def pad_case_id(value: object, dataset: str) -> str:
 
 def result_json_path(dataset: str, backend: str, variant: str, case_id: str) -> Path:
     return backend_dir(dataset, backend) / variant / case_id / "result.json"
+
+
+def backend_column(backend: str) -> str:
+    return backend_result_dir(backend)
 
 
 def load_ocd62_manifest() -> pd.DataFrame:
@@ -133,15 +143,77 @@ def load_adsmind_backend_rows(dataset: str, backend: str, variant: str) -> pd.Da
     return out
 
 
+def value_from_row(row: pd.Series, key: str, fallback: object = "") -> object:
+    value = row.get(key, fallback)
+    if pd.isna(value):
+        return ""
+    return value
+
+
+def build_ablation_4backend(dataset: str) -> pd.DataFrame:
+    rows: list[dict[str, object]] = []
+    for case_id in case_ids(dataset):
+        for backend in BACKENDS:
+            path = backend_dir(dataset, backend) / "all_variants_summary.csv"
+            df = read_csv(path)
+            df["case_id"] = df["case_id"].map(lambda value: pad_case_id(value, dataset))
+            for _, row in df[df["case_id"] == case_id].iterrows():
+                rows.append(
+                    {
+                        "case_id": case_id,
+                        **summary_metadata(backend_identity(backend)),
+                        "variant": value_from_row(row, "variant"),
+                        "best_energy_eV": value_from_row(row, "best_energy"),
+                        "success": "TRUE" if to_success(pd.Series([row.get("success", "")])).iloc[0] else "FALSE",
+                        "run_path": str(
+                            (
+                                backend_dir(dataset, backend)
+                                / str(value_from_row(row, "variant"))
+                                / case_id
+                            ).relative_to(ROOT)
+                        ),
+                        "iterations": value_from_row(row, "iterations", value_from_row(row, "iteration_count")),
+                        "wasted_iterations": value_from_row(row, "wasted_iterations", value_from_row(row, "calc_failure_count")),
+                        "waste_ratio": value_from_row(row, "waste_ratio"),
+                        "slip_count": value_from_row(row, "slip_count", value_from_row(row, "chemical_slip_count")),
+                        "dissociation_count": value_from_row(row, "dissociation_count"),
+                        "tokens_used": value_from_row(row, "tokens_used"),
+                    }
+                )
+    fields = [
+        "case_id",
+        "backend_key",
+        "backend",
+        "llm_model",
+        "llm_route",
+        "force_field",
+        "calculator_backend",
+        "force_field_model",
+        "force_field_size",
+        "variant",
+        "best_energy_eV",
+        "success",
+        "run_path",
+        "iterations",
+        "wasted_iterations",
+        "waste_ratio",
+        "slip_count",
+        "dissociation_count",
+        "tokens_used",
+    ]
+    return pd.DataFrame(rows, columns=fields)
+
+
 def add_adsmind_columns(table: pd.DataFrame, dataset: str, variant: str, prefix: str) -> None:
     for backend in BACKENDS:
         rows = load_adsmind_backend_rows(dataset, backend, variant).set_index("case_id")
+        column_backend = backend_column(backend)
         for metric in ["energy", "relax", "success"]:
-            table[f"{prefix}_{backend}_{metric}"] = table["case_id"].map(rows[metric])
+            table[f"{prefix}_{column_backend}_{metric}"] = table["case_id"].map(rows[metric])
 
-    energy_cols = [f"{prefix}_{backend}_energy" for backend in BACKENDS]
-    relax_cols = [f"{prefix}_{backend}_relax" for backend in BACKENDS]
-    success_cols = [f"{prefix}_{backend}_success" for backend in BACKENDS]
+    energy_cols = [f"{prefix}_{backend_column(backend)}_energy" for backend in BACKENDS]
+    relax_cols = [f"{prefix}_{backend_column(backend)}_relax" for backend in BACKENDS]
+    success_cols = [f"{prefix}_{backend_column(backend)}_success" for backend in BACKENDS]
 
     table[f"{prefix}_energy_best4"] = table[energy_cols].min(axis=1, skipna=True)
     table[f"{prefix}_energy_mean4"] = table[energy_cols].mean(axis=1, skipna=True)
@@ -195,7 +267,7 @@ def add_adsorbagent_columns(table: pd.DataFrame, dataset: str) -> None:
         BASIC_ROOT
         / "cmu20"
         / "baselines"
-        / "adsorbagent_mace_mp0_small_gpt54"
+        / "adsorbagent_openai_gpt54_mace_mp0_small"
         / "summary.csv"
     )
     df = read_csv(path)
@@ -410,10 +482,10 @@ def write_publication_tables(summary: pd.DataFrame) -> None:
 def summarize_cross_dataset_basic_tests(tables: dict[str, pd.DataFrame]) -> pd.DataFrame:
     rows: list[dict[str, object]] = []
     for dataset, table in tables.items():
-        full_success_cols = [f"adsmind_full_{backend}_success" for backend in BACKENDS]
-        shot_success_cols = [f"adsmind_1shot_{backend}_success" for backend in BACKENDS]
-        full_energy_cols = [f"adsmind_full_{backend}_energy" for backend in BACKENDS]
-        shot_energy_cols = [f"adsmind_1shot_{backend}_energy" for backend in BACKENDS]
+        full_success_cols = [f"adsmind_full_{backend_column(backend)}_success" for backend in BACKENDS]
+        shot_success_cols = [f"adsmind_1shot_{backend_column(backend)}_success" for backend in BACKENDS]
+        full_energy_cols = [f"adsmind_full_{backend_column(backend)}_energy" for backend in BACKENDS]
+        shot_energy_cols = [f"adsmind_1shot_{backend_column(backend)}_energy" for backend in BACKENDS]
 
         full_success_values = table[full_success_cols].to_numpy(dtype=float).ravel()
         shot_success_values = table[shot_success_cols].to_numpy(dtype=float).ravel()
@@ -477,6 +549,10 @@ def main() -> None:
         public_path = output_dir / "method_comparison.csv"
         table.to_csv(public_path, index=False)
         print(f"Wrote {public_path.relative_to(ROOT)} ({len(table)} rows)")
+        if dataset == "cmu20":
+            ablation_path = output_dir / "ablation_4backend.csv"
+            build_ablation_4backend(dataset).to_csv(ablation_path, index=False)
+            print(f"Wrote {ablation_path.relative_to(ROOT)}")
 
     summary = summarize_tables(tables)
     summary.to_csv(BASIC_SUMMARY_DIR / "method_comparison_summary.csv", index=False)

@@ -20,8 +20,17 @@ from research.agent_eval.common import (
     compute_bootstrap_ci,
     rank_biserial_from_differences,
 )
+from research.agent_eval.experiment_identity import identity_from_path, summary_metadata
 
 SUMMARY_FIELDS = [
+    "backend_key",
+    "backend",
+    "llm_model",
+    "llm_route",
+    "force_field",
+    "calculator_backend",
+    "force_field_model",
+    "force_field_size",
     "case_id",
     "variant",
     "best_energy",
@@ -181,6 +190,9 @@ def main(argv: Optional[list[str]] = None) -> int:
     variants = [v.strip() for v in args.variants.split(",")]
 
     rows, stats = rebuild(ablation_dir, variants, case_ids, one_shot_dir)
+    identity = identity_from_path(ablation_dir)
+    metadata = summary_metadata(identity) if identity is not None else {}
+    rows = [{**metadata, **row} for row in rows]
 
     summary_path = ablation_dir / "ablation_summary.csv"
     summary_path.parent.mkdir(parents=True, exist_ok=True)

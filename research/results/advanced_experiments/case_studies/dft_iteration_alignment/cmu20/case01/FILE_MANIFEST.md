@@ -1,0 +1,28 @@
+# Case 01 DFT Alignment File Manifest
+
+All paths are relative to this directory.
+
+- `MVP_HANDOFF.md` (2,716 bytes)
+- `README.md` (2,131 bytes)
+- `agent_iteration_trajectory.csv` (49,801 bytes)
+- `agent_run_summary.csv` (1,668 bytes)
+- `dft_reference_template.csv` (694 bytes)
+- `energy_curve.csv` (4,081 bytes)
+- `energy_curve.svg` (4,905 bytes)
+- `snapshot_contact_sheet.png` (191,397 bytes)
+- `snapshots/anthropic_claude_sonnet46_mace_mp0_small/iter01_E-3.557256_hollow_to_bridge.png` (62,133 bytes)
+- `snapshots/anthropic_claude_sonnet46_mace_mp0_small/iter02_E-3.623601_hollow_to_hollow_HCP_Subsurf-Atom.png` (62,146 bytes)
+- `snapshots/anthropic_claude_sonnet46_mace_mp0_small/iter03_E-3.616887_bridge_to_hollow_HCP_Subsurf-Atom.png` (61,724 bytes)
+- `snapshots/anthropic_claude_sonnet46_mace_mp0_small/iter04_E-3.630131_ontop_to_hollow_HCP_Subsurf-Atom.png` (61,866 bytes)
+- `snapshots/openai_gpt54_mace_mp0_small/iter01_E-3.623601_hollow_to_hollow_HCP_Subsurf-Atom.png` (62,146 bytes)
+- `snapshots/openai_gpt54_mace_mp0_small/iter02_E-3.557256_hollow_to_bridge.png` (62,133 bytes)
+- `snapshots/openai_gpt54_mace_mp0_small/iter03_E-3.616887_bridge_to_hollow_HCP_Subsurf-Atom.png` (61,724 bytes)
+- `snapshots/openai_gpt54_mace_mp0_small/iter04_E-3.627324_bridge_to_hollow_HCP_Subsurf-Atom.png` (62,113 bytes)
+- `structures/anthropic_claude_sonnet46_mace_mp0_small/iter01_E-3.557256_hollow_to_bridge.xyz` (18,016 bytes)
+- `structures/anthropic_claude_sonnet46_mace_mp0_small/iter02_E-3.623601_hollow_to_hollow_HCP_Subsurf-Atom.xyz` (18,032 bytes)
+- `structures/anthropic_claude_sonnet46_mace_mp0_small/iter03_E-3.616887_bridge_to_hollow_HCP_Subsurf-Atom.xyz` (18,015 bytes)
+- `structures/anthropic_claude_sonnet46_mace_mp0_small/iter04_E-3.630131_ontop_to_hollow_HCP_Subsurf-Atom.xyz` (17,940 bytes)
+- `structures/openai_gpt54_mace_mp0_small/iter01_E-3.623601_hollow_to_hollow_HCP_Subsurf-Atom.xyz` (18,035 bytes)
+- `structures/openai_gpt54_mace_mp0_small/iter02_E-3.557256_hollow_to_bridge.xyz` (18,018 bytes)
+- `structures/openai_gpt54_mace_mp0_small/iter03_E-3.616887_bridge_to_hollow_HCP_Subsurf-Atom.xyz` (18,015 bytes)
+- `structures/openai_gpt54_mace_mp0_small/iter04_E-3.627324_bridge_to_hollow_HCP_Subsurf-Atom.xyz` (18,007 bytes)

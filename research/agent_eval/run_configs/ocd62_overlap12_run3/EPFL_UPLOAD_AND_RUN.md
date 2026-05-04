@@ -43,18 +43,18 @@ tail -f research/agent_eval/run_configs/ocd62_overlap12_run3/logs/*.log
 Expected completed outputs:
 
 ```text
-research/results/advanced_experiments/ocd62_overlap12_reproducibility/run3/gpt/
-research/results/advanced_experiments/ocd62_overlap12_reproducibility/run3/claude/
-research/results/advanced_experiments/ocd62_overlap12_reproducibility/run3/gemini/
-research/results/advanced_experiments/ocd62_overlap12_reproducibility/run3/grok/
+research/results/advanced_experiments/reproducibility/ocd62_overlap12/run3/openai_gpt54_mace_mp0_small/
+research/results/advanced_experiments/reproducibility/ocd62_overlap12/run3/anthropic_claude_sonnet46_mace_mp0_small/
+research/results/advanced_experiments/reproducibility/ocd62_overlap12/run3/openrouter_gemini25pro_mace_mp0_small/
+research/results/advanced_experiments/reproducibility/ocd62_overlap12/run3/openrouter_xai_grok4_mace_mp0_small/
 ```
 
 ## Pull Results Back
 
 ```bash
 rsync -av \
-  LIACPC12:/data/zongmin/workspace/AdsMind/research/results/advanced_experiments/ocd62_overlap12_reproducibility/run3/ \
-  research/results/advanced_experiments/ocd62_overlap12_reproducibility/run3/
+  LIACPC12:/data/zongmin/workspace/AdsMind/research/results/advanced_experiments/reproducibility/ocd62_overlap12/run3/ \
+  research/results/advanced_experiments/reproducibility/ocd62_overlap12/run3/
 ```
 
 Then locally:

@@ -1,8 +1,9 @@
 # OCD62 Summaries
 
-Dataset-level summary tables for OCD62. Run directories live under the sibling
-backend folders (`gpt`, `claude`, `gemini`, `grok`), and non-LLM baselines live
-under `baselines/`.
+Dataset-level summary tables for OCD62. Run directories live under sibling
+LLM/force-field folders such as
+`openai_gpt54_mace_mp0_small`, and non-LLM baselines live under
+`baselines/`.
 
 - `method_comparison.csv`: per-case comparison of AdsMind 1-Shot, AdsMind Full,
   random N=20, and heuristic enumeration.

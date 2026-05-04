@@ -19,18 +19,23 @@ ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "data"
 OUT = ROOT / "output"
 
-BACKEND_ORDER = ["gemini", "gpt", "claude", "grok4"]
+BACKEND_ORDER = [
+    "google_vertexai_gemini25pro_mace_mp0_small",
+    "openai_gpt54_mace_mp0_small",
+    "anthropic_claude_sonnet46_mace_mp0_small",
+    "xai_grok4_0709_mace_mp0_small",
+]
 BACKEND_LABEL = {
-    "gemini": "Gemini 2.5 Pro",
-    "gpt": "GPT-5.4",
-    "claude": "Claude Sonnet 4.6",
-    "grok4": "Grok-4",
+    "google_vertexai_gemini25pro_mace_mp0_small": "Gemini 2.5 Pro",
+    "openai_gpt54_mace_mp0_small": "GPT-5.4",
+    "anthropic_claude_sonnet46_mace_mp0_small": "Claude Sonnet 4.6",
+    "xai_grok4_0709_mace_mp0_small": "Grok-4",
 }
 BACKEND_COLOR = {
-    "gemini": "#7EA6E0",
-    "gpt": "#F28B82",
-    "claude": "#F9C80E",
-    "grok4": "#45B97C",
+    "google_vertexai_gemini25pro_mace_mp0_small": "#7EA6E0",
+    "openai_gpt54_mace_mp0_small": "#F28B82",
+    "anthropic_claude_sonnet46_mace_mp0_small": "#F9C80E",
+    "xai_grok4_0709_mace_mp0_small": "#45B97C",
 }
 VARIANT_ORDER = ["single_shot", "no_slip", "no_forbid", "no_termination"]
 VARIANT_LABEL = {
@@ -42,8 +47,6 @@ VARIANT_LABEL = {
 
 
 def canonical_dataset_name(name: str) -> str:
-    if name.startswith("OCD-GMAE rep50"):
-        return "OCD-GMAE rep50"
     return name
 
 
@@ -63,8 +66,6 @@ def load_failure_counts() -> dict[tuple[str, str], int]:
 
 def plot_dataset(ax: plt.Axes, df: pd.DataFrame, dataset: str, failures: dict[tuple[str, str], int]) -> None:
     value_col = "delta_E_variant_minus_full_eV"
-    if dataset == "OCD-GMAE rep50":
-        value_col = "delta_E_1shot_minus_full_eV" if "delta_E_1shot_minus_full_eV" in df.columns else value_col
 
     variants = [variant for variant in VARIANT_ORDER if variant in set(df["variant"])]
     x_positions = range(len(variants))
@@ -149,11 +150,10 @@ def main() -> None:
 
     panels = [
         ("CMU20", DATA / "plot_cmu20_delta_points.csv"),
-        ("OCD24", DATA / "plot_ocd24_delta_points.csv"),
-        ("OCD-GMAE rep50", DATA / "plot_rep50_delta_points.csv"),
+        ("OCD62", DATA / "plot_ocd62_delta_points.csv"),
     ]
 
-    fig, axes = plt.subplots(1, 3, figsize=(13.5, 4.2), sharey=False)
+    fig, axes = plt.subplots(1, 2, figsize=(10.0, 4.2), sharey=False)
     for ax, (title, path) in zip(axes, panels):
         df = pd.read_csv(path)
         plot_dataset(ax, df, title, failures)

@@ -4,11 +4,16 @@ from __future__ import annotations
 
 import argparse
 import csv
+import sys
 from pathlib import Path
 
-
 ROOT = Path(__file__).resolve().parents[4]
-BACKENDS = ("gpt", "claude", "gemini", "grok")
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
+from research.agent_eval.experiment_identity import BACKEND_KEYS, backend_result_dir
+
+BACKENDS = BACKEND_KEYS
 VARIANTS = ("full", "no_slip", "no_forbid", "no_termination", "one_shot")
 CASES = tuple(f"{idx:03d}" for idx in range(1, 13))
 
@@ -16,8 +21,8 @@ CASES = tuple(f"{idx:03d}" for idx in range(1, 13))
 def summary_path(backend: str) -> Path:
     return (
         ROOT
-        / "research/results/advanced_experiments/ocd62_overlap12_reproducibility/run3"
-        / backend
+        / "research/results/advanced_experiments/reproducibility/ocd62_overlap12/run3"
+        / backend_result_dir(backend, run_name="run3")
         / "all_variants_summary.csv"
     )
 

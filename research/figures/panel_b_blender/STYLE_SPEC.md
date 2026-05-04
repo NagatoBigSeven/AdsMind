@@ -80,6 +80,15 @@ Notes:
 - Output: PNG with alpha (transparent background).
 - Color space: sRGB / Filmic OFF (Standard view transform — papers want literal colors, not cinematic).
 
-## What goes in `manifest.csv` for each render
+## Render Input Manifest
 
-We re-use `research/results/analysis/panel_b_assets_20260429/manifest.csv`. The `source_xyz` column points to the relaxed structure to load. We will add a new column `blender_png_path` for the new outputs (don't overwrite the old ASE-rendered `png_path`).
+Generate the current Panel B manifest with:
+
+```bash
+.venv/bin/python research/agent_eval/render_panel_b_assets.py
+```
+
+The generated `manifest.csv` records each selected structure, its source
+`result_dir`, and the rendered PNG path. It is written under
+`research/figures/panel_b_structure_assets/panel_b_assets_20260429/` when the
+asset script is run locally.

@@ -1,0 +1,274 @@
+{
+  "case_id": "026",
+  "case_metadata": {
+    "case_id": "026",
+    "slab_file": "datasets/ocd62/026_ocd_335_As40Ti40_C_O.xyz",
+    "smiles": "C[O]",
+    "user_request": "Find the lowest-energy adsorption configuration for the adsorbate with SMILES C[O] on the provided surface.",
+    "surface_family": "compound",
+    "adsorbate_name": "C[O]",
+    "miller_index": "",
+    "reaction_class": "GENERALIZATION",
+    "ablation_candidate": "FALSE",
+    "notes": "OCD id=335; adsorbate=C[O]; surface_formula=As40Ti40; y_relaxed=-2.485463 eV; site=37",
+    "surface_formula": "As40Ti40",
+    "surface_elements": "As;Ti",
+    "bare_slab_atoms": "80",
+    "adsorbate_atoms": "5",
+    "y_relaxed": "-2.485463",
+    "site_indices": "37"
+  },
+  "status": "success",
+  "best_energy_eV": -7.434549331665039,
+  "iteration_count": 3,
+  "max_attempts": 5,
+  "final_site_type": "ontop",
+  "converged_tag": false,
+  "wall_clock_sec": 182.827791005373,
+  "total_input_tokens": 15618,
+  "total_output_tokens": 5041,
+  "artifact_paths": {
+    "BEST_CO_bridge_to_ontop_E-7.292": "research/results/basic_experiments/ocd62/openai_gpt54_mace_mp0_small/no_slip/026/artifacts/BEST_CO_bridge_to_ontop_E-7.292.xyz",
+    "BEST_CO_bridge_to_ontop_E-7.292.xyz": "research/results/basic_experiments/ocd62/openai_gpt54_mace_mp0_small/no_slip/026/artifacts/BEST_CO_bridge_to_ontop_E-7.292.xyz",
+    "best_structure_file": "research/results/basic_experiments/ocd62/openai_gpt54_mace_mp0_small/no_slip/026/artifacts/BEST_CO_ontop_E-7.242.xyz",
+    "BEST_CO_hollow_to_ontop_ISO_E-7.435": "research/results/basic_experiments/ocd62/openai_gpt54_mace_mp0_small/no_slip/026/artifacts/BEST_CO_hollow_to_ontop_ISO_E-7.435.xyz",
+    "BEST_CO_hollow_to_ontop_ISO_E-7.435.xyz": "research/results/basic_experiments/ocd62/openai_gpt54_mace_mp0_small/no_slip/026/artifacts/BEST_CO_hollow_to_ontop_ISO_E-7.435.xyz",
+    "BEST_CO_ontop_E-7.242": "research/results/basic_experiments/ocd62/openai_gpt54_mace_mp0_small/no_slip/026/artifacts/BEST_CO_ontop_E-7.242.xyz",
+    "BEST_CO_ontop_E-7.242.xyz": "research/results/basic_experiments/ocd62/openai_gpt54_mace_mp0_small/no_slip/026/artifacts/BEST_CO_ontop_E-7.242.xyz",
+    "conformers_C[O]": "research/results/basic_experiments/ocd62/openai_gpt54_mace_mp0_small/no_slip/026/artifacts/conformers_C[O].traj",
+    "conformers_C[O].traj": "research/results/basic_experiments/ocd62/openai_gpt54_mace_mp0_small/no_slip/026/artifacts/conformers_C[O].traj",
+    "final": "research/results/basic_experiments/ocd62/openai_gpt54_mace_mp0_small/no_slip/026/artifacts/final.xyz",
+    "final.xyz": "research/results/basic_experiments/ocd62/openai_gpt54_mace_mp0_small/no_slip/026/artifacts/final.xyz",
+    "relaxation": "research/results/basic_experiments/ocd62/openai_gpt54_mace_mp0_small/no_slip/026/artifacts/relaxation.traj",
+    "relaxation.traj": "research/results/basic_experiments/ocd62/openai_gpt54_mace_mp0_small/no_slip/026/artifacts/relaxation.traj",
+    "relaxation_trajectory_file": "research/results/basic_experiments/ocd62/openai_gpt54_mace_mp0_small/no_slip/026/artifacts/relaxation.traj"
+  },
+  "best_result": {
+    "most_stable_energy_eV": -7.434549331665039,
+    "analysis_json": {
+      "status": "success",
+      "message": "Most stable config adsorption energy: -7.4345 eV. Target Atom: O (from plan index 1, global index 80 in relaxed structure). -> Nearest: Ti (Index 13), Distance: 1.71 Å (Threshold: 3.277), Bound: True. Bonded Surface Atoms: Ti-1.71Å. Is Bound: True. Reactivity Change Detected: True (Bond Changes: 1). Chemical Slip: True (Planned ['As', 'Ti', 'Ti'] -> Actual ['Ti']).",
+      "most_stable_energy_eV": -7.434549331665039,
+      "target_adsorbate_atom": "O",
+      "target_adsorbate_atom_index": 80,
+      "bonded_surface_atoms": [
+        {
+          "symbol": "Ti",
+          "index": 13,
+          "distance": 1.71
+        }
+      ],
+      "nearest_slab_atom": "Ti",
+      "nearest_slab_atom_index": 13,
+      "final_bond_distance_A": 1.71,
+      "estimated_covalent_cutoff_A": 2.486,
+      "is_covalently_bound": true,
+      "reaction_detected": true,
+      "is_dissociated": false,
+      "n_components": 1,
+      "bond_change_count": 1,
+      "site_analysis": {
+        "planned_site_type": "hollow",
+        "planned_connectivity": 3,
+        "actual_site_type": "ontop",
+        "actual_connectivity": 1,
+        "is_chemical_slip": true,
+        "planned_symbols": [
+          "As",
+          "Ti",
+          "Ti"
+        ],
+        "actual_symbols": [
+          "Ti"
+        ],
+        "site_fingerprint": "Ti13"
+      },
+      "best_structure_file": "outputs/039-67af5943/BEST_CO_hollow_to_ontop_ISO_E-7.435.xyz",
+      "generated_conformers_file": "outputs/039-67af5943/conformers_C[O].traj",
+      "relaxation_trajectory_file": "outputs/039-67af5943/final.xyz",
+      "session_id": "039-67af5943"
+    },
+    "plan": {
+      "reasoning": "SMILES consistency check: C[O] corresponds to the methoxy radical, not a closed-shell alcohol. The provided atom list shows C index 0 is SP3 with 0 radical electrons, and O index 1 is SP3 with 1 radical electron. Therefore this must be treated as a ReactiveSpecies, and the only chemically valid radical binding atom is O(1). History analysis: two successful plans have already been tested. An initial ontop Ti plan gave E = -7.242 eV. A bridge As-Ti plan subsequently relaxed to the same actual site family, reported as ontop(Ti), with a slightly lower E = -7.292 eV and became the current best. No failure tags, no reactivity-change warnings, and critically no [🔄 Converged to known best] tag are present, so termination is not yet mandatory. To remain systematic and propose a genuinely new plan, I should avoid repeating ontop Ti or bridge As-Ti. Given the surface options, the next most chemically plausible distinct high-symmetry environment for an O-centered radical on a Ti/As surface is a hollow site containing Ti, since O radicals generally prefer coordination to electropositive metal centers. Among available hollows, As-Ti-Ti should be more promising than As-As-As because Ti is likely the stronger binding component. User intent is to find the global minimum adsorption configuration, so the next plan should probe an untested Ti-rich hollow environment using the radical O atom as the sole binding index.",
+      "adsorbate_type": "ReactiveSpecies",
+      "solution": {
+        "action": "continue",
+        "site_type": "hollow",
+        "surface_binding_atoms": [
+          "As",
+          "Ti",
+          "Ti"
+        ],
+        "adsorbate_binding_indices": [
+          1
+        ],
+        "relax_top_n": 1,
+        "touch_sphere_size": 2,
+        "overlap_thr": 0.1,
+        "conformers_per_site_cap": 4
+      }
+    },
+    "result_type": "Isomerized"
+  },
+  "last_analysis": {
+    "status": "success",
+    "message": "Most stable config adsorption energy: -7.4345 eV. Target Atom: O (from plan index 1, global index 80 in relaxed structure). -> Nearest: Ti (Index 13), Distance: 1.71 Å (Threshold: 3.277), Bound: True. Bonded Surface Atoms: Ti-1.71Å. Is Bound: True. Reactivity Change Detected: True (Bond Changes: 1). Chemical Slip: True (Planned ['As', 'Ti', 'Ti'] -> Actual ['Ti']).",
+    "most_stable_energy_eV": -7.434549331665039,
+    "target_adsorbate_atom": "O",
+    "target_adsorbate_atom_index": 80,
+    "bonded_surface_atoms": [
+      {
+        "symbol": "Ti",
+        "index": 13,
+        "distance": 1.71
+      }
+    ],
+    "nearest_slab_atom": "Ti",
+    "nearest_slab_atom_index": 13,
+    "final_bond_distance_A": 1.71,
+    "estimated_covalent_cutoff_A": 2.486,
+    "is_covalently_bound": true,
+    "reaction_detected": true,
+    "is_dissociated": false,
+    "n_components": 1,
+    "bond_change_count": 1,
+    "site_analysis": {
+      "planned_site_type": "hollow",
+      "planned_connectivity": 3,
+      "actual_site_type": "ontop",
+      "actual_connectivity": 1,
+      "is_chemical_slip": true,
+      "planned_symbols": [
+        "As",
+        "Ti",
+        "Ti"
+      ],
+      "actual_symbols": [
+        "Ti"
+      ],
+      "site_fingerprint": "Ti13"
+    },
+    "best_structure_file": "outputs/039-67af5943/BEST_CO_hollow_to_ontop_ISO_E-7.435.xyz",
+    "generated_conformers_file": "outputs/039-67af5943/conformers_C[O].traj",
+    "relaxation_trajectory_file": "outputs/039-67af5943/final.xyz",
+    "session_id": "039-67af5943"
+  },
+  "attempt_records": [
+    {
+      "attempt_index": 1,
+      "plan": {
+        "reasoning": "No previous attempts exist, so I should propose the best physically motivated initial trial. SMILES consistency check: C[O] corresponds to a C-O species with atom 0 = C (SP3, degree 1, radical_electrons 0) and atom 1 = O (SP3, degree 1, radical_electrons 1). There is no mismatch with a saturated alkyl description because none was given. The oxygen is explicitly radical and is therefore the correct reactive binding center if using ReactiveSpecies. Carbon is saturated in the provided atom analysis and should not be chosen as the binding atom for ReactiveSpecies. Adsorbate analysis: this is best interpreted as methoxy-like radical/fragment centered at O, so adsorption through O is chemically most plausible. Surface analysis: available sites are hollow As-As-As, As-As-Ti, As-Ti-Ti; bridge As-As, As-Ti; ontop As, Ti. For an O-centered radical on a mixed Ti/As surface, Ti is typically the more oxophilic and stronger binding center than As, so the lowest-energy region is most likely associated with Ti-containing sites. As an initial systematic plan, the most targeted high-probability trial is O bound directly to a Ti atom at an ontop site. This obeys the site/alignment rules with one binding index for ontop. Since there is no history, this is the best initial low-energy guess before exploring Ti-containing bridge or hollow motifs if needed.",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "ontop",
+          "surface_binding_atoms": [
+            "Ti"
+          ],
+          "adsorbate_binding_indices": [
+            1
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "ontop|Ti|1|ReactiveSpecies|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -7.24180793762207,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": false,
+      "planned_site_type": "ontop",
+      "actual_site_type": "ontop",
+      "best_structure_file": "outputs/039-67af5943/BEST_CO_ontop_E-7.242.xyz",
+      "generated_conformers_file": "outputs/039-67af5943/conformers_C[O].traj",
+      "relaxation_trajectory_file": "outputs/039-67af5943/final.xyz",
+      "message": "Most stable config adsorption energy: -7.2418 eV. Target Atom: O (from plan index 1, global index 80 in relaxed structure). -> Nearest: Ti (Index 33), Distance: 1.728 Å (Threshold: 3.277), Bound: True. Bonded Surface Atoms: Ti-1.728Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: False (Planned ['Ti'] -> Actual ['Ti']).",
+      "history_entry": "【✅ Perfect Adsorption】 ontop @ ['Ti'] (Index [1]) -> Site: ontop (Ti) [🌟 New Best] | E=-7.242 eV"
+    },
+    {
+      "attempt_index": 2,
+      "plan": {
+        "reasoning": "SMILES consistency check: the adsorbate is C[O], i.e. methoxy-type radical. The provided atom list shows C index 0 is SP3 with 0 radical electrons, and O index 1 is SP3 with 1 radical electron. There is no hybridization mismatch to warn about. Because I plan adsorption through O, the ReactiveSpecies designation is chemically consistent since O(1) indeed has an unpaired electron. History analysis: only one successful plan has been tested so far, namely ontop on Ti using adsorbate index [1], giving the current best energy of -7.242 eV. No convergence-to-known-best termination tag is present, and major high-symmetry site families have not yet all been explored. Therefore a new, systematically different plan is warranted. User intent is to find the lowest-energy adsorption configuration for C[O] on the Ti-As surface. For a methoxy radical on a heterogeneous Ti/As surface, O-centered binding is the chemically preferred motif; binding through the saturated carbon atom would violate the stated rules for ReactiveSpecies. Since Ti ontop is already best among tried cases, the next most plausible stronger motif is a multi-center O interaction involving Ti plus a neighboring more weakly binding As, i.e. an As-Ti bridge. This explores whether the alloy environment stabilizes the O radical better than simple Ti ontop while remaining distinct from the tested plan. Surface analysis confirms As-Ti bridge is an available site combination. Thus I will test bridge adsorption with O index 1 as the sole binding atom on an As-Ti bridge.",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "bridge",
+          "surface_binding_atoms": [
+            "As",
+            "Ti"
+          ],
+          "adsorbate_binding_indices": [
+            1
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "bridge|As,Ti|1|ReactiveSpecies|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -7.292398452758789,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": true,
+      "planned_site_type": "bridge",
+      "actual_site_type": "ontop",
+      "best_structure_file": "outputs/039-67af5943/BEST_CO_bridge_to_ontop_E-7.292.xyz",
+      "generated_conformers_file": "outputs/039-67af5943/conformers_C[O].traj",
+      "relaxation_trajectory_file": "outputs/039-67af5943/final.xyz",
+      "message": "Most stable config adsorption energy: -7.2924 eV. Target Atom: O (from plan index 1, global index 80 in relaxed structure). -> Nearest: Ti (Index 7), Distance: 1.714 Å (Threshold: 3.277), Bound: True. Bonded Surface Atoms: Ti-1.714Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['As', 'Ti'] -> Actual ['Ti']).",
+      "history_entry": "【✅ Perfect Adsorption】 bridge @ ['As', 'Ti'] (Index [1]) -> Site: ontop (Ti) [🌟 New Best] | E=-7.292 eV"
+    },
+    {
+      "attempt_index": 3,
+      "plan": {
+        "reasoning": "SMILES consistency check: C[O] corresponds to the methoxy radical, not a closed-shell alcohol. The provided atom list shows C index 0 is SP3 with 0 radical electrons, and O index 1 is SP3 with 1 radical electron. Therefore this must be treated as a ReactiveSpecies, and the only chemically valid radical binding atom is O(1). History analysis: two successful plans have already been tested. An initial ontop Ti plan gave E = -7.242 eV. A bridge As-Ti plan subsequently relaxed to the same actual site family, reported as ontop(Ti), with a slightly lower E = -7.292 eV and became the current best. No failure tags, no reactivity-change warnings, and critically no [🔄 Converged to known best] tag are present, so termination is not yet mandatory. To remain systematic and propose a genuinely new plan, I should avoid repeating ontop Ti or bridge As-Ti. Given the surface options, the next most chemically plausible distinct high-symmetry environment for an O-centered radical on a Ti/As surface is a hollow site containing Ti, since O radicals generally prefer coordination to electropositive metal centers. Among available hollows, As-Ti-Ti should be more promising than As-As-As because Ti is likely the stronger binding component. User intent is to find the global minimum adsorption configuration, so the next plan should probe an untested Ti-rich hollow environment using the radical O atom as the sole binding index.",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "hollow",
+          "surface_binding_atoms": [
+            "As",
+            "Ti",
+            "Ti"
+          ],
+          "adsorbate_binding_indices": [
+            1
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "hollow|As,Ti,Ti|1|ReactiveSpecies|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -7.434549331665039,
+      "bond_change_count": 1,
+      "is_dissociated": false,
+      "is_chemical_slip": true,
+      "planned_site_type": "hollow",
+      "actual_site_type": "ontop",
+      "best_structure_file": "outputs/039-67af5943/BEST_CO_hollow_to_ontop_ISO_E-7.435.xyz",
+      "generated_conformers_file": "outputs/039-67af5943/conformers_C[O].traj",
+      "relaxation_trajectory_file": "outputs/039-67af5943/final.xyz",
+      "message": "Most stable config adsorption energy: -7.4345 eV. Target Atom: O (from plan index 1, global index 80 in relaxed structure). -> Nearest: Ti (Index 13), Distance: 1.71 Å (Threshold: 3.277), Bound: True. Bonded Surface Atoms: Ti-1.71Å. Is Bound: True. Reactivity Change Detected: True (Bond Changes: 1). Chemical Slip: True (Planned ['As', 'Ti', 'Ti'] -> Actual ['Ti']).",
+      "history_entry": "【⚠️ Rearrangement(BC=1)】 hollow @ ['As', 'Ti', 'Ti'] (Index [1]) -> Site: ontop (Ti) [🌟 New Best] | E=-7.435 eV"
+    }
+  ],
+  "history": [
+    "【✅ Perfect Adsorption】 ontop @ ['Ti'] (Index [1]) -> Site: ontop (Ti) [🌟 New Best] | E=-7.242 eV",
+    "【✅ Perfect Adsorption】 bridge @ ['As', 'Ti'] (Index [1]) -> Site: ontop (Ti) [🌟 New Best] | E=-7.292 eV",
+    "【⚠️ Rearrangement(BC=1)】 hollow @ ['As', 'Ti', 'Ti'] (Index [1]) -> Site: ontop (Ti) [🌟 New Best] | E=-7.435 eV"
+  ],
+  "error": null,
+  "perfect_count": 2,
+  "dissociation_count": 0,
+  "rearrangement_count": 1,
+  "calc_failure_count": 0,
+  "chemical_slip_count": 2
+}

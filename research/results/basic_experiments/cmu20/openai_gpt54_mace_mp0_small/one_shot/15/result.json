@@ -1,0 +1,183 @@
+{
+  "case_id": "15",
+  "case_metadata": {
+    "case_id": "15",
+    "slab_file": "benchmark_slabs/15_Cu6Ga2_100.xyz",
+    "smiles": "[CH2]CO",
+    "user_request": "Find the lowest-energy adsorption configuration for the 2-hydroxyethyl radical on the provided surface.",
+    "surface_family": "intermetallic",
+    "adsorbate_name": "CH2CH2OH",
+    "miller_index": "(100)",
+    "reaction_class": "COMPLEX",
+    "ablation_candidate": "FALSE",
+    "notes": "Resolved from prior AdsMind outputs; local evidence matches formula C2H5O"
+  },
+  "status": "success",
+  "best_energy_eV": -2.9636917114257812,
+  "iteration_count": 1,
+  "max_attempts": 1,
+  "final_site_type": "ontop",
+  "converged_tag": false,
+  "wall_clock_sec": 87.24129596725106,
+  "total_input_tokens": 3686,
+  "total_output_tokens": 1070,
+  "artifact_paths": {},
+  "best_result": {
+    "most_stable_energy_eV": -2.9636917114257812,
+    "analysis_json": {
+      "status": "success",
+      "message": "Most stable config adsorption energy: -2.9637 eV. Target Atom: C (from plan index 0, global index 64 in relaxed structure). -> Nearest: Cu (Index 44), Distance: 1.965 Å (Threshold: 3.016), Bound: True. Bonded Surface Atoms: Cu-1.965Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: False (Planned ['Cu'] -> Actual ['Cu']).",
+      "most_stable_energy_eV": -2.9636917114257812,
+      "target_adsorbate_atom": "C",
+      "target_adsorbate_atom_index": 64,
+      "bonded_surface_atoms": [
+        {
+          "symbol": "Cu",
+          "index": 44,
+          "distance": 1.965
+        }
+      ],
+      "nearest_slab_atom": "Cu",
+      "nearest_slab_atom_index": 44,
+      "final_bond_distance_A": 1.965,
+      "estimated_covalent_cutoff_A": 2.288,
+      "is_covalently_bound": true,
+      "reaction_detected": false,
+      "is_dissociated": false,
+      "n_components": 1,
+      "bond_change_count": 0,
+      "site_analysis": {
+        "planned_site_type": "ontop",
+        "planned_connectivity": 1,
+        "actual_site_type": "ontop",
+        "actual_connectivity": 1,
+        "is_chemical_slip": false,
+        "planned_symbols": [
+          "Cu"
+        ],
+        "actual_symbols": [
+          "Cu"
+        ],
+        "site_fingerprint": "Cu44"
+      },
+      "best_structure_file": "outputs/15-0bf335a7/BEST_CH2CO_ontop_E-2.964.xyz",
+      "generated_conformers_file": "outputs/15-0bf335a7/conformers_[CH2]CO.traj",
+      "relaxation_trajectory_file": "outputs/15-0bf335a7/final.xyz",
+      "session_id": "15-0bf335a7"
+    },
+    "plan": {
+      "reasoning": "No history exists, so this is the first and only allowed plan and it should target the most chemically plausible strongest-binding motif. SMILES consistency check: [CH2]CO corresponds to the 2-hydroxyethyl radical, with atom 0 as an SP3 carbon bearing 1 radical electron, atom 1 as saturated SP3 carbon, and atom 2 as SP3 oxygen. The user description matches the SMILES: this is a radical, not a closed-shell saturated alkyl. Because ReactiveSpecies adsorption must use atoms with unpaired electrons, the valid primary binding atom is atom 0 only; atom 1 and atom 2 do not have radical electrons and therefore should not be used as ReactiveSpecies binding indices. For Cu-based surfaces, alkyl radicals typically bind strongly through the radical carbon to a single metal atom; this is a better first guess than forcing a bridge or hollow geometry for a monoradical center. The available sites include ontop Cu, bridge Cu-Cu, and hollow Cu-only motifs. Since there is no prior evidence of instability or convergence, the best initial low-energy search is C-radical adsorption at an ontop Cu site, allowing the CH2CH2OH fragment to orient away from the surface during relaxation. Surface composition includes Ga, but the enumerated available sites are all Cu-only, so the plan must use Cu. Therefore select ontop adsorption through adsorbate atom index 0 onto Cu.",
+      "adsorbate_type": "ReactiveSpecies",
+      "solution": {
+        "action": "continue",
+        "site_type": "ontop",
+        "surface_binding_atoms": [
+          "Cu"
+        ],
+        "adsorbate_binding_indices": [
+          0
+        ],
+        "relax_top_n": 1,
+        "touch_sphere_size": 2,
+        "overlap_thr": 0.1,
+        "conformers_per_site_cap": 4
+      }
+    },
+    "result_type": "Perfect"
+  },
+  "last_analysis": {
+    "status": "success",
+    "message": "Most stable config adsorption energy: -2.9637 eV. Target Atom: C (from plan index 0, global index 64 in relaxed structure). -> Nearest: Cu (Index 44), Distance: 1.965 Å (Threshold: 3.016), Bound: True. Bonded Surface Atoms: Cu-1.965Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: False (Planned ['Cu'] -> Actual ['Cu']).",
+    "most_stable_energy_eV": -2.9636917114257812,
+    "target_adsorbate_atom": "C",
+    "target_adsorbate_atom_index": 64,
+    "bonded_surface_atoms": [
+      {
+        "symbol": "Cu",
+        "index": 44,
+        "distance": 1.965
+      }
+    ],
+    "nearest_slab_atom": "Cu",
+    "nearest_slab_atom_index": 44,
+    "final_bond_distance_A": 1.965,
+    "estimated_covalent_cutoff_A": 2.288,
+    "is_covalently_bound": true,
+    "reaction_detected": false,
+    "is_dissociated": false,
+    "n_components": 1,
+    "bond_change_count": 0,
+    "site_analysis": {
+      "planned_site_type": "ontop",
+      "planned_connectivity": 1,
+      "actual_site_type": "ontop",
+      "actual_connectivity": 1,
+      "is_chemical_slip": false,
+      "planned_symbols": [
+        "Cu"
+      ],
+      "actual_symbols": [
+        "Cu"
+      ],
+      "site_fingerprint": "Cu44"
+    },
+    "best_structure_file": "outputs/15-0bf335a7/BEST_CH2CO_ontop_E-2.964.xyz",
+    "generated_conformers_file": "outputs/15-0bf335a7/conformers_[CH2]CO.traj",
+    "relaxation_trajectory_file": "outputs/15-0bf335a7/final.xyz",
+    "session_id": "15-0bf335a7"
+  },
+  "attempt_records": [
+    {
+      "attempt_index": 1,
+      "plan": {
+        "reasoning": "No history exists, so this is the first and only allowed plan and it should target the most chemically plausible strongest-binding motif. SMILES consistency check: [CH2]CO corresponds to the 2-hydroxyethyl radical, with atom 0 as an SP3 carbon bearing 1 radical electron, atom 1 as saturated SP3 carbon, and atom 2 as SP3 oxygen. The user description matches the SMILES: this is a radical, not a closed-shell saturated alkyl. Because ReactiveSpecies adsorption must use atoms with unpaired electrons, the valid primary binding atom is atom 0 only; atom 1 and atom 2 do not have radical electrons and therefore should not be used as ReactiveSpecies binding indices. For Cu-based surfaces, alkyl radicals typically bind strongly through the radical carbon to a single metal atom; this is a better first guess than forcing a bridge or hollow geometry for a monoradical center. The available sites include ontop Cu, bridge Cu-Cu, and hollow Cu-only motifs. Since there is no prior evidence of instability or convergence, the best initial low-energy search is C-radical adsorption at an ontop Cu site, allowing the CH2CH2OH fragment to orient away from the surface during relaxation. Surface composition includes Ga, but the enumerated available sites are all Cu-only, so the plan must use Cu. Therefore select ontop adsorption through adsorbate atom index 0 onto Cu.",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "ontop",
+          "surface_binding_atoms": [
+            "Cu"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "ontop|Cu|0|ReactiveSpecies|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -2.9636917114257812,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": false,
+      "planned_site_type": "ontop",
+      "actual_site_type": "ontop",
+      "best_structure_file": "outputs/15-0bf335a7/BEST_CH2CO_ontop_E-2.964.xyz",
+      "generated_conformers_file": "outputs/15-0bf335a7/conformers_[CH2]CO.traj",
+      "relaxation_trajectory_file": "outputs/15-0bf335a7/final.xyz",
+      "message": "Most stable config adsorption energy: -2.9637 eV. Target Atom: C (from plan index 0, global index 64 in relaxed structure). -> Nearest: Cu (Index 44), Distance: 1.965 Å (Threshold: 3.016), Bound: True. Bonded Surface Atoms: Cu-1.965Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: False (Planned ['Cu'] -> Actual ['Cu']).",
+      "history_entry": "【✅ Perfect Adsorption】 ontop @ ['Cu'] (Index [0]) -> Site: ontop (Cu) [🌟 New Best] | E=-2.964 eV"
+    }
+  ],
+  "history": [
+    "【✅ Perfect Adsorption】 ontop @ ['Cu'] (Index [0]) -> Site: ontop (Cu) [🌟 New Best] | E=-2.964 eV"
+  ],
+  "error": null,
+  "perfect_count": 1,
+  "dissociation_count": 0,
+  "rearrangement_count": 0,
+  "calc_failure_count": 0,
+  "chemical_slip_count": 0,
+  "provenance": {
+    "result_tree": "research/results/basic_experiments/cmu20/openai_gpt54_mace_mp0_small/one_shot",
+    "dataset": "cmu20",
+    "backend": "openai_gpt54_mace_mp0_small",
+    "variant": "one_shot",
+    "artifact_status": "result_json_restored_from_git_history_without_heavy_artifacts",
+    "restored_from_commit": "ba317df76802c090bc365a99bdbe8ca9f8396fe9",
+    "note": "The lightweight result.json was recovered from git history during result-tree cleanup; heavy .xyz/.traj artifacts were not tracked and are not available locally."
+  }
+}

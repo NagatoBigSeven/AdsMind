@@ -1,0 +1,207 @@
+{
+  "case_id": "12",
+  "case_metadata": {
+    "case_id": "12",
+    "slab_file": "benchmark_slabs/12_Au_111.xyz",
+    "smiles": "[OH]",
+    "user_request": "Find the lowest-energy adsorption configuration for hydroxyl radical on the provided surface.",
+    "surface_family": "monometallic",
+    "adsorbate_name": "OH",
+    "miller_index": "(111)",
+    "reaction_class": "ORR",
+    "ablation_candidate": "FALSE",
+    "notes": "Prior runs labeled all final sites as desorbed"
+  },
+  "status": "success",
+  "best_energy_eV": -2.0813217163085938,
+  "iteration_count": 1,
+  "max_attempts": 1,
+  "final_site_type": "hollow (FCC/No-Subsurf)",
+  "converged_tag": false,
+  "wall_clock_sec": 52.54006461426616,
+  "total_input_tokens": 4386,
+  "total_output_tokens": 1523,
+  "artifact_paths": {},
+  "best_result": {
+    "most_stable_energy_eV": -2.0813217163085938,
+    "analysis_json": {
+      "status": "success",
+      "message": "Most stable config adsorption energy: -2.0813 eV. Target Atom: O (from plan index 0, global index 27 in relaxed structure). -> Nearest: Au (Index 21), Distance: 2.225 Å (Threshold: 2.929), Bound: True. Bonded Surface Atoms: Au-2.225Å, Au-2.231Å, Au-2.91Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Au'] -> Actual ['Au', 'Au', 'Au']).",
+      "most_stable_energy_eV": -2.0813217163085938,
+      "target_adsorbate_atom": "O",
+      "target_adsorbate_atom_index": 27,
+      "bonded_surface_atoms": [
+        {
+          "symbol": "Au",
+          "index": 21,
+          "distance": 2.225
+        },
+        {
+          "symbol": "Au",
+          "index": 6,
+          "distance": 2.231
+        },
+        {
+          "symbol": "Au",
+          "index": 3,
+          "distance": 2.91
+        }
+      ],
+      "nearest_slab_atom": "Au",
+      "nearest_slab_atom_index": 21,
+      "final_bond_distance_A": 2.225,
+      "estimated_covalent_cutoff_A": 2.222,
+      "is_covalently_bound": true,
+      "reaction_detected": false,
+      "is_dissociated": false,
+      "n_components": 1,
+      "bond_change_count": 0,
+      "site_analysis": {
+        "planned_site_type": "ontop",
+        "planned_connectivity": 1,
+        "actual_site_type": "hollow (FCC/No-Subsurf)",
+        "actual_connectivity": 3,
+        "is_chemical_slip": true,
+        "planned_symbols": [
+          "Au"
+        ],
+        "actual_symbols": [
+          "Au",
+          "Au",
+          "Au"
+        ],
+        "site_fingerprint": "Au21-Au6-Au3"
+      },
+      "best_structure_file": "outputs/12-85072b90/BEST_OH_ontop_to_hollow_FCC-No-Subsurf_E-2.081.xyz",
+      "generated_conformers_file": "outputs/12-85072b90/conformers_[OH].traj",
+      "relaxation_trajectory_file": "outputs/12-85072b90/final.xyz",
+      "session_id": "12-85072b90"
+    },
+    "plan": {
+      "reasoning": "Step 0 - SMILES Consistency Check: The SMILES is [OH], which represents a hydroxyl radical. The atom list shows O at index 0 with SP3 hybridization, degree 0, and radical_electrons = 1. This confirms it is a radical species (OH•), consistent with the SMILES notation.\n\nStep 1 - Analyze History: No previous attempts exist. This is the first plan.\n\nStep 2 & 3 - Analyze Request: The user wants the lowest-energy adsorption configuration for hydroxyl radical (OH•) on Au(111). Since OH is a radical with the unpaired electron on O (index 0), it should be treated as ReactiveSpecies.\n\nStep 4 - Analyze Adsorbate: OH radical has only one heavy atom: O at index 0, with radical_electrons = 1. The binding atom must be O (index 0).\n\nStep 5 - Analyze Surface: Au(111) has three site types:\n- Ontop: single Au atom\n- Bridge: Au-Au pair\n- Hollow-3: Au-Au-Au triplet\n\nFor OH on noble metal surfaces like Au(111), literature generally shows OH prefers ontop or bridge sites. The ontop site is commonly reported as the preferred adsorption site for OH on Au(111). Given the hard limit of 1 attempt, I should choose the most likely lowest-energy site. On Au(111), OH typically adsorbs at the ontop site with O binding to a single Au atom, as this maximizes the O-Au bond strength while minimizing steric repulsion from the H atom.\n\nStep 6 - Formulate Plan: \n- adsorbate_type: ReactiveSpecies (radical with unpaired electron on O)\n- site_type: ontop (single Au atom, O index 0 has radical electron)\n- surface_binding_atoms: ['Au']\n- adsorbate_binding_indices: [0] (O atom, the only heavy atom, with radical)\n- This satisfies the constraint: ontop requires len(adsorbate_binding_indices) == 1.",
+      "adsorbate_type": "ReactiveSpecies",
+      "solution": {
+        "action": "continue",
+        "site_type": "ontop",
+        "surface_binding_atoms": [
+          "Au"
+        ],
+        "adsorbate_binding_indices": [
+          0
+        ],
+        "relax_top_n": 1,
+        "touch_sphere_size": 2,
+        "overlap_thr": 0.1,
+        "conformers_per_site_cap": 4
+      }
+    },
+    "result_type": "Perfect"
+  },
+  "last_analysis": {
+    "status": "success",
+    "message": "Most stable config adsorption energy: -2.0813 eV. Target Atom: O (from plan index 0, global index 27 in relaxed structure). -> Nearest: Au (Index 21), Distance: 2.225 Å (Threshold: 2.929), Bound: True. Bonded Surface Atoms: Au-2.225Å, Au-2.231Å, Au-2.91Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Au'] -> Actual ['Au', 'Au', 'Au']).",
+    "most_stable_energy_eV": -2.0813217163085938,
+    "target_adsorbate_atom": "O",
+    "target_adsorbate_atom_index": 27,
+    "bonded_surface_atoms": [
+      {
+        "symbol": "Au",
+        "index": 21,
+        "distance": 2.225
+      },
+      {
+        "symbol": "Au",
+        "index": 6,
+        "distance": 2.231
+      },
+      {
+        "symbol": "Au",
+        "index": 3,
+        "distance": 2.91
+      }
+    ],
+    "nearest_slab_atom": "Au",
+    "nearest_slab_atom_index": 21,
+    "final_bond_distance_A": 2.225,
+    "estimated_covalent_cutoff_A": 2.222,
+    "is_covalently_bound": true,
+    "reaction_detected": false,
+    "is_dissociated": false,
+    "n_components": 1,
+    "bond_change_count": 0,
+    "site_analysis": {
+      "planned_site_type": "ontop",
+      "planned_connectivity": 1,
+      "actual_site_type": "hollow (FCC/No-Subsurf)",
+      "actual_connectivity": 3,
+      "is_chemical_slip": true,
+      "planned_symbols": [
+        "Au"
+      ],
+      "actual_symbols": [
+        "Au",
+        "Au",
+        "Au"
+      ],
+      "site_fingerprint": "Au21-Au6-Au3"
+    },
+    "best_structure_file": "outputs/12-85072b90/BEST_OH_ontop_to_hollow_FCC-No-Subsurf_E-2.081.xyz",
+    "generated_conformers_file": "outputs/12-85072b90/conformers_[OH].traj",
+    "relaxation_trajectory_file": "outputs/12-85072b90/final.xyz",
+    "session_id": "12-85072b90"
+  },
+  "attempt_records": [
+    {
+      "attempt_index": 1,
+      "plan": {
+        "reasoning": "Step 0 - SMILES Consistency Check: The SMILES is [OH], which represents a hydroxyl radical. The atom list shows O at index 0 with SP3 hybridization, degree 0, and radical_electrons = 1. This confirms it is a radical species (OH•), consistent with the SMILES notation.\n\nStep 1 - Analyze History: No previous attempts exist. This is the first plan.\n\nStep 2 & 3 - Analyze Request: The user wants the lowest-energy adsorption configuration for hydroxyl radical (OH•) on Au(111). Since OH is a radical with the unpaired electron on O (index 0), it should be treated as ReactiveSpecies.\n\nStep 4 - Analyze Adsorbate: OH radical has only one heavy atom: O at index 0, with radical_electrons = 1. The binding atom must be O (index 0).\n\nStep 5 - Analyze Surface: Au(111) has three site types:\n- Ontop: single Au atom\n- Bridge: Au-Au pair\n- Hollow-3: Au-Au-Au triplet\n\nFor OH on noble metal surfaces like Au(111), literature generally shows OH prefers ontop or bridge sites. The ontop site is commonly reported as the preferred adsorption site for OH on Au(111). Given the hard limit of 1 attempt, I should choose the most likely lowest-energy site. On Au(111), OH typically adsorbs at the ontop site with O binding to a single Au atom, as this maximizes the O-Au bond strength while minimizing steric repulsion from the H atom.\n\nStep 6 - Formulate Plan: \n- adsorbate_type: ReactiveSpecies (radical with unpaired electron on O)\n- site_type: ontop (single Au atom, O index 0 has radical electron)\n- surface_binding_atoms: ['Au']\n- adsorbate_binding_indices: [0] (O atom, the only heavy atom, with radical)\n- This satisfies the constraint: ontop requires len(adsorbate_binding_indices) == 1.",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "ontop",
+          "surface_binding_atoms": [
+            "Au"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "ontop|Au|0|ReactiveSpecies|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -2.0813217163085938,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": true,
+      "planned_site_type": "ontop",
+      "actual_site_type": "hollow (FCC/No-Subsurf)",
+      "best_structure_file": "outputs/12-85072b90/BEST_OH_ontop_to_hollow_FCC-No-Subsurf_E-2.081.xyz",
+      "generated_conformers_file": "outputs/12-85072b90/conformers_[OH].traj",
+      "relaxation_trajectory_file": "outputs/12-85072b90/final.xyz",
+      "message": "Most stable config adsorption energy: -2.0813 eV. Target Atom: O (from plan index 0, global index 27 in relaxed structure). -> Nearest: Au (Index 21), Distance: 2.225 Å (Threshold: 2.929), Bound: True. Bonded Surface Atoms: Au-2.225Å, Au-2.231Å, Au-2.91Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Au'] -> Actual ['Au', 'Au', 'Au']).",
+      "history_entry": "【✅ Perfect Adsorption】 ontop @ ['Au'] (Index [0]) -> ⚠️【Unstable Site Warning】⚠️: Planned ontop (Au) is unstable, adsorbate spontaneously slipped to hollow (FCC/No-Subsurf) (Au-Au-Au).This means Au has insufficient affinity for this adsorbate. Please **FORBID** testing Au type sites again! [🌟 New Best] | E=-2.081 eV"
+    }
+  ],
+  "history": [
+    "【✅ Perfect Adsorption】 ontop @ ['Au'] (Index [0]) -> ⚠️【Unstable Site Warning】⚠️: Planned ontop (Au) is unstable, adsorbate spontaneously slipped to hollow (FCC/No-Subsurf) (Au-Au-Au).This means Au has insufficient affinity for this adsorbate. Please **FORBID** testing Au type sites again! [🌟 New Best] | E=-2.081 eV"
+  ],
+  "error": null,
+  "perfect_count": 1,
+  "dissociation_count": 0,
+  "rearrangement_count": 0,
+  "calc_failure_count": 0,
+  "chemical_slip_count": 1,
+  "provenance": {
+    "result_tree": "research/results/basic_experiments/cmu20/anthropic_claude_sonnet46_mace_mp0_small/one_shot",
+    "dataset": "cmu20",
+    "backend": "anthropic_claude_sonnet46_mace_mp0_small",
+    "variant": "one_shot",
+    "artifact_status": "result_json_restored_from_git_history_without_heavy_artifacts",
+    "restored_from_commit": "ba317df76802c090bc365a99bdbe8ca9f8396fe9",
+    "note": "The lightweight result.json was recovered from git history during result-tree cleanup; heavy .xyz/.traj artifacts were not tracked and are not available locally."
+  }
+}

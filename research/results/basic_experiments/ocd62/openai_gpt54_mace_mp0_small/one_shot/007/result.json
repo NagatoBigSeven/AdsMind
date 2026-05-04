@@ -1,0 +1,191 @@
+{
+  "case_id": "007",
+  "case_metadata": {
+    "case_id": "007",
+    "slab_file": "datasets/ocd62/007_ocd_84_Mo18S72W18_O_N.xyz",
+    "smiles": "O=N",
+    "user_request": "Find the lowest-energy adsorption configuration for the adsorbate with SMILES O=N on the provided surface.",
+    "surface_family": "intermetallic",
+    "adsorbate_name": "O=N",
+    "miller_index": "",
+    "reaction_class": "GENERALIZATION",
+    "ablation_candidate": "FALSE",
+    "notes": "OCD id=84; adsorbate=O=N; surface_formula=Mo18S72W18; y_relaxed=-1.778516 eV; site=18",
+    "surface_formula": "Mo18S72W18",
+    "surface_elements": "Mo;S;W",
+    "bare_slab_atoms": "108",
+    "adsorbate_atoms": "3",
+    "y_relaxed": "-1.778516",
+    "site_indices": "18"
+  },
+  "status": "success",
+  "best_energy_eV": -19.717514038085938,
+  "iteration_count": 1,
+  "max_attempts": 1,
+  "final_site_type": "ontop",
+  "converged_tag": false,
+  "wall_clock_sec": 588.7534172423184,
+  "total_input_tokens": 3745,
+  "total_output_tokens": 901,
+  "artifact_paths": {
+    "BEST_O_N_ontop_E-19.718": "research/results/basic_experiments/ocd62/openai_gpt54_mace_mp0_small/one_shot/007/artifacts/BEST_O_N_ontop_E-19.718.xyz",
+    "BEST_O_N_ontop_E-19.718.xyz": "research/results/basic_experiments/ocd62/openai_gpt54_mace_mp0_small/one_shot/007/artifacts/BEST_O_N_ontop_E-19.718.xyz",
+    "best_structure_file": "research/results/basic_experiments/ocd62/openai_gpt54_mace_mp0_small/one_shot/007/artifacts/BEST_O_N_ontop_E-19.718.xyz",
+    "conformers_O_N": "research/results/basic_experiments/ocd62/openai_gpt54_mace_mp0_small/one_shot/007/artifacts/conformers_O_N.traj",
+    "conformers_O_N.traj": "research/results/basic_experiments/ocd62/openai_gpt54_mace_mp0_small/one_shot/007/artifacts/conformers_O_N.traj",
+    "final": "research/results/basic_experiments/ocd62/openai_gpt54_mace_mp0_small/one_shot/007/artifacts/final.xyz",
+    "final.xyz": "research/results/basic_experiments/ocd62/openai_gpt54_mace_mp0_small/one_shot/007/artifacts/final.xyz",
+    "relaxation": "research/results/basic_experiments/ocd62/openai_gpt54_mace_mp0_small/one_shot/007/artifacts/relaxation.traj",
+    "relaxation.traj": "research/results/basic_experiments/ocd62/openai_gpt54_mace_mp0_small/one_shot/007/artifacts/relaxation.traj",
+    "relaxation_trajectory_file": "research/results/basic_experiments/ocd62/openai_gpt54_mace_mp0_small/one_shot/007/artifacts/relaxation.traj"
+  },
+  "best_result": {
+    "most_stable_energy_eV": -19.717514038085938,
+    "analysis_json": {
+      "status": "success",
+      "message": "Most stable config adsorption energy: -19.7175 eV. Target Atom: N (from plan index 1, global index 108 in relaxed structure). -> Nearest: Mo (Index 0), Distance: 2.008 Å (Threshold: 3.262), Bound: True. Bonded Surface Atoms: Mo-2.008Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: False (Planned ['Mo'] -> Actual ['Mo']).",
+      "most_stable_energy_eV": -19.717514038085938,
+      "target_adsorbate_atom": "N",
+      "target_adsorbate_atom_index": 108,
+      "bonded_surface_atoms": [
+        {
+          "symbol": "Mo",
+          "index": 0,
+          "distance": 2.008
+        }
+      ],
+      "nearest_slab_atom": "Mo",
+      "nearest_slab_atom_index": 0,
+      "final_bond_distance_A": 2.008,
+      "estimated_covalent_cutoff_A": 2.475,
+      "is_covalently_bound": true,
+      "reaction_detected": false,
+      "is_dissociated": false,
+      "n_components": 1,
+      "bond_change_count": 0,
+      "site_analysis": {
+        "planned_site_type": "ontop",
+        "planned_connectivity": 1,
+        "actual_site_type": "ontop",
+        "actual_connectivity": 1,
+        "is_chemical_slip": false,
+        "planned_symbols": [
+          "Mo"
+        ],
+        "actual_symbols": [
+          "Mo"
+        ],
+        "site_fingerprint": "Mo0"
+      },
+      "best_structure_file": "outputs/026-41d860e2/BEST_O_N_ontop_E-19.718.xyz",
+      "generated_conformers_file": "outputs/026-41d860e2/conformers_O_N.traj",
+      "relaxation_trajectory_file": "outputs/026-41d860e2/final.xyz",
+      "session_id": "026-41d860e2"
+    },
+    "plan": {
+      "reasoning": "No history is available, so I must choose the best first-principles initial plan. The adsorbate SMILES O=N corresponds to nitric oxide written as O=N. From the provided atom list, atom 0 is O (SP2, degree 1, radical_electrons 0) and atom 1 is N (SP2, degree 1, radical_electrons 0). There is no SMILES inconsistency to flag beyond noting that this representation is treated here as a closed-shell molecule because the provided radical count is zero on both atoms, so adsorbate_type should be Molecule, not ReactiveSpecies. For molecular adsorption, the most chemically plausible donor site is the N atom because NO commonly binds transition-metal centers through N due to better donation/back-donation balance than O-bound adsorption. The surface contains Mo, W, and S; among these, the transition metals Mo and W are much more likely to provide strong chemisorption than sulfur. With no prior results, the most promising high-symmetry initial guess is N-end-on adsorption at an ontop metal site. Between Mo and W, Mo sulfides often show stronger adsorption for small N/O-containing molecules than W analogues, so Mo-ontop is the best initial choice. This uses one adsorbate binding atom and is consistent with the ontop rule. I therefore propose an ontop Mo site with N atom index 1 as the binding atom.",
+      "adsorbate_type": "Molecule",
+      "solution": {
+        "action": "continue",
+        "site_type": "ontop",
+        "surface_binding_atoms": [
+          "Mo"
+        ],
+        "adsorbate_binding_indices": [
+          1
+        ],
+        "relax_top_n": 1,
+        "touch_sphere_size": 2,
+        "overlap_thr": 0.1,
+        "conformers_per_site_cap": 4
+      }
+    },
+    "result_type": "Perfect"
+  },
+  "last_analysis": {
+    "status": "success",
+    "message": "Most stable config adsorption energy: -19.7175 eV. Target Atom: N (from plan index 1, global index 108 in relaxed structure). -> Nearest: Mo (Index 0), Distance: 2.008 Å (Threshold: 3.262), Bound: True. Bonded Surface Atoms: Mo-2.008Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: False (Planned ['Mo'] -> Actual ['Mo']).",
+    "most_stable_energy_eV": -19.717514038085938,
+    "target_adsorbate_atom": "N",
+    "target_adsorbate_atom_index": 108,
+    "bonded_surface_atoms": [
+      {
+        "symbol": "Mo",
+        "index": 0,
+        "distance": 2.008
+      }
+    ],
+    "nearest_slab_atom": "Mo",
+    "nearest_slab_atom_index": 0,
+    "final_bond_distance_A": 2.008,
+    "estimated_covalent_cutoff_A": 2.475,
+    "is_covalently_bound": true,
+    "reaction_detected": false,
+    "is_dissociated": false,
+    "n_components": 1,
+    "bond_change_count": 0,
+    "site_analysis": {
+      "planned_site_type": "ontop",
+      "planned_connectivity": 1,
+      "actual_site_type": "ontop",
+      "actual_connectivity": 1,
+      "is_chemical_slip": false,
+      "planned_symbols": [
+        "Mo"
+      ],
+      "actual_symbols": [
+        "Mo"
+      ],
+      "site_fingerprint": "Mo0"
+    },
+    "best_structure_file": "outputs/026-41d860e2/BEST_O_N_ontop_E-19.718.xyz",
+    "generated_conformers_file": "outputs/026-41d860e2/conformers_O_N.traj",
+    "relaxation_trajectory_file": "outputs/026-41d860e2/final.xyz",
+    "session_id": "026-41d860e2"
+  },
+  "attempt_records": [
+    {
+      "attempt_index": 1,
+      "plan": {
+        "reasoning": "No history is available, so I must choose the best first-principles initial plan. The adsorbate SMILES O=N corresponds to nitric oxide written as O=N. From the provided atom list, atom 0 is O (SP2, degree 1, radical_electrons 0) and atom 1 is N (SP2, degree 1, radical_electrons 0). There is no SMILES inconsistency to flag beyond noting that this representation is treated here as a closed-shell molecule because the provided radical count is zero on both atoms, so adsorbate_type should be Molecule, not ReactiveSpecies. For molecular adsorption, the most chemically plausible donor site is the N atom because NO commonly binds transition-metal centers through N due to better donation/back-donation balance than O-bound adsorption. The surface contains Mo, W, and S; among these, the transition metals Mo and W are much more likely to provide strong chemisorption than sulfur. With no prior results, the most promising high-symmetry initial guess is N-end-on adsorption at an ontop metal site. Between Mo and W, Mo sulfides often show stronger adsorption for small N/O-containing molecules than W analogues, so Mo-ontop is the best initial choice. This uses one adsorbate binding atom and is consistent with the ontop rule. I therefore propose an ontop Mo site with N atom index 1 as the binding atom.",
+        "adsorbate_type": "Molecule",
+        "solution": {
+          "action": "continue",
+          "site_type": "ontop",
+          "surface_binding_atoms": [
+            "Mo"
+          ],
+          "adsorbate_binding_indices": [
+            1
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "ontop|Mo|1|Molecule|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -19.717514038085938,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": false,
+      "planned_site_type": "ontop",
+      "actual_site_type": "ontop",
+      "best_structure_file": "outputs/026-41d860e2/BEST_O_N_ontop_E-19.718.xyz",
+      "generated_conformers_file": "outputs/026-41d860e2/conformers_O_N.traj",
+      "relaxation_trajectory_file": "outputs/026-41d860e2/final.xyz",
+      "message": "Most stable config adsorption energy: -19.7175 eV. Target Atom: N (from plan index 1, global index 108 in relaxed structure). -> Nearest: Mo (Index 0), Distance: 2.008 Å (Threshold: 3.262), Bound: True. Bonded Surface Atoms: Mo-2.008Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: False (Planned ['Mo'] -> Actual ['Mo']).",
+      "history_entry": "【✅ Perfect Adsorption】 ontop @ ['Mo'] (Index [1]) -> Site: ontop (Mo) [🌟 New Best] | E=-19.718 eV"
+    }
+  ],
+  "history": [
+    "【✅ Perfect Adsorption】 ontop @ ['Mo'] (Index [1]) -> Site: ontop (Mo) [🌟 New Best] | E=-19.718 eV"
+  ],
+  "error": null,
+  "perfect_count": 1,
+  "dissociation_count": 0,
+  "rearrangement_count": 0,
+  "calc_failure_count": 0,
+  "chemical_slip_count": 0
+}

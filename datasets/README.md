@@ -1,4 +1,4 @@
-# Benchmark Slab Datasets
+# Datasets
 
 Curated input slab files used by AdsMind benchmarks and the manuscript figures.
 These are committed snapshots — running the agent does NOT require redownloading.
@@ -13,7 +13,7 @@ Paper-facing OCD slabs are stored as `OCD62` inputs.
 
 ## Notes
 
-- `cmu20/`: derived from FAIR-Chem/OCP via `research/generate_slabs.py`
+- `cmu20/`: derived from FAIR-Chem/OCP via `datasets/cmu20/download_cmu20_slabs.py`
   (committed because regeneration requires network and the OCP client).
 - `ocd62/`: the OCD62 benchmark used by the manuscript.
 - `ocd62_overlap12/`: input queue for reproducibility runs on the 12 overlap

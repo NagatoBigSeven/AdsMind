@@ -1,0 +1,204 @@
+{
+  "case_id": "050",
+  "case_metadata": {
+    "case_id": "050",
+    "slab_file": "datasets/ocd62/050_ocd_768_Ga24Y24_H.xyz",
+    "smiles": "[H]",
+    "user_request": "Find the lowest-energy adsorption configuration for atomic hydrogen on the provided surface.",
+    "surface_family": "intermetallic",
+    "adsorbate_name": "H",
+    "miller_index": "",
+    "reaction_class": "HER",
+    "ablation_candidate": "FALSE",
+    "notes": "OCD id=768; adsorbate=[H]; surface_formula=Ga24Y24; y_relaxed=-0.464746 eV; site=19;43;45;47",
+    "surface_formula": "Ga24Y24",
+    "surface_elements": "Ga;Y",
+    "bare_slab_atoms": "48",
+    "adsorbate_atoms": "1",
+    "y_relaxed": "-0.464746",
+    "site_indices": "19;43;45;47"
+  },
+  "status": "success",
+  "best_energy_eV": -3.3241164684295654,
+  "iteration_count": 1,
+  "max_attempts": 1,
+  "final_site_type": "bridge",
+  "converged_tag": false,
+  "wall_clock_sec": 622.1393546499312,
+  "total_input_tokens": 4730,
+  "total_output_tokens": 1340,
+  "artifact_paths": {
+    "BEST_H_ontop_to_bridge_E-3.324": "research/results/basic_experiments/ocd62/xai_grok4_0709_mace_mp0_small/one_shot/050/artifacts/BEST_H_ontop_to_bridge_E-3.324.xyz",
+    "BEST_H_ontop_to_bridge_E-3.324.xyz": "research/results/basic_experiments/ocd62/xai_grok4_0709_mace_mp0_small/one_shot/050/artifacts/BEST_H_ontop_to_bridge_E-3.324.xyz",
+    "best_structure_file": "research/results/basic_experiments/ocd62/xai_grok4_0709_mace_mp0_small/one_shot/050/artifacts/BEST_H_ontop_to_bridge_E-3.324.xyz",
+    "conformers_[H]": "research/results/basic_experiments/ocd62/xai_grok4_0709_mace_mp0_small/one_shot/050/artifacts/conformers_[H].traj",
+    "conformers_[H].traj": "research/results/basic_experiments/ocd62/xai_grok4_0709_mace_mp0_small/one_shot/050/artifacts/conformers_[H].traj",
+    "final": "research/results/basic_experiments/ocd62/xai_grok4_0709_mace_mp0_small/one_shot/050/artifacts/final.xyz",
+    "final.xyz": "research/results/basic_experiments/ocd62/xai_grok4_0709_mace_mp0_small/one_shot/050/artifacts/final.xyz",
+    "relaxation": "research/results/basic_experiments/ocd62/xai_grok4_0709_mace_mp0_small/one_shot/050/artifacts/relaxation.traj",
+    "relaxation.traj": "research/results/basic_experiments/ocd62/xai_grok4_0709_mace_mp0_small/one_shot/050/artifacts/relaxation.traj",
+    "relaxation_trajectory_file": "research/results/basic_experiments/ocd62/xai_grok4_0709_mace_mp0_small/one_shot/050/artifacts/relaxation.traj"
+  },
+  "best_result": {
+    "most_stable_energy_eV": -3.3241164684295654,
+    "analysis_json": {
+      "status": "success",
+      "message": "Most stable config adsorption energy: -3.3241 eV. Target Atom: H (from plan index 0, global index 48 in relaxed structure). -> Nearest: Y (Index 33), Distance: 2.168 Å (Threshold: 3.204), Bound: True. Bonded Surface Atoms: Y-2.168Å, Y-2.169Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Ga'] -> Actual ['Y', 'Y']).",
+      "most_stable_energy_eV": -3.3241164684295654,
+      "target_adsorbate_atom": "H",
+      "target_adsorbate_atom_index": 48,
+      "bonded_surface_atoms": [
+        {
+          "symbol": "Y",
+          "index": 33,
+          "distance": 2.168
+        },
+        {
+          "symbol": "Y",
+          "index": 35,
+          "distance": 2.169
+        }
+      ],
+      "nearest_slab_atom": "Y",
+      "nearest_slab_atom_index": 33,
+      "final_bond_distance_A": 2.168,
+      "estimated_covalent_cutoff_A": 2.431,
+      "is_covalently_bound": true,
+      "reaction_detected": false,
+      "is_dissociated": false,
+      "n_components": 1,
+      "bond_change_count": 0,
+      "site_analysis": {
+        "planned_site_type": "ontop",
+        "planned_connectivity": 1,
+        "actual_site_type": "bridge",
+        "actual_connectivity": 2,
+        "is_chemical_slip": true,
+        "planned_symbols": [
+          "Ga"
+        ],
+        "actual_symbols": [
+          "Y",
+          "Y"
+        ],
+        "site_fingerprint": "Y33-Y35"
+      },
+      "best_structure_file": "outputs/002-22ac25a0/BEST_H_ontop_to_bridge_E-3.324.xyz",
+      "generated_conformers_file": "outputs/002-22ac25a0/conformers_[H].traj",
+      "relaxation_trajectory_file": "outputs/002-22ac25a0/final.xyz",
+      "session_id": "002-22ac25a0"
+    },
+    "plan": {
+      "reasoning": "Step 0: SMILES is [H], representing atomic hydrogen, a radical with one unpaired electron. The heavy atom index list is [], as hydrogen is not a heavy atom. However, for atomic hydrogen, the only atom is at index 0, which has the unpaired electron, suitable for ReactiveSpecies. No hybridization mismatch, as it's atomic. Step 1: History is None, no previous attempts, successes, failures, or tags. No unstable sites identified. Step 2: As the first plan, propose a new configuration. Goal is lowest adsorption energy. For atomic H, start with a simple ontop site on Ga, a common starting point for systematic exploration. Will iterate to other sites like ontop Y, bridges, and hollows in subsequent steps if needed. No evidence of instability yet. Step 3: User's core intent is to find the lowest-energy adsorption site for atomic hydrogen on the Ga-Y surface. Step 4: Adsorbate is atomic hydrogen radical, no major functional groups. Binding via the H atom at index 0. Step 5: Surface has Ga and Y atoms, with available ontop, bridge, and hollow-3 sites involving combinations of Ga and Y. Step 6: Plan ontop site on Ga, binding via H index 0. Using defaults for other parameters.",
+      "adsorbate_type": "ReactiveSpecies",
+      "solution": {
+        "action": "continue",
+        "site_type": "ontop",
+        "surface_binding_atoms": [
+          "Ga"
+        ],
+        "adsorbate_binding_indices": [
+          0
+        ],
+        "relax_top_n": 1,
+        "touch_sphere_size": 2,
+        "overlap_thr": 0.1,
+        "conformers_per_site_cap": 4
+      }
+    },
+    "result_type": "Perfect"
+  },
+  "last_analysis": {
+    "status": "success",
+    "message": "Most stable config adsorption energy: -3.3241 eV. Target Atom: H (from plan index 0, global index 48 in relaxed structure). -> Nearest: Y (Index 33), Distance: 2.168 Å (Threshold: 3.204), Bound: True. Bonded Surface Atoms: Y-2.168Å, Y-2.169Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Ga'] -> Actual ['Y', 'Y']).",
+    "most_stable_energy_eV": -3.3241164684295654,
+    "target_adsorbate_atom": "H",
+    "target_adsorbate_atom_index": 48,
+    "bonded_surface_atoms": [
+      {
+        "symbol": "Y",
+        "index": 33,
+        "distance": 2.168
+      },
+      {
+        "symbol": "Y",
+        "index": 35,
+        "distance": 2.169
+      }
+    ],
+    "nearest_slab_atom": "Y",
+    "nearest_slab_atom_index": 33,
+    "final_bond_distance_A": 2.168,
+    "estimated_covalent_cutoff_A": 2.431,
+    "is_covalently_bound": true,
+    "reaction_detected": false,
+    "is_dissociated": false,
+    "n_components": 1,
+    "bond_change_count": 0,
+    "site_analysis": {
+      "planned_site_type": "ontop",
+      "planned_connectivity": 1,
+      "actual_site_type": "bridge",
+      "actual_connectivity": 2,
+      "is_chemical_slip": true,
+      "planned_symbols": [
+        "Ga"
+      ],
+      "actual_symbols": [
+        "Y",
+        "Y"
+      ],
+      "site_fingerprint": "Y33-Y35"
+    },
+    "best_structure_file": "outputs/002-22ac25a0/BEST_H_ontop_to_bridge_E-3.324.xyz",
+    "generated_conformers_file": "outputs/002-22ac25a0/conformers_[H].traj",
+    "relaxation_trajectory_file": "outputs/002-22ac25a0/final.xyz",
+    "session_id": "002-22ac25a0"
+  },
+  "attempt_records": [
+    {
+      "attempt_index": 1,
+      "plan": {
+        "reasoning": "Step 0: SMILES is [H], representing atomic hydrogen, a radical with one unpaired electron. The heavy atom index list is [], as hydrogen is not a heavy atom. However, for atomic hydrogen, the only atom is at index 0, which has the unpaired electron, suitable for ReactiveSpecies. No hybridization mismatch, as it's atomic. Step 1: History is None, no previous attempts, successes, failures, or tags. No unstable sites identified. Step 2: As the first plan, propose a new configuration. Goal is lowest adsorption energy. For atomic H, start with a simple ontop site on Ga, a common starting point for systematic exploration. Will iterate to other sites like ontop Y, bridges, and hollows in subsequent steps if needed. No evidence of instability yet. Step 3: User's core intent is to find the lowest-energy adsorption site for atomic hydrogen on the Ga-Y surface. Step 4: Adsorbate is atomic hydrogen radical, no major functional groups. Binding via the H atom at index 0. Step 5: Surface has Ga and Y atoms, with available ontop, bridge, and hollow-3 sites involving combinations of Ga and Y. Step 6: Plan ontop site on Ga, binding via H index 0. Using defaults for other parameters.",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "ontop",
+          "surface_binding_atoms": [
+            "Ga"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "ontop|Ga|0|ReactiveSpecies|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -3.3241164684295654,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": true,
+      "planned_site_type": "ontop",
+      "actual_site_type": "bridge",
+      "best_structure_file": "outputs/002-22ac25a0/BEST_H_ontop_to_bridge_E-3.324.xyz",
+      "generated_conformers_file": "outputs/002-22ac25a0/conformers_[H].traj",
+      "relaxation_trajectory_file": "outputs/002-22ac25a0/final.xyz",
+      "message": "Most stable config adsorption energy: -3.3241 eV. Target Atom: H (from plan index 0, global index 48 in relaxed structure). -> Nearest: Y (Index 33), Distance: 2.168 Å (Threshold: 3.204), Bound: True. Bonded Surface Atoms: Y-2.168Å, Y-2.169Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Ga'] -> Actual ['Y', 'Y']).",
+      "history_entry": "【✅ Perfect Adsorption】 ontop @ ['Ga'] (Index [0]) -> ⚠️【Unstable Site Warning】⚠️: Planned ontop (Ga) is unstable, adsorbate spontaneously slipped to bridge (Y-Y).This means Ga has insufficient affinity for this adsorbate. Please **FORBID** testing Ga type sites again! [🌟 New Best] | E=-3.324 eV"
+    }
+  ],
+  "history": [
+    "【✅ Perfect Adsorption】 ontop @ ['Ga'] (Index [0]) -> ⚠️【Unstable Site Warning】⚠️: Planned ontop (Ga) is unstable, adsorbate spontaneously slipped to bridge (Y-Y).This means Ga has insufficient affinity for this adsorbate. Please **FORBID** testing Ga type sites again! [🌟 New Best] | E=-3.324 eV"
+  ],
+  "error": null,
+  "perfect_count": 1,
+  "dissociation_count": 0,
+  "rearrangement_count": 0,
+  "calc_failure_count": 0,
+  "chemical_slip_count": 1,
+  "best_structure_file": "research/results/basic_experiments/ocd62/xai_grok4_0709_mace_mp0_small/one_shot/050/artifacts/BEST_H_ontop_to_bridge_E-3.324.xyz"
+}

@@ -1,0 +1,247 @@
+{
+  "case_id": "045",
+  "case_metadata": {
+    "case_id": "045",
+    "slab_file": "datasets/ocd62/045_ocd_665_Ga16Mn32V16_CH2_O.xyz",
+    "smiles": "[CH2][O]",
+    "user_request": "Find the lowest-energy adsorption configuration for the adsorbate with SMILES [CH2][O] on the provided surface.",
+    "surface_family": "intermetallic",
+    "adsorbate_name": "[CH2][O]",
+    "miller_index": "",
+    "reaction_class": "GENERALIZATION",
+    "ablation_candidate": "FALSE",
+    "notes": "OCD id=665; adsorbate=[CH2][O]; surface_formula=Ga16Mn32V16; y_relaxed=-4.696501 eV; site=9;16;24;27;43;53",
+    "surface_formula": "Ga16Mn32V16",
+    "surface_elements": "Ga;Mn;V",
+    "bare_slab_atoms": "64",
+    "adsorbate_atoms": "4",
+    "y_relaxed": "-4.696501",
+    "site_indices": "9;16;24;27;43;53"
+  },
+  "status": "success",
+  "best_energy_eV": -1.351470947265625,
+  "iteration_count": 1,
+  "max_attempts": 1,
+  "final_site_type": "bridge",
+  "converged_tag": false,
+  "wall_clock_sec": 103.76008385792375,
+  "total_input_tokens": 5333,
+  "total_output_tokens": 1848,
+  "artifact_paths": {
+    "BEST_CH2O_bridge_E-1.351": "research/results/basic_experiments/ocd62/xai_grok4_0709_mace_mp0_small/one_shot/045/artifacts/BEST_CH2O_bridge_E-1.351.xyz",
+    "BEST_CH2O_bridge_E-1.351.xyz": "research/results/basic_experiments/ocd62/xai_grok4_0709_mace_mp0_small/one_shot/045/artifacts/BEST_CH2O_bridge_E-1.351.xyz",
+    "best_structure_file": "research/results/basic_experiments/ocd62/xai_grok4_0709_mace_mp0_small/one_shot/045/artifacts/BEST_CH2O_bridge_E-1.351.xyz",
+    "conformers_[CH2][O]": "research/results/basic_experiments/ocd62/xai_grok4_0709_mace_mp0_small/one_shot/045/artifacts/conformers_[CH2][O].traj",
+    "conformers_[CH2][O].traj": "research/results/basic_experiments/ocd62/xai_grok4_0709_mace_mp0_small/one_shot/045/artifacts/conformers_[CH2][O].traj",
+    "final": "research/results/basic_experiments/ocd62/xai_grok4_0709_mace_mp0_small/one_shot/045/artifacts/final.xyz",
+    "final.xyz": "research/results/basic_experiments/ocd62/xai_grok4_0709_mace_mp0_small/one_shot/045/artifacts/final.xyz",
+    "relaxation": "research/results/basic_experiments/ocd62/xai_grok4_0709_mace_mp0_small/one_shot/045/artifacts/relaxation.traj",
+    "relaxation.traj": "research/results/basic_experiments/ocd62/xai_grok4_0709_mace_mp0_small/one_shot/045/artifacts/relaxation.traj",
+    "relaxation_trajectory_file": "research/results/basic_experiments/ocd62/xai_grok4_0709_mace_mp0_small/one_shot/045/artifacts/relaxation.traj"
+  },
+  "best_result": {
+    "most_stable_energy_eV": -1.351470947265625,
+    "analysis_json": {
+      "status": "success",
+      "message": "Most stable config adsorption energy: -1.3515 eV. Target Atom 1: C (from plan index 0, global index 64). -> Nearest: Mn (Index 32), Distance: 2.656 Å (Threshold: 2.365), Bound: False. Target Atom 2: O (from plan index 1, global index 65). -> Nearest: Mn (Index 19), Distance: 2.559 Å (Threshold: 2.255), Bound: False. Bonded Surface Atoms: O(65)-Mn(1.899Å), C(64)-Mn(2.414Å), C(64)-Mn(2.575Å). Is Bound: False. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Mn', 'Mn'] -> Actual ['Mn', 'Mn', 'Mn']).",
+      "most_stable_energy_eV": -1.351470947265625,
+      "bonded_surface_atoms": [
+        {
+          "adsorbate_atom": "O(65)",
+          "adsorbate_atom_index": 65,
+          "symbol": "Mn",
+          "index": 19,
+          "distance": 1.899
+        },
+        {
+          "adsorbate_atom": "C(64)",
+          "adsorbate_atom_index": 64,
+          "symbol": "Mn",
+          "index": 32,
+          "distance": 2.414
+        },
+        {
+          "adsorbate_atom": "C(64)",
+          "adsorbate_atom_index": 64,
+          "symbol": "Mn",
+          "index": 19,
+          "distance": 2.575
+        }
+      ],
+      "final_bond_distance_A": 1.899,
+      "is_covalently_bound": false,
+      "atom_1": {
+        "symbol": "C",
+        "global_index": 64,
+        "distance_A": 2.656,
+        "is_bound": false
+      },
+      "atom_2": {
+        "symbol": "O",
+        "global_index": 65,
+        "distance_A": 2.559,
+        "is_bound": false
+      },
+      "reaction_detected": false,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "n_components": 1,
+      "site_analysis": {
+        "planned_site_type": "bridge",
+        "planned_connectivity": 2,
+        "actual_site_type": "bridge",
+        "actual_connectivity": 2,
+        "is_chemical_slip": true,
+        "planned_symbols": [
+          "Mn",
+          "Mn"
+        ],
+        "actual_symbols": [
+          "Mn",
+          "Mn",
+          "Mn"
+        ],
+        "site_fingerprint": "Mn19-Mn32-Mn19"
+      },
+      "best_structure_file": "outputs/015-0a0bbb86/BEST_CH2O_bridge_E-1.351.xyz",
+      "generated_conformers_file": "outputs/015-0a0bbb86/conformers_[CH2][O].traj",
+      "relaxation_trajectory_file": "outputs/015-0a0bbb86/final.xyz",
+      "session_id": "015-0a0bbb86"
+    },
+    "plan": {
+      "reasoning": "Step 0: SMILES Consistency Check. The SMILES is [CH2][O], with atoms C (index 0, SP3, radical_electrons=1) and O (index 1, SP3, radical_electrons=1). This indicates a diradical species •CH2•O. No user description mismatch to warn about. Radicals confirmed for ReactiveSpecies planning.\nStep 1: Analyze Old Plans. History is None, so no previous attempts, successes, failures, or tags. No unstable sites identified yet. No convergence signals.\nStep 2: Formulate New Plan. Since history is empty, propose the best initial plan. Goal is lowest adsorption energy. Avoid repeating plans (none exist). Process has a hard limit of 1 attempt, but this is the first, so continue.\nStep 3: Analyze Request. User's intent is to find the lowest-energy adsorption configuration for [CH2][O] on the surface.\nStep 4: Analyze Adsorbate. SMILES [CH2][O] represents a diradical with C (index 0) and O (index 1), both with unpaired electrons. Suitable for bidentate adsorption via both atoms.\nStep 5: Analyze Surface. Available sites include bridge (Mn-Mn), which is suitable for bidentate binding. Surface elements: Mn, Ga, V.\nStep 6: Formulate Plan. Select 'ReactiveSpecies' due to radicals on both atoms. For potentially lowest energy, plan bidentate adsorption (η2 via C and O) at a bridge site, which aligns with common adsorption modes for similar species. Use site_type 'bridge' (canonical name). surface_binding_atoms ['Mn', 'Mn'] from available [Bridge]: Mn-Mn. adsorbate_binding_indices [0, 1] for C and O. Defaults for other parameters. This is a new plan distinct from history (none).",
+      "adsorbate_type": "ReactiveSpecies",
+      "solution": {
+        "action": "continue",
+        "site_type": "bridge",
+        "surface_binding_atoms": [
+          "Mn",
+          "Mn"
+        ],
+        "adsorbate_binding_indices": [
+          0,
+          1
+        ],
+        "relax_top_n": 1,
+        "touch_sphere_size": 2,
+        "overlap_thr": 0.1,
+        "conformers_per_site_cap": 4
+      }
+    },
+    "result_type": "Perfect"
+  },
+  "last_analysis": {
+    "status": "success",
+    "message": "Most stable config adsorption energy: -1.3515 eV. Target Atom 1: C (from plan index 0, global index 64). -> Nearest: Mn (Index 32), Distance: 2.656 Å (Threshold: 2.365), Bound: False. Target Atom 2: O (from plan index 1, global index 65). -> Nearest: Mn (Index 19), Distance: 2.559 Å (Threshold: 2.255), Bound: False. Bonded Surface Atoms: O(65)-Mn(1.899Å), C(64)-Mn(2.414Å), C(64)-Mn(2.575Å). Is Bound: False. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Mn', 'Mn'] -> Actual ['Mn', 'Mn', 'Mn']).",
+    "most_stable_energy_eV": -1.351470947265625,
+    "bonded_surface_atoms": [
+      {
+        "adsorbate_atom": "O(65)",
+        "adsorbate_atom_index": 65,
+        "symbol": "Mn",
+        "index": 19,
+        "distance": 1.899
+      },
+      {
+        "adsorbate_atom": "C(64)",
+        "adsorbate_atom_index": 64,
+        "symbol": "Mn",
+        "index": 32,
+        "distance": 2.414
+      },
+      {
+        "adsorbate_atom": "C(64)",
+        "adsorbate_atom_index": 64,
+        "symbol": "Mn",
+        "index": 19,
+        "distance": 2.575
+      }
+    ],
+    "final_bond_distance_A": 1.899,
+    "is_covalently_bound": false,
+    "atom_1": {
+      "symbol": "C",
+      "global_index": 64,
+      "distance_A": 2.656,
+      "is_bound": false
+    },
+    "atom_2": {
+      "symbol": "O",
+      "global_index": 65,
+      "distance_A": 2.559,
+      "is_bound": false
+    },
+    "reaction_detected": false,
+    "bond_change_count": 0,
+    "is_dissociated": false,
+    "n_components": 1,
+    "site_analysis": {
+      "planned_site_type": "bridge",
+      "planned_connectivity": 2,
+      "actual_site_type": "bridge",
+      "actual_connectivity": 2,
+      "is_chemical_slip": true,
+      "planned_symbols": [
+        "Mn",
+        "Mn"
+      ],
+      "actual_symbols": [
+        "Mn",
+        "Mn",
+        "Mn"
+      ],
+      "site_fingerprint": "Mn19-Mn32-Mn19"
+    },
+    "best_structure_file": "outputs/015-0a0bbb86/BEST_CH2O_bridge_E-1.351.xyz",
+    "generated_conformers_file": "outputs/015-0a0bbb86/conformers_[CH2][O].traj",
+    "relaxation_trajectory_file": "outputs/015-0a0bbb86/final.xyz",
+    "session_id": "015-0a0bbb86"
+  },
+  "attempt_records": [
+    {
+      "attempt_index": 1,
+      "plan": {
+        "reasoning": "Step 0: SMILES Consistency Check. The SMILES is [CH2][O], with atoms C (index 0, SP3, radical_electrons=1) and O (index 1, SP3, radical_electrons=1). This indicates a diradical species •CH2•O. No user description mismatch to warn about. Radicals confirmed for ReactiveSpecies planning.\nStep 1: Analyze Old Plans. History is None, so no previous attempts, successes, failures, or tags. No unstable sites identified yet. No convergence signals.\nStep 2: Formulate New Plan. Since history is empty, propose the best initial plan. Goal is lowest adsorption energy. Avoid repeating plans (none exist). Process has a hard limit of 1 attempt, but this is the first, so continue.\nStep 3: Analyze Request. User's intent is to find the lowest-energy adsorption configuration for [CH2][O] on the surface.\nStep 4: Analyze Adsorbate. SMILES [CH2][O] represents a diradical with C (index 0) and O (index 1), both with unpaired electrons. Suitable for bidentate adsorption via both atoms.\nStep 5: Analyze Surface. Available sites include bridge (Mn-Mn), which is suitable for bidentate binding. Surface elements: Mn, Ga, V.\nStep 6: Formulate Plan. Select 'ReactiveSpecies' due to radicals on both atoms. For potentially lowest energy, plan bidentate adsorption (η2 via C and O) at a bridge site, which aligns with common adsorption modes for similar species. Use site_type 'bridge' (canonical name). surface_binding_atoms ['Mn', 'Mn'] from available [Bridge]: Mn-Mn. adsorbate_binding_indices [0, 1] for C and O. Defaults for other parameters. This is a new plan distinct from history (none).",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "bridge",
+          "surface_binding_atoms": [
+            "Mn",
+            "Mn"
+          ],
+          "adsorbate_binding_indices": [
+            0,
+            1
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "bridge|Mn,Mn|0,1|ReactiveSpecies|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -1.351470947265625,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": true,
+      "planned_site_type": "bridge",
+      "actual_site_type": "bridge",
+      "best_structure_file": "outputs/015-0a0bbb86/BEST_CH2O_bridge_E-1.351.xyz",
+      "generated_conformers_file": "outputs/015-0a0bbb86/conformers_[CH2][O].traj",
+      "relaxation_trajectory_file": "outputs/015-0a0bbb86/final.xyz",
+      "message": "Most stable config adsorption energy: -1.3515 eV. Target Atom 1: C (from plan index 0, global index 64). -> Nearest: Mn (Index 32), Distance: 2.656 Å (Threshold: 2.365), Bound: False. Target Atom 2: O (from plan index 1, global index 65). -> Nearest: Mn (Index 19), Distance: 2.559 Å (Threshold: 2.255), Bound: False. Bonded Surface Atoms: O(65)-Mn(1.899Å), C(64)-Mn(2.414Å), C(64)-Mn(2.575Å). Is Bound: False. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Mn', 'Mn'] -> Actual ['Mn', 'Mn', 'Mn']).",
+      "history_entry": "【✅ Perfect Adsorption】 bridge @ ['Mn', 'Mn'] (Index [0, 1]) -> ⚠️【Unstable Site Warning】⚠️: Planned bridge (Mn-Mn) is unstable, adsorbate spontaneously slipped to bridge (Mn-Mn-Mn).This means Mn-Mn has insufficient affinity for this adsorbate. Please **FORBID** testing Mn-Mn type sites again! [🌟 New Best] | E=-1.351 eV"
+    }
+  ],
+  "history": [
+    "【✅ Perfect Adsorption】 bridge @ ['Mn', 'Mn'] (Index [0, 1]) -> ⚠️【Unstable Site Warning】⚠️: Planned bridge (Mn-Mn) is unstable, adsorbate spontaneously slipped to bridge (Mn-Mn-Mn).This means Mn-Mn has insufficient affinity for this adsorbate. Please **FORBID** testing Mn-Mn type sites again! [🌟 New Best] | E=-1.351 eV"
+  ],
+  "error": null,
+  "perfect_count": 1,
+  "dissociation_count": 0,
+  "rearrangement_count": 0,
+  "calc_failure_count": 0,
+  "chemical_slip_count": 1
+}

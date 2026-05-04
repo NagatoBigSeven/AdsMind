@@ -1,0 +1,150 @@
+{
+  "case_id": "053",
+  "case_metadata": {
+    "case_id": "053",
+    "slab_file": "datasets/ocd62/053_ocd_780_K20_C_CH2_O.xyz",
+    "smiles": "C([CH2])O",
+    "user_request": "Find the lowest-energy adsorption configuration for the adsorbate with SMILES C([CH2])O on the provided surface.",
+    "surface_family": "monometallic",
+    "adsorbate_name": "C([CH2])O",
+    "miller_index": "",
+    "reaction_class": "GENERALIZATION",
+    "ablation_candidate": "FALSE",
+    "notes": "OCD id=780; adsorbate=C([CH2])O; surface_formula=K20; y_relaxed=-3.186096 eV; site=2;8;12",
+    "source_key": "780",
+    "original_ads_smi": "C([CH2])O",
+    "surface_formula": "K20",
+    "surface_elements": "K",
+    "bare_slab_atoms": "20",
+    "adsorbate_atoms": "8",
+    "y_relaxed": "-3.186096",
+    "site_indices": "2;8;12",
+    "selection_bucket": "small_organic"
+  },
+  "status": "failed",
+  "best_energy_eV": null,
+  "iteration_count": 1,
+  "max_attempts": 5,
+  "final_site_type": null,
+  "converged_tag": false,
+  "wall_clock_sec": 232.91516999155283,
+  "total_input_tokens": 7973,
+  "total_output_tokens": 2381,
+  "artifact_paths": {
+    "BEST_C(CH2)O_ontop_to_hollow_FCC-No-Subsurf_DISS_E-7.045": "research/results/advanced_experiments/model_sensitivity/mace_mp0_large/ocd62_sample10/openai_gpt54_mace_mp0_large/full/053/artifacts/BEST_C(CH2)O_ontop_to_hollow_FCC-No-Subsurf_DISS_E-7.045.xyz",
+    "BEST_C(CH2)O_ontop_to_hollow_FCC-No-Subsurf_DISS_E-7.045.xyz": "research/results/advanced_experiments/model_sensitivity/mace_mp0_large/ocd62_sample10/openai_gpt54_mace_mp0_large/full/053/artifacts/BEST_C(CH2)O_ontop_to_hollow_FCC-No-Subsurf_DISS_E-7.045.xyz",
+    "best_structure_file": "research/results/advanced_experiments/model_sensitivity/mace_mp0_large/ocd62_sample10/openai_gpt54_mace_mp0_large/full/053/artifacts/BEST_C(CH2)O_ontop_to_hollow_FCC-No-Subsurf_DISS_E-7.045.xyz",
+    "conformers_C([CH2])O": "research/results/advanced_experiments/model_sensitivity/mace_mp0_large/ocd62_sample10/openai_gpt54_mace_mp0_large/full/053/artifacts/conformers_C([CH2])O.traj",
+    "conformers_C([CH2])O.traj": "research/results/advanced_experiments/model_sensitivity/mace_mp0_large/ocd62_sample10/openai_gpt54_mace_mp0_large/full/053/artifacts/conformers_C([CH2])O.traj",
+    "final": "research/results/advanced_experiments/model_sensitivity/mace_mp0_large/ocd62_sample10/openai_gpt54_mace_mp0_large/full/053/artifacts/final.xyz",
+    "final.xyz": "research/results/advanced_experiments/model_sensitivity/mace_mp0_large/ocd62_sample10/openai_gpt54_mace_mp0_large/full/053/artifacts/final.xyz",
+    "relaxation": "research/results/advanced_experiments/model_sensitivity/mace_mp0_large/ocd62_sample10/openai_gpt54_mace_mp0_large/full/053/artifacts/relaxation.traj",
+    "relaxation.traj": "research/results/advanced_experiments/model_sensitivity/mace_mp0_large/ocd62_sample10/openai_gpt54_mace_mp0_large/full/053/artifacts/relaxation.traj",
+    "relaxation_trajectory_file": "research/results/advanced_experiments/model_sensitivity/mace_mp0_large/ocd62_sample10/openai_gpt54_mace_mp0_large/full/053/artifacts/relaxation.traj"
+  },
+  "best_result": {},
+  "last_analysis": {
+    "status": "success",
+    "message": "Most stable config adsorption energy: -7.0454 eV. Target Atom: C (from plan index 1, global index 20 in relaxed structure). -> Nearest: K (Index 15), Distance: 2.731 Å (Threshold: 4.045), Bound: True. Bonded Surface Atoms: K-2.731Å, K-2.748Å, K-2.94Å, K-3.043Å. Is Bound: True. Reactivity Change Detected: True (Bond Changes: 1). Chemical Slip: True (Planned ['K'] -> Actual ['K', 'K', 'K', 'K']).",
+    "most_stable_energy_eV": -7.045434904972332,
+    "target_adsorbate_atom": "C",
+    "target_adsorbate_atom_index": 20,
+    "bonded_surface_atoms": [
+      {
+        "symbol": "K",
+        "index": 15,
+        "distance": 2.731
+      },
+      {
+        "symbol": "K",
+        "index": 10,
+        "distance": 2.748
+      },
+      {
+        "symbol": "K",
+        "index": 5,
+        "distance": 2.94
+      },
+      {
+        "symbol": "K",
+        "index": 3,
+        "distance": 3.043
+      }
+    ],
+    "nearest_slab_atom": "K",
+    "nearest_slab_atom_index": 15,
+    "final_bond_distance_A": 2.731,
+    "estimated_covalent_cutoff_A": 3.069,
+    "is_covalently_bound": true,
+    "reaction_detected": true,
+    "is_dissociated": true,
+    "n_components": 2,
+    "bond_change_count": 1,
+    "site_analysis": {
+      "planned_site_type": "ontop",
+      "planned_connectivity": 1,
+      "actual_site_type": "hollow (FCC/No-Subsurf)",
+      "actual_connectivity": 4,
+      "is_chemical_slip": true,
+      "planned_symbols": [
+        "K"
+      ],
+      "actual_symbols": [
+        "K",
+        "K",
+        "K",
+        "K"
+      ],
+      "site_fingerprint": "K15-K10-K5-K3"
+    },
+    "best_structure_file": "outputs/043-5d861843/BEST_C(CH2)O_ontop_to_hollow_FCC-No-Subsurf_DISS_E-7.045.xyz",
+    "generated_conformers_file": "outputs/043-5d861843/conformers_C([CH2])O.traj",
+    "relaxation_trajectory_file": "outputs/043-5d861843/final.xyz",
+    "session_id": "043-5d861843"
+  },
+  "attempt_records": [
+    {
+      "attempt_index": 1,
+      "plan": {
+        "reasoning": "No previous attempts exist, so this should be the best physically motivated initial trial. The SMILES C([CH2])O corresponds to a hydroxyethyl-type radical with heavy atoms C(0)-C(1)-O(2). From the provided atom list, atom 1 is an SP3 carbon with 1 radical electron, while atoms 0 and 2 have 0 radical electrons. There is no SMILES/user-description mismatch to warn about beyond noting that this is not a fully closed-shell saturated alcohol; it is a radical species, so adsorption should be treated as ReactiveSpecies. Because ReactiveSpecies adsorption must use atoms with unpaired electrons, the correct binding atom is carbon index 1 only. The available site list only provides ontop K, so the only valid canonical site to test is ontop with surface_binding_atoms ['K']. For an alkyl radical on an electropositive alkali-metal surface, the radical carbon is the most chemically reasonable anchoring point for the initial lowest-energy search; O is not allowed here for ReactiveSpecies because it has no radical electron, and no bridge/hollow options are supported by the provided site inventory. Therefore the systematic first plan is C-radical-down adsorption on K ontop.",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "ontop",
+          "surface_binding_atoms": [
+            "K"
+          ],
+          "adsorbate_binding_indices": [
+            1
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "ontop|K|1|ReactiveSpecies|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -7.045434904972332,
+      "bond_change_count": 1,
+      "is_dissociated": true,
+      "is_chemical_slip": true,
+      "planned_site_type": "ontop",
+      "actual_site_type": "hollow (FCC/No-Subsurf)",
+      "best_structure_file": "outputs/043-5d861843/BEST_C(CH2)O_ontop_to_hollow_FCC-No-Subsurf_DISS_E-7.045.xyz",
+      "generated_conformers_file": "outputs/043-5d861843/conformers_C([CH2])O.traj",
+      "relaxation_trajectory_file": "outputs/043-5d861843/final.xyz",
+      "message": "Most stable config adsorption energy: -7.0454 eV. Target Atom: C (from plan index 1, global index 20 in relaxed structure). -> Nearest: K (Index 15), Distance: 2.731 Å (Threshold: 4.045), Bound: True. Bonded Surface Atoms: K-2.731Å, K-2.748Å, K-2.94Å, K-3.043Å. Is Bound: True. Reactivity Change Detected: True (Bond Changes: 1). Chemical Slip: True (Planned ['K'] -> Actual ['K', 'K', 'K', 'K']).",
+      "history_entry": "【❌ Dissociated】 ontop @ ['K'] (Index [1]) -> ⚠️【Unstable Site Warning】⚠️: Planned ontop (K) is unstable, adsorbate spontaneously slipped to hollow (FCC/No-Subsurf) (K-K-K-K).This means K has insufficient affinity for this adsorbate. Please **FORBID** testing K type sites again! | E=-7.045 eV"
+    }
+  ],
+  "history": [
+    "【❌ Dissociated】 ontop @ ['K'] (Index [1]) -> ⚠️【Unstable Site Warning】⚠️: Planned ontop (K) is unstable, adsorbate spontaneously slipped to hollow (FCC/No-Subsurf) (K-K-K-K).This means K has insufficient affinity for this adsorbate. Please **FORBID** testing K type sites again! | E=-7.045 eV"
+  ],
+  "error": null,
+  "perfect_count": 0,
+  "dissociation_count": 1,
+  "rearrangement_count": 0,
+  "calc_failure_count": 0,
+  "chemical_slip_count": 1
+}
