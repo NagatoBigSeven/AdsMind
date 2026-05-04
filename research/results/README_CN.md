@@ -8,8 +8,8 @@ research/results/
     cmu20/
       openai_gpt54_mace_mp0_small/
       anthropic_claude_sonnet46_mace_mp0_small/
-      google_vertexai_gemini25pro_mace_mp0_small/
-      xai_grok4_0709_mace_mp0_small/
+      openrouter_gemini25pro_mace_mp0_small/
+      openrouter_grok4_mace_mp0_small/
         one_shot|full|no_slip|no_termination|no_forbid/
           summary.csv
           <case_id>/result.json
@@ -18,8 +18,8 @@ research/results/
     ocd62/
       openai_gpt54_mace_mp0_small/
       anthropic_claude_sonnet46_mace_mp0_small/
-      google_vertexai_gemini25pro_mace_mp0_small/
-      xai_grok4_0709_mace_mp0_small/
+      openrouter_gemini25pro_mace_mp0_small/
+      openrouter_grok4_mace_mp0_small/
         one_shot|full|no_slip|no_termination|no_forbid/
           summary.csv
           <case_id>/result.json
@@ -27,9 +27,9 @@ research/results/
       summaries/
     summaries/
   advanced_experiments/
-    mechanism/
+    ablation_and_chemical_slip_diagnostics/
     reproducibility/
-    model_sensitivity/
+    force_field_sensitivity/
     case_studies/
 ```
 
@@ -41,8 +41,8 @@ research/results/
 - LLM/力场目录：
   `openai_gpt54_mace_mp0_small`,
   `anthropic_claude_sonnet46_mace_mp0_small`,
-  `google_vertexai_gemini25pro_mace_mp0_small`,
-  `xai_grok4_0709_mace_mp0_small`
+  `openrouter_gemini25pro_mace_mp0_small`,
+  `openrouter_grok4_mace_mp0_small`
 - 变体：`one_shot`, `full`, `no_slip`, `no_termination`, `no_forbid`
 
 每个后端目录下有 `all_variants_summary.csv`，每个变体目录下也有自己的
@@ -69,22 +69,21 @@ one-shot run 没有对应 artifact 目录；完整 case 统计以 `summary.csv` 
 
 进阶实验不再按主矩阵展开，而是按研究问题组织：
 
-- `mechanism/ablation_effects/`：Full 与消融机制变体的配对统计、backend
+- `ablation_and_chemical_slip_diagnostics/ablation_effects/`：Full 与消融变体的配对统计、backend
   agreement 和 reach-Full 表。
-- `mechanism/chemical_slip_interpretability/`：chemical slip 的解释性表格和轨迹。
-- `reproducibility/ocd62_overlap12/`：OCD62 重叠 12 个 case 的重复性实验，
+- `ablation_and_chemical_slip_diagnostics/chemical_slip_interpretability/`：
+  chemical slip 的解释性表格和轨迹。
+- `reproducibility/ocd62_overlap12_rerun/`：OCD62 重叠 12 个 case 的重复性实验，
   包括远程 RUN3 的落盘目录。
 - `reproducibility/cmu20_openai_gpt54_mace_mp0_small_multiseed/`：
   GPT-5.4 CMU20 full-run 在 MACE-MP-0 small 下的多随机种子敏感性。
-- `model_sensitivity/mace_mp0_large/`：MACE-MP-0 large 力场敏感性检查，内部再按
-  dataset/backend/variant 拆分。
-  `ocd62_sample10` 是 manifest 明确列出的 OCD62 子集，10 个 case 都已经在
-  OCD62 基础实验矩阵中完成。
+- `force_field_sensitivity/mace_mp0_large_vs_mace_mp0_small/`：MACE-MP-0 large 与
+  MACE-MP-0 small 的力场敏感性检查。CMU20 已完成；这个实验不定义 OCD62 子集。
 - `case_studies/dft_iteration_alignment/`：用于 DFT 对齐的 CMU20 case 轨迹导出。
 - `case_studies/iteration_convergence/`：迭代过程中 running-best energy 曲线。
 
 远程 RUN3 完成后，结果应进入
-`advanced_experiments/reproducibility/ocd62_overlap12/run3/`。随后运行：
+`advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/`。随后运行：
 
 ```bash
 .venv/bin/python research/analysis/build_ocd62_summary.py --write-n3

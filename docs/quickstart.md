@@ -6,8 +6,7 @@ Get AdsMind running in 5 minutes.
 
 - Python 3.10 or 3.11
 - [uv](https://github.com/astral-sh/uv) package manager (recommended)
-- API key from Google AI, Anthropic, xAI, or OpenRouter for hosted API backends
-  (Vertex AI uses Google Application Default Credentials instead)
+- API key from OpenRouter, OpenAI, or Anthropic for hosted API backends
 
 ## Installation
 
@@ -23,55 +22,47 @@ Use this path if you want the repository examples, benchmark assets, tests, or
 paper reproduction scripts.
 
 ```bash
-# Clone the repository
 git clone https://github.com/AI4QC/AdsMind.git
 cd AdsMind
-
-# Install runtime, dev, and research dependencies
 uv pip install -e ".[dev,research]"
 ```
 
 ## Step 1: Set Up LLM Backend
 
-### Option A: Google AI (Recommended)
+### Option A: OpenRouter
 
-1. Get a free API key from [Google AI Studio](https://aistudio.google.com/apikey)
-2. Set the environment variable:
+Use this route for Gemini and Grok.
 
-   ```bash
-   export GOOGLE_API_KEY="your-google-api-key"
-   ```
+```bash
+export ADSMIND_LLM_BACKEND=openrouter
+export OPENROUTER_API_KEY="your-openrouter-api-key"
+```
 
-### Option B: Vertex AI
+### Option B: OpenAI
 
-1. Authenticate with Google Application Default Credentials:
+Use this route for GPT.
 
-   ```bash
-   gcloud auth application-default login
-   export GOOGLE_CLOUD_PROJECT="your-gcp-project"
-   export GOOGLE_CLOUD_LOCATION="us-central1"
-   ```
+```bash
+export ADSMIND_LLM_BACKEND=openai
+export OPENAI_API_KEY="your-openai-api-key"
+```
 
-2. Set the backend:
+### Option C: Anthropic
 
-   ```bash
-   export ADSMIND_LLM_BACKEND=google_vertexai
-   ```
+Use this route for Claude.
 
-### Option C: OpenRouter
+```bash
+export ADSMIND_LLM_BACKEND=anthropic
+export ANTHROPIC_API_KEY="your-anthropic-api-key"
+```
 
-1. Get an API key from [OpenRouter](https://openrouter.ai/)
-2. Set the environment variable:
+### Option D: Ollama
 
-   ```bash
-   export OPENROUTER_API_KEY="your-openrouter-api-key"
-   ```
-
-### Option D: Ollama (Local, No API Key)
-
-1. Install Ollama: `curl -fsSL https://ollama.com/install.sh | sh`
-2. Pull a model: `ollama pull qwen3:8b`
-3. Start the service: `ollama serve`
+```bash
+curl -fsSL https://ollama.com/install.sh | sh
+ollama pull qwen3:8b
+ollama serve
+```
 
 ## Step 2: Launch the App
 
@@ -86,12 +77,11 @@ available as an equivalent contributor entry point.
 
 ## Step 3: Run Your First Simulation
 
-### 1. Select LLM Backend (Sidebar)
+### 1. Select LLM Backend
 
-- Choose your backend (Google AI, Vertex AI, Anthropic, xAI, OpenRouter, Ollama,
-  or HuggingFace)
-- Enter API key if using a cloud backend
-- Select a model
+- Choose OpenRouter, OpenAI, Anthropic, Ollama, or HuggingFace.
+- Enter an API key if using a hosted backend.
+- Select a model.
 
 ### 2. Enter Inputs
 
@@ -101,33 +91,11 @@ available as an equivalent contributor entry point.
 | **Slab File** | Surface structure file | Upload XYZ, CIF, or POSCAR |
 | **Query** | What you want to find | "Find the most stable adsorption site" |
 
-### 3. Click "▶️ Run"
+### 3. Click "Run"
 
-The agent will:
-
-1. Parse your adsorbate and surface structure file
-2. Propose an adsorption configuration based on chemical reasoning
-3. Populate the adsorbate onto the surface using AutoAdsorbate
-4. Run relaxation simulation with MACE
-5. Analyze results and iterate if needed
-6. Report the best configuration found
-
-## Example: CO₂ on Copper
-
-**Inputs:**
-
-- SMILES: `O=C=O`
-- Slab: `datasets/samples/cu_slab_211.xyz` (included in repo)
-- Query: "Find the most stable binding configuration for CO2"
-
-**What happens:**
-
-1. Agent analyzes surface structure and identifies binding site types
-2. Proposes a binding configuration based on chemical reasoning
-3. Runs MACE relaxation to test stability
-4. Analyzes results — if unstable, proposes a different configuration
-5. Iterates until finding a stable configuration
-6. Reports findings with structural analysis
+The agent will parse the adsorbate and slab, propose adsorption configurations,
+run MACE relaxations, analyze the results, and iterate until it reports the best
+configuration found.
 
 ## Supported File Formats
 
@@ -138,15 +106,3 @@ The agent will:
 | PDB | `.pdb` | Protein Data Bank format |
 | SDF/MOL | `.sdf`, `.mol` | MDL Molfile format |
 | POSCAR | `.poscar`, `.vasp` | VASP structure format |
-
-## Tips
-
-- **Start simple**: Use small molecules like CO2, H2O, or CH4
-- **Be specific**: Clear queries get better results
-- **Check status**: The agent shows its reasoning in real-time
-- **Use Clear button**: Reset conversation and all settings between experiments
-
-## Next Steps
-
-- [LLM Backend Configuration](llm_backends.md) - Advanced LLM settings
-- [Calculator Backends](calculator_backends.md) - MACE and other calculators

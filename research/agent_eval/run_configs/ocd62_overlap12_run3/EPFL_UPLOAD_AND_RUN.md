@@ -28,9 +28,18 @@ rsync -av \
 ```bash
 cd /data/zongmin/workspace/AdsMind
 export PYTHONPATH="$PWD:${PYTHONPATH:-}"
+export OPENAI_API_KEY_FILE=/path/to/openai.key
+export ANTHROPIC_API_KEY_FILE=/path/to/anthropic.key
+export OPENROUTER_API_KEY_PRIMARY_FILE=/path/to/openrouter-primary.key
+export OPENROUTER_API_KEY_SECONDARY_FILE=/path/to/openrouter-secondary.key
 tmux new -s ocd62-run3
 research/agent_eval/run_configs/ocd62_overlap12_run3/run_ocd62_overlap12_run3_failover.sh
 ```
+
+Use the official OpenAI key for GPT and the official Anthropic key for Claude.
+Use OpenRouter for Gemini and Grok; the launcher switches from the primary
+OpenRouter key to the secondary key only when the primary route fails with an
+auth/quota/payment/rate-limit style error.
 
 ## Monitor
 
@@ -43,18 +52,18 @@ tail -f research/agent_eval/run_configs/ocd62_overlap12_run3/logs/*.log
 Expected completed outputs:
 
 ```text
-research/results/advanced_experiments/reproducibility/ocd62_overlap12/run3/openai_gpt54_mace_mp0_small/
-research/results/advanced_experiments/reproducibility/ocd62_overlap12/run3/anthropic_claude_sonnet46_mace_mp0_small/
-research/results/advanced_experiments/reproducibility/ocd62_overlap12/run3/openrouter_gemini25pro_mace_mp0_small/
-research/results/advanced_experiments/reproducibility/ocd62_overlap12/run3/openrouter_xai_grok4_mace_mp0_small/
+research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/openai_gpt54_mace_mp0_small/
+research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/anthropic_claude_sonnet46_mace_mp0_small/
+research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/openrouter_gemini25pro_mace_mp0_small/
+research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/openrouter_grok4_mace_mp0_small/
 ```
 
 ## Pull Results Back
 
 ```bash
 rsync -av \
-  LIACPC12:/data/zongmin/workspace/AdsMind/research/results/advanced_experiments/reproducibility/ocd62_overlap12/run3/ \
-  research/results/advanced_experiments/reproducibility/ocd62_overlap12/run3/
+  LIACPC12:/data/zongmin/workspace/AdsMind/research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/ \
+  research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/
 ```
 
 Then locally:

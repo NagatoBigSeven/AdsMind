@@ -39,7 +39,7 @@ class TestEntrypoints(unittest.TestCase):
             patch("adsmind.agent.agent.parse_args", return_value=args),
             patch("adsmind.agent.agent.get_agent_executor", return_value=FakeExecutor()),
             patch("adsmind.agent.agent.os.path.exists", return_value=True),
-            patch("adsmind.utils.config.get_llm_backend_name", return_value="google"),
+            patch("adsmind.utils.config.get_llm_backend_name", return_value="openrouter"),
             patch(
                 "adsmind.utils.config.get_api_key_for_backend",
                 return_value=("dummy-key", "env"),
@@ -106,9 +106,9 @@ class TestEntrypoints(unittest.TestCase):
         report = {
             "python_version": "3.11.0",
             "platform": "test-platform",
-            "configured_llm_backend": "google",
+            "configured_llm_backend": "openrouter",
             "configured_calculator_backend": "mace",
-            "available_llm_backends": ["google"],
+            "available_llm_backends": ["openrouter"],
             "available_calculator_backends": ["mace"],
             "agent_graph_compiles": True,
         }

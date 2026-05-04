@@ -20,22 +20,22 @@ DATA = ROOT / "data"
 OUT = ROOT / "output"
 
 BACKEND_ORDER = [
-    "google_vertexai_gemini25pro_mace_mp0_small",
+    "openrouter_gemini25pro_mace_mp0_small",
     "openai_gpt54_mace_mp0_small",
     "anthropic_claude_sonnet46_mace_mp0_small",
-    "xai_grok4_0709_mace_mp0_small",
+    "openrouter_grok4_mace_mp0_small",
 ]
 BACKEND_LABEL = {
-    "google_vertexai_gemini25pro_mace_mp0_small": "Gemini 2.5 Pro",
+    "openrouter_gemini25pro_mace_mp0_small": "Gemini 2.5 Pro",
     "openai_gpt54_mace_mp0_small": "GPT-5.4",
     "anthropic_claude_sonnet46_mace_mp0_small": "Claude Sonnet 4.6",
-    "xai_grok4_0709_mace_mp0_small": "Grok-4",
+    "openrouter_grok4_mace_mp0_small": "Grok-4",
 }
 BACKEND_COLOR = {
-    "google_vertexai_gemini25pro_mace_mp0_small": "#7EA6E0",
+    "openrouter_gemini25pro_mace_mp0_small": "#7EA6E0",
     "openai_gpt54_mace_mp0_small": "#F28B82",
     "anthropic_claude_sonnet46_mace_mp0_small": "#F9C80E",
-    "xai_grok4_0709_mace_mp0_small": "#45B97C",
+    "openrouter_grok4_mace_mp0_small": "#45B97C",
 }
 VARIANT_ORDER = ["single_shot", "no_slip", "no_forbid", "no_termination"]
 VARIANT_LABEL = {

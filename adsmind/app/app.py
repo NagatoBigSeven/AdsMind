@@ -45,54 +45,40 @@ st.sidebar.header("🤖 LLM Backend")
 
 # Available backends with descriptions
 LLM_BACKENDS = [
-    "google",
-    "google_vertexai",
+    "openai",
     "anthropic",
-    "xai",
     "openrouter",
     "ollama",
     "huggingface",
 ]
 LLM_BACKEND_LABELS = {
-    "google": "Google AI (Gemini)",
-    "google_vertexai": "Google Vertex AI (Gemini)",
+    "openai": "OpenAI (GPT)",
     "anthropic": "Anthropic (Claude)",
-    "xai": "xAI (Grok)",
-    "openrouter": "OpenRouter (Multi-provider)",
+    "openrouter": "OpenRouter (Gemini/Grok)",
     "ollama": "Ollama (Local)",
     "huggingface": "HuggingFace (Local)",
 }
 LLM_BACKEND_DESCRIPTIONS = {
-    "google": "Direct access to Google's Gemini models. Low latency, recommended.",
-    "google_vertexai": "Gemini through Vertex AI using Google Application Default Credentials.",
+    "openai": "Official OpenAI endpoint for GPT models.",
     "anthropic": "Direct access to Anthropic Claude models through Anthropic's API.",
-    "xai": "Direct access to xAI Grok models through xAI's API.",
-    "openrouter": "Access multiple providers (GPT-4, Claude, Gemini) through one API.",
+    "openrouter": "OpenRouter endpoint for Gemini and Grok models.",
     "ollama": "Run models locally. Free, private, no internet required.",
     "huggingface": "Load HuggingFace models locally. Full customization.",
 }
 
 LLM_BACKEND_KEY_HELP = {
-    "google": "Google AI Studio",
+    "openai": "OpenAI Platform",
     "anthropic": "Anthropic Console",
-    "xai": "xAI Console",
     "openrouter": "openrouter.ai",
 }
 
 # Default models for each backend
 DEFAULT_MODELS = {
-    "google": ["gemini-2.5-pro", "gemini-2.5-flash", "gemini-2.5-flash-lite"],
-    "google_vertexai": [
-        "gemini-2.5-pro",
-        "gemini-2.5-flash",
-        "gemini-2.5-flash-lite",
-    ],
+    "openai": ["gpt-5.4-2026-03-05"],
     "anthropic": ["claude-sonnet-4-6", "claude-opus-4-6"],
-    "xai": ["grok-4-0709"],
     "openrouter": [
-        "google/gemini-3-pro-preview",
-        "openai/gpt-5.2-pro",
-        "anthropic/claude-opus-4.5",
+        "google/gemini-2.5-pro",
+        "x-ai/grok-4",
     ],
     "ollama": [],  # Will be populated dynamically
     "huggingface": ["Qwen/Qwen3-8B"],
@@ -170,7 +156,7 @@ if is_cloud_backend(selected_backend):
     # Model selection for cloud backends
     st.sidebar.subheader("📦 Model")
     model_options = DEFAULT_MODELS.get(selected_backend, [])
-    if selected_backend in ("anthropic", "xai", "openrouter"):
+    if selected_backend in ("openai", "anthropic", "openrouter"):
         # Allow custom model input for hosted backends that expose model ids directly.
         use_custom_model = st.sidebar.checkbox(
             "Use custom model", key="custom_model_toggle"
@@ -187,31 +173,9 @@ if is_cloud_backend(selected_backend):
         selected_model = st.sidebar.selectbox("Select Model", model_options)
 
 else:
-    # Backends that do not use provider API keys in the app.
-    if selected_backend == "google_vertexai":
-        st.sidebar.info(
-            "Google Vertex AI uses Application Default Credentials from your environment."
-        )
-        st.sidebar.subheader("📦 Model")
-        selected_model = st.sidebar.selectbox(
-            "Select Model", DEFAULT_MODELS["google_vertexai"]
-        )
-        vertex_project = st.sidebar.text_input(
-            "Google Cloud Project",
-            value=os.environ.get("GOOGLE_CLOUD_PROJECT", ""),
-            help="Optional. Leave blank to use the project from ADC or gcloud.",
-        )
-        vertex_location = st.sidebar.text_input(
-            "Vertex AI Location",
-            value=os.environ.get(
-                "GOOGLE_CLOUD_LOCATION",
-                os.environ.get("VERTEXAI_LOCATION", "us-central1"),
-            ),
-        )
-    else:
-        st.sidebar.info(
-            f"🏠 {LLM_BACKEND_LABELS[selected_backend]} - No API key required"
-        )
+    st.sidebar.info(
+        f"🏠 {LLM_BACKEND_LABELS[selected_backend]} - No API key required"
+    )
 
     # Ollama-specific configuration
     if selected_backend == "ollama":
@@ -331,11 +295,6 @@ llm_config = {
     "temperature": temperature,
     "max_tokens": max_tokens,
 }
-if selected_backend == "google_vertexai":
-    if "vertex_project" in locals() and vertex_project:
-        llm_config["project"] = vertex_project
-    if "vertex_location" in locals() and vertex_location:
-        llm_config["location"] = vertex_location
 # Add HuggingFace-specific options
 if hf_quantize and hf_quantize != "none":
     llm_config["quantize"] = hf_quantize
@@ -487,8 +446,7 @@ st.sidebar.markdown("---")
 with st.sidebar.expander("ℹ️ Quick Start Guide"):
     st.markdown("""
     **1. Select LLM Backend**
-    - API key: Google AI, Anthropic, xAI, or OpenRouter
-    - Google ADC: Vertex AI
+    - API key: OpenAI, Anthropic, or OpenRouter
     - Local: Ollama or HuggingFace
     
     **2. Enter Inputs**

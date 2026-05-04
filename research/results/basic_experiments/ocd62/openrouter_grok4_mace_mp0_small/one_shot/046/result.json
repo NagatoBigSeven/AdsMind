@@ -1,0 +1,216 @@
+{
+  "case_id": "046",
+  "case_metadata": {
+    "case_id": "046",
+    "slab_file": "datasets/ocd62/046_ocd_677_Au36Ga36_N_O.xyz",
+    "smiles": "[N]=O",
+    "user_request": "Find the lowest-energy adsorption configuration for the adsorbate with SMILES [N]=O on the provided surface.",
+    "surface_family": "intermetallic",
+    "adsorbate_name": "[N]=O",
+    "miller_index": "",
+    "reaction_class": "GENERALIZATION",
+    "ablation_candidate": "FALSE",
+    "notes": "OCD id=677; adsorbate=[N]=O; surface_formula=Au36Ga36; y_relaxed=1.885671 eV; site=6;30;34",
+    "surface_formula": "Au36Ga36",
+    "surface_elements": "Au;Ga",
+    "bare_slab_atoms": "72",
+    "adsorbate_atoms": "2",
+    "y_relaxed": "1.885671",
+    "site_indices": "6;30;34"
+  },
+  "status": "success",
+  "best_energy_eV": -3.8581466674804688,
+  "iteration_count": 1,
+  "max_attempts": 1,
+  "final_site_type": "hollow (HCP/Subsurf-Atom)",
+  "converged_tag": false,
+  "wall_clock_sec": 426.55184487998486,
+  "total_input_tokens": 4959,
+  "total_output_tokens": 1292,
+  "artifact_paths": {
+    "BEST_N_O_ontop_to_hollow_HCP-Subsurf-Atom_E-3.858": "research/results/basic_experiments/ocd62/openrouter_grok4_mace_mp0_small/one_shot/046/artifacts/BEST_N_O_ontop_to_hollow_HCP-Subsurf-Atom_E-3.858.xyz",
+    "BEST_N_O_ontop_to_hollow_HCP-Subsurf-Atom_E-3.858.xyz": "research/results/basic_experiments/ocd62/openrouter_grok4_mace_mp0_small/one_shot/046/artifacts/BEST_N_O_ontop_to_hollow_HCP-Subsurf-Atom_E-3.858.xyz",
+    "best_structure_file": "research/results/basic_experiments/ocd62/openrouter_grok4_mace_mp0_small/one_shot/046/artifacts/BEST_N_O_ontop_to_hollow_HCP-Subsurf-Atom_E-3.858.xyz",
+    "conformers_[N]_O": "research/results/basic_experiments/ocd62/openrouter_grok4_mace_mp0_small/one_shot/046/artifacts/conformers_[N]_O.traj",
+    "conformers_[N]_O.traj": "research/results/basic_experiments/ocd62/openrouter_grok4_mace_mp0_small/one_shot/046/artifacts/conformers_[N]_O.traj",
+    "final": "research/results/basic_experiments/ocd62/openrouter_grok4_mace_mp0_small/one_shot/046/artifacts/final.xyz",
+    "final.xyz": "research/results/basic_experiments/ocd62/openrouter_grok4_mace_mp0_small/one_shot/046/artifacts/final.xyz",
+    "relaxation": "research/results/basic_experiments/ocd62/openrouter_grok4_mace_mp0_small/one_shot/046/artifacts/relaxation.traj",
+    "relaxation.traj": "research/results/basic_experiments/ocd62/openrouter_grok4_mace_mp0_small/one_shot/046/artifacts/relaxation.traj",
+    "relaxation_trajectory_file": "research/results/basic_experiments/ocd62/openrouter_grok4_mace_mp0_small/one_shot/046/artifacts/relaxation.traj"
+  },
+  "best_result": {
+    "most_stable_energy_eV": -3.8581466674804688,
+    "analysis_json": {
+      "status": "success",
+      "message": "Most stable config adsorption energy: -3.8581 eV. Target Atom: N (from plan index 0, global index 72 in relaxed structure). -> Nearest: Ga (Index 6), Distance: 1.907 Å (Threshold: 2.798), Bound: True. Bonded Surface Atoms: Ga-1.907Å, Ga-2.02Å, Ga-2.043Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Ga'] -> Actual ['Ga', 'Ga', 'Ga']).",
+      "most_stable_energy_eV": -3.8581466674804688,
+      "target_adsorbate_atom": "N",
+      "target_adsorbate_atom_index": 72,
+      "bonded_surface_atoms": [
+        {
+          "symbol": "Ga",
+          "index": 6,
+          "distance": 1.907
+        },
+        {
+          "symbol": "Ga",
+          "index": 34,
+          "distance": 2.02
+        },
+        {
+          "symbol": "Ga",
+          "index": 30,
+          "distance": 2.043
+        }
+      ],
+      "nearest_slab_atom": "Ga",
+      "nearest_slab_atom_index": 6,
+      "final_bond_distance_A": 1.907,
+      "estimated_covalent_cutoff_A": 2.123,
+      "is_covalently_bound": true,
+      "reaction_detected": false,
+      "is_dissociated": false,
+      "n_components": 1,
+      "bond_change_count": 0,
+      "site_analysis": {
+        "planned_site_type": "ontop",
+        "planned_connectivity": 1,
+        "actual_site_type": "hollow (HCP/Subsurf-Atom)",
+        "actual_connectivity": 3,
+        "is_chemical_slip": true,
+        "planned_symbols": [
+          "Ga"
+        ],
+        "actual_symbols": [
+          "Ga",
+          "Ga",
+          "Ga"
+        ],
+        "site_fingerprint": "Ga6-Ga34-Ga30"
+      },
+      "best_structure_file": "outputs/021-2c6e0a77/BEST_N_O_ontop_to_hollow_HCP-Subsurf-Atom_E-3.858.xyz",
+      "generated_conformers_file": "outputs/021-2c6e0a77/conformers_[N]_O.traj",
+      "relaxation_trajectory_file": "outputs/021-2c6e0a77/final.xyz",
+      "session_id": "021-2c6e0a77"
+    },
+    "plan": {
+      "reasoning": "SMILES consistency check: The SMILES is [N]=O, representing NO with N at index 0 (SP2, radical_electrons 1) and O at index 1 (SP2, no radical). No mismatch with user request. No hybridization issues as no saturated alkyl is requested. History is none, so this is the initial plan. Analyze adsorbate: NO is a stable diatomic molecule with a radical on N, but treated as 'Molecule' for adsorption via donor atoms. Major functional group is the N=O bond. Surface analysis: Alloy surface with Au and Ga atoms, available ontop sites on Au and Ga. Formulate plan: Start with the most common adsorption mode for NO, which is end-on via N at an ontop site. Choose ontop Ga as Ga may be more reactive than Au in this alloy, potentially leading to stronger binding. Bind via N (index 0), as it is the typical binding atom. Use 'Molecule' type since NO is a complete stable molecule. This is a new plan distinct from history (none). Defaults for other parameters.",
+      "adsorbate_type": "Molecule",
+      "solution": {
+        "action": "continue",
+        "site_type": "ontop",
+        "surface_binding_atoms": [
+          "Ga"
+        ],
+        "adsorbate_binding_indices": [
+          0
+        ],
+        "relax_top_n": 1,
+        "touch_sphere_size": 2,
+        "overlap_thr": 0.1,
+        "conformers_per_site_cap": 4
+      }
+    },
+    "result_type": "Perfect"
+  },
+  "last_analysis": {
+    "status": "success",
+    "message": "Most stable config adsorption energy: -3.8581 eV. Target Atom: N (from plan index 0, global index 72 in relaxed structure). -> Nearest: Ga (Index 6), Distance: 1.907 Å (Threshold: 2.798), Bound: True. Bonded Surface Atoms: Ga-1.907Å, Ga-2.02Å, Ga-2.043Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Ga'] -> Actual ['Ga', 'Ga', 'Ga']).",
+    "most_stable_energy_eV": -3.8581466674804688,
+    "target_adsorbate_atom": "N",
+    "target_adsorbate_atom_index": 72,
+    "bonded_surface_atoms": [
+      {
+        "symbol": "Ga",
+        "index": 6,
+        "distance": 1.907
+      },
+      {
+        "symbol": "Ga",
+        "index": 34,
+        "distance": 2.02
+      },
+      {
+        "symbol": "Ga",
+        "index": 30,
+        "distance": 2.043
+      }
+    ],
+    "nearest_slab_atom": "Ga",
+    "nearest_slab_atom_index": 6,
+    "final_bond_distance_A": 1.907,
+    "estimated_covalent_cutoff_A": 2.123,
+    "is_covalently_bound": true,
+    "reaction_detected": false,
+    "is_dissociated": false,
+    "n_components": 1,
+    "bond_change_count": 0,
+    "site_analysis": {
+      "planned_site_type": "ontop",
+      "planned_connectivity": 1,
+      "actual_site_type": "hollow (HCP/Subsurf-Atom)",
+      "actual_connectivity": 3,
+      "is_chemical_slip": true,
+      "planned_symbols": [
+        "Ga"
+      ],
+      "actual_symbols": [
+        "Ga",
+        "Ga",
+        "Ga"
+      ],
+      "site_fingerprint": "Ga6-Ga34-Ga30"
+    },
+    "best_structure_file": "outputs/021-2c6e0a77/BEST_N_O_ontop_to_hollow_HCP-Subsurf-Atom_E-3.858.xyz",
+    "generated_conformers_file": "outputs/021-2c6e0a77/conformers_[N]_O.traj",
+    "relaxation_trajectory_file": "outputs/021-2c6e0a77/final.xyz",
+    "session_id": "021-2c6e0a77"
+  },
+  "attempt_records": [
+    {
+      "attempt_index": 1,
+      "plan": {
+        "reasoning": "SMILES consistency check: The SMILES is [N]=O, representing NO with N at index 0 (SP2, radical_electrons 1) and O at index 1 (SP2, no radical). No mismatch with user request. No hybridization issues as no saturated alkyl is requested. History is none, so this is the initial plan. Analyze adsorbate: NO is a stable diatomic molecule with a radical on N, but treated as 'Molecule' for adsorption via donor atoms. Major functional group is the N=O bond. Surface analysis: Alloy surface with Au and Ga atoms, available ontop sites on Au and Ga. Formulate plan: Start with the most common adsorption mode for NO, which is end-on via N at an ontop site. Choose ontop Ga as Ga may be more reactive than Au in this alloy, potentially leading to stronger binding. Bind via N (index 0), as it is the typical binding atom. Use 'Molecule' type since NO is a complete stable molecule. This is a new plan distinct from history (none). Defaults for other parameters.",
+        "adsorbate_type": "Molecule",
+        "solution": {
+          "action": "continue",
+          "site_type": "ontop",
+          "surface_binding_atoms": [
+            "Ga"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "ontop|Ga|0|Molecule|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -3.8581466674804688,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": true,
+      "planned_site_type": "ontop",
+      "actual_site_type": "hollow (HCP/Subsurf-Atom)",
+      "best_structure_file": "outputs/021-2c6e0a77/BEST_N_O_ontop_to_hollow_HCP-Subsurf-Atom_E-3.858.xyz",
+      "generated_conformers_file": "outputs/021-2c6e0a77/conformers_[N]_O.traj",
+      "relaxation_trajectory_file": "outputs/021-2c6e0a77/final.xyz",
+      "message": "Most stable config adsorption energy: -3.8581 eV. Target Atom: N (from plan index 0, global index 72 in relaxed structure). -> Nearest: Ga (Index 6), Distance: 1.907 Å (Threshold: 2.798), Bound: True. Bonded Surface Atoms: Ga-1.907Å, Ga-2.02Å, Ga-2.043Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Ga'] -> Actual ['Ga', 'Ga', 'Ga']).",
+      "history_entry": "【✅ Perfect Adsorption】 ontop @ ['Ga'] (Index [0]) -> ⚠️【Unstable Site Warning】⚠️: Planned ontop (Ga) is unstable, adsorbate spontaneously slipped to hollow (HCP/Subsurf-Atom) (Ga-Ga-Ga).This means Ga has insufficient affinity for this adsorbate. Please **FORBID** testing Ga type sites again! [🌟 New Best] | E=-3.858 eV"
+    }
+  ],
+  "history": [
+    "【✅ Perfect Adsorption】 ontop @ ['Ga'] (Index [0]) -> ⚠️【Unstable Site Warning】⚠️: Planned ontop (Ga) is unstable, adsorbate spontaneously slipped to hollow (HCP/Subsurf-Atom) (Ga-Ga-Ga).This means Ga has insufficient affinity for this adsorbate. Please **FORBID** testing Ga type sites again! [🌟 New Best] | E=-3.858 eV"
+  ],
+  "error": null,
+  "perfect_count": 1,
+  "dissociation_count": 0,
+  "rearrangement_count": 0,
+  "calc_failure_count": 0,
+  "chemical_slip_count": 1,
+  "best_structure_file": "research/results/basic_experiments/ocd62/openrouter_grok4_mace_mp0_small/one_shot/046/artifacts/BEST_N_O_ontop_to_hollow_HCP-Subsurf-Atom_E-3.858.xyz"
+}

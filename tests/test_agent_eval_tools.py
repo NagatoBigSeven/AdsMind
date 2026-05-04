@@ -25,7 +25,7 @@ from research.agent_eval.summarize_runs import main as summarize_main
 
 
 ROOT = Path(__file__).resolve().parents[1]
-MANIFEST = ROOT / "research/agent_eval/manifests/cmu_manifest.csv"
+MANIFEST = ROOT / "datasets/cmu20/cmu20_manifest.csv"
 CONFIG = ROOT / "research/agent_eval/configs/frozen_config.json"
 
 
@@ -36,7 +36,7 @@ class TestAgentEvalTools(unittest.TestCase):
         manifest = load_manifest(MANIFEST)
         config = load_frozen_config(CONFIG)
         self.assertEqual(len(manifest), 20)
-        self.assertEqual(config["llm_model"], "gemini-2.5-pro")
+        self.assertEqual(config["llm_model"], "google/gemini-2.5-pro")
         self.assertEqual(config["mace_model"], "small")
 
     def test_resolve_runtime_flags_drops_none_relaxation_values(self):
@@ -162,7 +162,7 @@ class TestAgentEvalTools(unittest.TestCase):
                 code = run_batch_main(
                     [
                         "--manifest",
-                        "research/agent_eval/manifests/cmu_manifest.csv",
+                        "datasets/cmu20/cmu20_manifest.csv",
                         "--config",
                         "research/agent_eval/configs/frozen_config.json",
                         "--output",

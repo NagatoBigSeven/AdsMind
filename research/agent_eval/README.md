@@ -8,9 +8,12 @@ research infrastructure, not a logbook of local runs.
 
 - `datasets/cmu20/cmu20_manifest.csv`: CMU20 benchmark case definitions.
 - `datasets/ocd62/ocd62_manifest.csv`: OCD62 benchmark case definitions.
-- `datasets/ocd62_overlap12/overlap12_manifest.csv`: overlap12 reproducibility input.
+- `datasets/ocd62_overlap12/ocd62_overlap12_manifest.csv`: overlap12 reproducibility input.
 - `configs/frozen_config*.json`: backend-specific locked experiment configs.
   See `configs/README.md`.
+
+There is no separate `research/agent_eval/manifests/` mirror. Dataset manifests
+are kept only under `datasets/` to avoid competing source-of-truth files.
 
 ## Script Map
 
@@ -20,6 +23,7 @@ The recommended entrypoints are grouped by role.
 |---|---|---|---|
 | Shared code | `common.py` | Core library | Manifest/config parsing, run payloads, statistics helpers. |
 | Shared code | `baseline_utils.py` | Core library | Utilities used by random and heuristic non-LLM baselines. |
+| Shared code | `experiment_identity.py` | Core library | Stable backend/path/provenance labels. |
 | Run AdsMind | `run_case.py` | Core CLI | Run one case with one frozen config. |
 | Run AdsMind | `run_batch.py` | Core CLI | Run a manifest sequentially with one frozen config. |
 | Run AdsMind | `run_ablation.py` | Core CLI | Run full / w/o Slip / w/o Forbid / w/o Term / 1-Shot ablations. |
@@ -40,16 +44,22 @@ The recommended entrypoints are grouped by role.
 | Narrow comparison | `compare_two_backend_ablation.py` | Auxiliary CLI | Compare exactly two backend ablation tables; not the main 4-backend analysis. |
 
 Retired compatibility wrappers with old names were removed. Use the script
-names in the table above for new runs.
+names in the table above for new runs. The old OCD-GMAE manifest-preparation
+scripts were also removed; the curated OCD62 inputs now live in `datasets/ocd62/`
+and `datasets/ocd62_overlap12/`.
 
 ## Core Commands
+
+Paper-facing remote run configs:
+
+- `run_configs/ocd62_overlap12_run3/`: third reproducibility run on the 12 OCD62 overlap cases.
 
 Run a manifest sequentially:
 
 ```bash
 python -m research.agent_eval.run_batch \
   --manifest datasets/cmu20/cmu20_manifest.csv \
-  --config research/agent_eval/configs/frozen_config_gemini25pro_vertexai_one_shot.json \
+  --config research/agent_eval/configs/frozen_config_gemini25pro_openrouter_one_shot.json \
   --output research/results/example_cmu20_gemini_one_shot
 ```
 
@@ -58,7 +68,7 @@ Run an ablation matrix:
 ```bash
 python -m research.agent_eval.run_ablation \
   --manifest datasets/cmu20/cmu20_manifest.csv \
-  --config research/agent_eval/configs/frozen_config_gemini25pro_vertexai.json \
+  --config research/agent_eval/configs/frozen_config_gemini25pro_openrouter.json \
   --output research/results/example_gemini_ablation \
   --cases 01,02,09,14,19 \
   --variants full,no_slip,no_forbid,no_termination,one_shot
@@ -83,8 +93,8 @@ Aggregate a 4-backend ablation table:
 python -m research.agent_eval.aggregate_ablation_across_backends \
   --summary openai_gpt54_mace_mp0_small=research/results/basic_experiments/cmu20/openai_gpt54_mace_mp0_small/all_variants_summary.csv \
   --summary anthropic_claude_sonnet46_mace_mp0_small=research/results/basic_experiments/cmu20/anthropic_claude_sonnet46_mace_mp0_small/all_variants_summary.csv \
-  --summary google_vertexai_gemini25pro_mace_mp0_small=research/results/basic_experiments/cmu20/google_vertexai_gemini25pro_mace_mp0_small/all_variants_summary.csv \
-  --summary xai_grok4_0709_mace_mp0_small=research/results/basic_experiments/cmu20/xai_grok4_0709_mace_mp0_small/all_variants_summary.csv \
+  --summary openrouter_gemini25pro_mace_mp0_small=research/results/basic_experiments/cmu20/openrouter_gemini25pro_mace_mp0_small/all_variants_summary.csv \
+  --summary openrouter_grok4_mace_mp0_small=research/results/basic_experiments/cmu20/openrouter_grok4_mace_mp0_small/all_variants_summary.csv \
   --output-csv research/results/basic_experiments/cmu20/summaries/ablation_4backend.csv \
   --output-json research/results/basic_experiments/cmu20/summaries/ablation_4backend.json
 ```

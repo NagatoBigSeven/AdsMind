@@ -5,10 +5,9 @@ This module provides a factory pattern for LLM backends, allowing easy switching
 between different LLM providers (cloud and local).
 
 Supported backends:
-- google: Google AI (Gemini) - Default, direct access
+- openai: OpenAI GPT API - Direct access via official endpoint
 - anthropic: Anthropic Claude API - Direct access via official compatibility endpoint
-- xai: xAI Grok API - Direct access via official OpenAI-compatible endpoint
-- openrouter: OpenRouter API - Access to multiple models via unified API
+- openrouter: OpenRouter API - Gemini and Grok model access for paper runs
 - ollama: Ollama local service - Privacy-focused, no API cost
 - huggingface: HuggingFace Transformers - Offline, customizable
 
@@ -16,8 +15,8 @@ Usage:
     from adsmind.llms import get_llm_backend, get_available_llm_backends
 
     # Get a specific backend
-    backend = get_llm_backend("google")
-    config = backend.get_default_config(api_key="your-google-api-key")
+    backend = get_llm_backend("openrouter")
+    config = backend.get_default_config(api_key="your-openrouter-api-key")
     llm = backend.get_chat_model(config)
 
     # List available backends

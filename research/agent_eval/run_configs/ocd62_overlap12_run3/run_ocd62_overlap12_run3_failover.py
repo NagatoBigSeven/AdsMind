@@ -101,13 +101,19 @@ def delete_key_file(name: str) -> None:
         pass
 
 
-def load_runtime_keys() -> dict[str, str]:
-    keys = {
-        "OPENROUTER_API_KEY_PRIMARY": read_key("OPENROUTER_API_KEY_PRIMARY"),
-        "OPENROUTER_API_KEY_SECONDARY": read_key("OPENROUTER_API_KEY_SECONDARY"),
-        "OPENAI_API_KEY": read_key("OPENAI_API_KEY"),
-        "ANTHROPIC_API_KEY": read_key("ANTHROPIC_API_KEY"),
-    }
+def required_key_names(backends: tuple[str, ...]) -> tuple[str, ...]:
+    names: list[str] = []
+    if any(backend in OPENROUTER_BACKENDS for backend in backends):
+        names.extend(["OPENROUTER_API_KEY_PRIMARY", "OPENROUTER_API_KEY_SECONDARY"])
+    if "gpt" in backends:
+        names.append("OPENAI_API_KEY")
+    if "claude" in backends:
+        names.append("ANTHROPIC_API_KEY")
+    return tuple(dict.fromkeys(names))
+
+
+def load_runtime_keys(backends: tuple[str, ...]) -> dict[str, str]:
+    keys = {name: read_key(name) for name in required_key_names(backends)}
     missing = [name for name, value in keys.items() if not value]
     if missing:
         raise SystemExit(
@@ -347,12 +353,12 @@ def parse_csv_tuple(value: str, allowed: tuple[str, ...], label: str) -> tuple[s
 
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--manifest", default="datasets/ocd62_overlap12/overlap12_manifest.csv")
+    parser.add_argument("--manifest", default="datasets/ocd62_overlap12/ocd62_overlap12_manifest.csv")
     parser.add_argument("--openrouter-config-dir", default="research/agent_eval/configs/ocd62_overlap12_run3_openrouter")
     parser.add_argument("--native-config-dir", default="research/agent_eval/configs/ocd62_overlap12_run3_native")
     parser.add_argument(
         "--output-base",
-        default="research/results/advanced_experiments/reproducibility/ocd62_overlap12/run3",
+        default="research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3",
     )
     parser.add_argument("--log-dir", default="research/agent_eval/run_configs/ocd62_overlap12_run3/logs")
     parser.add_argument("--backends", default="all")
@@ -361,8 +367,6 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--sleep-after-failure-sec", type=int, default=20)
     parser.add_argument("--max-attempts-per-key", type=int, default=1)
     args = parser.parse_args(argv)
-
-    keys = load_runtime_keys()
 
     py = os.environ.get("PY", str(ROOT / ".venv/bin/python"))
     manifest = (ROOT / args.manifest).resolve()
@@ -375,6 +379,7 @@ def main(argv: list[str] | None = None) -> int:
     backends = parse_csv_tuple(args.backends, BACKENDS, "backend")
     variants = parse_csv_tuple(args.variants, VARIANTS, "variant")
     cases = parse_csv_tuple(args.cases, CASES, "case")
+    keys = load_runtime_keys(backends)
 
     failures: list[str] = []
     for backend in backends:

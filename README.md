@@ -27,7 +27,7 @@ At the core of AdsMind is [AutoAdsorbate](https://github.com/basf/autoadsorbate)
 
 ## ✨ Features
 
-* **Multi-Backend LLM Support**: Google AI (Gemini), Vertex AI, Anthropic Claude, xAI Grok, OpenRouter, Ollama, HuggingFace
+* **Multi-Backend LLM Support**: OpenAI GPT, Anthropic Claude, OpenRouter Gemini/Grok, Ollama, HuggingFace
 * **Multiple Structure Formats**: XYZ, CIF, PDB, SDF, MOL, POSCAR/VASP
 * **Interactive UI**: Streamlit-based interface with real-time agent feedback
 * **Local & Cloud Options**: Use cloud APIs or run completely offline with Ollama/HuggingFace
@@ -38,8 +38,8 @@ At the core of AdsMind is [AutoAdsorbate](https://github.com/basf/autoadsorbate)
 # Install from PyPI
 python -m pip install adsmind
 
-# Set API key (Google AI is default)
-export GOOGLE_API_KEY="your-google-api-key"
+# Set API key (OpenRouter is default)
+export OPENROUTER_API_KEY="your-openrouter-api-key"
 
 # Run the packaged app
 adsmind-ui
@@ -83,18 +83,16 @@ pipeline and concept figures live in `assets/`.
 
 | Backend | Type | API Key | Best For |
 |---------|------|---------|----------|
-| **Google AI** | Cloud | `GOOGLE_API_KEY` | Production (default) |
-| **Vertex AI** | Cloud | Google ADC | Enterprise Gemini deployments |
+| **OpenAI** | Cloud | `OPENAI_API_KEY` | GPT models through OpenAI's official endpoint |
 | **Anthropic** | Cloud | `ANTHROPIC_API_KEY` | Claude models |
-| **xAI** | Cloud | `XAI_API_KEY` | Grok models |
-| **OpenRouter** | Cloud | `OPENROUTER_API_KEY` | Multi-model access |
+| **OpenRouter** | Cloud | `OPENROUTER_API_KEY` | Gemini and Grok models for the paper benchmark |
 | **Ollama** | Local | Not needed | Privacy, offline |
 | **HuggingFace** | Local | Not needed | Customization |
 
 Select your backend in the app sidebar or via environment variable:
 
 ```bash
-export ADSMIND_LLM_BACKEND=google    # or google_vertexai, anthropic, xai, openrouter, ollama, huggingface
+export ADSMIND_LLM_BACKEND=openrouter    # or openai, anthropic, ollama, huggingface
 ```
 
 Legacy `ADSKRK_LLM_BACKEND` is still accepted as a fallback.
@@ -120,8 +118,8 @@ Multiple ways to provide your API key (in priority order):
 1. **Environment variable**:
 
    ```bash
-   export GOOGLE_API_KEY="your-google-api-key"
-   # or ANTHROPIC_API_KEY / XAI_API_KEY / OPENROUTER_API_KEY, depending on backend
+   export OPENROUTER_API_KEY="your-openrouter-api-key"
+   # or OPENAI_API_KEY / ANTHROPIC_API_KEY, depending on backend
    ```
 
 2. **Config file**: Use the app's "Save for future sessions" checkbox

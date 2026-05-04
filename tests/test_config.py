@@ -29,12 +29,12 @@ class TestConfigPersistence(unittest.TestCase):
                 config_module, "LEGACY_CONFIG_FILE_PATH", legacy_config_file
             ):
                 self.assertTrue(config_module.save_llm_backend("ollama"))
-                self.assertTrue(config_module.save_api_key_for_backend("google", "secret"))
+                self.assertTrue(config_module.save_api_key_for_backend("openrouter", "secret"))
 
                 loaded = config_module.load_config()
 
         self.assertEqual(loaded["llm_backend"], "ollama")
-        self.assertEqual(loaded["google_api_key"], "secret")
+        self.assertEqual(loaded["openrouter_api_key"], "secret")
 
     def test_environment_backend_takes_priority_over_file(self):
         with tempfile.TemporaryDirectory() as tmpdir:

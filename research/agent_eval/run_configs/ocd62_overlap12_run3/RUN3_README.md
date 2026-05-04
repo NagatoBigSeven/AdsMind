@@ -7,7 +7,7 @@ OCD62 cases. It is not a 62-case rerun.
 
 ## Scope
 
-- cases: 12 overlap cases from `datasets/ocd62_overlap12/overlap12_manifest.csv`
+- cases: 12 overlap cases from `datasets/ocd62_overlap12/ocd62_overlap12_manifest.csv`
 - backend keys accepted by the launcher: `gpt`, `claude`, `gemini`, `grok`
 - result directories encode the exact route/model and force field
 - variants: `full`, `no_slip`, `no_forbid`, `no_termination`, `one_shot`
@@ -16,11 +16,11 @@ OCD62 cases. It is not a 62-case rerun.
 The runner writes to:
 
 ```text
-research/results/advanced_experiments/reproducibility/ocd62_overlap12/run3/
+research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/
   openai_gpt54_mace_mp0_small/
   anthropic_claude_sonnet46_mace_mp0_small/
   openrouter_gemini25pro_mace_mp0_small/
-  openrouter_xai_grok4_mace_mp0_small/
+  openrouter_grok4_mace_mp0_small/
     full|no_slip|no_forbid|no_termination|one_shot/
 ```
 
@@ -48,9 +48,16 @@ To run one backend:
 research/agent_eval/run_configs/ocd62_overlap12_run3/run_ocd62_overlap12_run3_failover.sh --backends grok
 ```
 
-The script reads `OPENROUTER_API_KEY_PRIMARY`,
-`OPENROUTER_API_KEY_SECONDARY`, `OPENAI_API_KEY`, and `ANTHROPIC_API_KEY`, or
-their `*_FILE` variants. Keys are not stored in the repository or logs.
+The launcher uses provider-specific routes:
+
+- GPT: official OpenAI endpoint with `OPENAI_API_KEY`.
+- Claude: official Anthropic endpoint with `ANTHROPIC_API_KEY`.
+- Gemini and Grok: OpenRouter with `OPENROUTER_API_KEY_PRIMARY`; on auth,
+  quota, payment, or rate-limit failure, the launcher retries with
+  `OPENROUTER_API_KEY_SECONDARY`.
+
+All keys can also be supplied through the corresponding `*_FILE` variants. Keys
+are not stored in the repository or logs.
 
 ## Check
 
@@ -70,5 +77,5 @@ This rewrites:
 
 Expected summary outputs:
 
-- `research/results/advanced_experiments/reproducibility/ocd62_overlap12/summaries/reproducibility_n3.csv`
-- `research/results/advanced_experiments/reproducibility/ocd62_overlap12/summaries/reproducibility_n3.md`
+- `research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/summaries/reproducibility_n3.csv`
+- `research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/summaries/reproducibility_n3.md`

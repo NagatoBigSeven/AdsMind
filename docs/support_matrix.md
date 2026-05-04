@@ -25,11 +25,9 @@ validated.
 
 | Backend | Status | Validation Level |
 |--------|--------|------------------|
-| Google | Core | Config and factory tests, production default |
-| Vertex AI | Core-hosted | Factory tests; requires Google ADC on the host |
 | Anthropic | Core-hosted | Config and factory tests |
-| xAI | Core-hosted | Config and factory tests |
-| OpenRouter | Core | Config and factory tests |
+| OpenAI | Core-hosted | Config and factory tests |
+| OpenRouter | Core | Config and factory tests, production default |
 | Ollama | Core | Config and factory tests; requires local daemon |
 | HuggingFace | Experimental-local | Factory tests plus cache-key regression test; model availability depends on host stack |
 

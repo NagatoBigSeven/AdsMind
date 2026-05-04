@@ -167,24 +167,26 @@ def get_calculator_backend() -> str:
 # LLM Backend Configuration
 # ============================================================
 
-# Default LLM backend
-DEFAULT_LLM_BACKEND = "google"
+# Default LLM backend. Paper-facing Gemini and Grok runs use OpenRouter.
+DEFAULT_LLM_BACKEND = "openrouter"
 
 # Environment variable to API key mapping
 LLM_API_KEY_ENV_VARS = {
-    "google": "GOOGLE_API_KEY",
+    "openai": "OPENAI_API_KEY",
     "anthropic": "ANTHROPIC_API_KEY",
-    "xai": "XAI_API_KEY",
     "openrouter": "OPENROUTER_API_KEY",
 }
 
 # Config file key mapping
 LLM_API_KEY_CONFIG_KEYS = {
-    "google": "google_api_key",
+    "openai": "openai_api_key",
     "anthropic": "anthropic_api_key",
-    "xai": "xai_api_key",
     "openrouter": "openrouter_api_key",
 }
+
+VALID_LLM_BACKENDS = frozenset(
+    ["openai", "anthropic", "openrouter", "ollama", "huggingface"]
+)
 
 
 def get_llm_backend_name() -> str:
@@ -194,14 +196,12 @@ def get_llm_backend_name() -> str:
     Priority order:
     1. Environment variable (ADSMIND_LLM_BACKEND, legacy ADSKRK_LLM_BACKEND)
     2. Config file (~/.adsmind/config.json -> llm_backend, legacy ~/.adskrk/config.json also supported)
-    3. Default ("google")
+    3. Default ("openrouter")
     
     Available backends:
-    - "google": Google AI (Gemini) - Default
-    - "google_vertexai": Google Vertex AI Gemini through ADC
+    - "openai": OpenAI GPT API
     - "anthropic": Anthropic Claude API
-    - "xai": xAI Grok API
-    - "openrouter": OpenRouter API
+    - "openrouter": OpenRouter API for Gemini/Grok runs
     - "ollama": Local Ollama service
     - "huggingface": Local HuggingFace Transformers
     
@@ -213,13 +213,13 @@ def get_llm_backend_name() -> str:
         LLM_BACKEND_ENV_VAR,
         LEGACY_LLM_BACKEND_ENV_VAR,
     )
-    if env_backend:
+    if env_backend in VALID_LLM_BACKENDS:
         return env_backend
     
     # Check config file
     config = load_config()
     config_backend = config.get("llm_backend")
-    if config_backend:
+    if config_backend in VALID_LLM_BACKENDS:
         return config_backend
     
     return DEFAULT_LLM_BACKEND
@@ -230,12 +230,12 @@ def get_api_key_for_backend(backend: str) -> Tuple[Optional[str], ApiKeySource]:
     Get the API key for a specific LLM backend.
     
     Priority order:
-    1. Environment variable (backend-specific, e.g., GOOGLE_API_KEY)
+    1. Environment variable (backend-specific, e.g., OPENROUTER_API_KEY)
     2. Config file (~/.adsmind/config.json, legacy ~/.adskrk/config.json also supported)
     3. None (user must input)
     
     Args:
-        backend: LLM backend name ("google", "openrouter", etc.)
+        backend: LLM backend name ("openrouter", "openai", etc.)
         
     Returns:
         Tuple of (api_key, source) where source is "env", "config", or None.
@@ -264,7 +264,7 @@ def save_api_key_for_backend(backend: str, api_key: str) -> bool:
     Save the API key for a specific LLM backend to the config file.
     
     Args:
-        backend: LLM backend name ("google", "openrouter", etc.)
+        backend: LLM backend name ("openrouter", "openai", etc.)
         api_key: The API key to save.
         
     Returns:
@@ -304,4 +304,4 @@ def is_cloud_backend(backend: str) -> bool:
     Returns:
         bool: True if the backend requires an API key
     """
-    return backend in ("google", "anthropic", "xai", "openrouter")
+    return backend in ("openai", "anthropic", "openrouter")

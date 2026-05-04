@@ -1,0 +1,199 @@
+{
+  "case_id": "12",
+  "case_metadata": {
+    "case_id": "12",
+    "slab_file": "benchmark_slabs/12_Au_111.xyz",
+    "smiles": "[OH]",
+    "user_request": "Find the lowest-energy adsorption configuration for hydroxyl radical on the provided surface.",
+    "surface_family": "monometallic",
+    "adsorbate_name": "OH",
+    "miller_index": "(111)",
+    "reaction_class": "ORR",
+    "ablation_candidate": "FALSE",
+    "notes": "Prior runs labeled all final sites as desorbed"
+  },
+  "status": "success",
+  "best_energy_eV": -2.080881118774414,
+  "iteration_count": 1,
+  "max_attempts": 1,
+  "final_site_type": "bridge",
+  "converged_tag": false,
+  "wall_clock_sec": 118.53062800003681,
+  "total_input_tokens": 4918,
+  "total_output_tokens": 1471,
+  "artifact_paths": {},
+  "best_result": {
+    "most_stable_energy_eV": -2.080881118774414,
+    "analysis_json": {
+      "status": "success",
+      "message": "Most stable config adsorption energy: -2.0809 eV. Target Atom: O (from plan index 0, global index 27 in relaxed structure). -> Nearest: Au (Index 15), Distance: 2.216 Å (Threshold: 2.929), Bound: True. Bonded Surface Atoms: Au-2.216Å, Au-2.219Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: False (Planned ['Au', 'Au'] -> Actual ['Au', 'Au']).",
+      "most_stable_energy_eV": -2.080881118774414,
+      "target_adsorbate_atom": "O",
+      "target_adsorbate_atom_index": 27,
+      "bonded_surface_atoms": [
+        {
+          "symbol": "Au",
+          "index": 15,
+          "distance": 2.216
+        },
+        {
+          "symbol": "Au",
+          "index": 6,
+          "distance": 2.219
+        }
+      ],
+      "nearest_slab_atom": "Au",
+      "nearest_slab_atom_index": 15,
+      "final_bond_distance_A": 2.216,
+      "estimated_covalent_cutoff_A": 2.222,
+      "is_covalently_bound": true,
+      "reaction_detected": false,
+      "is_dissociated": false,
+      "n_components": 1,
+      "bond_change_count": 0,
+      "site_analysis": {
+        "planned_site_type": "bridge",
+        "planned_connectivity": 2,
+        "actual_site_type": "bridge",
+        "actual_connectivity": 2,
+        "is_chemical_slip": false,
+        "planned_symbols": [
+          "Au",
+          "Au"
+        ],
+        "actual_symbols": [
+          "Au",
+          "Au"
+        ],
+        "site_fingerprint": "Au15-Au6"
+      },
+      "best_structure_file": "outputs/12-b5dd778e/BEST_OH_bridge_E-2.081.xyz",
+      "generated_conformers_file": "outputs/12-b5dd778e/conformers_[OH].traj",
+      "relaxation_trajectory_file": "outputs/12-b5dd778e/final.xyz",
+      "session_id": "12-b5dd778e"
+    },
+    "plan": {
+      "reasoning": "0. SMILES Consistency Check: The provided heavy atom list shows O at index 0, SP3 hybridization, degree 0, radical_electrons 1, formal_charge 0. This matches the hydroxyl radical ([OH]), where the radical is on O. Degree 0 likely indicates no heavy atom neighbors, as H is implicit and not counted in heavy atom degree. Hybridization SP3 is consistent. No mismatch with user description. For ReactiveSpecies, the binding atom (O, index 0) has radical_electrons > 0, which is confirmed.\n1. Analyze Old Plans: History is None, so no previous attempts, successes, failures, or tags. This is the first plan. No unstable sites identified yet.\n2. Formulate New Plan: As the first attempt, propose the most promising configuration based on knowledge of heterogeneous catalysis. For hydroxyl radical (•OH) on Au(111), literature indicates preference for bridge sites, where O binds to two Au atoms. This is expected to have lower energy than ontop. Hollow will be tested later if needed. Avoid repeating plans (none exist). Since history is empty, no convergence or slips to consider. The process has a stated limit of 1 attempt, but proceed with 'continue' for this initial plan.\n3. Analyze Request: The user's intent is to find the lowest-energy adsorption configuration of the hydroxyl radical on the Au(111) surface by iteratively testing sites.\n4. Analyze Adsorbate: SMILES [OH] represents the hydroxyl radical (•OH). Major functional group: hydroxy with unpaired electron on O. Heavy atoms: O at index 0. Binding should occur through O (index 0) due to the radical location.\n5. Analyze Surface: Pure Au surface with available sites: ontop (Au), bridge (Au-Au), hollow (Au-Au-Au). All sites involve Au atoms only.\n6. Formulate Plan: Select bridge site for initial test, as it is likely the most stable for OH on Au(111). Bind via O (index 0) to two Au atoms. Use default parameters.",
+      "adsorbate_type": "ReactiveSpecies",
+      "solution": {
+        "action": "continue",
+        "site_type": "bridge",
+        "surface_binding_atoms": [
+          "Au",
+          "Au"
+        ],
+        "adsorbate_binding_indices": [
+          0
+        ],
+        "relax_top_n": 1,
+        "touch_sphere_size": 2,
+        "overlap_thr": 0.1,
+        "conformers_per_site_cap": 4
+      }
+    },
+    "result_type": "Perfect"
+  },
+  "last_analysis": {
+    "status": "success",
+    "message": "Most stable config adsorption energy: -2.0809 eV. Target Atom: O (from plan index 0, global index 27 in relaxed structure). -> Nearest: Au (Index 15), Distance: 2.216 Å (Threshold: 2.929), Bound: True. Bonded Surface Atoms: Au-2.216Å, Au-2.219Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: False (Planned ['Au', 'Au'] -> Actual ['Au', 'Au']).",
+    "most_stable_energy_eV": -2.080881118774414,
+    "target_adsorbate_atom": "O",
+    "target_adsorbate_atom_index": 27,
+    "bonded_surface_atoms": [
+      {
+        "symbol": "Au",
+        "index": 15,
+        "distance": 2.216
+      },
+      {
+        "symbol": "Au",
+        "index": 6,
+        "distance": 2.219
+      }
+    ],
+    "nearest_slab_atom": "Au",
+    "nearest_slab_atom_index": 15,
+    "final_bond_distance_A": 2.216,
+    "estimated_covalent_cutoff_A": 2.222,
+    "is_covalently_bound": true,
+    "reaction_detected": false,
+    "is_dissociated": false,
+    "n_components": 1,
+    "bond_change_count": 0,
+    "site_analysis": {
+      "planned_site_type": "bridge",
+      "planned_connectivity": 2,
+      "actual_site_type": "bridge",
+      "actual_connectivity": 2,
+      "is_chemical_slip": false,
+      "planned_symbols": [
+        "Au",
+        "Au"
+      ],
+      "actual_symbols": [
+        "Au",
+        "Au"
+      ],
+      "site_fingerprint": "Au15-Au6"
+    },
+    "best_structure_file": "outputs/12-b5dd778e/BEST_OH_bridge_E-2.081.xyz",
+    "generated_conformers_file": "outputs/12-b5dd778e/conformers_[OH].traj",
+    "relaxation_trajectory_file": "outputs/12-b5dd778e/final.xyz",
+    "session_id": "12-b5dd778e"
+  },
+  "attempt_records": [
+    {
+      "attempt_index": 1,
+      "plan": {
+        "reasoning": "0. SMILES Consistency Check: The provided heavy atom list shows O at index 0, SP3 hybridization, degree 0, radical_electrons 1, formal_charge 0. This matches the hydroxyl radical ([OH]), where the radical is on O. Degree 0 likely indicates no heavy atom neighbors, as H is implicit and not counted in heavy atom degree. Hybridization SP3 is consistent. No mismatch with user description. For ReactiveSpecies, the binding atom (O, index 0) has radical_electrons > 0, which is confirmed.\n1. Analyze Old Plans: History is None, so no previous attempts, successes, failures, or tags. This is the first plan. No unstable sites identified yet.\n2. Formulate New Plan: As the first attempt, propose the most promising configuration based on knowledge of heterogeneous catalysis. For hydroxyl radical (•OH) on Au(111), literature indicates preference for bridge sites, where O binds to two Au atoms. This is expected to have lower energy than ontop. Hollow will be tested later if needed. Avoid repeating plans (none exist). Since history is empty, no convergence or slips to consider. The process has a stated limit of 1 attempt, but proceed with 'continue' for this initial plan.\n3. Analyze Request: The user's intent is to find the lowest-energy adsorption configuration of the hydroxyl radical on the Au(111) surface by iteratively testing sites.\n4. Analyze Adsorbate: SMILES [OH] represents the hydroxyl radical (•OH). Major functional group: hydroxy with unpaired electron on O. Heavy atoms: O at index 0. Binding should occur through O (index 0) due to the radical location.\n5. Analyze Surface: Pure Au surface with available sites: ontop (Au), bridge (Au-Au), hollow (Au-Au-Au). All sites involve Au atoms only.\n6. Formulate Plan: Select bridge site for initial test, as it is likely the most stable for OH on Au(111). Bind via O (index 0) to two Au atoms. Use default parameters.",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "bridge",
+          "surface_binding_atoms": [
+            "Au",
+            "Au"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "bridge|Au,Au|0|ReactiveSpecies|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -2.080881118774414,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": false,
+      "planned_site_type": "bridge",
+      "actual_site_type": "bridge",
+      "best_structure_file": "outputs/12-b5dd778e/BEST_OH_bridge_E-2.081.xyz",
+      "generated_conformers_file": "outputs/12-b5dd778e/conformers_[OH].traj",
+      "relaxation_trajectory_file": "outputs/12-b5dd778e/final.xyz",
+      "message": "Most stable config adsorption energy: -2.0809 eV. Target Atom: O (from plan index 0, global index 27 in relaxed structure). -> Nearest: Au (Index 15), Distance: 2.216 Å (Threshold: 2.929), Bound: True. Bonded Surface Atoms: Au-2.216Å, Au-2.219Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: False (Planned ['Au', 'Au'] -> Actual ['Au', 'Au']).",
+      "history_entry": "【✅ Perfect Adsorption】 bridge @ ['Au', 'Au'] (Index [0]) -> Site: bridge (Au,Au) [🌟 New Best] | E=-2.081 eV"
+    }
+  ],
+  "history": [
+    "【✅ Perfect Adsorption】 bridge @ ['Au', 'Au'] (Index [0]) -> Site: bridge (Au,Au) [🌟 New Best] | E=-2.081 eV"
+  ],
+  "error": null,
+  "perfect_count": 1,
+  "dissociation_count": 0,
+  "rearrangement_count": 0,
+  "calc_failure_count": 0,
+  "chemical_slip_count": 0,
+  "provenance": {
+    "result_tree": "research/results/basic_experiments/cmu20/openrouter_grok4_mace_mp0_small/one_shot",
+    "dataset": "cmu20",
+    "backend": "openrouter_grok4_mace_mp0_small",
+    "variant": "one_shot",
+    "artifact_status": "result_json_restored_from_git_history_without_heavy_artifacts",
+    "restored_from_commit": "ba317df76802c090bc365a99bdbe8ca9f8396fe9",
+    "note": "The lightweight result.json was recovered from git history during result-tree cleanup; heavy .xyz/.traj artifacts were not tracked and are not available locally."
+  }
+}

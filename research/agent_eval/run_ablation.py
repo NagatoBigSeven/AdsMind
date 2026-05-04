@@ -36,7 +36,7 @@ def write_csv(path: Path, rows: List[Dict[str, object]], fieldnames: List[str]) 
 def main(argv: Optional[list[str]] = None) -> int:
     """CLI entrypoint for ablation execution."""
     parser = argparse.ArgumentParser(description="Run AdsMind ablation variants.")
-    parser.add_argument("--manifest", required=True, help="Path to cmu_manifest.csv")
+    parser.add_argument("--manifest", required=True, help="Path to a dataset manifest CSV")
     parser.add_argument("--config", required=True, help="Path to frozen_config.json")
     parser.add_argument("--output", required=True, help="Output directory for ablation runs")
     parser.add_argument("--cases", default="01,02,09,14,19", help="Comma-separated case ids")

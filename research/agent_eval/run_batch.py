@@ -21,7 +21,7 @@ from research.agent_eval.run_case import execute_case
 def parse_args(argv: Optional[list[str]] = None) -> argparse.Namespace:
     """Parse CLI arguments for the batch runner."""
     parser = argparse.ArgumentParser(description="Run AdsMind benchmark cases sequentially.")
-    parser.add_argument("--manifest", required=True, help="Path to cmu_manifest.csv")
+    parser.add_argument("--manifest", required=True, help="Path to a dataset manifest CSV")
     parser.add_argument("--config", required=True, help="Path to frozen_config.json")
     parser.add_argument("--output", required=True, help="Output directory for the run")
     parser.add_argument(

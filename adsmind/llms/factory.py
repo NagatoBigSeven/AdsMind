@@ -17,19 +17,15 @@ def _get_llm_registry() -> Dict[str, Type[BaseLLMBackend]]:
     Using lazy imports to avoid loading heavy dependencies (like HuggingFace)
     until actually needed.
     """
-    from adsmind.llms.google_backend import GoogleBackend
-    from adsmind.llms.google_vertexai_backend import GoogleVertexAIBackend
     from adsmind.llms.anthropic_backend import AnthropicBackend
+    from adsmind.llms.openai_backend import OpenAIBackend
     from adsmind.llms.openrouter_backend import OpenRouterBackend
-    from adsmind.llms.xai_backend import XAIBackend
     from adsmind.llms.ollama_backend import OllamaBackend
     from adsmind.llms.huggingface_backend import HuggingFaceBackend
 
     return {
-        "google": GoogleBackend,
-        "google_vertexai": GoogleVertexAIBackend,
+        "openai": OpenAIBackend,
         "anthropic": AnthropicBackend,
-        "xai": XAIBackend,
         "openrouter": OpenRouterBackend,
         "ollama": OllamaBackend,
         "huggingface": HuggingFaceBackend,
@@ -41,8 +37,8 @@ def get_llm_backend(name: str) -> BaseLLMBackend:
     Get an LLM backend by name.
 
     Args:
-        name: Backend name ("google", "anthropic", "xai", "openrouter",
-            "ollama", "huggingface")
+        name: Backend name ("openai", "anthropic", "openrouter", "ollama",
+            "huggingface")
 
     Returns:
         An instance of the requested backend
@@ -51,8 +47,8 @@ def get_llm_backend(name: str) -> BaseLLMBackend:
         ValueError: If the backend name is unknown
 
     Example:
-        >>> backend = get_llm_backend("google")
-        >>> config = backend.get_default_config(api_key="your-google-api-key")
+        >>> backend = get_llm_backend("openrouter")
+        >>> config = backend.get_default_config(api_key="your-openrouter-api-key")
         >>> llm = backend.get_chat_model(config)
     """
     registry = _get_llm_registry()

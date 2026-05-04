@@ -21,8 +21,8 @@ class LLMConfig:
     Backend-specific options should be placed in `extra_options`.
 
     Attributes:
-        backend: Backend identifier ("google", "anthropic", "xai",
-            "openrouter", "ollama", "huggingface")
+        backend: Backend identifier ("openai", "anthropic", "openrouter",
+            "ollama", "huggingface")
         api_key: API key for cloud backends (None for local backends)
         model: Model identifier (backend-specific)
         temperature: Sampling temperature (0.0 for deterministic output)
@@ -44,7 +44,7 @@ class BaseLLMBackend(ABC):
     """
     Abstract base class for LLM backends.
 
-    All LLM backends (Google, OpenRouter, Ollama, HuggingFace) must inherit
+    All LLM backends (OpenAI, Anthropic, OpenRouter, Ollama, HuggingFace) must inherit
     from this class and implement the required abstract methods.
 
     The interface is designed to work with LangChain, so all models returned
@@ -84,7 +84,7 @@ class BaseLLMBackend(ABC):
     @property
     @abstractmethod
     def name(self) -> str:
-        """Return the backend name (e.g., 'google', 'ollama')."""
+        """Return the backend name (e.g., 'openrouter', 'ollama')."""
         pass
 
     @property

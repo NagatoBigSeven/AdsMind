@@ -33,7 +33,7 @@ class AgentState(TypedDict):
     session_id: str  # UUID for file path isolation
     api_key: str     # API key for this session (not from global env)
     # LLM configuration
-    llm_backend: str  # LLM backend name ("google", "anthropic", "xai", etc.)
+    llm_backend: str  # LLM backend name ("openai", "anthropic", "openrouter", etc.)
     llm_config: Optional[Dict[str, Any]]  # Optional LLM configuration overrides
     # Calculator configuration
     calculator_backend: str
@@ -80,7 +80,7 @@ load_dotenv()
 # This prevents key leakage between concurrent sessions
 
 # Default LLM backend (can be overridden via environment variable)
-DEFAULT_LLM_BACKEND = "google"
+DEFAULT_LLM_BACKEND = "openrouter"
 
 
 def _read_usage_value(container: Any, *keys: str) -> int:
@@ -166,14 +166,15 @@ def get_llm(api_key: str, backend_name: str = None, llm_config: dict = None):
     Create an LLM instance using the configured backend.
     
     This function uses a factory pattern to support multiple LLM backends:
-    - google: Direct Google AI (Gemini) - Default
+    - openai: OpenAI GPT API (official endpoint)
+    - anthropic: Anthropic Claude API (official endpoint)
     - openrouter: OpenRouter API (multiple providers)
     - ollama: Local Ollama service
     - huggingface: Local HuggingFace Transformers
     
     Args:
         api_key: API key for cloud backends (ignored for local backends)
-        backend_name: Backend name (defaults to ADSMIND_LLM_BACKEND env var or "google")
+        backend_name: Backend name (defaults to ADSMIND_LLM_BACKEND env var or "openrouter")
         llm_config: Optional configuration overrides
         
     Returns:
@@ -1051,8 +1052,8 @@ def _prepare_initial_state(
         user_request: User's natural language request
         api_key: API key for this session (required for cloud backends)
         session_id: UUID for file path isolation
-        llm_backend: LLM backend name ("google", "anthropic", "xai",
-            "openrouter", "ollama", "huggingface")
+        llm_backend: LLM backend name ("openai", "anthropic", "openrouter",
+            "ollama", "huggingface")
         llm_config: Optional LLM configuration overrides
         random_seed: Optional random seed for reproducible runs (None = not fixed)
         relaxation_mode: "fast" (all slab fixed) or "standard" (bottom 1/3 fixed)

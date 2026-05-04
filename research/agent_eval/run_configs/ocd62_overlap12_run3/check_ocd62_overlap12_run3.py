@@ -21,7 +21,7 @@ CASES = tuple(f"{idx:03d}" for idx in range(1, 13))
 def summary_path(backend: str) -> Path:
     return (
         ROOT
-        / "research/results/advanced_experiments/reproducibility/ocd62_overlap12/run3"
+        / "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3"
         / backend_result_dir(backend, run_name="run3")
         / "all_variants_summary.csv"
     )

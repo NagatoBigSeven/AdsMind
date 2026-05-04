@@ -23,16 +23,16 @@ RESULTS_ROOT = ROOT / "research" / "results"
 BASIC_ROOT = RESULTS_ROOT / "basic_experiments"
 ADVANCED_ROOT = RESULTS_ROOT / "advanced_experiments"
 OCD62_SUMMARY_DIR = BASIC_ROOT / "ocd62" / "summaries"
-OVERLAP12_ROOT = ADVANCED_ROOT / "reproducibility/ocd62_overlap12"
+OVERLAP12_ROOT = ADVANCED_ROOT / "reproducibility" / "ocd62_overlap12_rerun"
 OVERLAP12_SUMMARY_DIR = OVERLAP12_ROOT / "summaries"
 DATASET_DIR = ROOT / "datasets" / "ocd62"
 OVERLAP_MANIFEST = (
     ROOT
     / "datasets"
     / "ocd62_overlap12"
-    / "overlap12_manifest.csv"
+    / "ocd62_overlap12_manifest.csv"
 )
-REPRO_RUNS_DATASET = "ocd62_overlap12"
+REPRO_RUNS_DATASET = "ocd62_overlap12_rerun"
 
 BACKENDS = BACKEND_KEYS
 VARIANTS = ("full", "no_slip", "no_forbid", "no_termination", "one_shot")

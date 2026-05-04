@@ -93,11 +93,11 @@ Recent work has demonstrated the integration of MLFFs with LLM agents for materi
 Adsorption energy in this study is operationally defined within the fixed MACE-MP-0 small protocol: all ablation comparisons, Wilcoxon tests, and backend-convergence metrics are evaluated on energies produced by the same locked MACE-MP-0 small calculator, so within-protocol rankings between configurations on the same surface are self-consistent by construction.
 We do not claim that MACE-MP-0 small rankings match DFT rankings in absolute terms; rather, the MACE-MP-0 large run described below serves as a sensitivity boundary that quantifies how far absolute energies shift under a higher-fidelity force field, without being treated as ground-truth validation.
 
-To characterize this sensitivity, we repeated the GPT-5.4 AdsMind Full variant on all 20 CMU cases with MACE-MP-0 large (GPU, float64, dispersion enabled), and on a 10-case OCD62 sensitivity slice.
+To characterize this sensitivity, we repeated the GPT-5.4 AdsMind Full variant on all 20 CMU cases with MACE-MP-0 large (GPU, float64, dispersion enabled).
 MACE-MP-0 large shifts absolute AdsMind energies substantially: on CMU20 the mean absolute shift relative to MACE-MP-0 small is 1.255~eV, or 0.834~eV when the anomalous case~20 is excluded.
 The direction of the shift is case-dependent, with 15/20 CMU cases becoming more stable and 5/20 becoming less stable under MACE-MP-0 large.
 Case~20 is an anomaly rather than a clean failure: the summary retains a non-dissociated best structure at $-2.402$~eV, while later dissociated analyses reach lower unretained energies.
-On the OCD62 sensitivity set, MACE-MP-0 large succeeds on 9/10 cases, with case~043 failing naturally through slip and dissociation.
+No separate OCD62 MACE-MP-0 large subset is introduced here.
 Because Adsorb-Agent was not rerun with MACE-MP-0 large, this experiment should be interpreted as a force-field sensitivity check on AdsMind trajectories, not as a second AdsMind--Adsorb-Agent head-to-head.
 Representative DFT validation remains necessary before interpreting the MLFF-ranked structures as final adsorption energetics beyond the fixed surrogate protocol.
 

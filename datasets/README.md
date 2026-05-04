@@ -8,7 +8,7 @@ Paper-facing OCD slabs are stored as `OCD62` inputs.
 |---|---:|---|---|
 | `cmu20/` | 20 | `datasets/cmu20/cmu20_manifest.csv` | CMU benchmark cases (intermetallics + monometallics, H/NNH/OH/larger adsorbates) |
 | `ocd62/` | 62 | `datasets/ocd62/ocd62_manifest.csv` | OCD62 benchmark used for basic tests and the four-backend five-variant ablation matrix |
-| `ocd62_overlap12/` | 12 | `datasets/ocd62_overlap12/overlap12_manifest.csv` | Reproducibility input queue for the 12 OCD62 overlap cases |
+| `ocd62_overlap12/` | 12 | `datasets/ocd62_overlap12/ocd62_overlap12_manifest.csv` | Reproducibility input queue for the 12 OCD62 overlap cases |
 | `samples/` | 4 | — | Tiny example slabs used by docs/quickstart and the test suite (`cu_slab_211.xyz`, `CuZnO.xyz`, `NiFeO_slab.xyz`, `test_slab.xyz`) |
 
 ## Notes

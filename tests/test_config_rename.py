@@ -19,7 +19,7 @@ class TestAdsMindRenameCompatibility(unittest.TestCase):
             os.environ,
             {
                 "ADSMIND_LLM_BACKEND": "ollama",
-                "ADSKRK_LLM_BACKEND": "google",
+                "ADSKRK_LLM_BACKEND": "openrouter",
             },
             clear=True,
         ):
@@ -77,7 +77,7 @@ class TestAdsMindRenameCompatibility(unittest.TestCase):
             ), patch.object(
                 config_module, "LEGACY_CONFIG_FILE_PATH", legacy_config_path
             ):
-                self.assertTrue(config_module.save_llm_backend("google"))
+                self.assertTrue(config_module.save_llm_backend("openrouter"))
                 self.assertTrue(config_path.exists())
                 self.assertFalse(legacy_config_path.exists())
 

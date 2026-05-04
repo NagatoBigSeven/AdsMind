@@ -192,7 +192,7 @@ RUN3 is in progress as the third replicate for those 12 repeated cases.
 \begin{table}[h]
 \centering
 \small
-\caption{OCD-GMAE pairwise ablation statistics versus the full variant (4~backends, 10~cases each). Positive $\Delta E$ means the ablated variant is worse (higher energy) than full. Gemini was accessed via an AI HubMix proxy; the remaining three backends used direct API access.}
+\caption{OCD-GMAE pairwise ablation statistics versus the full variant (4~backends, 10~cases each). Positive $\Delta E$ means the ablated variant is worse (higher energy) than full. GPT and Claude used official provider endpoints, while Gemini and Grok used OpenRouter.}
 \label{tab:si4-ocd-ablation-statistics}
 \begin{tabular}{llrrrrr}
 \toprule
@@ -227,7 +227,7 @@ Claude & 1-Shot & 0.774 & 0.270 & 0.004 & [0.189, 1.719] & 4.671 (003) \\
 \section{External baselines and force-field sensitivity}
 
 This section separates the locked 15-case CMU overlap used for mechanism-level comparisons from newly completed control data.
-The completed additions are the CMU20 five-variant ablation completion, CMU20 random placement, MACE-MP-0 large sensitivity on CMU20 and OCD-rep10, and an Adsorb-Agent single-configuration stress control.
+The completed additions are the CMU20 five-variant ablation completion, CMU20 random placement, MACE-MP-0 large sensitivity on CMU20, and an Adsorb-Agent single-configuration stress control.
 The CMU20 ablation completion is used here as a reliability and failure-mode audit; the original 15-case tables above are retained for the first locked mechanism package.
 
 \begin{table}[h]
@@ -486,33 +486,6 @@ Case & MACE-MP-0 small & MACE-MP-0 large & $\Delta$ & Diss. events & Flag \\
 \midrule
 \multicolumn{6}{l}{All 20 rows retain a summary result; mean absolute shift is 1.255~eV, or 0.834~eV excluding case~20.} \\
 \multicolumn{6}{l}{Case~20 retains a non-dissociated best result but later dissociated analyses reach lower unretained energies.} \\
-\bottomrule
-\end{tabular}%
-}
-\end{table}
-
-\begin{table}[h]
-\centering
-\scriptsize
-\caption{MACE-MP-0 large sensitivity on 10 OCD62 cases. This is a force-field stress test on chemistry outside the CMU set, not a replacement for the locked 10-case OCD-GMAE MACE-MP-0 small ablation matrix. Case~043 fails naturally through slip and dissociation; no external service or calculator error is recorded.}
-\label{tab:si-mace-large-ocd-rep10}
-\resizebox{\textwidth}{!}{%
-\begin{tabular}{llllrrr}
-\toprule
-Case & Surface & Adsorbate & MACE-MP-0 large energy & Status & Slip & Diss. \\
-\midrule
-003 & Na$_{12}$Pb$_{36}$ & \texttt{[H]} & $-3.126$ & success & 5 & 0 \\
-006 & Ca$_{16}$Pb$_{16}$Pd$_{16}$ & \texttt{[OH]} & $-6.534$ & success & 3 & 0 \\
-012 & Sb$_{20}$Ta$_{60}$ & \texttt{[N]=N} & $-10.620$ & success & 5 & 4 \\
-020 & Pb$_{24}$Y$_8$ & \texttt{[N]=O} & $-2.286$ & success & 5 & 1 \\
-024 & Cd$_{24}$Pd$_{24}$ & \texttt{NO} & $-3.123$ & success & 3 & 0 \\
-027 & Cr$_{36}$N$_{48}$ & \texttt{[CH]=O} & $-7.819$ & success & 2 & 0 \\
-035 & Se$_{48}$Sn$_{48}$ & \texttt{CO} & $-3.387$ & success & 1 & 1 \\
-039 & As$_{40}$Ti$_{40}$ & \texttt{C[O]} & $-8.640$ & success & 4 & 0 \\
-043 & K$_{20}$ & \texttt{C([CH2])O} & --- & failed & 1 & 1 \\
-050 & Ni$_{38}$Se$_{40}$ & \texttt{[CH2]C} & $-9.525$ & success & 4 & 0 \\
-\midrule
-\multicolumn{7}{l}{Summary: 9/10 successes; failed case 043 has status=\texttt{failed}, error=None, calc\_failure\_count=0.} \\
 \bottomrule
 \end{tabular}%
 }
@@ -798,4 +771,3 @@ LLM temperature & 0 \\
 \bibliography{refs}
 
 \end{document}
-

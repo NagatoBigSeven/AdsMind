@@ -3,7 +3,7 @@ Anthropic backend implementation.
 
 This backend talks to Anthropic's official OpenAI-compatible Chat Completions
 endpoint. It keeps AdsMind's LangChain integration small while avoiding
-OpenRouter or other third-party routing for Claude experiments.
+alternate routes for Claude experiments.
 """
 
 import importlib.util

@@ -21,19 +21,12 @@ class TestLLMFactory(unittest.TestCase):
         self.assertTrue(callable(get_llm_backend))
         self.assertTrue(callable(get_available_llm_backends))
     
-    def test_get_google_backend(self):
-        """Test getting Google backend."""
+    def test_get_openai_backend(self):
+        """Test getting OpenAI backend."""
         from adsmind.llms import get_llm_backend
-        backend = get_llm_backend("google")
-        self.assertEqual(backend.name, "google")
+        backend = get_llm_backend("openai")
+        self.assertEqual(backend.name, "openai")
         self.assertTrue(backend.requires_api_key)
-
-    def test_get_google_vertexai_backend(self):
-        """Test getting Google Vertex AI backend."""
-        from adsmind.llms import get_llm_backend
-        backend = get_llm_backend("google_vertexai")
-        self.assertEqual(backend.name, "google_vertexai")
-        self.assertFalse(backend.requires_api_key)
     
     def test_get_openrouter_backend(self):
         """Test getting OpenRouter backend."""
@@ -49,13 +42,6 @@ class TestLLMFactory(unittest.TestCase):
         self.assertEqual(backend.name, "anthropic")
         self.assertTrue(backend.requires_api_key)
 
-    def test_get_xai_backend(self):
-        """Test getting xAI backend."""
-        from adsmind.llms import get_llm_backend
-        backend = get_llm_backend("xai")
-        self.assertEqual(backend.name, "xai")
-        self.assertTrue(backend.requires_api_key)
-    
     def test_get_ollama_backend(self):
         """Test getting Ollama backend."""
         from adsmind.llms import get_llm_backend
@@ -105,13 +91,13 @@ class TestLLMConfig(unittest.TestCase):
         """Test creating LLMConfig."""
         from adsmind.llms.base import LLMConfig
         config = LLMConfig(
-            backend="google",
+            backend="openrouter",
             api_key="test-key",
-            model="gemini-2.5-pro"
+            model="google/gemini-2.5-pro"
         )
-        self.assertEqual(config.backend, "google")
+        self.assertEqual(config.backend, "openrouter")
         self.assertEqual(config.api_key, "test-key")
-        self.assertEqual(config.model, "gemini-2.5-pro")
+        self.assertEqual(config.model, "google/gemini-2.5-pro")
         self.assertEqual(config.temperature, 0.0)
     
     def test_config_defaults(self):
@@ -122,68 +108,6 @@ class TestLLMConfig(unittest.TestCase):
         self.assertEqual(config.max_tokens, 4096)
         self.assertEqual(config.timeout, 120)
         self.assertEqual(config.extra_options, {})
-
-
-class TestGoogleBackend(unittest.TestCase):
-    """Test Google AI backend."""
-    
-    def test_default_config(self):
-        """Test default configuration."""
-        from adsmind.llms import get_llm_backend
-        backend = get_llm_backend("google")
-        config = backend.get_default_config(api_key="test-key")
-        
-        self.assertEqual(config.backend, "google")
-        self.assertEqual(config.api_key, "test-key")
-        self.assertEqual(config.model, "gemini-2.5-pro")
-        self.assertEqual(config.temperature, 0.0)
-    
-    def test_is_available(self):
-        """Test availability check."""
-        from adsmind.llms import get_llm_backend
-        backend = get_llm_backend("google")
-        # Should be True if langchain_google_genai is installed
-        self.assertIsInstance(backend.is_available, bool)
-
-
-class TestGoogleVertexAIBackend(unittest.TestCase):
-    """Test Google Vertex AI backend."""
-
-    def test_default_config(self):
-        """Test default Vertex AI configuration."""
-        from adsmind.llms import get_llm_backend
-        backend = get_llm_backend("google_vertexai")
-        config = backend.get_default_config(api_key="ignored")
-
-        self.assertEqual(config.backend, "google_vertexai")
-        self.assertIsNone(config.api_key)
-        self.assertEqual(config.model, "gemini-2.5-pro")
-
-    def test_chat_model_passes_vertex_options(self):
-        """Vertex backend should forward project and location."""
-        from adsmind.llms import get_llm_backend
-
-        captured = {}
-
-        class FakeChatVertexAI:
-            def __init__(self, **kwargs):
-                captured.update(kwargs)
-
-        fake_module = types.SimpleNamespace(ChatVertexAI=FakeChatVertexAI)
-
-        with patch.dict(sys.modules, {"langchain_google_vertexai": fake_module}):
-            backend = get_llm_backend("google_vertexai")
-            config = backend.get_default_config()
-            config.extra_options = {
-                "project": "test-project",
-                "location": "europe-west1",
-            }
-            backend.get_chat_model(config)
-
-        self.assertEqual(captured["model"], "gemini-2.5-pro")
-        self.assertEqual(captured["project"], "test-project")
-        self.assertEqual(captured["location"], "europe-west1")
-        self.assertEqual(captured["temperature"], 0.0)
 
 
 class TestOpenRouterBackend(unittest.TestCase):
@@ -225,6 +149,41 @@ class TestOpenRouterBackend(unittest.TestCase):
         self.assertEqual(captured["openai_api_base"], "https://example.test/v1")
         self.assertEqual(captured["default_headers"], {"X-Test": "1"})
         self.assertEqual(captured["seed"], 7)
+
+
+class TestOpenAIBackend(unittest.TestCase):
+    """Test OpenAI backend."""
+
+    def test_default_config(self):
+        """Test default OpenAI configuration."""
+        from adsmind.llms import get_llm_backend
+        backend = get_llm_backend("openai")
+        config = backend.get_default_config(api_key="test-key")
+
+        self.assertEqual(config.backend, "openai")
+        self.assertEqual(config.api_key, "test-key")
+        self.assertEqual(config.model, "gpt-5.4-2026-03-05")
+
+    def test_chat_model_uses_official_openai_base_url(self):
+        """OpenAI backend should call the official API endpoint."""
+        from adsmind.llms import get_llm_backend
+
+        captured = {}
+
+        class FakeChatOpenAI:
+            def __init__(self, **kwargs):
+                captured.update(kwargs)
+
+        fake_module = types.SimpleNamespace(ChatOpenAI=FakeChatOpenAI)
+
+        with patch.dict(sys.modules, {"langchain_openai": fake_module}):
+            backend = get_llm_backend("openai")
+            config = backend.get_default_config(api_key="test-key")
+            backend.get_chat_model(config)
+
+        self.assertEqual(captured["openai_api_base"], "https://api.openai.com/v1")
+        self.assertEqual(captured["openai_api_key"], "test-key")
+        self.assertEqual(captured["model"], "gpt-5.4-2026-03-05")
 
 
 class TestAnthropicBackend(unittest.TestCase):
@@ -280,42 +239,6 @@ class TestAnthropicBackend(unittest.TestCase):
             backend.get_chat_model(config)
 
         self.assertEqual(captured["default_headers"], {"X-Test": "1"})
-
-
-class TestXAIBackend(unittest.TestCase):
-    """Test xAI backend."""
-
-    def test_default_config(self):
-        """Test default xAI configuration."""
-        from adsmind.llms import get_llm_backend
-        backend = get_llm_backend("xai")
-        config = backend.get_default_config(api_key="test-key")
-
-        self.assertEqual(config.backend, "xai")
-        self.assertEqual(config.api_key, "test-key")
-        self.assertEqual(config.model, "grok-4-0709")
-
-    def test_chat_model_uses_official_xai_base_url(self):
-        """xAI backend should call the official API endpoint."""
-        from adsmind.llms import get_llm_backend
-
-        captured = {}
-
-        class FakeChatOpenAI:
-            def __init__(self, **kwargs):
-                captured.update(kwargs)
-
-        fake_module = types.SimpleNamespace(ChatOpenAI=FakeChatOpenAI)
-
-        with patch.dict(sys.modules, {"langchain_openai": fake_module}):
-            backend = get_llm_backend("xai")
-            config = backend.get_default_config(api_key="test-key")
-            backend.get_chat_model(config)
-
-        self.assertEqual(captured["openai_api_base"], "https://api.x.ai/v1")
-        self.assertEqual(captured["openai_api_key"], "test-key")
-        self.assertEqual(captured["model"], "grok-4-0709")
-        self.assertEqual(captured["seed"], 42)
 
 
 class TestOllamaBackend(unittest.TestCase):
@@ -405,10 +328,7 @@ class TestConfigModule(unittest.TestCase):
     def test_is_cloud_backend(self):
         """Test cloud backend detection."""
         from adsmind.utils.config import is_cloud_backend
-        self.assertTrue(is_cloud_backend("google"))
-        self.assertFalse(is_cloud_backend("google_vertexai"))
         self.assertTrue(is_cloud_backend("anthropic"))
-        self.assertTrue(is_cloud_backend("xai"))
         self.assertTrue(is_cloud_backend("openrouter"))
         self.assertFalse(is_cloud_backend("ollama"))
         self.assertFalse(is_cloud_backend("huggingface"))
@@ -421,12 +341,10 @@ class TestConfigModule(unittest.TestCase):
             os.environ,
             {
                 "ANTHROPIC_API_KEY": "anthropic-key",
-                "XAI_API_KEY": "xai-key",
             },
             clear=True,
         ):
             self.assertEqual(get_api_key_for_backend("anthropic"), ("anthropic-key", "env"))
-            self.assertEqual(get_api_key_for_backend("xai"), ("xai-key", "env"))
 
 
 class TestAgentIntegration(unittest.TestCase):

@@ -8,8 +8,8 @@ research/results/
     cmu20/
       openai_gpt54_mace_mp0_small/
       anthropic_claude_sonnet46_mace_mp0_small/
-      google_vertexai_gemini25pro_mace_mp0_small/
-      xai_grok4_0709_mace_mp0_small/
+      openrouter_gemini25pro_mace_mp0_small/
+      openrouter_grok4_mace_mp0_small/
         one_shot|full|no_slip|no_termination|no_forbid/
           summary.csv
           <case_id>/result.json
@@ -18,8 +18,8 @@ research/results/
     ocd62/
       openai_gpt54_mace_mp0_small/
       anthropic_claude_sonnet46_mace_mp0_small/
-      google_vertexai_gemini25pro_mace_mp0_small/
-      xai_grok4_0709_mace_mp0_small/
+      openrouter_gemini25pro_mace_mp0_small/
+      openrouter_grok4_mace_mp0_small/
         one_shot|full|no_slip|no_termination|no_forbid/
           summary.csv
           <case_id>/result.json
@@ -27,9 +27,9 @@ research/results/
       summaries/
     summaries/
   advanced_experiments/
-    mechanism/
+    ablation_and_chemical_slip_diagnostics/
     reproducibility/
-    model_sensitivity/
+    force_field_sensitivity/
     case_studies/
 ```
 
@@ -41,8 +41,8 @@ Basic experiments are the matched CMU20 and OCD62 evaluation matrix:
 - LLM/force-field directories:
   `openai_gpt54_mace_mp0_small`,
   `anthropic_claude_sonnet46_mace_mp0_small`,
-  `google_vertexai_gemini25pro_mace_mp0_small`,
-  `xai_grok4_0709_mace_mp0_small`
+  `openrouter_gemini25pro_mace_mp0_small`,
+  `openrouter_grok4_mace_mp0_small`
 - variants: `one_shot`, `full`, `no_slip`, `no_termination`, `no_forbid`
 
 Each backend has `all_variants_summary.csv` for the full backend table. Each
@@ -72,25 +72,24 @@ historically missing one-shot runs have no artifact directory; use
 Advanced experiments are organized by research question rather than by the
 main dataset/backend/variant matrix:
 
-- `mechanism/ablation_effects/`: paired Full vs ablated-mechanism statistics,
-  backend agreement, and reach-Full tables.
-- `mechanism/chemical_slip_interpretability/`: chemical-slip interpretation
-  tables and trajectories.
-- `reproducibility/ocd62_overlap12/`: repeated runs on the 12 overlapping OCD62
+- `ablation_and_chemical_slip_diagnostics/ablation_effects/`: Full-vs-ablation
+  statistics, backend agreement, and reach-Full tables.
+- `ablation_and_chemical_slip_diagnostics/chemical_slip_interpretability/`:
+  chemical-slip interpretation tables and trajectories.
+- `reproducibility/ocd62_overlap12_rerun/`: repeated runs on the 12 overlapping OCD62
   cases, including the RUN3 landing directory.
 - `reproducibility/cmu20_openai_gpt54_mace_mp0_small_multiseed/`:
   GPT-5.4 CMU20 full-run seed sensitivity under MACE-MP-0 small.
-- `model_sensitivity/mace_mp0_large/`: MACE-MP-0 large force-field sensitivity,
-  split by dataset, backend, and variant.
-  `ocd62_sample10` is a manifest-listed subset of OCD62, and all 10 cases are
-  already present in the OCD62 basic-experiment matrix.
+- `force_field_sensitivity/mace_mp0_large_vs_mace_mp0_small/`: MACE-MP-0 large vs
+  MACE-MP-0 small force-field sensitivity. CMU20 is complete; no OCD62 subset is
+  defined in this experiment.
 - `case_studies/dft_iteration_alignment/`: CMU20 case-level trajectory exports
   for DFT alignment.
 - `case_studies/iteration_convergence/`: per-iteration running-best energy
   curves.
 
 RUN3 reproducibility outputs are expected under
-`advanced_experiments/reproducibility/ocd62_overlap12/run3/` after the remote
+`advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/` after the remote
 jobs finish. Then refresh with:
 
 ```bash

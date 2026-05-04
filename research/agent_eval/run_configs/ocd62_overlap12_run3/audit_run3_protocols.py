@@ -45,7 +45,7 @@ EXPECTED = {
 def case_dir(backend: str, variant: str, case_id: str) -> Path:
     return (
         ROOT
-        / "research/results/advanced_experiments/reproducibility/ocd62_overlap12/run3"
+        / "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3"
         / backend_result_dir(backend, run_name="run3")
         / variant
         / case_id

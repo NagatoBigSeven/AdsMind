@@ -22,14 +22,14 @@ These labels are internal reading aids based only on the AdsMind/MACE trajectory
 
 - openai_gpt54_mace_mp0_small: memory-like-with-degenerate-refinement; iterations=4, best iteration=4, best MACE E=-3.627323865890503 eV, improvement vs first=0.00372314453125 eV.
 - anthropic_claude_sonnet46_mace_mp0_small: reasoning-recovery-like; iterations=4, best iteration=4, best MACE E=-3.630131483078003 eV, improvement vs first=0.0728759765625 eV.
-- google_vertexai_gemini25pro_mace_mp0_small: memory-like-with-degenerate-refinement; iterations=5, best iteration=3, best MACE E=-3.6317179203033447 eV, improvement vs first=0.00054931640625 eV.
-- xai_grok4_0709_mace_mp0_small: memory-like-with-degenerate-refinement; iterations=5, best iteration=3, best MACE E=-3.6317179203033447 eV, improvement vs first=0.0006103515625 eV.
+- openrouter_gemini25pro_mace_mp0_small: memory-like-with-degenerate-refinement; iterations=5, best iteration=3, best MACE E=-3.6317179203033447 eV, improvement vs first=0.00054931640625 eV.
+- openrouter_grok4_mace_mp0_small: memory-like-with-degenerate-refinement; iterations=5, best iteration=3, best MACE E=-3.6317179203033447 eV, improvement vs first=0.0006103515625 eV.
 
 ## Structure artifact status
 
 - Copied relaxed structures available now: 8.
 - Quick PNG snapshots available now: 8.
-- Backends with successful metadata but missing local `.xyz` artifacts: google_vertexai_gemini25pro_mace_mp0_small, xai_grok4_0709_mace_mp0_small.
+- Backends with successful metadata but missing local `.xyz` artifacts: openrouter_gemini25pro_mace_mp0_small, openrouter_grok4_mace_mp0_small.
 
 ## Figure cautions
 

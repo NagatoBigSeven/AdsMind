@@ -1,0 +1,372 @@
+{
+  "case_id": "007",
+  "case_metadata": {
+    "case_id": "007",
+    "slab_file": "datasets/ocd62_overlap12/007_ocd_479_Ni6Sc36Te12_OH.xyz",
+    "smiles": "[OH]",
+    "user_request": "Find the lowest-energy adsorption configuration for hydroxyl radical on the provided surface.",
+    "surface_family": "intermetallic",
+    "adsorbate_name": "OH",
+    "miller_index": "",
+    "reaction_class": "ORR",
+    "ablation_candidate": "FALSE",
+    "notes": "OCD-GMAE source key=479; original_ads_smi=[OH]; surface_formula=Ni6Sc36Te12; y_relaxed=-2.695426 eV; site=[27, 28, 30]; OCD62 overlap12 RUN3 symlink to representative50 source file; sha256=b3b675c823410b8df5a93aa574987ca77927a5d7902e8199e3de5e283bd71aba",
+    "source_key": "479",
+    "original_ads_smi": "[OH]",
+    "surface_formula": "Ni6Sc36Te12",
+    "surface_elements": "Ni;Sc;Te",
+    "bare_slab_atoms": "54",
+    "adsorbate_atoms": "2",
+    "y_relaxed": "-2.695426",
+    "site_indices": "27;28;30",
+    "selection_bucket": "cmu_exact"
+  },
+  "status": "success",
+  "best_energy_eV": -7.2280120849609375,
+  "iteration_count": 5,
+  "max_attempts": 5,
+  "final_site_type": "bridge",
+  "converged_tag": false,
+  "wall_clock_sec": 259.3420336507261,
+  "total_input_tokens": 27799,
+  "total_output_tokens": 9931,
+  "artifact_paths": {
+    "BEST_OH_bridge_E-6.630": "artifacts/BEST_OH_bridge_E-6.630.xyz",
+    "BEST_OH_bridge_E-6.630.xyz": "artifacts/BEST_OH_bridge_E-6.630.xyz",
+    "best_structure_file": "artifacts/BEST_OH_ontop_to_bridge_E-6.577.xyz",
+    "BEST_OH_bridge_E-7.114": "artifacts/BEST_OH_bridge_E-7.114.xyz",
+    "BEST_OH_bridge_E-7.114.xyz": "artifacts/BEST_OH_bridge_E-7.114.xyz",
+    "BEST_OH_hollow_to_bridge_E-7.228": "artifacts/BEST_OH_hollow_to_bridge_E-7.228.xyz",
+    "BEST_OH_hollow_to_bridge_E-7.228.xyz": "artifacts/BEST_OH_hollow_to_bridge_E-7.228.xyz",
+    "BEST_OH_hollow_to_hollow_FCC-No-Subsurf_E-7.124": "artifacts/BEST_OH_hollow_to_hollow_FCC-No-Subsurf_E-7.124.xyz",
+    "BEST_OH_hollow_to_hollow_FCC-No-Subsurf_E-7.124.xyz": "artifacts/BEST_OH_hollow_to_hollow_FCC-No-Subsurf_E-7.124.xyz",
+    "BEST_OH_ontop_to_bridge_E-6.577": "artifacts/BEST_OH_ontop_to_bridge_E-6.577.xyz",
+    "BEST_OH_ontop_to_bridge_E-6.577.xyz": "artifacts/BEST_OH_ontop_to_bridge_E-6.577.xyz",
+    "conformers_[OH]": "artifacts/conformers_[OH].traj",
+    "conformers_[OH].traj": "artifacts/conformers_[OH].traj",
+    "final": "artifacts/final.xyz",
+    "final.xyz": "artifacts/final.xyz",
+    "relaxation": "artifacts/relaxation.traj",
+    "relaxation.traj": "artifacts/relaxation.traj",
+    "relaxation_trajectory_file": "artifacts/relaxation.traj"
+  },
+  "best_result": {
+    "most_stable_energy_eV": -7.2280120849609375,
+    "analysis_json": {
+      "status": "success",
+      "message": "Most stable config adsorption energy: -7.2280 eV. Target Atom: O (from plan index 0, global index 54 in relaxed structure). -> Nearest: Sc (Index 32), Distance: 1.975 \u00c5 (Threshold: 3.422), Bound: True. Bonded Surface Atoms: Sc-1.975\u00c5, Sc-2.109\u00c5. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Sc', 'Sc', 'Sc'] -> Actual ['Sc', 'Sc']).",
+      "most_stable_energy_eV": -7.2280120849609375,
+      "target_adsorbate_atom": "O",
+      "target_adsorbate_atom_index": 54,
+      "bonded_surface_atoms": [
+        {
+          "symbol": "Sc",
+          "index": 32,
+          "distance": 1.975
+        },
+        {
+          "symbol": "Sc",
+          "index": 30,
+          "distance": 2.109
+        }
+      ],
+      "nearest_slab_atom": "Sc",
+      "nearest_slab_atom_index": 32,
+      "final_bond_distance_A": 1.975,
+      "estimated_covalent_cutoff_A": 2.596,
+      "is_covalently_bound": true,
+      "reaction_detected": false,
+      "is_dissociated": false,
+      "n_components": 1,
+      "bond_change_count": 0,
+      "site_analysis": {
+        "planned_site_type": "hollow",
+        "planned_connectivity": 3,
+        "actual_site_type": "bridge",
+        "actual_connectivity": 2,
+        "is_chemical_slip": true,
+        "planned_symbols": [
+          "Sc",
+          "Sc",
+          "Sc"
+        ],
+        "actual_symbols": [
+          "Sc",
+          "Sc"
+        ],
+        "site_fingerprint": "Sc32-Sc30"
+      },
+      "best_structure_file": "outputs/007-9501c6ca/BEST_OH_hollow_to_bridge_E-7.228.xyz",
+      "generated_conformers_file": "outputs/007-9501c6ca/conformers_[OH].traj",
+      "relaxation_trajectory_file": "outputs/007-9501c6ca/final.xyz",
+      "session_id": "007-9501c6ca"
+    },
+    "plan": {
+      "reasoning": "Step 0 - SMILES Consistency Check: The SMILES [OH] represents a hydroxyl radical. The RDKit analysis confirms atom index 0 is O (SP3, radical_electrons=1, degree=0). This is a reactive species with an unpaired electron on oxygen. adsorbate_type should be 'ReactiveSpecies' and adsorbate_binding_indices=[0].\n\nStep 1 - Analyze History: One attempt was made: ontop @ Ni (index [0]). The adsorbate slipped from the Ni ontop site to a bridge (Sc-Sc) site, indicating Ni ontop is thermodynamically unstable for OH. The resulting energy is -6.577 eV at the Sc-Sc bridge site. This is the current best. The Ni ontop site is marked as invalid/unstable.\n\nStep 2 - Formulate New Plan: Since the adsorbate spontaneously moved to a Sc-Sc bridge site, that configuration is already captured. I should now explicitly test other high-symmetry sites to see if a lower energy configuration exists. The available sites include: Sc ontop, Te ontop, Sc-Sc bridge (already found via slip), Sc-Te bridge, Ni-Sc bridge, Sc-Sc-Sc hollow, Sc-Sc-Te hollow, Sc-Sc-Sc-Te hollow-4, Sc-Sc-Te-Te hollow-4.\n\nThe Sc-Sc bridge was found via slip from Ni ontop. I should now try Sc ontop explicitly, as Sc shows strong affinity (the adsorbate migrated to Sc-Sc). Sc ontop might give a different (possibly lower) energy than the Sc-Sc bridge. Additionally, hollow sites (Sc-Sc-Sc) could be lower energy.\n\nI will try the Sc-Sc-Sc hollow site next, as hollow sites often provide stronger binding for reactive species like OH on metal surfaces, and Sc shows clear affinity for OH.\n\nStep 3 - User Intent: Find the lowest energy adsorption configuration for OH radical.\n\nStep 4 - Adsorbate: O atom at index 0, radical_electrons=1, ReactiveSpecies, binding via O.\n\nStep 5 - Surface: Hollow-3 Sc-Sc-Sc is available.\n\nStep 6 - Plan: Try hollow site Sc-Sc-Sc with O (index 0) as binding atom. This is a 3-fold hollow which often gives stronger binding for reactive oxygen species.",
+      "adsorbate_type": "ReactiveSpecies",
+      "solution": {
+        "action": "continue",
+        "site_type": "hollow",
+        "surface_binding_atoms": [
+          "Sc",
+          "Sc",
+          "Sc"
+        ],
+        "adsorbate_binding_indices": [
+          0
+        ],
+        "relax_top_n": 1,
+        "touch_sphere_size": 2,
+        "overlap_thr": 0.1,
+        "conformers_per_site_cap": 4
+      }
+    },
+    "result_type": "Perfect"
+  },
+  "last_analysis": {
+    "status": "success",
+    "message": "Most stable config adsorption energy: -7.1242 eV. Target Atom: O (from plan index 0, global index 54 in relaxed structure). -> Nearest: Sc (Index 32), Distance: 1.974 \u00c5 (Threshold: 3.422), Bound: True. Bonded Surface Atoms: Sc-1.974\u00c5, Sc-2.163\u00c5, Sc-2.819\u00c5. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Sc', 'Sc', 'Te'] -> Actual ['Sc', 'Sc', 'Sc']).",
+    "most_stable_energy_eV": -7.1241912841796875,
+    "target_adsorbate_atom": "O",
+    "target_adsorbate_atom_index": 54,
+    "bonded_surface_atoms": [
+      {
+        "symbol": "Sc",
+        "index": 32,
+        "distance": 1.974
+      },
+      {
+        "symbol": "Sc",
+        "index": 30,
+        "distance": 2.163
+      },
+      {
+        "symbol": "Sc",
+        "index": 24,
+        "distance": 2.819
+      }
+    ],
+    "nearest_slab_atom": "Sc",
+    "nearest_slab_atom_index": 32,
+    "final_bond_distance_A": 1.974,
+    "estimated_covalent_cutoff_A": 2.596,
+    "is_covalently_bound": true,
+    "reaction_detected": false,
+    "is_dissociated": false,
+    "n_components": 1,
+    "bond_change_count": 0,
+    "site_analysis": {
+      "planned_site_type": "hollow",
+      "planned_connectivity": 3,
+      "actual_site_type": "hollow (FCC/No-Subsurf)",
+      "actual_connectivity": 3,
+      "is_chemical_slip": true,
+      "planned_symbols": [
+        "Sc",
+        "Sc",
+        "Te"
+      ],
+      "actual_symbols": [
+        "Sc",
+        "Sc",
+        "Sc"
+      ],
+      "site_fingerprint": "Sc32-Sc30-Sc24"
+    },
+    "best_structure_file": "outputs/007-9501c6ca/BEST_OH_hollow_to_hollow_FCC-No-Subsurf_E-7.124.xyz",
+    "generated_conformers_file": "outputs/007-9501c6ca/conformers_[OH].traj",
+    "relaxation_trajectory_file": "outputs/007-9501c6ca/final.xyz",
+    "session_id": "007-9501c6ca"
+  },
+  "attempt_records": [
+    {
+      "attempt_index": 1,
+      "plan": {
+        "reasoning": "SMILES Consistency Check: The SMILES [OH] represents a hydroxyl radical. The RDKit analysis confirms atom index 0 is O (SP3, radical_electrons=1, degree=0). This is a reactive species (radical) with the unpaired electron on oxygen. No history exists, so this is the first attempt.\n\nAdsorbate Analysis: OH radical binds through its oxygen atom (index 0, radical_electrons=1). This is a ReactiveSpecies.\n\nSurface Analysis: Available sites include ontop (Ni, Sc, Te), bridge (Ni-Sc, Sc-Sc, Sc-Te), and hollow (Sc-Sc-Sc, Sc-Sc-Te, Sc-Sc-Sc-Te, Sc-Sc-Te-Te). For OH radical on transition metal/rare earth surfaces, the most common and typically lowest-energy adsorption is at high-coordination sites or on the most reactive metal. Ni is a transition metal and typically the most reactive site. However, Sc is a rare earth metal that can also bind OH strongly. For the first attempt, I will try the Ni ontop site as Ni is the transition metal and OH typically binds well to transition metals. The O atom (index 0) will bind to Ni via its radical electron.\n\nPlan: ontop Ni site, O (index 0) binding, ReactiveSpecies.",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "ontop",
+          "surface_binding_atoms": [
+            "Ni"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "ontop|Ni|0|ReactiveSpecies|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -6.576652526855469,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": true,
+      "planned_site_type": "ontop",
+      "actual_site_type": "bridge",
+      "best_structure_file": "outputs/007-9501c6ca/BEST_OH_ontop_to_bridge_E-6.577.xyz",
+      "generated_conformers_file": "outputs/007-9501c6ca/conformers_[OH].traj",
+      "relaxation_trajectory_file": "outputs/007-9501c6ca/final.xyz",
+      "message": "Most stable config adsorption energy: -6.5767 eV. Target Atom: O (from plan index 0, global index 54 in relaxed structure). -> Nearest: Sc (Index 25), Distance: 1.989 \u00c5 (Threshold: 3.422), Bound: True. Bonded Surface Atoms: Sc-1.989\u00c5, Sc-2.11\u00c5. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Ni'] -> Actual ['Sc', 'Sc']).",
+      "history_entry": "\u3010\u2705 Perfect Adsorption\u3011 ontop @ ['Ni'] (Index [0]) -> \u26a0\ufe0f\u3010Unstable Site Warning\u3011\u26a0\ufe0f: Planned ontop (Ni) is unstable, adsorbate spontaneously slipped to bridge (Sc-Sc).This means Ni has insufficient affinity for this adsorbate. [\ud83c\udf1f New Best] | E=-6.577 eV"
+    },
+    {
+      "attempt_index": 2,
+      "plan": {
+        "reasoning": "Step 0 - SMILES Consistency Check: The SMILES [OH] represents a hydroxyl radical. The RDKit analysis confirms atom index 0 is O (SP3, radical_electrons=1, degree=0). This is a reactive species with an unpaired electron on oxygen. adsorbate_type should be 'ReactiveSpecies' and adsorbate_binding_indices=[0].\n\nStep 1 - Analyze History: One attempt was made: ontop @ Ni (index [0]). The adsorbate slipped from the Ni ontop site to a bridge (Sc-Sc) site, indicating Ni ontop is thermodynamically unstable for OH. The resulting energy is -6.577 eV at the Sc-Sc bridge site. This is the current best. The Ni ontop site is marked as invalid/unstable.\n\nStep 2 - Formulate New Plan: Since the adsorbate spontaneously moved to a Sc-Sc bridge site, that configuration is already captured. I should now explicitly test other high-symmetry sites to see if a lower energy configuration exists. The available sites include: Sc ontop, Te ontop, Sc-Sc bridge (already found via slip), Sc-Te bridge, Ni-Sc bridge, Sc-Sc-Sc hollow, Sc-Sc-Te hollow, Sc-Sc-Sc-Te hollow-4, Sc-Sc-Te-Te hollow-4.\n\nThe Sc-Sc bridge was found via slip from Ni ontop. I should now try Sc ontop explicitly, as Sc shows strong affinity (the adsorbate migrated to Sc-Sc). Sc ontop might give a different (possibly lower) energy than the Sc-Sc bridge. Additionally, hollow sites (Sc-Sc-Sc) could be lower energy.\n\nI will try the Sc-Sc-Sc hollow site next, as hollow sites often provide stronger binding for reactive species like OH on metal surfaces, and Sc shows clear affinity for OH.\n\nStep 3 - User Intent: Find the lowest energy adsorption configuration for OH radical.\n\nStep 4 - Adsorbate: O atom at index 0, radical_electrons=1, ReactiveSpecies, binding via O.\n\nStep 5 - Surface: Hollow-3 Sc-Sc-Sc is available.\n\nStep 6 - Plan: Try hollow site Sc-Sc-Sc with O (index 0) as binding atom. This is a 3-fold hollow which often gives stronger binding for reactive oxygen species.",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "hollow",
+          "surface_binding_atoms": [
+            "Sc",
+            "Sc",
+            "Sc"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "hollow|Sc,Sc,Sc|0|ReactiveSpecies|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -7.2280120849609375,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": true,
+      "planned_site_type": "hollow",
+      "actual_site_type": "bridge",
+      "best_structure_file": "outputs/007-9501c6ca/BEST_OH_hollow_to_bridge_E-7.228.xyz",
+      "generated_conformers_file": "outputs/007-9501c6ca/conformers_[OH].traj",
+      "relaxation_trajectory_file": "outputs/007-9501c6ca/final.xyz",
+      "message": "Most stable config adsorption energy: -7.2280 eV. Target Atom: O (from plan index 0, global index 54 in relaxed structure). -> Nearest: Sc (Index 32), Distance: 1.975 \u00c5 (Threshold: 3.422), Bound: True. Bonded Surface Atoms: Sc-1.975\u00c5, Sc-2.109\u00c5. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Sc', 'Sc', 'Sc'] -> Actual ['Sc', 'Sc']).",
+      "history_entry": "\u3010\u2705 Perfect Adsorption\u3011 hollow @ ['Sc', 'Sc', 'Sc'] (Index [0]) -> \u26a0\ufe0f\u3010Unstable Site Warning\u3011\u26a0\ufe0f: Planned hollow (Sc-Sc-Sc) is unstable, adsorbate spontaneously slipped to bridge (Sc-Sc).This means Sc-Sc-Sc has insufficient affinity for this adsorbate. [\ud83c\udf1f New Best] | E=-7.228 eV"
+    },
+    {
+      "attempt_index": 3,
+      "plan": {
+        "reasoning": "**Step 0: SMILES Consistency Check**\nThe SMILES [OH] represents a hydroxyl radical. The RDKit analysis confirms: O atom at index 0, SP3 hybridization, 1 radical electron, degree 0. This is a ReactiveSpecies (radical). The binding atom is O (index 0).\n\n**Step 1: Analyze History**\n- Attempt 1: ontop @ Ni \u2192 slipped to bridge (Sc-Sc), E=-6.577 eV. Ni ontop is unstable/invalid.\n- Attempt 2: hollow @ Sc-Sc-Sc \u2192 slipped to bridge (Sc-Sc), E=-7.228 eV. Sc-Sc-Sc hollow is unstable/invalid. Both converged to bridge (Sc-Sc) but with different energies, suggesting different Sc-Sc bridge environments or slightly different geometries.\n\nBoth previous attempts slipped to bridge (Sc-Sc), but the energies differ (-6.577 vs -7.228 eV), indicating the surface is heterogeneous and different Sc-Sc bridge sites exist. The second attempt gave a lower energy.\n\n**Step 2: Formulate New Plan**\nSince both previous attempts ended up at bridge (Sc-Sc) sites with different energies, I should now directly target a bridge site explicitly. The available bridge sites include: Ni-Sc, Sc-Sc, Sc-Te. I should try:\n- Bridge @ Sc-Sc directly (to find potentially lower energy Sc-Sc bridge sites)\n- Bridge @ Sc-Te (a different chemical environment)\n- Bridge @ Ni-Sc\n\nSince the best result so far is -7.228 eV at a Sc-Sc bridge, I should try other bridge types to see if they can beat this. Let me try bridge @ Sc-Te, as Te is a heavier chalcogen that might provide different electronic environment. Also, I should try bridge @ Sc-Sc directly to confirm/improve the current best.\n\nLet me try bridge @ Sc-Sc directly first, as this is where both previous attempts converged, and a direct placement might find a better geometry or a different Sc-Sc pair with lower energy.\n\nActually, since both slipped TO Sc-Sc bridge, directly targeting Sc-Sc bridge is the most logical next step to systematically explore this site type. This is a new plan (direct bridge placement vs. slipped-to-bridge).\n\n**Step 3-6: Plan**\n- site_type: bridge\n- surface_binding_atoms: ['Sc', 'Sc']\n- adsorbate_binding_indices: [0] (O radical)\n- adsorbate_type: ReactiveSpecies",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "bridge",
+          "surface_binding_atoms": [
+            "Sc",
+            "Sc"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "bridge|Sc,Sc|0|ReactiveSpecies|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -7.1137542724609375,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": false,
+      "planned_site_type": "bridge",
+      "actual_site_type": "bridge",
+      "best_structure_file": "outputs/007-9501c6ca/BEST_OH_bridge_E-7.114.xyz",
+      "generated_conformers_file": "outputs/007-9501c6ca/conformers_[OH].traj",
+      "relaxation_trajectory_file": "outputs/007-9501c6ca/final.xyz",
+      "message": "Most stable config adsorption energy: -7.1138 eV. Target Atom: O (from plan index 0, global index 54 in relaxed structure). -> Nearest: Sc (Index 35), Distance: 1.918 \u00c5 (Threshold: 3.422), Bound: True. Bonded Surface Atoms: Sc-1.918\u00c5, Sc-2.197\u00c5. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: False (Planned ['Sc', 'Sc'] -> Actual ['Sc', 'Sc']).",
+      "history_entry": "\u3010\u2705 Perfect Adsorption\u3011 bridge @ ['Sc', 'Sc'] (Index [0]) -> Site: bridge (Sc,Sc) | E=-7.114 eV"
+    },
+    {
+      "attempt_index": 4,
+      "plan": {
+        "reasoning": "**Step 0: SMILES Consistency Check**\nThe SMILES [OH] represents a hydroxyl radical. The RDKit analysis confirms: O atom at index 0, SP3 hybridization, radical_electrons=1, degree=0. This is indeed a reactive radical species. adsorbate_type = 'ReactiveSpecies', binding via O atom at index 0.\n\n**Step 1: Analyze History**\n- Attempt 1: ontop @ Ni -> slipped to bridge (Sc-Sc), E=-6.577 eV. Ni ontop is unstable.\n- Attempt 2: hollow @ Sc-Sc-Sc -> slipped to bridge (Sc-Sc), E=-7.228 eV [Best so far]. Sc-Sc-Sc hollow is unstable.\n- Attempt 3: bridge @ Sc-Sc (Index [0]) -> stable at bridge (Sc,Sc), E=-7.114 eV.\n\nKey observations:\n- Both attempts 1 and 2 slipped to bridge (Sc-Sc), suggesting bridge Sc-Sc is a strong attractor.\n- Attempt 2 gave E=-7.228 eV (best), attempt 3 gave E=-7.114 eV. These are both bridge Sc-Sc but with different indices (attempt 2 used hollow Sc-Sc-Sc index [0], attempt 3 used bridge Sc-Sc index [0]). The energy difference is ~0.11 eV, which is above the 0.05 eV noise threshold, suggesting they may be geometrically distinct Sc-Sc bridge environments.\n\n**Step 2: Untested Sites**\nRemaining untested sites from the available list:\n- ontop @ Sc (not tested)\n- ontop @ Te (not tested)\n- hollow @ Sc-Sc-Te (not tested)\n- hollow @ Sc-Sc-Sc-Te (not tested)\n- hollow @ Sc-Sc-Te-Te (not tested)\n- bridge @ Ni-Sc (not tested)\n- bridge @ Sc-Te (not tested)\n\n**Step 3: Strategy**\nThe current best is E=-7.228 eV from a slip to bridge Sc-Sc. I should try sites that might give lower energy. Sc-based sites seem favorable. Let me try bridge @ Sc-Te, which is a new site type that hasn't been tested. Alternatively, ontop @ Sc could be interesting since Sc shows strong affinity.\n\nGiven that Sc-Sc bridge is the strongest site found so far, and hollow Sc-Sc-Te hasn't been tested (it might slip to a Sc-Te bridge or stay as hollow), let me try ontop @ Sc first since it's a distinct chemical environment. If Sc has strong affinity, ontop Sc might be stable or slip to a favorable configuration.\n\nActually, let me try bridge @ Sc-Te since it's a completely new bridge combination not yet explored, and Te might modify the electronic environment of Sc favorably.\n\n**Step 4: Plan**\nTry bridge @ Sc-Te with O (index 0) as binding atom. This is a new site not yet tested.",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "bridge",
+          "surface_binding_atoms": [
+            "Sc",
+            "Te"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "bridge|Sc,Te|0|ReactiveSpecies|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -6.6301116943359375,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": true,
+      "planned_site_type": "bridge",
+      "actual_site_type": "bridge",
+      "best_structure_file": "outputs/007-9501c6ca/BEST_OH_bridge_E-6.630.xyz",
+      "generated_conformers_file": "outputs/007-9501c6ca/conformers_[OH].traj",
+      "relaxation_trajectory_file": "outputs/007-9501c6ca/final.xyz",
+      "message": "Most stable config adsorption energy: -6.6301 eV. Target Atom: O (from plan index 0, global index 54 in relaxed structure). -> Nearest: Sc (Index 32), Distance: 1.959 \u00c5 (Threshold: 3.422), Bound: True. Bonded Surface Atoms: Sc-1.959\u00c5, Sc-2.184\u00c5. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Sc', 'Te'] -> Actual ['Sc', 'Sc']).",
+      "history_entry": "\u3010\u2705 Perfect Adsorption\u3011 bridge @ ['Sc', 'Te'] (Index [0]) -> \u26a0\ufe0f\u3010Unstable Site Warning\u3011\u26a0\ufe0f: Planned bridge (Sc-Te) is unstable, adsorbate spontaneously slipped to bridge (Sc-Sc).This means Sc-Te has insufficient affinity for this adsorbate. | E=-6.630 eV"
+    },
+    {
+      "attempt_index": 5,
+      "plan": {
+        "reasoning": "Let me analyze the history systematically:\n\n1. ontop @ Ni (Index [0]): Unstable, slipped to bridge (Sc-Sc). E=-6.577 eV\n2. hollow @ Sc-Sc-Sc (Index [0]): Unstable, slipped to bridge (Sc-Sc). E=-7.228 eV [Best so far]\n3. bridge @ Sc-Sc (Index [0]): Stable at bridge (Sc,Sc). E=-7.114 eV\n4. bridge @ Sc-Te (Index [0]): Unstable, slipped to bridge (Sc-Sc). E=-6.630 eV\n\nKey observations:\n- The best energy found is E=-7.228 eV from hollow Sc-Sc-Sc (Index [0]) which slipped to bridge (Sc-Sc)\n- The direct bridge Sc-Sc (Index [0]) gave E=-7.114 eV, slightly higher\n- This suggests there may be different Sc-Sc bridge environments (different index sets) that could give different energies\n- The surface has surface heterogeneity - different Sc-Sc bridge pairs may have different chemical environments\n\nRemaining untested sites from the available list:\n- ontop @ Sc\n- ontop @ Te\n- hollow @ Sc-Sc-Te\n- hollow @ Sc-Sc-Sc-Te (4-fold)\n- hollow @ Sc-Sc-Te-Te (4-fold)\n- bridge @ Ni-Sc\n- bridge @ Sc-Sc (Index [1] or higher - different environment)\n\nThe adsorbate [OH] has O at index 0 with 1 radical electron, so it is a ReactiveSpecies binding through O.\n\nI should try ontop @ Sc, as Sc is the dominant surface element and has shown strong affinity (all slips go to Sc-Sc bridge). An ontop Sc site might be stable and could give a competitive energy. Also, the hollow Sc-Sc-Te site has not been tested.\n\nLet me try ontop @ Sc next, as it hasn't been tested and Sc shows strong affinity for OH. If it slips, it will likely go to Sc-Sc bridge again. Alternatively, I could try hollow @ Sc-Sc-Te which is a distinct untested site.\n\nI'll try hollow @ Sc-Sc-Te since it's a distinct untested hollow site that could potentially give a lower energy than the current best of -7.228 eV. The O radical (index 0) will bind through the hollow site.",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "hollow",
+          "surface_binding_atoms": [
+            "Sc",
+            "Sc",
+            "Te"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "hollow|Sc,Sc,Te|0|ReactiveSpecies|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -7.1241912841796875,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": true,
+      "planned_site_type": "hollow",
+      "actual_site_type": "hollow (FCC/No-Subsurf)",
+      "best_structure_file": "outputs/007-9501c6ca/BEST_OH_hollow_to_hollow_FCC-No-Subsurf_E-7.124.xyz",
+      "generated_conformers_file": "outputs/007-9501c6ca/conformers_[OH].traj",
+      "relaxation_trajectory_file": "outputs/007-9501c6ca/final.xyz",
+      "message": "Most stable config adsorption energy: -7.1242 eV. Target Atom: O (from plan index 0, global index 54 in relaxed structure). -> Nearest: Sc (Index 32), Distance: 1.974 \u00c5 (Threshold: 3.422), Bound: True. Bonded Surface Atoms: Sc-1.974\u00c5, Sc-2.163\u00c5, Sc-2.819\u00c5. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Sc', 'Sc', 'Te'] -> Actual ['Sc', 'Sc', 'Sc']).",
+      "history_entry": "\u3010\u2705 Perfect Adsorption\u3011 hollow @ ['Sc', 'Sc', 'Te'] (Index [0]) -> \u26a0\ufe0f\u3010Unstable Site Warning\u3011\u26a0\ufe0f: Planned hollow (Sc-Sc-Te) is unstable, adsorbate spontaneously slipped to hollow (FCC/No-Subsurf) (Sc-Sc-Sc).This means Sc-Sc-Te has insufficient affinity for this adsorbate. | E=-7.124 eV"
+    }
+  ],
+  "history": [
+    "\u3010\u2705 Perfect Adsorption\u3011 ontop @ ['Ni'] (Index [0]) -> \u26a0\ufe0f\u3010Unstable Site Warning\u3011\u26a0\ufe0f: Planned ontop (Ni) is unstable, adsorbate spontaneously slipped to bridge (Sc-Sc).This means Ni has insufficient affinity for this adsorbate. [\ud83c\udf1f New Best] | E=-6.577 eV",
+    "\u3010\u2705 Perfect Adsorption\u3011 hollow @ ['Sc', 'Sc', 'Sc'] (Index [0]) -> \u26a0\ufe0f\u3010Unstable Site Warning\u3011\u26a0\ufe0f: Planned hollow (Sc-Sc-Sc) is unstable, adsorbate spontaneously slipped to bridge (Sc-Sc).This means Sc-Sc-Sc has insufficient affinity for this adsorbate. [\ud83c\udf1f New Best] | E=-7.228 eV",
+    "\u3010\u2705 Perfect Adsorption\u3011 bridge @ ['Sc', 'Sc'] (Index [0]) -> Site: bridge (Sc,Sc) | E=-7.114 eV",
+    "\u3010\u2705 Perfect Adsorption\u3011 bridge @ ['Sc', 'Te'] (Index [0]) -> \u26a0\ufe0f\u3010Unstable Site Warning\u3011\u26a0\ufe0f: Planned bridge (Sc-Te) is unstable, adsorbate spontaneously slipped to bridge (Sc-Sc).This means Sc-Te has insufficient affinity for this adsorbate. | E=-6.630 eV",
+    "\u3010\u2705 Perfect Adsorption\u3011 hollow @ ['Sc', 'Sc', 'Te'] (Index [0]) -> \u26a0\ufe0f\u3010Unstable Site Warning\u3011\u26a0\ufe0f: Planned hollow (Sc-Sc-Te) is unstable, adsorbate spontaneously slipped to hollow (FCC/No-Subsurf) (Sc-Sc-Sc).This means Sc-Sc-Te has insufficient affinity for this adsorbate. | E=-7.124 eV"
+  ],
+  "error": null,
+  "perfect_count": 5,
+  "dissociation_count": 0,
+  "rearrangement_count": 0,
+  "calc_failure_count": 0,
+  "chemical_slip_count": 4
+}

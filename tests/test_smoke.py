@@ -20,7 +20,7 @@ class TestSmoke(unittest.TestCase):
             session_id="session01",
         )
 
-        self.assertEqual(state["llm_backend"], "google")
+        self.assertEqual(state["llm_backend"], "openrouter")
         self.assertEqual(state["relaxation_mode"], "fast")
         self.assertEqual(state["attempted_keys"], [])
         self.assertEqual(state["max_attempts"], 5)

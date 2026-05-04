@@ -31,7 +31,7 @@ PROVENANCE_FIELDS = [
 RESULTS = ROOT / "research" / "results"
 BASIC = RESULTS / "basic_experiments"
 ADVANCED = RESULTS / "advanced_experiments"
-MECHANISM = ADVANCED / "mechanism" / "ablation_effects"
+MECHANISM = ADVANCED / "ablation_and_chemical_slip_diagnostics" / "ablation_effects"
 
 BACKEND_ALIASES = {
     "gpt": "gpt",
@@ -42,12 +42,10 @@ BACKEND_ALIASES = {
     "anthropic_sonnet46": "claude",
     "anthropic_claude_sonnet46_mace_mp0_small": "claude",
     "gemini": "gemini",
-    "google_vertexai_gemini25pro_mace_mp0_small": "gemini",
+    "openrouter_gemini25pro_mace_mp0_small": "gemini",
     "grok": "grok",
     "grok4": "grok",
-    "xai_grok4_0709_mace_mp0_small": "grok",
-    "xai_xai_grok4_0709_mace_mp0_small_0709_mace_mp0_small": "grok",
-    "google_vertexai_google_vertexai_gemini25pro_mace_mp0_small25pro_mace_mp0_small": "gemini",
+    "openrouter_grok4_mace_mp0_small": "grok",
     "anthropic_claude_sonnet46_mace_mp0_small_sonnet46_mace_mp0_small": "claude",
 }
 
@@ -299,6 +297,8 @@ def normalize_backend_csv(path: Path) -> None:
     for row in rows:
         metadata = provenance_for_row(row)
         clean = {key: value for key, value in row.items() if key not in PROVENANCE_FIELDS}
+        if clean.get("variant") == "single_shot":
+            clean["variant"] = "one_shot"
         normalized.append({**metadata, **clean})
     fields = [field for field in old_fields if field not in PROVENANCE_FIELDS and field != "backend"]
     write_csv(path, normalized, [*PROVENANCE_FIELDS, *fields])
@@ -309,6 +309,8 @@ def canonicalize_backend_value(value: str) -> str:
 
 
 def canonicalize_backend_key(value: str) -> str:
+    if value.endswith("_single_shot"):
+        value = f"{value[: -len('_single_shot')]}_one_shot"
     full = full_backend_for_alias(value)
     if full is not None:
         return full
@@ -321,6 +323,8 @@ def canonicalize_backend_key(value: str) -> str:
 
 
 def canonicalize_text(value: str) -> str:
+    if value == "single_shot":
+        return "one_shot"
     return value
 
 
@@ -346,6 +350,9 @@ def canonicalize_metric_keys(obj: object) -> object:
 def canonicalize_record_backends(obj: object) -> object:
     if isinstance(obj, dict):
         converted = {key: canonicalize_record_backends(value) for key, value in obj.items()}
+        variant = converted.get("variant")
+        if variant == "single_shot":
+            converted["variant"] = "one_shot"
         backend = converted.get("backend")
         if isinstance(backend, str):
             key = backend_key_for_alias(backend)
@@ -422,6 +429,8 @@ def normalize_outlier_patch_csv(path: Path) -> None:
     for row in rows:
         metadata = provenance_for_row(row)
         clean = {key: value for key, value in row.items() if key not in PROVENANCE_FIELDS}
+        if clean.get("variant") == "single_shot":
+            clean["variant"] = "one_shot"
         normalized.append({**metadata, **clean})
     old_fields = list(rows[0])
     fields = [field for field in old_fields if field not in PROVENANCE_FIELDS and field != "backend"]
@@ -433,23 +442,23 @@ def main() -> int:
     write_variant_delta_statistics()
     write_cross_backend_agreement()
     for path in [
-        ADVANCED / "mechanism" / "chemical_slip_interpretability" / "cmu20" / "case19_trajectory.csv",
+        ADVANCED / "ablation_and_chemical_slip_diagnostics" / "chemical_slip_interpretability" / "cmu20" / "case19_trajectory.csv",
         ADVANCED / "case_studies" / "iteration_convergence" / "cmu20" / "all_backends" / "full" / "iteration_convergence.csv",
     ]:
         normalize_backend_csv(path)
     normalize_slip_analysis_csv(
-        ADVANCED / "mechanism" / "chemical_slip_interpretability" / "cmu20" / "slip_analysis.csv"
+        ADVANCED / "ablation_and_chemical_slip_diagnostics" / "chemical_slip_interpretability" / "cmu20" / "slip_analysis.csv"
     )
     normalize_outlier_patch_csv(
-        ADVANCED / "reproducibility" / "ocd62_overlap12" / "summaries" / "grok_ocd16_outlier_patch.csv"
+        ADVANCED / "reproducibility" / "ocd62_overlap12_rerun" / "summaries" / "grok_ocd16_outlier_patch.csv"
     )
     for path in [
-        ADVANCED / "mechanism" / "chemical_slip_interpretability" / "cmu20" / "slip_analysis.json",
+        ADVANCED / "ablation_and_chemical_slip_diagnostics" / "chemical_slip_interpretability" / "cmu20" / "slip_analysis.json",
         MECHANISM / "variant_delta_statistics.json",
     ]:
         normalize_json(path, canonicalize_keys=True)
     normalize_json(
-        ADVANCED / "mechanism" / "chemical_slip_interpretability" / "cmu20" / "case19_trajectory.json",
+        ADVANCED / "ablation_and_chemical_slip_diagnostics" / "chemical_slip_interpretability" / "cmu20" / "case19_trajectory.json",
         canonicalize_records=True,
         canonicalize_keys=True,
     )
