@@ -1,28 +1,25 @@
-
 \subsection{Overview of AdsMind}
 
-To identify the most stable adsorption configuration and energy, AdsMind implements a closed-loop agent architecture with five core modules: \textbf{Planner}, \textbf{Validator}, \textbf{Executor}, \textbf{Analyzer}, and \textbf{Summarizer} (Figure~\ref{fig:pipeline}). 
-In each iteration, the \textbf{Planner} proposes a structured adsorption hypothesis, which the \textbf{Validator} checks before physical execution. 
-The \textbf{Executor} relaxes the structure, and the \textbf{Analyzer} interprets the post-relaxation coordinates to guide the next iteration.
-\textbf{Summarizer} acts as the report-and-routing node after each physical execution or explicit termination. It either returns control to the \textbf{Planner} when the search should continue, or emits the final report of the best configuration once the terminate action occurs or the budget is exhausted. The following sections explain the pipeline and modules in detail.
+AdsMind implements a closed-loop agent architecture for adsorption configuration search. The system comprises five modules: \textbf{Planner}, \textbf{Validator}, \textbf{Executor}, \textbf{Analyzer}, and \textbf{Summarizer} (Figure~\ref{fig:pipeline}). In each iteration, the \textbf{Planner} proposes an adsorption hypothesis, which the \textbf{Validator} checks before physical execution. The \textbf{Executor} relaxes the structure, and the \textbf{Analyzer} interprets the post-relaxation coordinates to guide the next iteration. The \textbf{Summarizer} routes control flow and emits the final report when termination criteria are met.
 
-\subsection{Planner and Validator: Adsorption Hypothesis Generation}
+\subsection{Closed-Loop Agent Architecture}
+
+\subsubsection{Planner and Validator: Adsorption Hypothesis Generation}
 
 At the beginning of the analysis, the user provides a request prompt together with the corresponding adsorbate SMILES string and surface slab file.
-At the onset of each iteration, the \textbf{Planner} proposes a structured adsorption hypothesis in JSON format, including the canonical site type---%
-\textit{ontop} (one surface atom),
-\textit{bridge} (two adjacent surface atoms), or
-\textit{hollow} (three or more surface atoms)---
-the intended surface symbols, and the adsorbate binding indices~\cite{norskov2004density,shriver2006inorganic}.
+At the onset of each iteration, the \textbf{Planner} proposes a structured adsorption hypothesis in JSON format, including the canonical site type---\textit{ontop} (one surface atom), \textit{bridge} (two adjacent surface atoms), or \textit{hollow} (three or more surface atoms)---the intended surface symbols, and the adsorbate binding indices~\cite{norskov2004density,shriver2006inorganic}.
 
 In our closed-loop architecture, the updated context from other modules is entered into the \textbf{Planner} prompt, providing physical feedback and performance analysis from previous hypotheses.
 The \textbf{Planner} prompt is assembled from conditional sections rather than a monolithic, fixed template. Three runtime switches control the agentic feedback exposed to the language model:
 \textit{Slip feedback} (enables slip-conditioned guidance) determines whether prior slips are framed as explicit evidence that the originally planned site is unstable.
-\textit{FORBID} (explicit negative constraint) determines whether slipped or otherwise failed site intents are converted into an explicit prohibition in the planner history, preventing retry of the same failed site family.
+\textit{Forbid} (explicit negative constraint) determines whether slipped or otherwise failed site intents are converted into an explicit prohibition in the planner history, preventing retry of the same failed site family.
 \textit{Termination} determines whether convergence-to-known-best signals are surfaced to the planner and whether the planner is allowed to stop early after repeated convergence.
+The three switches are independent; disabling all three yields the 1-Shot baseline. When Termination is disabled, the loop continues until the attempt budget (default: 5) is exhausted.
+
+Convergence is declared when the same site family is proposed in three consecutive iterations without finding a lower-energy configuration. The known-best energy is the minimum adsorption energy observed across all iterations. When Termination is enabled, the Planner receives a summary of the best-so-far result and may emit a STOP signal.
 
 %% Validator
-After the hypothesis is proposed by the \textbf{Planner}, the \textbf{Validator} will subsequently enforce chemistry- and schema-level constraints before any expensive physics simulation is made. The validation protocol ensures that:
+After the hypothesis is proposed by the \textbf{Planner}, the \textbf{Validator} enforces chemistry- and schema-level constraints before any expensive physics simulation is made. The validation protocol ensures that:
 \begin{enumerate}
     \item The requested adsorbate binding indices are valid and correspond to non-hydrogen heavy atoms, unless the adsorbate is explicitly a single atom (e.g., [H]).
     \item The cardinality of the binding indices matches the topological requirements of the specified site type (e.g., \textit{ontop} requires exactly one index, while \textit{bridge} allows up to two indices for side-on modes).
@@ -30,24 +27,21 @@ After the hypothesis is proposed by the \textbf{Planner}, the \textbf{Validator}
 \end{enumerate}
 Hypotheses failing these checks elicit an immediate penalty feedback prompt, directing the LLM to refine its proposal without advancing the state machine to the physical simulation phase.
 
-\subsection{Executor and Analyzer: Physical Simulation and Scientific Analysis}
+\subsubsection{Executor and Analyzer: Physical Simulation and Scientific Analysis}
 
 %% Executor
-With the validated adsorption hypothesis, we perform physical simulation to evaluate the adsorption energy and performance. 
+With the validated adsorption hypothesis, the \textbf{Executor} performs physical simulation to evaluate the adsorption energy and performance.
 In AdsMind, the \textbf{Executor} instantiates the accepted plan on the slab, performs physical relaxation, and returns a structured post-relaxation analysis rather than only a scalar energy.
-The \textbf{Analyzer} records whether the final structure remained bound, whether dissociation or rearrangement occurred, and whether the realized coordination environment differs from the \textbf{Planner}'s intent. These deviations are logged as slip diagnostics. The code-level \textit{Chemical Slip} flag is reserved for cases where relaxation realizes a different surface-symbol fingerprint than the planner requested; canonical site-family mismatch is retained separately as a geometric/site slip signal in the search history.
+The \textbf{Analyzer} records whether the final structure remained bound, whether dissociation or rearrangement occurred, and whether the realized coordination environment differs from the \textbf{Planner}'s intent. These deviations are logged as slip diagnostics. \textit{Chemical Slip} is detected when the relaxed structure exhibits a different surface-symbol fingerprint than the Planner's intent. The surface-symbol fingerprint is defined as the sorted list of element symbols of surface atoms within the first coordination shell of the adsorbate anchor atom. Canonical site-family mismatch is retained separately as a geometric/site slip signal in the search history.
 
 Before the physical simulation, the proposal is pre-processed by being translated into an atomistic starting structure through a surrogate-SMILES geometry layer. 
 This layer maps the selected binding atom(s) to proxy adsorption markers and constructs physically valid initial placements for \textit{ontop}, \textit{bridge}, and \textit{hollow} adsorption.
 It samples a capped set of candidate surface sites and conformers.
 In the benchmark configuration, the default cap is eight filtered surface coordinates (matching the requested site type and surface-symbol pattern) and four conformers per site, with one top-ranked candidate carried into full relaxation.
 
-A two-step evaluation procedure is then employed.
+A \textbf{two-step evaluation procedure} is then employed.
 Candidate structures are first screened with the MACE-MP calculator used by the active protocol to discard pathological configurations and rank promising candidates by screened energy. This screening stage can optionally include a short Langevin molecular-dynamics warmup, but the warmup is disabled (\texttt{md\_steps=0}) in the primary CPU benchmark. The best surviving candidate (\texttt{relax\_top\_n=1}) is then fully relaxed and analyzed.
-
 The post-relaxation analysis reconstructs the actual local coordination environment, detects dissociation and bond changes, and writes structured artifacts that can be consumed directly by the next \textbf{Planner} step or by offline benchmark tooling.
-
-The physical engine uses the MACE equivariant message-passing architecture and the MACE-MP foundation model~\cite{batatia2022mace,batatia2023foundation} as the surrogate calculator.
 
 For a given adsorption state, the thermodynamic stability is quantified by the adsorption energy $E_{\text{ads}}$, defined as:
 \begin{equation}
@@ -56,17 +50,15 @@ For a given adsorption state, the thermodynamic stability is quantified by the a
 \end{equation}
 where $E_{\text{total}}$ is the total potential energy of the relaxed adsorbate-slab system, $E_{\text{surface}}$ is the single-point potential energy of the bare surface evaluated with the same cell and calculator settings, and $E_{\text{adsorbate}}$ is the energy of the isolated adsorbate in a vacuum box.
 
-Structural relaxation is performed using the Broyden–Fletcher–Goldfarb–Shanno (BFGS) optimization algorithm~\cite{nocedal2006numerical}. The forces $\mathbf{F}_i$ on each unconstrained atom $i$ are minimized until the maximum force component falls below a predefined threshold $f_{\text{max}}$:
+Structural relaxation is performed using the Broyden--Fletcher--Goldfarb--Shanno (BFGS) optimization algorithm~\cite{nocedal2006numerical}. The forces $\mathbf{F}_i$ on each unconstrained atom $i$ are minimized until the maximum force component falls below a predefined threshold $f_{\text{max}}$:
 \begin{equation}
     \max_{i} \| \mathbf{F}_i \|_{\infty} \le f_{\text{max}}
 \end{equation}
 
 During the optimization, selective constraints are applied. In the standard mode, the bottom fraction of the surface slab atoms (typically one-third of the $z$-axis dimension) is held fixed to simulate the bulk crystal termination, while the upper atomic layers and the adsorbate are fully relaxed.
 
-All primary benchmark and matched-baseline experiments use the same MACE-MP-0 small (CPU, float32, dispersion disabled) physical backend so that observed differences reflect search strategy, not energy-function choice; the separate MACE-MP-0 large run is treated only as a force-field sensitivity check.
-
 Following physical simulation, the \textbf{Analyzer} systematically parses the relaxed trajectory to extract the precise local coordination environment.
-In AdsMind, \textit{Chemical Slip} is automatically detected when relaxation drives the adsorbate away from the \textbf{Planner}'s intended surface-symbol environment toward a different stable local environment. Canonical site-family mismatch is logged as a related geometric/site slip diagnostic rather than being conflated with the surface-symbol slip flag. 
+As defined above, \textit{Chemical Slip} is detected when the relaxed structure exhibits a different surface-symbol fingerprint than the Planner's intent (see \S~2.2.1). The surface-symbol fingerprint is recomputed from the relaxed coordinates to ensure consistency. Canonical site-family mismatch is logged as a related geometric/site slip diagnostic rather than being conflated with the surface-symbol slip flag. 
 
 The connectivity of the relaxed system is established by constructing a localized adjacency matrix $A$. Two atoms $i$ and $j$ are considered bonded if their interatomic distance $d_{ij}$ satisfies:
 \begin{equation}
@@ -81,16 +73,58 @@ If the realized site type or surface-symbol fingerprint differs from the \textbf
 
 The \textbf{Analyzer} then updates the running memory with the adsorption energy, bond integrity, and slip status, enabling dynamic adjustment of the exploration strategy.
 
-\subsection{Ablation Studies and Experimental Setup}
+\subsection{Physical Backend: MACE-MP-0 Calculator}
+\label{sec:mace_config}
 
-To identify the contribution of different mechanisms in AdsMind's loop search strategy, these ablation switches are designed for experiments. 
-The \textit{Full} setting enables all three mechanisms. \textit{$-$Slip} removes slip-conditioned guidance and the associated negative constraint. \textit{$-$Forbid} keeps slip detection but suppresses the explicit prohibition against retrying a failed site family. \textit{$-$Term} disables convergence-based early stopping while preserving the rest of the loop. \textit{1-Shot} disables all three mechanisms and sets the maximum attempt budget to one.
+The physical engine uses the MACE equivariant message-passing architecture and the MACE-MP foundation model~\cite{batatia2022mace,batatia2023foundation} as the surrogate calculator. Two configurations are employed:
 
-All agent-side benchmark runs in this manuscript use frozen experiment configurations rather than mutable product defaults. Four reasoning backends are evaluated: Gemini~2.5~Pro (\texttt{google/gemini-2.5-pro})~\cite{gemini2026modelcard}, Grok-4 (\texttt{x-ai/grok-4})~\cite{grok2025blog}, GPT-5.4 (\texttt{gpt-5.4-2026-03-05})~\cite{openai2026gpt5}, and Claude~Sonnet~4.6 (\texttt{claude-sonnet-4-6})~\cite{anthropic2026claude}, all run at zero temperature under fixed backend settings. For the primary benchmark protocol, the physical backend is locked to a conservative MACE-MP-0 small configuration loaded through \texttt{mace.calculators.mace\_mp}: \texttt{model=small}, \texttt{default\_dtype=float32}, \texttt{device=cpu}, and dispersion disabled. This choice reflects the practical hardware constraints of the benchmark environment and is held fixed across all reported ablations and backend comparisons. Each frozen configuration records the model identifier and experiment settings needed to reproduce the run. Key parameters and default settings are summarized in Table~S1.
+\begin{itemize}
+    \item \textbf{Primary benchmark}: MACE-MP-0 small checkpoint, CPU execution, float32 precision, dispersion disabled. This conservative setting reflects practical hardware constraints and is held fixed across all reported ablations and backend comparisons.
+    \item \textbf{Sensitivity checks}: MACE-MP-0 large checkpoint, CUDA execution, float64 precision, dispersion enabled. These runs probe force-field sensitivity and are treated separately from the primary benchmark.
+\end{itemize}
 
-The original locked CMU statistical package used 15 cases (01--02, 04--05, 09--10, 12--20), and the current manuscript revision extends the CMU ablation audit to the full 20-case manifest. This CMU set spans atomic adsorbates (H), small multi-atom intermediates (OH and NNH), and larger intermediates (CH$_2$CH$_2$OH, OCHCH$_3$, and ONN(CH$_3$)$_2$) across intermetallic and monometallic surfaces. Full runs use a maximum of five attempts. The 1-shot baseline uses the same tooling and physical backend but restricts the planner to a single attempt, allowing us to isolate the value of closed-loop refinement from the value of the base planner alone. Experiments are launched from frozen configurations with fixed seeds and structured result serialization for reproducibility.
+All primary benchmark and matched-baseline experiments use the same MACE-MP-0 small physical backend so that observed differences reflect search strategy, not energy-function choice. Key parameters and default settings are summarized in Table~\ref{tab:mace_config}.
 
-For the OCD-GMAE validation, we use a single 62-case OCD62 benchmark.
-The formal OCD62 statistics use all four reasoning backends in the same five-variant matrix, yielding 1240 backend--case--variant attempts.
-The 12 repeated OCD62 cases are reserved for overlap12 reproducibility analysis and are not treated as a separate benchmark.
-For these expanded analyses, natural chemistry failures are retained in success-rate and reach-Full statistics, while energy deltas are computed only on runs with valid relaxed adsorption energies.
+\subsection{Evaluation Protocol and Experimental Setup}
+\label{sec:eval_setup}
+
+To isolate the contribution of individual mechanisms in AdsMind's closed-loop strategy, we design an ablation study with five variants:
+
+\begin{itemize}
+    \item \textbf{Full}: All mechanisms enabled (Slip feedback, Forbid constraint, Termination).
+    \item \textbf{w/o Slip}: Removes slip-conditioned guidance and the associated negative constraint.
+    \item \textbf{w/o Forbid}: Keeps slip detection but suppresses the explicit prohibition against retrying a failed site family.
+    \item \textbf{w/o Term}: Disables convergence-based early stopping while preserving the rest of the loop.
+    \item \textbf{1-Shot}: Disables all three mechanisms and sets the maximum attempt budget to one.
+\end{itemize}
+
+All agent-side benchmark runs in this manuscript use frozen experiment configurations rather than mutable product defaults. Four reasoning backends are evaluated: Gemini~2.5~Pro (\texttt{gemini-2.5-pro})~\cite{gemini2026modelcard}, Grok-4 (\texttt{grok-4-0709})~\cite{grok2025blog}, GPT-5.4 (\texttt{gpt-5.4-2026-03-05})~\cite{openai2026gpt5}, and Claude~Sonnet~4.6 (\texttt{claude-sonnet-4-6})~\cite{anthropic2026claude}, all run at zero temperature under fixed backend settings. For the primary benchmark protocol, the physical backend is locked to the MACE-MP-0 small configuration described in~\S~\ref{sec:mace_config}. Each frozen configuration records the model identifier and experiment settings needed to reproduce the run.
+
+\subsection{CMU20 Experimental Setup}
+
+The CMU20 benchmark uses the completed 20-case manifest, spanning atomic adsorbates (H), small multi-atom intermediates (OH and NNH), and larger intermediates (CH$_2$CH$_2$OH, OCHCH$_3$, and ONN(CH$_3$)$_2$) across intermetallic and monometallic surfaces.
+The original locked CMU statistical package used 15 cases (01--02, 04--05, 09--10, 12--20), and the current manuscript revision extends the CMU ablation audit to the full 20-case manifest. Full runs use a maximum of five attempts. The 1-shot baseline uses the same tooling and physical backend but restricts the planner to a single attempt, allowing us to isolate the value of closed-loop refinement from the value of the base planner alone. Experiments are launched from frozen configurations with fixed seeds and structured result serialization for reproducibility. The five-variant ablation matrix (Full, w/o Slip, w/o Forbid, w/o Term, 1-Shot) is executed independently on all four LLM backends, yielding 400 total attempts (20 cases $\times$ 5 variants $\times$ 4 backends).
+Natural failures (dissociation or reaction outcomes) are retained in the success-rate denominator; only external service or calculator errors are excluded from the analysis.
+
+\subsection{OCD-GMAE62 Benchmark and Three-Tier Evaluation Protocol}
+
+For validation on broader chemistry beyond the CMU20 benchmark, we assemble the \textbf{OCD-GMAE62} benchmark (\textbf{O}pen \textbf{C}hemistry \textbf{D}ataset – \textbf{G}eneralized \textbf{M}achine-learning \textbf{A}dsorption \textbf{E}nergy 62-case dataset): a 62-case dataset spanning diverse surfaces (intermetallic, monometallic, and compound) and \[AI please replace this with the number of adsorbates\]
+adsorbates (H, OH, NNH, CH$_2$CH$_2$OH, OCHCH$_3$, ONN(CH$_3$)$_2$, and others).
+The dataset is curated to cover a wide range of adsorption energies and surface compositions, providing a comprehensive testbed for evaluating generalization beyond the CMU20 set.
+To systematically evaluate both baseline performance and system stability under a manageable computational budget, we employ a \textbf{three-tier evaluation protocol}:
+
+\textbf{Tier~1 (all 62 cases)} establishes baseline reliability and energy accuracy for the Full and 1-Shot variants.
+Metrics include success rate, mean/median $\Delta E = E_{\mathrm{variant}} - E_{\mathrm{Full}}$, four-backend range (max--min energy across backends), heuristic baseline comparison (Autoadsorbate high-symmetry sites), and random placement baseline ($N=20$ random poses per case).
+
+\textbf{Tier~2 (subsample of 24 cases, 40\% of OCD-GMAE62)} performs deep ablation with the complete five-variant matrix (Full, w/o Slip, w/o Forbid, w/o Term, 1-Shot).
+This subsample is selected to preserve surface-adsorbate diversity from the full 62-case set.
+Tier~2 analyses include: (i) Wilcoxon signed-rank tests for paired variant comparisons with Benjamini--Hochberg (BH) false discovery rate correction; (ii) reach-Full-within-0.01~eV analysis (fraction of runs reaching within 0.01~eV of the Full variant energy); (iii) chemical slip interpretability audit (systematic review of slip events and their physical interpretations); and (iv) cross-backend agreement deep-dive (distribution of four-backend ranges across variants and cases).
+
+\textbf{Tier~3 (selected 12 cases from Tier~2)} evaluates system stability through triple-repeat experiments.
+These 12 cases are a further subsample from the Tier~2 set, chosen to quantify run-to-run variance under identical initial conditions.
+For each of the 12 cases, we run the Full variant three times with identical backend settings and compute the standard deviation of adsorption energy across repeats.
+This tier establishes the precision of AdsMind's energy predictions and identifies cases with higher intrinsic variance (e.g., large adsorbates on multi-component surfaces).
+
+All experiments use the four LLM backends listed in Section~\ref{sec:eval_setup} under a fixed MACE-MP-0 small CPU protocol.
+External service failures are excluded at the raw-attempt audit stage; all reported failures are natural dissociation or reaction outcomes.
+The three-tier design balances statistical power (Tier~1: $n=62$), ablation depth (Tier~2: complete five-variant matrix on $n=24$), and variance quantification (Tier~3: triple repeats on $n=12$) while remaining within computational budget constraints.

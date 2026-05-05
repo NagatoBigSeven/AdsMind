@@ -122,35 +122,165 @@
 
 \clearpage
 
+\section{MACE-MP-0 Calculator Parameters}
+\label{sec:mace_details}
+
+Both the primary benchmark and the sensitivity check employ the MACE-MP-0 foundation model~\cite{batatia2023foundation}, a message-passing neural network architecture trained on the Materials Project trajectory (MPtrj) dataset covering 89 chemical elements~\cite{deng2023chgnet}. The model uses an equivariant architecture with 128-channel node embeddings and a maximum body order of $\nu=2$.
+
+The two checkpoints differ in their number of interaction layers (denoted L\emph{k}), which governs the receptive field and expressivity:
+\begin{itemize}
+    \item \textbf{MACE-MP-0 small} (\texttt{128-L0}): Contains 0 message-passing interaction layers beyond the atomic embedding layer, yielding a single-layer architecture with $\approx$3.85~million parameters. This configuration is efficient for CPU inference and was used as the primary benchmark.
+    \item \textbf{MACE-MP-0 large} (\texttt{128-L2}): Contains 2 interaction layers, yielding a three-layer architecture with $\approx$5.73~million parameters. The additional layers extend the effective cutoff sphere and capture longer-range chemical interactions at the cost of higher computational demand, motivating its deployment on GPU with float64 precision and dispersion corrections.
+\end{itemize}
+
+\begin{table}[ht]
+\centering
+\caption{MACE-MP-0 calculator configurations used in this study. The primary benchmark uses the small checkpoint with conservative settings. Sensitivity checks use the large checkpoint with higher precision.}
+\label{tab:mace_config}
+\begin{tabular}{lllllr}
+\toprule
+Configuration & Checkpoint & Device & Precision & Dispersion & Parameters \\
+\midrule
+Primary benchmark & MACE-MP-0 small (\texttt{128-L0}) & CPU & float32 & Disabled & $\approx$3.85~M \\
+Sensitivity check & MACE-MP-0 large  (\texttt{128-L2}) & CUDA & float64 & Enabled  & $\approx$5.73~M \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Additional parameters for the primary benchmark: \texttt{model=small}, \texttt{default\_dtype=float32}, \texttt{device=cpu}, dispersion disabled. The MACE calculator is loaded through \texttt{mace.calculators.mace\_mp}.
+
+\clearpage
+
 \section{Ablation statistics}
+
+
+
+
+% most information in this table has been included in radar chart
+% but need to include mean iterations
+% median value and mean value are in figure 2 panel a, repeat
+% Duplicate table removed: tab:ablation-summary-main was identical to tab:si-cmu20-ablation-completion.
+
+
+
+
+% largest range information in this table is shown in figure 2 panel b
+% mean 4 backend range is in radar chart
+% cases within 0.01 eV is in figure 2 panel  is not included
+% but need to include largest range?
+
+
+% Table: Cross-LLM robustness (20-case, 4-backend)
+\begin{table}[t]
+\centering
+\caption{Cross-LLM robustness across the 20-case ablation matrix. The four-backend range is max--min energy across Gemini, Grok-4, GPT-5.4, and Claude for the same case and runtime variant.}
+\label{tab:cross-llm-summary}
+\begin{tabular}{lrrr}
+\toprule
+Variant & Mean 4-backend range (eV) & $\leq$0.01\,eV & Largest range (eV) \\
+\midrule
+Full      & 0.153 &  8/20 & 0.776 \\
+w/o Slip  & 0.197 &  8/20 & 0.776 \\
+w/o Forbid & 0.143 & 10/20 & 0.776 \\
+w/o Term   & 0.089 & 11/20 & 0.433 \\
+1-Shot    & 0.341 &  0/20 & 0.880 \\
+\midrule
+Overall              & 0.185 & 37/100 & 0.880 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+
+% information in this table is shown in figure 2 panel b
+% but need to include ???
+
+\begin{table}[t]
+\centering
+\caption{Full-row backend robustness within the completed CMU20 five-variant ablation matrix.}
+\label{tab:cmu20-full-completion}
+\begin{tabular}{lr}
+\toprule
+Metric & Value \\
+\midrule
+Successful Full runs & 80/80 \\
+Mean four-backend range & 0.153~eV \\
+Median four-backend range & 0.029~eV \\
+Maximum four-backend range & 0.776~eV (case~08) \\
+Cases within 0.01~eV & 8/20 \\
+Cases within 0.05~eV & 12/20 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+% information in this table is shown in figure 2 panel a
+% Table: H1 hypothesis test (20-case)
+\begin{table}[t]
+\centering
+\small
+\caption{Explicit test of H$_1$ on the 20-case CMU benchmark using $\Delta E = E_{\mathrm{full}} - E_{\mathrm{1shot}}$. Negative values mean the full agent found a lower energy; hits require $\Delta E < -0.05$~eV. H$_1$ uses only intermetallic surfaces; monometallic cases are shown for completeness but excluded from the support rate. Here N/A means 1-shot failure (dissociated/rejected trajectory), not a physical execution failure.}
+\label{tab:hypothesis-test}
+\begin{tabular}{llrrrr}
+\toprule
+Case & Family & Gemini $\Delta E$/hit & Grok-4 $\Delta E$/hit & GPT-5.4 $\Delta E$/hit & Claude $\Delta E$/hit \\
+\midrule
+01 & intermetallic & $-0.001$ / No & $-0.001$ / No & $-0.070$ / Yes & $-0.073$ / Yes \\
+02 & intermetallic & $0.000$ / No & $-0.616$ / Yes & $-0.426$ / Yes & $-0.426$ / Yes \\
+03 & intermetallic & $0.000$ / No & $-0.032$ / No & $0.000$ / No & $0.000$ / No \\
+04 & intermetallic & $-0.402$ / Yes & $-0.597$ / Yes & $-0.012$ / No & $-0.440$ / Yes \\
+05 & intermetallic & $-0.015$ / No & $-0.015$ / No & $-0.119$ / Yes & $0.000$ / No \\
+06 & intermetallic & N/A & N/A & N/A & N/A \\
+07 & intermetallic & $-0.168$ / Yes & $-0.168$ / Yes & $-0.520$ / Yes & $-0.168$ / Yes \\
+08 & intermetallic & $+0.000$ / No & N/A & N/A & N/A \\
+09 & monometallic & $-0.173$ / N/A & $0.000$ / N/A & $0.000$ / N/A & $-0.187$ / N/A \\
+10 & monometallic & $-0.596$ / N/A & $-0.005$ / N/A & $0.008$ / N/A & $-0.008$ / N/A \\
+11 & intermetallic & $-0.007$ / No & $-0.030$ / No & $0.037$ / No & $0.000$ / No \\
+12 & monometallic & $-0.744$ / N/A & $-0.270$ / N/A & $0.000$ / N/A & $-0.270$ / N/A \\
+13 & monometallic & $-0.449$ / N/A & $-0.449$ / N/A & $-0.017$ / N/A & $0.000$ / N/A \\
+14 & intermetallic & $0.000$ / No & $-0.372$ / Yes & $-0.160$ / Yes & $-0.127$ / Yes \\
+15 & intermetallic & $-0.369$ / Yes & $-0.671$ / Yes & $-0.294$ / Yes & $-0.491$ / Yes \\
+16 & intermetallic & $-0.125$ / Yes & $-0.111$ / Yes & $0.391$ / No & $0.000$ / No \\
+17 & intermetallic & $-0.449$ / Yes & $0.200$ / No & $-0.549$ / Yes & $-0.549$ / Yes \\
+18 & intermetallic & $-0.361$ / Yes & $-0.711$ / Yes & $-0.205$ / Yes & $-0.205$ / Yes \\
+19 & intermetallic & $-0.708$ / Yes & $-0.451$ / Yes & $0.000$ / No & $0.000$ / No \\
+20 & intermetallic & $-1.048$ / Yes & $-1.050$ / Yes & $0.000$ / No & $-0.000$ / No \\
+\midrule
+Support rate & --- & 8/16 = 50\% & 9/16 = 56\% & 8/16 = 50\% & 8/16 = 50\% \\
+\bottomrule
+\end{tabular}
+\end{table}
+% ===== end inlined paper_tables =====
+
+
 
 % ===== inlined from research/results/si4_ablation_statistics.tex =====
 % SI Table: CMU Benchmark Ablation Statistics (15 cases, 4 backends)
-\begin{table}[h]
+\begin{table}[ht]
 \centering
 \scriptsize
-\caption{CMU benchmark pairwise ablation statistics versus the full variant (15~cases, 4~backends). Positive $\Delta E$ means the ablated variant is worse than full. BH denotes the Benjamini--Hochberg adjusted $p$-value; CI is a deterministic bootstrap 95\% interval for the mean $\Delta E$.}
+\caption{CMU benchmark pairwise ablation summary versus the full variant (15~cases, 4~backends). Positive $\Delta E$ means the ablated variant is worse than full. BH denotes the Benjamini--Hochberg adjusted $p$-value; CI is a deterministic bootstrap 95\% interval for the mean $\Delta E$.}
 \label{tab:si4-ablation-statistics}
 \resizebox{\textwidth}{!}{%
 \begin{tabular}{llrrrrllr}
 \toprule
 Backend & Variant & Mean $\Delta E$ & Median $\Delta E$ & Wilcoxon $p$ & BH $p$ & Rank-biserial $r$ & 95\% CI & Max degr. \\
 \midrule
-Gemini & $-$Slip & -0.010 & 0.000 & 0.8927 & 0.9165 & -0.067 & [-0.046, 0.023] & 0.158 (17) \\
-Gemini & $-$Forbid & -0.005 & 0.000 & 0.9165 & 0.9165 & 0.048 & [-0.075, 0.062] & 0.294 (15) \\
-Gemini & $-$Term & 0.018 & 0.000 & 0.5002 & 0.9165 & 0.333 & [-0.054, 0.081] & 0.247 (19) \\
+Gemini & w/o Slip & -0.010 & 0.000 & 0.8927 & 0.9165 & -0.067 & [-0.046, 0.023] & 0.158 (17) \\
+Gemini & w/o Forbid & -0.005 & 0.000 & 0.9165 & 0.9165 & 0.048 & [-0.075, 0.062] & 0.294 (15) \\
+Gemini & w/o Term & 0.018 & 0.000 & 0.5002 & 0.9165 & 0.333 & [-0.054, 0.081] & 0.247 (19) \\
 Gemini & 1-Shot & 0.363 & 0.369 & 0.0015 & 0.0059 & 1.000 & [0.211, 0.524] & 1.048 (20) \\
-Grok-4 & $-$Slip & 0.049 & 0.000 & 0.4631 & 0.6174 & 0.333 & [-0.027, 0.138] & 0.451 (19) \\
-Grok-4 & $-$Forbid & 0.045 & 0.000 & 0.2489 & 0.4977 & 0.524 & [-0.026, 0.134] & 0.451 (19) \\
-Grok-4 & $-$Term & -0.012 & 0.000 & 1.0000 & 1.0000 & 0.000 & [-0.040, 0.003] & 0.017 (19) \\
+Grok-4 & w/o Slip & 0.049 & 0.000 & 0.4631 & 0.6174 & 0.333 & [-0.027, 0.138] & 0.451 (19) \\
+Grok-4 & w/o Forbid & 0.045 & 0.000 & 0.2489 & 0.4977 & 0.524 & [-0.026, 0.134] & 0.451 (19) \\
+Grok-4 & w/o Term & -0.012 & 0.000 & 1.0000 & 1.0000 & 0.000 & [-0.040, 0.003] & 0.017 (19) \\
 Grok-4 & 1-Shot & 0.341 & 0.372 & 0.0029 & 0.0115 & 0.905 & [0.174, 0.517] & 1.050 (20) \\
-GPT-5.4 & $-$Slip & -0.034 & 0.000 & 0.6744 & 0.6744 & -0.167 & [-0.130, 0.051] & 0.294 (15) \\
-GPT-5.4 & $-$Forbid & -0.094 & 0.000 & 0.0630 & 0.0840 & -0.786 & [-0.181, -0.026] & 0.003 (20) \\
-GPT-5.4 & $-$Term & -0.078 & 0.000 & 0.0464 & 0.0840 & -0.905 & [-0.166, -0.001] & 0.000 (17) \\
+GPT-5.4 & w/o Slip & -0.034 & 0.000 & 0.6744 & 0.6744 & -0.167 & [-0.130, 0.051] & 0.294 (15) \\
+GPT-5.4 & w/o Forbid & -0.094 & 0.000 & 0.0630 & 0.0840 & -0.786 & [-0.181, -0.026] & 0.003 (20) \\
+GPT-5.4 & w/o Term & -0.078 & 0.000 & 0.0464 & 0.0840 & -0.905 & [-0.166, -0.001] & 0.000 (17) \\
 GPT-5.4 & 1-Shot & 0.097 & 0.017 & 0.0409 & 0.0840 & 0.697 & [-0.009, 0.207] & 0.549 (17) \\
-Claude & $-$Slip & -0.016 & 0.000 & 0.6744 & 0.6744 & -0.167 & [-0.107, 0.069] & 0.391 (16) \\
-Claude & $-$Forbid & -0.017 & 0.000 & 0.2489 & 0.4977 & -0.524 & [-0.042, 0.000] & 0.007 (01) \\
-Claude & $-$Term & -0.031 & 0.000 & 0.4631 & 0.6174 & -0.333 & [-0.099, 0.007] & 0.042 (04) \\
+Claude & w/o Slip & -0.016 & 0.000 & 0.6744 & 0.6744 & -0.167 & [-0.107, 0.069] & 0.391 (16) \\
+Claude & w/o Forbid & -0.017 & 0.000 & 0.2489 & 0.4977 & -0.524 & [-0.042, 0.000] & 0.007 (01) \\
+Claude & w/o Term & -0.031 & 0.000 & 0.4631 & 0.6174 & -0.333 & [-0.099, 0.007] & 0.042 (04) \\
 Claude & 1-Shot & 0.185 & 0.126 & 0.0033 & 0.0134 & 1.000 & [0.089, 0.286] & 0.549 (17) \\
 \bottomrule
 \end{tabular}%
@@ -162,60 +292,67 @@ Claude & 1-Shot & 0.185 & 0.126 & 0.0033 & 0.0134 & 1.000 & [0.089, 0.286] & 0.5
 
 \section{Independent OCD-GMAE validation statistics}
 
-The formal OCD-GMAE validation uses the OCD62 benchmark across all four LLM backends.
-The 12 repeated OCD62 cases are reported only as overlap12 reproducibility repeats.
+The OCD-GMAE62 Tier~1 dataset (10 cases) is presented below with complete energy matrices for all four backends.
+The current formal-ready expansion uses 24 OCD cases across all four LLM backends.
+The 24-case formal table is assembled from the audited locked10 subset (003, 004, 005, 012, 013, 015, 016, 019, 023, 024) plus the extra14 extension (001, 002, 006, 007, 008, 009, 010, 011, 014, 017, 018, 020, 021, 022).
+For 1-Shot, the same locked10+extra14 partition is used intentionally to avoid pooling duplicate historical reruns.
 
-\begin{table}[h]
+\begin{table}[ht]
 \centering
 \scriptsize
-\caption{OCD62 five-variant ablation summary across four LLM backends. Positive $\Delta E = E_{\mathrm{variant}} - E_{\mathrm{full}}$ means the ablated variant is worse than Full. Mean and median $\Delta E$ are computed over successful paired runs only. Reach Full$+0.01$ keeps failures in the denominator.}
-\label{tab:si-ocd62-four-backend-summary}
+\caption{Expanded OCD-GMAE62 Tier~2 (24 cases) five-variant ablation summary across four LLM backends. Positive $\Delta E = E_{\mathrm{variant}} - E_{\mathrm{full}}$ means the ablated variant is worse than Full. Mean and median $\Delta E$ are computed over successful runs only. Reach Full$+0.01$ counts runs within 0.01~eV of the same-backend Full result and keeps failures in the denominator.}
+\label{tab:si-ocd62-tier2-four-backend-summary}
 \begin{tabular}{lrrrrrr}
 \toprule
-Variant & Attempts & Successful & Failures & Mean $\Delta E$ & Median $\Delta E$ & Reach Full$+0.01$ \\ 
+Variant & Attempts & Successful & Failures & Mean $\Delta E$ & Median $\Delta E$ & Reach Full$+0.01$ \\
 \midrule
-Full & 248 & 245 & 3 & 0.000 & 0.000 & 245/248 \\ 
-$-$Slip & 248 & 247 & 1 & +0.021 & 0.000 & 192/248 \\ 
-$-$Forbid & 248 & 246 & 2 & +0.020 & 0.000 & 194/248 \\ 
-$-$Term & 248 & 247 & 1 & $-$0.039 & 0.000 & 212/248 \\ 
-1-Shot & 248 & 222 & 26 & +0.329 & 0.067 & 89/248 \\ 
+Full & 96 & 96 & 0 & 0.000 & 0.000 & 96/96 \\
+w/o Slip & 96 & 96 & 0 & +0.013 & 0.000 & 63/96 \\
+w/o Forbid & 96 & 96 & 0 & +0.015 & 0.000 & 74/96 \\
+w/o Term & 96 & 95 & 1 & $-$0.013 & 0.000 & 71/96 \\
+1-Shot & 96 & 82 & 14 & +0.305 & 0.031 & 34/96 \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-Across OCD62, Full succeeds on 245/248 runs while 1-Shot succeeds on 222/248.
-The mean four-backend range is 0.183~eV for Full and 0.316~eV for 1-Shot.
-The overlap12 N=2 reproducibility audit contains 240 paired comparisons, with 155/240 within 0.01~eV and two excluded numerical-collapse outliers.
-RUN3 is in progress as the third replicate for those 12 repeated cases.
+Within the paired success-only view across four backends, 1-Shot reaches Full within 0.01~eV on only 34/96 attempted backend--case pairs, compared with 63/96 for w/o Slip, 74/96 for w/o Forbid, and 71/96 for w/o Term.
+The mean four-backend range is 0.244~eV for Full and 0.396~eV for 1-Shot over the 24 OCD-GMAE62 Tier~2 cases with at least two successful one-shot backends.
+All 14 1-Shot failures and the single w/o Term failure are natural dissociation/reaction outcomes rather than external service or calculator errors.
+
+% rep50 tables removed: rep50 dataset replaced by OCD-GMAE62 Tier 1 (10 cases) and Tier 2 (24 cases).
+% See OCD-GMAE62 Full-versus-1-Shot analysis in tables above.
+
+Across the four backends, Full succeeds on 245/248 OCD-GMAE62 runs while 1-Shot succeeds on 222/248.
+The OCD-GMAE62 benchmark shows similar backend convergence as the CMU20 benchmark, with mean four-backend range of 0.183~eV for Full variants.
 
 % ===== inlined from research/results/si4_ocd_gmae_ablation_statistics.tex =====
-\begin{table}[h]
+\begin{table}[ht]
 \centering
 \small
-\caption{OCD-GMAE pairwise ablation statistics versus the full variant (4~backends, 10~cases each). Positive $\Delta E$ means the ablated variant is worse (higher energy) than full. GPT and Claude used official provider endpoints, while Gemini and Grok used OpenRouter.}
-\label{tab:si4-ocd-ablation-statistics}
+\caption{OCD-GMAE pairwise ablation summary versus the full variant (4~backends, 10~cases each). Positive $\Delta E$ means the ablated variant is worse (higher energy) than full. Gemini was accessed via an AI HubMix proxy; the remaining three backends used direct API access.}
+\label{tab:si4-ocd-tier1-ablation-statistics}
 \begin{tabular}{llrrrrr}
 \toprule
 Backend & Variant & Mean $\Delta E$ & Median $\Delta E$ & Wilcoxon $p$ & 95\% CI & Max degr. \\
 \midrule
-Gemini & $-$Slip & 0.040 & $-$0.000 & 0.922 & [$-$0.309, 0.372] & 1.026 (003) \\
-Gemini & $-$Forbid & 0.046 & 0.001 & 0.820 & [$-$0.292, 0.367] & 1.026 (003) \\
-Gemini & $-$Term & 0.090 & 0.001 & 0.820 & [$-$0.285, 0.464] & 1.195 (004) \\
+Gemini & w/o Slip & 0.040 & $-$0.000 & 0.922 & [$-$0.309, 0.372] & 1.026 (003) \\
+Gemini & w/o Forbid & 0.046 & 0.001 & 0.820 & [$-$0.292, 0.367] & 1.026 (003) \\
+Gemini & w/o Term & 0.090 & 0.001 & 0.820 & [$-$0.285, 0.464] & 1.195 (004) \\
 Gemini & 1-Shot & 0.381 & 0.068 & 0.004 & [0.071, 0.753] & 1.583 (004) \\
 \midrule
-Grok-4 & $-$Slip & $-$0.050 & 0.000 & 0.812 & [$-$0.182, 0.070] & 0.295 (024) \\
-Grok-4 & $-$Forbid & $-$0.066 & 0.000 & 0.625 & [$-$0.174, 0.006] & 0.026 (012) \\
-Grok-4 & $-$Term & $-$0.187 & 0.000 & 0.312 & [$-$0.446, 0.000] & 0.026 (012) \\
+Grok-4 & w/o Slip & $-$0.050 & 0.000 & 0.812 & [$-$0.182, 0.070] & 0.295 (024) \\
+Grok-4 & w/o Forbid & $-$0.066 & 0.000 & 0.625 & [$-$0.174, 0.006] & 0.026 (012) \\
+Grok-4 & w/o Term & $-$0.187 & 0.000 & 0.312 & [$-$0.446, 0.000] & 0.026 (012) \\
 Grok-4 & 1-Shot & 0.352 & 0.227 & 0.031 & [0.109, 0.645] & 1.284 (013) \\
 \midrule
-GPT-5.4 & $-$Slip & 0.037 & 0.007 & 0.016 & [0.007, 0.075] & 0.166 (019) \\
-GPT-5.4 & $-$Forbid & 0.122 & 0.000 & 0.062 & [0.002, 0.320] & 0.988 (004) \\
-GPT-5.4 & $-$Term & 0.008 & 0.000 & 0.219 & [$-$0.001, 0.024] & 0.075 (012) \\
+GPT-5.4 & w/o Slip & 0.037 & 0.007 & 0.016 & [0.007, 0.075] & 0.166 (019) \\
+GPT-5.4 & w/o Forbid & 0.122 & 0.000 & 0.062 & [0.002, 0.320] & 0.988 (004) \\
+GPT-5.4 & w/o Term & 0.008 & 0.000 & 0.219 & [$-$0.001, 0.024] & 0.075 (012) \\
 GPT-5.4 & 1-Shot & 0.578 & 0.316 & 0.012 & [0.171, 1.108] & 2.571 (004) \\
 \midrule
-Claude & $-$Slip & $-$0.065 & 0.000 & 0.438 & [$-$0.166, 0.027] & 0.166 (019) \\
-Claude & $-$Forbid & $-$0.006 & 0.000 & 1.000 & [$-$0.089, 0.073] & 0.242 (013) \\
-Claude & $-$Term & $-$0.085 & 0.000 & 0.312 & [$-$0.175, 0.000] & 0.000 (003) \\
+Claude & w/o Slip & $-$0.065 & 0.000 & 0.438 & [$-$0.166, 0.027] & 0.166 (019) \\
+Claude & w/o Forbid & $-$0.006 & 0.000 & 1.000 & [$-$0.089, 0.073] & 0.242 (013) \\
+Claude & w/o Term & $-$0.085 & 0.000 & 0.312 & [$-$0.175, 0.000] & 0.000 (003) \\
 Claude & 1-Shot & 0.774 & 0.270 & 0.004 & [0.189, 1.719] & 4.671 (003) \\
 \bottomrule
 \end{tabular}
@@ -227,10 +364,10 @@ Claude & 1-Shot & 0.774 & 0.270 & 0.004 & [0.189, 1.719] & 4.671 (003) \\
 \section{External baselines and force-field sensitivity}
 
 This section separates the locked 15-case CMU overlap used for mechanism-level comparisons from newly completed control data.
-The completed additions are the CMU20 five-variant ablation completion, CMU20 random placement, MACE-MP-0 large sensitivity on CMU20, and an Adsorb-Agent single-configuration stress control.
+The completed additions are the CMU20 five-variant ablation completion, CMU20 random placement, MACE-MP-0 large sensitivity on CMU20 and OCD-rep10, and an Adsorb-Agent single-configuration stress control.
 The CMU20 ablation completion is used here as a reliability and failure-mode audit; the original 15-case tables above are retained for the first locked mechanism package.
 
-\begin{table}[h]
+\begin{table}[ht]
 \centering
 \scriptsize
 \caption{Completed CMU20 five-variant ablation summary across four LLM backends. $\Delta E = E_{\mathrm{variant}} - E_{\mathrm{full}}$ for the same backend and case; positive values mean the variant is worse than Full. Energy deltas for 1-Shot are conditional on successful non-dissociated attempts, while failures remain in the success-rate denominator.}
@@ -240,9 +377,9 @@ The CMU20 ablation completion is used here as a reliability and failure-mode aud
 Variant & Attempts & Successful & Mean $\Delta E$ & Median $\Delta E$ & Mean iterations & Success rate \\
 \midrule
 Full & 80 & 80 & 0.000 & 0.000 & 4.18 & 100.0\% \\
-$-$Slip & 80 & 80 & $-$0.008 & 0.000 & 4.33 & 100.0\% \\
-$-$Forbid & 80 & 80 & $-$0.007 & 0.000 & 4.30 & 100.0\% \\
-$-$Term & 80 & 80 & $-$0.036 & 0.000 & 4.58 & 100.0\% \\
+w/o Slip & 80 & 80 & $-$0.008 & 0.000 & 4.33 & 100.0\% \\
+w/o Forbid & 80 & 80 & $-$0.007 & 0.000 & 4.30 & 100.0\% \\
+w/o Term & 80 & 80 & $-$0.036 & 0.000 & 4.58 & 100.0\% \\
 1-Shot & 80 & 73 & +0.217 & +0.125 & 1.00 & 91.2\% \\
 \bottomrule
 \end{tabular}
@@ -253,7 +390,7 @@ All seven have \texttt{error=None}, \texttt{calc\_failure\_count=0}, \texttt{dis
 Accordingly, these rows are counted as failed attempts in success-rate and reach-Full statistics, but excluded from conditional energy means.
 For this reason, ordinary paired Wilcoxon statistics in Table~\ref{tab:si4-ablation-statistics} are retained for the original 15-case complete-energy CMU package; the completed CMU20 data are reported here as a failure-aware audit rather than as a naively imputed 20-case paired test.
 
-\begin{table}[h]
+\begin{table}[ht]
 \centering
 \scriptsize
 \caption{Completed CMU20 Full-variant backend matrix. Energies are AdsMind Full adsorption energies in eV under the primary MACE-MP-0 small protocol. This table is the Full row of the completed CMU20 five-variant ablation matrix.}
@@ -291,7 +428,7 @@ Case & Gemini & Grok-4 & GPT-5.4 & Claude & Range & Best within 0.01~eV \\
 \end{table}
 
 % ===== inlined from research/results/si_adsorbagent_comparison.tex =====
-\begin{table}[h]
+\begin{table}[ht]
 \centering
 \scriptsize
 \caption{Head-to-head comparison of AdsMind (GPT-5.4 Full variant) versus Adsorb-Agent (GPT-5.4, matched MACE-MP-0 small) on 15 overlapping CMU benchmark cases. Adsorption energies in eV; lower is better. $\Delta = E_{\mathrm{AdsMind}} - E_{\mathrm{AdsorbAgent}}$, so positive values mean Adsorb-Agent is lower in energy. ``Failed'' denotes Adsorb-Agent runs with no valid trajectory files.}
@@ -323,7 +460,7 @@ Case & AdsMind (eV) & Adsorb-Ag.\ (eV) & $\Delta$ (eV) & Configs & Tokens & Winn
 \end{table}
 % ===== end inlined si_adsorbagent_comparison =====
 
-\begin{table}[h]
+\begin{table}[ht]
 \centering
 \scriptsize
 \caption{Adsorb-Agent single-configuration stress control on CMU20. The control forces the CatalystAIgent/Adsorb-Agent pipeline to select at most one configuration, testing whether the original multi-configuration depth comes from one-shot LLM placement alone or from breadth. Derived single-config adsorption energies use the original multi-config Adsorb-Agent reference offset when available; dashes indicate missing reference offsets or no selected configuration.}
@@ -362,7 +499,7 @@ Case & Single-config status & Single-config $E_\mathrm{ads}$ & Original multi-co
 \end{table}
 
 % ===== inlined from research/results/si_baselines_comparison.tex =====
-\begin{table}[h]
+\begin{table}[ht]
 \centering
 \scriptsize
 \caption{Baseline comparison on the original 15 CMU cases. Best energy achieved by each method under identical MACE-MP-0 small physics. Dashes indicate that the method produced no valid energy for that case. Energies in eV; lower is better. Relax column shows approximate MACE relaxation count per case. Heuristic entries in this legacy table are raw lowest energies before the connectivity audit in Table~\ref{tab:si-cmu20-heuristic-filtered}; raw heuristic lows should not be interpreted as chemically validated adsorption energies when the audit flags fragmentation or missing saved structures.}
@@ -394,7 +531,7 @@ Relax/case & 20 & 25--98 & 1 & $\sim$4 & $\sim$21 & $\sim$21 \\
 \end{table}
 % ===== end inlined si_baselines_comparison =====
 
-\begin{table}[h]
+\begin{table}[ht]
 \centering
 \scriptsize
 \caption{Completed CMU20 random-placement control versus AdsMind Full best-of-four-backends. Random(20) uses 20 MACE-MP-0 small relaxations per case; AdsMind uses the best Full result among the four LLM backends. $\Delta = E_\mathrm{random} - E_\mathrm{AdsMind}$; negative values mean random found a lower-energy relaxed structure. Random rows are protocol-valid MACE-MP-0 small energy comparisons but have not yet been filtered by the same anomaly detector used for agentic summaries.}
@@ -431,7 +568,7 @@ Case & Random(20) & AdsMind best Full & $\Delta$ & Outcome \\
 }
 \end{table}
 
-\begin{table}[h]
+\begin{table}[ht]
 \centering
 \scriptsize
 \caption{Completed CMU20 heuristic enumeration after saved-top-3 connectivity audit. The heuristic baseline relaxed 1{,}137 Autoadsorbate sites across 20 cases (median 56 sites/case, range 25--98). The audit checked 56 saved top-3 structures; 41 passed the connectivity screen and 15 were flagged as fragmented or otherwise invalid. Outcomes compare the best valid saved heuristic top-3 structure against AdsMind Full best-of-four-backends at a 0.01~eV tolerance.}
@@ -453,7 +590,7 @@ Unresolved after saved-top-3 audit & 04, 08, 16, 19, 20 & 5 \\
 }
 \end{table}
 
-\begin{table}[h]
+\begin{table}[ht]
 \centering
 \scriptsize
 \caption{CMU20 MACE force-field sensitivity. AdsMind Full variant with GPT-5.4 is compared between the primary MACE-MP-0 \textit{small} protocol (CPU, float32, no dispersion) and the MACE-MP-0 \textit{large} sensitivity protocol (GPU, float64, dispersion). $\Delta = E_\mathrm{large} - E_\mathrm{small}$; lower energies are more negative. ``Anomaly'' marks cases with dissociation events or extreme force-field shifts and should not be read as DFT validation.}
@@ -491,9 +628,36 @@ Case & MACE-MP-0 small & MACE-MP-0 large & $\Delta$ & Diss. events & Flag \\
 }
 \end{table}
 
+\begin{table}[ht]
+\centering
+\scriptsize
+\caption{MACE-MP-0 large sensitivity on 10 representative OCD-GMAE62 Tier~1 cases. This is a force-field stress test on chemistry outside the CMU set, not a replacement for the locked 10-case OCD-GMAE62 MACE-MP-0 small ablation matrix. Case~043 fails naturally through slip and dissociation; no external service or calculator error is recorded.}
+\label{tab:si-mace-large-ocd-rep10}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{llllrrr}
+\toprule
+Case & Surface & Adsorbate & MACE-MP-0 large energy & Status & Slip & Diss. \\
+\midrule
+003 & Na$_{12}$Pb$_{36}$ & \texttt{[H]} & $-3.126$ & success & 5 & 0 \\
+006 & Ca$_{16}$Pb$_{16}$Pd$_{16}$ & \texttt{[OH]} & $-6.534$ & success & 3 & 0 \\
+012 & Sb$_{20}$Ta$_{60}$ & \texttt{[N]=N} & $-10.620$ & success & 5 & 4 \\
+020 & Pb$_{24}$Y$_8$ & \texttt{[N]=O} & $-2.286$ & success & 5 & 1 \\
+024 & Cd$_{24}$Pd$_{24}$ & \texttt{NO} & $-3.123$ & success & 3 & 0 \\
+027 & Cr$_{36}$N$_{48}$ & \texttt{[CH]=O} & $-7.819$ & success & 2 & 0 \\
+035 & Se$_{48}$Sn$_{48}$ & \texttt{CO} & $-3.387$ & success & 1 & 1 \\
+039 & As$_{40}$Ti$_{40}$ & \texttt{C[O]} & $-8.640$ & success & 4 & 0 \\
+043 & K$_{20}$ & \texttt{C([CH2])O} & --- & failed & 1 & 1 \\
+050 & Ni$_{38}$Se$_{40}$ & \texttt{[CH2]C} & $-9.525$ & success & 4 & 0 \\
+\midrule
+\multicolumn{7}{l}{Summary: 9/10 successes; failed case 043 has status=\texttt{failed}, error=None, calc\_failure\_count=0.} \\
+\bottomrule
+\end{tabular}%
+}
+\end{table}
+
 \clearpage
 
-\begin{table}[h]
+\begin{table}[ht]
 \centering
 \scriptsize
 \caption{GPT-5.4 multi-seed depth check on the three complex CMU cases highlighted in the limitations discussion. Energies are AdsMind Full adsorption energies in eV under MACE-MP-0 small physics; lower is better. ``Default'' is the original GPT-5.4 Full run, and seeds 43--46 are independent reruns. Gain is $E_{\mathrm{default}} - E_{\mathrm{best\ of\ five}}$; residual gap is $E_{\mathrm{best\ of\ five}} - E_{\mathrm{AdsorbAgent}}$, so positive values mean Adsorb-Agent remains lower in energy.}
@@ -515,7 +679,7 @@ Case & Default & Seed 43 & Seed 44 & Seed 45 & Seed 46 & Best of five & Gain & A
 
 \section{Chemical Slip diagnostic statistics}
 
-\begin{table}[h]
+\begin{table}[ht]
 \centering
 \caption{One-shot Chemical Slip rates by surface family on the CMU one-shot benchmark. Entries are slip events divided by valid one-shot runs for each backend.}
 \label{tab:si-slip-surface-family}
@@ -539,7 +703,7 @@ Overall & 12/20 (60.0\%) & 12/20 (60.0\%) & 12/19 (63.2\%) & 12/18 (66.7\%) \\
 \section{Cost and convergence}
 
 % ===== inlined from research/results/si6_cost_analysis.tex =====
-\begin{table}[h]
+\begin{table}[ht]
 \centering
 \caption{Cost analysis for the 15-case CMU benchmark ablation matrix (4~backends $\times$ 5~variants). Token counts are totals per run (input + output); 1-Shot data drawn from the dedicated one-shot directories.}
 \label{tab:si6-cost-analysis}
@@ -548,24 +712,24 @@ Overall & 12/20 (60.0\%) & 12/20 (60.0\%) & 12/19 (63.2\%) & 12/18 (66.7\%) \\
 Backend & Variant & Mean tokens/run & Mean wall-clock (s) & Mean iterations \\
 \midrule
 Gemini & Full & 40131.1 & 699.4 & 4.5 \\
-Gemini & $-$Slip & 38639.7 & 676.9 & 4.5 \\
-Gemini & $-$Forbid & 38131.6 & 617.4 & 4.3 \\
-Gemini & $-$Term & 54619.7 & 562.3 & 4.8 \\
+Gemini & w/o Slip & 38639.7 & 676.9 & 4.5 \\
+Gemini & w/o Forbid & 38131.6 & 617.4 & 4.3 \\
+Gemini & w/o Term & 54619.7 & 562.3 & 4.8 \\
 Gemini & 1-Shot & 7347.6 & 81.0 & 1.0 \\
 Grok-4 & Full & 34270.4 & 963.4 & 4.3 \\
-Grok-4 & $-$Slip & 33088.9 & 950.3 & 4.5 \\
-Grok-4 & $-$Forbid & 33102.9 & 553.8 & 4.3 \\
-Grok-4 & $-$Term & 38941.7 & 696.1 & 4.4 \\
+Grok-4 & w/o Slip & 33088.9 & 950.3 & 4.5 \\
+Grok-4 & w/o Forbid & 33102.9 & 553.8 & 4.3 \\
+Grok-4 & w/o Term & 38941.7 & 696.1 & 4.4 \\
 Grok-4 & 1-Shot & 6265.7 & 145.9 & 1.0 \\
 GPT-5.4 & Full & 25448.7 & 437.1 & 3.9 \\
-GPT-5.4 & $-$Slip & 21527.0 & 399.6 & 3.6 \\
-GPT-5.4 & $-$Forbid & 25863.9 & 440.9 & 4.1 \\
-GPT-5.4 & $-$Term & 31036.5 & 595.6 & 4.6 \\
+GPT-5.4 & w/o Slip & 21527.0 & 399.6 & 3.6 \\
+GPT-5.4 & w/o Forbid & 25863.9 & 440.9 & 4.1 \\
+GPT-5.4 & w/o Term & 31036.5 & 595.6 & 4.6 \\
 GPT-5.4 & 1-Shot & 4845.1 & 61.5 & 1.0 \\
 Claude & Full & 36436.9 & 568.2 & 4.2 \\
-Claude & $-$Slip & 32894.8 & 572.5 & 4.4 \\
-Claude & $-$Forbid & 35256.9 & 632.8 & 4.3 \\
-Claude & $-$Term & 40481.7 & 406.5 & 4.6 \\
+Claude & w/o Slip & 32894.8 & 572.5 & 4.4 \\
+Claude & w/o Forbid & 35256.9 & 632.8 & 4.3 \\
+Claude & w/o Term & 40481.7 & 406.5 & 4.6 \\
 Claude & 1-Shot & 6384.7 & 72.1 & 1.0 \\
 \bottomrule
 \end{tabular}
@@ -573,7 +737,7 @@ Claude & 1-Shot & 6384.7 & 72.1 & 1.0 \\
 % ===== end inlined si6_cost_analysis =====
 
 % ===== inlined from research/results/si_iteration_convergence.tex =====
-\begin{table}[h]
+\begin{table}[ht]
 \centering
 \caption{Iteration convergence of AdsMind Full variant across 4 LLM backends (CMU benchmark, 15 cases). Mean running-best adsorption energy (eV) after each iteration, averaged across cases. Bottom rows: fraction of the total iter-1-to-final improvement captured by iteration 2 and iteration 3.}
 \label{tab:si-iteration-convergence}
@@ -607,14 +771,14 @@ Iteration & Gemini & Grok-4 & GPT-5.4 & Claude \\
 % ============================================================
 
 % SI Table: Gemini 15-case ablation energy matrix
-\begin{table}[h]
+\begin{table}[ht]
 \centering
 \small
 \caption{Gemini~2.5~Pro ablation on the 15 locked CMU benchmark cases. Lower (more negative) adsorption energy is better; bold marks the best variant per case.}
 \label{tab:si-ablation-gemini}
 \begin{tabular}{lrrrrr}
 \toprule
-Case & Full & $-$Slip & $-$Forbid & $-$Term & 1-Shot \\
+Case & Full & w/o Slip & w/o Forbid & w/o Term & 1-Shot \\
 \midrule
 01 & \textbf{$-$3.632} & \textbf{$-$3.632} & \textbf{$-$3.632} & \textbf{$-$3.632} & $-$3.631 \\
 02 & \textbf{$-$4.766} & \textbf{$-$4.766} & \textbf{$-$4.766} & \textbf{$-$4.766} & \textbf{$-$4.766} \\
@@ -636,14 +800,14 @@ Case & Full & $-$Slip & $-$Forbid & $-$Term & 1-Shot \\
 \end{table}
 
 % SI Table: Grok-4 15-case ablation energy matrix
-\begin{table}[h]
+\begin{table}[ht]
 \centering
 \small
 \caption{Grok-4 ablation on the 15 locked CMU benchmark cases. Lower (more negative) adsorption energy is better; bold marks the best variant per case.}
 \label{tab:si-ablation-grok}
 \begin{tabular}{lrrrrr}
 \toprule
-Case & Full & $-$Slip & $-$Forbid & $-$Term & 1-Shot \\
+Case & Full & w/o Slip & w/o Forbid & w/o Term & 1-Shot \\
 \midrule
 01 & \textbf{$-$3.632} & \textbf{$-$3.632} & \textbf{$-$3.632} & \textbf{$-$3.632} & $-$3.631 \\
 02 & \textbf{$-$4.766} & \textbf{$-$4.766} & $-$4.760 & \textbf{$-$4.766} & $-$4.150 \\
@@ -665,14 +829,14 @@ Case & Full & $-$Slip & $-$Forbid & $-$Term & 1-Shot \\
 \end{table}
 
 % SI Table: GPT-5.4 15-case ablation energy matrix
-\begin{table}[h]
+\begin{table}[ht]
 \centering
 \small
 \caption{GPT-5.4 ablation on the 15 locked CMU benchmark cases. Lower (more negative) adsorption energy is better; bold marks the best variant per case.}
 \label{tab:si-ablation-gpt54}
 \begin{tabular}{lrrrrr}
 \toprule
-Case & Full & $-$Slip & $-$Forbid & $-$Term & 1-Shot \\
+Case & Full & w/o Slip & w/o Forbid & w/o Term & 1-Shot \\
 \midrule
 01 & $-$3.627 & $-$3.627 & $-$3.627 & \textbf{$-$3.630} & $-$3.557 \\
 02 & \textbf{$-$4.769} & $-$4.764 & \textbf{$-$4.769} & \textbf{$-$4.769} & $-$4.343 \\
@@ -694,14 +858,14 @@ Case & Full & $-$Slip & $-$Forbid & $-$Term & 1-Shot \\
 \end{table}
 
 % SI Table: Claude 15-case ablation energy matrix
-\begin{table}[h]
+\begin{table}[ht]
 \centering
 \small
 \caption{Claude~Sonnet~4.6 ablation on the 15 locked CMU benchmark cases. Lower (more negative) adsorption energy is better; bold marks the best variant per case.}
 \label{tab:si-ablation-claude}
 \begin{tabular}{lrrrrr}
 \toprule
-Case & Full & $-$Slip & $-$Forbid & $-$Term & 1-Shot \\
+Case & Full & w/o Slip & w/o Forbid & w/o Term & 1-Shot \\
 \midrule
 01 & \textbf{$-$3.630} & \textbf{$-$3.630} & $-$3.624 & \textbf{$-$3.630} & $-$3.557 \\
 02 & \textbf{$-$4.769} & \textbf{$-$4.769} & \textbf{$-$4.769} & \textbf{$-$4.769} & $-$4.343 \\
@@ -722,11 +886,37 @@ Case & Full & $-$Slip & $-$Forbid & $-$Term & 1-Shot \\
 \end{tabular}
 \end{table}
 
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% OCD62 overlap12 table placeholder, should have 4 backend
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SI Table: OCD62 overlap12 ablation results placeholder, should be 4 tables for 4 backends
+\begin{table}[htbp]
+\centering
+\caption{OCD62 overlap12 ablation results placeholder, should be 4 tables for 4 backends}
+\label{tab:adsorbates}
+\begin{tabular}{llccccc}
+\toprule
+adsorbate\_name & surface\_formula &  Full & w/o Slip & w/o Forbid & w/o Term & 1-shot \\
+\midrule
+NO    & Hf18Sc18Si36 & - & - & - & - & -  \\
+{[N]=N}  & Ag18Sr27    & - & - & - & - & -  \\
+{[NH]}   & Ru60Ta20    & - & - & - & - & -  \\
+C(C)O & Cu32Se64W16 & - & - & - & - & -  \\
+{[CH]=O} & Cr36N48    & - & - & - & - & -  \\
+O=N   & In18N18Ti36 & - & - & - & - & -  \\
+OH    & Ni6Sc36Te12 & - & - & - & - & -  \\
+OH    & Pd24Zr24    & - & - & - & - & -  \\
+{[NH]}   & Co32Y48     & - & - & - & - & -  \\
+H     & Cr18Pt18    & - & - & - & - & -  \\
+{[NH2]}  & Re27Ti27    & - & - & - & - & -  \\
+H     & Ga24Y24     & - & - & - & - & -  \\
+\bottomrule
+\end{tabular}
+\end{table}
 
 
 % SI Table: Key parameters and default settings
-\begin{table}[h]
+\begin{table}[ht]
 \centering
 \caption{Key parameters and default settings in AdsMind.}
 \label{tab:si-parameters}
@@ -768,6 +958,25 @@ LLM temperature & 0 \\
 \end{tabular}
 \end{table}
 
+\clearpage
+
+\section{Supplementary Figures}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=\textwidth]{si_figures/si_figure_S1_combined.png}
+    \caption{Supplementary Figure~S1: Performance analysis. \textbf{(a)} Method comparison on CMU20 grouped by case: AdsMind Full vs Random (n=20), Heuristic, and Adsorb-Agent. \textbf{(b)} Cost--accuracy trade-off: mean tokens per run vs mean best energy across four LLM backends and five ablation variants. \textbf{(c)} MACE-MP-0 force-field sensitivity: scatter plot of MACE-MP-0 small vs large energies (left) and histogram of the energy difference (right).}
+    \label{fig:si-s1}
+\end{figure}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=\textwidth]{si_figures/si_figure_S2_combined.png}
+    \caption{Supplementary Figure~S2: Slip and reproducibility. \textbf{(a)} Cross-backend slip agreement heatmap for gemini and grok-4 across 20 cases; disagreement cases~01 and~15 are outlined. \textbf{(b)} Site transition matrix counting planned--to--actual site changes. \textbf{(c)} Multi-seed reproducibility of GPT-5.4 Full: distribution of five independent seeds (43--47) with default seed~42 overlaid as scatter points.}
+    \label{fig:si-s2}
+\end{figure}
+
 \bibliography{refs}
 
 \end{document}
+

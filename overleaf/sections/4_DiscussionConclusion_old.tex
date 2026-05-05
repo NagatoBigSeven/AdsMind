@@ -3,7 +3,8 @@
 \subsection{AdsMind's Contributions and Scope}
 
 The results of this study point to a nuanced characterization of closed-loop LLM agents that differs from much of the prior literature.
-Prior work on LLM agents for chemistry has emphasized the \textit{capability} axis: demonstrating LLM agents for new kinds of tasks, including materials discovery~\cite{zhang2026towards,zhang2026matclaw,li2026agentic}, autonomous atomistic simulation~\cite{huang2026towards,yang2026quasar}, and catalyst screening~\cite{chandrasekhar2026catalyst,mok2026reasoning}.
+Prior work on LLM agents for chemistry has emphasized the \textit{capability} axis: what new kinds of tasks can an LLM accomplish?
+Recent studies have demonstrated LLM agents for materials discovery~\cite{zhang2026towards,zhang2026matclaw,li2026agentic}, autonomous atomistic simulation~\cite{huang2026towards,yang2026quasar}, and catalyst screening~\cite{chandrasekhar2026catalyst,mok2026reasoning}.
 Our evidence suggests that for finding low-energy adsorbate configurations, the capability axis is not where closed-loop LLM reasoning wins.
 
 \textbf{Energy-depth comparison.}
@@ -13,14 +14,14 @@ Adsorb-Agent's multi-configuration search reaches lower energies in 14/16 compar
 
 \textbf{Robustness across backends.}
 These results are not artifacts of a single LLM backend.
-The closed-loop reliability and backend-convergence results hold on CMU20 and the OCD-GMAE62 benchmark with the three-tier evaluation protocol across four backends after external service failures are removed at the raw-attempt audit stage.
+The closed-loop reliability and backend-convergence results hold on CMU20, expanded OCD24, and the separately selected OCD-GMAE rep50 set across four backends after external service failures are removed at the raw-attempt audit stage.
 
 What closed-loop LLM reasoning contributes is along a different axis: the combined property of being \textit{reliable, compute-efficient, and interpretable} simultaneously.
 Each of these attributes alone has precedents: brute-force controls can be reliable, heuristic enumeration is interpretable (canonical sites), and single-attempt LLM planning can be MACE-efficient but brittle.
 What is new in AdsMind is the \textit{co-occurrence} of all three properties:
-\textbf{Reliability:} 80/80 CMU20 Full successes, OCD-GMAE62 Tier 1: 40/40 Full successes versus 36/40 1-Shot successes, and 320/320 successful CMU20 iterative-variant runs versus 73/80 successful CMU20 1-Shot runs.
+\textbf{Reliability:} 80/80 CMU20 Full successes, 96/96 OCD24 Full successes, 197/200 rep50 Full successes versus 178/200 for rep50 1-Shot, and 320/320 successful CMU20 iterative-variant runs versus 73/80 successful CMU20 1-Shot runs.
 \textbf{Efficiency:} 5--25$\times$ less MACE compute per single-backend run than brute-force alternatives.
-\textbf{Interpretability:} Physically grounded reasoning artifacts (slip events, forbid constraints, site-mismatch fingerprints) that a practitioner can inspect, validate, and incorporate into downstream workflows~\cite{zhang2026matclaw,huang2026towards}.
+\textbf{Interpretability:} Physically grounded reasoning artifacts (slip events, forbid constraints, site-mismatch fingerprints) that a practitioner can inspect, contest, and incorporate into downstream workflows~\cite{zhang2026matclaw,huang2026towards}.
 This combination is a prerequisite for autonomous chemistry, where silent failure or irreproducibility in any one dimension would break the pipeline.
 Reliability ensures the agent does not silently fail on edge cases; efficiency enables practical deployment with limited compute; and interpretability provides the transparency required for scientific trust and debugging.
 Recent work on autonomous materials agents emphasizes similar requirements for reliability and interpretability~\cite{zhang2026towards,yang2026quasar}.
@@ -29,15 +30,15 @@ Recent work on autonomous materials agents emphasizes similar requirements for r
 
 \subsection{Claims and evaluation}
 
-This paper establishes four empirical claims through 880 formal ablation attempts (400 CMU20 runs plus 480 OCD-GMAE62 Tier 2 runs across four backends) (to be updated with actual data), a separate OCD-GMAE62 Tier 1 Full-versus-1-Shot generalization study across the same four backends (to be updated with actual data), and matched baseline controls.
-We use the completed 20-case CMU matrix and the expanded 24-case OCD-GMAE matrix as mechanism tests, and use additional controls---CMU20 random placement, MACE-MP-0 large sensitivity, OCD-GMAE62 Tier 1 generalization, and Adsorb-Agent single-configuration stress testing---to define the operating envelope:
+This paper establishes four empirical claims through 880 formal ablation attempts (400 CMU20 runs plus 480 expanded-OCD24 runs across four backends), a separate 400-run rep50 Full-versus-1-Shot generalization study across the same four backends, and matched baseline controls.
+We use the completed 20-case CMU matrix and the expanded 24-case OCD-GMAE matrix as mechanism tests, and use additional controls---CMU20 random placement, MACE-MP-0 large sensitivity, rep50 generalization, and Adsorb-Agent single-configuration stress testing---to define the operating envelope:
 
 \begin{description}
-    \item[C$_1$ (reliability):] AdsMind Full achieves 100\% search success on completed CMU20 runs (80/80) and four-backend OCD-GMAE62 Tier 1 runs (40/40).
+    \item[C$_1$ (reliability):] AdsMind Full achieves 100\% search success on completed CMU20 runs (80/80) and four-backend OCD24 runs (96/96).
     \begin{itemize}
         \item CMU20: All 320 case--backend runs succeed for iterative variants (Full, w/o Slip, w/o Forbid, w/o Term), versus 73/80 for 1-Shot.
-        \item Tier 2: w/o Slip and w/o Forbid succeed on 96/96, w/o Term on 95/96, and 1-Shot on 82/96.
-        \item OCD-GMAE62 Tier 1: 40/40 Full successes versus 36/40 1-Shot successes.
+        \item OCD24: w/o Slip and w/o Forbid succeed on 96/96, w/o Term on 95/96, and 1-Shot on 82/96.
+        \item rep50: Full succeeds on 197/200 runs versus 178/200 for 1-Shot.
         \item Adsorb-Agent: Single-pass runs succeed on 73--80\% of cases; single-configuration stress test produces no output on 6/20 cases.
     \end{itemize}
     These shortfalls are natural dissociation/reaction outcomes, not external service failures.
@@ -45,8 +46,8 @@ We use the completed 20-case CMU matrix and the expanded 24-case OCD-GMAE matrix
     \item[C$_2$ (backend convergence):] The iterative architecture reduces energy variance across LLM backends.
     \begin{itemize}
         \item CMU20: Mean four-backend range is 0.153~eV for Full versus 0.359~eV for 1-Shot (2.3$\times$ reduction).
-        \item Tier 2: Mean range is 0.244~eV for Full versus 0.396~eV for 1-Shot.
-        \item OCD-GMAE62 Tier 1: mean four-backend range is 0.183~eV for Full (computed from 10 cases).
+        \item OCD24: Mean range is 0.244~eV for Full versus 0.396~eV for 1-Shot (1.6$\times$ reduction).
+        \item rep50: Mean range is 0.172~eV over 49 cases with at least two successful Full runs.
     \end{itemize}
 
     \item[C$_3$ (compute efficiency):] A single AdsMind Full run uses $\sim$4 MACE-MP relaxations per case.
@@ -67,8 +68,8 @@ We use the completed 20-case CMU matrix and the expanded 24-case OCD-GMAE matrix
 
 \subsection{Chemical Slip as a standalone LLM evaluation signal}
 
-Chemical Slip---the mismatch between an LLM-planned adsorption site and the site realized after physical relaxation---is introduced as a feedback signal for the closed-loop agent.
-The slip statistics aggregated across the CMU 20-case one-shot benchmark and the OCD-GMAE62 Tier 1 one-shot study reveal a secondary value: slip frequency, stratified by surface type and adsorbate, serves as a physically grounded proxy for LLM chemical reasoning quality that is independent of any downstream task metric~\cite{alfred2026data,zhang2026towards}.
+Chemical Slip---the mismatch between an LLM-planned adsorption site and the site realized after physical relaxation---was introduced as a feedback signal for the closed-loop agent.
+The slip statistics aggregated across the CMU 20-case one-shot benchmark and the historical 200-run OCD-GMAE rep50 one-shot study reveal a secondary value: slip frequency, stratified by surface type and adsorbate, serves as a physically grounded proxy for LLM chemical reasoning quality that is independent of any downstream task metric~\cite{alfred2026data,zhang2026towards}.
 On the CMU benchmark (see the Chemical Slip diagnostic section in the SI), one-shot slip rates range from 20\% (monometallic) to 77\% (intermetallic) across all four backends, indicating that LLM chemical priors are substantially less reliable on complex alloy compositions under this relaxation protocol.
 In contrast to text-based chemistry benchmarks such as ChemBench~\cite{mirza2024chembench}, which test chemistry knowledge and reasoning in language form, Chemical Slip evaluates \textit{applied} reasoning---whether the model's structural prediction survives physical simulation---and complements existing LLM evaluation frameworks for scientific domains~\cite{li2026agentic,huang2026towards}.
 This makes Chemical Slip a general-purpose evaluation signal for LLM scientific agents: it quantifies the gap between linguistic chemical knowledge and physically realizable structural predictions.
@@ -77,7 +78,7 @@ This makes Chemical Slip a general-purpose evaluation signal for LLM scientific 
 
 The energy-depth advantage of random placement and heuristic enumeration on complex surfaces requires explicit mechanistic interpretation.
 On simple adsorbates with few competitive binding sites (H on Cu$_3$Ag(111), OH on Pt(100)), AdsMind Full matches the non-LLM baselines within 0.01~eV; the PES has few distinct basins and iterative refinement from any initial guess converges to the same low-energy basin.
-On complex adsorbates (CH$_2$CH$_2$OH, OCHCH$_3$, ONN(CH$_3$)$_2$), the PES has many local minima separated by non-trivial barriers; iterative refinement from a single trajectory becomes trapped in whichever basin the first relaxation descends into, irrespective of whether a deeper basin exists elsewhere.
+On complex adsorbates (CH$_2$CH$_2$OH, OCHCH$_3$, ONN(CH$_3$)$_2$), the PES has many local minima separated by non-trivial barriers; iterative refinement from a single trajectory becomes trapped in whichever basin the first relaxation descends into, regardless of whether a deeper basin exists elsewhere.
 Broad initial sampling circumvents this trap by seeding multiple trajectories in different basins~\cite{lan2023adsorbml,zitnick2020introduction}.
 
 This observation matters practically because it delineates when closed-loop search is the right tool.
@@ -94,11 +95,11 @@ Recent work has demonstrated the integration of MLFFs with LLM agents for materi
 Adsorption energy in this study is operationally defined within the fixed MACE-MP-0 small protocol: all ablation comparisons, Wilcoxon tests, and backend-convergence metrics are evaluated on energies produced by the same locked MACE-MP-0 small calculator, so within-protocol rankings between configurations on the same surface are self-consistent by construction.
 We do not claim that MACE-MP-0 small rankings match DFT rankings in absolute terms; rather, the MACE-MP-0 large run described below serves as a sensitivity boundary that quantifies how far absolute energies shift under a higher-fidelity force field, without being treated as ground-truth validation.
 
-To characterize this sensitivity, we repeated the GPT-5.4 AdsMind Full variant on all 20 CMU cases with MACE-MP-0 large (GPU, float64, dispersion enabled), and on the OCD-GMAE62 Tier 1 sensitivity subset.
+To characterize this sensitivity, we repeated the GPT-5.4 AdsMind Full variant on all 20 CMU cases with MACE-MP-0 large (GPU, float64, dispersion enabled), and on a 10-case representative slice of OCD-GMAE rep50.
 MACE-MP-0 large shifts absolute AdsMind energies substantially: on CMU20 the mean absolute shift relative to MACE-MP-0 small is 1.255~eV, or 0.834~eV when the anomalous case~20 is excluded.
 The direction of the shift is case-dependent, with 15/20 CMU cases becoming more stable and 5/20 becoming less stable under MACE-MP-0 large.
 Case~20 is an anomaly rather than a clean failure: the summary retains a non-dissociated best structure at $-2.402$~eV, while later dissociated analyses reach lower unretained energies.
-On the OCD-GMAE62 Tier 1 sensitivity subset, MACE-MP-0 large succeeds on 9/10 cases (to be updated with actual data), with case~043 failing naturally through slip and dissociation.
+On the OCD-rep10 sensitivity set, MACE-MP-0 large succeeds on 9/10 cases, with case~043 failing naturally through slip and dissociation.
 Because Adsorb-Agent was not rerun with MACE-MP-0 large, this experiment should be interpreted as a force-field sensitivity check on AdsMind trajectories, not as a second AdsMind--Adsorb-Agent head-to-head.
 Representative DFT validation remains necessary before interpreting the MLFF-ranked structures as final adsorption energetics beyond the fixed surrogate protocol.
 
@@ -129,7 +130,7 @@ The question is not which system finds the absolute lowest energy---an LLM agent
 
 \paragraph{Statistical limitations.}
 Although the CMU and OCD-GMAE benchmarks are large enough for Friedman tests to reach significance ($p < 0.01$ for all comparisons), many pairwise Wilcoxon tests do not survive BH correction.
-The OCD-GMAE62 benchmark's historical data packages introduce natural failures, so we report failure-aware success rates and success-conditioned energy deltas instead of forcing ordinary paired tests.
+The expanded OCD24 matrix and separately selected rep50 package introduce natural failures, so we report failure-aware success rates and success-conditioned energy deltas instead of forcing ordinary paired tests.
 We interpret comparisons primarily through effect sizes and bootstrap confidence intervals, relying on the consistent direction of effects across backends as conceptual replication.
 
 \paragraph{Scope and reproducibility.}
@@ -145,4 +146,26 @@ The multi-backend design ensures that conclusions do not depend on any single LL
 
 \section{Conclusion}
 
-AdsMind is a closed-loop multi-agent framework that integrates LLM-driven planning with iterative MLFF relaxation feedback for autonomous adsorption configuration search. Three mechanisms---Chemical Slip detection, FORBID constraint memory, and autonomous termination---enable the agent to detect and correct its own reasoning errors. Through 880 formal ablation attempts across four LLM backends, plus a 400-run generalization study and head-to-head comparisons against non-LLM and LLM baselines, we establish that AdsMind's primary value lies in four properties: reliability (80/80 CMU20 Full successes vs.\ 73/80 for 1-Shot), backend convergence (2.3$\times$ reduction in energy spread on CMU20), compute efficiency (5--25$\times$ fewer MACE-MP relaxations than brute-force controls), and interpretability via slip events and forbid constraints. On complex adsorbates, brute-force sampling reaches lower energies than closed-loop refinement, a trade-off arising from single-trajectory iteration rather than insufficient compute; Chemical Slip additionally serves as a physically grounded diagnostic for LLM chemical reasoning quality. Closed-loop LLM reasoning is not a replacement for brute-force search on well-resourced problems; rather, it is the foundation for \textit{autonomous chemistry workflows} where reliability, efficiency, and interpretability must be achieved simultaneously. A natural next step is to combine AdsMind's error recovery with broader initial site enumeration, yielding an agent that inherits the depth of brute-force methods and the reliability of closed-loop refinement. Extending AdsMind to handle co-adsorption, solvation effects, and defected surfaces will require minimal architectural changes but significant validation, and the Chemical Slip diagnostic could be adapted to evaluate other LLM-based scientific agents, providing a general framework for assessing applied reasoning in physical domains.
+We have presented AdsMind, a closed-loop multi-agent framework that integrates LLM-driven planning with iterative MLFF relaxation feedback for autonomous adsorption configuration search.
+Three mechanisms---Chemical Slip detection, FORBID constraint memory, and autonomous termination---enable the agent to detect and correct its own reasoning errors.
+
+\textbf{Experimental validation.}
+Through 880 formal ablation attempts across four LLM backends, plus a 400-run generalization study and head-to-head comparisons against non-LLM and LLM baselines, we establish that AdsMind's primary value lies in four properties:
+(i)~reliability (80/80 CMU20 Full successes vs. 73/80 for 1-Shot);
+(ii)~backend convergence (2.3$\times$ reduction in energy spread on CMU20);
+(iii)~compute efficiency (5--25$\times$ fewer MACE-MP relaxations than brute-force controls);
+(iv)~interpretability via slip events and forbid constraints.
+
+\textbf{Negative results.}
+We report that on complex adsorbates, brute-force sampling reaches lower energies than closed-loop refinement.
+This trade-off arises from single-trajectory iteration rather than insufficient compute, and motivates future hybrid architectures.
+Chemical Slip additionally serves as a physically grounded diagnostic for LLM chemical reasoning quality.
+
+\textbf{Broader implications.}
+Closed-loop LLM reasoning is not a replacement for brute-force search on well-resourced problems; rather, it is the foundation for \textit{autonomous chemistry workflows} where reliability, efficiency, and interpretability must be achieved simultaneously.
+A natural next step is to combine AdsMind's error recovery with broader initial site enumeration, yielding an agent that inherits the depth of brute-force methods and the reliability of closed-loop refinement.
+
+\textbf{Future directions.}
+Extending AdsMind to handle co-adsorption, solvation effects, and defected surfaces will require minimal architectural changes but significant validation.
+The Chemical Slip diagnostic could be adapted to evaluate other LLM-based scientific agents, providing a general framework for assessing applied reasoning in physical domains.
+A two-stage pipeline---brute-force screening followed by closed-loop refinement on top candidates---would combine the throughput of broad sampling with the reliability and interpretability of iterative reasoning, representing a promising direction for production deployment.

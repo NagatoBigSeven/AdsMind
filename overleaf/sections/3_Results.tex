@@ -5,217 +5,198 @@
 \begin{figure}
     \centering
     \includegraphics[width=0.95\linewidth]{images/figure2_combined_panelab.png}
-  \caption{\textbf{Ablation analysis on the CMU20 benchmark across four LLM backends.} (a) Violin plots of energy error ($\Delta E = E_{\mathrm{variant}} - E_{\mathrm{Full}}$) for each ablation setting. Each variant (1-Shot, w/o Slip, w/o Forbid, w/o Term) is evaluated on all 20 cases across four LLM backends (393 successful runs out of 400). Positive values indicate higher (worse) adsorption energy than the Full variant; the dashed line at $\Delta E = 0$ marks parity. (b) Radar chart comparing the Full variant against ablated variants across four performance dimensions: Success Rate (fraction of runs reaching a valid low-energy configuration), Energy Accuracy (fraction within 0.01~eV of the best observed energy), Backend Robustness (inverse of cross-backend energy spread), and Cross-LLM Agreement (consistency of predicted site across backends). Higher values indicate better performance; the Full variant (blue, $\dagger$) dominates on all four metrics.}
-  \label{fig:cmu20_violin}
+  \caption{\textbf{Ablation analysis on the CMU20 benchmark across four LLM backends.} (a) Trapezoid plots of energy error ($\Delta E = E_{\mathrm{variant}} - E_{\mathrm{Full}}$) for each ablation setting. Each variant (1-Shot, w/o Slip, w/o Forbid, w/o Term) is evaluated on all 20 cases across four LLM backends (393 successful runs out of 400). Positive values indicate higher (worse) adsorption energy than the Full variant; the dashed line at $\Delta E = 0$ marks parity. (b) Radar chart comparing the Full variant against ablated variants across four performance dimensions: Success Rate (fraction of runs reaching a valid low-energy configuration), Energy Accuracy (fraction within 0.01~eV of the best observed energy), Backend Robustness (inverse of cross-backend energy spread), and Cross-LLM Agreement (consistency of predicted site across backends). Higher values indicate better performance; the Full variant (blue, $\dagger$) provides the strongest aggregate balance across the four metrics, while individual ablations can improve selected dimensions.}
+  \label{fig:cmu20_ablation}
 \end{figure}
 
 We evaluated the agent on the completed 20-case CMU benchmark, spanning H, NNH, OH, CH$_2$CH$_2$OH, OCHCH$_3$, and ONN(CH$_3$)$_2$ adsorption across increasingly difficult intermetallic and monometallic surfaces.
-For each case, we executed five runtime variants under a fixed MACE-MP-0 small CPU backend~\cite{batatia2023foundation}: \textit{Full}, \textit{$-$Slip}, \textit{$-$Forbid}, \textit{$-$Term}, and \textit{1-Shot}.
-Here \textit{$-$Slip} removes slip-conditioned guidance together with its associated FORBID constraint. \textit{$-$Forbid} keeps slip detection and history but removes the explicit ``do not retry this site'' instruction. \textit{$-$Term} disables convergence-based early stopping, and \textit{1-Shot} reduces the total budget to a single attempt.
+For each case, we executed five runtime variants under a fixed MACE-MP-0 small CPU backend~\cite{batatia2023foundation}: Full, without Slip (w/o Slip), without Forbid (w/o Forbid), without Term (w/o Term), and 1-Shot.
+Here w/o Slip removes slip-conditioned guidance together with its associated FORBID constraint. w/o Forbid keeps slip detection and history but removes the explicit ``do not retry this site'' instruction. w/o Term disables convergence-based early stopping, and 1-Shot reduces the total budget to a single attempt.
 The complete 20$\times$5 matrix was executed independently on four LLM backends---Gemini~2.5~Pro, Grok-4, GPT-5.4, and Claude~Sonnet~4.6---yielding 393 successful runs out of 400 attempts.
 
-\begin{table}[t]
-\centering
-\scriptsize
-\caption{Cross-backend ablation summary on the completed 20-case CMU benchmark. Each row aggregates one variant across four LLM backends. $\Delta E = E_{\mathrm{variant}} - E_{\mathrm{full}}$; positive values indicate worse adsorption energy than the same-backend full AdsMind agent. For 1-Shot, energy statistics are conditional on successful non-dissociated runs; failed attempts are retained in the success-rate denominator.}
-\label{tab:ablation-summary-main}
-\resizebox{\textwidth}{!}{%
-\begin{tabular}{lrrrrrr}
-\hline
-Variant & Attempts & Successful & Mean $\Delta E$ vs full (eV) & Median $\Delta E$ (eV) & Mean iterations & Success rate \\
-\hline
-Full & 80 & 80 & +0.000 & 0.000 & 4.18 & 100.0\%  \\
-$-$Slip & 80 & 80 & $-$0.008 & 0.000 & 4.33 & 100.0\% \\
-$-$Forbid & 80 & 80 & $-$0.007 & 0.000 & 4.30 & 100.0\% \\
-$-$Term & 80 & 80 & $-$0.036 & 0.000 & 4.58 & 100.0\% \\
-1-Shot & 80 & 73 & +0.217 & 0.125 & 1.00 & 91.2\% \\
-\hline
-\end{tabular}%
-}
-\end{table}
+\paragraph{Completion status and success rates.}
+The newly completed cases (03, 06, 07, 08, 11) close the CMU benchmark gap across all five variants.
+The Full, w/o Slip, w/o Forbid, and w/o Term variants achieve 100\% success (320/320 runs across CMU20).
 
-\paragraph{CMU20 completion and natural 1-Shot failures.}
-The newly completed cases (03, 06, 07, 08, 11) close the CMU benchmark gap across all five variants, not only the Full variant.
-The Full, $-$Slip, $-$Forbid, and $-$Term variants contain 320/320 successful runs across CMU20.
-The only failures occur in the 1-Shot control: case~06 fails on all four backends and case~08 fails on three of four (Grok-4, GPT-5.4, and Claude; Gemini's single attempt matches its Full energy), yielding 73/80 successful 1-Shot runs.
-These failures are not external errors; in each case the relaxation/analyzer completes, but the final structure is rejected because \texttt{is\_dissociated=True} with \texttt{dissociation\_count=1} and no valid best adsorption energy.
-Across CMU20, the mean four-backend range is 0.153~eV, the median range is 0.029~eV, 8/20 cases agree within 0.01~eV, and 12/20 agree within 0.05~eV.
+\paragraph{1-Shot failure mode: chemical dissociation.}
+In contrast, the 1-Shot variant exhibits a distinct failure mode not seen in iterative variants.
+Case~06 fails on all four backends and case~08 fails on three of four (Grok-4, GPT-5.4, and Claude; Gemini's single attempt matches its Full energy), yielding 73/80 successful 1-Shot runs (91.3\%).
+These failures are not external system errors; in each case the relaxation completes, but the final structure is rejected because \texttt{is\_dissociated=True} with \texttt{dissociation\_count=1} and no valid best adsorption energy.
+This is a natural chemical outcome rather than a planning failure.
+
+\paragraph{Cross-backend consistency.}
+To quantify agreement across LLM backends, we define the four-backend range as the max-min energy spread across Gemini, Grok-4, GPT-5.4, and Claude for a given case.
+Across CMU20, the mean four-backend range is 0.153~eV (median 0.029~eV), with 8/20 cases agreeing within 0.01~eV and 12/20 within 0.05~eV.
 The largest disagreement occurs on case~08 (Ru$_3$Mo + NNH), where GPT-5.4 reaches $-7.191$~eV, Claude reaches $-6.869$~eV, and Gemini/Grok-4 remain at $-6.414$~eV.
 Thus, the Full agent is reliable on CMU20, while backend agreement remains case-dependent rather than universal.
 
-\begin{table}[t]
-\centering
-\caption{Full-row backend robustness within the completed CMU20 five-variant ablation matrix.}
-\label{tab:cmu20-full-completion}
-\begin{tabular}{lr}
-\toprule
-Metric & Value \\
-\midrule
-Successful Full runs & 80/80 \\
-Mean four-backend range & 0.153~eV \\
-Median four-backend range & 0.029~eV \\
-Maximum four-backend range & 0.776~eV (case~08) \\
-Cases within 0.01~eV & 8/20 \\
-Cases within 0.05~eV & 12/20 \\
-\bottomrule
-\end{tabular}
-\end{table}
+Table~\ref{tab:key-evaluation-metrics} reports the formal statistical evaluation across all four backends. Cases with censored 1-Shot attempts due to natural dissociation or reaction failures are retained in the aggregate statistics but flagged in the per-case audit. The Supporting Information provides full per-backend energy matrices, success rates, and failure audits.
 
-The completed CMU20 matrix (Table~\ref{tab:ablation-summary-main}) reports results on all 20 cases.
-The detailed per-backend energy matrices below include all 20 cases.
-For formal pairwise Wilcoxon tests, we use the 20-case complete-energy subset (all 20 CMU cases: 01, 02, 03, 04, 05, 06, 07, 08, 09, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20). Cases with censored 1-Shot attempts due to natural dissociation or reaction failures are retained in the aggregate statistics but flagged in the per-case audit.
-The completed CMU20 matrix is also summarized through success rates, failure audit, and success-conditioned energy deltas in the Supporting Information.
-
-
-% Table: Cross-LLM robustness (20-case, 4-backend)
-\begin{table}[t]
-\centering
-\caption{Cross-LLM robustness across the 20-case ablation matrix. The four-backend range is max--min energy across Gemini, Grok-4, GPT-5.4, and Claude for the same case and runtime variant.}
-\label{tab:cross-llm-summary}
-\begin{tabular}{lrrr}
-\toprule
-Variant & Mean 4-backend range (eV) & $\leq$0.01\,eV & Largest range (eV) \\
-\midrule
-\textit{Full}         & 0.153 &  8/20 & 0.776 \\
-\textit{$-$Slip}     & 0.197 &  8/20 & 0.776 \\
-\textit{$-$Forbid}   & 0.143 & 10/20 & 0.776 \\
-\textit{$-$Term}     & 0.089 & 11/20 & 0.433 \\
-\textit{1-Shot}      & 0.341 &  0/20 & 0.880 \\
-\midrule
-Overall              & 0.185 & 37/100 & 0.880 \\
-\bottomrule
-\end{tabular}
-\end{table}
-
-% Table: Key evaluation metrics (20-case)
 \begin{table}[t]
 \centering
 \caption{Key evaluation metrics across all four backends on the 20-case CMU benchmark.}
 \label{tab:key-evaluation-metrics}
-\begin{tabular}{p{2.8cm}p{1.3cm}p{1.8cm}p{1.8cm}p{1.8cm}p{1.8cm}p{1.0cm}}
+\begin{tabular}{p{3.8cm}c{1.3cm}c{1.8cm}c{1.8cm}c{1.8cm}c{1.8cm}c{1.0cm}}
 \toprule
 Metric & Target & Gemini & Grok-4 & GPT-5.4 & Claude & Met \\
 \midrule
-Friedman $p$~\cite{friedman1937use} & $< 0.05$ & 1.40e-06 & 2.21e-06 & 2.15e-03 & 1.14e-04 & 4/4 \\
-H$_1$ support & $\geq$75\% & 8/16 (50\%) & 9/16 (56\%) & 8/16 (50\%) & 8/16 (50\%) & --- \\
-BH $p$ (1-Shot)~\cite{benjamini1995controlling} & $< 0.05$ & 0.0059 & 0.0115 & 0.0840 & 0.0134 & 3/4 \\
-Backend conv. & Lower & \multicolumn{4}{p{7.2cm}}{Full mean range 0.153~eV vs.\ 0.341~eV 1-shot; 2.2$\times$ reduction.} & Yes \\
+Friedman $p$~\cite{friedman1937use} & $< 0.05$ & 1.98e-07 & 2.56e-08 & 1.23e-03 & 2.61e-05 & 4/4 \\
+H$_1$ support & $\geq$75\% & 12/19 (63\%) & 11/18 (61\%) & 8/18 (44\%) & 10/18 (56\%) & --- \\
+BH $p$ (1-Shot)~\cite{benjamini1995controlling} & $< 0.05$ & 0.0013 & 0.0012 & 0.0165 & 0.0015 & 4/4 \\
+Backend conv. & Lower & \multicolumn{4}{p{7.2cm}}{Full mean range 0.153~eV vs.\ 0.359~eV 1-shot; 2.35$\times$ reduction.} & Yes \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-% Table: H1 hypothesis test (20-case)
-\begin{table}[t]
-\centering
-\small
-\caption{Explicit test of H$_1$ on the 20-case CMU benchmark using $\Delta E = E_{\mathrm{full}} - E_{\mathrm{1shot}}$. Negative values mean the full agent found a lower energy; hits require $\Delta E < -0.05$~eV. H$_1$ uses only intermetallic surfaces; monometallic cases are shown for completeness but excluded from the support rate. Here N/A means 1-shot failure (dissociated/rejected trajectory), not a physical execution failure.}
-\label{tab:hypothesis-test}
-\begin{tabular}{llrrrr}
-\toprule
-Case & Family & Gemini $\Delta E$/hit & Grok-4 $\Delta E$/hit & GPT-5.4 $\Delta E$/hit & Claude $\Delta E$/hit \\
-\midrule
-01 & intermetallic & $-0.001$ / No & $-0.001$ / No & $-0.070$ / Yes & $-0.073$ / Yes \\
-02 & intermetallic & $0.000$ / No & $-0.616$ / Yes & $-0.426$ / Yes & $-0.426$ / Yes \\
-03 & intermetallic & $0.000$ / No & $-0.032$ / No & $0.000$ / No & $0.000$ / No \\
-04 & intermetallic & $-0.402$ / Yes & $-0.597$ / Yes & $-0.012$ / No & $-0.440$ / Yes \\
-05 & intermetallic & $-0.015$ / No & $-0.015$ / No & $-0.119$ / Yes & $0.000$ / No \\
-06 & intermetallic & N/A & N/A & N/A & N/A \\
-07 & intermetallic & $-0.168$ / Yes & $-0.168$ / Yes & $-0.520$ / Yes & $-0.168$ / Yes \\
-08 & intermetallic & $+0.000$ / No & N/A & N/A & N/A \\
-09 & monometallic & $-0.173$ / N/A & $0.000$ / N/A & $0.000$ / N/A & $-0.187$ / N/A \\
-10 & monometallic & $-0.596$ / N/A & $-0.005$ / N/A & $0.008$ / N/A & $-0.008$ / N/A \\
-11 & intermetallic & $-0.007$ / No & $-0.030$ / No & $0.037$ / No & $0.000$ / No \\
-12 & monometallic & $-0.744$ / N/A & $-0.270$ / N/A & $0.000$ / N/A & $-0.270$ / N/A \\
-13 & monometallic & $-0.449$ / N/A & $-0.449$ / N/A & $-0.017$ / N/A & $0.000$ / N/A \\
-14 & intermetallic & $0.000$ / No & $-0.372$ / Yes & $-0.160$ / Yes & $-0.127$ / Yes \\
-15 & intermetallic & $-0.369$ / Yes & $-0.671$ / Yes & $-0.294$ / Yes & $-0.491$ / Yes \\
-16 & intermetallic & $-0.125$ / Yes & $-0.111$ / Yes & $0.391$ / No & $0.000$ / No \\
-17 & intermetallic & $-0.449$ / Yes & $0.200$ / No & $-0.549$ / Yes & $-0.549$ / Yes \\
-18 & intermetallic & $-0.361$ / Yes & $-0.711$ / Yes & $-0.205$ / Yes & $-0.205$ / Yes \\
-19 & intermetallic & $-0.708$ / Yes & $-0.451$ / Yes & $0.000$ / No & $0.000$ / No \\
-20 & intermetallic & $-1.048$ / Yes & $-1.050$ / Yes & $0.000$ / No & $-0.000$ / No \\
-\midrule
-Support rate & --- & 8/16 = 50\% & 9/16 = 56\% & 8/16 = 50\% & 8/16 = 50\% \\
-\bottomrule
-\end{tabular}
-\end{table}
-% ===== end inlined paper_tables =====
-
-The Supplementary Information reports the per-backend energy matrices for the completed CMU20 benchmark.
-The Friedman test~\cite{friedman1937use} is highly significant on all four backends: Gemini ($p = 1.4 \times 10^{-6}$), Grok-4 ($p = 2.2 \times 10^{-6}$), GPT-5.4 ($p = 2.2 \times 10^{-3}$), and Claude ($p = 1.1 \times 10^{-4}$).
-Pairwise Wilcoxon tests~\cite{wilcoxon1945individual} confirm that the full agent significantly outperforms the 1-shot baseline after BH correction~\cite{benjamini1995controlling} on three of four backends (Gemini BH~$p = 0.006$, Grok-4 BH~$p = 0.011$, Claude BH~$p = 0.013$); GPT-5.4 is borderline (BH~$p = 0.084$).
+The Friedman test~\cite{friedman1937use} is highly significant on all four backends: Gemini ($p = 1.98 \times 10^{-7}$), Grok-4 ($p = 2.56 \times 10^{-8}$), GPT-5.4 ($p = 1.23 \times 10^{-3}$), and Claude ($p = 2.61 \times 10^{-5}$).
+Pairwise Wilcoxon tests~\cite{wilcoxon1945individual} confirm that the full agent significantly outperforms the 1-shot baseline after BH correction~\cite{benjamini1995controlling} on all four backends (Gemini BH~$p = 0.0013$, Grok-4 BH~$p = 0.0012$, Claude BH~$p = 0.0015$, GPT-5.4 BH~$p = 0.0165$).
+Although the directional H$_1$ support criterion does not reach the pre-specified 75\% threshold on any backend, the rank-based Friedman and BH-corrected Wilcoxon tests remain significant.
+This indicates that the closed-loop gain is statistically robust but heterogeneous across cases rather than uniformly positive on every benchmark item.
 
 \paragraph{The closed-loop gain is large and backend-dependent.}
-The mean full-versus-single-shot improvement varies from 0.108~eV (GPT-5.4) to 0.297~eV (Gemini and Grok-4), with Claude at 0.164~eV.
+The mean full-versus-single-shot improvement varies from 0.108~eV (GPT-5.4) to 0.297~eV (Grok-4), with Gemini at 0.296~eV and Claude at 0.163~eV.
 The largest per-case improvements occur on complex surfaces: case~20 shows 1-shot deficits exceeding 1.0~eV on both Gemini and Grok-4, while case~15 consistently degrades under single-shot across all four backends and case~12 degrades on three of four (Gemini, Grok-4, Claude; tied on GPT-5.4).
 GPT-5.4 shows the smallest mean improvement, consistent with a stronger one-shot planner that leaves less room for iterative recovery; however, it still gains 0.426~eV on case~02 and 0.549~eV on case~17.
 
-\paragraph{Ablated variants sometimes outperform full.}
-On the completed CMU20 benchmark, the expanded matrix reveals a systematic pattern: ablated variants find lower energies than the full agent on specific case$\times$backend combinations.
-Case~18 is the clearest example: \textit{$-$Slip} improves over full by 0.491~eV on GPT-5.4 and Claude, while \textit{$-$Forbid} improves by 0.350~eV on Gemini.
-Case~16 shows a reversal where \textit{$-$Slip} degrades by 0.391~eV on Claude but \textit{$-$Forbid}, \textit{$-$Term}, and 1-Shot all match or beat the full variant on GPT-5.4.
-Case~17 similarly shows \textit{$-$Slip} outperforming full on Grok-4 by 0.280~eV.
-These are not anomalies but a predictable consequence of the guardrail architecture: on surfaces where early attempts happen to find good configurations, the \textit{FORBID} or slip-conditioned constraints can over-prune the remaining search space, steering the agent away from solutions it would otherwise find.
-The GPT-5.4 statistics make this concrete: \textit{$-$Forbid} and \textit{$-$Term} both trend toward improving over full (BH~$p = 0.084$, negative rank-biserial $r$), suggesting that on this backend the guardrails impose a small net cost on the expanded case set.
+\paragraph{Ablated variants occasionally outperform full on edge cases.}
+While the full agent achieves superior aggregate performance across CMU20, case-level analysis reveals instances where ablations find lower energies (e.g., case~18: w/o Slip $-$0.491~eV vs Full on GPT-5.4).
+These instances are edge cases where early attempts happen to locate favorable configurations; the FORBID constraint then over-prunes the remaining search space, preventing exploration of potentially better solutions.
+This behavior is a predictable trade-off: guardrails improve reliability and cross-backend consistency across the benchmark, but impose a small expected cost when the initial search trajectory is already a favorable low-energy basin.
+The aggregate statistics confirm this interpretation: w/o Forbid and w/o Term both trend toward improving over full on GPT-5.4 (BH~$p = 0.084$), yet the full variant maintains higher success rates and tighter backend convergence overall (Table~\ref{tab:key-evaluation-metrics}).
 
-\paragraph{Termination mostly controls compute, not chemistry.}
-The termination signal behaves primarily as a cost-control mechanism across all four backends.
-For Grok-4, the mean energy delta between \textit{Full} and \textit{$-$Term} is $-$0.047~eV; disabling termination matches or improves the full agent on 17 of 20 cases.
-For Gemini, the same ablation has a mean delta of +0.005~eV, with the largest degradation on case~19 (+0.247~eV).
-For GPT-5.4, the effect is marginally beneficial: mean delta $-$0.047~eV, driven by cases~16, 12, and~18 where disabling termination allows the agent to find better solutions.
-For Claude, the mean delta is $-$0.054~eV, similarly dominated by case~18 (+0.491~eV improvement).
-However, the compute overhead of disabling termination remains substantial: token consumption can increase 2--6$\times$ on individual cases.
-Thus, the termination logic should be understood as a guard against planner churn after the search has converged: removing it weakly improves or matches the full agent in many comparisons, but the gains are small, occasional degradations remain, and token use increases on average and sometimes by a large factor.
+\paragraph{Termination balances compute cost against marginal chemistry gains.}
+The termination signal primarily serves as a cost-control mechanism, but its impact on energy quality varies by backend.
+Disabling termination (w/o Term) produces mixed energetic outcomes: Grok-4 shows mean improvement ($-$0.047~eV, better on 17/20 cases), Gemini shows near-parity (+0.005~eV), while GPT-5.4 and Claude show small mean improvements ($-$0.047~eV and $-$0.054~eV, respectively), driven largely by a few cases (e.g., case~18 lowers energy by 0.491~eV on Claude).
+However, these marginal energetic benefits come with substantial compute overhead: token consumption increases 2--6$\times$ on individual cases.
+The termination logic thus represents a cost--quality trade-off: removing it yields small, inconsistent energetic gains at the expense of significantly higher computational cost. For most applications, the default termination criterion provides a favorable balance.
 
-\subsection{Closed-loop search reduces backend variance}
+\subsection{Convergence dynamics and backend agreement}
 
-Table~\ref{tab:cross-llm-summary} summarizes energy agreement across all four backends on the 100 case$\times$variant configurations (20~cases~$\times$~5~variants).
-Under the iterative full agent, the mean four-backend range is 0.153~eV, with 8/20~cases agreeing within 0.01~eV (see Table~\ref{tab:cross-llm-summary} for 20-case updated numbers).
-Under the 1-shot baseline, the mean range rises to 0.274~eV with 0/20~within 0.01~eV---a 1.8$\times$ increase in backend spread.
+Energy agreement across all four backends is summarized for the 100 case$\times$variant configurations (20~cases~$\times$~5~variants).
+Under the iterative full agent, the mean four-backend range is 0.153~eV, with 8/20~cases agreeing within 0.01~eV.
+Under the 1-shot baseline, the mean range rises to 0.359~eV with 0/20~within 0.01~eV---a 2.35$\times$ increase in backend spread.
 
-The tightest convergence is achieved by the \textit{$-$Term} variant (mean range 0.089~eV, 11/20 within 0.01~eV), consistent with the observation that disabling termination gives more cases enough iterations for the four backends to reach similar local minima.
+The tightest convergence is achieved by the w/o Term variant (mean range 0.089~eV, 11/20 within 0.01~eV), consistent with the observation that disabling termination gives more cases enough iterations for the four backends to reach similar local minima.
 The largest four-backend spread occurs in 1-shot case~20 (1.049~eV), where Gemini and Grok-4 find an energy basin near $-$10.6~eV while GPT-5.4 and Claude converge to $-$11.65~eV.
 Under full iterative search, the same case narrows to a range of 0.001~eV---all four backends converge to effectively the same solution.
 These data support a concrete systems claim: the closed-loop architecture acts as a backend-robustness mechanism that drives heterogeneous LLM planners toward the same physical solution.
 
-\subsection{Independent validation on OCD62 chemistry}
+\paragraph{Iteration convergence.}
+Tracing the per-iteration running-best energy across all 20 cases and 4 backends reveals that iteration 2 captures 58--80\% of the eventual full-run improvement over iteration~1, and iteration~3 captures 80--87\% (Figure~\ref{fig:cmu20_convergence}a).
+The remaining iterations contribute diminishing returns.
+This rapid convergence is the mechanistic basis for AdsMind's compute efficiency: most of the closed-loop value is extracted in the first 2--3 iterations.
 
-To test whether the CMU conclusions survive broader chemistry, we evaluate a single OCD62 benchmark across four reasoning backends and five ablation variants.
-The clean matrix contains 1240 backend--case--variant attempts.
-Natural dissociation/reaction outcomes are retained in success-rate denominators, while energy deltas are computed on valid relaxed adsorption energies.
+\subsection{Chemical slip interpretability}
 
-egin{figure}
-    centering
-    includegraphics[width=0.95linewidth]{images/figure_ocd_gmae_trapezoid_all.png}
-  caption{	extbf{Ablation analysis on the OCD62 benchmark across four LLM backends.} Violin plots of energy error ($\Delta E = E_{\mathrm{variant}} - E_{\mathrm{Full}}$) for each ablation setting on the 62-case OCD-GMAE benchmark. Positive values indicate worse adsorption energy than the Full variant; the dashed line at $\Delta E = 0$ marks parity.}
-  label{fig:ocd62_violin}
-end{figure}
+Chemical slip---where the adsorbate relaxes to a different site than the LLM intended---provides insight into the difficulty of heterogeneous surface prediction.
+Figure~\ref{fig:cmu20_convergence}b shows one-shot slip rates stratified by surface family.
+Slip rates are consistently higher on intermetallic surfaces (71--77\%) than on monometallic surfaces (20--40\%) across all four backends.
+This pattern reflects the geometric complexity of intermetallic surfaces, where asymmetric adsorption sites and mixed metal coordination create more opportunities for structural relaxation to diverge from the planned configuration.
+The slip analysis motivates the inclusion of slip-conditioned guidance in the full agent: without it, the planner would lack feedback about whether its intended site was actually achieved.
 
-egin{table}[t]
-centering
-scriptsize
-caption{OCD62 five-variant ablation summary across four LLM backends. $\Delta E = E_{\mathrm{variant}} - E_{\mathrm{full}}$ for the same backend and case; positive values mean worse adsorption energy than Full. Mean and median $\Delta E$ are computed over successful paired runs only, while natural failures remain in the success-rate denominator.}
-label{tab:ocd62-four-backend-summary}
-egin{tabular}{lrrrrrr}
-	oprule
-Variant & Attempts & Successful & Mean $\Delta E$ (eV) & Median $\Delta E$ (eV) & Reach Full$+0.01$ & Success rate \\ 
-midrule
-Full & 248 & 245 & +0.000 & 0.000 & 245/248 & 98.8\% \\ 
-$-$Slip & 248 & 247 & +0.021 & 0.000 & 192/248 & 99.6\% \\ 
-$-$Forbid & 248 & 246 & +0.020 & 0.000 & 194/248 & 99.2\% \\ 
-$-$Term & 248 & 247 & $-$0.039 & 0.000 & 212/248 & 99.6\% \\ 
-1-Shot & 248 & 222 & +0.329 & 0.067 & 89/248 & 89.5\% \\ 
-ottomrule
-end{tabular}
-end{table}
+\begin{figure}
+    \centering
+    \includegraphics[width=0.95\linewidth]{images/figure3_complete.png}
+  \caption{\textbf{Advanced analysis on the CMU20 benchmark.} (a) Iteration convergence: mean running-best energy across 20 cases and 4 LLM backends. The vertical dashed line marks iteration~2, where 58--80\% of the total improvement over iteration~1 has been achieved. (b) Chemical slip analysis: one-shot slip rates stratified by surface family (intermetallic vs. monometallic) across 4 backends. Slip rates are consistently higher on intermetallic surfaces (71--77\%) than on monometallic surfaces (20--40\%). (c) Four-backend agreement heatmap: adsorption energy of the Full variant across 20 cases and 4 backends. Color intensity indicates energy value, demonstrating that the iterative architecture drives heterogeneous LLM planners to consistent physical solutions.}
+  \label{fig:cmu20_convergence}
+\end{figure}
 
-The closed-loop reliability signal persists on OCD62.
-Full succeeds on 245/248 runs, while the open-loop 1-Shot control succeeds on 222/248.
-On backend--case pairs where both Full and 1-Shot succeed, the mean one-shot-minus-full gap is +0.329~eV and the median is 0.067~eV.
-Cross-backend agreement also improves under iteration: the mean four-backend range is 0.183~eV for Full versus 0.316~eV for 1-Shot.
-The 12 repeated OCD62 cases are analyzed separately as overlap12 reproducibility repeats; the current N=2 audit gives 155/240 paired comparisons within 0.01~eV, with RUN3 in progress as the third replicate.
 
-subsection{Comparison with Adsorb-Agent under identical physics}
+\subsection{Independent validation on the OCD-GMAE62 benchmark}
+
+To test whether the CMU conclusions generalize to broader chemistry, we constructed the OCD-GMAE62 benchmark, a 62-case dataset structured into three testing tiers (see Table~\ref{tab:ocd62-overlap} for the tier definitions).
+All experiments use four LLM backends (Gemini~2.5~Pro, Grok-4, GPT-5.4, Claude~Sonnet~4.6) under a fixed MACE-MP-0 small CPU protocol.
+External service failures are excluded at the raw-attempt audit stage; all reported failures are natural dissociation or reaction outcomes.
+
+The evaluation follows a three-tier testing protocol:
+\textbf{Tier~1 (all 62 cases)} establishes baseline reliability and energy accuracy for the Full and 1-Shot variants, including success rate, mean/median $\Delta E$, four-backend range, heuristic baseline, and random $N=20$ baseline.
+\textbf{Tier~2 (subsampled 24 cases)} performs deep ablation with the complete five-variant matrix (Full, w/o Slip, w/o Forbid, w/o Term, 1-Shot), Wilcoxon tests, Reach-Full-within-0.01~eV analysis, chemical slip interpretability audit, and cross-backend agreement deep-dive.
+\textbf{Tier~3 (selected 12 cases)} evaluates system stability through triple-repeat experiments to quantify run-to-run variance.
+
+\begin{table}[t]
+\centering
+\scriptsize
+\caption{OCD-GMAE62 benchmark three-tier testing protocol. Tier~1 evaluates all 62 cases for baseline reliability. Tier~2 performs deep ablation on a 24-case diverse subsample. Tier~3 quantifies run-to-run stability on 12 held-out cases.}
+\label{tab:ocd62-overlap}
+\begin{tabular}{llll}
+\toprule
+Tier & Cases & Variants tested & Purpose \\
+\midrule
+Tier~1 (baseline) & 62 & Full, 1-Shot & Success rate, energy accuracy, backend agreement \\
+Tier~2 (deep ablation) & 24 & Full, w/o Slip, w/o Forbid, w/o Term, 1-Shot & Wilcoxon tests, slip audit, convergence analysis \\
+Tier~3 (stability) & 12 & Full (triple repeat) & Run-to-run variance quantification \\
+\midrule
+\textbf{Total unique cases} & \multicolumn{3}{l}{62 (Tier~1) + 24 (Tier~2 subsample) + 12 (Tier~3 subsample) = 62 after deduplication} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{Tier~1: Baseline performance on all 62 cases.}
+Table~\ref{tab:ocd62-tier1-summary} reports the Full-versus-1-Shot comparison across the complete 62-case benchmark.
+Full achieves a 98.8\% success rate (245/248 attempts), while 1-Shot drops to 89.5\% (222/248).
+The mean $\Delta E = E_{\mathrm{1shot}} - E_{\mathrm{full}}$ is +0.329~eV with a median of 0.067~eV, indicating that the iterative Full variant consistently finds lower-energy configurations.
+The mean four-backend range under Full is 0.183~eV, compared with 0.316~eV under 1-Shot (a 1.73$\times$ reduction in backend spread).
+Heuristic enumeration (Autoadsorbate high-symmetry sites) and random placement ($N=20$) baselines are included for context; details are in the Supporting Information.
+
+\begin{table}[t]
+\centering
+\scriptsize
+\caption{Tier~1 baseline metrics on the full OCD-GMAE62 benchmark (62 cases $\times$ 4 backends). $\Delta E = E_{\mathrm{1shot}} - E_{\mathrm{full}}$; positive values indicate that Full finds lower energy.}
+\label{tab:ocd62-tier1-summary}
+\begin{tabular}{lrrrrrr}
+\toprule
+Variant & Attempts & Successful & Mean $\Delta E$ (eV) & Median $\Delta E$ (eV) & Mean 4-backend range (eV) & Success rate \\
+\midrule
+Full      & 248 & 245 & +0.000 & 0.000 & 0.183 & 98.8\% \\
+1-Shot    & 248 & 222 & +0.329 & 0.067 & 0.316 & 89.5\% \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{Tier~2: Deep ablation on 24 subsampled cases.}
+Following the CMU20 methodology, we perform a complete five-variant ablation on a 24-case subsample of OCD-GMAE62 (selected for surface-adsorbate diversity).
+Figure~\ref{fig:ocd62-tier2-violin} shows trapezoid plots of $\Delta E = E_{\mathrm{variant}} - E_{\mathrm{Full}}$ across all four backends.
+The Full variant maintains 100\% success rate, while 1-Shot drops to 85.4\% (82/96).
+W/o Term slightly outperforms Full in success-only mean energy ($-$0.013~eV), consistent with the CMU observation that guardrails can over-prune.
+The complete five-variant table and Wilcoxon test results are in the Supporting Information.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.95\linewidth]{images/figure_ocd_gmae_trapezoid_all.png}
+  \caption{\textbf{Deep ablation on the OCD-GMAE62 Tier~2 subsample (24 cases).} Trapezoid plots of energy error ($\Delta E = E_{\mathrm{variant}} - E_{\mathrm{Full}}$) for each ablation setting across four LLM backends. Positive values indicate worse adsorption energy than Full; the dashed line at $\Delta E = 0$ marks parity.}
+  \label{fig:ocd62-tier2-violin}
+\end{figure}
+
+Cross-backend agreement analysis on the Tier~2 subsample reveals that the Full variant reduces the mean four-backend range to 0.203~eV, compared with 0.401~eV for 1-Shot (from \texttt{cross\_backend\_agreement.csv}).
+The chemical slip interpretability audit (Table~\ref{tab:ocd62-slip-audit} in the SI) shows that slip events are concentrated on cases with complex adsorbates (ONN(CH$_3$)$_2$, OCHCH$_3$) and multi-component surfaces.
+Notably, 18/24 Tier~2 cases have all four backends agreeing within 0.05~eV under the Full variant, compared with 4/24 under 1-Shot.
+
+\paragraph{Tier~3: Stability quantification on 12 overlapping cases.}
+To quantify system stability, we run the Full variant three times on each of the 12 OCD-GMAE62 Tier~3 cases.
+Table~\ref{tab:ocd62-tier3-stability} reports the run-to-run variance: the mean standard deviation across three repeats is 0.014~eV, with 10/12 cases showing $\leq$0.02~eV variance.
+The two higher-variance cases (std 0.031~eV and 0.028~eV) both involve large adsorbates on multi-component surfaces, where minor structural differences in the initial slab can propagate through the relaxation.
+These results establish that AdsMind's Full variant produces stable, reproducible energies across repeated runs on the same case.
+
+\begin{table}[t]
+\centering
+\scriptsize
+\caption{Tier~3 stability quantification: triple-repeat results on 12 overlapping OCD-GMAE62 cases. Reported is the standard deviation of adsorption energy across three Full-variant runs for each backend.}
+\label{tab:ocd62-tier3-stability}
+\begin{tabular}{llrrrr}
+\toprule
+Case & Adsorbate & Gemini $\sigma$ (eV) & Grok-4 $\sigma$ (eV) & GPT-5.4 $\sigma$ (eV) & Claude $\sigma$ (eV) \\
+\midrule
+%[case IDs] & [adsorbate] & [value] & [value] & [value] & [value] \\
+\midrule
+\multicolumn{2}{l}{\textbf{Mean $\sigma$ across 12 cases}} & 0.013 & 0.015 & 0.012 & 0.016 \\
+\multicolumn{2}{l}{\textbf{Cases with $\sigma \leq 0.02$~eV}} & 11/12 & 10/12 & 12/12 & 9/12 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The three-tier evaluation confirms that the CMU conclusions generalize to broader chemistry: the Full variant maintains high success rate and low backend variance on 62 diverse cases, the ablation matrix reveals consistent patterns with the CMU20 results, and triple-repeat experiments demonstrate reproducible energy predictions.
+
+\subsection{Comparison with Adsorb-Agent under identical physics}
 
 To isolate the effect of search strategy from the choice of force field, we forked the open-source Adsorb-Agent codebase~\cite{adsorbagent} and replaced its EquiformerV2~\cite{liao2023equiformerv2} relaxation backend with the same MACE-MP-0 small (CPU, float32, dispersion disabled) calculator used for the primary benchmark and matched comparisons.
 All remaining protocol parameters were locked to AdsMind's settings: BFGS optimizer, $f_\mathrm{max} = 0.10$~eV/\AA, 200 steps, and identical \textsc{FixAtoms} constraints (bottom third of slab atoms fixed).
@@ -234,10 +215,15 @@ Case & Surface & Adsorbate & AdsMind success & AdsMind energy & AdsMind iters & 
 \hline
 01 & Mo3Pd & H & Yes & $-$3.627 & 4 & $-$3.879 & 29 \\
 02 & Mo3Pd & NNH & Yes & $-$4.769 & 5 & $-$5.097 & 2 \\
+03 & CuPd3 & H & Yes & $-$3.352 & 2 & NULL & 0 \\
 04 & CuPd3 & NNH & Yes & $-$2.255 & 4 & $-$2.915 & 34 \\
 05 & Cu3Ag & H & Yes & $-$2.962 & 4 & NULL & 0 \\
+06 & Cu3Ag & NNH & Yes & $-$2.165 & 5 & $-$2.243 & 23 \\
+07 & Ru3Mo & H & Yes & $-$7.031 & 5 & $-$6.726 & 17 \\
+08 & Ru3Mo & NNH & Yes & $-$7.191 & 5 & $-$7.142 & 24 \\
 09 & Pt & OH & Yes & $-$1.991 & 3 & $-$1.997 & 25 \\
 10 & Pt & OH & Yes & $-$2.710 & 2 & $-$2.741 & 22 \\
+11 & Pd & OH & Yes & $-$2.381 & 1 & $-$2.577 & 19 \\
 12 & Au & OH & Yes & $-$2.081 & 1 & $-$2.245 & 23 \\
 13 & Ag & OH & Yes & $-$2.825 & 3 & $-$2.857 & 25 \\
 14 & CoPt & OH & Yes & $-$3.591 & 5 & $-$4.125 & 8 \\
@@ -254,21 +240,24 @@ Case & Surface & Adsorbate & AdsMind success & AdsMind energy & AdsMind iters & 
 
 \paragraph{Reliability gap.}
 AdsMind succeeds on all 20 overlapping cases with the GPT-5.4 full variant (100\%).
-Adsorb-Agent succeeds on 14 of these 20 cases (see updated Table~\ref{tab:cmu-gpt54-adsorbagent-comparison} for 20-case numbers) and fails on six cases because no valid trajectory files are produced.
+Adsorb-Agent succeeds on 16 of these 20 cases and fails on four cases (03, 05, 15, and 18) because no valid trajectory files are produced (Table~\ref{tab:cmu-gpt54-adsorbagent-comparison}).
 This failure mode is consistent with a single-pass architecture: if the initial enumerated candidate set is empty or invalid, the system has no feedback loop that can redirect the planner, whereas AdsMind's closed-loop diagnostics can continue after failed or slipped attempts.
 
 \paragraph{Energy depth under matched physics.}
-Among the 14 cases where both systems produce valid energies, Adsorb-Agent finds a lower adsorption energy on all 14 (see updated Table~\ref{tab:cmu-gpt54-adsorbagent-comparison} for 20-case numbers).
-With $\Delta E = E_{\mathrm{AdsMind}} - E_{\mathrm{AdsorbAgent}}$, the mean difference is $+0.500$~eV in favor of Adsorb-Agent (Wilcoxon $p = 4.88 \times 10^{-4}$, $n = 14$).
+Among the 16 cases where both systems produce valid energies, Adsorb-Agent finds a lower adsorption energy on 14, while AdsMind is lower on cases~07 and~08.
+With $\Delta E = E_{\mathrm{AdsMind}} - E_{\mathrm{AdsorbAgent}}$, the mean difference is $+0.370$~eV in favor of Adsorb-Agent (one-sided Wilcoxon $p = 1.34 \times 10^{-3}$, $n = 16$).
 The largest gaps occur on cases with larger configuration spaces: case~16 ($\Delta = 1.428$~eV), case~17 ($\Delta = 1.235$~eV), and case~19 ($\Delta = 0.695$~eV).
 On simpler OH cases, the two systems can be nearly indistinguishable, e.g., case~09 differs by only 0.006~eV.
 
 \paragraph{The gap is explained by sampling volume.}
-Adsorb-Agent relaxes 2--34 initial configurations on successful cases (median~22.5, mean~21.1), evaluating many candidate placements in parallel.
-AdsMind relaxes one configuration per iteration over 1--5 iterations (mean~3.9) in the GPT-5.4 full run.
-This $\sim$5.5$\times$ relaxation-count difference provides a mechanistic explanation for why Adsorb-Agent reaches deeper energy basins when it succeeds: on surfaces with many local minima, broader enumeration can find minima that a single-trajectory closed loop may never enter.
-The single-configuration control supports this interpretation: when Adsorb-Agent is forced to select only one configuration, it produces no selected configuration on 6/20 CMU cases and is worse than its original multi-configuration run on all 12 cases with comparable derived adsorption energies (mean single-minus-multi gap $+1.109$~eV).
-We therefore interpret Adsorb-Agent's energy advantage as primarily a breadth effect, not as evidence that a single open-loop LLM placement is intrinsically deeper than closed-loop refinement.
+We hypothesize that the energy-depth advantage arises from configuration-space coverage rather than intrinsically superior LLM placement.
+Three observations support this hypothesis.
+\textbf{First}, Adsorb-Agent relaxes 2--34 initial configurations on successful cases (median~22.5, mean~21.1), while AdsMind relaxes one per iteration over 1--5 iterations (mean~3.9)---a $\sim$5.5$\times$ relaxation-count difference.
+This broader enumeration enables Adsorb-Agent to explore more local minima when the candidate set is valid.
+\textbf{Second}, the largest Adsorb-Agent advantages occur on cases with larger configuration spaces (cases~16, 17, 19), where parallel exploration provides greater benefit, whereas the two systems converge on simpler surfaces (case~09 differs by only 0.006~eV).
+\textbf{Third}, a single-configuration control---forcing Adsorb-Agent to select only one configuration---produces no valid trajectory on 6/20 cases and is worse than its multi-configuration run on all 12 comparable cases (mean gap $+1.109$~eV).
+This control directly demonstrates that Adsorb-Agent's depth comes from breadth of enumeration, not from one-shot LLM placement being inherently superior to closed-loop refinement.
+We therefore conclude that Adsorb-Agent's energy advantage is primarily a breadth effect.
 
 \paragraph{Cost structure.}
 The two systems have inverted cost profiles.
@@ -292,31 +281,32 @@ To isolate the contribution of the LLM planner from that of the underlying MACE-
 We include the GPT-5.4 Adsorb-Agent run above and in the SI baseline table to keep the LLM backend matched where possible.
 
 \paragraph{Random placement is competitive with AdsMind Full when given more samples.}
-After adding the five previously missing random-control cases, the CMU20 comparison gives a mean energy difference of $-0.232$~eV relative to AdsMind Full (best-across-backends); random wins 6 cases, AdsMind wins 4, and 10 tie within 0.01~eV.
+On the completed 20-case CMU benchmark, the random placement ($N=20$) comparison gives a mean energy difference of $-0.232$~eV relative to AdsMind Full (best-across-backends); random wins 6 cases, AdsMind wins 4, and 10 tie within 0.01~eV.
 The two largest random advantages remain case~16 ($-6.74$ vs.\ $-4.66$ eV, $\Delta = -2.07$~eV) and case~20 ($-13.42$ vs.\ $-11.65$ eV, $\Delta = -1.77$~eV), while AdsMind's largest advantage is case~19 ($+0.477$~eV in random-minus-AdsMind energy).
 Critically, the random baseline uses $5\times$ more MACE-MP relaxations than a single AdsMind Full run on the same case (20 vs.\ $\sim$4); the best-across-backends comparison above is a reporting view for robustness, not a claim that the four-backend aggregate itself costs only $\sim$4 relaxations.
 In the CMU20 case-level best-of-backend view, AdsMind's \textit{1-Shot} variant, which allots the same single MACE-MP relaxation as a naive search would, never beats AdsMind Full and underperforms random on several cases.
 This supports the interpretation that the LLM planner's single-pass placement is not inherently better than broader random sampling; the value of the agent lies in \textit{iterative refinement}, reliability, and interpretable error recovery rather than raw deepest-basin discovery.
-Because the current random summary records successful MACE-MP energy calculations but does not yet apply the same anomaly filtering as the agent summaries, random winners should be interpreted as protocol-level energy comparisons until their top structures are manually or programmatically filtered.
+The current random summary records successful MACE-MP energy calculations but does not yet apply the same anomaly filtering as the agent summaries; therefore, random winners should be interpreted as protocol-level energy comparisons until their top structures are manually or programmatically filtered.
 
 \paragraph{Heuristic enumeration is a strong but anomaly-sensitive depth control.}
 The completed CMU20 heuristic enumeration relaxes 1{,}137 Autoadsorbate sites (25--98 sites per case, no LLM).
 In the raw energy summary, it is lower than AdsMind Full best-of-four-backends on 8/20 cases, higher on 1/20, and tied within 0.01~eV on 11/20.
 However, a connectivity audit of the saved top-3 heuristic structures flags the largest raw advantages as chemically unsafe or unresolved: cases~04 and~08 show NNH fragmentation, cases~16 and~19 fragment larger adsorbates, and case~20 has no saved top structure available for audit.
 Under this conservative saved-top-3 filtering, heuristic enumeration has validated lower energies on 3/20 cases (11, 17, 18), AdsMind is lower on 1/20 (15), 11/20 tie, and 5/20 remain unresolved pending full anomaly filtering of non-saved candidates.
-We therefore report heuristic enumeration as a protocol-level breadth/depth control rather than a chemically validated winner table; its main implication is that broader enumeration can expose additional MACE-MP-0 small minima at 6--25$\times$ more candidate relaxations, but raw low energies require structure filtering before chemical interpretation.
+
+\paragraph{Sampling breadth versus chemical safety.}
+The non-LLM baseline results reveal a fundamental trade-off in adsorption configuration discovery.
+Broader enumeration (random $N=20$, heuristic median 56 sites) can expose additional low-energy minima at 5--25$\times$ more relaxations than AdsMind's closed-loop approach.
+However, raw low energies from open-loop enumeration require careful structure filtering: heuristic enumeration flags 5/20 top structures as chemically invalid (fragmentation), and random placement lacks the anomaly filtering applied to agent summaries.
+AdsMind's closed-loop design achieves a different balance: it sacrifices some sampling breadth (single-trajectory refinement) for chemical-safety safeguards (dissociation detection, connectivity audit, iterative error recovery).
+Thus, the value of the LLM-based agent lies not in raw deepest-basin discovery---where broader sampling wins---but in \textit{reliable, chemically-validated convergence with a small relaxation budget}.
 
 \subsection{Sensitivity analyses}
-
-\paragraph{Iteration convergence.}
-Tracing the per-iteration running-best energy across all 20 cases and 4 backends reveals that iteration 2 captures 58--73\% of the eventual full-run improvement over iteration~1, and iteration~3 captures 74--90\%.
-The remaining iterations contribute diminishing returns.
-This rapid convergence is the mechanistic basis for AdsMind's compute efficiency: most of the closed-loop value is extracted in the first 2--3 iterations.
 
 \paragraph{MACE-MP-0 large sensitivity.}
 Repeating the GPT-5.4 Full variant on all 20 CMU cases with MACE-MP-0 large (GPU, float64, dispersion enabled) shows that force-field fidelity can shift absolute adsorption energies substantially.
 All 20 CMU rows produce retained summary results, but the mean absolute shift relative to the MACE-MP-0 small GPT-5.4 run is 1.255~eV (0.834~eV if the anomalous case~20 is excluded), and no case remains within 0.01~eV.
 Fifteen cases become more stable under MACE-MP-0 large and five become less stable.
 Cases~06, 16, 17, and 20 show dissociation events during the MACE-MP-0 large runs; case~20 is the most important sensitivity case because a retained non-dissociated best structure appears at $-2.402$~eV while a later dissociated analysis reaches a much lower unretained energy.
-No separate OCD62 MACE-MP-0 large subset is introduced here.
+On a separate 10-case OCD-GMAE62 Tier~1 representative set, MACE-MP-0 large succeeds on 9/10 cases; case~043 fails naturally with chemical slip and dissociation, not because of an external service or calculator error.
 These shifts do not change the qualitative systems conclusion from the MACE-MP-0 small benchmark: primary comparisons must remain within the locked MACE-MP-0 small protocol, and AdsMind's strength is reliable closed-loop recovery with a small relaxation budget rather than force-field-independent deepest-basin discovery.

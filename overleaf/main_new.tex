@@ -48,9 +48,9 @@ superscriptaddress,
 %
 \author{Zongmin Zhang}
 \affiliation{Department of Computer Science and Engineering, Hong Kong University of Science and Technology, Kowloon, Hong Kong 999077, China}
-\author{Bowen Zhang}
-\affiliation{Department of Chemistry, Hong Kong University of Science and Technology, Kowloon, Hong Kong 999077, China}
 \author{Yuyang Lou}
+\affiliation{Department of Chemistry, Hong Kong University of Science and Technology, Kowloon, Hong Kong 999077, China}
+\author{Bowen Zhang}
 \affiliation{Department of Chemistry, Hong Kong University of Science and Technology, Kowloon, Hong Kong 999077, China}
 \author{Edvin Fako}
 \affiliation{Laboratory of Artificial Chemical Intelligence (LIAC), EPFL, Lausanne, Switzerland}
@@ -75,12 +75,12 @@ superscriptaddress,
 Identifying the most stable adsorbate--surface configuration is central to heterogeneous catalysis and electrochemical energy conversion, yet remains computationally expensive and expert-intensive.
 While machine learning force fields (MLFFs) have dramatically reduced per-evaluation cost, the upstream \textit{search strategy} problem---deciding which configurations to evaluate---remains unsolved.
 Existing LLM-based agents for this task operate in an open-loop, single-pass regime that cannot recover from incorrect site predictions.
-Here we introduce \textbf{AdsMind} (\textbf{Ads}orption with \textbf{M}achine \textbf{I}ntelligence \textbf{\&} fee\textbf{d}back), a closed-loop multi-agent framework in which each MLFF relaxation result feeds back into the LLM planner, enabling autonomous error correction and termination.
-Three mechanisms implement this feedback: \textit{Chemical Slip} detection (diagnosing mismatches between planned and realized coordination), \textit{FORBID} constraints (preventing retry of failed site families), and convergence-based early stopping.
-Evaluated across four LLM backends (Gemini~2.5~Pro, Grok-4, GPT-5.4, Claude~Sonnet~4.6) and two benchmarks (CMU20 and OCD62), AdsMind achieves 80/80 CMU20 and 245/248 OCD62 Full-run successes, reduces cross-backend energy variance, and consumes 5--25$\times$ fewer MLFF relaxations than brute-force baselines.
-Notably, we report the negative result that broader initial sampling outperforms closed-loop refinement on energy depth for complex adsorbates---a trade-off that clarifies the operating envelope of LLM-driven reasoning.
+This work introduces \textbf{AdsMind} (\textbf{Ads}orption with \textbf{M}achine \textbf{I}ntelligence \textbf{\&} Fee\textbf{d}back), the first closed-loop multi-agent framework that enables autonomous error correction through MLFF relaxation feedback.
+Three mechanisms implement this closed loop: \textit{Chemical Slip} detection diagnoses mismatches between planned and realized coordination; \textit{FORBID} constraints prevent retry of failed site families; and convergence-based early stopping avoids unnecessary computation.
+Evaluated on 880~ablation attempts across four LLM backends (Gemini~2.5~Pro, Grok-4, GPT-5.4, Claude~Sonnet~4.6) and the OCD-GMAE62 benchmark with a three-tier evaluation protocol, AdsMind achieves 100\% search reliability, reduces cross-backend energy variance by 2.3$\times$, and consumes 5--25$\times$ fewer MLFF relaxations than brute-force baselines.
+Notably, we report the negative result that broader initial sampling outperforms closed-loop refinement on energy depth for complex adsorbates, a trade-off that clarifies the operating envelope of LLM-driven reasoning.
 Chemical Slip further provides a physically grounded evaluation signal for LLM chemical reasoning quality.
-AdsMind demonstrates that closed-loop LLM agents can deliver reliability, efficiency, and interpretability simultaneously, establishing a foundation for autonomous chemistry workflows.
+By delivering reliability, efficiency, and interpretability simultaneously, AdsMind establishes a foundation for autonomous chemistry workflows.
 \end{abstract}
 
 
@@ -107,9 +107,9 @@ AdsMind demonstrates that closed-loop LLM agents can deliver reliability, effici
 
 
 \section*{Acknowledgements}
-We acknowledge financial support from the Swiss National Science Foundation (SNSF) through the National Centre of Competence in Research (NCCR) Catalysis (grant number 180544). We also thank the EPFL Scientific IT and Application Support team for their computational support. 
+We acknowledge financial support from the Swiss National Science Foundation (SNSF) through the National Centre of Competence in Research (NCCR) Catalysis (grant number 180544). We also thank the EPFL Scientific IT and Application Support team for their computational support. Z.Z. thanks the support from Hong Kong Special Administrative Region Government Scholarship Fund Scholarship
 
-\paragraph{AI Disclosure Statement.}
+\textbf{AI Disclosure Statement.}
 The authors used generative AI tools (including large language models such as GPT-4, Claude, and Grammarly) for \textbf{grammar polishing, language editing, and minor phrasing improvements} in preparing this manuscript. All scientific content, analysis, interpretations, and conclusions were solely produced by the authors. The authors reviewed and edited the output of these tools and take full responsibility for the content of the published article.
 
 
