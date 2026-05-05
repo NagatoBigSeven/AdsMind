@@ -2,7 +2,7 @@
   "case_id": "05",
   "case_metadata": {
     "case_id": "05",
-    "slab_file": "datasets/cmu20/05_Cu3Ag_111.xyz",
+    "slab_file": "benchmark_slabs/05_Cu3Ag_111.xyz",
     "smiles": "[H]",
     "user_request": "Find the lowest-energy adsorption configuration for atomic hydrogen on the provided surface.",
     "surface_family": "intermetallic",
@@ -12,22 +12,206 @@
     "ablation_candidate": "FALSE",
     "notes": "Cu3Ag hydrogen benchmark"
   },
-  "status": "error",
-  "best_energy_eV": null,
-  "iteration_count": 0,
+  "status": "success",
+  "best_energy_eV": -2.9616286754608154,
+  "iteration_count": 1,
   "max_attempts": 1,
-  "final_site_type": null,
+  "final_site_type": "hollow (FCC/No-Subsurf)",
   "converged_tag": false,
-  "wall_clock_sec": 32.81056625000201,
-  "total_input_tokens": 0,
-  "total_output_tokens": 0,
-  "artifact_paths": {},
-  "best_result": {},
-  "last_analysis": {},
-  "attempt_records": [],
-  "history": [],
-  "error": "403 This API method requires billing to be enabled. Please enable billing on project #igneous-sandbox-479916-t9 by visiting https://console.developers.google.com/billing/enable?project=igneous-sandbox-479916-t9 then retry. If you enabled billing for this project recently, wait a few minutes for the action to propagate to our systems and retry. [reason: \"BILLING_DISABLED\"\ndomain: \"googleapis.com\"\nmetadata {\n  key: \"service\"\n  value: \"aiplatform.googleapis.com\"\n}\nmetadata {\n  key: \"containerInfo\"\n  value: \"igneous-sandbox-479916-t9\"\n}\nmetadata {\n  key: \"consumer\"\n  value: \"projects/igneous-sandbox-479916-t9\"\n}\nmetadata {\n  key: \"consoleUrl\"\n  value: \"https://console.developers.google.com/billing/enable?project=igneous-sandbox-479916-t9\"\n}\n, locale: \"en-US\"\nmessage: \"This API method requires billing to be enabled. Please enable billing on project #igneous-sandbox-479916-t9 by visiting https://console.developers.google.com/billing/enable?project=igneous-sandbox-479916-t9 then retry. If you enabled billing for this project recently, wait a few minutes for the action to propagate to our systems and retry.\"\n, links {\n  description: \"Google developers console billing\"\n  url: \"https://console.developers.google.com/billing/enable?project=igneous-sandbox-479916-t9\"\n}\n]",
-  "perfect_count": 0,
+  "wall_clock_sec": 187.16145855933428,
+  "total_input_tokens": 3750,
+  "total_output_tokens": 3481,
+  "artifact_paths": {
+    "BEST_H_hollow_to_hollow_FCC-No-Subsurf_E-2.962": "research/results/basic_experiments/cmu20/gemini25pro_mace_mp0_small/one_shot/05/artifacts/BEST_H_hollow_to_hollow_FCC-No-Subsurf_E-2.962.xyz",
+    "BEST_H_hollow_to_hollow_FCC-No-Subsurf_E-2.962.xyz": "research/results/basic_experiments/cmu20/gemini25pro_mace_mp0_small/one_shot/05/artifacts/BEST_H_hollow_to_hollow_FCC-No-Subsurf_E-2.962.xyz",
+    "best_structure_file": "research/results/basic_experiments/cmu20/gemini25pro_mace_mp0_small/one_shot/05/artifacts/BEST_H_hollow_to_hollow_FCC-No-Subsurf_E-2.962.xyz",
+    "conformers_[H]": "research/results/basic_experiments/cmu20/gemini25pro_mace_mp0_small/one_shot/05/artifacts/conformers_[H].traj",
+    "conformers_[H].traj": "research/results/basic_experiments/cmu20/gemini25pro_mace_mp0_small/one_shot/05/artifacts/conformers_[H].traj",
+    "generated_conformers_file": "research/results/basic_experiments/cmu20/gemini25pro_mace_mp0_small/one_shot/05/artifacts/conformers_[H].traj",
+    "final": "research/results/basic_experiments/cmu20/gemini25pro_mace_mp0_small/one_shot/05/artifacts/final.xyz",
+    "final.xyz": "research/results/basic_experiments/cmu20/gemini25pro_mace_mp0_small/one_shot/05/artifacts/final.xyz",
+    "final_structure_file": "research/results/basic_experiments/cmu20/gemini25pro_mace_mp0_small/one_shot/05/artifacts/final.xyz",
+    "relaxation": "research/results/basic_experiments/cmu20/gemini25pro_mace_mp0_small/one_shot/05/artifacts/relaxation.traj",
+    "relaxation.traj": "research/results/basic_experiments/cmu20/gemini25pro_mace_mp0_small/one_shot/05/artifacts/relaxation.traj",
+    "relaxation_trajectory_file": "research/results/basic_experiments/cmu20/gemini25pro_mace_mp0_small/one_shot/05/artifacts/relaxation.traj"
+  },
+  "best_result": {
+    "most_stable_energy_eV": -2.9616286754608154,
+    "analysis_json": {
+      "status": "success",
+      "message": "Most stable config adsorption energy: -2.9616 eV. Target Atom: H (from plan index 0, global index 64 in relaxed structure). -> Nearest: Cu (Index 27), Distance: 1.684 Å (Threshold: 2.364), Bound: True. Bonded Surface Atoms: Cu-1.684Å, Cu-1.774Å, Cu-1.777Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: False (Planned ['Cu', 'Cu', 'Cu'] -> Actual ['Cu', 'Cu', 'Cu']).",
+      "most_stable_energy_eV": -2.9616286754608154,
+      "target_adsorbate_atom": "H",
+      "target_adsorbate_atom_index": 64,
+      "bonded_surface_atoms": [
+        {
+          "symbol": "Cu",
+          "index": 27,
+          "distance": 1.684
+        },
+        {
+          "symbol": "Cu",
+          "index": 17,
+          "distance": 1.774
+        },
+        {
+          "symbol": "Cu",
+          "index": 19,
+          "distance": 1.777
+        }
+      ],
+      "nearest_slab_atom": "Cu",
+      "nearest_slab_atom_index": 27,
+      "final_bond_distance_A": 1.684,
+      "estimated_covalent_cutoff_A": 1.793,
+      "is_covalently_bound": true,
+      "reaction_detected": false,
+      "is_dissociated": false,
+      "n_components": 1,
+      "bond_change_count": 0,
+      "site_analysis": {
+        "planned_site_type": "hollow",
+        "planned_connectivity": 3,
+        "actual_site_type": "hollow (FCC/No-Subsurf)",
+        "actual_connectivity": 3,
+        "is_chemical_slip": false,
+        "planned_symbols": [
+          "Cu",
+          "Cu",
+          "Cu"
+        ],
+        "actual_symbols": [
+          "Cu",
+          "Cu",
+          "Cu"
+        ],
+        "site_fingerprint": "Cu27-Cu17-Cu19"
+      },
+      "best_structure_file": "outputs/05-96999b9b/BEST_H_hollow_to_hollow_FCC-No-Subsurf_E-2.962.xyz",
+      "generated_conformers_file": "outputs/05-96999b9b/conformers_[H].traj",
+      "relaxation_trajectory_file": "outputs/05-96999b9b/final.xyz",
+      "session_id": "05-96999b9b"
+    },
+    "plan": {
+      "reasoning": "0. **SMILES Consistency Check**: The SMILES `[H]` represents a hydrogen atom, which is a radical with one unpaired electron. This is consistent with the user's request for atomic hydrogen adsorption. The `adsorbate_type` will be `ReactiveSpecies`, and the binding will occur through the single hydrogen atom (index 0).\n1. **Analyze Old Plans**: The history is empty. This is the first attempt to find the lowest energy site.\n2. **Formulate New Plan**: My goal is to systematically explore the available sites to find the most stable one. For atomic adsorbates like hydrogen on close-packed metal surfaces, high-coordination sites (like hollow sites) are often the most stable. The surface is a Cu-Ag alloy, and Cu is generally more reactive and forms stronger bonds with hydrogen than Ag. Therefore, a hollow site composed entirely of Cu atoms is a very strong candidate for the global minimum. I will start by testing the `Cu-Cu-Cu` 3-fold hollow site.\n3. **Analyze Request**: The user wants to find the lowest-energy configuration for atomic hydrogen. My plan to start with the most promising site (`Cu-Cu-Cu` hollow) directly addresses this.\n4. **Analyze Adsorbate**: The adsorbate is `[H]`. RDKit identifies a single atom at index 0. This is a radical, so `ReactiveSpecies` is the correct type. The `adsorbate_binding_indices` will be `[0]`.\n5. **Analyze Surface**: The list of available sites includes `[Hollow-3]: Ag-Cu-Cu, Cu-Cu-Cu`. My choice to test a `Cu-Cu-Cu` site is valid.\n6. **Formulate Plan**: Based on the analysis, I will propose adsorbing the hydrogen atom (index 0) at a 3-fold hollow site defined by three copper atoms.",
+      "adsorbate_type": "ReactiveSpecies",
+      "solution": {
+        "action": "continue",
+        "site_type": "hollow",
+        "surface_binding_atoms": [
+          "Cu",
+          "Cu",
+          "Cu"
+        ],
+        "adsorbate_binding_indices": [
+          0
+        ],
+        "relax_top_n": 1,
+        "touch_sphere_size": 2,
+        "overlap_thr": 0.1,
+        "conformers_per_site_cap": 4
+      }
+    },
+    "result_type": "Perfect"
+  },
+  "last_analysis": {
+    "status": "success",
+    "message": "Most stable config adsorption energy: -2.9616 eV. Target Atom: H (from plan index 0, global index 64 in relaxed structure). -> Nearest: Cu (Index 27), Distance: 1.684 Å (Threshold: 2.364), Bound: True. Bonded Surface Atoms: Cu-1.684Å, Cu-1.774Å, Cu-1.777Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: False (Planned ['Cu', 'Cu', 'Cu'] -> Actual ['Cu', 'Cu', 'Cu']).",
+    "most_stable_energy_eV": -2.9616286754608154,
+    "target_adsorbate_atom": "H",
+    "target_adsorbate_atom_index": 64,
+    "bonded_surface_atoms": [
+      {
+        "symbol": "Cu",
+        "index": 27,
+        "distance": 1.684
+      },
+      {
+        "symbol": "Cu",
+        "index": 17,
+        "distance": 1.774
+      },
+      {
+        "symbol": "Cu",
+        "index": 19,
+        "distance": 1.777
+      }
+    ],
+    "nearest_slab_atom": "Cu",
+    "nearest_slab_atom_index": 27,
+    "final_bond_distance_A": 1.684,
+    "estimated_covalent_cutoff_A": 1.793,
+    "is_covalently_bound": true,
+    "reaction_detected": false,
+    "is_dissociated": false,
+    "n_components": 1,
+    "bond_change_count": 0,
+    "site_analysis": {
+      "planned_site_type": "hollow",
+      "planned_connectivity": 3,
+      "actual_site_type": "hollow (FCC/No-Subsurf)",
+      "actual_connectivity": 3,
+      "is_chemical_slip": false,
+      "planned_symbols": [
+        "Cu",
+        "Cu",
+        "Cu"
+      ],
+      "actual_symbols": [
+        "Cu",
+        "Cu",
+        "Cu"
+      ],
+      "site_fingerprint": "Cu27-Cu17-Cu19"
+    },
+    "best_structure_file": "outputs/05-96999b9b/BEST_H_hollow_to_hollow_FCC-No-Subsurf_E-2.962.xyz",
+    "generated_conformers_file": "outputs/05-96999b9b/conformers_[H].traj",
+    "relaxation_trajectory_file": "outputs/05-96999b9b/final.xyz",
+    "session_id": "05-96999b9b"
+  },
+  "attempt_records": [
+    {
+      "attempt_index": 1,
+      "plan": {
+        "reasoning": "0. **SMILES Consistency Check**: The SMILES `[H]` represents a hydrogen atom, which is a radical with one unpaired electron. This is consistent with the user's request for atomic hydrogen adsorption. The `adsorbate_type` will be `ReactiveSpecies`, and the binding will occur through the single hydrogen atom (index 0).\n1. **Analyze Old Plans**: The history is empty. This is the first attempt to find the lowest energy site.\n2. **Formulate New Plan**: My goal is to systematically explore the available sites to find the most stable one. For atomic adsorbates like hydrogen on close-packed metal surfaces, high-coordination sites (like hollow sites) are often the most stable. The surface is a Cu-Ag alloy, and Cu is generally more reactive and forms stronger bonds with hydrogen than Ag. Therefore, a hollow site composed entirely of Cu atoms is a very strong candidate for the global minimum. I will start by testing the `Cu-Cu-Cu` 3-fold hollow site.\n3. **Analyze Request**: The user wants to find the lowest-energy configuration for atomic hydrogen. My plan to start with the most promising site (`Cu-Cu-Cu` hollow) directly addresses this.\n4. **Analyze Adsorbate**: The adsorbate is `[H]`. RDKit identifies a single atom at index 0. This is a radical, so `ReactiveSpecies` is the correct type. The `adsorbate_binding_indices` will be `[0]`.\n5. **Analyze Surface**: The list of available sites includes `[Hollow-3]: Ag-Cu-Cu, Cu-Cu-Cu`. My choice to test a `Cu-Cu-Cu` site is valid.\n6. **Formulate Plan**: Based on the analysis, I will propose adsorbing the hydrogen atom (index 0) at a 3-fold hollow site defined by three copper atoms.",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "hollow",
+          "surface_binding_atoms": [
+            "Cu",
+            "Cu",
+            "Cu"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "hollow|Cu,Cu,Cu|0|ReactiveSpecies|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -2.9616286754608154,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": false,
+      "planned_site_type": "hollow",
+      "actual_site_type": "hollow (FCC/No-Subsurf)",
+      "best_structure_file": "outputs/05-96999b9b/BEST_H_hollow_to_hollow_FCC-No-Subsurf_E-2.962.xyz",
+      "generated_conformers_file": "outputs/05-96999b9b/conformers_[H].traj",
+      "relaxation_trajectory_file": "outputs/05-96999b9b/final.xyz",
+      "message": "Most stable config adsorption energy: -2.9616 eV. Target Atom: H (from plan index 0, global index 64 in relaxed structure). -> Nearest: Cu (Index 27), Distance: 1.684 Å (Threshold: 2.364), Bound: True. Bonded Surface Atoms: Cu-1.684Å, Cu-1.774Å, Cu-1.777Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: False (Planned ['Cu', 'Cu', 'Cu'] -> Actual ['Cu', 'Cu', 'Cu']).",
+      "history_entry": "【✅ Perfect Adsorption】 hollow @ ['Cu', 'Cu', 'Cu'] (Index [0]) -> ⚠️ Geometric Slip: hollow -> hollow (FCC/No-Subsurf) | E=-2.962 eV"
+    }
+  ],
+  "history": [
+    "【✅ Perfect Adsorption】 hollow @ ['Cu', 'Cu', 'Cu'] (Index [0]) -> ⚠️ Geometric Slip: hollow -> hollow (FCC/No-Subsurf) | E=-2.962 eV"
+  ],
+  "error": null,
+  "perfect_count": 1,
   "dissociation_count": 0,
   "rearrangement_count": 0,
   "calc_failure_count": 0,

@@ -2,7 +2,7 @@
   "case_id": "19",
   "case_metadata": {
     "case_id": "19",
-    "slab_file": "datasets/cmu20/19_Hf2Zn6_110.xyz",
+    "slab_file": "benchmark_slabs/19_Hf2Zn6_110.xyz",
     "smiles": "CC=O",
     "user_request": "Find the lowest-energy adsorption configuration for acetaldehyde on the provided surface.",
     "surface_family": "intermetallic",
@@ -12,24 +12,200 @@
     "ablation_candidate": "TRUE",
     "notes": "Best-available reconstruction from sanitized filename CC_O and formula C2H4O; large-adsorbate ablation candidate"
   },
-  "status": "error",
-  "best_energy_eV": null,
-  "iteration_count": 0,
+  "status": "success",
+  "best_energy_eV": -4.0126495361328125,
+  "iteration_count": 1,
   "max_attempts": 1,
-  "final_site_type": null,
+  "final_site_type": "hollow (HCP/Subsurf-Atom)",
   "converged_tag": false,
-  "wall_clock_sec": 32.643400541041046,
-  "total_input_tokens": 0,
-  "total_output_tokens": 0,
-  "artifact_paths": {},
-  "best_result": {},
-  "last_analysis": {},
-  "attempt_records": [],
-  "history": [],
-  "error": "403 This API method requires billing to be enabled. Please enable billing on project #igneous-sandbox-479916-t9 by visiting https://console.developers.google.com/billing/enable?project=igneous-sandbox-479916-t9 then retry. If you enabled billing for this project recently, wait a few minutes for the action to propagate to our systems and retry. [reason: \"BILLING_DISABLED\"\ndomain: \"googleapis.com\"\nmetadata {\n  key: \"service\"\n  value: \"aiplatform.googleapis.com\"\n}\nmetadata {\n  key: \"containerInfo\"\n  value: \"igneous-sandbox-479916-t9\"\n}\nmetadata {\n  key: \"consumer\"\n  value: \"projects/igneous-sandbox-479916-t9\"\n}\nmetadata {\n  key: \"consoleUrl\"\n  value: \"https://console.developers.google.com/billing/enable?project=igneous-sandbox-479916-t9\"\n}\n, locale: \"en-US\"\nmessage: \"This API method requires billing to be enabled. Please enable billing on project #igneous-sandbox-479916-t9 by visiting https://console.developers.google.com/billing/enable?project=igneous-sandbox-479916-t9 then retry. If you enabled billing for this project recently, wait a few minutes for the action to propagate to our systems and retry.\"\n, links {\n  description: \"Google developers console billing\"\n  url: \"https://console.developers.google.com/billing/enable?project=igneous-sandbox-479916-t9\"\n}\n]",
-  "perfect_count": 0,
+  "wall_clock_sec": 595.3454416655004,
+  "total_input_tokens": 3997,
+  "total_output_tokens": 3129,
+  "artifact_paths": {
+    "BEST_CC_O_ontop_to_hollow_HCP-Subsurf-Atom_E-4.013": "research/results/basic_experiments/cmu20/gemini25pro_mace_mp0_small/one_shot/19/artifacts/BEST_CC_O_ontop_to_hollow_HCP-Subsurf-Atom_E-4.013.xyz",
+    "BEST_CC_O_ontop_to_hollow_HCP-Subsurf-Atom_E-4.013.xyz": "research/results/basic_experiments/cmu20/gemini25pro_mace_mp0_small/one_shot/19/artifacts/BEST_CC_O_ontop_to_hollow_HCP-Subsurf-Atom_E-4.013.xyz",
+    "best_structure_file": "research/results/basic_experiments/cmu20/gemini25pro_mace_mp0_small/one_shot/19/artifacts/BEST_CC_O_ontop_to_hollow_HCP-Subsurf-Atom_E-4.013.xyz",
+    "conformers_CC_O": "research/results/basic_experiments/cmu20/gemini25pro_mace_mp0_small/one_shot/19/artifacts/conformers_CC_O.traj",
+    "conformers_CC_O.traj": "research/results/basic_experiments/cmu20/gemini25pro_mace_mp0_small/one_shot/19/artifacts/conformers_CC_O.traj",
+    "generated_conformers_file": "research/results/basic_experiments/cmu20/gemini25pro_mace_mp0_small/one_shot/19/artifacts/conformers_CC_O.traj",
+    "final": "research/results/basic_experiments/cmu20/gemini25pro_mace_mp0_small/one_shot/19/artifacts/final.xyz",
+    "final.xyz": "research/results/basic_experiments/cmu20/gemini25pro_mace_mp0_small/one_shot/19/artifacts/final.xyz",
+    "final_structure_file": "research/results/basic_experiments/cmu20/gemini25pro_mace_mp0_small/one_shot/19/artifacts/final.xyz",
+    "relaxation": "research/results/basic_experiments/cmu20/gemini25pro_mace_mp0_small/one_shot/19/artifacts/relaxation.traj",
+    "relaxation.traj": "research/results/basic_experiments/cmu20/gemini25pro_mace_mp0_small/one_shot/19/artifacts/relaxation.traj",
+    "relaxation_trajectory_file": "research/results/basic_experiments/cmu20/gemini25pro_mace_mp0_small/one_shot/19/artifacts/relaxation.traj"
+  },
+  "best_result": {
+    "most_stable_energy_eV": -4.0126495361328125,
+    "analysis_json": {
+      "status": "success",
+      "message": "Most stable config adsorption energy: -4.0126 eV. Target Atom: O (from plan index 2, global index 64 in relaxed structure). -> Nearest: Hf (Index 16), Distance: 1.897 Å (Threshold: 3.494), Bound: True. Bonded Surface Atoms: Hf-1.897Å, Hf-2.368Å, Hf-3.256Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Hf'] -> Actual ['Hf', 'Hf', 'Hf']).",
+      "most_stable_energy_eV": -4.0126495361328125,
+      "target_adsorbate_atom": "O",
+      "target_adsorbate_atom_index": 64,
+      "bonded_surface_atoms": [
+        {
+          "symbol": "Hf",
+          "index": 16,
+          "distance": 1.897
+        },
+        {
+          "symbol": "Hf",
+          "index": 50,
+          "distance": 2.368
+        },
+        {
+          "symbol": "Hf",
+          "index": 18,
+          "distance": 3.256
+        }
+      ],
+      "nearest_slab_atom": "Hf",
+      "nearest_slab_atom_index": 16,
+      "final_bond_distance_A": 1.897,
+      "estimated_covalent_cutoff_A": 2.651,
+      "is_covalently_bound": true,
+      "reaction_detected": false,
+      "is_dissociated": false,
+      "n_components": 1,
+      "bond_change_count": 0,
+      "site_analysis": {
+        "planned_site_type": "ontop",
+        "planned_connectivity": 1,
+        "actual_site_type": "hollow (HCP/Subsurf-Atom)",
+        "actual_connectivity": 3,
+        "is_chemical_slip": true,
+        "planned_symbols": [
+          "Hf"
+        ],
+        "actual_symbols": [
+          "Hf",
+          "Hf",
+          "Hf"
+        ],
+        "site_fingerprint": "Hf16-Hf50-Hf18"
+      },
+      "best_structure_file": "outputs/19-6ad92db6/BEST_CC_O_ontop_to_hollow_HCP-Subsurf-Atom_E-4.013.xyz",
+      "generated_conformers_file": "outputs/19-6ad92db6/conformers_CC_O.traj",
+      "relaxation_trajectory_file": "outputs/19-6ad92db6/final.xyz",
+      "session_id": "19-6ad92db6"
+    },
+    "plan": {
+      "reasoning": "0. **SMILES Consistency Check:** The SMILES `CC=O` corresponds to acetaldehyde. The provided atom list confirms the structure with an SP3 carbon (index 0), an SP2 carbonyl carbon (index 1), and an SP2 oxygen (index 2). The molecule is not a radical, so `adsorbate_type` will be 'Molecule'.\n1. **Analyze Old Plans:** There is no history of previous attempts. This is the first calculation.\n2. **Formulate New Plan:** My goal is to find the lowest energy adsorption configuration. A systematic search should start with the most chemically plausible and typically strongest interaction.\n3. **Analyze Request:** The user wants to find the most stable adsorption site for acetaldehyde on the Hf2Zn6(110) surface.\n4. **Analyze Adsorbate:** Acetaldehyde (CC=O) has a polar carbonyl group. The oxygen atom (index 2) possesses lone pairs, making it a strong Lewis base and a primary candidate for binding to electron-accepting metal sites on the surface.\n5. **Analyze Surface:** The surface is composed of Hf and Zn. Hf is generally more oxophilic and reactive than Zn. Therefore, interactions with Hf sites are expected to be stronger than with Zn sites.\n6. **Formulate Plan:** Based on the analysis, the most promising initial configuration is the adsorption of acetaldehyde via its oxygen atom onto a surface Hf atom. This corresponds to an ontop η1(O) binding mode. This is a very common and often the most stable configuration for small aldehydes and ketones on transition metal surfaces. Therefore, I will propose an `ontop` site on an `Hf` atom, with the adsorbate binding through the oxygen atom (index 2).\n   - `adsorbate_type`: \"Molecule\" (stable molecule)\n   - `site_type`: \"ontop\"\n   - `surface_binding_atoms`: [\"Hf\"]\n   - `adsorbate_binding_indices`: [2] (index of the oxygen atom)",
+      "adsorbate_type": "Molecule",
+      "solution": {
+        "action": "continue",
+        "site_type": "ontop",
+        "surface_binding_atoms": [
+          "Hf"
+        ],
+        "adsorbate_binding_indices": [
+          2
+        ],
+        "relax_top_n": 1,
+        "touch_sphere_size": 2,
+        "overlap_thr": 0.1,
+        "conformers_per_site_cap": 4
+      }
+    },
+    "result_type": "Perfect"
+  },
+  "last_analysis": {
+    "status": "success",
+    "message": "Most stable config adsorption energy: -4.0126 eV. Target Atom: O (from plan index 2, global index 64 in relaxed structure). -> Nearest: Hf (Index 16), Distance: 1.897 Å (Threshold: 3.494), Bound: True. Bonded Surface Atoms: Hf-1.897Å, Hf-2.368Å, Hf-3.256Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Hf'] -> Actual ['Hf', 'Hf', 'Hf']).",
+    "most_stable_energy_eV": -4.0126495361328125,
+    "target_adsorbate_atom": "O",
+    "target_adsorbate_atom_index": 64,
+    "bonded_surface_atoms": [
+      {
+        "symbol": "Hf",
+        "index": 16,
+        "distance": 1.897
+      },
+      {
+        "symbol": "Hf",
+        "index": 50,
+        "distance": 2.368
+      },
+      {
+        "symbol": "Hf",
+        "index": 18,
+        "distance": 3.256
+      }
+    ],
+    "nearest_slab_atom": "Hf",
+    "nearest_slab_atom_index": 16,
+    "final_bond_distance_A": 1.897,
+    "estimated_covalent_cutoff_A": 2.651,
+    "is_covalently_bound": true,
+    "reaction_detected": false,
+    "is_dissociated": false,
+    "n_components": 1,
+    "bond_change_count": 0,
+    "site_analysis": {
+      "planned_site_type": "ontop",
+      "planned_connectivity": 1,
+      "actual_site_type": "hollow (HCP/Subsurf-Atom)",
+      "actual_connectivity": 3,
+      "is_chemical_slip": true,
+      "planned_symbols": [
+        "Hf"
+      ],
+      "actual_symbols": [
+        "Hf",
+        "Hf",
+        "Hf"
+      ],
+      "site_fingerprint": "Hf16-Hf50-Hf18"
+    },
+    "best_structure_file": "outputs/19-6ad92db6/BEST_CC_O_ontop_to_hollow_HCP-Subsurf-Atom_E-4.013.xyz",
+    "generated_conformers_file": "outputs/19-6ad92db6/conformers_CC_O.traj",
+    "relaxation_trajectory_file": "outputs/19-6ad92db6/final.xyz",
+    "session_id": "19-6ad92db6"
+  },
+  "attempt_records": [
+    {
+      "attempt_index": 1,
+      "plan": {
+        "reasoning": "0. **SMILES Consistency Check:** The SMILES `CC=O` corresponds to acetaldehyde. The provided atom list confirms the structure with an SP3 carbon (index 0), an SP2 carbonyl carbon (index 1), and an SP2 oxygen (index 2). The molecule is not a radical, so `adsorbate_type` will be 'Molecule'.\n1. **Analyze Old Plans:** There is no history of previous attempts. This is the first calculation.\n2. **Formulate New Plan:** My goal is to find the lowest energy adsorption configuration. A systematic search should start with the most chemically plausible and typically strongest interaction.\n3. **Analyze Request:** The user wants to find the most stable adsorption site for acetaldehyde on the Hf2Zn6(110) surface.\n4. **Analyze Adsorbate:** Acetaldehyde (CC=O) has a polar carbonyl group. The oxygen atom (index 2) possesses lone pairs, making it a strong Lewis base and a primary candidate for binding to electron-accepting metal sites on the surface.\n5. **Analyze Surface:** The surface is composed of Hf and Zn. Hf is generally more oxophilic and reactive than Zn. Therefore, interactions with Hf sites are expected to be stronger than with Zn sites.\n6. **Formulate Plan:** Based on the analysis, the most promising initial configuration is the adsorption of acetaldehyde via its oxygen atom onto a surface Hf atom. This corresponds to an ontop η1(O) binding mode. This is a very common and often the most stable configuration for small aldehydes and ketones on transition metal surfaces. Therefore, I will propose an `ontop` site on an `Hf` atom, with the adsorbate binding through the oxygen atom (index 2).\n   - `adsorbate_type`: \"Molecule\" (stable molecule)\n   - `site_type`: \"ontop\"\n   - `surface_binding_atoms`: [\"Hf\"]\n   - `adsorbate_binding_indices`: [2] (index of the oxygen atom)",
+        "adsorbate_type": "Molecule",
+        "solution": {
+          "action": "continue",
+          "site_type": "ontop",
+          "surface_binding_atoms": [
+            "Hf"
+          ],
+          "adsorbate_binding_indices": [
+            2
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "ontop|Hf|2|Molecule|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -4.0126495361328125,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": true,
+      "planned_site_type": "ontop",
+      "actual_site_type": "hollow (HCP/Subsurf-Atom)",
+      "best_structure_file": "outputs/19-6ad92db6/BEST_CC_O_ontop_to_hollow_HCP-Subsurf-Atom_E-4.013.xyz",
+      "generated_conformers_file": "outputs/19-6ad92db6/conformers_CC_O.traj",
+      "relaxation_trajectory_file": "outputs/19-6ad92db6/final.xyz",
+      "message": "Most stable config adsorption energy: -4.0126 eV. Target Atom: O (from plan index 2, global index 64 in relaxed structure). -> Nearest: Hf (Index 16), Distance: 1.897 Å (Threshold: 3.494), Bound: True. Bonded Surface Atoms: Hf-1.897Å, Hf-2.368Å, Hf-3.256Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Hf'] -> Actual ['Hf', 'Hf', 'Hf']).",
+      "history_entry": "【✅ Perfect Adsorption】 ontop @ ['Hf'] (Index [2]) -> Site: hollow (HCP/Subsurf-Atom) (Hf,Hf,Hf) | E=-4.013 eV"
+    }
+  ],
+  "history": [
+    "【✅ Perfect Adsorption】 ontop @ ['Hf'] (Index [2]) -> Site: hollow (HCP/Subsurf-Atom) (Hf,Hf,Hf) | E=-4.013 eV"
+  ],
+  "error": null,
+  "perfect_count": 1,
   "dissociation_count": 0,
   "rearrangement_count": 0,
   "calc_failure_count": 0,
-  "chemical_slip_count": 0
+  "chemical_slip_count": 1
 }

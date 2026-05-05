@@ -2,7 +2,7 @@
   "case_id": "10",
   "case_metadata": {
     "case_id": "10",
-    "slab_file": "datasets/cmu20/10_Pt_100.xyz",
+    "slab_file": "benchmark_slabs/10_Pt_100.xyz",
     "smiles": "[OH]",
     "user_request": "Find the lowest-energy adsorption configuration for hydroxyl radical on the provided surface.",
     "surface_family": "monometallic",
@@ -12,24 +12,188 @@
     "ablation_candidate": "FALSE",
     "notes": "Facet sensitivity test; DFT handoff target"
   },
-  "status": "error",
-  "best_energy_eV": null,
-  "iteration_count": 0,
+  "status": "success",
+  "best_energy_eV": -2.7095260620117188,
+  "iteration_count": 1,
   "max_attempts": 1,
-  "final_site_type": null,
+  "final_site_type": "bridge",
   "converged_tag": false,
-  "wall_clock_sec": 32.58262162504252,
-  "total_input_tokens": 0,
-  "total_output_tokens": 0,
-  "artifact_paths": {},
-  "best_result": {},
-  "last_analysis": {},
-  "attempt_records": [],
-  "history": [],
-  "error": "403 This API method requires billing to be enabled. Please enable billing on project #igneous-sandbox-479916-t9 by visiting https://console.developers.google.com/billing/enable?project=igneous-sandbox-479916-t9 then retry. If you enabled billing for this project recently, wait a few minutes for the action to propagate to our systems and retry. [reason: \"BILLING_DISABLED\"\ndomain: \"googleapis.com\"\nmetadata {\n  key: \"service\"\n  value: \"aiplatform.googleapis.com\"\n}\nmetadata {\n  key: \"containerInfo\"\n  value: \"igneous-sandbox-479916-t9\"\n}\nmetadata {\n  key: \"consumer\"\n  value: \"projects/igneous-sandbox-479916-t9\"\n}\nmetadata {\n  key: \"consoleUrl\"\n  value: \"https://console.developers.google.com/billing/enable?project=igneous-sandbox-479916-t9\"\n}\n, locale: \"en-US\"\nmessage: \"This API method requires billing to be enabled. Please enable billing on project #igneous-sandbox-479916-t9 by visiting https://console.developers.google.com/billing/enable?project=igneous-sandbox-479916-t9 then retry. If you enabled billing for this project recently, wait a few minutes for the action to propagate to our systems and retry.\"\n, links {\n  description: \"Google developers console billing\"\n  url: \"https://console.developers.google.com/billing/enable?project=igneous-sandbox-479916-t9\"\n}\n]",
-  "perfect_count": 0,
+  "wall_clock_sec": 441.25644055753946,
+  "total_input_tokens": 3423,
+  "total_output_tokens": 3625,
+  "artifact_paths": {
+    "BEST_OH_ontop_to_bridge_E-2.710": "research/results/basic_experiments/cmu20/gemini25pro_mace_mp0_small/one_shot/10/artifacts/BEST_OH_ontop_to_bridge_E-2.710.xyz",
+    "BEST_OH_ontop_to_bridge_E-2.710.xyz": "research/results/basic_experiments/cmu20/gemini25pro_mace_mp0_small/one_shot/10/artifacts/BEST_OH_ontop_to_bridge_E-2.710.xyz",
+    "best_structure_file": "research/results/basic_experiments/cmu20/gemini25pro_mace_mp0_small/one_shot/10/artifacts/BEST_OH_ontop_to_bridge_E-2.710.xyz",
+    "conformers_[OH]": "research/results/basic_experiments/cmu20/gemini25pro_mace_mp0_small/one_shot/10/artifacts/conformers_[OH].traj",
+    "conformers_[OH].traj": "research/results/basic_experiments/cmu20/gemini25pro_mace_mp0_small/one_shot/10/artifacts/conformers_[OH].traj",
+    "generated_conformers_file": "research/results/basic_experiments/cmu20/gemini25pro_mace_mp0_small/one_shot/10/artifacts/conformers_[OH].traj",
+    "final": "research/results/basic_experiments/cmu20/gemini25pro_mace_mp0_small/one_shot/10/artifacts/final.xyz",
+    "final.xyz": "research/results/basic_experiments/cmu20/gemini25pro_mace_mp0_small/one_shot/10/artifacts/final.xyz",
+    "final_structure_file": "research/results/basic_experiments/cmu20/gemini25pro_mace_mp0_small/one_shot/10/artifacts/final.xyz",
+    "relaxation": "research/results/basic_experiments/cmu20/gemini25pro_mace_mp0_small/one_shot/10/artifacts/relaxation.traj",
+    "relaxation.traj": "research/results/basic_experiments/cmu20/gemini25pro_mace_mp0_small/one_shot/10/artifacts/relaxation.traj",
+    "relaxation_trajectory_file": "research/results/basic_experiments/cmu20/gemini25pro_mace_mp0_small/one_shot/10/artifacts/relaxation.traj"
+  },
+  "best_result": {
+    "most_stable_energy_eV": -2.7095260620117188,
+    "analysis_json": {
+      "status": "success",
+      "message": "Most stable config adsorption energy: -2.7095 eV. Target Atom: O (from plan index 0, global index 36 in relaxed structure). -> Nearest: Pt (Index 5), Distance: 2.017 Å (Threshold: 2.929), Bound: True. Bonded Surface Atoms: Pt-2.017Å, Pt-2.021Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Pt'] -> Actual ['Pt', 'Pt']).",
+      "most_stable_energy_eV": -2.7095260620117188,
+      "target_adsorbate_atom": "O",
+      "target_adsorbate_atom_index": 36,
+      "bonded_surface_atoms": [
+        {
+          "symbol": "Pt",
+          "index": 5,
+          "distance": 2.017
+        },
+        {
+          "symbol": "Pt",
+          "index": 17,
+          "distance": 2.021
+        }
+      ],
+      "nearest_slab_atom": "Pt",
+      "nearest_slab_atom_index": 5,
+      "final_bond_distance_A": 2.017,
+      "estimated_covalent_cutoff_A": 2.222,
+      "is_covalently_bound": true,
+      "reaction_detected": false,
+      "is_dissociated": false,
+      "n_components": 1,
+      "bond_change_count": 0,
+      "site_analysis": {
+        "planned_site_type": "ontop",
+        "planned_connectivity": 1,
+        "actual_site_type": "bridge",
+        "actual_connectivity": 2,
+        "is_chemical_slip": true,
+        "planned_symbols": [
+          "Pt"
+        ],
+        "actual_symbols": [
+          "Pt",
+          "Pt"
+        ],
+        "site_fingerprint": "Pt5-Pt17"
+      },
+      "best_structure_file": "outputs/10-24571da2/BEST_OH_ontop_to_bridge_E-2.710.xyz",
+      "generated_conformers_file": "outputs/10-24571da2/conformers_[OH].traj",
+      "relaxation_trajectory_file": "outputs/10-24571da2/final.xyz",
+      "session_id": "10-24571da2"
+    },
+    "plan": {
+      "reasoning": "This is the first attempt to find the lowest energy adsorption configuration for a hydroxyl radical ([OH]) on a Pt(100) surface. The history is empty. I will start a systematic search by testing the most common and high-symmetry adsorption sites first. The provided SMILES `[OH]` corresponds to a hydroxyl radical. The RDKit analysis confirms that the oxygen atom (index 0) has one radical electron (`radical_electrons: 1`). Therefore, the adsorption should be modeled as a `ReactiveSpecies` where the oxygen atom forms a bond with the surface. A logical first site to test is the 'ontop' site, where the oxygen atom binds directly to a single platinum atom. This is a fundamental binding mode for many small molecules and radicals.",
+      "adsorbate_type": "ReactiveSpecies",
+      "solution": {
+        "action": "continue",
+        "site_type": "ontop",
+        "surface_binding_atoms": [
+          "Pt"
+        ],
+        "adsorbate_binding_indices": [
+          0
+        ],
+        "relax_top_n": 1,
+        "touch_sphere_size": 2,
+        "overlap_thr": 0.1,
+        "conformers_per_site_cap": 4
+      }
+    },
+    "result_type": "Perfect"
+  },
+  "last_analysis": {
+    "status": "success",
+    "message": "Most stable config adsorption energy: -2.7095 eV. Target Atom: O (from plan index 0, global index 36 in relaxed structure). -> Nearest: Pt (Index 5), Distance: 2.017 Å (Threshold: 2.929), Bound: True. Bonded Surface Atoms: Pt-2.017Å, Pt-2.021Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Pt'] -> Actual ['Pt', 'Pt']).",
+    "most_stable_energy_eV": -2.7095260620117188,
+    "target_adsorbate_atom": "O",
+    "target_adsorbate_atom_index": 36,
+    "bonded_surface_atoms": [
+      {
+        "symbol": "Pt",
+        "index": 5,
+        "distance": 2.017
+      },
+      {
+        "symbol": "Pt",
+        "index": 17,
+        "distance": 2.021
+      }
+    ],
+    "nearest_slab_atom": "Pt",
+    "nearest_slab_atom_index": 5,
+    "final_bond_distance_A": 2.017,
+    "estimated_covalent_cutoff_A": 2.222,
+    "is_covalently_bound": true,
+    "reaction_detected": false,
+    "is_dissociated": false,
+    "n_components": 1,
+    "bond_change_count": 0,
+    "site_analysis": {
+      "planned_site_type": "ontop",
+      "planned_connectivity": 1,
+      "actual_site_type": "bridge",
+      "actual_connectivity": 2,
+      "is_chemical_slip": true,
+      "planned_symbols": [
+        "Pt"
+      ],
+      "actual_symbols": [
+        "Pt",
+        "Pt"
+      ],
+      "site_fingerprint": "Pt5-Pt17"
+    },
+    "best_structure_file": "outputs/10-24571da2/BEST_OH_ontop_to_bridge_E-2.710.xyz",
+    "generated_conformers_file": "outputs/10-24571da2/conformers_[OH].traj",
+    "relaxation_trajectory_file": "outputs/10-24571da2/final.xyz",
+    "session_id": "10-24571da2"
+  },
+  "attempt_records": [
+    {
+      "attempt_index": 1,
+      "plan": {
+        "reasoning": "This is the first attempt to find the lowest energy adsorption configuration for a hydroxyl radical ([OH]) on a Pt(100) surface. The history is empty. I will start a systematic search by testing the most common and high-symmetry adsorption sites first. The provided SMILES `[OH]` corresponds to a hydroxyl radical. The RDKit analysis confirms that the oxygen atom (index 0) has one radical electron (`radical_electrons: 1`). Therefore, the adsorption should be modeled as a `ReactiveSpecies` where the oxygen atom forms a bond with the surface. A logical first site to test is the 'ontop' site, where the oxygen atom binds directly to a single platinum atom. This is a fundamental binding mode for many small molecules and radicals.",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "ontop",
+          "surface_binding_atoms": [
+            "Pt"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "ontop|Pt|0|ReactiveSpecies|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -2.7095260620117188,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": true,
+      "planned_site_type": "ontop",
+      "actual_site_type": "bridge",
+      "best_structure_file": "outputs/10-24571da2/BEST_OH_ontop_to_bridge_E-2.710.xyz",
+      "generated_conformers_file": "outputs/10-24571da2/conformers_[OH].traj",
+      "relaxation_trajectory_file": "outputs/10-24571da2/final.xyz",
+      "message": "Most stable config adsorption energy: -2.7095 eV. Target Atom: O (from plan index 0, global index 36 in relaxed structure). -> Nearest: Pt (Index 5), Distance: 2.017 Å (Threshold: 2.929), Bound: True. Bonded Surface Atoms: Pt-2.017Å, Pt-2.021Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Pt'] -> Actual ['Pt', 'Pt']).",
+      "history_entry": "【✅ Perfect Adsorption】 ontop @ ['Pt'] (Index [0]) -> Site: bridge (Pt,Pt) | E=-2.710 eV"
+    }
+  ],
+  "history": [
+    "【✅ Perfect Adsorption】 ontop @ ['Pt'] (Index [0]) -> Site: bridge (Pt,Pt) | E=-2.710 eV"
+  ],
+  "error": null,
+  "perfect_count": 1,
   "dissociation_count": 0,
   "rearrangement_count": 0,
   "calc_failure_count": 0,
-  "chemical_slip_count": 0
+  "chemical_slip_count": 1
 }
