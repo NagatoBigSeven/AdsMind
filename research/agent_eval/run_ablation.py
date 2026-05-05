@@ -116,7 +116,6 @@ def main(argv: Optional[list[str]] = None) -> int:
             "backend_key",
             "backend",
             "llm_model",
-            "llm_route",
             "force_field",
             "calculator_backend",
             "force_field_model",

@@ -1,0 +1,227 @@
+{
+  "case_id": "014",
+  "case_metadata": {
+    "case_id": "014",
+    "slab_file": "datasets/ocd62/014_Ge36V60_N_N.xyz",
+    "smiles": "[N]=N",
+    "user_request": "Find the lowest-energy adsorption configuration for the adsorbate with SMILES [N]=N on the provided surface.",
+    "surface_family": "compound",
+    "adsorbate_name": "[N]=N",
+    "miller_index": "",
+    "reaction_class": "GENERALIZATION",
+    "ablation_candidate": "FALSE",
+    "notes": "OCD id=118; adsorbate=[N]=N; surface_formula=Ge36V60; y_relaxed=-2.727881 eV; site=37;47;53;62;65;86",
+    "surface_formula": "Ge36V60",
+    "surface_elements": "Ge;V",
+    "bare_slab_atoms": "96",
+    "adsorbate_atoms": "3",
+    "y_relaxed": "-2.727881",
+    "site_indices": "37;47;53;62;65;86"
+  },
+  "status": "success",
+  "best_energy_eV": -10.13772201538086,
+  "iteration_count": 1,
+  "max_attempts": 1,
+  "final_site_type": "hollow (HCP/Subsurf-Atom)",
+  "converged_tag": false,
+  "wall_clock_sec": 860.7478336319327,
+  "total_input_tokens": 4799,
+  "total_output_tokens": 1727,
+  "artifact_paths": {
+    "BEST_N_N_ontop_to_hollow_HCP-Subsurf-Atom_E-10.138": "research/results/basic_experiments/ocd62/claude_sonnet46_mace_mp0_small/one_shot/014/artifacts/BEST_N_N_ontop_to_hollow_HCP-Subsurf-Atom_E-10.138.xyz",
+    "BEST_N_N_ontop_to_hollow_HCP-Subsurf-Atom_E-10.138.xyz": "research/results/basic_experiments/ocd62/claude_sonnet46_mace_mp0_small/one_shot/014/artifacts/BEST_N_N_ontop_to_hollow_HCP-Subsurf-Atom_E-10.138.xyz",
+    "best_structure_file": "research/results/basic_experiments/ocd62/claude_sonnet46_mace_mp0_small/one_shot/014/artifacts/BEST_N_N_ontop_to_hollow_HCP-Subsurf-Atom_E-10.138.xyz",
+    "conformers_[N]_N": "research/results/basic_experiments/ocd62/claude_sonnet46_mace_mp0_small/one_shot/014/artifacts/conformers_[N]_N.traj",
+    "conformers_[N]_N.traj": "research/results/basic_experiments/ocd62/claude_sonnet46_mace_mp0_small/one_shot/014/artifacts/conformers_[N]_N.traj",
+    "final": "research/results/basic_experiments/ocd62/claude_sonnet46_mace_mp0_small/one_shot/014/artifacts/final.xyz",
+    "final.xyz": "research/results/basic_experiments/ocd62/claude_sonnet46_mace_mp0_small/one_shot/014/artifacts/final.xyz",
+    "relaxation": "research/results/basic_experiments/ocd62/claude_sonnet46_mace_mp0_small/one_shot/014/artifacts/relaxation.traj",
+    "relaxation.traj": "research/results/basic_experiments/ocd62/claude_sonnet46_mace_mp0_small/one_shot/014/artifacts/relaxation.traj",
+    "relaxation_trajectory_file": "research/results/basic_experiments/ocd62/claude_sonnet46_mace_mp0_small/one_shot/014/artifacts/relaxation.traj"
+  },
+  "best_result": {
+    "most_stable_energy_eV": -10.13772201538086,
+    "analysis_json": {
+      "status": "success",
+      "message": "Most stable config adsorption energy: -10.1377 eV. Target Atom: N (from plan index 0, global index 96 in relaxed structure). -> Nearest: V (Index 86), Distance: 1.98 Å (Threshold: 3.248), Bound: True. Bonded Surface Atoms: V-1.98Å, V-1.991Å, V-2.018Å, V-2.203Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['V'] -> Actual ['V', 'V', 'V', 'V']).",
+      "most_stable_energy_eV": -10.13772201538086,
+      "target_adsorbate_atom": "N",
+      "target_adsorbate_atom_index": 96,
+      "bonded_surface_atoms": [
+        {
+          "symbol": "V",
+          "index": 86,
+          "distance": 1.98
+        },
+        {
+          "symbol": "V",
+          "index": 62,
+          "distance": 1.991
+        },
+        {
+          "symbol": "V",
+          "index": 71,
+          "distance": 2.018
+        },
+        {
+          "symbol": "V",
+          "index": 44,
+          "distance": 2.203
+        }
+      ],
+      "nearest_slab_atom": "V",
+      "nearest_slab_atom_index": 86,
+      "final_bond_distance_A": 1.98,
+      "estimated_covalent_cutoff_A": 2.464,
+      "is_covalently_bound": true,
+      "reaction_detected": false,
+      "is_dissociated": false,
+      "n_components": 1,
+      "bond_change_count": 0,
+      "site_analysis": {
+        "planned_site_type": "ontop",
+        "planned_connectivity": 1,
+        "actual_site_type": "hollow (HCP/Subsurf-Atom)",
+        "actual_connectivity": 4,
+        "is_chemical_slip": true,
+        "planned_symbols": [
+          "V"
+        ],
+        "actual_symbols": [
+          "V",
+          "V",
+          "V",
+          "V"
+        ],
+        "site_fingerprint": "V86-V62-V71-V44"
+      },
+      "best_structure_file": "outputs/004-205d4e6a/BEST_N_N_ontop_to_hollow_HCP-Subsurf-Atom_E-10.138.xyz",
+      "generated_conformers_file": "outputs/004-205d4e6a/conformers_[N]_N.traj",
+      "relaxation_trajectory_file": "outputs/004-205d4e6a/final.xyz",
+      "session_id": "004-205d4e6a"
+    },
+    "plan": {
+      "reasoning": "Step 0 - SMILES Consistency Check: The SMILES [N]=N represents diazene (N2H0 with a double bond between two nitrogen atoms). RDKit analysis shows: atom 0 is N (SP2, degree 1, radical_electrons=1, formal_charge=0) and atom 1 is N (SP2, degree 1, radical_electrons=0, formal_charge=0). Atom 0 has a radical electron, making this a ReactiveSpecies. The molecule is N2 in a diradical/reactive form.\n\nStep 1 - Analyze Old Plans: No history exists. This is the first attempt.\n\nStep 2 - Formulate New Plan: Since this is the first attempt and we have a hard limit of 1 attempt, I need to choose the most promising configuration. For N2-like species on transition metal surfaces, the most common and energetically favorable adsorption is end-on (N-ontop) at a V site, since V is the transition metal component and typically more reactive toward N2 adsorption than Ge. The radical electron is on atom 0 (index 0), making it the binding atom.\n\nStep 3 - Analyze Request: Find the lowest-energy adsorption configuration for [N]=N on the V-Ge surface.\n\nStep 4 - Analyze Adsorbate: [N]=N has two N atoms. Atom 0 (index 0) has radical_electrons=1, making it the reactive binding site. Atom 1 (index 1) has no radical electrons. For ReactiveSpecies, binding should occur through atom 0.\n\nStep 5 - Analyze Surface: Available sites include ontop V, ontop Ge, bridge Ge-V, bridge V-V, hollow sites, etc. For N2 adsorption, ontop V is the most physically motivated choice as V is a transition metal with d-orbitals that can back-donate into N2 antibonding orbitals.\n\nStep 6 - Formulate Plan: Use ReactiveSpecies type, ontop V site, binding through atom index 0 (the radical N atom). This is the most physically reasonable first choice for N2 on a V-Ge surface.",
+      "adsorbate_type": "ReactiveSpecies",
+      "solution": {
+        "action": "continue",
+        "site_type": "ontop",
+        "surface_binding_atoms": [
+          "V"
+        ],
+        "adsorbate_binding_indices": [
+          0
+        ],
+        "relax_top_n": 1,
+        "touch_sphere_size": 2,
+        "overlap_thr": 0.1,
+        "conformers_per_site_cap": 4
+      }
+    },
+    "result_type": "Perfect"
+  },
+  "last_analysis": {
+    "status": "success",
+    "message": "Most stable config adsorption energy: -10.1377 eV. Target Atom: N (from plan index 0, global index 96 in relaxed structure). -> Nearest: V (Index 86), Distance: 1.98 Å (Threshold: 3.248), Bound: True. Bonded Surface Atoms: V-1.98Å, V-1.991Å, V-2.018Å, V-2.203Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['V'] -> Actual ['V', 'V', 'V', 'V']).",
+    "most_stable_energy_eV": -10.13772201538086,
+    "target_adsorbate_atom": "N",
+    "target_adsorbate_atom_index": 96,
+    "bonded_surface_atoms": [
+      {
+        "symbol": "V",
+        "index": 86,
+        "distance": 1.98
+      },
+      {
+        "symbol": "V",
+        "index": 62,
+        "distance": 1.991
+      },
+      {
+        "symbol": "V",
+        "index": 71,
+        "distance": 2.018
+      },
+      {
+        "symbol": "V",
+        "index": 44,
+        "distance": 2.203
+      }
+    ],
+    "nearest_slab_atom": "V",
+    "nearest_slab_atom_index": 86,
+    "final_bond_distance_A": 1.98,
+    "estimated_covalent_cutoff_A": 2.464,
+    "is_covalently_bound": true,
+    "reaction_detected": false,
+    "is_dissociated": false,
+    "n_components": 1,
+    "bond_change_count": 0,
+    "site_analysis": {
+      "planned_site_type": "ontop",
+      "planned_connectivity": 1,
+      "actual_site_type": "hollow (HCP/Subsurf-Atom)",
+      "actual_connectivity": 4,
+      "is_chemical_slip": true,
+      "planned_symbols": [
+        "V"
+      ],
+      "actual_symbols": [
+        "V",
+        "V",
+        "V",
+        "V"
+      ],
+      "site_fingerprint": "V86-V62-V71-V44"
+    },
+    "best_structure_file": "outputs/004-205d4e6a/BEST_N_N_ontop_to_hollow_HCP-Subsurf-Atom_E-10.138.xyz",
+    "generated_conformers_file": "outputs/004-205d4e6a/conformers_[N]_N.traj",
+    "relaxation_trajectory_file": "outputs/004-205d4e6a/final.xyz",
+    "session_id": "004-205d4e6a"
+  },
+  "attempt_records": [
+    {
+      "attempt_index": 1,
+      "plan": {
+        "reasoning": "Step 0 - SMILES Consistency Check: The SMILES [N]=N represents diazene (N2H0 with a double bond between two nitrogen atoms). RDKit analysis shows: atom 0 is N (SP2, degree 1, radical_electrons=1, formal_charge=0) and atom 1 is N (SP2, degree 1, radical_electrons=0, formal_charge=0). Atom 0 has a radical electron, making this a ReactiveSpecies. The molecule is N2 in a diradical/reactive form.\n\nStep 1 - Analyze Old Plans: No history exists. This is the first attempt.\n\nStep 2 - Formulate New Plan: Since this is the first attempt and we have a hard limit of 1 attempt, I need to choose the most promising configuration. For N2-like species on transition metal surfaces, the most common and energetically favorable adsorption is end-on (N-ontop) at a V site, since V is the transition metal component and typically more reactive toward N2 adsorption than Ge. The radical electron is on atom 0 (index 0), making it the binding atom.\n\nStep 3 - Analyze Request: Find the lowest-energy adsorption configuration for [N]=N on the V-Ge surface.\n\nStep 4 - Analyze Adsorbate: [N]=N has two N atoms. Atom 0 (index 0) has radical_electrons=1, making it the reactive binding site. Atom 1 (index 1) has no radical electrons. For ReactiveSpecies, binding should occur through atom 0.\n\nStep 5 - Analyze Surface: Available sites include ontop V, ontop Ge, bridge Ge-V, bridge V-V, hollow sites, etc. For N2 adsorption, ontop V is the most physically motivated choice as V is a transition metal with d-orbitals that can back-donate into N2 antibonding orbitals.\n\nStep 6 - Formulate Plan: Use ReactiveSpecies type, ontop V site, binding through atom index 0 (the radical N atom). This is the most physically reasonable first choice for N2 on a V-Ge surface.",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "ontop",
+          "surface_binding_atoms": [
+            "V"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "ontop|V|0|ReactiveSpecies|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -10.13772201538086,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": true,
+      "planned_site_type": "ontop",
+      "actual_site_type": "hollow (HCP/Subsurf-Atom)",
+      "best_structure_file": "outputs/004-205d4e6a/BEST_N_N_ontop_to_hollow_HCP-Subsurf-Atom_E-10.138.xyz",
+      "generated_conformers_file": "outputs/004-205d4e6a/conformers_[N]_N.traj",
+      "relaxation_trajectory_file": "outputs/004-205d4e6a/final.xyz",
+      "message": "Most stable config adsorption energy: -10.1377 eV. Target Atom: N (from plan index 0, global index 96 in relaxed structure). -> Nearest: V (Index 86), Distance: 1.98 Å (Threshold: 3.248), Bound: True. Bonded Surface Atoms: V-1.98Å, V-1.991Å, V-2.018Å, V-2.203Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['V'] -> Actual ['V', 'V', 'V', 'V']).",
+      "history_entry": "【✅ Perfect Adsorption】 ontop @ ['V'] (Index [0]) -> ⚠️【Unstable Site Warning】⚠️: Planned ontop (V) is unstable, adsorbate spontaneously slipped to hollow (HCP/Subsurf-Atom) (V-V-V-V).This means V has insufficient affinity for this adsorbate. Please **FORBID** testing V type sites again! [🌟 New Best] | E=-10.138 eV"
+    }
+  ],
+  "history": [
+    "【✅ Perfect Adsorption】 ontop @ ['V'] (Index [0]) -> ⚠️【Unstable Site Warning】⚠️: Planned ontop (V) is unstable, adsorbate spontaneously slipped to hollow (HCP/Subsurf-Atom) (V-V-V-V).This means V has insufficient affinity for this adsorbate. Please **FORBID** testing V type sites again! [🌟 New Best] | E=-10.138 eV"
+  ],
+  "error": null,
+  "perfect_count": 1,
+  "dissociation_count": 0,
+  "rearrangement_count": 0,
+  "calc_failure_count": 0,
+  "chemical_slip_count": 1
+}

@@ -1,0 +1,384 @@
+{
+  "case_id": "009",
+  "case_metadata": {
+    "case_id": "009",
+    "slab_file": "datasets/ocd62_overlap12/009_Co32Y48_NH.xyz",
+    "smiles": "[NH]",
+    "user_request": "Find the lowest-energy adsorption configuration for the adsorbate with SMILES [NH] on the provided surface.",
+    "surface_family": "intermetallic",
+    "adsorbate_name": "[NH]",
+    "miller_index": "",
+    "reaction_class": "GENERALIZATION",
+    "ablation_candidate": "FALSE",
+    "notes": "OCD-GMAE source key=530; original_ads_smi=[NH]; surface_formula=Co32Y48; y_relaxed=-2.517605 eV; site=[65, 66, 77]; OCD62 overlap12 RUN3 symlink to representative50 source file; sha256=ecdb228f39fd80c93c6286234a9365227d9c75a1d767ee39d257d3f5fff8c02a",
+    "source_key": "530",
+    "original_ads_smi": "[NH]",
+    "surface_formula": "Co32Y48",
+    "surface_elements": "Co;Y",
+    "bare_slab_atoms": "80",
+    "adsorbate_atoms": "2",
+    "y_relaxed": "-2.517605",
+    "site_indices": "65;66;77",
+    "selection_bucket": "small_n_species"
+  },
+  "status": "success",
+  "best_energy_eV": -10.643351554870605,
+  "iteration_count": 5,
+  "max_attempts": 5,
+  "final_site_type": "hollow (FCC/No-Subsurf)",
+  "converged_tag": false,
+  "wall_clock_sec": 337.4725526571274,
+  "total_input_tokens": 23662,
+  "total_output_tokens": 17443,
+  "artifact_paths": {
+    "BEST_NH_bridge_to_hollow_FCC-No-Subsurf_E-10.643": "artifacts/BEST_NH_bridge_to_hollow_FCC-No-Subsurf_E-10.643.xyz",
+    "BEST_NH_bridge_to_hollow_FCC-No-Subsurf_E-10.643.xyz": "artifacts/BEST_NH_bridge_to_hollow_FCC-No-Subsurf_E-10.643.xyz",
+    "best_structure_file": "artifacts/BEST_NH_ontop_to_hollow_HCP-Subsurf-Atom_E-9.682.xyz",
+    "BEST_NH_bridge_to_hollow_FCC-No-Subsurf_E-9.957": "artifacts/BEST_NH_bridge_to_hollow_FCC-No-Subsurf_E-9.957.xyz",
+    "BEST_NH_bridge_to_hollow_FCC-No-Subsurf_E-9.957.xyz": "artifacts/BEST_NH_bridge_to_hollow_FCC-No-Subsurf_E-9.957.xyz",
+    "BEST_NH_bridge_to_hollow_HCP-Subsurf-Atom_E-10.079": "artifacts/BEST_NH_bridge_to_hollow_HCP-Subsurf-Atom_E-10.079.xyz",
+    "BEST_NH_bridge_to_hollow_HCP-Subsurf-Atom_E-10.079.xyz": "artifacts/BEST_NH_bridge_to_hollow_HCP-Subsurf-Atom_E-10.079.xyz",
+    "BEST_NH_ontop_to_hollow_FCC-No-Subsurf_E-9.981": "artifacts/BEST_NH_ontop_to_hollow_FCC-No-Subsurf_E-9.981.xyz",
+    "BEST_NH_ontop_to_hollow_FCC-No-Subsurf_E-9.981.xyz": "artifacts/BEST_NH_ontop_to_hollow_FCC-No-Subsurf_E-9.981.xyz",
+    "BEST_NH_ontop_to_hollow_HCP-Subsurf-Atom_E-9.682": "artifacts/BEST_NH_ontop_to_hollow_HCP-Subsurf-Atom_E-9.682.xyz",
+    "BEST_NH_ontop_to_hollow_HCP-Subsurf-Atom_E-9.682.xyz": "artifacts/BEST_NH_ontop_to_hollow_HCP-Subsurf-Atom_E-9.682.xyz",
+    "conformers_[NH]": "artifacts/conformers_[NH].traj",
+    "conformers_[NH].traj": "artifacts/conformers_[NH].traj",
+    "final": "artifacts/final.xyz",
+    "final.xyz": "artifacts/final.xyz",
+    "relaxation": "artifacts/relaxation.traj",
+    "relaxation.traj": "artifacts/relaxation.traj",
+    "relaxation_trajectory_file": "artifacts/relaxation.traj"
+  },
+  "best_result": {
+    "most_stable_energy_eV": -10.643351554870605,
+    "analysis_json": {
+      "status": "success",
+      "message": "Most stable config adsorption energy: -10.6434 eV. Target Atom: N (from plan index 0, global index 80 in relaxed structure). -> Nearest: Y (Index 63), Distance: 2.357 \u00c5 (Threshold: 3.784), Bound: True. Bonded Surface Atoms: Y-2.357\u00c5, Y-2.385\u00c5, Y-2.387\u00c5, Y-2.442\u00c5. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Y', 'Y'] -> Actual ['Y', 'Y', 'Y', 'Y']).",
+      "most_stable_energy_eV": -10.643351554870605,
+      "target_adsorbate_atom": "N",
+      "target_adsorbate_atom_index": 80,
+      "bonded_surface_atoms": [
+        {
+          "symbol": "Y",
+          "index": 63,
+          "distance": 2.357
+        },
+        {
+          "symbol": "Y",
+          "index": 71,
+          "distance": 2.385
+        },
+        {
+          "symbol": "Y",
+          "index": 61,
+          "distance": 2.387
+        },
+        {
+          "symbol": "Y",
+          "index": 65,
+          "distance": 2.442
+        }
+      ],
+      "nearest_slab_atom": "Y",
+      "nearest_slab_atom_index": 63,
+      "final_bond_distance_A": 2.357,
+      "estimated_covalent_cutoff_A": 2.871,
+      "is_covalently_bound": true,
+      "reaction_detected": false,
+      "is_dissociated": false,
+      "n_components": 1,
+      "bond_change_count": 0,
+      "site_analysis": {
+        "planned_site_type": "bridge",
+        "planned_connectivity": 2,
+        "actual_site_type": "hollow (FCC/No-Subsurf)",
+        "actual_connectivity": 4,
+        "is_chemical_slip": true,
+        "planned_symbols": [
+          "Y",
+          "Y"
+        ],
+        "actual_symbols": [
+          "Y",
+          "Y",
+          "Y",
+          "Y"
+        ],
+        "site_fingerprint": "Y63-Y71-Y61-Y65"
+      },
+      "best_structure_file": "outputs/009-bb7d0a11/BEST_NH_bridge_to_hollow_FCC-No-Subsurf_E-10.643.xyz",
+      "generated_conformers_file": "outputs/009-bb7d0a11/conformers_[NH].traj",
+      "relaxation_trajectory_file": "outputs/009-bb7d0a11/final.xyz",
+      "session_id": "009-bb7d0a11"
+    },
+    "plan": {
+      "reasoning": "Based on the history, all tested ontop (Co, Y) and bridge (Co-Y, Co-Co) sites have proven to be unstable for the NH adsorbate, with the adsorbate spontaneously slipping to higher-coordination hollow sites. This strongly indicates that NH prefers multi-fold coordination on this Co-Y surface. The current lowest energy found is -10.079 eV, which resulted from a slip to a hollow site. I have already forbidden the unstable ontop and specific bridge site types. To continue the systematic search, I will now test the remaining available bridge site, 'Y-Y', before moving to explicitly targeting hollow sites. The adsorbate is the NH radical ([NH]), which has two radical electrons on the nitrogen atom (index 0). Therefore, I will plan a 'ReactiveSpecies' adsorption via the nitrogen atom.",
+      "adsorbate_type": "ReactiveSpecies",
+      "solution": {
+        "action": "continue",
+        "site_type": "bridge",
+        "surface_binding_atoms": [
+          "Y",
+          "Y"
+        ],
+        "adsorbate_binding_indices": [
+          0
+        ],
+        "relax_top_n": 1,
+        "touch_sphere_size": 2,
+        "overlap_thr": 0.1,
+        "conformers_per_site_cap": 4
+      }
+    },
+    "result_type": "Perfect"
+  },
+  "last_analysis": {
+    "status": "success",
+    "message": "Most stable config adsorption energy: -10.6434 eV. Target Atom: N (from plan index 0, global index 80 in relaxed structure). -> Nearest: Y (Index 63), Distance: 2.357 \u00c5 (Threshold: 3.784), Bound: True. Bonded Surface Atoms: Y-2.357\u00c5, Y-2.385\u00c5, Y-2.387\u00c5, Y-2.442\u00c5. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Y', 'Y'] -> Actual ['Y', 'Y', 'Y', 'Y']).",
+    "most_stable_energy_eV": -10.643351554870605,
+    "target_adsorbate_atom": "N",
+    "target_adsorbate_atom_index": 80,
+    "bonded_surface_atoms": [
+      {
+        "symbol": "Y",
+        "index": 63,
+        "distance": 2.357
+      },
+      {
+        "symbol": "Y",
+        "index": 71,
+        "distance": 2.385
+      },
+      {
+        "symbol": "Y",
+        "index": 61,
+        "distance": 2.387
+      },
+      {
+        "symbol": "Y",
+        "index": 65,
+        "distance": 2.442
+      }
+    ],
+    "nearest_slab_atom": "Y",
+    "nearest_slab_atom_index": 63,
+    "final_bond_distance_A": 2.357,
+    "estimated_covalent_cutoff_A": 2.871,
+    "is_covalently_bound": true,
+    "reaction_detected": false,
+    "is_dissociated": false,
+    "n_components": 1,
+    "bond_change_count": 0,
+    "site_analysis": {
+      "planned_site_type": "bridge",
+      "planned_connectivity": 2,
+      "actual_site_type": "hollow (FCC/No-Subsurf)",
+      "actual_connectivity": 4,
+      "is_chemical_slip": true,
+      "planned_symbols": [
+        "Y",
+        "Y"
+      ],
+      "actual_symbols": [
+        "Y",
+        "Y",
+        "Y",
+        "Y"
+      ],
+      "site_fingerprint": "Y63-Y71-Y61-Y65"
+    },
+    "best_structure_file": "outputs/009-bb7d0a11/BEST_NH_bridge_to_hollow_FCC-No-Subsurf_E-10.643.xyz",
+    "generated_conformers_file": "outputs/009-bb7d0a11/conformers_[NH].traj",
+    "relaxation_trajectory_file": "outputs/009-bb7d0a11/final.xyz",
+    "session_id": "009-bb7d0a11"
+  },
+  "attempt_records": [
+    {
+      "attempt_index": 1,
+      "plan": {
+        "reasoning": "This is the first attempt to find the lowest energy adsorption site for the NH radical. The history is empty. The adsorbate is the imidogen radical, [NH]. The provided analysis shows that the nitrogen atom (index 0) has two radical electrons, making it a reactive species. Therefore, the `adsorbate_type` should be 'ReactiveSpecies'. The binding will occur through this nitrogen atom. The surface is a Co-Y alloy. Cobalt, being a d-block transition metal, is expected to be a more active site for bonding with a nitrogen-based radical compared to Yttrium. A logical and systematic first step is to test a simple, high-symmetry site. The ontop site on a Cobalt atom is a very common and often stable configuration for small radicals. Thus, the initial plan is to place the nitrogen atom of the NH radical directly on top of a Co surface atom.",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "ontop",
+          "surface_binding_atoms": [
+            "Co"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "ontop|Co|0|ReactiveSpecies|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -9.681571960449219,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": true,
+      "planned_site_type": "ontop",
+      "actual_site_type": "hollow (HCP/Subsurf-Atom)",
+      "best_structure_file": "outputs/009-bb7d0a11/BEST_NH_ontop_to_hollow_HCP-Subsurf-Atom_E-9.682.xyz",
+      "generated_conformers_file": "outputs/009-bb7d0a11/conformers_[NH].traj",
+      "relaxation_trajectory_file": "outputs/009-bb7d0a11/final.xyz",
+      "message": "Most stable config adsorption energy: -9.6816 eV. Target Atom: N (from plan index 0, global index 80 in relaxed structure). -> Nearest: Co (Index 17), Distance: 1.846 \u00c5 (Threshold: 2.856), Bound: True. Bonded Surface Atoms: Co-1.846\u00c5, Y-2.269\u00c5, Y-2.283\u00c5. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Co'] -> Actual ['Co', 'Y', 'Y']).",
+      "history_entry": "\u3010\u2705 Perfect Adsorption\u3011 ontop @ ['Co'] (Index [0]) -> \u26a0\ufe0f\u3010Unstable Site Warning\u3011\u26a0\ufe0f: Planned ontop (Co) is unstable, adsorbate spontaneously slipped to hollow (HCP/Subsurf-Atom) (Co-Y-Y).This means Co has insufficient affinity for this adsorbate. Please **FORBID** testing Co type sites again! | E=-9.682 eV"
+    },
+    {
+      "attempt_index": 2,
+      "plan": {
+        "reasoning": "The previous attempt involved placing the NH adsorbate on an 'ontop' Co site. The calculation revealed this site to be unstable, as the adsorbate spontaneously migrated to a 'hollow' Co-Y-Y site, resulting in a very favorable adsorption energy of -9.682 eV. The history explicitly warns that Co sites have insufficient affinity and should be forbidden. This strongly suggests that sites involving Yttrium (Y) are more stable for NH adsorption. To systematically explore other potential configurations, the next logical step is to test the simplest available site involving Yttrium. Therefore, I will test the 'ontop' site on a Y atom. The adsorbate is the NH radical ([NH]), which has two radical electrons on the nitrogen atom (index 0). Consequently, I will use 'ReactiveSpecies' as the adsorbate type and bind it through the nitrogen atom.",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "ontop",
+          "surface_binding_atoms": [
+            "Y"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "ontop|Y|0|ReactiveSpecies|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -9.981315612792969,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": true,
+      "planned_site_type": "ontop",
+      "actual_site_type": "hollow (FCC/No-Subsurf)",
+      "best_structure_file": "outputs/009-bb7d0a11/BEST_NH_ontop_to_hollow_FCC-No-Subsurf_E-9.981.xyz",
+      "generated_conformers_file": "outputs/009-bb7d0a11/conformers_[NH].traj",
+      "relaxation_trajectory_file": "outputs/009-bb7d0a11/final.xyz",
+      "message": "Most stable config adsorption energy: -9.9813 eV. Target Atom: N (from plan index 0, global index 80 in relaxed structure). -> Nearest: Y (Index 57), Distance: 2.305 \u00c5 (Threshold: 3.784), Bound: True. Bonded Surface Atoms: Y-2.305\u00c5, Y-2.311\u00c5, Y-2.329\u00c5. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Y'] -> Actual ['Y', 'Y', 'Y']).",
+      "history_entry": "\u3010\u2705 Perfect Adsorption\u3011 ontop @ ['Y'] (Index [0]) -> \u26a0\ufe0f\u3010Unstable Site Warning\u3011\u26a0\ufe0f: Planned ontop (Y) is unstable, adsorbate spontaneously slipped to hollow (FCC/No-Subsurf) (Y-Y-Y).This means Y has insufficient affinity for this adsorbate. Please **FORBID** testing Y type sites again! | E=-9.981 eV"
+    },
+    {
+      "attempt_index": 3,
+      "plan": {
+        "reasoning": "The previous two attempts tested ontop adsorption on both Co and Y sites. Both attempts resulted in an 'Unstable Site Warning', where the NH adsorbate spontaneously slipped from the planned ontop site to a higher-coordination hollow site. Specifically, the ontop-Co plan relaxed to a Co-Y-Y hollow site with E=-9.682 eV, and the ontop-Y plan relaxed to a Y-Y-Y hollow site with E=-9.981 eV. This strongly indicates that NH prefers to bind at sites with higher coordination than ontop. The warnings explicitly forbid re-testing Co and Y ontop sites. To continue the systematic search for the lowest energy configuration, I will now move to test bridge sites, which offer a higher coordination number than ontop sites. I will start with the Co-Y bridge site, as it is a common mixed-metal site available on this alloy surface. The adsorbate [NH] is a radical with two unpaired electrons on the Nitrogen atom (index 0), so I will use `ReactiveSpecies` with the N atom as the binding point.",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "bridge",
+          "surface_binding_atoms": [
+            "Co",
+            "Y"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "bridge|Co,Y|0|ReactiveSpecies|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -10.078959465026855,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": true,
+      "planned_site_type": "bridge",
+      "actual_site_type": "hollow (HCP/Subsurf-Atom)",
+      "best_structure_file": "outputs/009-bb7d0a11/BEST_NH_bridge_to_hollow_HCP-Subsurf-Atom_E-10.079.xyz",
+      "generated_conformers_file": "outputs/009-bb7d0a11/conformers_[NH].traj",
+      "relaxation_trajectory_file": "outputs/009-bb7d0a11/final.xyz",
+      "message": "Most stable config adsorption energy: -10.0790 eV. Target Atom: N (from plan index 0, global index 80 in relaxed structure). -> Nearest: Co (Index 26), Distance: 2.123 \u00c5 (Threshold: 2.856), Bound: True. Bonded Surface Atoms: Co-2.123\u00c5, Y-2.275\u00c5, Y-2.385\u00c5, Y-2.567\u00c5, Y-3.624\u00c5. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Co', 'Y'] -> Actual ['Co', 'Y', 'Y', 'Y', 'Y']).",
+      "history_entry": "\u3010\u2705 Perfect Adsorption\u3011 bridge @ ['Co', 'Y'] (Index [0]) -> \u26a0\ufe0f\u3010Unstable Site Warning\u3011\u26a0\ufe0f: Planned bridge (Co-Y) is unstable, adsorbate spontaneously slipped to hollow (HCP/Subsurf-Atom) (Co-Y-Y-Y-Y).This means Co-Y has insufficient affinity for this adsorbate. Please **FORBID** testing Co-Y type sites again! | E=-10.079 eV"
+    },
+    {
+      "attempt_index": 4,
+      "plan": {
+        "reasoning": "The history of previous calculations shows a clear trend: on-top sites on both Co and Y, and the Co-Y bridge site, are all unstable for the NH radical. In every case, the adsorbate spontaneously slipped to a higher-coordination hollow site, yielding progressively lower energies (-9.682 eV, -9.981 eV, and -10.079 eV). This strongly suggests that the most stable adsorption sites for NH on this surface are hollow sites. The warnings explicitly forbid re-testing on-top Co, on-top Y, and bridge Co-Y sites. To continue the systematic search, I will now test another available bridge site that has not been explored yet: the Co-Co bridge. The adsorbate, NH, is a radical with two unpaired electrons on the nitrogen atom (index 0), so I will define it as a `ReactiveSpecies` binding through the N atom.",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "bridge",
+          "surface_binding_atoms": [
+            "Co",
+            "Co"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "bridge|Co,Co|0|ReactiveSpecies|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -9.957316398620605,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": true,
+      "planned_site_type": "bridge",
+      "actual_site_type": "hollow (FCC/No-Subsurf)",
+      "best_structure_file": "outputs/009-bb7d0a11/BEST_NH_bridge_to_hollow_FCC-No-Subsurf_E-9.957.xyz",
+      "generated_conformers_file": "outputs/009-bb7d0a11/conformers_[NH].traj",
+      "relaxation_trajectory_file": "outputs/009-bb7d0a11/final.xyz",
+      "message": "Most stable config adsorption energy: -9.9573 eV. Target Atom: N (from plan index 0, global index 80 in relaxed structure). -> Nearest: Co (Index 16), Distance: 1.831 \u00c5 (Threshold: 2.856), Bound: True. Bonded Surface Atoms: Co-1.831\u00c5, Co-2.078\u00c5, Y-2.427\u00c5, Y-2.473\u00c5. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Co', 'Co'] -> Actual ['Co', 'Co', 'Y', 'Y']).",
+      "history_entry": "\u3010\u2705 Perfect Adsorption\u3011 bridge @ ['Co', 'Co'] (Index [0]) -> \u26a0\ufe0f\u3010Unstable Site Warning\u3011\u26a0\ufe0f: Planned bridge (Co-Co) is unstable, adsorbate spontaneously slipped to hollow (FCC/No-Subsurf) (Co-Co-Y-Y).This means Co-Co has insufficient affinity for this adsorbate. Please **FORBID** testing Co-Co type sites again! | E=-9.957 eV"
+    },
+    {
+      "attempt_index": 5,
+      "plan": {
+        "reasoning": "Based on the history, all tested ontop (Co, Y) and bridge (Co-Y, Co-Co) sites have proven to be unstable for the NH adsorbate, with the adsorbate spontaneously slipping to higher-coordination hollow sites. This strongly indicates that NH prefers multi-fold coordination on this Co-Y surface. The current lowest energy found is -10.079 eV, which resulted from a slip to a hollow site. I have already forbidden the unstable ontop and specific bridge site types. To continue the systematic search, I will now test the remaining available bridge site, 'Y-Y', before moving to explicitly targeting hollow sites. The adsorbate is the NH radical ([NH]), which has two radical electrons on the nitrogen atom (index 0). Therefore, I will plan a 'ReactiveSpecies' adsorption via the nitrogen atom.",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "bridge",
+          "surface_binding_atoms": [
+            "Y",
+            "Y"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "bridge|Y,Y|0|ReactiveSpecies|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -10.643351554870605,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": true,
+      "planned_site_type": "bridge",
+      "actual_site_type": "hollow (FCC/No-Subsurf)",
+      "best_structure_file": "outputs/009-bb7d0a11/BEST_NH_bridge_to_hollow_FCC-No-Subsurf_E-10.643.xyz",
+      "generated_conformers_file": "outputs/009-bb7d0a11/conformers_[NH].traj",
+      "relaxation_trajectory_file": "outputs/009-bb7d0a11/final.xyz",
+      "message": "Most stable config adsorption energy: -10.6434 eV. Target Atom: N (from plan index 0, global index 80 in relaxed structure). -> Nearest: Y (Index 63), Distance: 2.357 \u00c5 (Threshold: 3.784), Bound: True. Bonded Surface Atoms: Y-2.357\u00c5, Y-2.385\u00c5, Y-2.387\u00c5, Y-2.442\u00c5. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Y', 'Y'] -> Actual ['Y', 'Y', 'Y', 'Y']).",
+      "history_entry": "\u3010\u2705 Perfect Adsorption\u3011 bridge @ ['Y', 'Y'] (Index [0]) -> \u26a0\ufe0f\u3010Unstable Site Warning\u3011\u26a0\ufe0f: Planned bridge (Y-Y) is unstable, adsorbate spontaneously slipped to hollow (FCC/No-Subsurf) (Y-Y-Y-Y).This means Y-Y has insufficient affinity for this adsorbate. Please **FORBID** testing Y-Y type sites again! | E=-10.643 eV"
+    }
+  ],
+  "history": [
+    "\u3010\u2705 Perfect Adsorption\u3011 ontop @ ['Co'] (Index [0]) -> \u26a0\ufe0f\u3010Unstable Site Warning\u3011\u26a0\ufe0f: Planned ontop (Co) is unstable, adsorbate spontaneously slipped to hollow (HCP/Subsurf-Atom) (Co-Y-Y).This means Co has insufficient affinity for this adsorbate. Please **FORBID** testing Co type sites again! | E=-9.682 eV",
+    "\u3010\u2705 Perfect Adsorption\u3011 ontop @ ['Y'] (Index [0]) -> \u26a0\ufe0f\u3010Unstable Site Warning\u3011\u26a0\ufe0f: Planned ontop (Y) is unstable, adsorbate spontaneously slipped to hollow (FCC/No-Subsurf) (Y-Y-Y).This means Y has insufficient affinity for this adsorbate. Please **FORBID** testing Y type sites again! | E=-9.981 eV",
+    "\u3010\u2705 Perfect Adsorption\u3011 bridge @ ['Co', 'Y'] (Index [0]) -> \u26a0\ufe0f\u3010Unstable Site Warning\u3011\u26a0\ufe0f: Planned bridge (Co-Y) is unstable, adsorbate spontaneously slipped to hollow (HCP/Subsurf-Atom) (Co-Y-Y-Y-Y).This means Co-Y has insufficient affinity for this adsorbate. Please **FORBID** testing Co-Y type sites again! | E=-10.079 eV",
+    "\u3010\u2705 Perfect Adsorption\u3011 bridge @ ['Co', 'Co'] (Index [0]) -> \u26a0\ufe0f\u3010Unstable Site Warning\u3011\u26a0\ufe0f: Planned bridge (Co-Co) is unstable, adsorbate spontaneously slipped to hollow (FCC/No-Subsurf) (Co-Co-Y-Y).This means Co-Co has insufficient affinity for this adsorbate. Please **FORBID** testing Co-Co type sites again! | E=-9.957 eV",
+    "\u3010\u2705 Perfect Adsorption\u3011 bridge @ ['Y', 'Y'] (Index [0]) -> \u26a0\ufe0f\u3010Unstable Site Warning\u3011\u26a0\ufe0f: Planned bridge (Y-Y) is unstable, adsorbate spontaneously slipped to hollow (FCC/No-Subsurf) (Y-Y-Y-Y).This means Y-Y has insufficient affinity for this adsorbate. Please **FORBID** testing Y-Y type sites again! | E=-10.643 eV"
+  ],
+  "error": null,
+  "perfect_count": 5,
+  "dissociation_count": 0,
+  "rearrangement_count": 0,
+  "calc_failure_count": 0,
+  "chemical_slip_count": 5
+}

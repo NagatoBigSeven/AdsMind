@@ -9,7 +9,7 @@ OCD62 cases. It is not a 62-case rerun.
 
 - cases: 12 overlap cases from `datasets/ocd62_overlap12/ocd62_overlap12_manifest.csv`
 - backend keys accepted by the launcher: `gpt`, `claude`, `gemini`, `grok`
-- result directories encode the exact route/model and force field
+- result directories encode the LLM backend/version and force field
 - variants: `full`, `no_slip`, `no_forbid`, `no_termination`, `one_shot`
 - total jobs: 240
 
@@ -17,10 +17,10 @@ The runner writes to:
 
 ```text
 research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/
-  openai_gpt54_mace_mp0_small/
-  anthropic_claude_sonnet46_mace_mp0_small/
-  openrouter_gemini25pro_mace_mp0_small/
-  openrouter_grok4_mace_mp0_small/
+  gpt54_mace_mp0_small/
+  claude_sonnet46_mace_mp0_small/
+  gemini25pro_mace_mp0_small/
+  grok4_mace_mp0_small/
     full|no_slip|no_forbid|no_termination|one_shot/
 ```
 
@@ -28,13 +28,13 @@ research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3
 
 Backend config snapshots stay under `research/agent_eval/configs/`:
 
-- native GPT: `ocd62_overlap12_run3_native/frozen_config_ocd62_overlap12_run3_native_openai_gpt54.json`
-- native Claude: `ocd62_overlap12_run3_native/frozen_config_ocd62_overlap12_run3_native_anthropic_sonnet46.json`
-- OpenRouter Gemini: `ocd62_overlap12_run3_openrouter/frozen_config_ocd62_overlap12_run3_openrouter_gemini.json`
-- OpenRouter Grok: `ocd62_overlap12_run3_openrouter/frozen_config_ocd62_overlap12_run3_openrouter_grok4.json`
+- GPT: `ocd62_overlap12_run3/frozen_config_ocd62_overlap12_run3_gpt54_mace_mp0_small.json`
+- Claude: `ocd62_overlap12_run3/frozen_config_ocd62_overlap12_run3_claude_sonnet46_mace_mp0_small.json`
+- Gemini: `ocd62_overlap12_run3/frozen_config_ocd62_overlap12_run3_gemini25pro_mace_mp0_small.json`
+- Grok: `ocd62_overlap12_run3/frozen_config_ocd62_overlap12_run3_grok4_mace_mp0_small.json`
 
-The CLI accepts short backend keys, but public result folders use full
-protocol names.
+The CLI accepts short backend keys; public result folders use only the
+backend/model identity.
 
 ## Run
 
@@ -48,13 +48,12 @@ To run one backend:
 research/agent_eval/run_configs/ocd62_overlap12_run3/run_ocd62_overlap12_run3_failover.sh --backends grok
 ```
 
-The launcher uses provider-specific routes:
+The launcher uses the API transport settings frozen in the config JSON files:
 
-- GPT: official OpenAI endpoint with `OPENAI_API_KEY`.
-- Claude: official Anthropic endpoint with `ANTHROPIC_API_KEY`.
-- Gemini and Grok: OpenRouter with `OPENROUTER_API_KEY_PRIMARY`; on auth,
-  quota, payment, or rate-limit failure, the launcher retries with
-  `OPENROUTER_API_KEY_SECONDARY`.
+- GPT with `OPENAI_API_KEY`.
+- Claude with `ANTHROPIC_API_KEY`.
+- Gemini and Grok with `OPENROUTER_API_KEY_PRIMARY`; on auth, quota, payment, or
+  rate-limit failure, the launcher retries with `OPENROUTER_API_KEY_SECONDARY`.
 
 All keys can also be supplied through the corresponding `*_FILE` variants. Keys
 are not stored in the repository or logs.

@@ -11,12 +11,8 @@ rsync -av \
   LIACPC12:/data/zongmin/workspace/AdsMind/datasets/ocd62_overlap12/
 
 rsync -av \
-  research/agent_eval/configs/ocd62_overlap12_run3_native/ \
-  LIACPC12:/data/zongmin/workspace/AdsMind/research/agent_eval/configs/ocd62_overlap12_run3_native/
-
-rsync -av \
-  research/agent_eval/configs/ocd62_overlap12_run3_openrouter/ \
-  LIACPC12:/data/zongmin/workspace/AdsMind/research/agent_eval/configs/ocd62_overlap12_run3_openrouter/
+  research/agent_eval/configs/ocd62_overlap12_run3/ \
+  LIACPC12:/data/zongmin/workspace/AdsMind/research/agent_eval/configs/ocd62_overlap12_run3/
 
 rsync -av \
   research/agent_eval/run_configs/ocd62_overlap12_run3/ \
@@ -36,10 +32,9 @@ tmux new -s ocd62-run3
 research/agent_eval/run_configs/ocd62_overlap12_run3/run_ocd62_overlap12_run3_failover.sh
 ```
 
-Use the official OpenAI key for GPT and the official Anthropic key for Claude.
-Use OpenRouter for Gemini and Grok; the launcher switches from the primary
-OpenRouter key to the secondary key only when the primary route fails with an
-auth/quota/payment/rate-limit style error.
+Use the GPT and Claude API keys for those backends. Use the primary Gemini/Grok
+API key first; the launcher switches to the secondary key only when the primary
+transport fails with an auth/quota/payment/rate-limit style error.
 
 ## Monitor
 
@@ -52,10 +47,10 @@ tail -f research/agent_eval/run_configs/ocd62_overlap12_run3/logs/*.log
 Expected completed outputs:
 
 ```text
-research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/openai_gpt54_mace_mp0_small/
-research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/anthropic_claude_sonnet46_mace_mp0_small/
-research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/openrouter_gemini25pro_mace_mp0_small/
-research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/openrouter_grok4_mace_mp0_small/
+research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/gpt54_mace_mp0_small/
+research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/claude_sonnet46_mace_mp0_small/
+research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/gemini25pro_mace_mp0_small/
+research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/grok4_mace_mp0_small/
 ```
 
 ## Pull Results Back

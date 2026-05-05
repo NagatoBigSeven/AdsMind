@@ -177,4 +177,4 @@
 - Questions are sorted by priority (High → Medium → Low)
 - Each question includes suggested answer for reference
 - Author can edit suggested answers or provide custom answers
-- After QTA resolution, we should update `OCD-GMAE62 合并修改清单.md`
+- After QTA resolution, update the current manuscript sections and SI directly.

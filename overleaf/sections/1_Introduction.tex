@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% REVISED INTRODUCTION STRUCTURE
-%%% Current structure has logical gaps: the LLM-in-materials section
-%%% interrupts the main narrative flow (problem → methods → gap → our method).
+%%% Revision note: this section was reorganized to repair the earlier narrative jump
+%%% in which the LLM-in-materials discussion interrupted the problem → methods → gap → our method flow.
 %%%
 %%% Current revised order (Round 3 — logical-bridge fix for narrative jump):
 %%%   1. Opening: problem statement (adsorption config search matters)
@@ -69,7 +69,7 @@ Three mechanisms implement this feedback cycle:
     \item \textbf{Autonomous termination.} The agent monitors whether successive iterations converge to the same best energy and terminates early when further exploration is unlikely to improve the result.
 \end{enumerate}
 
-% AI modification for open-loop → closed-loop → loop as the selling point → agents as implementation → 3 mechanisms as technical instantiations of information flow
+% Revision note for open-loop → closed-loop → loop as the selling point → agents as implementation → 3 mechanisms as technical instantiations of information flow
 % [From line 63 to 70] To overcome these limitations, we introduce \textbf{AdsMind} (\textbf{Ads}orption with \textbf{M}achine \textbf{I}ntelligence \textbf{\&} fee\textbf{d}back), a closed-loop multi-agent framework in which each MLFF relaxation result feeds back into the LLM planner. The framework comprises five specialized agents---a \textsc{Planner} that proposes structured adsorption hypotheses, a \textsc{Validator} that enforces geometric and chemical constraints, an \textsc{Executor} that materializes each hypothesis as a physical relaxation, an \textsc{Analyzer} that extracts the realized coordination environment from the relaxed trajectory, and a \textsc{Summarizer} that monitors convergence and decides when to terminate. Three cross-agent information flows drive this feedback cycle: \textit{chemical slip detection}, which flags mismatches between the planner's intended site and the realized coordination environment; \textit{FORBID constraints}, which convert detected slips and dissociation events into explicit negative search constraints; and \textit{autonomous termination}, which stops the search when successive iterations converge to the same best energy. Through these feedback pathways, AdsMind detects its own reasoning errors, encodes them as actionable constraints, and decides autonomously when to stop---closing the loop that open-loop systems leave open.
 
 
@@ -96,13 +96,13 @@ This trade-off---reliability and efficiency versus depth of exploration---frames
 AdsMind is not a replacement for brute-force methods where compute is cheap and failures are tolerable; rather, it is a foundation for \textit{autonomous chemistry workflows} where silent failures are unacceptable and where a 5--25$\times$ efficiency gain matters.
 Details of the head-to-head comparison protocol are provided in Section~\ref{sec:methods}.
 
-% AI modification for science journal style end, some content should be moved to conclusion or results
-% [From line 79 to 93] Here we demonstrate this framework across 44 surfaces spanning monometallic, intermetallic, oxide, and compound systems, evaluated with four distinct LLM backends (Gemini~2.5~Pro, Grok~4, GPT~5.4, and Claude~Sonnet~4.6) under matched MACE-MP-0 physics, and benchmarked against conventional baselines (random enumeration, heuristic enumeration) and the open-loop LLM baseline Adsorb-Agent~\cite{ock2026adsorbagent}. The results show that closing the feedback loop systematically mitigates the three failure modes of single-pass planning, achieving consistent reliability gains across surfaces where open-loop approaches prove brittle. This work establishes AdsMind as a generalizable foundation for autonomous adsorption configuration search, demonstrating that LLM-driven reasoning, when coupled with physical feedback, can detect and recover from its own errors without requiring exhaustive enumeration.
+% Current contribution-framing note: keep detailed benchmark statistics in Results/Conclusion rather than overloading the Introduction.
+% Current paper-facing scope: CMU20 plus OCD-GMAE62, four LLM backends under matched MACE-MP-0 small physics, and matched random/heuristic/Adsorb-Agent baselines.
 
 
 \begin{figure}[t]
     \centering
     \includegraphics[width=0.75\linewidth]{images/pipeline.png}
-    \caption{\textbf{Overview of AdsMind.} (a) Schematic diagram of the AdsMind closed-loop multi-agent framework, showing the Planner, Validator, Executor, Analyzer, and Summarizer agents. (b) Test benchmark datasets: CMU20 (20 monometallic and intermetallic surfaces) and OCD-GMAE62 (62 oxide, compound, and alloy surfaces across three testing tiers). (c) Real-world application: comparison with DFT calculations on selected cases.}
+    \caption{\textbf{Overview of AdsMind.} (a) Schematic diagram of the AdsMind closed-loop multi-agent framework, showing the Planner, Validator, Executor, Analyzer, and Summarizer agents. (b) Test benchmark datasets: CMU20 (20 monometallic and intermetallic surfaces) and OCD-GMAE62 (62 oxide, compound, and alloy surfaces). (c) Real-world application: comparison with DFT calculations on selected cases.}
     \label{fig:pipeline}
 \end{figure}

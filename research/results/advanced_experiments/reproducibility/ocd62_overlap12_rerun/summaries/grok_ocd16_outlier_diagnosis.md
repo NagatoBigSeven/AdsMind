@@ -6,10 +6,10 @@ Date: 2026-05-03
 
 This diagnosis covers OCD16 (`Hf18Sc18Si36` + `NO`) in the Grok OCD62 reproducibility run:
 
-- `research/results/advanced_experiments/reproducibility/ocd62_overlap12/run2/openrouter_grok4_mace_mp0_small/full/001/result.json`
-- `research/results/advanced_experiments/reproducibility/ocd62_overlap12/run2/openrouter_grok4_mace_mp0_small/no_forbid/001/result.json`
-- related variants for the same case in `research/results/advanced_experiments/reproducibility/ocd62_overlap12/run2/openrouter_grok4_mace_mp0_small/`
-- matching main OCD62 run `research/results/basic_experiments/ocd62/openrouter_grok4_mace_mp0_small/full/002/`
+- `research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run2/grok4_mace_mp0_small/full/001/result.json`
+- `research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run2/grok4_mace_mp0_small/no_forbid/001/result.json`
+- related variants for the same case in `research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run2/grok4_mace_mp0_small/`
+- matching main OCD62 run `research/results/basic_experiments/ocd62/grok4_mace_mp0_small/full/002/`
 
 ## Findings
 
@@ -43,9 +43,9 @@ For the Grok OCD62 overlap12 run2 OCD16 summary, the raw `result.json` and artif
 
 Patch CSV:
 
-`research/results/advanced_experiments/reproducibility/ocd62_overlap12/summaries/grok_ocd16_outlier_patch.csv`
+`research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/summaries/grok_ocd16_outlier_patch.csv`
 
-Patched `reproducibility/ocd62_overlap12/run2/grok/all_variants_summary.csv` rows for case `001`:
+Patched `reproducibility/ocd62_overlap12_rerun/run2/grok/all_variants_summary.csv` rows for case `001`:
 
 | variant | patched best energy (eV) | patched delta vs full (eV) |
 |---|---:|---:|
@@ -61,7 +61,7 @@ Patched `reproducibility/ocd62_overlap12/run2/grok/all_variants_summary.csv` row
 
 The two corrupted paired comparisons are marked as `outlier_excluded` in:
 
-`research/results/advanced_experiments/reproducibility/ocd62_overlap12/summaries/reproducibility_n2.csv`
+`research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/summaries/reproducibility_n2.csv`
 
 Rows:
 

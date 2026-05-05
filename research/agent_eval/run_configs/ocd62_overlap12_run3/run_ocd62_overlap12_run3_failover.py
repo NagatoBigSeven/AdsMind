@@ -22,23 +22,22 @@ BACKENDS = BACKEND_KEYS
 VARIANTS = ("full", "no_slip", "no_forbid", "no_termination", "one_shot")
 CASES = tuple(f"{idx:03d}" for idx in range(1, 13))
 OPENROUTER_BACKENDS = {"gemini", "grok"}
-NATIVE_BACKENDS = {"gpt", "claude"}
 CONFIG_BACKEND = {
-    "gpt": "openai_gpt54",
-    "claude": "anthropic_sonnet46",
-    "gemini": "gemini",
-    "grok": "grok4",
+    "gpt": "gpt54_mace_mp0_small",
+    "claude": "claude_sonnet46_mace_mp0_small",
+    "gemini": "gemini25pro_mace_mp0_small",
+    "grok": "grok4_mace_mp0_small",
 }
 EXPECTED_PROTOCOL = {
     "gemini": {
         "llm_backend": "openrouter",
-        "llm_model": "google/gemini-2.5-pro",
+        "llm_model": {"gemini-2.5-pro", "google/gemini-2.5-pro"},
         "llm_base_url": "https://openrouter.ai/api/v1",
         "llm_api_key_env_var": "OPENROUTER_API_KEY",
     },
     "grok": {
         "llm_backend": "openrouter",
-        "llm_model": "x-ai/grok-4",
+        "llm_model": {"grok-4", "x-ai/grok-4"},
         "llm_base_url": "https://openrouter.ai/api/v1",
         "llm_api_key_env_var": "OPENROUTER_API_KEY",
     },
@@ -127,15 +126,10 @@ def load_runtime_keys(backends: tuple[str, ...]) -> dict[str, str]:
 def config_for_backend(
     backend: str,
     *,
-    openrouter_config_dir: Path,
-    native_config_dir: Path,
+    config_dir: Path,
 ) -> Path:
     config_backend = CONFIG_BACKEND[backend]
-    if backend in OPENROUTER_BACKENDS:
-        return openrouter_config_dir / f"frozen_config_ocd62_overlap12_run3_openrouter_{config_backend}.json"
-    if backend in NATIVE_BACKENDS:
-        return native_config_dir / f"frozen_config_ocd62_overlap12_run3_native_{config_backend}.json"
-    raise ValueError(f"Unknown backend: {backend}")
+    return config_dir / f"frozen_config_ocd62_overlap12_run3_{config_backend}.json"
 
 
 def key_plan_for_backend(backend: str, keys: dict[str, str]) -> tuple[tuple[str, str, str], ...]:
@@ -163,7 +157,11 @@ def protocol_matches(backend: str, case_dir: Path) -> bool:
     frozen = payload.get("frozen_config") or {}
     expected = EXPECTED_PROTOCOL[backend]
     for key, value in expected.items():
-        if frozen.get(key) != value:
+        actual = frozen.get(key)
+        if isinstance(value, set):
+            if actual not in value:
+                return False
+        elif actual != value:
             return False
     return True
 
@@ -245,7 +243,6 @@ def summarize_backend(output_root: Path, backend: str, variants: tuple[str, ...]
             "backend_key",
             "backend",
             "llm_model",
-            "llm_route",
             "force_field",
             "calculator_backend",
             "force_field_model",
@@ -354,8 +351,7 @@ def parse_csv_tuple(value: str, allowed: tuple[str, ...], label: str) -> tuple[s
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--manifest", default="datasets/ocd62_overlap12/ocd62_overlap12_manifest.csv")
-    parser.add_argument("--openrouter-config-dir", default="research/agent_eval/configs/ocd62_overlap12_run3_openrouter")
-    parser.add_argument("--native-config-dir", default="research/agent_eval/configs/ocd62_overlap12_run3_native")
+    parser.add_argument("--config-dir", default="research/agent_eval/configs/ocd62_overlap12_run3")
     parser.add_argument(
         "--output-base",
         default="research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3",
@@ -370,8 +366,7 @@ def main(argv: list[str] | None = None) -> int:
 
     py = os.environ.get("PY", str(ROOT / ".venv/bin/python"))
     manifest = (ROOT / args.manifest).resolve()
-    openrouter_config_dir = (ROOT / args.openrouter_config_dir).resolve()
-    native_config_dir = (ROOT / args.native_config_dir).resolve()
+    config_dir = (ROOT / args.config_dir).resolve()
     output_base = (ROOT / args.output_base).resolve()
     log_dir = (ROOT / args.log_dir).resolve()
     log_dir.mkdir(parents=True, exist_ok=True)
@@ -385,8 +380,7 @@ def main(argv: list[str] | None = None) -> int:
     for backend in backends:
         config = config_for_backend(
             backend,
-            openrouter_config_dir=openrouter_config_dir,
-            native_config_dir=native_config_dir,
+            config_dir=config_dir,
         )
         output_root = output_base / backend_result_dir(backend, run_name="run3")
         if not config.exists():

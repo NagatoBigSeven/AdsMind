@@ -1,0 +1,251 @@
+{
+  "case_id": "012",
+  "case_metadata": {
+    "case_id": "012",
+    "slab_file": "datasets/ocd62/012_Ru60Ta20_NH.xyz",
+    "smiles": "[NH]",
+    "user_request": "Find the lowest-energy adsorption configuration for the adsorbate with SMILES [NH] on the provided surface.",
+    "surface_family": "intermetallic",
+    "adsorbate_name": "[NH]",
+    "miller_index": "",
+    "reaction_class": "GENERALIZATION",
+    "ablation_candidate": "FALSE",
+    "notes": "OCD id=108; adsorbate=[NH]; surface_formula=Ru60Ta20; y_relaxed=-2.195671 eV; site=1;8;26;31",
+    "surface_formula": "Ru60Ta20",
+    "surface_elements": "Ru;Ta",
+    "bare_slab_atoms": "80",
+    "adsorbate_atoms": "2",
+    "y_relaxed": "-2.195671",
+    "site_indices": "1;8;26;31"
+  },
+  "status": "success",
+  "best_energy_eV": -13.564433097839355,
+  "iteration_count": 1,
+  "max_attempts": 5,
+  "final_site_type": "hollow (HCP/Subsurf-Atom)",
+  "converged_tag": false,
+  "wall_clock_sec": 502.3228315077722,
+  "total_input_tokens": 2312,
+  "total_output_tokens": 599,
+  "artifact_paths": {
+    "BEST_NH_hollow_to_hollow_HCP-Subsurf-Atom_E-13.564": "research/results/basic_experiments/ocd62/gemini25pro_mace_mp0_small/no_forbid/012/artifacts/BEST_NH_hollow_to_hollow_HCP-Subsurf-Atom_E-13.564.xyz",
+    "BEST_NH_hollow_to_hollow_HCP-Subsurf-Atom_E-13.564.xyz": "research/results/basic_experiments/ocd62/gemini25pro_mace_mp0_small/no_forbid/012/artifacts/BEST_NH_hollow_to_hollow_HCP-Subsurf-Atom_E-13.564.xyz",
+    "best_structure_file": "research/results/basic_experiments/ocd62/gemini25pro_mace_mp0_small/no_forbid/012/artifacts/BEST_NH_hollow_to_hollow_HCP-Subsurf-Atom_E-13.564.xyz",
+    "conformers_[NH]": "research/results/basic_experiments/ocd62/gemini25pro_mace_mp0_small/no_forbid/012/artifacts/conformers_[NH].traj",
+    "conformers_[NH].traj": "research/results/basic_experiments/ocd62/gemini25pro_mace_mp0_small/no_forbid/012/artifacts/conformers_[NH].traj",
+    "final": "research/results/basic_experiments/ocd62/gemini25pro_mace_mp0_small/no_forbid/012/artifacts/final.xyz",
+    "final.xyz": "research/results/basic_experiments/ocd62/gemini25pro_mace_mp0_small/no_forbid/012/artifacts/final.xyz",
+    "relaxation": "research/results/basic_experiments/ocd62/gemini25pro_mace_mp0_small/no_forbid/012/artifacts/relaxation.traj",
+    "relaxation.traj": "research/results/basic_experiments/ocd62/gemini25pro_mace_mp0_small/no_forbid/012/artifacts/relaxation.traj",
+    "relaxation_trajectory_file": "research/results/basic_experiments/ocd62/gemini25pro_mace_mp0_small/no_forbid/012/artifacts/relaxation.traj"
+  },
+  "best_result": {
+    "most_stable_energy_eV": -13.564433097839355,
+    "analysis_json": {
+      "status": "success",
+      "message": "Most stable config adsorption energy: -13.5644 eV. Target Atom: N (from plan index 0, global index 80 in relaxed structure). -> Nearest: Ru (Index 78), Distance: 2.062 Å (Threshold: 3.146), Bound: True. Bonded Surface Atoms: Ru-2.062Å, Ru-2.068Å, Ru-2.086Å, Ru-2.185Å, Ta-2.654Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Ru', 'Ru', 'Ru', 'Ru'] -> Actual ['Ru', 'Ru', 'Ru', 'Ru', 'Ta']).",
+      "most_stable_energy_eV": -13.564433097839355,
+      "target_adsorbate_atom": "N",
+      "target_adsorbate_atom_index": 80,
+      "bonded_surface_atoms": [
+        {
+          "symbol": "Ru",
+          "index": 78,
+          "distance": 2.062
+        },
+        {
+          "symbol": "Ru",
+          "index": 34,
+          "distance": 2.068
+        },
+        {
+          "symbol": "Ru",
+          "index": 73,
+          "distance": 2.086
+        },
+        {
+          "symbol": "Ru",
+          "index": 59,
+          "distance": 2.185
+        },
+        {
+          "symbol": "Ta",
+          "index": 17,
+          "distance": 2.654
+        }
+      ],
+      "nearest_slab_atom": "Ru",
+      "nearest_slab_atom_index": 78,
+      "final_bond_distance_A": 2.062,
+      "estimated_covalent_cutoff_A": 2.387,
+      "is_covalently_bound": true,
+      "reaction_detected": false,
+      "is_dissociated": false,
+      "n_components": 1,
+      "bond_change_count": 0,
+      "site_analysis": {
+        "planned_site_type": "hollow",
+        "planned_connectivity": 4,
+        "actual_site_type": "hollow (HCP/Subsurf-Atom)",
+        "actual_connectivity": 5,
+        "is_chemical_slip": true,
+        "planned_symbols": [
+          "Ru",
+          "Ru",
+          "Ru",
+          "Ru"
+        ],
+        "actual_symbols": [
+          "Ru",
+          "Ru",
+          "Ru",
+          "Ru",
+          "Ta"
+        ],
+        "site_fingerprint": "Ru78-Ru34-Ru73-Ru59-Ta17"
+      },
+      "best_structure_file": "outputs/016-9b1f79f9/BEST_NH_hollow_to_hollow_HCP-Subsurf-Atom_E-13.564.xyz",
+      "generated_conformers_file": "outputs/016-9b1f79f9/conformers_[NH].traj",
+      "relaxation_trajectory_file": "outputs/016-9b1f79f9/final.xyz",
+      "session_id": "016-9b1f79f9"
+    },
+    "plan": {
+      "reasoning": "0. **SMILES Consistency Check**: The user provided the SMILES `[NH]`. The `autoadsorbate_context` confirms this is a radical species with the Nitrogen atom (index 0) having 2 radical electrons. This is consistent, and I will plan for a `ReactiveSpecies` adsorption.\n1. **Analyze Old Plans**: The history is empty. This is the first attempt to find the lowest energy site.\n2. **Formulate New Plan**: My goal is to find the most stable adsorption site. For single-atom or diatomic adsorbates like NH, high-coordination sites (bridge or hollow) are often more stable than on-top sites. The available sites list includes several hollow sites: `[Hollow-4]: Ru-Ru-Ru-Ru`, `[Hollow-3]: Ru-Ru-Ru`, and `[Hollow-3]: Ru-Ru-Ta`. The 4-fold hollow site (`Ru-Ru-Ru-Ru`) offers the highest coordination among the options and is a very strong candidate for the lowest energy configuration. Therefore, I will start by testing this site.\n3. **Analyze Request**: The user wants to find the lowest-energy configuration for NH adsorption.\n4. **Analyze Adsorbate**: The adsorbate is the imidogen radical, `[NH]`. The binding will occur through the Nitrogen atom, which has unpaired electrons and is at index 0.\n5. **Analyze Surface**: The surface is a Ru-Ta alloy. The `Available Sites List` confirms the existence of `[Hollow-4]: Ru-Ru-Ru-Ru` sites.\n6. **Formulate Plan**: I will place the Nitrogen atom (index 0) of the NH radical into a 4-fold hollow site composed of four Ru atoms. This corresponds to `adsorbate_type: \"ReactiveSpecies\"`, `site_type: \"hollow\"`, `surface_binding_atoms: [\"Ru\", \"Ru\", \"Ru\", \"Ru\"]`, and `adsorbate_binding_indices: [0]`.",
+      "adsorbate_type": "ReactiveSpecies",
+      "solution": {
+        "action": "continue",
+        "site_type": "hollow",
+        "surface_binding_atoms": [
+          "Ru",
+          "Ru",
+          "Ru",
+          "Ru"
+        ],
+        "adsorbate_binding_indices": [
+          0
+        ],
+        "relax_top_n": 1,
+        "touch_sphere_size": 2,
+        "overlap_thr": 0.1,
+        "conformers_per_site_cap": 4
+      }
+    },
+    "result_type": "Perfect"
+  },
+  "last_analysis": {
+    "status": "success",
+    "message": "Most stable config adsorption energy: -13.5644 eV. Target Atom: N (from plan index 0, global index 80 in relaxed structure). -> Nearest: Ru (Index 78), Distance: 2.062 Å (Threshold: 3.146), Bound: True. Bonded Surface Atoms: Ru-2.062Å, Ru-2.068Å, Ru-2.086Å, Ru-2.185Å, Ta-2.654Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Ru', 'Ru', 'Ru', 'Ru'] -> Actual ['Ru', 'Ru', 'Ru', 'Ru', 'Ta']).",
+    "most_stable_energy_eV": -13.564433097839355,
+    "target_adsorbate_atom": "N",
+    "target_adsorbate_atom_index": 80,
+    "bonded_surface_atoms": [
+      {
+        "symbol": "Ru",
+        "index": 78,
+        "distance": 2.062
+      },
+      {
+        "symbol": "Ru",
+        "index": 34,
+        "distance": 2.068
+      },
+      {
+        "symbol": "Ru",
+        "index": 73,
+        "distance": 2.086
+      },
+      {
+        "symbol": "Ru",
+        "index": 59,
+        "distance": 2.185
+      },
+      {
+        "symbol": "Ta",
+        "index": 17,
+        "distance": 2.654
+      }
+    ],
+    "nearest_slab_atom": "Ru",
+    "nearest_slab_atom_index": 78,
+    "final_bond_distance_A": 2.062,
+    "estimated_covalent_cutoff_A": 2.387,
+    "is_covalently_bound": true,
+    "reaction_detected": false,
+    "is_dissociated": false,
+    "n_components": 1,
+    "bond_change_count": 0,
+    "site_analysis": {
+      "planned_site_type": "hollow",
+      "planned_connectivity": 4,
+      "actual_site_type": "hollow (HCP/Subsurf-Atom)",
+      "actual_connectivity": 5,
+      "is_chemical_slip": true,
+      "planned_symbols": [
+        "Ru",
+        "Ru",
+        "Ru",
+        "Ru"
+      ],
+      "actual_symbols": [
+        "Ru",
+        "Ru",
+        "Ru",
+        "Ru",
+        "Ta"
+      ],
+      "site_fingerprint": "Ru78-Ru34-Ru73-Ru59-Ta17"
+    },
+    "best_structure_file": "outputs/016-9b1f79f9/BEST_NH_hollow_to_hollow_HCP-Subsurf-Atom_E-13.564.xyz",
+    "generated_conformers_file": "outputs/016-9b1f79f9/conformers_[NH].traj",
+    "relaxation_trajectory_file": "outputs/016-9b1f79f9/final.xyz",
+    "session_id": "016-9b1f79f9"
+  },
+  "attempt_records": [
+    {
+      "attempt_index": 1,
+      "plan": {
+        "reasoning": "0. **SMILES Consistency Check**: The user provided the SMILES `[NH]`. The `autoadsorbate_context` confirms this is a radical species with the Nitrogen atom (index 0) having 2 radical electrons. This is consistent, and I will plan for a `ReactiveSpecies` adsorption.\n1. **Analyze Old Plans**: The history is empty. This is the first attempt to find the lowest energy site.\n2. **Formulate New Plan**: My goal is to find the most stable adsorption site. For single-atom or diatomic adsorbates like NH, high-coordination sites (bridge or hollow) are often more stable than on-top sites. The available sites list includes several hollow sites: `[Hollow-4]: Ru-Ru-Ru-Ru`, `[Hollow-3]: Ru-Ru-Ru`, and `[Hollow-3]: Ru-Ru-Ta`. The 4-fold hollow site (`Ru-Ru-Ru-Ru`) offers the highest coordination among the options and is a very strong candidate for the lowest energy configuration. Therefore, I will start by testing this site.\n3. **Analyze Request**: The user wants to find the lowest-energy configuration for NH adsorption.\n4. **Analyze Adsorbate**: The adsorbate is the imidogen radical, `[NH]`. The binding will occur through the Nitrogen atom, which has unpaired electrons and is at index 0.\n5. **Analyze Surface**: The surface is a Ru-Ta alloy. The `Available Sites List` confirms the existence of `[Hollow-4]: Ru-Ru-Ru-Ru` sites.\n6. **Formulate Plan**: I will place the Nitrogen atom (index 0) of the NH radical into a 4-fold hollow site composed of four Ru atoms. This corresponds to `adsorbate_type: \"ReactiveSpecies\"`, `site_type: \"hollow\"`, `surface_binding_atoms: [\"Ru\", \"Ru\", \"Ru\", \"Ru\"]`, and `adsorbate_binding_indices: [0]`.",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "hollow",
+          "surface_binding_atoms": [
+            "Ru",
+            "Ru",
+            "Ru",
+            "Ru"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "hollow|Ru,Ru,Ru,Ru|0|ReactiveSpecies|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -13.564433097839355,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": true,
+      "planned_site_type": "hollow",
+      "actual_site_type": "hollow (HCP/Subsurf-Atom)",
+      "best_structure_file": "outputs/016-9b1f79f9/BEST_NH_hollow_to_hollow_HCP-Subsurf-Atom_E-13.564.xyz",
+      "generated_conformers_file": "outputs/016-9b1f79f9/conformers_[NH].traj",
+      "relaxation_trajectory_file": "outputs/016-9b1f79f9/final.xyz",
+      "message": "Most stable config adsorption energy: -13.5644 eV. Target Atom: N (from plan index 0, global index 80 in relaxed structure). -> Nearest: Ru (Index 78), Distance: 2.062 Å (Threshold: 3.146), Bound: True. Bonded Surface Atoms: Ru-2.062Å, Ru-2.068Å, Ru-2.086Å, Ru-2.185Å, Ta-2.654Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Ru', 'Ru', 'Ru', 'Ru'] -> Actual ['Ru', 'Ru', 'Ru', 'Ru', 'Ta']).",
+      "history_entry": "【✅ Perfect Adsorption】 hollow @ ['Ru', 'Ru', 'Ru', 'Ru'] (Index [0]) -> ⚠️【Unstable Site Warning】⚠️: Planned hollow (Ru-Ru-Ru-Ru) is unstable, adsorbate spontaneously slipped to hollow (HCP/Subsurf-Atom) (Ru-Ru-Ru-Ru-Ta).This means Ru-Ru-Ru-Ru has insufficient affinity for this adsorbate. [🌟 New Best] | E=-13.564 eV"
+    }
+  ],
+  "history": [
+    "【✅ Perfect Adsorption】 hollow @ ['Ru', 'Ru', 'Ru', 'Ru'] (Index [0]) -> ⚠️【Unstable Site Warning】⚠️: Planned hollow (Ru-Ru-Ru-Ru) is unstable, adsorbate spontaneously slipped to hollow (HCP/Subsurf-Atom) (Ru-Ru-Ru-Ru-Ta).This means Ru-Ru-Ru-Ru has insufficient affinity for this adsorbate. [🌟 New Best] | E=-13.564 eV"
+  ],
+  "error": null,
+  "perfect_count": 1,
+  "dissociation_count": 0,
+  "rearrangement_count": 0,
+  "calc_failure_count": 0,
+  "chemical_slip_count": 1
+}

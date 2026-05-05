@@ -6,20 +6,20 @@
 research/results/
   basic_experiments/
     cmu20/
-      openai_gpt54_mace_mp0_small/
-      anthropic_claude_sonnet46_mace_mp0_small/
-      openrouter_gemini25pro_mace_mp0_small/
-      openrouter_grok4_mace_mp0_small/
+      gpt54_mace_mp0_small/
+      claude_sonnet46_mace_mp0_small/
+      gemini25pro_mace_mp0_small/
+      grok4_mace_mp0_small/
         one_shot|full|no_slip|no_termination|no_forbid/
           summary.csv
           <case_id>/result.json
       baselines/
       summaries/
     ocd62/
-      openai_gpt54_mace_mp0_small/
-      anthropic_claude_sonnet46_mace_mp0_small/
-      openrouter_gemini25pro_mace_mp0_small/
-      openrouter_grok4_mace_mp0_small/
+      gpt54_mace_mp0_small/
+      claude_sonnet46_mace_mp0_small/
+      gemini25pro_mace_mp0_small/
+      grok4_mace_mp0_small/
         one_shot|full|no_slip|no_termination|no_forbid/
           summary.csv
           <case_id>/result.json
@@ -39,10 +39,10 @@ research/results/
 
 - 数据集：`cmu20`, `ocd62`
 - LLM/力场目录：
-  `openai_gpt54_mace_mp0_small`,
-  `anthropic_claude_sonnet46_mace_mp0_small`,
-  `openrouter_gemini25pro_mace_mp0_small`,
-  `openrouter_grok4_mace_mp0_small`
+  `gpt54_mace_mp0_small`,
+  `claude_sonnet46_mace_mp0_small`,
+  `gemini25pro_mace_mp0_small`,
+  `grok4_mace_mp0_small`
 - 变体：`one_shot`, `full`, `no_slip`, `no_termination`, `no_forbid`
 
 每个后端目录下有 `all_variants_summary.csv`，每个变体目录下也有自己的
@@ -60,10 +60,7 @@ research/results/
 
 非 LLM baseline 放在各数据集的 `baselines/` 目录下。CMU20 的
 Adsorb-Agent 对照实验在
-`basic_experiments/cmu20/baselines/adsorbagent_openai_gpt54_mace_mp0_small/`。
-
-注意：CMU20 的 `one_shot` summary 表包含 20 个 case。部分失败或历史缺失的
-one-shot run 没有对应 artifact 目录；完整 case 统计以 `summary.csv` 为准。
+`basic_experiments/cmu20/baselines/adsorbagent_gpt54_mace_mp0_small/`。
 
 ## 进阶实验
 
@@ -74,16 +71,15 @@ one-shot run 没有对应 artifact 目录；完整 case 统计以 `summary.csv` 
 - `ablation_and_chemical_slip_diagnostics/chemical_slip_interpretability/`：
   chemical slip 的解释性表格和轨迹。
 - `reproducibility/ocd62_overlap12_rerun/`：OCD62 重叠 12 个 case 的重复性实验，
-  包括远程 RUN3 的落盘目录。
-- `reproducibility/cmu20_openai_gpt54_mace_mp0_small_multiseed/`：
+  包括 run1/run2/run3 目录以及 N=2/N=3 汇总。
+- `reproducibility/cmu20_gpt54_mace_mp0_small_multiseed/`：
   GPT-5.4 CMU20 full-run 在 MACE-MP-0 small 下的多随机种子敏感性。
 - `force_field_sensitivity/mace_mp0_large_vs_mace_mp0_small/`：MACE-MP-0 large 与
   MACE-MP-0 small 的力场敏感性检查。CMU20 已完成；这个实验不定义 OCD62 子集。
 - `case_studies/dft_iteration_alignment/`：用于 DFT 对齐的 CMU20 case 轨迹导出。
 - `case_studies/iteration_convergence/`：迭代过程中 running-best energy 曲线。
 
-远程 RUN3 完成后，结果应进入
-`advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/`。随后运行：
+重复性汇总可以用以下命令从 run 目录刷新：
 
 ```bash
 .venv/bin/python research/analysis/build_ocd62_summary.py --write-n3

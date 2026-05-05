@@ -1,0 +1,207 @@
+{
+  "case_id": "04",
+  "case_metadata": {
+    "case_id": "04",
+    "slab_file": "benchmark_slabs/04_Pd3Cu_111.xyz",
+    "smiles": "[N]=[NH]",
+    "user_request": "Find the lowest-energy adsorption configuration for NNH on the provided surface.",
+    "surface_family": "intermetallic",
+    "adsorbate_name": "NNH",
+    "miller_index": "(111)",
+    "reaction_class": "NRR",
+    "ablation_candidate": "FALSE",
+    "notes": "Paper surface label CuPd3; dissociation observed before"
+  },
+  "status": "success",
+  "best_energy_eV": -1.6579418182373047,
+  "iteration_count": 1,
+  "max_attempts": 1,
+  "final_site_type": "hollow (FCC/No-Subsurf)",
+  "converged_tag": false,
+  "wall_clock_sec": 165.22415074997116,
+  "total_input_tokens": 2841,
+  "total_output_tokens": 360,
+  "artifact_paths": {},
+  "best_result": {
+    "most_stable_energy_eV": -1.6579418182373047,
+    "analysis_json": {
+      "status": "success",
+      "message": "Most stable config adsorption energy: -1.6579 eV. Target Atom: N (from plan index 0, global index 64 in relaxed structure). -> Nearest: Cu (Index 50), Distance: 1.981 Å (Threshold: 2.944), Bound: True. Bonded Surface Atoms: Cu-1.981Å, Pd-2.075Å, Pd-2.111Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Pd'] -> Actual ['Cu', 'Pd', 'Pd']).",
+      "most_stable_energy_eV": -1.6579418182373047,
+      "target_adsorbate_atom": "N",
+      "target_adsorbate_atom_index": 64,
+      "bonded_surface_atoms": [
+        {
+          "symbol": "Cu",
+          "index": 50,
+          "distance": 1.981
+        },
+        {
+          "symbol": "Pd",
+          "index": 23,
+          "distance": 2.075
+        },
+        {
+          "symbol": "Pd",
+          "index": 31,
+          "distance": 2.111
+        }
+      ],
+      "nearest_slab_atom": "Cu",
+      "nearest_slab_atom_index": 50,
+      "final_bond_distance_A": 1.981,
+      "estimated_covalent_cutoff_A": 2.233,
+      "is_covalently_bound": true,
+      "reaction_detected": false,
+      "is_dissociated": false,
+      "n_components": 1,
+      "bond_change_count": 0,
+      "site_analysis": {
+        "planned_site_type": "ontop",
+        "planned_connectivity": 1,
+        "actual_site_type": "hollow (FCC/No-Subsurf)",
+        "actual_connectivity": 3,
+        "is_chemical_slip": true,
+        "planned_symbols": [
+          "Pd"
+        ],
+        "actual_symbols": [
+          "Cu",
+          "Pd",
+          "Pd"
+        ],
+        "site_fingerprint": "Cu50-Pd23-Pd31"
+      },
+      "best_structure_file": "outputs/04-5e280604/BEST_N_NH_ontop_to_hollow_FCC-No-Subsurf_E-1.658.xyz",
+      "generated_conformers_file": "outputs/04-5e280604/conformers_[N]_[NH].traj",
+      "relaxation_trajectory_file": "outputs/04-5e280604/final.xyz",
+      "session_id": "04-5e280604"
+    },
+    "plan": {
+      "reasoning": "SMILES Consistency Check: The atom list shows two N atoms, both SP2 hybridized. Index 0 has 1 radical electron, index 1 has 0. No mismatch with user description as no specific hybridization was requested beyond the SMILES. Analyze Old Plans: History is None, so no previous attempts. Formulate New Plan: Goal is lowest energy adsorption. Since history is empty, propose the best initial plan. Avoid unstable sites: None identified yet. Analyze Request: Find lowest-energy adsorption configuration for NNH on Pd3Cu(111). Analyze Adsorbate: SMILES [N]=[NH] represents •N=NH, with radical on index 0 (N) and index 1 (NH). Major functional group: N=N double bond with radical on one N. Analyze Surface: Alloy with Pd and Cu atoms; available sites include ontop Pd and Cu. Formulate Plan: Treat as ReactiveSpecies since it's a radical. Bind via index 0 (has radical_electrons > 0) for physical consistency. Start with end-on adsorption on ontop Pd, as Pd likely provides stronger binding for nitrogenous species in catalysis. This is a new plan distinct from history (None). Hard limit noted as 1 attempt, but proceeding with continue for first plan.",
+      "adsorbate_type": "ReactiveSpecies",
+      "solution": {
+        "action": "continue",
+        "site_type": "ontop",
+        "surface_binding_atoms": [
+          "Pd"
+        ],
+        "adsorbate_binding_indices": [
+          0
+        ],
+        "relax_top_n": 1,
+        "touch_sphere_size": 2,
+        "overlap_thr": 0.1,
+        "conformers_per_site_cap": 4
+      }
+    },
+    "result_type": "Perfect"
+  },
+  "last_analysis": {
+    "status": "success",
+    "message": "Most stable config adsorption energy: -1.6579 eV. Target Atom: N (from plan index 0, global index 64 in relaxed structure). -> Nearest: Cu (Index 50), Distance: 1.981 Å (Threshold: 2.944), Bound: True. Bonded Surface Atoms: Cu-1.981Å, Pd-2.075Å, Pd-2.111Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Pd'] -> Actual ['Cu', 'Pd', 'Pd']).",
+    "most_stable_energy_eV": -1.6579418182373047,
+    "target_adsorbate_atom": "N",
+    "target_adsorbate_atom_index": 64,
+    "bonded_surface_atoms": [
+      {
+        "symbol": "Cu",
+        "index": 50,
+        "distance": 1.981
+      },
+      {
+        "symbol": "Pd",
+        "index": 23,
+        "distance": 2.075
+      },
+      {
+        "symbol": "Pd",
+        "index": 31,
+        "distance": 2.111
+      }
+    ],
+    "nearest_slab_atom": "Cu",
+    "nearest_slab_atom_index": 50,
+    "final_bond_distance_A": 1.981,
+    "estimated_covalent_cutoff_A": 2.233,
+    "is_covalently_bound": true,
+    "reaction_detected": false,
+    "is_dissociated": false,
+    "n_components": 1,
+    "bond_change_count": 0,
+    "site_analysis": {
+      "planned_site_type": "ontop",
+      "planned_connectivity": 1,
+      "actual_site_type": "hollow (FCC/No-Subsurf)",
+      "actual_connectivity": 3,
+      "is_chemical_slip": true,
+      "planned_symbols": [
+        "Pd"
+      ],
+      "actual_symbols": [
+        "Cu",
+        "Pd",
+        "Pd"
+      ],
+      "site_fingerprint": "Cu50-Pd23-Pd31"
+    },
+    "best_structure_file": "outputs/04-5e280604/BEST_N_NH_ontop_to_hollow_FCC-No-Subsurf_E-1.658.xyz",
+    "generated_conformers_file": "outputs/04-5e280604/conformers_[N]_[NH].traj",
+    "relaxation_trajectory_file": "outputs/04-5e280604/final.xyz",
+    "session_id": "04-5e280604"
+  },
+  "attempt_records": [
+    {
+      "attempt_index": 1,
+      "plan": {
+        "reasoning": "SMILES Consistency Check: The atom list shows two N atoms, both SP2 hybridized. Index 0 has 1 radical electron, index 1 has 0. No mismatch with user description as no specific hybridization was requested beyond the SMILES. Analyze Old Plans: History is None, so no previous attempts. Formulate New Plan: Goal is lowest energy adsorption. Since history is empty, propose the best initial plan. Avoid unstable sites: None identified yet. Analyze Request: Find lowest-energy adsorption configuration for NNH on Pd3Cu(111). Analyze Adsorbate: SMILES [N]=[NH] represents •N=NH, with radical on index 0 (N) and index 1 (NH). Major functional group: N=N double bond with radical on one N. Analyze Surface: Alloy with Pd and Cu atoms; available sites include ontop Pd and Cu. Formulate Plan: Treat as ReactiveSpecies since it's a radical. Bind via index 0 (has radical_electrons > 0) for physical consistency. Start with end-on adsorption on ontop Pd, as Pd likely provides stronger binding for nitrogenous species in catalysis. This is a new plan distinct from history (None). Hard limit noted as 1 attempt, but proceeding with continue for first plan.",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "ontop",
+          "surface_binding_atoms": [
+            "Pd"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "ontop|Pd|0|ReactiveSpecies|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -1.6579418182373047,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": true,
+      "planned_site_type": "ontop",
+      "actual_site_type": "hollow (FCC/No-Subsurf)",
+      "best_structure_file": "outputs/04-5e280604/BEST_N_NH_ontop_to_hollow_FCC-No-Subsurf_E-1.658.xyz",
+      "generated_conformers_file": "outputs/04-5e280604/conformers_[N]_[NH].traj",
+      "relaxation_trajectory_file": "outputs/04-5e280604/final.xyz",
+      "message": "Most stable config adsorption energy: -1.6579 eV. Target Atom: N (from plan index 0, global index 64 in relaxed structure). -> Nearest: Cu (Index 50), Distance: 1.981 Å (Threshold: 2.944), Bound: True. Bonded Surface Atoms: Cu-1.981Å, Pd-2.075Å, Pd-2.111Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Pd'] -> Actual ['Cu', 'Pd', 'Pd']).",
+      "history_entry": "【✅ Perfect Adsorption】 ontop @ ['Pd'] (Index [0]) -> ⚠️【Unstable Site Warning】⚠️: Planned ontop (Pd) is unstable, adsorbate spontaneously slipped to hollow (FCC/No-Subsurf) (Cu-Pd-Pd).This means Pd has insufficient affinity for this adsorbate. Please **FORBID** testing Pd type sites again! [🌟 New Best] | E=-1.658 eV"
+    }
+  ],
+  "history": [
+    "【✅ Perfect Adsorption】 ontop @ ['Pd'] (Index [0]) -> ⚠️【Unstable Site Warning】⚠️: Planned ontop (Pd) is unstable, adsorbate spontaneously slipped to hollow (FCC/No-Subsurf) (Cu-Pd-Pd).This means Pd has insufficient affinity for this adsorbate. Please **FORBID** testing Pd type sites again! [🌟 New Best] | E=-1.658 eV"
+  ],
+  "error": null,
+  "perfect_count": 1,
+  "dissociation_count": 0,
+  "rearrangement_count": 0,
+  "calc_failure_count": 0,
+  "chemical_slip_count": 1,
+  "provenance": {
+    "result_tree": "research/results/basic_experiments/cmu20/grok4_mace_mp0_small/one_shot",
+    "dataset": "cmu20",
+    "backend": "grok4_mace_mp0_small",
+    "variant": "one_shot",
+    "artifact_status": "result_json_restored_from_git_history_without_heavy_artifacts",
+    "restored_from_commit": "ba317df76802c090bc365a99bdbe8ca9f8396fe9",
+    "note": "The lightweight result.json was recovered from git history during result-tree cleanup; heavy .xyz/.traj artifacts were not tracked and are not available locally."
+  }
+}

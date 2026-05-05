@@ -104,36 +104,36 @@ The slip analysis motivates the inclusion of slip-conditioned guidance in the fu
 
 \subsection{Independent validation on the OCD-GMAE62 benchmark}
 
-To test whether the CMU conclusions generalize to broader chemistry, we constructed the OCD-GMAE62 benchmark, a 62-case dataset structured into three testing tiers (see Table~\ref{tab:ocd62-overlap} for the tier definitions).
+To test whether the CMU conclusions generalize to broader chemistry, we constructed the OCD-GMAE62 benchmark as a single 62-case dataset.
 All experiments use four LLM backends (Gemini~2.5~Pro, Grok-4, GPT-5.4, Claude~Sonnet~4.6) under a fixed MACE-MP-0 small CPU protocol.
 External service failures are excluded at the raw-attempt audit stage; all reported failures are natural dissociation or reaction outcomes.
 
-The evaluation follows a three-tier testing protocol:
-\textbf{Tier~1 (all 62 cases)} establishes baseline reliability and energy accuracy for the Full and 1-Shot variants, including success rate, mean/median $\Delta E$, four-backend range, heuristic baseline, and random $N=20$ baseline.
-\textbf{Tier~2 (subsampled 24 cases)} performs deep ablation with the complete five-variant matrix (Full, w/o Slip, w/o Forbid, w/o Term, 1-Shot), Wilcoxon tests, Reach-Full-within-0.01~eV analysis, chemical slip interpretability audit, and cross-backend agreement deep-dive.
-\textbf{Tier~3 (selected 12 cases)} evaluates system stability through triple-repeat experiments to quantify run-to-run variance.
+The primary evaluation executes the complete five-variant ablation matrix on all 62 cases:
+Full, w/o Slip, w/o Forbid, w/o Term, and 1-Shot.
+This produces 1,240 raw attempts (62 cases $\times$ 5 variants $\times$ 4 backends).
+The 12 duplicated historical records are used only for a repeated-run reproducibility audit; they are not counted as a separate dataset or as additional unique benchmark cases.
 
 \begin{table}[t]
 \centering
 \scriptsize
-\caption{OCD-GMAE62 benchmark three-tier testing protocol. Tier~1 evaluates all 62 cases for baseline reliability. Tier~2 performs deep ablation on a 24-case diverse subsample. Tier~3 quantifies run-to-run stability on 12 held-out cases.}
+\caption{OCD-GMAE62 evaluation structure. The benchmark is a single 62-case matrix; the 12-case overlap set is used only for repeated-run reproducibility analysis.}
 \label{tab:ocd62-overlap}
 \begin{tabular}{llll}
 \toprule
-Tier & Cases & Variants tested & Purpose \\
+Analysis & Cases & Variants tested & Purpose \\
 \midrule
-Tier~1 (baseline) & 62 & Full, 1-Shot & Success rate, energy accuracy, backend agreement \\
-Tier~2 (deep ablation) & 24 & Full, w/o Slip, w/o Forbid, w/o Term, 1-Shot & Wilcoxon tests, slip audit, convergence analysis \\
-Tier~3 (stability) & 12 & Full (triple repeat) & Run-to-run variance quantification \\
-\midrule
-\textbf{Total unique cases} & \multicolumn{3}{l}{62 (Tier~1) + 24 (Tier~2 subsample) + 12 (Tier~3 subsample) = 62 after deduplication} \\
+Basic matrix & 62 & Full, w/o Slip, w/o Forbid, w/o Term, 1-Shot & Success, energy deltas, backend agreement \\
+Baselines & 62 & Full, 1-Shot, random $N=20$, heuristic & Search-strategy comparison \\
+Reproducibility audit & 12 overlap cases & Five variants, repeated runs & Run-to-run variance and outlier diagnosis \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-\paragraph{Tier~1: Baseline performance on all 62 cases.}
+\paragraph{Full-matrix performance on all 62 cases.}
 Table~\ref{tab:ocd62-tier1-summary} reports the Full-versus-1-Shot comparison across the complete 62-case benchmark.
 Full achieves a 98.8\% success rate (245/248 attempts), while 1-Shot drops to 89.5\% (222/248).
+The three Full failures all correspond to the same OCD-GMAE62 structure (case~053, K20 + \texttt{C([CH2])O}) on GPT-5.4, Gemini~2.5~Pro, and Grok-4.
+They are not external API, network, or calculator failures: each run has \texttt{error=None}, \texttt{calc\_failure\_count=0}, and is rejected only because the relaxed adsorbate is marked as dissociated/reacted.
 The mean $\Delta E = E_{\mathrm{1shot}} - E_{\mathrm{full}}$ is +0.329~eV with a median of 0.067~eV, indicating that the iterative Full variant consistently finds lower-energy configurations.
 The mean four-backend range under Full is 0.183~eV, compared with 0.316~eV under 1-Shot (a 1.73$\times$ reduction in backend spread).
 Heuristic enumeration (Autoadsorbate high-symmetry sites) and random placement ($N=20$) baselines are included for context; details are in the Supporting Information.
@@ -141,7 +141,7 @@ Heuristic enumeration (Autoadsorbate high-symmetry sites) and random placement (
 \begin{table}[t]
 \centering
 \scriptsize
-\caption{Tier~1 baseline metrics on the full OCD-GMAE62 benchmark (62 cases $\times$ 4 backends). $\Delta E = E_{\mathrm{1shot}} - E_{\mathrm{full}}$; positive values indicate that Full finds lower energy.}
+\caption{Full-matrix baseline metrics on the OCD-GMAE62 benchmark (62 cases $\times$ 4 backends). $\Delta E = E_{\mathrm{1shot}} - E_{\mathrm{full}}$; positive values indicate that Full finds lower energy.}
 \label{tab:ocd62-tier1-summary}
 \begin{tabular}{lrrrrrr}
 \toprule
@@ -153,55 +153,55 @@ Full      & 248 & 245 & +0.000 & 0.000 & 0.183 & 98.8\% \\
 \end{tabular}
 \end{table}
 
-\paragraph{Tier~2: Deep ablation on 24 subsampled cases.}
-Following the CMU20 methodology, we perform a complete five-variant ablation on a 24-case subsample of OCD-GMAE62 (selected for surface-adsorbate diversity).
+\paragraph{Five-variant ablation on the complete benchmark.}
+Following the CMU20 methodology, we perform the complete five-variant ablation on all 62 OCD-GMAE62 cases.
 Figure~\ref{fig:ocd62-tier2-violin} shows trapezoid plots of $\Delta E = E_{\mathrm{variant}} - E_{\mathrm{Full}}$ across all four backends.
-The Full variant maintains 100\% success rate, while 1-Shot drops to 85.4\% (82/96).
-W/o Term slightly outperforms Full in success-only mean energy ($-$0.013~eV), consistent with the CMU observation that guardrails can over-prune.
-The complete five-variant table and Wilcoxon test results are in the Supporting Information.
+The Full variant succeeds on 245/248 attempts, while w/o Slip succeeds on 247/248, w/o Forbid on 246/248, w/o Term on 247/248, and 1-Shot on 222/248.
+As above, reported failures are failure-aware natural chemistry outcomes retained in the denominator; service or execution errors are removed before constructing the paper-facing matrix.
+Success-conditioned mean deltas relative to Full are +0.021~eV for w/o Slip, +0.020~eV for w/o Forbid, $-$0.039~eV for w/o Term, and +0.329~eV for 1-Shot.
+The 1-Shot penalty is highly significant by Wilcoxon signed-rank test ($p = 9.4 \times 10^{-24}$), whereas the other ablations remain near parity in median energy.
 
 \begin{figure}
     \centering
     \includegraphics[width=0.95\linewidth]{images/figure_ocd_gmae_trapezoid_all.png}
-  \caption{\textbf{Deep ablation on the OCD-GMAE62 Tier~2 subsample (24 cases).} Trapezoid plots of energy error ($\Delta E = E_{\mathrm{variant}} - E_{\mathrm{Full}}$) for each ablation setting across four LLM backends. Positive values indicate worse adsorption energy than Full; the dashed line at $\Delta E = 0$ marks parity.}
+  \caption{\textbf{Ablation on the full OCD-GMAE62 benchmark.} Trapezoid plots of energy error ($\Delta E = E_{\mathrm{variant}} - E_{\mathrm{Full}}$) for each ablation setting across four LLM backends and 62 cases. Positive values indicate worse adsorption energy than Full; the dashed line at $\Delta E = 0$ marks parity.}
   \label{fig:ocd62-tier2-violin}
 \end{figure}
 
-Cross-backend agreement analysis on the Tier~2 subsample reveals that the Full variant reduces the mean four-backend range to 0.203~eV, compared with 0.401~eV for 1-Shot (from \texttt{cross\_backend\_agreement.csv}).
+Cross-backend agreement analysis reveals that the Full variant reduces the mean four-backend range to 0.183~eV, compared with 0.316~eV for 1-Shot.
+Among cases with at least two successful backends, 24/61 Full rows agree within 0.01~eV and 35/61 within 0.05~eV; 1-Shot reaches 23/58 and 29/58 by the same thresholds.
 The chemical slip interpretability audit (Table~\ref{tab:ocd62-slip-audit} in the SI) shows that slip events are concentrated on cases with complex adsorbates (ONN(CH$_3$)$_2$, OCHCH$_3$) and multi-component surfaces.
-Notably, 18/24 Tier~2 cases have all four backends agreeing within 0.05~eV under the Full variant, compared with 4/24 under 1-Shot.
 
-\paragraph{Tier~3: Stability quantification on 12 overlapping cases.}
-To quantify system stability, we run the Full variant three times on each of the 12 OCD-GMAE62 Tier~3 cases.
-Table~\ref{tab:ocd62-tier3-stability} reports the run-to-run variance: the mean standard deviation across three repeats is 0.014~eV, with 10/12 cases showing $\leq$0.02~eV variance.
-The two higher-variance cases (std 0.031~eV and 0.028~eV) both involve large adsorbates on multi-component surfaces, where minor structural differences in the initial slab can propagate through the relaxation.
-These results establish that AdsMind's Full variant produces stable, reproducible energies across repeated runs on the same case.
+\paragraph{Repeated-run audit on 12 overlapping cases.}
+To quantify system stability, we use the 12 historical overlap cases as a repeated-run audit.
+Table~\ref{tab:ocd62-tier3-stability} reports the N=3 reproducibility summary across all four backends and five variants.
+Across 240 repeated-run comparisons, 129 (53.8\%) agree within 0.01~eV and two numerical-collapse outliers are excluded.
+For the Full variant alone, 26/48 comparisons agree within 0.01~eV; the median run range is only 0.00018~eV, but the mean range is 0.224~eV because a small number of divergent trajectories reach different adsorption basins.
+Thus the repeated-run audit identifies both a stable core and a non-negligible tail of stochastic basin selection, rather than supporting a blanket determinism claim.
 
 \begin{table}[t]
 \centering
 \scriptsize
-\caption{Tier~3 stability quantification: triple-repeat results on 12 overlapping OCD-GMAE62 cases. Reported is the standard deviation of adsorption energy across three Full-variant runs for each backend.}
+\caption{N=3 repeated-run audit on the 12 overlapping OCD-GMAE62 cases. Ranges are computed across the three repeated runs for the same case, backend, and variant.}
 \label{tab:ocd62-tier3-stability}
-\begin{tabular}{llrrrr}
+\begin{tabular}{lrrrrr}
 \toprule
-Case & Adsorbate & Gemini $\sigma$ (eV) & Grok-4 $\sigma$ (eV) & GPT-5.4 $\sigma$ (eV) & Claude $\sigma$ (eV) \\
+Scope & Comparisons & $\leq$0.01~eV & Median range & Mean range & Excluded outliers \\
 \midrule
-%[case IDs] & [adsorbate] & [value] & [value] & [value] & [value] \\
-\midrule
-\multicolumn{2}{l}{\textbf{Mean $\sigma$ across 12 cases}} & 0.013 & 0.015 & 0.012 & 0.016 \\
-\multicolumn{2}{l}{\textbf{Cases with $\sigma \leq 0.02$~eV}} & 11/12 & 10/12 & 12/12 & 9/12 \\
+All variants & 240 & 129/240 & 0.001~eV & 0.271~eV & 2 \\
+Full only & 48 & 26/48 & 0.00018~eV & 0.224~eV & 1 \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-The three-tier evaluation confirms that the CMU conclusions generalize to broader chemistry: the Full variant maintains high success rate and low backend variance on 62 diverse cases, the ablation matrix reveals consistent patterns with the CMU20 results, and triple-repeat experiments demonstrate reproducible energy predictions.
+The OCD-GMAE62 evaluation confirms that the CMU conclusions generalize to broader chemistry in reliability and 1-Shot penalty: the Full variant maintains a high success rate on 62 diverse cases, the complete ablation matrix shows the largest degradation when the loop is reduced to a single attempt, and repeated-run analysis exposes the residual stochasticity of hosted LLM trajectories.
 
 \subsection{Comparison with Adsorb-Agent under identical physics}
 
 To isolate the effect of search strategy from the choice of force field, we forked the open-source Adsorb-Agent codebase~\cite{adsorbagent} and replaced its EquiformerV2~\cite{liao2023equiformerv2} relaxation backend with the same MACE-MP-0 small (CPU, float32, dispersion disabled) calculator used for the primary benchmark and matched comparisons.
 All remaining protocol parameters were locked to AdsMind's settings: BFGS optimizer, $f_\mathrm{max} = 0.10$~eV/\AA, 200 steps, and identical \textsc{FixAtoms} constraints (bottom third of slab atoms fixed).
 We ran the modified Adsorb-Agent with GPT-5.4 and report the 20-case overlap with the CMU20 benchmark.
-We separately ran a single-configuration Adsorb-Agent stress control on CMU20 to test whether Adsorb-Agent's energy depth comes from one-shot chemical site choice alone or from its breadth of enumerated configurations.
+We separately ran a single-configuration Adsorb-Agent breadth control on CMU20 to test whether Adsorb-Agent's energy depth comes from one-shot chemical site choice alone or from broader configuration enumeration.
 
 \begin{table}[t]
 \centering
@@ -308,5 +308,4 @@ Repeating the GPT-5.4 Full variant on all 20 CMU cases with MACE-MP-0 large (GPU
 All 20 CMU rows produce retained summary results, but the mean absolute shift relative to the MACE-MP-0 small GPT-5.4 run is 1.255~eV (0.834~eV if the anomalous case~20 is excluded), and no case remains within 0.01~eV.
 Fifteen cases become more stable under MACE-MP-0 large and five become less stable.
 Cases~06, 16, 17, and 20 show dissociation events during the MACE-MP-0 large runs; case~20 is the most important sensitivity case because a retained non-dissociated best structure appears at $-2.402$~eV while a later dissociated analysis reaches a much lower unretained energy.
-On a separate 10-case OCD-GMAE62 Tier~1 representative set, MACE-MP-0 large succeeds on 9/10 cases; case~043 fails naturally with chemical slip and dissociation, not because of an external service or calculator error.
 These shifts do not change the qualitative systems conclusion from the MACE-MP-0 small benchmark: primary comparisons must remain within the locked MACE-MP-0 small protocol, and AdsMind's strength is reliable closed-loop recovery with a small relaxation budget rather than force-field-independent deepest-basin discovery.

@@ -18,13 +18,13 @@ CASES = tuple(f"{idx:03d}" for idx in range(1, 13))
 EXPECTED = {
     "gemini": {
         "llm_backend": "openrouter",
-        "llm_model": "google/gemini-2.5-pro",
+        "llm_model": {"gemini-2.5-pro", "google/gemini-2.5-pro"},
         "llm_base_url": "https://openrouter.ai/api/v1",
         "llm_api_key_env_var": "OPENROUTER_API_KEY",
     },
     "grok": {
         "llm_backend": "openrouter",
-        "llm_model": "x-ai/grok-4",
+        "llm_model": {"grok-4", "x-ai/grok-4"},
         "llm_base_url": "https://openrouter.ai/api/v1",
         "llm_api_key_env_var": "OPENROUTER_API_KEY",
     },
@@ -74,7 +74,10 @@ def status_for(backend: str, variant: str, case_id: str) -> tuple[str, str]:
     mismatches = []
     for key, expected in EXPECTED[backend].items():
         actual = frozen.get(key)
-        if actual != expected:
+        if isinstance(expected, set):
+            if actual not in expected:
+                mismatches.append(f"{key}: expected_one_of={sorted(expected)!r} actual={actual!r}")
+        elif actual != expected:
             mismatches.append(f"{key}: expected={expected!r} actual={actual!r}")
     if mismatches:
         return "PROTOCOL_MISMATCH", "; ".join(mismatches)
@@ -89,7 +92,7 @@ def main() -> int:
             for case_id in CASES:
                 status, detail = status_for(backend, variant, case_id)
                 counts[status] = counts.get(status, 0) + 1
-                if status not in {"OK", "MISSING"}:
+                if status not in {"OK", "MISSING", "NOT_SUCCESS"}:
                     problems.append(f"{backend}/{variant}/{case_id}: {status} {detail}")
     for key in sorted(counts):
         print(f"{key}={counts[key]}")

@@ -1,7 +1,8 @@
 """Stable experiment identities for research result paths.
 
-Directory names encode the LLM family/version and MACE-MP-0 force-field size.
-Exact model snapshots belong in the provenance columns, not in path names.
+Paper-facing result directories encode the LLM family/version and MACE-MP-0
+force-field size. API transport details are retained only where needed to rerun
+experiments; they are not benchmark identity dimensions.
 """
 
 from __future__ import annotations
@@ -15,7 +16,6 @@ class BackendIdentity:
     key: str
     result_dir: str
     display_name: str
-    llm_route: str
     llm_model: str
     force_field: str
     calculator_backend: str = "mace"
@@ -26,34 +26,30 @@ class BackendIdentity:
 BASIC_BACKEND_IDENTITIES: dict[str, BackendIdentity] = {
     "gpt": BackendIdentity(
         key="gpt",
-        result_dir="openai_gpt54_mace_mp0_small",
-        display_name="OpenAI GPT-5.4",
-        llm_route="OpenAI official endpoint",
+        result_dir="gpt54_mace_mp0_small",
+        display_name="GPT-5.4",
         llm_model="gpt-5.4-2026-03-05",
         force_field="MACE-MP-0 small",
     ),
     "claude": BackendIdentity(
         key="claude",
-        result_dir="anthropic_claude_sonnet46_mace_mp0_small",
-        display_name="Anthropic Claude Sonnet 4.6",
-        llm_route="Anthropic official endpoint",
+        result_dir="claude_sonnet46_mace_mp0_small",
+        display_name="Claude Sonnet 4.6",
         llm_model="claude-sonnet-4-6",
         force_field="MACE-MP-0 small",
     ),
     "gemini": BackendIdentity(
         key="gemini",
-        result_dir="openrouter_gemini25pro_mace_mp0_small",
-        display_name="OpenRouter Gemini 2.5 Pro",
-        llm_route="OpenRouter",
-        llm_model="google/gemini-2.5-pro",
+        result_dir="gemini25pro_mace_mp0_small",
+        display_name="Gemini 2.5 Pro",
+        llm_model="gemini-2.5-pro",
         force_field="MACE-MP-0 small",
     ),
     "grok": BackendIdentity(
         key="grok",
-        result_dir="openrouter_grok4_mace_mp0_small",
-        display_name="OpenRouter Grok-4",
-        llm_route="OpenRouter",
-        llm_model="x-ai/grok-4",
+        result_dir="grok4_mace_mp0_small",
+        display_name="Grok-4",
+        llm_model="grok-4",
         force_field="MACE-MP-0 small",
     ),
 }
@@ -62,27 +58,24 @@ RUN3_BACKEND_IDENTITIES: dict[str, BackendIdentity] = {
     **BASIC_BACKEND_IDENTITIES,
     "gemini": BackendIdentity(
         key="gemini",
-        result_dir="openrouter_gemini25pro_mace_mp0_small",
-        display_name="OpenRouter Gemini 2.5 Pro",
-        llm_route="OpenRouter",
-        llm_model="google/gemini-2.5-pro",
+        result_dir="gemini25pro_mace_mp0_small",
+        display_name="Gemini 2.5 Pro",
+        llm_model="gemini-2.5-pro",
         force_field="MACE-MP-0 small",
     ),
     "grok": BackendIdentity(
         key="grok",
-        result_dir="openrouter_grok4_mace_mp0_small",
-        display_name="OpenRouter Grok-4",
-        llm_route="OpenRouter",
-        llm_model="x-ai/grok-4",
+        result_dir="grok4_mace_mp0_small",
+        display_name="Grok-4",
+        llm_model="grok-4",
         force_field="MACE-MP-0 small",
     ),
 }
 
-MACE_LARGE_OPENAI_GPT54 = BackendIdentity(
+MACE_LARGE_GPT54 = BackendIdentity(
     key="gpt",
-    result_dir="openai_gpt54_mace_mp0_large",
-    display_name="OpenAI GPT-5.4",
-    llm_route="OpenAI official endpoint",
+    result_dir="gpt54_mace_mp0_large",
+    display_name="GPT-5.4",
     llm_model="gpt-5.4-2026-03-05",
     force_field="MACE-MP-0 large",
     force_field_size="large",
@@ -104,7 +97,7 @@ def backend_result_dir(key: str, *, run_name: str | None = None) -> str:
 
 def identity_from_result_dir(result_dir: str) -> BackendIdentity | None:
     """Return the identity encoded by a result directory name."""
-    for identity in (*BASIC_BACKEND_IDENTITIES.values(), *RUN3_BACKEND_IDENTITIES.values(), MACE_LARGE_OPENAI_GPT54):
+    for identity in (*BASIC_BACKEND_IDENTITIES.values(), *RUN3_BACKEND_IDENTITIES.values(), MACE_LARGE_GPT54):
         if identity.result_dir == result_dir:
             return identity
     return None
@@ -118,7 +111,7 @@ def identity_from_path(path: str | Path) -> BackendIdentity | None:
         if identity is not None:
             return identity
     for part in reversed(parts):
-        for identity in (*BASIC_BACKEND_IDENTITIES.values(), *RUN3_BACKEND_IDENTITIES.values(), MACE_LARGE_OPENAI_GPT54):
+        for identity in (*BASIC_BACKEND_IDENTITIES.values(), *RUN3_BACKEND_IDENTITIES.values(), MACE_LARGE_GPT54):
             if identity.result_dir in part:
                 return identity
     return None
@@ -138,15 +131,17 @@ def identity_from_label(label: str) -> BackendIdentity | None:
         "gpt_5.4": "gpt",
         "gpt-5.4": "gpt",
         "gpt54": "gpt",
-        "openai_gpt54": "gpt",
+        "gpt54_mace_mp0_small": "gpt",
         "gemini_2.5_pro": "gemini",
-        "google/gemini-2.5-pro": "gemini",
+        "gemini-2.5-pro": "gemini",
+        "gemini25pro_mace_mp0_small": "gemini",
         "grok_4": "grok",
         "grok-4": "grok",
         "grok4": "grok",
+        "grok4_mace_mp0_small": "grok",
         "claude_sonnet_4.6": "claude",
         "claude-sonnet-4.6": "claude",
-        "anthropic_sonnet46": "claude",
+        "claude_sonnet46_mace_mp0_small": "claude",
     }
     key = aliases.get(normalized)
     return BASIC_BACKEND_IDENTITIES[key] if key else None
@@ -158,7 +153,6 @@ def summary_metadata(identity: BackendIdentity) -> dict[str, str]:
         "backend_key": identity.key,
         "backend": identity.result_dir,
         "llm_model": identity.llm_model,
-        "llm_route": identity.llm_route,
         "force_field": identity.force_field,
         "calculator_backend": identity.calculator_backend,
         "force_field_model": identity.force_field_model,

@@ -19,10 +19,10 @@ Files:
 - `MVP_HANDOFF.md`: short handoff note for Lou/Bowen.
 
 Current backend summary:
-- openai_gpt54_mace_mp0_small: status=success, iterations=4, best_iter=4, best_E=-3.627323865890503 eV
-- anthropic_claude_sonnet46_mace_mp0_small: status=success, iterations=4, best_iter=4, best_E=-3.630131483078003 eV
-- openrouter_gemini25pro_mace_mp0_small: status=success, iterations=5, best_iter=3, best_E=-3.6317179203033447 eV
-- openrouter_grok4_mace_mp0_small: status=success, iterations=5, best_iter=3, best_E=-3.6317179203033447 eV
+- gpt54_mace_mp0_small: status=success, iterations=4, best_iter=4, best_E=-3.627323865890503 eV
+- claude_sonnet46_mace_mp0_small: status=success, iterations=4, best_iter=4, best_E=-3.630131483078003 eV
+- gemini25pro_mace_mp0_small: status=success, iterations=5, best_iter=3, best_E=-3.6317179203033447 eV
+- grok4_mace_mp0_small: status=success, iterations=5, best_iter=3, best_E=-3.6317179203033447 eV
 
 Next when DFT structure arrives:
 1. Put the DFT optimized final structure path into `dft_reference_template.csv`.

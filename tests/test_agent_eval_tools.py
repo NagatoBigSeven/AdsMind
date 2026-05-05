@@ -26,7 +26,7 @@ from research.agent_eval.summarize_runs import main as summarize_main
 
 ROOT = Path(__file__).resolve().parents[1]
 MANIFEST = ROOT / "datasets/cmu20/cmu20_manifest.csv"
-CONFIG = ROOT / "research/agent_eval/configs/frozen_config.json"
+CONFIG = ROOT / "research/agent_eval/configs/frozen_config_gemini25pro_mace_mp0_small.json"
 
 
 class TestAgentEvalTools(unittest.TestCase):
@@ -164,7 +164,7 @@ class TestAgentEvalTools(unittest.TestCase):
                         "--manifest",
                         "datasets/cmu20/cmu20_manifest.csv",
                         "--config",
-                        "research/agent_eval/configs/frozen_config.json",
+                        "research/agent_eval/configs/frozen_config_gemini25pro_mace_mp0_small.json",
                         "--output",
                         str(output_dir),
                         "--case-ids",

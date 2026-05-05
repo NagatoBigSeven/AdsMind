@@ -1,0 +1,220 @@
+{
+  "case_id": "11",
+  "case_metadata": {
+    "case_id": "11",
+    "slab_file": "datasets/cmu20/11_Pd_111.xyz",
+    "smiles": "[OH]",
+    "user_request": "Find the lowest-energy adsorption configuration for hydroxyl radical on the provided surface.",
+    "surface_family": "monometallic",
+    "adsorbate_name": "OH",
+    "miller_index": "(111)",
+    "reaction_class": "ORR",
+    "ablation_candidate": "FALSE",
+    "notes": "Pd ORR benchmark"
+  },
+  "status": "success",
+  "best_energy_eV": -2.3885955810546875,
+  "iteration_count": 1,
+  "max_attempts": 1,
+  "final_site_type": "hollow (FCC/No-Subsurf)",
+  "converged_tag": false,
+  "wall_clock_sec": 256.17651280760765,
+  "total_input_tokens": 4724,
+  "total_output_tokens": 1643,
+  "artifact_paths": {
+    "BEST_OH_bridge_to_hollow_FCC-No-Subsurf_E-2.389": "research/results/basic_experiments/cmu20/grok4_mace_mp0_small/one_shot/11/artifacts/BEST_OH_bridge_to_hollow_FCC-No-Subsurf_E-2.389.xyz",
+    "BEST_OH_bridge_to_hollow_FCC-No-Subsurf_E-2.389.xyz": "research/results/basic_experiments/cmu20/grok4_mace_mp0_small/one_shot/11/artifacts/BEST_OH_bridge_to_hollow_FCC-No-Subsurf_E-2.389.xyz",
+    "best_structure_file": "research/results/basic_experiments/cmu20/grok4_mace_mp0_small/one_shot/11/artifacts/BEST_OH_bridge_to_hollow_FCC-No-Subsurf_E-2.389.xyz",
+    "conformers_[OH]": "research/results/basic_experiments/cmu20/grok4_mace_mp0_small/one_shot/11/artifacts/conformers_[OH].traj",
+    "conformers_[OH].traj": "research/results/basic_experiments/cmu20/grok4_mace_mp0_small/one_shot/11/artifacts/conformers_[OH].traj",
+    "final": "research/results/basic_experiments/cmu20/grok4_mace_mp0_small/one_shot/11/artifacts/final.xyz",
+    "final.xyz": "research/results/basic_experiments/cmu20/grok4_mace_mp0_small/one_shot/11/artifacts/final.xyz",
+    "relaxation": "research/results/basic_experiments/cmu20/grok4_mace_mp0_small/one_shot/11/artifacts/relaxation.traj",
+    "relaxation.traj": "research/results/basic_experiments/cmu20/grok4_mace_mp0_small/one_shot/11/artifacts/relaxation.traj",
+    "relaxation_trajectory_file": "research/results/basic_experiments/cmu20/grok4_mace_mp0_small/one_shot/11/artifacts/relaxation.traj"
+  },
+  "best_result": {
+    "most_stable_energy_eV": -2.3885955810546875,
+    "analysis_json": {
+      "status": "success",
+      "message": "Most stable config adsorption energy: -2.3886 eV. Target Atom: O (from plan index 0, global index 54 in relaxed structure). -> Nearest: Pd (Index 39), Distance: 2.083 Å (Threshold: 2.972), Bound: True. Bonded Surface Atoms: Pd-2.083Å, Pd-2.093Å, Pd-2.713Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Pd', 'Pd'] -> Actual ['Pd', 'Pd', 'Pd']).",
+      "most_stable_energy_eV": -2.3885955810546875,
+      "target_adsorbate_atom": "O",
+      "target_adsorbate_atom_index": 54,
+      "bonded_surface_atoms": [
+        {
+          "symbol": "Pd",
+          "index": 39,
+          "distance": 2.083
+        },
+        {
+          "symbol": "Pd",
+          "index": 9,
+          "distance": 2.093
+        },
+        {
+          "symbol": "Pd",
+          "index": 45,
+          "distance": 2.713
+        }
+      ],
+      "nearest_slab_atom": "Pd",
+      "nearest_slab_atom_index": 39,
+      "final_bond_distance_A": 2.083,
+      "estimated_covalent_cutoff_A": 2.255,
+      "is_covalently_bound": true,
+      "reaction_detected": false,
+      "is_dissociated": false,
+      "n_components": 1,
+      "bond_change_count": 0,
+      "site_analysis": {
+        "planned_site_type": "bridge",
+        "planned_connectivity": 2,
+        "actual_site_type": "hollow (FCC/No-Subsurf)",
+        "actual_connectivity": 3,
+        "is_chemical_slip": true,
+        "planned_symbols": [
+          "Pd",
+          "Pd"
+        ],
+        "actual_symbols": [
+          "Pd",
+          "Pd",
+          "Pd"
+        ],
+        "site_fingerprint": "Pd39-Pd9-Pd45"
+      },
+      "best_structure_file": "outputs/11-42f127be/BEST_OH_bridge_to_hollow_FCC-No-Subsurf_E-2.389.xyz",
+      "generated_conformers_file": "outputs/11-42f127be/conformers_[OH].traj",
+      "relaxation_trajectory_file": "outputs/11-42f127be/final.xyz",
+      "session_id": "11-42f127be"
+    },
+    "plan": {
+      "reasoning": "Step 0: SMILES Consistency Check. The SMILES is [OH], representing a hydroxyl radical. The heavy atom list shows O at index 0 with SP3 hybridization, degree 0 (no heavy atom neighbors), radical_electrons 1, formal_charge 0. This matches a radical species with the unpaired electron on O. No hybridization mismatch with user description. For ReactiveSpecies, the binding atom O (index 0) has radical_electrons > 0, which is confirmed.\nStep 1: Analyze Old Plans. History is None, so no previous attempts. No successes, failures, or energies to consider. Termination is disabled, but there is a hard limit of 1 attempt, so this is the initial plan.\nStep 2: Formulate New Plan. Since history is None, propose the best initial plan. The goal is to find the lowest energy adsorption configuration. For OH radical on Pd(111), literature and catalysis knowledge indicate that OH prefers bridge sites, where O binds to two Pd atoms, often with adsorption energies around -2.5 eV. This is a physically sensible starting point. Will test bridge site with single binding through O. Future plans (if allowed) could test ontop and hollow for comparison.\nStep 3: Analyze Request. User's core intent is to find the lowest-energy adsorption configuration for the hydroxyl radical on the Pd(111) surface, systematically testing sites.\nStep 4: Analyze Adsorbate. SMILES [OH] is hydroxyl radical, major functional group is -OH with radical on O. Heavy atom: O at index 0. Binding will be through O (index 0), which has the unpaired electron.\nStep 5: Analyze Surface. Surface composition is Pd, available sites: ontop (Pd), bridge (Pd-Pd), hollow (Pd-Pd-Pd). Plan only for existing site combinations.\nStep 6: Formulate Plan. Select site_type 'bridge' for initial test. surface_binding_atoms ['Pd', 'Pd'] matches available bridge site. adsorbate_binding_indices [0] for O binding. Defaults for other parameters. adsorbate_type 'ReactiveSpecies' because it's a radical binding via atom with unpaired electrons. This aligns with site alignment rules: bridge can have 1 binding index.",
+      "adsorbate_type": "ReactiveSpecies",
+      "solution": {
+        "action": "continue",
+        "site_type": "bridge",
+        "surface_binding_atoms": [
+          "Pd",
+          "Pd"
+        ],
+        "adsorbate_binding_indices": [
+          0
+        ],
+        "relax_top_n": 1,
+        "touch_sphere_size": 2,
+        "overlap_thr": 0.1,
+        "conformers_per_site_cap": 4
+      }
+    },
+    "result_type": "Perfect"
+  },
+  "last_analysis": {
+    "status": "success",
+    "message": "Most stable config adsorption energy: -2.3886 eV. Target Atom: O (from plan index 0, global index 54 in relaxed structure). -> Nearest: Pd (Index 39), Distance: 2.083 Å (Threshold: 2.972), Bound: True. Bonded Surface Atoms: Pd-2.083Å, Pd-2.093Å, Pd-2.713Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Pd', 'Pd'] -> Actual ['Pd', 'Pd', 'Pd']).",
+    "most_stable_energy_eV": -2.3885955810546875,
+    "target_adsorbate_atom": "O",
+    "target_adsorbate_atom_index": 54,
+    "bonded_surface_atoms": [
+      {
+        "symbol": "Pd",
+        "index": 39,
+        "distance": 2.083
+      },
+      {
+        "symbol": "Pd",
+        "index": 9,
+        "distance": 2.093
+      },
+      {
+        "symbol": "Pd",
+        "index": 45,
+        "distance": 2.713
+      }
+    ],
+    "nearest_slab_atom": "Pd",
+    "nearest_slab_atom_index": 39,
+    "final_bond_distance_A": 2.083,
+    "estimated_covalent_cutoff_A": 2.255,
+    "is_covalently_bound": true,
+    "reaction_detected": false,
+    "is_dissociated": false,
+    "n_components": 1,
+    "bond_change_count": 0,
+    "site_analysis": {
+      "planned_site_type": "bridge",
+      "planned_connectivity": 2,
+      "actual_site_type": "hollow (FCC/No-Subsurf)",
+      "actual_connectivity": 3,
+      "is_chemical_slip": true,
+      "planned_symbols": [
+        "Pd",
+        "Pd"
+      ],
+      "actual_symbols": [
+        "Pd",
+        "Pd",
+        "Pd"
+      ],
+      "site_fingerprint": "Pd39-Pd9-Pd45"
+    },
+    "best_structure_file": "outputs/11-42f127be/BEST_OH_bridge_to_hollow_FCC-No-Subsurf_E-2.389.xyz",
+    "generated_conformers_file": "outputs/11-42f127be/conformers_[OH].traj",
+    "relaxation_trajectory_file": "outputs/11-42f127be/final.xyz",
+    "session_id": "11-42f127be"
+  },
+  "attempt_records": [
+    {
+      "attempt_index": 1,
+      "plan": {
+        "reasoning": "Step 0: SMILES Consistency Check. The SMILES is [OH], representing a hydroxyl radical. The heavy atom list shows O at index 0 with SP3 hybridization, degree 0 (no heavy atom neighbors), radical_electrons 1, formal_charge 0. This matches a radical species with the unpaired electron on O. No hybridization mismatch with user description. For ReactiveSpecies, the binding atom O (index 0) has radical_electrons > 0, which is confirmed.\nStep 1: Analyze Old Plans. History is None, so no previous attempts. No successes, failures, or energies to consider. Termination is disabled, but there is a hard limit of 1 attempt, so this is the initial plan.\nStep 2: Formulate New Plan. Since history is None, propose the best initial plan. The goal is to find the lowest energy adsorption configuration. For OH radical on Pd(111), literature and catalysis knowledge indicate that OH prefers bridge sites, where O binds to two Pd atoms, often with adsorption energies around -2.5 eV. This is a physically sensible starting point. Will test bridge site with single binding through O. Future plans (if allowed) could test ontop and hollow for comparison.\nStep 3: Analyze Request. User's core intent is to find the lowest-energy adsorption configuration for the hydroxyl radical on the Pd(111) surface, systematically testing sites.\nStep 4: Analyze Adsorbate. SMILES [OH] is hydroxyl radical, major functional group is -OH with radical on O. Heavy atom: O at index 0. Binding will be through O (index 0), which has the unpaired electron.\nStep 5: Analyze Surface. Surface composition is Pd, available sites: ontop (Pd), bridge (Pd-Pd), hollow (Pd-Pd-Pd). Plan only for existing site combinations.\nStep 6: Formulate Plan. Select site_type 'bridge' for initial test. surface_binding_atoms ['Pd', 'Pd'] matches available bridge site. adsorbate_binding_indices [0] for O binding. Defaults for other parameters. adsorbate_type 'ReactiveSpecies' because it's a radical binding via atom with unpaired electrons. This aligns with site alignment rules: bridge can have 1 binding index.",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "bridge",
+          "surface_binding_atoms": [
+            "Pd",
+            "Pd"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "bridge|Pd,Pd|0|ReactiveSpecies|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -2.3885955810546875,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": true,
+      "planned_site_type": "bridge",
+      "actual_site_type": "hollow (FCC/No-Subsurf)",
+      "best_structure_file": "outputs/11-42f127be/BEST_OH_bridge_to_hollow_FCC-No-Subsurf_E-2.389.xyz",
+      "generated_conformers_file": "outputs/11-42f127be/conformers_[OH].traj",
+      "relaxation_trajectory_file": "outputs/11-42f127be/final.xyz",
+      "message": "Most stable config adsorption energy: -2.3886 eV. Target Atom: O (from plan index 0, global index 54 in relaxed structure). -> Nearest: Pd (Index 39), Distance: 2.083 Å (Threshold: 2.972), Bound: True. Bonded Surface Atoms: Pd-2.083Å, Pd-2.093Å, Pd-2.713Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Pd', 'Pd'] -> Actual ['Pd', 'Pd', 'Pd']).",
+      "history_entry": "【✅ Perfect Adsorption】 bridge @ ['Pd', 'Pd'] (Index [0]) -> Site: hollow (FCC/No-Subsurf) (Pd,Pd,Pd) | E=-2.389 eV"
+    }
+  ],
+  "history": [
+    "【✅ Perfect Adsorption】 bridge @ ['Pd', 'Pd'] (Index [0]) -> Site: hollow (FCC/No-Subsurf) (Pd,Pd,Pd) | E=-2.389 eV"
+  ],
+  "error": null,
+  "perfect_count": 1,
+  "dissociation_count": 0,
+  "rearrangement_count": 0,
+  "calc_failure_count": 0,
+  "chemical_slip_count": 1,
+  "provenance": {
+    "result_tree": "research/results/basic_experiments/cmu20/grok4_mace_mp0_small/one_shot",
+    "dataset": "cmu20",
+    "backend": "grok4_mace_mp0_small",
+    "variant": "one_shot",
+    "artifact_status": "local_artifacts_present"
+  }
+}

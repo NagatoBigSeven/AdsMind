@@ -1,0 +1,296 @@
+{
+  "case_id": "005",
+  "case_metadata": {
+    "case_id": "005",
+    "slab_file": "datasets/ocd62_overlap12/005_Cr36N48_CH_O.xyz",
+    "smiles": "[CH]=O",
+    "user_request": "Find the lowest-energy adsorption configuration for the adsorbate with SMILES [CH]=O on the provided surface.",
+    "surface_family": "compound",
+    "adsorbate_name": "[CH]=O",
+    "miller_index": "",
+    "reaction_class": "GENERALIZATION",
+    "ablation_candidate": "FALSE",
+    "notes": "OCD-GMAE source key=201; original_ads_smi=[CH]=O; surface_formula=Cr36N48; y_relaxed=-4.026478 eV; site=[4, 6, 36]; OCD62 overlap12 RUN3 symlink to representative50 source file; sha256=b5c73af519a5d1b538be622d4572742cef48b39b2b240ce24d4b887ff388ebb0",
+    "source_key": "201",
+    "original_ads_smi": "[CH]=O",
+    "surface_formula": "Cr36N48",
+    "surface_elements": "Cr;N",
+    "bare_slab_atoms": "84",
+    "adsorbate_atoms": "3",
+    "y_relaxed": "-4.026478",
+    "site_indices": "4;6;36",
+    "selection_bucket": "small_organic"
+  },
+  "status": "success",
+  "best_energy_eV": -7.707094192504883,
+  "iteration_count": 3,
+  "max_attempts": 5,
+  "final_site_type": "hollow (HCP/Subsurf-Atom)",
+  "converged_tag": true,
+  "wall_clock_sec": 277.6698956377804,
+  "total_input_tokens": 18194,
+  "total_output_tokens": 13433,
+  "artifact_paths": {
+    "BEST_CH_O_hollow_to_hollow_HCP-Subsurf-Atom_E-7.687": "artifacts/BEST_CH_O_hollow_to_hollow_HCP-Subsurf-Atom_E-7.687.xyz",
+    "BEST_CH_O_hollow_to_hollow_HCP-Subsurf-Atom_E-7.687.xyz": "artifacts/BEST_CH_O_hollow_to_hollow_HCP-Subsurf-Atom_E-7.687.xyz",
+    "best_structure_file": "artifacts/BEST_CH_O_ontop_to_hollow_HCP-Subsurf-Atom_E-7.707.xyz",
+    "BEST_CH_O_ontop_to_hollow_HCP-Subsurf-Atom_E-7.130": "artifacts/BEST_CH_O_ontop_to_hollow_HCP-Subsurf-Atom_E-7.130.xyz",
+    "BEST_CH_O_ontop_to_hollow_HCP-Subsurf-Atom_E-7.130.xyz": "artifacts/BEST_CH_O_ontop_to_hollow_HCP-Subsurf-Atom_E-7.130.xyz",
+    "BEST_CH_O_ontop_to_hollow_HCP-Subsurf-Atom_E-7.707": "artifacts/BEST_CH_O_ontop_to_hollow_HCP-Subsurf-Atom_E-7.707.xyz",
+    "BEST_CH_O_ontop_to_hollow_HCP-Subsurf-Atom_E-7.707.xyz": "artifacts/BEST_CH_O_ontop_to_hollow_HCP-Subsurf-Atom_E-7.707.xyz",
+    "conformers_[CH]_O": "artifacts/conformers_[CH]_O.traj",
+    "conformers_[CH]_O.traj": "artifacts/conformers_[CH]_O.traj",
+    "final": "artifacts/final.xyz",
+    "final.xyz": "artifacts/final.xyz",
+    "relaxation": "artifacts/relaxation.traj",
+    "relaxation.traj": "artifacts/relaxation.traj",
+    "relaxation_trajectory_file": "artifacts/relaxation.traj"
+  },
+  "best_result": {
+    "most_stable_energy_eV": -7.707094192504883,
+    "analysis_json": {
+      "status": "success",
+      "message": "Most stable config adsorption energy: -7.7071 eV. Target Atom: C (from plan index 0, global index 84 in relaxed structure). -> Nearest: N (Index 51), Distance: 1.339 \u00c5 (Threshold: 2.132), Bound: True. Bonded Surface Atoms: N-1.339\u00c5, Cr-2.937\u00c5, Cr-3.013\u00c5. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Cr'] -> Actual ['Cr', 'Cr', 'N']).",
+      "most_stable_energy_eV": -7.707094192504883,
+      "target_adsorbate_atom": "C",
+      "target_adsorbate_atom_index": 84,
+      "bonded_surface_atoms": [
+        {
+          "symbol": "N",
+          "index": 51,
+          "distance": 1.339
+        },
+        {
+          "symbol": "Cr",
+          "index": 3,
+          "distance": 2.937
+        },
+        {
+          "symbol": "Cr",
+          "index": 8,
+          "distance": 3.013
+        }
+      ],
+      "nearest_slab_atom": "N",
+      "nearest_slab_atom_index": 51,
+      "final_bond_distance_A": 1.339,
+      "estimated_covalent_cutoff_A": 1.617,
+      "is_covalently_bound": true,
+      "reaction_detected": false,
+      "is_dissociated": false,
+      "n_components": 1,
+      "bond_change_count": 0,
+      "site_analysis": {
+        "planned_site_type": "ontop",
+        "planned_connectivity": 1,
+        "actual_site_type": "hollow (HCP/Subsurf-Atom)",
+        "actual_connectivity": 3,
+        "is_chemical_slip": true,
+        "planned_symbols": [
+          "Cr"
+        ],
+        "actual_symbols": [
+          "Cr",
+          "Cr",
+          "N"
+        ],
+        "site_fingerprint": "N51-Cr3-Cr8"
+      },
+      "best_structure_file": "outputs/005-c5a3e292/BEST_CH_O_ontop_to_hollow_HCP-Subsurf-Atom_E-7.707.xyz",
+      "generated_conformers_file": "outputs/005-c5a3e292/conformers_[CH]_O.traj",
+      "relaxation_trajectory_file": "outputs/005-c5a3e292/final.xyz",
+      "session_id": "005-c5a3e292"
+    },
+    "plan": {
+      "reasoning": "This is the first attempt to find the lowest energy adsorption configuration. The adsorbate is the formyl radical, [CH]=O. The provided analysis shows that the carbon atom (index 0) has one radical electron, making it the most reactive site for forming a covalent bond with the surface. Transition metal sites like Cr are generally more reactive towards radicals than nitrogen sites. Therefore, the most chemically intuitive and promising initial configuration is to place the radical carbon on an ontop Cr site. This corresponds to a 'ReactiveSpecies' adsorption type, as we are utilizing the unpaired electron for bonding.",
+      "adsorbate_type": "ReactiveSpecies",
+      "solution": {
+        "action": "continue",
+        "site_type": "ontop",
+        "surface_binding_atoms": [
+          "Cr"
+        ],
+        "adsorbate_binding_indices": [
+          0
+        ],
+        "relax_top_n": 1,
+        "touch_sphere_size": 2,
+        "overlap_thr": 0.1,
+        "conformers_per_site_cap": 4
+      }
+    },
+    "result_type": "Perfect"
+  },
+  "last_analysis": {
+    "status": "success",
+    "message": "Most stable config adsorption energy: -7.6870 eV. Target Atom: C (from plan index 0, global index 84 in relaxed structure). -> Nearest: N (Index 51), Distance: 1.346 \u00c5 (Threshold: 2.132), Bound: True. Bonded Surface Atoms: N-1.346\u00c5, Cr-2.872\u00c5, Cr-3.052\u00c5. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: False (Planned ['Cr', 'Cr', 'N'] -> Actual ['Cr', 'Cr', 'N']).",
+    "most_stable_energy_eV": -7.687000274658203,
+    "target_adsorbate_atom": "C",
+    "target_adsorbate_atom_index": 84,
+    "bonded_surface_atoms": [
+      {
+        "symbol": "N",
+        "index": 51,
+        "distance": 1.346
+      },
+      {
+        "symbol": "Cr",
+        "index": 3,
+        "distance": 2.872
+      },
+      {
+        "symbol": "Cr",
+        "index": 8,
+        "distance": 3.052
+      }
+    ],
+    "nearest_slab_atom": "N",
+    "nearest_slab_atom_index": 51,
+    "final_bond_distance_A": 1.346,
+    "estimated_covalent_cutoff_A": 1.617,
+    "is_covalently_bound": true,
+    "reaction_detected": false,
+    "is_dissociated": false,
+    "n_components": 1,
+    "bond_change_count": 0,
+    "site_analysis": {
+      "planned_site_type": "hollow",
+      "planned_connectivity": 3,
+      "actual_site_type": "hollow (HCP/Subsurf-Atom)",
+      "actual_connectivity": 3,
+      "is_chemical_slip": false,
+      "planned_symbols": [
+        "Cr",
+        "Cr",
+        "N"
+      ],
+      "actual_symbols": [
+        "Cr",
+        "Cr",
+        "N"
+      ],
+      "site_fingerprint": "N51-Cr3-Cr8"
+    },
+    "best_structure_file": "outputs/005-c5a3e292/BEST_CH_O_hollow_to_hollow_HCP-Subsurf-Atom_E-7.687.xyz",
+    "generated_conformers_file": "outputs/005-c5a3e292/conformers_[CH]_O.traj",
+    "relaxation_trajectory_file": "outputs/005-c5a3e292/final.xyz",
+    "session_id": "005-c5a3e292"
+  },
+  "attempt_records": [
+    {
+      "attempt_index": 1,
+      "plan": {
+        "reasoning": "This is the first attempt to find the lowest energy adsorption configuration. The adsorbate is the formyl radical, [CH]=O. The provided analysis shows that the carbon atom (index 0) has one radical electron, making it the most reactive site for forming a covalent bond with the surface. Transition metal sites like Cr are generally more reactive towards radicals than nitrogen sites. Therefore, the most chemically intuitive and promising initial configuration is to place the radical carbon on an ontop Cr site. This corresponds to a 'ReactiveSpecies' adsorption type, as we are utilizing the unpaired electron for bonding.",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "ontop",
+          "surface_binding_atoms": [
+            "Cr"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "ontop|Cr|0|ReactiveSpecies|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -7.707094192504883,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": true,
+      "planned_site_type": "ontop",
+      "actual_site_type": "hollow (HCP/Subsurf-Atom)",
+      "best_structure_file": "outputs/005-c5a3e292/BEST_CH_O_ontop_to_hollow_HCP-Subsurf-Atom_E-7.707.xyz",
+      "generated_conformers_file": "outputs/005-c5a3e292/conformers_[CH]_O.traj",
+      "relaxation_trajectory_file": "outputs/005-c5a3e292/final.xyz",
+      "message": "Most stable config adsorption energy: -7.7071 eV. Target Atom: C (from plan index 0, global index 84 in relaxed structure). -> Nearest: N (Index 51), Distance: 1.339 \u00c5 (Threshold: 2.132), Bound: True. Bonded Surface Atoms: N-1.339\u00c5, Cr-2.937\u00c5, Cr-3.013\u00c5. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Cr'] -> Actual ['Cr', 'Cr', 'N']).",
+      "history_entry": "\u3010\u2705 Perfect Adsorption\u3011 ontop @ ['Cr'] (Index [0]) -> \u26a0\ufe0f\u3010Unstable Site Warning\u3011\u26a0\ufe0f: Planned ontop (Cr) is unstable, adsorbate spontaneously slipped to hollow (HCP/Subsurf-Atom) (Cr-Cr-N).This means Cr has insufficient affinity for this adsorbate. Please **FORBID** testing Cr type sites again! [\ud83c\udf1f New Best] | E=-7.707 eV"
+    },
+    {
+      "attempt_index": 2,
+      "plan": {
+        "reasoning": "0. **SMILES Consistency Check**: The SMILES `[CH]=O` corresponds to a formyl radical. The provided atom list confirms this, with the Carbon atom (index 0) having `radical_electrons: 1`. This is consistent.\n\n1. **Analyze Old Plans**: The history shows one attempt: `ontop @ ['Cr']`. This plan was unstable, as the adsorbate spontaneously slipped to a `hollow (Cr-Cr-N)` site. This resulted in the current best energy of -7.707 eV. The warning explicitly states: `Please FORBID testing Cr type sites again!`. This is a critical instruction. The initial `Cr` ontop site is thermodynamically unfavorable.\n\n2. **Formulate New Plan**: My goal is to find a configuration with energy lower than -7.707 eV. Based on the history, I must avoid any site primarily involving `Cr`, such as `ontop @ Cr` or `bridge @ Cr-Cr`. The previous calculation already found a stable configuration in a `Cr-Cr-N` hollow site. To systematically explore other possibilities, I will now test a chemically distinct site. The available sites list includes `ontop @ N`. This is a high-symmetry site that has not been tested and is fundamentally different from the failed `Cr` site.\n\n3. **Analyze Request**: The user wants to find the lowest-energy adsorption configuration for the `[CH]=O` radical.\n\n4. **Analyze Adsorbate**: The adsorbate is a formyl radical, `[CH]=O`. The radical electron is located on the Carbon atom (index 0), making it the most likely atom to form a covalent bond with the surface.\n\n5. **Analyze Surface**: The available sites are `[Bridge]: Cr-Cr, Cr-N, N-N; [Ontop]: Cr, N; [Hollow-3]: Cr-Cr-N, Cr-N-N, N-N-N`. Following the instruction from the previous failure, I will avoid `Cr` sites and select the `N` ontop site.\n\n6. **Formulate Plan**: I will propose adsorbing the formyl radical via its radical Carbon atom (index 0) onto an `ontop` site composed of a single Nitrogen atom. This constitutes a `ReactiveSpecies` adsorption. This plan is distinct from the previous one and respects all historical findings and warnings.",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "ontop",
+          "surface_binding_atoms": [
+            "N"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "ontop|N|0|ReactiveSpecies|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -7.130311965942383,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": true,
+      "planned_site_type": "ontop",
+      "actual_site_type": "hollow (HCP/Subsurf-Atom)",
+      "best_structure_file": "outputs/005-c5a3e292/BEST_CH_O_ontop_to_hollow_HCP-Subsurf-Atom_E-7.130.xyz",
+      "generated_conformers_file": "outputs/005-c5a3e292/conformers_[CH]_O.traj",
+      "relaxation_trajectory_file": "outputs/005-c5a3e292/final.xyz",
+      "message": "Most stable config adsorption energy: -7.1303 eV. Target Atom: C (from plan index 0, global index 84 in relaxed structure). -> Nearest: N (Index 49), Distance: 1.371 \u00c5 (Threshold: 2.132), Bound: True. Bonded Surface Atoms: N-1.371\u00c5, Cr-2.997\u00c5, Cr-3.102\u00c5. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['N'] -> Actual ['Cr', 'Cr', 'N']).",
+      "history_entry": "\u3010\u2705 Perfect Adsorption\u3011 ontop @ ['N'] (Index [0]) -> \u26a0\ufe0f\u3010Unstable Site Warning\u3011\u26a0\ufe0f: Planned ontop (N) is unstable, adsorbate spontaneously slipped to hollow (HCP/Subsurf-Atom) (Cr-Cr-N).This means N has insufficient affinity for this adsorbate. Please **FORBID** testing N type sites again! | E=-7.130 eV"
+    },
+    {
+      "attempt_index": 3,
+      "plan": {
+        "reasoning": "Based on the history, two previous attempts were made to place the formyl radical on ontop sites (Cr and N). In both cases, the adsorbate was unstable at the planned site and spontaneously slipped to a `Cr-Cr-N` hollow site. The attempt starting from the Cr ontop site resulted in the current lowest energy of -7.707 eV. This provides strong evidence that the `Cr-Cr-N` hollow site is a highly favorable adsorption location. The warnings explicitly forbid re-testing ontop sites of type Cr or N. Therefore, the most logical next step is to directly test the `Cr-Cr-N` hollow site, which was the destination of the previous slips. The adsorbate is a formyl radical ([CH]=O) with the unpaired electron on the Carbon atom (index 0), as confirmed by the provided analysis (`radical_electrons: 1`). Thus, I will plan a `ReactiveSpecies` adsorption with the Carbon atom (index 0) positioned over the `Cr-Cr-N` hollow site.",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "hollow",
+          "surface_binding_atoms": [
+            "Cr",
+            "Cr",
+            "N"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "hollow|Cr,Cr,N|0|ReactiveSpecies|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -7.687000274658203,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": false,
+      "planned_site_type": "hollow",
+      "actual_site_type": "hollow (HCP/Subsurf-Atom)",
+      "best_structure_file": "outputs/005-c5a3e292/BEST_CH_O_hollow_to_hollow_HCP-Subsurf-Atom_E-7.687.xyz",
+      "generated_conformers_file": "outputs/005-c5a3e292/conformers_[CH]_O.traj",
+      "relaxation_trajectory_file": "outputs/005-c5a3e292/final.xyz",
+      "message": "Most stable config adsorption energy: -7.6870 eV. Target Atom: C (from plan index 0, global index 84 in relaxed structure). -> Nearest: N (Index 51), Distance: 1.346 \u00c5 (Threshold: 2.132), Bound: True. Bonded Surface Atoms: N-1.346\u00c5, Cr-2.872\u00c5, Cr-3.052\u00c5. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: False (Planned ['Cr', 'Cr', 'N'] -> Actual ['Cr', 'Cr', 'N']).",
+      "history_entry": "\u3010\u2705 Perfect Adsorption\u3011 hollow @ ['Cr', 'Cr', 'N'] (Index [0]) -> \u26a0\ufe0f Geometric Slip: hollow -> hollow (HCP/Subsurf-Atom) [\ud83d\udd04 Converged to known best] | E=-7.687 eV"
+    }
+  ],
+  "history": [
+    "\u3010\u2705 Perfect Adsorption\u3011 ontop @ ['Cr'] (Index [0]) -> \u26a0\ufe0f\u3010Unstable Site Warning\u3011\u26a0\ufe0f: Planned ontop (Cr) is unstable, adsorbate spontaneously slipped to hollow (HCP/Subsurf-Atom) (Cr-Cr-N).This means Cr has insufficient affinity for this adsorbate. Please **FORBID** testing Cr type sites again! [\ud83c\udf1f New Best] | E=-7.707 eV",
+    "\u3010\u2705 Perfect Adsorption\u3011 ontop @ ['N'] (Index [0]) -> \u26a0\ufe0f\u3010Unstable Site Warning\u3011\u26a0\ufe0f: Planned ontop (N) is unstable, adsorbate spontaneously slipped to hollow (HCP/Subsurf-Atom) (Cr-Cr-N).This means N has insufficient affinity for this adsorbate. Please **FORBID** testing N type sites again! | E=-7.130 eV",
+    "\u3010\u2705 Perfect Adsorption\u3011 hollow @ ['Cr', 'Cr', 'N'] (Index [0]) -> \u26a0\ufe0f Geometric Slip: hollow -> hollow (HCP/Subsurf-Atom) [\ud83d\udd04 Converged to known best] | E=-7.687 eV"
+  ],
+  "error": null,
+  "perfect_count": 3,
+  "dissociation_count": 0,
+  "rearrangement_count": 0,
+  "calc_failure_count": 0,
+  "chemical_slip_count": 2
+}

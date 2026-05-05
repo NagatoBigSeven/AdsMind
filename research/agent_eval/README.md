@@ -59,7 +59,7 @@ Run a manifest sequentially:
 ```bash
 python -m research.agent_eval.run_batch \
   --manifest datasets/cmu20/cmu20_manifest.csv \
-  --config research/agent_eval/configs/frozen_config_gemini25pro_openrouter_one_shot.json \
+  --config research/agent_eval/configs/frozen_config_gemini25pro_mace_mp0_small_one_shot.json \
   --output research/results/example_cmu20_gemini_one_shot
 ```
 
@@ -68,7 +68,7 @@ Run an ablation matrix:
 ```bash
 python -m research.agent_eval.run_ablation \
   --manifest datasets/cmu20/cmu20_manifest.csv \
-  --config research/agent_eval/configs/frozen_config_gemini25pro_openrouter.json \
+  --config research/agent_eval/configs/frozen_config_gemini25pro_mace_mp0_small.json \
   --output research/results/example_gemini_ablation \
   --cases 01,02,09,14,19 \
   --variants full,no_slip,no_forbid,no_termination,one_shot
@@ -91,10 +91,10 @@ Aggregate a 4-backend ablation table:
 
 ```bash
 python -m research.agent_eval.aggregate_ablation_across_backends \
-  --summary openai_gpt54_mace_mp0_small=research/results/basic_experiments/cmu20/openai_gpt54_mace_mp0_small/all_variants_summary.csv \
-  --summary anthropic_claude_sonnet46_mace_mp0_small=research/results/basic_experiments/cmu20/anthropic_claude_sonnet46_mace_mp0_small/all_variants_summary.csv \
-  --summary openrouter_gemini25pro_mace_mp0_small=research/results/basic_experiments/cmu20/openrouter_gemini25pro_mace_mp0_small/all_variants_summary.csv \
-  --summary openrouter_grok4_mace_mp0_small=research/results/basic_experiments/cmu20/openrouter_grok4_mace_mp0_small/all_variants_summary.csv \
+  --summary gpt54_mace_mp0_small=research/results/basic_experiments/cmu20/gpt54_mace_mp0_small/all_variants_summary.csv \
+  --summary claude_sonnet46_mace_mp0_small=research/results/basic_experiments/cmu20/claude_sonnet46_mace_mp0_small/all_variants_summary.csv \
+  --summary gemini25pro_mace_mp0_small=research/results/basic_experiments/cmu20/gemini25pro_mace_mp0_small/all_variants_summary.csv \
+  --summary grok4_mace_mp0_small=research/results/basic_experiments/cmu20/grok4_mace_mp0_small/all_variants_summary.csv \
   --output-csv research/results/basic_experiments/cmu20/summaries/ablation_4backend.csv \
   --output-json research/results/basic_experiments/cmu20/summaries/ablation_4backend.json
 ```

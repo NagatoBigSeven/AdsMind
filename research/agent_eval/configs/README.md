@@ -1,25 +1,22 @@
 # Frozen Experiment Configs
 
 These JSON files pin the runtime settings used for AdsMind benchmark and
-ablation runs. They intentionally store model names, physics settings, and
-provider routes, but never API keys.
+ablation runs. They intentionally store model names, physics settings, and API
+transport settings, but never API keys.
 
-## Recommended Public Routes
+## Frozen Configs
 
-- `frozen_config_openai_gpt54*.json`: GPT-5.4 through OpenAI's official
-  endpoint.
-- `frozen_config_anthropic_sonnet46*.json`: Claude Sonnet 4.6 through
-  Anthropic's official OpenAI-compatible endpoint.
-- `frozen_config_gemini25pro_openrouter*.json`: Gemini 2.5 Pro through
-  OpenRouter.
-- `frozen_config_grok4_openrouter*.json`: Grok-4 through OpenRouter.
+- `frozen_config_gpt54_mace_mp0_small*.json`: GPT-5.4 with MACE-MP-0 small.
+- `frozen_config_claude_sonnet46_mace_mp0_small*.json`: Claude Sonnet 4.6 with MACE-MP-0 small.
+- `frozen_config_gemini25pro_mace_mp0_small*.json`: Gemini 2.5 Pro with MACE-MP-0 small.
+- `frozen_config_grok4_mace_mp0_small*.json`: Grok-4 with MACE-MP-0 small.
+- `frozen_config_gpt54_mace_mp0_large.json`: GPT-5.4 with MACE-MP-0 large.
 
-## Route Policy
+## Identity Policy
 
-The paper-facing benchmark uses one public route per model family: OpenAI for
-GPT, Anthropic for Claude, and OpenRouter for Gemini and Grok. Historical
-alternate-provider recovery configs are intentionally not retained here because
-they make the public experiment identity ambiguous.
+Paper-facing results identify runs by dataset, LLM backend/version, variant, and
+force-field size. API transport settings are retained here only so the runner can
+reproduce the execution environment; they are not benchmark identity dimensions.
 
 ## Local Overrides
 

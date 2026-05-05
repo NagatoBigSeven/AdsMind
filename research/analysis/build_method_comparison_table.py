@@ -185,7 +185,6 @@ def build_ablation_4backend(dataset: str) -> pd.DataFrame:
         "backend_key",
         "backend",
         "llm_model",
-        "llm_route",
         "force_field",
         "calculator_backend",
         "force_field_model",
@@ -267,7 +266,7 @@ def add_adsorbagent_columns(table: pd.DataFrame, dataset: str) -> None:
         BASIC_ROOT
         / "cmu20"
         / "baselines"
-        / "adsorbagent_openai_gpt54_mace_mp0_small"
+        / "adsorbagent_gpt54_mace_mp0_small"
         / "summary.csv"
     )
     df = read_csv(path)

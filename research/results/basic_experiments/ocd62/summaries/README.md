@@ -2,7 +2,7 @@
 
 Dataset-level summary tables for OCD62. Run directories live under sibling
 LLM/force-field folders such as
-`openai_gpt54_mace_mp0_small`, and non-LLM baselines live under
+`gpt54_mace_mp0_small`, and non-LLM baselines live under
 `baselines/`.
 
 - `method_comparison.csv`: per-case comparison of AdsMind 1-Shot, AdsMind Full,

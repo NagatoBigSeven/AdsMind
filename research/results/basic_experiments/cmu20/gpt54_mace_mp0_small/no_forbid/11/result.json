@@ -1,0 +1,296 @@
+{
+  "case_id": "11",
+  "case_metadata": {
+    "case_id": "11",
+    "slab_file": "datasets/cmu20/11_Pd_111.xyz",
+    "smiles": "[OH]",
+    "user_request": "Find the lowest-energy adsorption configuration for hydroxyl radical on the provided surface.",
+    "surface_family": "monometallic",
+    "adsorbate_name": "OH",
+    "miller_index": "(111)",
+    "reaction_class": "ORR",
+    "ablation_candidate": "FALSE",
+    "notes": "Pd ORR benchmark"
+  },
+  "status": "success",
+  "best_energy_eV": -2.4184722900390625,
+  "iteration_count": 3,
+  "max_attempts": 5,
+  "final_site_type": "hollow (FCC/No-Subsurf)",
+  "converged_tag": false,
+  "wall_clock_sec": 771.8049920201302,
+  "total_input_tokens": 16621,
+  "total_output_tokens": 4388,
+  "artifact_paths": {
+    "BEST_OH_bridge_to_hollow_FCC-No-Subsurf_E-2.389": "research/results/basic_experiments/cmu20/gpt54_mace_mp0_small/no_forbid/11/artifacts/BEST_OH_bridge_to_hollow_FCC-No-Subsurf_E-2.389.xyz",
+    "BEST_OH_bridge_to_hollow_FCC-No-Subsurf_E-2.389.xyz": "research/results/basic_experiments/cmu20/gpt54_mace_mp0_small/no_forbid/11/artifacts/BEST_OH_bridge_to_hollow_FCC-No-Subsurf_E-2.389.xyz",
+    "best_structure_file": "research/results/basic_experiments/cmu20/gpt54_mace_mp0_small/no_forbid/11/artifacts/BEST_OH_ontop_to_hollow_FCC-No-Subsurf_E-2.381.xyz",
+    "BEST_OH_hollow_to_hollow_FCC-No-Subsurf_E-2.418": "research/results/basic_experiments/cmu20/gpt54_mace_mp0_small/no_forbid/11/artifacts/BEST_OH_hollow_to_hollow_FCC-No-Subsurf_E-2.418.xyz",
+    "BEST_OH_hollow_to_hollow_FCC-No-Subsurf_E-2.418.xyz": "research/results/basic_experiments/cmu20/gpt54_mace_mp0_small/no_forbid/11/artifacts/BEST_OH_hollow_to_hollow_FCC-No-Subsurf_E-2.418.xyz",
+    "BEST_OH_ontop_to_hollow_FCC-No-Subsurf_E-2.381": "research/results/basic_experiments/cmu20/gpt54_mace_mp0_small/no_forbid/11/artifacts/BEST_OH_ontop_to_hollow_FCC-No-Subsurf_E-2.381.xyz",
+    "BEST_OH_ontop_to_hollow_FCC-No-Subsurf_E-2.381.xyz": "research/results/basic_experiments/cmu20/gpt54_mace_mp0_small/no_forbid/11/artifacts/BEST_OH_ontop_to_hollow_FCC-No-Subsurf_E-2.381.xyz",
+    "conformers_[OH]": "research/results/basic_experiments/cmu20/gpt54_mace_mp0_small/no_forbid/11/artifacts/conformers_[OH].traj",
+    "conformers_[OH].traj": "research/results/basic_experiments/cmu20/gpt54_mace_mp0_small/no_forbid/11/artifacts/conformers_[OH].traj",
+    "final": "research/results/basic_experiments/cmu20/gpt54_mace_mp0_small/no_forbid/11/artifacts/final.xyz",
+    "final.xyz": "research/results/basic_experiments/cmu20/gpt54_mace_mp0_small/no_forbid/11/artifacts/final.xyz",
+    "relaxation": "research/results/basic_experiments/cmu20/gpt54_mace_mp0_small/no_forbid/11/artifacts/relaxation.traj",
+    "relaxation.traj": "research/results/basic_experiments/cmu20/gpt54_mace_mp0_small/no_forbid/11/artifacts/relaxation.traj",
+    "relaxation_trajectory_file": "research/results/basic_experiments/cmu20/gpt54_mace_mp0_small/no_forbid/11/artifacts/relaxation.traj"
+  },
+  "best_result": {
+    "most_stable_energy_eV": -2.4184722900390625,
+    "analysis_json": {
+      "status": "success",
+      "message": "Most stable config adsorption energy: -2.4185 eV. Target Atom: O (from plan index 0, global index 54 in relaxed structure). -> Nearest: Pd (Index 39), Distance: 2.085 Å (Threshold: 2.972), Bound: True. Bonded Surface Atoms: Pd-2.085Å, Pd-2.093Å, Pd-2.503Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: False (Planned ['Pd', 'Pd', 'Pd'] -> Actual ['Pd', 'Pd', 'Pd']).",
+      "most_stable_energy_eV": -2.4184722900390625,
+      "target_adsorbate_atom": "O",
+      "target_adsorbate_atom_index": 54,
+      "bonded_surface_atoms": [
+        {
+          "symbol": "Pd",
+          "index": 39,
+          "distance": 2.085
+        },
+        {
+          "symbol": "Pd",
+          "index": 33,
+          "distance": 2.093
+        },
+        {
+          "symbol": "Pd",
+          "index": 21,
+          "distance": 2.503
+        }
+      ],
+      "nearest_slab_atom": "Pd",
+      "nearest_slab_atom_index": 39,
+      "final_bond_distance_A": 2.085,
+      "estimated_covalent_cutoff_A": 2.255,
+      "is_covalently_bound": true,
+      "reaction_detected": false,
+      "is_dissociated": false,
+      "n_components": 1,
+      "bond_change_count": 0,
+      "site_analysis": {
+        "planned_site_type": "hollow",
+        "planned_connectivity": 3,
+        "actual_site_type": "hollow (FCC/No-Subsurf)",
+        "actual_connectivity": 3,
+        "is_chemical_slip": false,
+        "planned_symbols": [
+          "Pd",
+          "Pd",
+          "Pd"
+        ],
+        "actual_symbols": [
+          "Pd",
+          "Pd",
+          "Pd"
+        ],
+        "site_fingerprint": "Pd39-Pd33-Pd21"
+      },
+      "best_structure_file": "outputs/11-1fd395da/BEST_OH_hollow_to_hollow_FCC-No-Subsurf_E-2.418.xyz",
+      "generated_conformers_file": "outputs/11-1fd395da/conformers_[OH].traj",
+      "relaxation_trajectory_file": "outputs/11-1fd395da/final.xyz",
+      "session_id": "11-1fd395da"
+    },
+    "plan": {
+      "reasoning": "SMILES consistency check: the adsorbate is [OH], i.e. hydroxyl radical. The provided atom list contains one heavy atom, O at index 0, with SP3 hybridization and 1 radical electron. This is chemically consistent with using ReactiveSpecies and binding through O. There is no history yet, so no prior sites, orientations, energies, slips, or convergence tags to analyze. The user wants the lowest-energy adsorption configuration of hydroxyl on Pd(111). For OH on close-packed late transition-metal surfaces, the chemically most plausible strong chemisorption mode is O-down with the radical center on O interacting directly with the metal. Since this is the first attempt, the best systematic initial guess is a high-coordination site. On fcc(111) surfaces, O-containing adsorbates commonly favor hollow or bridge over ontop, and starting from hollow is the most reasonable first exploration for a potentially lowest-energy state. Available site types are ontop, bridge, and hollow; I will use the canonical site name 'hollow'. The only valid adsorbate binding index from the provided list is O index 0. Surface composition is Pd, so the hollow site uses three Pd atoms. This respects the rule that hollow can use 1 binding index on the adsorbate side.",
+      "adsorbate_type": "ReactiveSpecies",
+      "solution": {
+        "action": "continue",
+        "site_type": "hollow",
+        "surface_binding_atoms": [
+          "Pd",
+          "Pd",
+          "Pd"
+        ],
+        "adsorbate_binding_indices": [
+          0
+        ],
+        "relax_top_n": 1,
+        "touch_sphere_size": 2,
+        "overlap_thr": 0.1,
+        "conformers_per_site_cap": 4
+      }
+    },
+    "result_type": "Perfect"
+  },
+  "last_analysis": {
+    "status": "success",
+    "message": "Most stable config adsorption energy: -2.3813 eV. Target Atom: O (from plan index 0, global index 54 in relaxed structure). -> Nearest: Pd (Index 15), Distance: 2.073 Å (Threshold: 2.972), Bound: True. Bonded Surface Atoms: Pd-2.073Å, Pd-2.08Å, Pd-2.792Å, Pd-2.869Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Pd'] -> Actual ['Pd', 'Pd', 'Pd', 'Pd']).",
+    "most_stable_energy_eV": -2.3813095092773438,
+    "target_adsorbate_atom": "O",
+    "target_adsorbate_atom_index": 54,
+    "bonded_surface_atoms": [
+      {
+        "symbol": "Pd",
+        "index": 15,
+        "distance": 2.073
+      },
+      {
+        "symbol": "Pd",
+        "index": 51,
+        "distance": 2.08
+      },
+      {
+        "symbol": "Pd",
+        "index": 3,
+        "distance": 2.792
+      },
+      {
+        "symbol": "Pd",
+        "index": 45,
+        "distance": 2.869
+      }
+    ],
+    "nearest_slab_atom": "Pd",
+    "nearest_slab_atom_index": 15,
+    "final_bond_distance_A": 2.073,
+    "estimated_covalent_cutoff_A": 2.255,
+    "is_covalently_bound": true,
+    "reaction_detected": false,
+    "is_dissociated": false,
+    "n_components": 1,
+    "bond_change_count": 0,
+    "site_analysis": {
+      "planned_site_type": "ontop",
+      "planned_connectivity": 1,
+      "actual_site_type": "hollow (FCC/No-Subsurf)",
+      "actual_connectivity": 4,
+      "is_chemical_slip": true,
+      "planned_symbols": [
+        "Pd"
+      ],
+      "actual_symbols": [
+        "Pd",
+        "Pd",
+        "Pd",
+        "Pd"
+      ],
+      "site_fingerprint": "Pd15-Pd51-Pd3-Pd45"
+    },
+    "best_structure_file": "outputs/11-1fd395da/BEST_OH_ontop_to_hollow_FCC-No-Subsurf_E-2.381.xyz",
+    "generated_conformers_file": "outputs/11-1fd395da/conformers_[OH].traj",
+    "relaxation_trajectory_file": "outputs/11-1fd395da/final.xyz",
+    "session_id": "11-1fd395da"
+  },
+  "attempt_records": [
+    {
+      "attempt_index": 1,
+      "plan": {
+        "reasoning": "SMILES consistency check: the adsorbate is [OH], i.e. hydroxyl radical. The provided atom list contains one heavy atom, O at index 0, with SP3 hybridization and 1 radical electron. This is chemically consistent with using ReactiveSpecies and binding through O. There is no history yet, so no prior sites, orientations, energies, slips, or convergence tags to analyze. The user wants the lowest-energy adsorption configuration of hydroxyl on Pd(111). For OH on close-packed late transition-metal surfaces, the chemically most plausible strong chemisorption mode is O-down with the radical center on O interacting directly with the metal. Since this is the first attempt, the best systematic initial guess is a high-coordination site. On fcc(111) surfaces, O-containing adsorbates commonly favor hollow or bridge over ontop, and starting from hollow is the most reasonable first exploration for a potentially lowest-energy state. Available site types are ontop, bridge, and hollow; I will use the canonical site name 'hollow'. The only valid adsorbate binding index from the provided list is O index 0. Surface composition is Pd, so the hollow site uses three Pd atoms. This respects the rule that hollow can use 1 binding index on the adsorbate side.",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "hollow",
+          "surface_binding_atoms": [
+            "Pd",
+            "Pd",
+            "Pd"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "hollow|Pd,Pd,Pd|0|ReactiveSpecies|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -2.4184722900390625,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": false,
+      "planned_site_type": "hollow",
+      "actual_site_type": "hollow (FCC/No-Subsurf)",
+      "best_structure_file": "outputs/11-1fd395da/BEST_OH_hollow_to_hollow_FCC-No-Subsurf_E-2.418.xyz",
+      "generated_conformers_file": "outputs/11-1fd395da/conformers_[OH].traj",
+      "relaxation_trajectory_file": "outputs/11-1fd395da/final.xyz",
+      "message": "Most stable config adsorption energy: -2.4185 eV. Target Atom: O (from plan index 0, global index 54 in relaxed structure). -> Nearest: Pd (Index 39), Distance: 2.085 Å (Threshold: 2.972), Bound: True. Bonded Surface Atoms: Pd-2.085Å, Pd-2.093Å, Pd-2.503Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: False (Planned ['Pd', 'Pd', 'Pd'] -> Actual ['Pd', 'Pd', 'Pd']).",
+      "history_entry": "【✅ Perfect Adsorption】 hollow @ ['Pd', 'Pd', 'Pd'] (Index [0]) -> ⚠️ Geometric Slip: hollow -> hollow (FCC/No-Subsurf) [🌟 New Best] | E=-2.418 eV"
+    },
+    {
+      "attempt_index": 2,
+      "plan": {
+        "reasoning": "SMILES consistency check: the adsorbate is [OH], i.e. hydroxyl radical. The provided heavy atom list contains only O at index 0 with SP3 hybridization, degree 0, formal charge 0, and radical_electrons = 1. This is fully consistent with a radical OH species, so ReactiveSpecies is appropriate, and the only valid binding atom is O index 0 because it indeed carries an unpaired electron. History analysis: one successful plan has already been tested, namely hollow on Pd-Pd-Pd, which relaxed to a hollow FCC-like site and gave E = -2.418 eV as the current best. There is no tag indicating convergence from another distinct initial site to the same known best, and no evidence that ontop or bridge have been tested yet. Therefore termination is not yet justified. User intent is to find the lowest-energy adsorption configuration of hydroxyl on Pd(111), so the next systematic step is to test another major high-symmetry site. For OH on close-packed late-transition-metal surfaces, O-bound adsorption is physically sensible; exploring ontop/bridge versus hollow is the standard sequence. Since hollow is already tested and best so far, the most distinct remaining high-symmetry alternative is bridge. The available site list explicitly includes Bridge: Pd-Pd, so this is a valid new plan. I will keep single-point O binding because OH has only one heavy atom available in the provided index list and the radical center is on O. Parameters are left at defaults.",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "bridge",
+          "surface_binding_atoms": [
+            "Pd",
+            "Pd"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "bridge|Pd,Pd|0|ReactiveSpecies|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -2.3885955810546875,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": true,
+      "planned_site_type": "bridge",
+      "actual_site_type": "hollow (FCC/No-Subsurf)",
+      "best_structure_file": "outputs/11-1fd395da/BEST_OH_bridge_to_hollow_FCC-No-Subsurf_E-2.389.xyz",
+      "generated_conformers_file": "outputs/11-1fd395da/conformers_[OH].traj",
+      "relaxation_trajectory_file": "outputs/11-1fd395da/final.xyz",
+      "message": "Most stable config adsorption energy: -2.3886 eV. Target Atom: O (from plan index 0, global index 54 in relaxed structure). -> Nearest: Pd (Index 39), Distance: 2.083 Å (Threshold: 2.972), Bound: True. Bonded Surface Atoms: Pd-2.083Å, Pd-2.093Å, Pd-2.713Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Pd', 'Pd'] -> Actual ['Pd', 'Pd', 'Pd']).",
+      "history_entry": "【✅ Perfect Adsorption】 bridge @ ['Pd', 'Pd'] (Index [0]) -> ⚠️【Unstable Site Warning】⚠️: Planned bridge (Pd-Pd) is unstable, adsorbate spontaneously slipped to hollow (FCC/No-Subsurf) (Pd-Pd-Pd).This means Pd-Pd has insufficient affinity for this adsorbate. [⚠️ Energy Degenerate but Geometrically Distinct] | E=-2.389 eV"
+    },
+    {
+      "attempt_index": 3,
+      "plan": {
+        "reasoning": "SMILES consistency check: the adsorbate is [OH], i.e. hydroxyl radical. The provided RDKit atom list contains one heavy atom, O at index 0, with SP3 hybridization and 1 radical electron. This is fully consistent with a ReactiveSpecies plan binding through O. History analysis: a hollow Pd-Pd-Pd site has already been tested successfully and is currently the best structure at -2.418 eV. A bridge Pd-Pd site was also tested, but it spontaneously slipped to hollow and was explicitly flagged as an unstable bridge; therefore bridge should be treated as invalid/unstable for this adsorbate on this surface. The remaining major high-symmetry site not yet tested is ontop on Pd. This is a genuinely new plan, distinct from prior hollow and bridge attempts, and is the only systematic high-symmetry site left to probe before termination. User intent is to find the lowest-energy adsorption configuration of hydroxyl on Pd(111), so testing the last untried canonical site is appropriate. For OH radical on a metal surface, O is the chemically correct binding atom, and its radical electron supports choosing ReactiveSpecies with adsorbate_binding_indices [0].",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "ontop",
+          "surface_binding_atoms": [
+            "Pd"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "ontop|Pd|0|ReactiveSpecies|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -2.3813095092773438,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": true,
+      "planned_site_type": "ontop",
+      "actual_site_type": "hollow (FCC/No-Subsurf)",
+      "best_structure_file": "outputs/11-1fd395da/BEST_OH_ontop_to_hollow_FCC-No-Subsurf_E-2.381.xyz",
+      "generated_conformers_file": "outputs/11-1fd395da/conformers_[OH].traj",
+      "relaxation_trajectory_file": "outputs/11-1fd395da/final.xyz",
+      "message": "Most stable config adsorption energy: -2.3813 eV. Target Atom: O (from plan index 0, global index 54 in relaxed structure). -> Nearest: Pd (Index 15), Distance: 2.073 Å (Threshold: 2.972), Bound: True. Bonded Surface Atoms: Pd-2.073Å, Pd-2.08Å, Pd-2.792Å, Pd-2.869Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Pd'] -> Actual ['Pd', 'Pd', 'Pd', 'Pd']).",
+      "history_entry": "【✅ Perfect Adsorption】 ontop @ ['Pd'] (Index [0]) -> ⚠️【Unstable Site Warning】⚠️: Planned ontop (Pd) is unstable, adsorbate spontaneously slipped to hollow (FCC/No-Subsurf) (Pd-Pd-Pd-Pd).This means Pd has insufficient affinity for this adsorbate. [⚠️ Energy Degenerate but Geometrically Distinct] | E=-2.381 eV"
+    }
+  ],
+  "history": [
+    "【✅ Perfect Adsorption】 hollow @ ['Pd', 'Pd', 'Pd'] (Index [0]) -> ⚠️ Geometric Slip: hollow -> hollow (FCC/No-Subsurf) [🌟 New Best] | E=-2.418 eV",
+    "【✅ Perfect Adsorption】 bridge @ ['Pd', 'Pd'] (Index [0]) -> ⚠️【Unstable Site Warning】⚠️: Planned bridge (Pd-Pd) is unstable, adsorbate spontaneously slipped to hollow (FCC/No-Subsurf) (Pd-Pd-Pd).This means Pd-Pd has insufficient affinity for this adsorbate. [⚠️ Energy Degenerate but Geometrically Distinct] | E=-2.389 eV",
+    "【✅ Perfect Adsorption】 ontop @ ['Pd'] (Index [0]) -> ⚠️【Unstable Site Warning】⚠️: Planned ontop (Pd) is unstable, adsorbate spontaneously slipped to hollow (FCC/No-Subsurf) (Pd-Pd-Pd-Pd).This means Pd has insufficient affinity for this adsorbate. [⚠️ Energy Degenerate but Geometrically Distinct] | E=-2.381 eV"
+  ],
+  "error": null,
+  "perfect_count": 3,
+  "dissociation_count": 0,
+  "rearrangement_count": 0,
+  "calc_failure_count": 0,
+  "chemical_slip_count": 2
+}

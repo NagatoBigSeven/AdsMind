@@ -21,7 +21,6 @@ PROVENANCE_FIELDS = [
     "backend_key",
     "backend",
     "llm_model",
-    "llm_route",
     "force_field",
     "calculator_backend",
     "force_field_model",
@@ -35,18 +34,15 @@ MECHANISM = ADVANCED / "ablation_and_chemical_slip_diagnostics" / "ablation_effe
 
 BACKEND_ALIASES = {
     "gpt": "gpt",
-    "openai_gpt54": "gpt",
-    "openai_gpt54_mace_mp0_small": "gpt",
+    "gpt54_mace_mp0_small": "gpt",
     "claude": "claude",
-    "anthropic_claude": "claude",
-    "anthropic_sonnet46": "claude",
-    "anthropic_claude_sonnet46_mace_mp0_small": "claude",
+    "claude_sonnet46_mace_mp0_small": "claude",
     "gemini": "gemini",
-    "openrouter_gemini25pro_mace_mp0_small": "gemini",
+    "gemini25pro_mace_mp0_small": "gemini",
     "grok": "grok",
     "grok4": "grok",
-    "openrouter_grok4_mace_mp0_small": "grok",
-    "anthropic_claude_sonnet46_mace_mp0_small_sonnet46_mace_mp0_small": "claude",
+    "grok4_mace_mp0_small": "grok",
+    "claude_sonnet46_mace_mp0_small_sonnet46_mace_mp0_small": "claude",
 }
 
 SHORT_BACKEND_VALUES = set(BACKEND_ALIASES)

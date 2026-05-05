@@ -1,0 +1,321 @@
+{
+  "case_id": "030",
+  "case_metadata": {
+    "case_id": "030",
+    "slab_file": "datasets/ocd62/030_Cd16Pd48_C_CH2_O.xyz",
+    "smiles": "C([CH2])O",
+    "user_request": "Find the lowest-energy adsorption configuration for the adsorbate with SMILES C([CH2])O on the provided surface.",
+    "surface_family": "intermetallic",
+    "adsorbate_name": "C([CH2])O",
+    "miller_index": "",
+    "reaction_class": "GENERALIZATION",
+    "ablation_candidate": "FALSE",
+    "notes": "OCD id=384; adsorbate=C([CH2])O; surface_formula=Cd16Pd48; y_relaxed=-3.061927 eV; site=16;48",
+    "surface_formula": "Cd16Pd48",
+    "surface_elements": "Cd;Pd",
+    "bare_slab_atoms": "64",
+    "adsorbate_atoms": "8",
+    "y_relaxed": "-3.061927",
+    "site_indices": "16;48"
+  },
+  "status": "success",
+  "best_energy_eV": -5.087837219238281,
+  "iteration_count": 4,
+  "max_attempts": 5,
+  "final_site_type": "bridge",
+  "converged_tag": false,
+  "wall_clock_sec": 455.25679725781083,
+  "total_input_tokens": 20314,
+  "total_output_tokens": 5587,
+  "artifact_paths": {
+    "BEST_C(CH2)O_bridge_E-4.390": "research/results/basic_experiments/ocd62/gpt54_mace_mp0_small/no_slip/030/artifacts/BEST_C(CH2)O_bridge_E-4.390.xyz",
+    "BEST_C(CH2)O_bridge_E-4.390.xyz": "research/results/basic_experiments/ocd62/gpt54_mace_mp0_small/no_slip/030/artifacts/BEST_C(CH2)O_bridge_E-4.390.xyz",
+    "best_structure_file": "research/results/basic_experiments/ocd62/gpt54_mace_mp0_small/no_slip/030/artifacts/BEST_C(CH2)O_ontop_E-4.934.xyz",
+    "BEST_C(CH2)O_bridge_E-5.088": "research/results/basic_experiments/ocd62/gpt54_mace_mp0_small/no_slip/030/artifacts/BEST_C(CH2)O_bridge_E-5.088.xyz",
+    "BEST_C(CH2)O_bridge_E-5.088.xyz": "research/results/basic_experiments/ocd62/gpt54_mace_mp0_small/no_slip/030/artifacts/BEST_C(CH2)O_bridge_E-5.088.xyz",
+    "BEST_C(CH2)O_hollow_to_bridge_E-4.689": "research/results/basic_experiments/ocd62/gpt54_mace_mp0_small/no_slip/030/artifacts/BEST_C(CH2)O_hollow_to_bridge_E-4.689.xyz",
+    "BEST_C(CH2)O_hollow_to_bridge_E-4.689.xyz": "research/results/basic_experiments/ocd62/gpt54_mace_mp0_small/no_slip/030/artifacts/BEST_C(CH2)O_hollow_to_bridge_E-4.689.xyz",
+    "BEST_C(CH2)O_ontop_E-4.934": "research/results/basic_experiments/ocd62/gpt54_mace_mp0_small/no_slip/030/artifacts/BEST_C(CH2)O_ontop_E-4.934.xyz",
+    "BEST_C(CH2)O_ontop_E-4.934.xyz": "research/results/basic_experiments/ocd62/gpt54_mace_mp0_small/no_slip/030/artifacts/BEST_C(CH2)O_ontop_E-4.934.xyz",
+    "conformers_C([CH2])O": "research/results/basic_experiments/ocd62/gpt54_mace_mp0_small/no_slip/030/artifacts/conformers_C([CH2])O.traj",
+    "conformers_C([CH2])O.traj": "research/results/basic_experiments/ocd62/gpt54_mace_mp0_small/no_slip/030/artifacts/conformers_C([CH2])O.traj",
+    "final": "research/results/basic_experiments/ocd62/gpt54_mace_mp0_small/no_slip/030/artifacts/final.xyz",
+    "final.xyz": "research/results/basic_experiments/ocd62/gpt54_mace_mp0_small/no_slip/030/artifacts/final.xyz",
+    "relaxation": "research/results/basic_experiments/ocd62/gpt54_mace_mp0_small/no_slip/030/artifacts/relaxation.traj",
+    "relaxation.traj": "research/results/basic_experiments/ocd62/gpt54_mace_mp0_small/no_slip/030/artifacts/relaxation.traj",
+    "relaxation_trajectory_file": "research/results/basic_experiments/ocd62/gpt54_mace_mp0_small/no_slip/030/artifacts/relaxation.traj"
+  },
+  "best_result": {
+    "most_stable_energy_eV": -5.087837219238281,
+    "analysis_json": {
+      "status": "success",
+      "message": "Most stable config adsorption energy: -5.0878 eV. Target Atom: C (from plan index 1, global index 64 in relaxed structure). -> Nearest: Pd (Index 24), Distance: 2.069 Å (Threshold: 3.117), Bound: True. Bonded Surface Atoms: Pd-2.069Å, Pd-2.078Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: False (Planned ['Pd', 'Pd'] -> Actual ['Pd', 'Pd']).",
+      "most_stable_energy_eV": -5.087837219238281,
+      "target_adsorbate_atom": "C",
+      "target_adsorbate_atom_index": 64,
+      "bonded_surface_atoms": [
+        {
+          "symbol": "Pd",
+          "index": 24,
+          "distance": 2.069
+        },
+        {
+          "symbol": "Pd",
+          "index": 40,
+          "distance": 2.078
+        }
+      ],
+      "nearest_slab_atom": "Pd",
+      "nearest_slab_atom_index": 24,
+      "final_bond_distance_A": 2.069,
+      "estimated_covalent_cutoff_A": 2.365,
+      "is_covalently_bound": true,
+      "reaction_detected": false,
+      "is_dissociated": false,
+      "n_components": 1,
+      "bond_change_count": 0,
+      "site_analysis": {
+        "planned_site_type": "bridge",
+        "planned_connectivity": 2,
+        "actual_site_type": "bridge",
+        "actual_connectivity": 2,
+        "is_chemical_slip": false,
+        "planned_symbols": [
+          "Pd",
+          "Pd"
+        ],
+        "actual_symbols": [
+          "Pd",
+          "Pd"
+        ],
+        "site_fingerprint": "Pd24-Pd40"
+      },
+      "best_structure_file": "outputs/044-ce089b7f/BEST_C(CH2)O_bridge_E-5.088.xyz",
+      "generated_conformers_file": "outputs/044-ce089b7f/conformers_C([CH2])O.traj",
+      "relaxation_trajectory_file": "outputs/044-ce089b7f/final.xyz",
+      "session_id": "044-ce089b7f"
+    },
+    "plan": {
+      "reasoning": "SMILES consistency check: the adsorbate C([CH2])O corresponds to a hydroxyethyl-type radical, not a fully saturated alkyl. The provided RDKit atom list shows atom 1 is an SP3 carbon with 1 radical electron, while atom 0 and atom 2 have 0 radical electrons. Therefore this should be treated as a ReactiveSpecies if binding through the radical center. History analysis: only one successful plan has been tested so far, namely ontop on Pd using a single Pd site, with E = -4.934 eV and marked as the current best. There is no [🔄 Converged to known best] tag, so termination is not required. To search systematically for a lower-energy configuration, I should propose a genuinely new high-symmetry site not yet tested. Because the radical center is carbon atom 1, the chemically correct binding index for ReactiveSpecies is [1]. Available untested sites include bridge Cd-Pd, bridge Pd-Pd, hollow Cd-Pd-Pd, and hollow Pd-Pd-Pd. A carbon-centered radical on Pd-rich alloy surfaces often benefits from higher coordination than ontop, so the next most reasonable trial is a Pd-Pd bridge using the radical carbon. This is distinct from the prior ontop-Pd trial and respects the available site list. User intent is to find the lowest-energy adsorption configuration overall, so continuing systematic exploration of untested strong-binding Pd-rich sites is appropriate.",
+      "adsorbate_type": "ReactiveSpecies",
+      "solution": {
+        "action": "continue",
+        "site_type": "bridge",
+        "surface_binding_atoms": [
+          "Pd",
+          "Pd"
+        ],
+        "adsorbate_binding_indices": [
+          1
+        ],
+        "relax_top_n": 1,
+        "touch_sphere_size": 2,
+        "overlap_thr": 0.1,
+        "conformers_per_site_cap": 4
+      }
+    },
+    "result_type": "Perfect"
+  },
+  "last_analysis": {
+    "status": "success",
+    "message": "Most stable config adsorption energy: -4.3901 eV. Target Atom: C (from plan index 1, global index 64 in relaxed structure). -> Nearest: Pd (Index 48), Distance: 2.035 Å (Threshold: 3.117), Bound: True. Bonded Surface Atoms: Pd-2.035Å, Pd-3.071Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Cd', 'Pd'] -> Actual ['Pd', 'Pd']).",
+    "most_stable_energy_eV": -4.390144348144531,
+    "target_adsorbate_atom": "C",
+    "target_adsorbate_atom_index": 64,
+    "bonded_surface_atoms": [
+      {
+        "symbol": "Pd",
+        "index": 48,
+        "distance": 2.035
+      },
+      {
+        "symbol": "Pd",
+        "index": 43,
+        "distance": 3.071
+      }
+    ],
+    "nearest_slab_atom": "Pd",
+    "nearest_slab_atom_index": 48,
+    "final_bond_distance_A": 2.035,
+    "estimated_covalent_cutoff_A": 2.365,
+    "is_covalently_bound": true,
+    "reaction_detected": false,
+    "is_dissociated": false,
+    "n_components": 1,
+    "bond_change_count": 0,
+    "site_analysis": {
+      "planned_site_type": "bridge",
+      "planned_connectivity": 2,
+      "actual_site_type": "bridge",
+      "actual_connectivity": 2,
+      "is_chemical_slip": true,
+      "planned_symbols": [
+        "Cd",
+        "Pd"
+      ],
+      "actual_symbols": [
+        "Pd",
+        "Pd"
+      ],
+      "site_fingerprint": "Pd48-Pd43"
+    },
+    "best_structure_file": "outputs/044-ce089b7f/BEST_C(CH2)O_bridge_E-4.390.xyz",
+    "generated_conformers_file": "outputs/044-ce089b7f/conformers_C([CH2])O.traj",
+    "relaxation_trajectory_file": "outputs/044-ce089b7f/final.xyz",
+    "session_id": "044-ce089b7f"
+  },
+  "attempt_records": [
+    {
+      "attempt_index": 1,
+      "plan": {
+        "reasoning": "No previous attempts exist, so I should propose the best physically motivated initial adsorption plan rather than terminate. The SMILES C([CH2])O corresponds to a hydroxyethyl-type radical, with heavy atoms indexed as 0=C (SP3, non-radical), 1=C (SP3, radical_electrons=1), 2=O (SP3, non-radical). There is no SMILES/user-description mismatch to warn about beyond noting that this is not a fully saturated closed-shell molecule; it is a radical species because atom 1 has one unpaired electron. Therefore the adsorbate must be treated as ReactiveSpecies, and the binding index should be the actual radical center, atom 1. I should not bind through atom 0 or atom 2 under ReactiveSpecies rules because they do not carry unpaired electrons. For a carbon-centered radical on a Pd-containing alloy surface, the chemically most plausible strongest initial chemisorption is C-radical binding to a Pd atom. Among the available sites, ontop Pd is explicitly available and is the most direct, high-probability first trial for a carbon radical. Hollow and bridge motifs are possible later, but with no history yet, the most systematic best initial plan is the simplest strong C-Pd bond: radical carbon atom 1 on ontop Pd. Site naming must use the canonical label 'ontop', while surface binding atoms should specify the actual available atom type ['Pd'].",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "ontop",
+          "surface_binding_atoms": [
+            "Pd"
+          ],
+          "adsorbate_binding_indices": [
+            1
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "ontop|Pd|1|ReactiveSpecies|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -4.933784484863281,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": false,
+      "planned_site_type": "ontop",
+      "actual_site_type": "ontop",
+      "best_structure_file": "outputs/044-ce089b7f/BEST_C(CH2)O_ontop_E-4.934.xyz",
+      "generated_conformers_file": "outputs/044-ce089b7f/conformers_C([CH2])O.traj",
+      "relaxation_trajectory_file": "outputs/044-ce089b7f/final.xyz",
+      "message": "Most stable config adsorption energy: -4.9338 eV. Target Atom: C (from plan index 1, global index 64 in relaxed structure). -> Nearest: Pd (Index 40), Distance: 1.988 Å (Threshold: 3.117), Bound: True. Bonded Surface Atoms: Pd-1.988Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: False (Planned ['Pd'] -> Actual ['Pd']).",
+      "history_entry": "【✅ Perfect Adsorption】 ontop @ ['Pd'] (Index [1]) -> Site: ontop (Pd) [🌟 New Best] | E=-4.934 eV"
+    },
+    {
+      "attempt_index": 2,
+      "plan": {
+        "reasoning": "SMILES consistency check: the adsorbate C([CH2])O corresponds to a hydroxyethyl-type radical, not a fully saturated alkyl. The provided RDKit atom list shows atom 1 is an SP3 carbon with 1 radical electron, while atom 0 and atom 2 have 0 radical electrons. Therefore this should be treated as a ReactiveSpecies if binding through the radical center. History analysis: only one successful plan has been tested so far, namely ontop on Pd using a single Pd site, with E = -4.934 eV and marked as the current best. There is no [🔄 Converged to known best] tag, so termination is not required. To search systematically for a lower-energy configuration, I should propose a genuinely new high-symmetry site not yet tested. Because the radical center is carbon atom 1, the chemically correct binding index for ReactiveSpecies is [1]. Available untested sites include bridge Cd-Pd, bridge Pd-Pd, hollow Cd-Pd-Pd, and hollow Pd-Pd-Pd. A carbon-centered radical on Pd-rich alloy surfaces often benefits from higher coordination than ontop, so the next most reasonable trial is a Pd-Pd bridge using the radical carbon. This is distinct from the prior ontop-Pd trial and respects the available site list. User intent is to find the lowest-energy adsorption configuration overall, so continuing systematic exploration of untested strong-binding Pd-rich sites is appropriate.",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "bridge",
+          "surface_binding_atoms": [
+            "Pd",
+            "Pd"
+          ],
+          "adsorbate_binding_indices": [
+            1
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "bridge|Pd,Pd|1|ReactiveSpecies|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -5.087837219238281,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": false,
+      "planned_site_type": "bridge",
+      "actual_site_type": "bridge",
+      "best_structure_file": "outputs/044-ce089b7f/BEST_C(CH2)O_bridge_E-5.088.xyz",
+      "generated_conformers_file": "outputs/044-ce089b7f/conformers_C([CH2])O.traj",
+      "relaxation_trajectory_file": "outputs/044-ce089b7f/final.xyz",
+      "message": "Most stable config adsorption energy: -5.0878 eV. Target Atom: C (from plan index 1, global index 64 in relaxed structure). -> Nearest: Pd (Index 24), Distance: 2.069 Å (Threshold: 3.117), Bound: True. Bonded Surface Atoms: Pd-2.069Å, Pd-2.078Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: False (Planned ['Pd', 'Pd'] -> Actual ['Pd', 'Pd']).",
+      "history_entry": "【✅ Perfect Adsorption】 bridge @ ['Pd', 'Pd'] (Index [1]) -> Site: bridge (Pd,Pd) [🌟 New Best] | E=-5.088 eV"
+    },
+    {
+      "attempt_index": 3,
+      "plan": {
+        "reasoning": "SMILES consistency check: the adsorbate C([CH2])O corresponds to a hydroxyethyl-type radical, not a fully saturated closed-shell alcohol. The provided RDKit heavy-atom list is internally consistent: atom 0 is SP3 carbon with no radical electrons, atom 1 is SP3 carbon with 1 radical electron, and atom 2 is SP3 oxygen with no radical electrons. Therefore this should be treated as a ReactiveSpecies if binding through the radical center. Previous successful attempts already tested ontop on Pd using one binding atom and bridge on Pd-Pd using one binding atom, with energies -4.934 and -5.088 eV respectively; bridge(Pd,Pd) is currently the best. No failure or convergence-to-known-best tag is present, so termination is not yet mandated. To systematically continue, we should test a genuinely new high-symmetry site from the allowed list rather than repeat prior plans. Available untested major options include bridge Cd-Pd and hollow sites Cd-Pd-Pd and Pd-Pd-Pd. Since the radical center is atom 1, the binding index must be 1 for a ReactiveSpecies plan. A hollow site can sometimes stabilize carbon-centered radicals on Pd-rich alloy surfaces better than bridge, especially when the local ensemble is Pd-rich. Among the available hollow motifs, Pd-Pd-Pd is the most likely to provide strong adsorption relative to Cd-containing ensembles, so it is the most promising unexplored candidate for lowering the energy below the current best.",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "hollow",
+          "surface_binding_atoms": [
+            "Pd",
+            "Pd",
+            "Pd"
+          ],
+          "adsorbate_binding_indices": [
+            1
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "hollow|Pd,Pd,Pd|1|ReactiveSpecies|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -4.688911437988281,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": true,
+      "planned_site_type": "hollow",
+      "actual_site_type": "bridge",
+      "best_structure_file": "outputs/044-ce089b7f/BEST_C(CH2)O_hollow_to_bridge_E-4.689.xyz",
+      "generated_conformers_file": "outputs/044-ce089b7f/conformers_C([CH2])O.traj",
+      "relaxation_trajectory_file": "outputs/044-ce089b7f/final.xyz",
+      "message": "Most stable config adsorption energy: -4.6889 eV. Target Atom: C (from plan index 1, global index 64 in relaxed structure). -> Nearest: Pd (Index 24), Distance: 2.06 Å (Threshold: 3.117), Bound: True. Bonded Surface Atoms: Pd-2.06Å, Pd-2.186Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Pd', 'Pd', 'Pd'] -> Actual ['Pd', 'Pd']).",
+      "history_entry": "【✅ Perfect Adsorption】 hollow @ ['Pd', 'Pd', 'Pd'] (Index [1]) -> Site: bridge (Pd,Pd) | E=-4.689 eV"
+    },
+    {
+      "attempt_index": 4,
+      "plan": {
+        "reasoning": "SMILES consistency check: the adsorbate C([CH2])O corresponds to a hydroxyethyl radical framework, with heavy-atom indices 0=C (SP3, no radical), 1=C (SP3, 1 radical electron), 2=O (SP3, no radical). There is no mismatch between a saturated alkyl request and the SMILES hybridization; the key reactive center is atom 1, the radical carbon. Therefore this should be treated as ReactiveSpecies, and any radical-based binding must use index 1, not the saturated carbon 0 or oxygen 2. History analysis: tested successful plans are ontop on Pd with E=-4.934 eV, bridge on Pd-Pd with E=-5.088 eV (current best), and hollow on Pd-Pd-Pd which relaxed to bridge(Pd,Pd) with E=-4.689 eV. No failure tags or bond-change warnings are given, but the hollow attempt did not improve and effectively slid to bridge. Major high-symmetry Pd-only motifs have therefore been explored. The remaining chemically distinct untested high-symmetry environments from the available site list are the alloy motifs involving Cd: bridge Cd-Pd and hollow Cd-Pd-Pd. Because this is an alloy surface, heterogeneity can matter, so one more systematic test at the mixed-metal bridge is justified before terminating; bridge is also already the best-performing site type for this radical. User intent is to find the lowest-energy adsorption configuration on this surface, so the best next plan is to probe the untested mixed Cd-Pd bridge using the actual radical center. This is a genuinely new plan relative to history.",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "bridge",
+          "surface_binding_atoms": [
+            "Cd",
+            "Pd"
+          ],
+          "adsorbate_binding_indices": [
+            1
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "bridge|Cd,Pd|1|ReactiveSpecies|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -4.390144348144531,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": true,
+      "planned_site_type": "bridge",
+      "actual_site_type": "bridge",
+      "best_structure_file": "outputs/044-ce089b7f/BEST_C(CH2)O_bridge_E-4.390.xyz",
+      "generated_conformers_file": "outputs/044-ce089b7f/conformers_C([CH2])O.traj",
+      "relaxation_trajectory_file": "outputs/044-ce089b7f/final.xyz",
+      "message": "Most stable config adsorption energy: -4.3901 eV. Target Atom: C (from plan index 1, global index 64 in relaxed structure). -> Nearest: Pd (Index 48), Distance: 2.035 Å (Threshold: 3.117), Bound: True. Bonded Surface Atoms: Pd-2.035Å, Pd-3.071Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Cd', 'Pd'] -> Actual ['Pd', 'Pd']).",
+      "history_entry": "【✅ Perfect Adsorption】 bridge @ ['Cd', 'Pd'] (Index [1]) -> Site: bridge (Pd,Pd) | E=-4.390 eV"
+    }
+  ],
+  "history": [
+    "【✅ Perfect Adsorption】 ontop @ ['Pd'] (Index [1]) -> Site: ontop (Pd) [🌟 New Best] | E=-4.934 eV",
+    "【✅ Perfect Adsorption】 bridge @ ['Pd', 'Pd'] (Index [1]) -> Site: bridge (Pd,Pd) [🌟 New Best] | E=-5.088 eV",
+    "【✅ Perfect Adsorption】 hollow @ ['Pd', 'Pd', 'Pd'] (Index [1]) -> Site: bridge (Pd,Pd) | E=-4.689 eV",
+    "【✅ Perfect Adsorption】 bridge @ ['Cd', 'Pd'] (Index [1]) -> Site: bridge (Pd,Pd) | E=-4.390 eV"
+  ],
+  "error": null,
+  "perfect_count": 4,
+  "dissociation_count": 0,
+  "rearrangement_count": 0,
+  "calc_failure_count": 0,
+  "chemical_slip_count": 2
+}

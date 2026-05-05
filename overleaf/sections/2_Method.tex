@@ -103,28 +103,23 @@ All agent-side benchmark runs in this manuscript use frozen experiment configura
 \subsection{CMU20 Experimental Setup}
 
 The CMU20 benchmark uses the completed 20-case manifest, spanning atomic adsorbates (H), small multi-atom intermediates (OH and NNH), and larger intermediates (CH$_2$CH$_2$OH, OCHCH$_3$, and ONN(CH$_3$)$_2$) across intermetallic and monometallic surfaces.
-The original locked CMU statistical package used 15 cases (01--02, 04--05, 09--10, 12--20), and the current manuscript revision extends the CMU ablation audit to the full 20-case manifest. Full runs use a maximum of five attempts. The 1-shot baseline uses the same tooling and physical backend but restricts the planner to a single attempt, allowing us to isolate the value of closed-loop refinement from the value of the base planner alone. Experiments are launched from frozen configurations with fixed seeds and structured result serialization for reproducibility. The five-variant ablation matrix (Full, w/o Slip, w/o Forbid, w/o Term, 1-Shot) is executed independently on all four LLM backends, yielding 400 total attempts (20 cases $\times$ 5 variants $\times$ 4 backends).
+The current CMU analysis uses the full 20-case manifest. Full runs use a maximum of five attempts. The 1-shot baseline uses the same tooling and physical backend but restricts the planner to a single attempt, allowing us to isolate the value of closed-loop refinement from the value of the base planner alone. Experiments are launched from frozen configurations with fixed seeds and structured result serialization for reproducibility. The five-variant ablation matrix (Full, w/o Slip, w/o Forbid, w/o Term, 1-Shot) is executed independently on all four LLM backends, yielding 400 total attempts (20 cases $\times$ 5 variants $\times$ 4 backends).
 Natural failures (dissociation or reaction outcomes) are retained in the success-rate denominator; only external service or calculator errors are excluded from the analysis.
 
-\subsection{OCD-GMAE62 Benchmark and Three-Tier Evaluation Protocol}
+\subsection{OCD-GMAE62 Benchmark}
 
-For validation on broader chemistry beyond the CMU20 benchmark, we assemble the \textbf{OCD-GMAE62} benchmark (\textbf{O}pen \textbf{C}hemistry \textbf{D}ataset – \textbf{G}eneralized \textbf{M}achine-learning \textbf{A}dsorption \textbf{E}nergy 62-case dataset): a 62-case dataset spanning diverse surfaces (intermetallic, monometallic, and compound) and \[AI please replace this with the number of adsorbates\]
-adsorbates (H, OH, NNH, CH$_2$CH$_2$OH, OCHCH$_3$, ONN(CH$_3$)$_2$, and others).
-The dataset is curated to cover a wide range of adsorption energies and surface compositions, providing a comprehensive testbed for evaluating generalization beyond the CMU20 set.
-To systematically evaluate both baseline performance and system stability under a manageable computational budget, we employ a \textbf{three-tier evaluation protocol}:
+For validation on broader chemistry beyond CMU20, we assemble the \textbf{OCD-GMAE62} benchmark (\textbf{O}pen \textbf{C}hemistry \textbf{D}ataset -- \textbf{G}eneralized \textbf{M}achine-learning \textbf{A}dsorption \textbf{E}nergy 62-case dataset).
+The benchmark contains 62 unique adsorption tasks spanning 48 intermetallic, 13 compound, and 1 monometallic surfaces, with 18 adsorbate labels including H, OH, CO, NO, N, \texttt{[N]=N}, \texttt{[N]=O}, \texttt{[NH]}, \texttt{[NH2]}, \texttt{[CH]=O}, \texttt{[CH2][O]}, \texttt{C[O]}, \texttt{C(=O)C}, and related carbon/nitrogen/oxygen intermediates.
+The dataset is curated as a single 62-case benchmark; duplicated historical sampling records are not treated as additional benchmark cases.
 
-\textbf{Tier~1 (all 62 cases)} establishes baseline reliability and energy accuracy for the Full and 1-Shot variants.
-Metrics include success rate, mean/median $\Delta E = E_{\mathrm{variant}} - E_{\mathrm{Full}}$, four-backend range (max--min energy across backends), heuristic baseline comparison (Autoadsorbate high-symmetry sites), and random placement baseline ($N=20$ random poses per case).
+The primary OCD-GMAE62 evaluation uses the same five-variant ablation matrix as CMU20 on all 62 cases and all four LLM backends.
+This yields 1,240 raw attempts (62 cases $\times$ 5 variants $\times$ 4 backends) under the locked MACE-MP-0 small CPU protocol.
+Metrics include success rate, success-conditioned $\Delta E = E_{\mathrm{variant}} - E_{\mathrm{Full}}$, four-backend range, reach-Full-within-0.01~eV, Wilcoxon signed-rank tests with Benjamini--Hochberg correction, and matched random/heuristic baseline comparisons.
 
-\textbf{Tier~2 (subsample of 24 cases, 40\% of OCD-GMAE62)} performs deep ablation with the complete five-variant matrix (Full, w/o Slip, w/o Forbid, w/o Term, 1-Shot).
-This subsample is selected to preserve surface-adsorbate diversity from the full 62-case set.
-Tier~2 analyses include: (i) Wilcoxon signed-rank tests for paired variant comparisons with Benjamini--Hochberg (BH) false discovery rate correction; (ii) reach-Full-within-0.01~eV analysis (fraction of runs reaching within 0.01~eV of the Full variant energy); (iii) chemical slip interpretability audit (systematic review of slip events and their physical interpretations); and (iv) cross-backend agreement deep-dive (distribution of four-backend ranges across variants and cases).
-
-\textbf{Tier~3 (selected 12 cases from Tier~2)} evaluates system stability through triple-repeat experiments.
-These 12 cases are a further subsample from the Tier~2 set, chosen to quantify run-to-run variance under identical initial conditions.
-For each of the 12 cases, we run the Full variant three times with identical backend settings and compute the standard deviation of adsorption energy across repeats.
-This tier establishes the precision of AdsMind's energy predictions and identifies cases with higher intrinsic variance (e.g., large adsorbates on multi-component surfaces).
+A separate reproducibility analysis uses the 12 duplicated OCD-GMAE62 source records that appeared in both historical sampling batches.
+These 12 cases are retained only as an overlap set for repeated-run analysis, not as a separate benchmark subset.
+For each overlap case, we compare repeated runs across the same four LLM backends and five runtime variants, giving 240 repeated-run comparisons per additional repeat.
+This design turns the historical overlap into a reproducibility audit while keeping the paper-facing benchmark definition as CMU20 plus OCD-GMAE62.
 
 All experiments use the four LLM backends listed in Section~\ref{sec:eval_setup} under a fixed MACE-MP-0 small CPU protocol.
 External service failures are excluded at the raw-attempt audit stage; all reported failures are natural dissociation or reaction outcomes.
-The three-tier design balances statistical power (Tier~1: $n=62$), ablation depth (Tier~2: complete five-variant matrix on $n=24$), and variance quantification (Tier~3: triple repeats on $n=12$) while remaining within computational budget constraints.

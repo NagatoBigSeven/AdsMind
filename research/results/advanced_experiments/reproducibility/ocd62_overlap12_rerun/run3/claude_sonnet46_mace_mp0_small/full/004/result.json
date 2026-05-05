@@ -1,0 +1,310 @@
+{
+  "case_id": "004",
+  "case_metadata": {
+    "case_id": "004",
+    "slab_file": "datasets/ocd62_overlap12/004_Cu32Se64W16_C_C_O.xyz",
+    "smiles": "C(C)O",
+    "user_request": "Find the lowest-energy adsorption configuration for the adsorbate with SMILES C(C)O on the provided surface.",
+    "surface_family": "intermetallic",
+    "adsorbate_name": "C(C)O",
+    "miller_index": "",
+    "reaction_class": "GENERALIZATION",
+    "ablation_candidate": "FALSE",
+    "notes": "OCD-GMAE source key=181; original_ads_smi=C(C)O; surface_formula=Cu32Se64W16; y_relaxed=-4.747458 eV; site=[35]; OCD62 overlap12 RUN3 symlink to representative50 source file; sha256=f9e04115cdeae73fcd7076e7459343794782e3fdce7614c3e374a95b43c7ad7f",
+    "source_key": "181",
+    "original_ads_smi": "C(C)O",
+    "surface_formula": "Cu32Se64W16",
+    "surface_elements": "Cu;Se;W",
+    "bare_slab_atoms": "112",
+    "adsorbate_atoms": "9",
+    "y_relaxed": "-4.747458",
+    "site_indices": "35",
+    "selection_bucket": "small_organic"
+  },
+  "status": "success",
+  "best_energy_eV": -9.077415466308594,
+  "iteration_count": 4,
+  "max_attempts": 5,
+  "final_site_type": "ontop",
+  "converged_tag": false,
+  "wall_clock_sec": 366.0293463803828,
+  "total_input_tokens": 27076,
+  "total_output_tokens": 8805,
+  "artifact_paths": {
+    "BEST_C(C)O_bridge_to_ontop_DISS_E-8.406": "artifacts/BEST_C(C)O_bridge_to_ontop_DISS_E-8.406.xyz",
+    "BEST_C(C)O_bridge_to_ontop_DISS_E-8.406.xyz": "artifacts/BEST_C(C)O_bridge_to_ontop_DISS_E-8.406.xyz",
+    "best_structure_file": "artifacts/BEST_C(C)O_ontop_to_bridge_E-8.988.xyz",
+    "BEST_C(C)O_hollow_to_ontop_E-8.742": "artifacts/BEST_C(C)O_hollow_to_ontop_E-8.742.xyz",
+    "BEST_C(C)O_hollow_to_ontop_E-8.742.xyz": "artifacts/BEST_C(C)O_hollow_to_ontop_E-8.742.xyz",
+    "BEST_C(C)O_ontop_E-9.077": "artifacts/BEST_C(C)O_ontop_E-9.077.xyz",
+    "BEST_C(C)O_ontop_E-9.077.xyz": "artifacts/BEST_C(C)O_ontop_E-9.077.xyz",
+    "BEST_C(C)O_ontop_to_bridge_E-8.988": "artifacts/BEST_C(C)O_ontop_to_bridge_E-8.988.xyz",
+    "BEST_C(C)O_ontop_to_bridge_E-8.988.xyz": "artifacts/BEST_C(C)O_ontop_to_bridge_E-8.988.xyz",
+    "conformers_C(C)O": "artifacts/conformers_C(C)O.traj",
+    "conformers_C(C)O.traj": "artifacts/conformers_C(C)O.traj",
+    "final": "artifacts/final.xyz",
+    "final.xyz": "artifacts/final.xyz",
+    "relaxation": "artifacts/relaxation.traj",
+    "relaxation.traj": "artifacts/relaxation.traj",
+    "relaxation_trajectory_file": "artifacts/relaxation.traj"
+  },
+  "best_result": {
+    "most_stable_energy_eV": -9.077415466308594,
+    "analysis_json": {
+      "status": "success",
+      "message": "Most stable config adsorption energy: -9.0774 eV. Target Atom: O (from plan index 2, global index 112 in relaxed structure). -> Nearest: Cu (Index 20), Distance: 1.923 \u00c5 (Threshold: 2.871), Bound: True. Bonded Surface Atoms: Cu-1.923\u00c5. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: False (Planned ['Cu'] -> Actual ['Cu']).",
+      "most_stable_energy_eV": -9.077415466308594,
+      "target_adsorbate_atom": "O",
+      "target_adsorbate_atom_index": 112,
+      "bonded_surface_atoms": [
+        {
+          "symbol": "Cu",
+          "index": 20,
+          "distance": 1.923
+        }
+      ],
+      "nearest_slab_atom": "Cu",
+      "nearest_slab_atom_index": 20,
+      "final_bond_distance_A": 1.923,
+      "estimated_covalent_cutoff_A": 2.178,
+      "is_covalently_bound": true,
+      "reaction_detected": false,
+      "is_dissociated": false,
+      "n_components": 1,
+      "bond_change_count": 0,
+      "site_analysis": {
+        "planned_site_type": "ontop",
+        "planned_connectivity": 1,
+        "actual_site_type": "ontop",
+        "actual_connectivity": 1,
+        "is_chemical_slip": false,
+        "planned_symbols": [
+          "Cu"
+        ],
+        "actual_symbols": [
+          "Cu"
+        ],
+        "site_fingerprint": "Cu20"
+      },
+      "best_structure_file": "outputs/004-3d24a304/BEST_C(C)O_ontop_E-9.077.xyz",
+      "generated_conformers_file": "outputs/004-3d24a304/conformers_C(C)O.traj",
+      "relaxation_trajectory_file": "outputs/004-3d24a304/final.xyz",
+      "session_id": "004-3d24a304"
+    },
+    "plan": {
+      "reasoning": "Step 0 - SMILES Consistency Check: The SMILES C(C)O represents ethanol (CH3CH2OH). All atoms are SP3 hybridized with no radical electrons. This is a stable, complete molecule. No inconsistencies.\n\nStep 1 - Analyze Old Plans: No history exists. This is the first attempt.\n\nStep 2-3 - Analyze Request: Find the lowest-energy adsorption configuration for ethanol (C(C)O) on a Cu-Se-W surface.\n\nStep 4 - Analyze Adsorbate:\n- SMILES C(C)O = ethanol: C0 is the central carbon (CH2, degree 2, SP3), C1 is the methyl carbon (CH3, degree 1, SP3), O2 is the hydroxyl oxygen (OH, degree 1, SP3).\n- All atoms are SP3 with no radical electrons, so this must be treated as a Molecule.\n- For molecular adsorption of ethanol, the oxygen atom (index 2) is the primary binding atom due to its lone pairs. This is the standard adsorption mode for alcohols on metal surfaces - O-down coordination.\n- The oxygen (index 2) has lone pairs available for donation to surface metal atoms despite being SP3 with degree 1 (bonded to C0 and H, but H is implicit).\n\nStep 5 - Analyze Surface:\n- Available ontop sites: Cu, Se, W\n- For ethanol adsorption, Cu ontop is the most chemically reasonable first choice as Cu is a common active metal for alcohol adsorption. W ontop would also be interesting given its stronger Lewis acid character.\n- The O atom donates a lone pair to the surface metal.\n\nStep 6 - Formulate Plan:\n- Best initial plan: O-down adsorption on Cu ontop site\n- site_type: ontop\n- surface_binding_atoms: ['Cu']\n- adsorbate_binding_indices: [2] (oxygen atom)\n- This is the most physically reasonable starting configuration for ethanol on a Cu-containing surface.\n- adsorbate_type: Molecule (complete stable molecule, O lone pair donation)",
+      "adsorbate_type": "Molecule",
+      "solution": {
+        "action": "continue",
+        "site_type": "ontop",
+        "surface_binding_atoms": [
+          "Cu"
+        ],
+        "adsorbate_binding_indices": [
+          2
+        ],
+        "relax_top_n": 1,
+        "touch_sphere_size": 2,
+        "overlap_thr": 0.1,
+        "conformers_per_site_cap": 4
+      }
+    },
+    "result_type": "Perfect"
+  },
+  "last_analysis": {
+    "status": "success",
+    "message": "Most stable config adsorption energy: -8.7416 eV. Target Atom: O (from plan index 2, global index 112 in relaxed structure). -> Nearest: Se (Index 88), Distance: 2.282 \u00c5 (Threshold: 2.697), Bound: True. Bonded Surface Atoms: Se-2.282\u00c5. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Cu', 'Cu', 'Se'] -> Actual ['Se']).",
+    "most_stable_energy_eV": -8.741584777832031,
+    "target_adsorbate_atom": "O",
+    "target_adsorbate_atom_index": 112,
+    "bonded_surface_atoms": [
+      {
+        "symbol": "Se",
+        "index": 88,
+        "distance": 2.282
+      }
+    ],
+    "nearest_slab_atom": "Se",
+    "nearest_slab_atom_index": 88,
+    "final_bond_distance_A": 2.282,
+    "estimated_covalent_cutoff_A": 2.046,
+    "is_covalently_bound": true,
+    "reaction_detected": false,
+    "is_dissociated": false,
+    "n_components": 1,
+    "bond_change_count": 0,
+    "site_analysis": {
+      "planned_site_type": "hollow",
+      "planned_connectivity": 3,
+      "actual_site_type": "ontop",
+      "actual_connectivity": 1,
+      "is_chemical_slip": true,
+      "planned_symbols": [
+        "Cu",
+        "Cu",
+        "Se"
+      ],
+      "actual_symbols": [
+        "Se"
+      ],
+      "site_fingerprint": "Se88"
+    },
+    "best_structure_file": "outputs/004-3d24a304/BEST_C(C)O_hollow_to_ontop_E-8.742.xyz",
+    "generated_conformers_file": "outputs/004-3d24a304/conformers_C(C)O.traj",
+    "relaxation_trajectory_file": "outputs/004-3d24a304/final.xyz",
+    "session_id": "004-3d24a304"
+  },
+  "attempt_records": [
+    {
+      "attempt_index": 1,
+      "plan": {
+        "reasoning": "Step 0 - SMILES Consistency Check: The SMILES C(C)O represents ethanol (CH3CH2OH). All atoms are SP3 hybridized with no radical electrons. This is a stable, complete molecule. No inconsistencies.\n\nStep 1 - Analyze Old Plans: No history exists. This is the first attempt.\n\nStep 2-3 - Analyze Request: Find the lowest-energy adsorption configuration for ethanol (C(C)O) on a Cu-Se-W surface.\n\nStep 4 - Analyze Adsorbate:\n- SMILES C(C)O = ethanol: C0 is the central carbon (CH2, degree 2, SP3), C1 is the methyl carbon (CH3, degree 1, SP3), O2 is the hydroxyl oxygen (OH, degree 1, SP3).\n- All atoms are SP3 with no radical electrons, so this must be treated as a Molecule.\n- For molecular adsorption of ethanol, the oxygen atom (index 2) is the primary binding atom due to its lone pairs. This is the standard adsorption mode for alcohols on metal surfaces - O-down coordination.\n- The oxygen (index 2) has lone pairs available for donation to surface metal atoms despite being SP3 with degree 1 (bonded to C0 and H, but H is implicit).\n\nStep 5 - Analyze Surface:\n- Available ontop sites: Cu, Se, W\n- For ethanol adsorption, Cu ontop is the most chemically reasonable first choice as Cu is a common active metal for alcohol adsorption. W ontop would also be interesting given its stronger Lewis acid character.\n- The O atom donates a lone pair to the surface metal.\n\nStep 6 - Formulate Plan:\n- Best initial plan: O-down adsorption on Cu ontop site\n- site_type: ontop\n- surface_binding_atoms: ['Cu']\n- adsorbate_binding_indices: [2] (oxygen atom)\n- This is the most physically reasonable starting configuration for ethanol on a Cu-containing surface.\n- adsorbate_type: Molecule (complete stable molecule, O lone pair donation)",
+        "adsorbate_type": "Molecule",
+        "solution": {
+          "action": "continue",
+          "site_type": "ontop",
+          "surface_binding_atoms": [
+            "Cu"
+          ],
+          "adsorbate_binding_indices": [
+            2
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "ontop|Cu|2|Molecule|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -9.077415466308594,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": false,
+      "planned_site_type": "ontop",
+      "actual_site_type": "ontop",
+      "best_structure_file": "outputs/004-3d24a304/BEST_C(C)O_ontop_E-9.077.xyz",
+      "generated_conformers_file": "outputs/004-3d24a304/conformers_C(C)O.traj",
+      "relaxation_trajectory_file": "outputs/004-3d24a304/final.xyz",
+      "message": "Most stable config adsorption energy: -9.0774 eV. Target Atom: O (from plan index 2, global index 112 in relaxed structure). -> Nearest: Cu (Index 20), Distance: 1.923 \u00c5 (Threshold: 2.871), Bound: True. Bonded Surface Atoms: Cu-1.923\u00c5. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: False (Planned ['Cu'] -> Actual ['Cu']).",
+      "history_entry": "\u3010\u2705 Perfect Adsorption\u3011 ontop @ ['Cu'] (Index [2]) -> Site: ontop (Cu) [\ud83c\udf1f New Best] | E=-9.077 eV"
+    },
+    {
+      "attempt_index": 2,
+      "plan": {
+        "reasoning": "Step 0 - SMILES Consistency Check: C(C)O is ethanol (CH3CH2OH). All atoms are SP3 hybridized, no radicals. This is a stable molecule, so adsorbate_type is 'Molecule'. Atom indices: 0=C (central carbon, degree 2), 1=C (methyl carbon, degree 1), 2=O (hydroxyl oxygen, degree 1).\n\nStep 1 - Analyze History: We have one successful attempt: ontop @ Cu (Index [2]) with E=-9.077 eV. This used the oxygen atom (index 2) binding to Cu ontop site. This is the current best.\n\nStep 2 - Formulate New Plan: We need to explore other sites to see if we can find lower energy configurations. The oxygen atom (index 2) is the most natural binding atom for ethanol on metal surfaces due to its lone pairs. We've tested O-ontop-Cu. Next logical steps:\n- Try O binding at a bridge site (Cu-Se or Cu-W) - oxygen can bridge between two surface atoms\n- Try O binding at hollow sites\n\nFor ethanol adsorption, the oxygen lone pairs are the primary binding mechanism. Let me try the bridge site Cu-Se with oxygen (index 2) as the binding atom. This could potentially give stronger binding due to interaction with both Cu and Se.\n\nStep 3 - User Intent: Find lowest energy adsorption configuration for ethanol on Cu-Se-W surface.\n\nStep 4 - Adsorbate Analysis: Ethanol (C(C)O). Binding atom should be O (index 2) which has lone pairs available for donation to surface. C atoms are SP3 saturated with no lone pairs or radicals.\n\nStep 5 - Surface Analysis: Available bridge sites include Cu-Se and Cu-W. The Cu-Se bridge is a natural choice as Cu is already known to bind ethanol well.\n\nStep 6 - Plan: Try O (index 2) at bridge Cu-Se site. This is a new configuration not yet tested.",
+        "adsorbate_type": "Molecule",
+        "solution": {
+          "action": "continue",
+          "site_type": "bridge",
+          "surface_binding_atoms": [
+            "Cu",
+            "Se"
+          ],
+          "adsorbate_binding_indices": [
+            2
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "bridge|Cu,Se|2|Molecule|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -8.406257629394531,
+      "bond_change_count": 2,
+      "is_dissociated": true,
+      "is_chemical_slip": true,
+      "planned_site_type": "bridge",
+      "actual_site_type": "ontop",
+      "best_structure_file": "outputs/004-3d24a304/BEST_C(C)O_bridge_to_ontop_DISS_E-8.406.xyz",
+      "generated_conformers_file": "outputs/004-3d24a304/conformers_C(C)O.traj",
+      "relaxation_trajectory_file": "outputs/004-3d24a304/final.xyz",
+      "message": "Most stable config adsorption energy: -8.4063 eV. Target Atom: O (from plan index 2, global index 112 in relaxed structure). -> Nearest: Cu (Index 20), Distance: 2.035 \u00c5 (Threshold: 2.871), Bound: True. Bonded Surface Atoms: Cu-2.035\u00c5. Is Bound: True. Reactivity Change Detected: True (Bond Changes: 2). Chemical Slip: True (Planned ['Cu', 'Se'] -> Actual ['Cu']).",
+      "history_entry": "\u3010\u274c Dissociated\u3011 bridge @ ['Cu', 'Se'] (Index [2]) -> \u26a0\ufe0f\u3010Unstable Site Warning\u3011\u26a0\ufe0f: Planned bridge (Cu-Se) is unstable, adsorbate spontaneously slipped to ontop (Cu).This means Cu-Se has insufficient affinity for this adsorbate. Please **FORBID** testing Cu-Se type sites again! | E=-8.406 eV"
+    },
+    {
+      "attempt_index": 3,
+      "plan": {
+        "reasoning": "Step 0 - SMILES Consistency Check: C(C)O is ethanol. Atom indices: 0=C (SP3, central carbon), 1=C (SP3, methyl carbon), 2=O (SP3, hydroxyl oxygen). All atoms are saturated with no radical electrons. This is a stable molecule, so adsorbate_type='Molecule'. The oxygen lone pairs make it the primary binding atom.\n\nStep 1 - Analyze History:\n- \u2705 ontop @ Cu (index 2, O-down): E=-9.077 eV \u2014 Best result so far. O atom (index 2) bound to Cu ontop site.\n- \u274c bridge @ Cu-Se: Unstable, slipped to ontop Cu. Cu-Se bridge sites are FORBIDDEN.\n\nStep 2 - Formulate New Plan:\nTested so far: ontop Cu (O-binding), bridge Cu-Se (forbidden).\nRemaining untested viable options:\n- ontop Se (O-binding)\n- ontop W (O-binding)\n- bridge Cu-W (O-binding)\n- bridge Se-Se (O-binding)\n- bridge Se-W (O-binding)\n- hollow sites: Cu-Cu-Se, Cu-Se-Se, Cu-Se-W, Se-Se-W\n\nFor ethanol (C(C)O), the oxygen lone pairs are the primary interaction point with metal surfaces. W is a strong oxophilic metal and could provide stronger O-W interaction. Let me try ontop W with O-binding next, as W is highly oxophilic and may give lower energy than Cu.\n\nStep 3 - User Intent: Find lowest energy adsorption configuration for ethanol on Cu-Se-W surface.\n\nStep 4 - Adsorbate Analysis: Ethanol, O at index 2 is the binding atom via lone pairs. SP3 hybridized, no radicals. Molecule type.\n\nStep 5 - Surface Analysis: Available ontop sites include W. W is oxophilic and could bind O strongly.\n\nStep 6 - Plan: ontop W, O-binding (index 2), single binding point consistent with ontop site rule.",
+        "adsorbate_type": "Molecule",
+        "solution": {
+          "action": "continue",
+          "site_type": "ontop",
+          "surface_binding_atoms": [
+            "W"
+          ],
+          "adsorbate_binding_indices": [
+            2
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "ontop|W|2|Molecule|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -8.988121032714844,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": true,
+      "planned_site_type": "ontop",
+      "actual_site_type": "bridge",
+      "best_structure_file": "outputs/004-3d24a304/BEST_C(C)O_ontop_to_bridge_E-8.988.xyz",
+      "generated_conformers_file": "outputs/004-3d24a304/conformers_C(C)O.traj",
+      "relaxation_trajectory_file": "outputs/004-3d24a304/final.xyz",
+      "message": "Most stable config adsorption energy: -8.9881 eV. Target Atom: O (from plan index 2, global index 112 in relaxed structure). -> Nearest: Cu (Index 23), Distance: 2.225 \u00c5 (Threshold: 2.871), Bound: True. Bonded Surface Atoms: Cu-2.225\u00c5, W-2.971\u00c5. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['W'] -> Actual ['Cu', 'W']).",
+      "history_entry": "\u3010\u2705 Perfect Adsorption\u3011 ontop @ ['W'] (Index [2]) -> \u26a0\ufe0f\u3010Unstable Site Warning\u3011\u26a0\ufe0f: Planned ontop (W) is unstable, adsorbate spontaneously slipped to bridge (Cu-W).This means W has insufficient affinity for this adsorbate. Please **FORBID** testing W type sites again! | E=-8.988 eV"
+    },
+    {
+      "attempt_index": 4,
+      "plan": {
+        "reasoning": "Step 0 - SMILES Consistency Check: C(C)O is ethanol. Atom indices: 0=C (SP3, methylene/central carbon), 1=C (SP3, methyl), 2=O (SP3, hydroxyl oxygen). No radicals, so adsorbate_type is 'Molecule'. The oxygen lone pairs make it the primary binding atom.\n\nStep 1 - Analyze History:\n- ontop @ Cu (Index [2], O-down): E=-9.077 eV [BEST, Perfect]\n- bridge @ Cu-Se: UNSTABLE, slipped to ontop Cu. Cu-Se sites FORBIDDEN.\n- ontop @ W: UNSTABLE, slipped to bridge Cu-W. W ontop sites FORBIDDEN.\n\nNote: The W ontop attempt actually resulted in a Cu-W bridge configuration (E=-8.988 eV). This means a Cu-W bridge was implicitly tested and gave -8.988 eV, which is worse than the Cu ontop best of -9.077 eV.\n\nStep 2 - Remaining untested sites:\n- ontop @ Se (not tested, but Se may have low affinity)\n- bridge @ Cu-W (implicitly tested via slip from W ontop, E=-8.988 eV)\n- bridge @ Se-Se (not tested)\n- bridge @ Se-W (not tested)\n- hollow @ Cu-Cu-Se, Cu-Se-Se, Cu-Se-W, Se-Se-W (none tested)\n\nStep 3 - Strategy: The best result so far is ontop Cu with O binding (E=-9.077 eV). To find something better, I should try hollow sites which can provide multi-coordination. The Cu-Cu-Se hollow site is most promising since Cu showed the strongest affinity. I'll try hollow @ Cu-Cu-Se with O (index 2) as the binding atom. This is a new, untested configuration.\n\nStep 4 - Adsorbate analysis: O (index 2) has lone pairs and is the natural donor atom for surface binding. This is consistent with the successful ontop Cu result where O binds to Cu.\n\nStep 5 - New Plan: hollow @ Cu-Cu-Se with O (index 2). This explores a 3-fold hollow site dominated by Cu atoms, which showed the strongest affinity. The hollow site may provide stronger binding than ontop due to multi-coordination with Cu atoms.",
+        "adsorbate_type": "Molecule",
+        "solution": {
+          "action": "continue",
+          "site_type": "hollow",
+          "surface_binding_atoms": [
+            "Cu",
+            "Cu",
+            "Se"
+          ],
+          "adsorbate_binding_indices": [
+            2
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "hollow|Cu,Cu,Se|2|Molecule|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -8.741584777832031,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": true,
+      "planned_site_type": "hollow",
+      "actual_site_type": "ontop",
+      "best_structure_file": "outputs/004-3d24a304/BEST_C(C)O_hollow_to_ontop_E-8.742.xyz",
+      "generated_conformers_file": "outputs/004-3d24a304/conformers_C(C)O.traj",
+      "relaxation_trajectory_file": "outputs/004-3d24a304/final.xyz",
+      "message": "Most stable config adsorption energy: -8.7416 eV. Target Atom: O (from plan index 2, global index 112 in relaxed structure). -> Nearest: Se (Index 88), Distance: 2.282 \u00c5 (Threshold: 2.697), Bound: True. Bonded Surface Atoms: Se-2.282\u00c5. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Cu', 'Cu', 'Se'] -> Actual ['Se']).",
+      "history_entry": "\u3010\u2705 Perfect Adsorption\u3011 hollow @ ['Cu', 'Cu', 'Se'] (Index [2]) -> \u26a0\ufe0f\u3010Unstable Site Warning\u3011\u26a0\ufe0f: Planned hollow (Cu-Cu-Se) is unstable, adsorbate spontaneously slipped to ontop (Se).This means Cu-Cu-Se has insufficient affinity for this adsorbate. Please **FORBID** testing Cu-Cu-Se type sites again! | E=-8.742 eV"
+    }
+  ],
+  "history": [
+    "\u3010\u2705 Perfect Adsorption\u3011 ontop @ ['Cu'] (Index [2]) -> Site: ontop (Cu) [\ud83c\udf1f New Best] | E=-9.077 eV",
+    "\u3010\u274c Dissociated\u3011 bridge @ ['Cu', 'Se'] (Index [2]) -> \u26a0\ufe0f\u3010Unstable Site Warning\u3011\u26a0\ufe0f: Planned bridge (Cu-Se) is unstable, adsorbate spontaneously slipped to ontop (Cu).This means Cu-Se has insufficient affinity for this adsorbate. Please **FORBID** testing Cu-Se type sites again! | E=-8.406 eV",
+    "\u3010\u2705 Perfect Adsorption\u3011 ontop @ ['W'] (Index [2]) -> \u26a0\ufe0f\u3010Unstable Site Warning\u3011\u26a0\ufe0f: Planned ontop (W) is unstable, adsorbate spontaneously slipped to bridge (Cu-W).This means W has insufficient affinity for this adsorbate. Please **FORBID** testing W type sites again! | E=-8.988 eV",
+    "\u3010\u2705 Perfect Adsorption\u3011 hollow @ ['Cu', 'Cu', 'Se'] (Index [2]) -> \u26a0\ufe0f\u3010Unstable Site Warning\u3011\u26a0\ufe0f: Planned hollow (Cu-Cu-Se) is unstable, adsorbate spontaneously slipped to ontop (Se).This means Cu-Cu-Se has insufficient affinity for this adsorbate. Please **FORBID** testing Cu-Cu-Se type sites again! | E=-8.742 eV"
+  ],
+  "error": null,
+  "perfect_count": 3,
+  "dissociation_count": 1,
+  "rearrangement_count": 0,
+  "calc_failure_count": 0,
+  "chemical_slip_count": 3
+}

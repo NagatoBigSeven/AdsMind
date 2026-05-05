@@ -11,20 +11,20 @@
 | Data | File | Plot Status |
 |------|------|-------------|
 | 5-variant ablation (80 runs, 4 backends) | `basic_experiments/cmu20/summaries/ablation_4backend.csv` | ✅ Figure 2a+b |
-| 4-backend range per case | `advanced_experiments/ablation_mechanism_analysis/cross_backend_agreement.csv` | ✅ Figure 3c heatmap |
-| Full vs 1-Shot head-to-head | `correct_stats.md` Section 5 | ✅ Figure 2a (trapezoid) |
+| 4-backend range per case | `advanced_experiments/ablation_and_chemical_slip_diagnostics/ablation_effects/cross_backend_agreement.csv` | ✅ Figure 3c heatmap |
+| Full vs 1-Shot head-to-head | `basic_experiments/summaries/full_vs_one_shot_summary.csv` | ✅ Figure 2a (trapezoid) |
 | Baseline: Random (n=20) | `basic_experiments/cmu20/baselines/random_n20/summary.csv` | ✅ SI S1a |
 | Baseline: Heuristic | `basic_experiments/cmu20/baselines/heuristic/summary.csv` | ✅ SI S1a |
-| Baseline: Adsorb-Agent | `basic_experiments/cmu20/baselines/adsorbagent_mace_mp0_small_gpt54/summary.csv` | ✅ SI S1a |
+| Baseline: Adsorb-Agent | `basic_experiments/cmu20/baselines/adsorbagent_gpt54_mace_mp0_small/summary.csv` | ✅ SI S1a |
 
 ### Advanced Testing Data ✅ (All Plotted)
 | Data | File | Plot Status |
 |------|------|-------------|
-| Iteration convergence (per-iteration energy) | `advanced_experiments/iteration_convergence/cmu20_full/iteration_convergence.csv` | ✅ Figure 3a |
-| Chemical Slip (planned vs actual site) | `advanced_experiments/chemical_slip_interpretability/cmu20/slip_analysis.csv` | ✅ SI S2b |
-| Slip rates by backend + surface family | `advanced_experiments/chemical_slip_interpretability/cmu20/slip_analysis.json` | ✅ Figure 3b, SI S2a |
-| MACE Small vs Large sensitivity | `advanced_experiments/mace_force_field_sensitivity/cmu20_gpt_full_mace_mp0_large/ablation_summary.csv` | ✅ SI S1c |
-| Multi-seed reproducibility (5 seeds) | `advanced_experiments/gpt54_multiseed_cmu20/seed{43-47}_full/` | ✅ SI S2c |
+| Iteration convergence (per-iteration energy) | `advanced_experiments/case_studies/iteration_convergence/cmu20/all_backends/full/` | ✅ Figure 3a |
+| Chemical Slip (planned vs actual site) | `advanced_experiments/ablation_and_chemical_slip_diagnostics/chemical_slip_interpretability/cmu20/slip_analysis.csv` | ✅ SI S2b |
+| Slip rates by backend + surface family | `advanced_experiments/ablation_and_chemical_slip_diagnostics/chemical_slip_interpretability/cmu20/slip_analysis.json` | ✅ Figure 3b, SI S2a |
+| MACE Small vs Large sensitivity | `advanced_experiments/force_field_sensitivity/mace_mp0_large_vs_mace_mp0_small/cmu20/gpt54_mace_mp0_large/full/` | ✅ SI S1c |
+| Multi-seed reproducibility (5 seeds) | `advanced_experiments/reproducibility/cmu20_gpt54_mace_mp0_small_multiseed/seed{43-47}/full/` | ✅ SI S2c |
 | Cost analysis (tokens, wall-clock) | `basic_experiments/cmu20/*/full/summary.csv` (tokens_used column) | ✅ SI S1b |
 
 ---
@@ -42,7 +42,7 @@ Figure 2 (2 panels, side by side):
 │   └─ 5 ablation variants (Full, 1-Shot, w/o Slip, w/o Forbid, w/o Term)
 │   └─ y: Energy Δ distribution (IQR boxes + mean diamond + jittered scatter)
 │   └─ Data: basic_experiments/cmu20/summaries/ablation_4backend.csv
-│   └─ Key message: "1-Shot loses ~0.158 eV; ablation components have minimal effect"
+│   └─ Key message: "1-Shot is the dominant degradation; iterative ablations stay near Full in median energy"
 │
 └─ Panel b: Radar chart
     └─ Polar coordinates, 5 variants as axes
@@ -62,15 +62,15 @@ Figure 3 (2 rows):
 ├─ Row 1: Panel a (left) + Panel b (right)
 │   ├─ Panel a: Iteration Convergence of dE
 │   │   └─ x: Iteration (1-5), y: Mean dE (eV)
-│   │   └─ dE = AdsMind energy - Reference (AdsorbAgent DFT)
+│   │   └─ dE = running-best energy change across AdsMind iterations
 │   │   └─ 4 backends as colored lines, y starts at 0
 │   │   └─ Vertical dashed line at Iter 2 (80% improvement)
-│   │   └─ Data: advanced_experiments/iteration_convergence/cmu20_full/iteration_convergence.csv
+│   │   └─ Data: advanced_experiments/case_studies/iteration_convergence/cmu20/all_backends/full/
 │   │
 │   └─ Panel b: Chemical Slip Analysis
 │       └─ Grouped bar chart: Backend (4) × Slip rate
 │       └─ Grouped by surface family (Intermetallic vs Monometallic)
-│       └─ Data: advanced_experiments/chemical_slip_interpretability/cmu20/slip_analysis.json
+│       └─ Data: advanced_experiments/ablation_and_chemical_slip_diagnostics/chemical_slip_interpretability/cmu20/slip_analysis.json
 │
 └─ Row 2: Panel c (full width)
     └─ Panel c: 4-Backend Agreement Heatmap
@@ -92,8 +92,8 @@ SI Figure S1 (2 rows):
 │   └─ Panel a: Method Comparison
 │       └─ Grouped bar chart (20 cases, 4 methods)
 │       └─ Methods: AdsMind Full, Random (n=20), Heuristic, Adsorb-Agent
-│       └─ Data: basic_experiments/cmu20/gpt/full/summary.csv + baselines/*
-│       └─ Key message: "AdsMind outperforms baselines by >1.2 eV on average"
+│       └─ Data: basic_experiments/cmu20/gpt54_mace_mp0_small/full/summary.csv + baselines/*
+│       └─ Key message: "AdsMind trades raw energy depth for fewer relaxations and higher closed-loop reliability"
 │
 └─ Row 2: Panel b (left) + Panel c (right, c1 scatter + c2 histogram)
     ├─ Panel b: Cost-Accuracy Trade-off
@@ -104,7 +104,7 @@ SI Figure S1 (2 rows):
     └─ Panel c: MACE Force Field Sensitivity
         ├─ c1: MACE Small vs Large scatter (diagonal line)
         └─ c2: Δ energy histogram (Large − Small)
-        └─ Data: advanced_experiments/mace_force_field_sensitivity/cmu20_*/
+        └─ Data: advanced_experiments/force_field_sensitivity/mace_mp0_large_vs_mace_mp0_small/cmu20/
 ```
 
 ---
@@ -119,7 +119,7 @@ SI Figure S2 (1 row, 3 columns):
 │   └─ Heatmap: Case ID (20) × Backend (Gemini, Grok-4)
 │   └─ Color: slip (red) / no slip (gray)
 │   └─ Highlight disagreement cases (1, 15) with black border
-│   └─ Data: advanced_experiments/chemical_slip_interpretability/cmu20/slip_analysis.csv
+│   └─ Data: advanced_experiments/ablation_and_chemical_slip_diagnostics/chemical_slip_interpretability/cmu20/slip_analysis.csv
 │   └─ Key: 18/20 cases agreement (90%)
 │
 ├─ Panel b: Site Transition Matrix
@@ -130,9 +130,9 @@ SI Figure S2 (1 row, 3 columns):
 │
 └─ Panel c: Multi-Seed Reproducibility
     └─ Box plot: Case ID (20) × Energy (5 seeds: seed43-47)
-    └─ Overlay: Default seed42 reference points
-    └─ Data: advanced_experiments/gpt54_multiseed_cmu20/seed{43-47}_full/ablation_summary.csv
-    └─ Key: Additional seeds provide marginal benefit; seed42 is near-optimal
+    └─ Overlay: Primary GPT-5.4 reference points
+    └─ Data: advanced_experiments/reproducibility/cmu20_gpt54_mace_mp0_small_multiseed/seed{43-47}/full/summary.csv
+    └─ Key: Additional seeds probe stochastic basin selection on difficult cases
 ```
 
 ---
