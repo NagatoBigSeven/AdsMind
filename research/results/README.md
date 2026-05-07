@@ -59,9 +59,16 @@ Dataset-level summaries:
 - `basic_experiments/summaries/method_comparison_table.md`
 - `basic_experiments/summaries/method_comparison_table.tex`
 
-Baselines live under each dataset's `baselines/` directory. CMU20 also includes
-the matched Adsorb-Agent MACE-MP-0 small control at
-`basic_experiments/cmu20/baselines/adsorbagent_gpt54_mace_mp0_small/`.
+Baselines live under each dataset's `baselines/` directory. The paper-facing
+Adsorb-Agent control uses GPT-5.4, MACE-MP-0 small, and up to five generated
+candidate configurations per case:
+
+- `basic_experiments/cmu20/baselines/adsorb-agent/adsorb-agent_gpt54_mace_mp0_small_5config/`
+- `basic_experiments/ocd62/baselines/adsorb-agent/adsorb-agent_gpt54_mace_mp0_small_5config/`
+
+The older unbounded-candidate CMU20 Adsorb-Agent rerun has been removed from
+the curated result tree; generated method-comparison tables require the
+matched-budget 5-config directories above.
 
 ## Advanced Experiments
 
@@ -73,7 +80,8 @@ main dataset/backend/variant matrix:
 - `ablation_and_chemical_slip_diagnostics/chemical_slip_interpretability/`:
   chemical-slip interpretation tables and trajectories.
 - `reproducibility/ocd62_overlap12_rerun/`: repeated runs on the 12 overlapping OCD62
-  cases, including run1/run2/run3 directories and N=2/N=3 summaries.
+  cases, including complete run1/run2/run3/run4 directories, a partial audited
+  run5, and N=2/N=3/N=4 summaries.
 - `reproducibility/cmu20_gpt54_mace_mp0_small_multiseed/`:
   GPT-5.4 CMU20 full-run seed sensitivity under MACE-MP-0 small.
 - `force_field_sensitivity/mace_mp0_large_vs_mace_mp0_small/`: MACE-MP-0 large vs

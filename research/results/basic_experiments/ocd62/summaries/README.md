@@ -6,7 +6,8 @@ LLM/force-field folders such as
 `baselines/`.
 
 - `method_comparison.csv`: per-case comparison of AdsMind 1-Shot, AdsMind Full,
-  random N=20, and heuristic enumeration.
+  random N=20, heuristic enumeration, and the matched Adsorb-Agent 5-config
+  control.
 - `ablation_4backend.csv`: unified 62-case x 4-backend x 5-variant ablation
   matrix.
 

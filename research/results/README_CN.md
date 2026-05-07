@@ -58,9 +58,16 @@ research/results/
 - `basic_experiments/summaries/method_comparison_table.md`
 - `basic_experiments/summaries/method_comparison_table.tex`
 
-非 LLM baseline 放在各数据集的 `baselines/` 目录下。CMU20 的
-Adsorb-Agent 对照实验在
-`basic_experiments/cmu20/baselines/adsorbagent_gpt54_mace_mp0_small/`。
+非 LLM baseline 放在各数据集的 `baselines/` 目录下。论文主表使用的
+Adsorb-Agent 对照实验统一为 GPT-5.4、MACE-MP-0 small，并且每个 case 最多
+生成 5 个候选构型：
+
+- `basic_experiments/cmu20/baselines/adsorb-agent/adsorb-agent_gpt54_mace_mp0_small_5config/`
+- `basic_experiments/ocd62/baselines/adsorb-agent/adsorb-agent_gpt54_mace_mp0_small_5config/`
+
+旧的 CMU20 未限制候选数 Adsorb-Agent 重跑已从 curated result tree 删除；
+自动生成的 method-comparison 表现在强制使用上面的 matched-budget 5-config
+目录。
 
 ## 进阶实验
 
@@ -71,7 +78,8 @@ Adsorb-Agent 对照实验在
 - `ablation_and_chemical_slip_diagnostics/chemical_slip_interpretability/`：
   chemical slip 的解释性表格和轨迹。
 - `reproducibility/ocd62_overlap12_rerun/`：OCD62 重叠 12 个 case 的重复性实验，
-  包括 run1/run2/run3 目录以及 N=2/N=3 汇总。
+  包括完整的 run1/run2/run3/run4、经审计的 partial run5，以及 N=2/N=3/N=4
+  汇总。
 - `reproducibility/cmu20_gpt54_mace_mp0_small_multiseed/`：
   GPT-5.4 CMU20 full-run 在 MACE-MP-0 small 下的多随机种子敏感性。
 - `force_field_sensitivity/mace_mp0_large_vs_mace_mp0_small/`：MACE-MP-0 large 与

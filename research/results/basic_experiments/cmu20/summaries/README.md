@@ -6,7 +6,8 @@ LLM/force-field folders such as
 `baselines/`.
 
 - `method_comparison.csv`: per-case comparison of AdsMind 1-Shot, AdsMind Full,
-  random N=20, heuristic enumeration, and Adsorb-Agent where available.
+  random N=20, heuristic enumeration, and the matched Adsorb-Agent 5-config
+  control.
 
 Regenerate with:
 
