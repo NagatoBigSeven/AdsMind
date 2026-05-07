@@ -53,6 +53,9 @@ and `datasets/ocd62_overlap12/`.
 Paper-facing remote run configs:
 
 - `run_configs/ocd62_overlap12_run3/`: third reproducibility run on the 12 OCD62 overlap cases.
+- `run_configs/ocd62_overlap12_run45/`: parallel fourth/fifth reproducibility
+  run launcher. Run4 is complete; run5 is retained only as audited partial data
+  because remote Grok run5 hit external credit/billing failures.
 
 Run a manifest sequentially:
 
