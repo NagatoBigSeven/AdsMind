@@ -16,6 +16,15 @@ from ase import Atoms
 from ase.constraints import FixAtoms
 from ase.io import read
 from ase.optimize import BFGS
+
+try:
+    import torch
+
+    if not hasattr(torch.compiler, "is_compiling"):
+        torch.compiler.is_compiling = lambda: False  # type: ignore[attr-defined]
+except Exception:
+    pass
+
 from mace.calculators import mace_mp
 from scipy.stats import wilcoxon
 
@@ -25,9 +34,20 @@ from research.agent_eval.common import (
     exact_mcnemar,
     rank_biserial_from_differences,
 )
+from research.agent_eval.experiment_identity import backend_identity, summary_metadata
 
 
 SUMMARY_FIELDS = [
+    "baseline",
+    "backend_key",
+    "backend",
+    "llm_model",
+    "force_field",
+    "calculator_backend",
+    "force_field_model",
+    "force_field_size",
+    "max_config_budget",
+    "random_ratio",
     "case_id",
     "config_name",
     "ads_smiles",
@@ -56,6 +76,11 @@ SUMMARY_FIELDS = [
     "orient",
     "cutoff_multiplier",
 ]
+
+ADSORBAGENT_METADATA = {
+    "baseline": "adsorbagent",
+    **summary_metadata(backend_identity("gpt")),
+}
 
 
 COMPARISON_FIELDS = [
@@ -88,6 +113,15 @@ def parse_optional_float(value: Any) -> Optional[float]:
 def parse_bool(value: Any) -> bool:
     """Parse a common boolean-like value."""
     return str(value).strip().lower() in {"1", "true", "yes", "y", "success"}
+
+
+def normalize_case_id(value: Any) -> str:
+    """Normalize numeric-looking case IDs without truncating existing padding."""
+    text = str(value).strip()
+    if text.endswith(".0"):
+        text = text[:-2]
+    width = max(2, len(text))
+    return text.zfill(width)
 
 
 def load_csv(path: Path) -> List[Dict[str, str]]:
@@ -178,12 +212,15 @@ def summarize_case(
 ) -> Dict[str, Any]:
     """Summarize one Adsorb-Agent result directory."""
     config_name = result_dir.name
-    case_id = config_name.split("_", 1)[0].zfill(2)
+    case_id = normalize_case_id(config_name.split("_", 1)[0])
     cfg = load_case_config(config_dir, config_name)
     payload = load_result_payload(result_dir)
     solution = payload.get("initial_solution", {}) if payload else {}
 
     row: Dict[str, Any] = {
+        **ADSORBAGENT_METADATA,
+        "max_config_budget": payload.get("max_config_budget", ""),
+        "random_ratio": payload.get("random_ratio", ""),
         "case_id": case_id,
         "config_name": config_name,
         "ads_smiles": cfg.get("ads_smiles", ""),
@@ -291,11 +328,11 @@ def compare_with_adsmind(
 ) -> Tuple[List[Dict[str, Any]], Dict[str, Any]]:
     """Build comparison rows and statistical payload."""
     adsmind_rows = {
-        row["case_id"].zfill(2): row
+        normalize_case_id(row["case_id"]): row
         for row in load_csv(adsmind_summary)
         if row.get("variant") == "full"
     }
-    competitor_rows = {str(row["case_id"]).zfill(2): row for row in adsorbagent_rows}
+    competitor_rows = {normalize_case_id(row["case_id"]): row for row in adsorbagent_rows}
 
     comparison_rows: List[Dict[str, Any]] = []
     energy_differences: List[float] = []
