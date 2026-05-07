@@ -43,6 +43,7 @@ REPRO_RUN_DIRS = {
     1: "run1",
     2: "run2",
     3: "run3",
+    4: "run4",
 }
 OUTLIER_KEYS = {("grok", "full", 16), ("grok", "no_forbid", 16)}
 OUTLIER_THRESHOLD_EV = -10_000.0
@@ -252,8 +253,8 @@ def agreement_class(delta: float | None, *, outlier: bool = False) -> str:
 
 
 def paired_rows(run_count: int) -> list[dict[str, Any]]:
-    if run_count not in {2, 3}:
-        raise ValueError("run_count must be 2 or 3")
+    if run_count not in {2, 3, 4}:
+        raise ValueError("run_count must be 2, 3, or 4")
 
     overlap = overlap_by_case()
     run_names = [REPRO_RUN_DIRS[i] for i in range(1, run_count + 1)]
@@ -293,7 +294,7 @@ def paired_rows(run_count: int) -> list[dict[str, Any]]:
                 for idx, value in enumerate(values, start=1):
                     row[f"e_run{idx}"] = format_float(value)
                     row[f"run{idx}_backend"] = backend_result_dir(backend, run_name=REPRO_RUN_DIRS[idx])
-                if run_count == 3 and len(clean) >= 2:
+                if run_count >= 3 and len(clean) >= 2:
                     row["e_min"] = format_float(min(clean))
                     row["std_eV"] = format_float(pstdev(clean))
                 rows.append(row)
@@ -335,7 +336,56 @@ def reproducibility_report(rows: list[dict[str, Any]], run_count: int) -> str:
     return "\n".join(lines)
 
 
-def write_outputs(write_n3: bool) -> None:
+def reproducibility_fieldnames(run_count: int) -> list[str]:
+    fields = [
+        "case_id",
+        "ocd62_case_id",
+        "ocd_id",
+        "surface_formula",
+        "adsorbate",
+        "backend_key",
+        "backend",
+    ]
+    fields.extend(f"run{idx}_backend" for idx in range(1, run_count + 1))
+    fields.extend(
+        [
+            "llm_model",
+            "force_field",
+            "calculator_backend",
+            "force_field_model",
+            "force_field_size",
+            "variant",
+        ]
+    )
+    fields.extend(f"e_run{idx}" for idx in range(1, run_count + 1))
+    fields.extend(["range_eV"])
+    if run_count >= 3:
+        fields.extend(["e_min", "std_eV"])
+    fields.append("agreement_class")
+    return fields
+
+
+def ensure_repro_summaries(run_count: int) -> None:
+    missing = [
+        f"{REPRO_RUN_DIRS[idx]}/{backend}"
+        for idx in range(1, run_count + 1)
+        for backend in BACKENDS
+        if not repro_summary_path(REPRO_RUN_DIRS[idx], backend).exists()
+    ]
+    if missing:
+        raise FileNotFoundError(f"Reproducibility summaries missing for: {', '.join(missing)}")
+
+
+def write_reproducibility_outputs(run_count: int) -> None:
+    ensure_repro_summaries(run_count)
+    rows = paired_rows(run_count)
+    fieldnames = reproducibility_fieldnames(run_count)
+    write_csv(OVERLAP12_SUMMARY_DIR / f"reproducibility_n{run_count}.csv", rows, fieldnames)
+    report = reproducibility_report(rows, run_count)
+    (OVERLAP12_SUMMARY_DIR / f"reproducibility_n{run_count}.md").write_text(report, encoding="utf-8")
+
+
+def write_outputs(write_n3: bool, write_n4: bool) -> None:
     unified_fields = [
         "case_id",
         "ocd_id",
@@ -362,77 +412,21 @@ def write_outputs(write_n3: bool) -> None:
     unified = unified_rows()
     write_csv(OCD62_SUMMARY_DIR / "ablation_4backend.csv", unified, unified_fields)
 
-    n2 = paired_rows(2)
-    n2_fields = [
-        "case_id",
-        "ocd62_case_id",
-        "ocd_id",
-        "surface_formula",
-        "adsorbate",
-        "backend_key",
-        "backend",
-        "run1_backend",
-        "run2_backend",
-        "llm_model",
-        "force_field",
-        "calculator_backend",
-        "force_field_model",
-        "force_field_size",
-        "variant",
-        "e_run1",
-        "e_run2",
-        "range_eV",
-        "agreement_class",
-    ]
-    write_csv(OVERLAP12_SUMMARY_DIR / "reproducibility_n2.csv", n2, n2_fields)
-    report_n2 = reproducibility_report(n2, 2)
-    (OVERLAP12_SUMMARY_DIR / "reproducibility_n2.md").write_text(report_n2, encoding="utf-8")
+    write_reproducibility_outputs(2)
 
     if write_n3:
-        missing = [
-            backend
-            for backend in BACKENDS
-            if not repro_summary_path(REPRO_RUN_DIRS[3], backend).exists()
-        ]
-        if missing:
-            raise FileNotFoundError(f"RUN3 summaries missing for: {', '.join(missing)}")
-        n3 = paired_rows(3)
-        n3_fields = [
-            "case_id",
-            "ocd62_case_id",
-            "ocd_id",
-            "surface_formula",
-            "adsorbate",
-            "backend_key",
-            "backend",
-            "run1_backend",
-            "run2_backend",
-            "run3_backend",
-            "llm_model",
-            "force_field",
-            "calculator_backend",
-            "force_field_model",
-            "force_field_size",
-            "variant",
-            "e_run1",
-            "e_run2",
-            "e_run3",
-            "range_eV",
-            "e_min",
-            "std_eV",
-            "agreement_class",
-        ]
-        write_csv(OVERLAP12_SUMMARY_DIR / "reproducibility_n3.csv", n3, n3_fields)
-        report_n3 = reproducibility_report(n3, 3)
-        (OVERLAP12_SUMMARY_DIR / "reproducibility_n3.md").write_text(report_n3, encoding="utf-8")
+        write_reproducibility_outputs(3)
+    if write_n4:
+        write_reproducibility_outputs(4)
 
 
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--write-n3", action="store_true", help="Also write N=3 outputs after RUN3 is present")
+    parser.add_argument("--write-n4", action="store_true", help="Also write N=4 outputs after RUN4 is present")
     parser.add_argument("--policy", default="", help=argparse.SUPPRESS)
     args = parser.parse_args(argv)
-    write_outputs(args.write_n3)
+    write_outputs(args.write_n3, args.write_n4)
     return 0
 
 

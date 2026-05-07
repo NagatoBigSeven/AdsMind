@@ -13,33 +13,44 @@
     "notes": "Resolved from prior AdsMind outputs; strong dissociation previously"
   },
   "status": "success",
-  "best_energy_eV": -4.551860809326172,
+  "best_energy_eV": -4.662910461425781,
   "iteration_count": 1,
   "max_attempts": 1,
   "final_site_type": "ontop",
   "converged_tag": false,
-  "wall_clock_sec": 145.16062799998326,
-  "total_input_tokens": 4934,
-  "total_output_tokens": 1110,
-  "artifact_paths": {},
+  "wall_clock_sec": 188.23997854813933,
+  "total_input_tokens": 4552,
+  "total_output_tokens": 5597,
+  "artifact_paths": {
+    "BEST_CH2CO_ontop_E-4.663": "research/results/basic_experiments/cmu20/grok4_mace_mp0_small/one_shot/16/artifacts/BEST_CH2CO_ontop_E-4.663.xyz",
+    "BEST_CH2CO_ontop_E-4.663.xyz": "research/results/basic_experiments/cmu20/grok4_mace_mp0_small/one_shot/16/artifacts/BEST_CH2CO_ontop_E-4.663.xyz",
+    "best_structure_file": "research/results/basic_experiments/cmu20/grok4_mace_mp0_small/one_shot/16/artifacts/BEST_CH2CO_ontop_E-4.663.xyz",
+    "conformers_[CH2]CO": "research/results/basic_experiments/cmu20/grok4_mace_mp0_small/one_shot/16/artifacts/conformers_[CH2]CO.traj",
+    "conformers_[CH2]CO.traj": "research/results/basic_experiments/cmu20/grok4_mace_mp0_small/one_shot/16/artifacts/conformers_[CH2]CO.traj",
+    "final": "research/results/basic_experiments/cmu20/grok4_mace_mp0_small/one_shot/16/artifacts/final.xyz",
+    "final.xyz": "research/results/basic_experiments/cmu20/grok4_mace_mp0_small/one_shot/16/artifacts/final.xyz",
+    "relaxation": "research/results/basic_experiments/cmu20/grok4_mace_mp0_small/one_shot/16/artifacts/relaxation.traj",
+    "relaxation.traj": "research/results/basic_experiments/cmu20/grok4_mace_mp0_small/one_shot/16/artifacts/relaxation.traj",
+    "relaxation_trajectory_file": "research/results/basic_experiments/cmu20/grok4_mace_mp0_small/one_shot/16/artifacts/relaxation.traj"
+  },
   "best_result": {
-    "most_stable_energy_eV": -4.551860809326172,
+    "most_stable_energy_eV": -4.662910461425781,
     "analysis_json": {
       "status": "success",
-      "message": "Most stable config adsorption energy: -4.5519 eV. Target Atom: C (from plan index 0, global index 54 in relaxed structure). -> Nearest: Hf (Index 36), Distance: 2.252 Å (Threshold: 3.639), Bound: True. Bonded Surface Atoms: Hf-2.252Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: False (Planned ['Hf'] -> Actual ['Hf']).",
-      "most_stable_energy_eV": -4.551860809326172,
+      "message": "Most stable config adsorption energy: -4.6629 eV. Target Atom: C (from plan index 0, global index 54 in relaxed structure). -> Nearest: Hf (Index 18), Distance: 2.25 Å (Threshold: 3.639), Bound: True. Bonded Surface Atoms: Hf-2.25Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: False (Planned ['Hf'] -> Actual ['Hf']).",
+      "most_stable_energy_eV": -4.662910461425781,
       "target_adsorbate_atom": "C",
       "target_adsorbate_atom_index": 54,
       "bonded_surface_atoms": [
         {
           "symbol": "Hf",
-          "index": 36,
-          "distance": 2.252
+          "index": 18,
+          "distance": 2.25
         }
       ],
       "nearest_slab_atom": "Hf",
-      "nearest_slab_atom_index": 36,
-      "final_bond_distance_A": 2.252,
+      "nearest_slab_atom_index": 18,
+      "final_bond_distance_A": 2.25,
       "estimated_covalent_cutoff_A": 2.761,
       "is_covalently_bound": true,
       "reaction_detected": false,
@@ -58,15 +69,15 @@
         "actual_symbols": [
           "Hf"
         ],
-        "site_fingerprint": "Hf36"
+        "site_fingerprint": "Hf18"
       },
-      "best_structure_file": "outputs/16-ba40cbc6/BEST_CH2CO_ontop_E-4.552.xyz",
-      "generated_conformers_file": "outputs/16-ba40cbc6/conformers_[CH2]CO.traj",
-      "relaxation_trajectory_file": "outputs/16-ba40cbc6/final.xyz",
-      "session_id": "16-ba40cbc6"
+      "best_structure_file": "outputs/16-722b5b3d/BEST_CH2CO_ontop_E-4.663.xyz",
+      "generated_conformers_file": "outputs/16-722b5b3d/conformers_[CH2]CO.traj",
+      "relaxation_trajectory_file": "outputs/16-722b5b3d/final.xyz",
+      "session_id": "16-722b5b3d"
     },
     "plan": {
-      "reasoning": "SMILES Consistency Check: The SMILES [CH2]CO represents the 2-hydroxyethyl radical (•CH2-CH2-OH), with the radical on carbon at index 0 (radical_electrons: 1, hybridization: SP3). This matches the user description. No hybridization mismatch. For ReactiveSpecies, the binding atom (index 0) has unpaired electrons, which is correct. Analyze Old Plans: History is None, so no previous attempts, successes, failures, or tags. No unstable sites identified yet. No convergence signals. Formulate New Plan: This is the initial plan. Aim for the lowest energy adsorption. Since it's a radical, use 'ReactiveSpecies' and bind via the radical carbon (index 0). Cannot bind via saturated atoms like O (index 2) under ReactiveSpecies rules. Start with ontop site on Hf, as Hf is likely more reactive than Au for stronger binding (more negative adsorption energy). Surface has ontop Hf sites available. This is a single binding point, aligning with ontop requirements. Physical consistency: No issues anticipated. Avoid pitfalls: No repeats since first attempt. Analyze Request: Find lowest-energy adsorption for the radical on the surface. Analyze Adsorbate: Major functional group is the radical on C0 and OH on C1. Atom indices confirmed. Analyze Surface: Ontop sites include Hf. Formulate Plan: Propose ontop Hf via index 0. Defaults for other parameters. Hard limit of 1 attempt noted, but since this is the first, proceed with continue.",
+      "reasoning": "SMILES Consistency Check: The SMILES [CH2]CO represents the 2-hydroxyethyl radical (•CH2CH2OH), with the radical at carbon index 0 (SP3, radical_electrons=1). This matches the user description. No hybridization mismatch. For ReactiveSpecies, binding atoms must have unpaired electrons, so only index 0 is eligible. Analyze Old Plans: History is None, so this is the first attempt. Formulate New Plan: The goal is the lowest-energy adsorption of the intact radical. As a radical, use 'ReactiveSpecies'. Start with the most promising site: ontop on Hf, as Hf is likely more reactive than Au for binding the carbon radical. Propose single-point adsorption via index 0 at ontop Hf site. Since only one attempt allowed, this is the initial plan. If more attempts were possible, I would systematically test other sites like ontop Au, bridge Au-Hf, etc. Cannot propose multi-point adsorption because only one atom has unpaired electrons.",
       "adsorbate_type": "ReactiveSpecies",
       "solution": {
         "action": "continue",
@@ -87,20 +98,20 @@
   },
   "last_analysis": {
     "status": "success",
-    "message": "Most stable config adsorption energy: -4.5519 eV. Target Atom: C (from plan index 0, global index 54 in relaxed structure). -> Nearest: Hf (Index 36), Distance: 2.252 Å (Threshold: 3.639), Bound: True. Bonded Surface Atoms: Hf-2.252Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: False (Planned ['Hf'] -> Actual ['Hf']).",
-    "most_stable_energy_eV": -4.551860809326172,
+    "message": "Most stable config adsorption energy: -4.6629 eV. Target Atom: C (from plan index 0, global index 54 in relaxed structure). -> Nearest: Hf (Index 18), Distance: 2.25 Å (Threshold: 3.639), Bound: True. Bonded Surface Atoms: Hf-2.25Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: False (Planned ['Hf'] -> Actual ['Hf']).",
+    "most_stable_energy_eV": -4.662910461425781,
     "target_adsorbate_atom": "C",
     "target_adsorbate_atom_index": 54,
     "bonded_surface_atoms": [
       {
         "symbol": "Hf",
-        "index": 36,
-        "distance": 2.252
+        "index": 18,
+        "distance": 2.25
       }
     ],
     "nearest_slab_atom": "Hf",
-    "nearest_slab_atom_index": 36,
-    "final_bond_distance_A": 2.252,
+    "nearest_slab_atom_index": 18,
+    "final_bond_distance_A": 2.25,
     "estimated_covalent_cutoff_A": 2.761,
     "is_covalently_bound": true,
     "reaction_detected": false,
@@ -119,18 +130,18 @@
       "actual_symbols": [
         "Hf"
       ],
-      "site_fingerprint": "Hf36"
+      "site_fingerprint": "Hf18"
     },
-    "best_structure_file": "outputs/16-ba40cbc6/BEST_CH2CO_ontop_E-4.552.xyz",
-    "generated_conformers_file": "outputs/16-ba40cbc6/conformers_[CH2]CO.traj",
-    "relaxation_trajectory_file": "outputs/16-ba40cbc6/final.xyz",
-    "session_id": "16-ba40cbc6"
+    "best_structure_file": "outputs/16-722b5b3d/BEST_CH2CO_ontop_E-4.663.xyz",
+    "generated_conformers_file": "outputs/16-722b5b3d/conformers_[CH2]CO.traj",
+    "relaxation_trajectory_file": "outputs/16-722b5b3d/final.xyz",
+    "session_id": "16-722b5b3d"
   },
   "attempt_records": [
     {
       "attempt_index": 1,
       "plan": {
-        "reasoning": "SMILES Consistency Check: The SMILES [CH2]CO represents the 2-hydroxyethyl radical (•CH2-CH2-OH), with the radical on carbon at index 0 (radical_electrons: 1, hybridization: SP3). This matches the user description. No hybridization mismatch. For ReactiveSpecies, the binding atom (index 0) has unpaired electrons, which is correct. Analyze Old Plans: History is None, so no previous attempts, successes, failures, or tags. No unstable sites identified yet. No convergence signals. Formulate New Plan: This is the initial plan. Aim for the lowest energy adsorption. Since it's a radical, use 'ReactiveSpecies' and bind via the radical carbon (index 0). Cannot bind via saturated atoms like O (index 2) under ReactiveSpecies rules. Start with ontop site on Hf, as Hf is likely more reactive than Au for stronger binding (more negative adsorption energy). Surface has ontop Hf sites available. This is a single binding point, aligning with ontop requirements. Physical consistency: No issues anticipated. Avoid pitfalls: No repeats since first attempt. Analyze Request: Find lowest-energy adsorption for the radical on the surface. Analyze Adsorbate: Major functional group is the radical on C0 and OH on C1. Atom indices confirmed. Analyze Surface: Ontop sites include Hf. Formulate Plan: Propose ontop Hf via index 0. Defaults for other parameters. Hard limit of 1 attempt noted, but since this is the first, proceed with continue.",
+        "reasoning": "SMILES Consistency Check: The SMILES [CH2]CO represents the 2-hydroxyethyl radical (•CH2CH2OH), with the radical at carbon index 0 (SP3, radical_electrons=1). This matches the user description. No hybridization mismatch. For ReactiveSpecies, binding atoms must have unpaired electrons, so only index 0 is eligible. Analyze Old Plans: History is None, so this is the first attempt. Formulate New Plan: The goal is the lowest-energy adsorption of the intact radical. As a radical, use 'ReactiveSpecies'. Start with the most promising site: ontop on Hf, as Hf is likely more reactive than Au for binding the carbon radical. Propose single-point adsorption via index 0 at ontop Hf site. Since only one attempt allowed, this is the initial plan. If more attempts were possible, I would systematically test other sites like ontop Au, bridge Au-Hf, etc. Cannot propose multi-point adsorption because only one atom has unpaired electrons.",
         "adsorbate_type": "ReactiveSpecies",
         "solution": {
           "action": "continue",
@@ -149,35 +160,26 @@
       },
       "plan_key": "ontop|Hf|0|ReactiveSpecies|2.0",
       "status": "success",
-      "most_stable_energy_eV": -4.551860809326172,
+      "most_stable_energy_eV": -4.662910461425781,
       "bond_change_count": 0,
       "is_dissociated": false,
       "is_chemical_slip": false,
       "planned_site_type": "ontop",
       "actual_site_type": "ontop",
-      "best_structure_file": "outputs/16-ba40cbc6/BEST_CH2CO_ontop_E-4.552.xyz",
-      "generated_conformers_file": "outputs/16-ba40cbc6/conformers_[CH2]CO.traj",
-      "relaxation_trajectory_file": "outputs/16-ba40cbc6/final.xyz",
-      "message": "Most stable config adsorption energy: -4.5519 eV. Target Atom: C (from plan index 0, global index 54 in relaxed structure). -> Nearest: Hf (Index 36), Distance: 2.252 Å (Threshold: 3.639), Bound: True. Bonded Surface Atoms: Hf-2.252Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: False (Planned ['Hf'] -> Actual ['Hf']).",
-      "history_entry": "【✅ Perfect Adsorption】 ontop @ ['Hf'] (Index [0]) -> Site: ontop (Hf) [🌟 New Best] | E=-4.552 eV"
+      "best_structure_file": "outputs/16-722b5b3d/BEST_CH2CO_ontop_E-4.663.xyz",
+      "generated_conformers_file": "outputs/16-722b5b3d/conformers_[CH2]CO.traj",
+      "relaxation_trajectory_file": "outputs/16-722b5b3d/final.xyz",
+      "message": "Most stable config adsorption energy: -4.6629 eV. Target Atom: C (from plan index 0, global index 54 in relaxed structure). -> Nearest: Hf (Index 18), Distance: 2.25 Å (Threshold: 3.639), Bound: True. Bonded Surface Atoms: Hf-2.25Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: False (Planned ['Hf'] -> Actual ['Hf']).",
+      "history_entry": "【✅ Perfect Adsorption】 ontop @ ['Hf'] (Index [0]) -> Site: ontop (Hf) | E=-4.663 eV"
     }
   ],
   "history": [
-    "【✅ Perfect Adsorption】 ontop @ ['Hf'] (Index [0]) -> Site: ontop (Hf) [🌟 New Best] | E=-4.552 eV"
+    "【✅ Perfect Adsorption】 ontop @ ['Hf'] (Index [0]) -> Site: ontop (Hf) | E=-4.663 eV"
   ],
   "error": null,
   "perfect_count": 1,
   "dissociation_count": 0,
   "rearrangement_count": 0,
   "calc_failure_count": 0,
-  "chemical_slip_count": 0,
-  "provenance": {
-    "result_tree": "research/results/basic_experiments/cmu20/grok4_mace_mp0_small/one_shot",
-    "dataset": "cmu20",
-    "backend": "grok4_mace_mp0_small",
-    "variant": "one_shot",
-    "artifact_status": "result_json_restored_from_git_history_without_heavy_artifacts",
-    "restored_from_commit": "ba317df76802c090bc365a99bdbe8ca9f8396fe9",
-    "note": "The lightweight result.json was recovered from git history during result-tree cleanup; heavy .xyz/.traj artifacts were not tracked and are not available locally."
-  }
+  "chemical_slip_count": 0
 }

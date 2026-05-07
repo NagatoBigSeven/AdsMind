@@ -13,104 +13,91 @@
     "notes": "Best-available reconstruction from sanitized filename CC_O and formula C2H4O; large-adsorbate ablation candidate"
   },
   "status": "success",
-  "best_energy_eV": -3.5939178466796875,
+  "best_energy_eV": -4.0125579833984375,
   "iteration_count": 1,
   "max_attempts": 1,
-  "final_site_type": "bridge",
+  "final_site_type": "hollow (HCP/Subsurf-Atom)",
   "converged_tag": false,
-  "wall_clock_sec": 114.23250874999212,
-  "total_input_tokens": 5311,
-  "total_output_tokens": 1429,
-  "artifact_paths": {},
+  "wall_clock_sec": 309.8161687813699,
+  "total_input_tokens": 4724,
+  "total_output_tokens": 2762,
+  "artifact_paths": {
+    "BEST_CC_O_ontop_to_hollow_HCP-Subsurf-Atom_E-4.013": "research/results/basic_experiments/cmu20/grok4_mace_mp0_small/one_shot/19/artifacts/BEST_CC_O_ontop_to_hollow_HCP-Subsurf-Atom_E-4.013.xyz",
+    "BEST_CC_O_ontop_to_hollow_HCP-Subsurf-Atom_E-4.013.xyz": "research/results/basic_experiments/cmu20/grok4_mace_mp0_small/one_shot/19/artifacts/BEST_CC_O_ontop_to_hollow_HCP-Subsurf-Atom_E-4.013.xyz",
+    "best_structure_file": "research/results/basic_experiments/cmu20/grok4_mace_mp0_small/one_shot/19/artifacts/BEST_CC_O_ontop_to_hollow_HCP-Subsurf-Atom_E-4.013.xyz",
+    "conformers_CC_O": "research/results/basic_experiments/cmu20/grok4_mace_mp0_small/one_shot/19/artifacts/conformers_CC_O.traj",
+    "conformers_CC_O.traj": "research/results/basic_experiments/cmu20/grok4_mace_mp0_small/one_shot/19/artifacts/conformers_CC_O.traj",
+    "final": "research/results/basic_experiments/cmu20/grok4_mace_mp0_small/one_shot/19/artifacts/final.xyz",
+    "final.xyz": "research/results/basic_experiments/cmu20/grok4_mace_mp0_small/one_shot/19/artifacts/final.xyz",
+    "relaxation": "research/results/basic_experiments/cmu20/grok4_mace_mp0_small/one_shot/19/artifacts/relaxation.traj",
+    "relaxation.traj": "research/results/basic_experiments/cmu20/grok4_mace_mp0_small/one_shot/19/artifacts/relaxation.traj",
+    "relaxation_trajectory_file": "research/results/basic_experiments/cmu20/grok4_mace_mp0_small/one_shot/19/artifacts/relaxation.traj"
+  },
   "best_result": {
-    "most_stable_energy_eV": -3.5939178466796875,
+    "most_stable_energy_eV": -4.0125579833984375,
     "analysis_json": {
       "status": "success",
-      "message": "Most stable config adsorption energy: -3.5939 eV. Target Atom 1: C (from plan index 1, global index 64). -> Nearest: Hf (Index 16), Distance: 2.277 Å (Threshold: 2.761), Bound: True. Target Atom 2: O (from plan index 2, global index 65). -> Nearest: Hf (Index 18), Distance: 2.206 Å (Threshold: 2.651), Bound: True. Bonded Surface Atoms: O(65)-Hf(1.914Å), C(64)-Hf(2.42Å), C(64)-Hf(2.759Å), O(65)-Hf(3.329Å). Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Hf', 'Hf'] -> Actual ['Hf', 'Hf', 'Hf', 'Hf']).",
-      "most_stable_energy_eV": -3.5939178466796875,
+      "message": "Most stable config adsorption energy: -4.0126 eV. Target Atom: O (from plan index 2, global index 64 in relaxed structure). -> Nearest: Hf (Index 16), Distance: 1.897 Å (Threshold: 3.494), Bound: True. Bonded Surface Atoms: Hf-1.897Å, Hf-2.368Å, Hf-3.256Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Hf'] -> Actual ['Hf', 'Hf', 'Hf']).",
+      "most_stable_energy_eV": -4.0125579833984375,
+      "target_adsorbate_atom": "O",
+      "target_adsorbate_atom_index": 64,
       "bonded_surface_atoms": [
         {
-          "adsorbate_atom": "O(65)",
-          "adsorbate_atom_index": 65,
-          "symbol": "Hf",
-          "index": 18,
-          "distance": 1.914
-        },
-        {
-          "adsorbate_atom": "C(64)",
-          "adsorbate_atom_index": 64,
           "symbol": "Hf",
           "index": 16,
-          "distance": 2.42
+          "distance": 1.897
         },
         {
-          "adsorbate_atom": "C(64)",
-          "adsorbate_atom_index": 64,
+          "symbol": "Hf",
+          "index": 50,
+          "distance": 2.368
+        },
+        {
           "symbol": "Hf",
           "index": 18,
-          "distance": 2.759
-        },
-        {
-          "adsorbate_atom": "O(65)",
-          "adsorbate_atom_index": 65,
-          "symbol": "Hf",
-          "index": 16,
-          "distance": 3.329
+          "distance": 3.256
         }
       ],
-      "final_bond_distance_A": 1.914,
+      "nearest_slab_atom": "Hf",
+      "nearest_slab_atom_index": 16,
+      "final_bond_distance_A": 1.897,
+      "estimated_covalent_cutoff_A": 2.651,
       "is_covalently_bound": true,
-      "atom_1": {
-        "symbol": "C",
-        "global_index": 64,
-        "distance_A": 2.277,
-        "is_bound": true
-      },
-      "atom_2": {
-        "symbol": "O",
-        "global_index": 65,
-        "distance_A": 2.206,
-        "is_bound": true
-      },
       "reaction_detected": false,
-      "bond_change_count": 0,
       "is_dissociated": false,
       "n_components": 1,
+      "bond_change_count": 0,
       "site_analysis": {
-        "planned_site_type": "bridge",
-        "planned_connectivity": 2,
-        "actual_site_type": "bridge",
-        "actual_connectivity": 2,
+        "planned_site_type": "ontop",
+        "planned_connectivity": 1,
+        "actual_site_type": "hollow (HCP/Subsurf-Atom)",
+        "actual_connectivity": 3,
         "is_chemical_slip": true,
         "planned_symbols": [
-          "Hf",
           "Hf"
         ],
         "actual_symbols": [
           "Hf",
           "Hf",
-          "Hf",
           "Hf"
         ],
-        "site_fingerprint": "Hf18-Hf16-Hf18-Hf16"
+        "site_fingerprint": "Hf16-Hf50-Hf18"
       },
-      "best_structure_file": "outputs/19-d308a2ec/BEST_CC_O_bridge_E-3.594.xyz",
-      "generated_conformers_file": "outputs/19-d308a2ec/conformers_CC_O.traj",
-      "relaxation_trajectory_file": "outputs/19-d308a2ec/final.xyz",
-      "session_id": "19-d308a2ec"
+      "best_structure_file": "outputs/19-b1718e97/BEST_CC_O_ontop_to_hollow_HCP-Subsurf-Atom_E-4.013.xyz",
+      "generated_conformers_file": "outputs/19-b1718e97/conformers_CC_O.traj",
+      "relaxation_trajectory_file": "outputs/19-b1718e97/final.xyz",
+      "session_id": "19-b1718e97"
     },
     "plan": {
-      "reasoning": "Step 0: SMILES CC=O represents acetaldehyde (CH3CHO). Atom list: index 0 (C, SP3, degree 1), index 1 (C, SP2, degree 2), index 2 (O, SP2, degree 1). No radicals (all radical_electrons=0). Hybridization matches the molecule description; no warnings needed. Step 1: History is None, so no previous attempts, successes, failures, or tags. No unstable sites identified. Step 2: Formulate new plan to find lowest energy configuration. Since no history, propose an initial plan. Step 3: User's intent is to find the lowest-energy adsorption configuration for acetaldehyde on the surface. Step 4: Adsorbate is acetaldehyde with carbonyl group (C=O). No unpaired electrons, so use 'Molecule' type. Potential binding via O lone pairs or pi-bond (C=O). Step 5: Surface has Zn and Hf atoms. Available bridge sites: Hf-Hf, Hf-Zn, Zn-Zn. Step 6: For aldehydes, eta2 adsorption (side-on via C and O) on bridge sites is often stable. Select bridge site with Hf-Hf for strong binding, as Hf is a transition metal. Adsorbate binding indices [1,2] for carbonyl C and O. This aligns with rules: 'Molecule' type, bridge with 2 binding indices. Defaults for other parameters. Since this is the first attempt and process has a hard limit of 1 attempts, but no results yet, proceed with continue; termination would follow after this if limit enforced, but reasoning prioritizes starting exploration.",
+      "reasoning": "SMILES Consistency Check: The SMILES CC=O represents acetaldehyde (CH3CHO). Atom list confirms: index 0 (C, SP3, no radical), index 1 (C, SP2, no radical), index 2 (O, SP2, no radical). No mismatches in hybridization or radicals. History is None, so this is the first attempt. User's intent is to find the lowest-energy adsorption configuration for acetaldehyde on the Hf2Zn6(110) surface. Adsorbate analysis: Acetaldehyde has a carbonyl group (C=O), with major functional group being the aldehyde. Common adsorption modes include eta1 (via O lone pair) or eta2 (side-on via C and O). Since it's a stable molecule with no radicals, use 'Molecule' type. Surface analysis: Available ontop sites include Hf and Zn; Hf is more oxophilic, so start with ontop Hf via O (index 2) for eta1 mode, as this is a physically sensible initial plan. Site_type restricted to ontop/bridge/hollow; here ontop with 1 binding index. Termination disabled, so action 'continue'. Hard limit of 1 attempt noted, but proposing this as the initial plan.",
       "adsorbate_type": "Molecule",
       "solution": {
         "action": "continue",
-        "site_type": "bridge",
+        "site_type": "ontop",
         "surface_binding_atoms": [
-          "Hf",
           "Hf"
         ],
         "adsorbate_binding_indices": [
-          1,
           2
         ],
         "relax_top_n": 1,
@@ -123,94 +110,70 @@
   },
   "last_analysis": {
     "status": "success",
-    "message": "Most stable config adsorption energy: -3.5939 eV. Target Atom 1: C (from plan index 1, global index 64). -> Nearest: Hf (Index 16), Distance: 2.277 Å (Threshold: 2.761), Bound: True. Target Atom 2: O (from plan index 2, global index 65). -> Nearest: Hf (Index 18), Distance: 2.206 Å (Threshold: 2.651), Bound: True. Bonded Surface Atoms: O(65)-Hf(1.914Å), C(64)-Hf(2.42Å), C(64)-Hf(2.759Å), O(65)-Hf(3.329Å). Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Hf', 'Hf'] -> Actual ['Hf', 'Hf', 'Hf', 'Hf']).",
-    "most_stable_energy_eV": -3.5939178466796875,
+    "message": "Most stable config adsorption energy: -4.0126 eV. Target Atom: O (from plan index 2, global index 64 in relaxed structure). -> Nearest: Hf (Index 16), Distance: 1.897 Å (Threshold: 3.494), Bound: True. Bonded Surface Atoms: Hf-1.897Å, Hf-2.368Å, Hf-3.256Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Hf'] -> Actual ['Hf', 'Hf', 'Hf']).",
+    "most_stable_energy_eV": -4.0125579833984375,
+    "target_adsorbate_atom": "O",
+    "target_adsorbate_atom_index": 64,
     "bonded_surface_atoms": [
       {
-        "adsorbate_atom": "O(65)",
-        "adsorbate_atom_index": 65,
-        "symbol": "Hf",
-        "index": 18,
-        "distance": 1.914
-      },
-      {
-        "adsorbate_atom": "C(64)",
-        "adsorbate_atom_index": 64,
         "symbol": "Hf",
         "index": 16,
-        "distance": 2.42
+        "distance": 1.897
       },
       {
-        "adsorbate_atom": "C(64)",
-        "adsorbate_atom_index": 64,
+        "symbol": "Hf",
+        "index": 50,
+        "distance": 2.368
+      },
+      {
         "symbol": "Hf",
         "index": 18,
-        "distance": 2.759
-      },
-      {
-        "adsorbate_atom": "O(65)",
-        "adsorbate_atom_index": 65,
-        "symbol": "Hf",
-        "index": 16,
-        "distance": 3.329
+        "distance": 3.256
       }
     ],
-    "final_bond_distance_A": 1.914,
+    "nearest_slab_atom": "Hf",
+    "nearest_slab_atom_index": 16,
+    "final_bond_distance_A": 1.897,
+    "estimated_covalent_cutoff_A": 2.651,
     "is_covalently_bound": true,
-    "atom_1": {
-      "symbol": "C",
-      "global_index": 64,
-      "distance_A": 2.277,
-      "is_bound": true
-    },
-    "atom_2": {
-      "symbol": "O",
-      "global_index": 65,
-      "distance_A": 2.206,
-      "is_bound": true
-    },
     "reaction_detected": false,
-    "bond_change_count": 0,
     "is_dissociated": false,
     "n_components": 1,
+    "bond_change_count": 0,
     "site_analysis": {
-      "planned_site_type": "bridge",
-      "planned_connectivity": 2,
-      "actual_site_type": "bridge",
-      "actual_connectivity": 2,
+      "planned_site_type": "ontop",
+      "planned_connectivity": 1,
+      "actual_site_type": "hollow (HCP/Subsurf-Atom)",
+      "actual_connectivity": 3,
       "is_chemical_slip": true,
       "planned_symbols": [
-        "Hf",
         "Hf"
       ],
       "actual_symbols": [
         "Hf",
         "Hf",
-        "Hf",
         "Hf"
       ],
-      "site_fingerprint": "Hf18-Hf16-Hf18-Hf16"
+      "site_fingerprint": "Hf16-Hf50-Hf18"
     },
-    "best_structure_file": "outputs/19-d308a2ec/BEST_CC_O_bridge_E-3.594.xyz",
-    "generated_conformers_file": "outputs/19-d308a2ec/conformers_CC_O.traj",
-    "relaxation_trajectory_file": "outputs/19-d308a2ec/final.xyz",
-    "session_id": "19-d308a2ec"
+    "best_structure_file": "outputs/19-b1718e97/BEST_CC_O_ontop_to_hollow_HCP-Subsurf-Atom_E-4.013.xyz",
+    "generated_conformers_file": "outputs/19-b1718e97/conformers_CC_O.traj",
+    "relaxation_trajectory_file": "outputs/19-b1718e97/final.xyz",
+    "session_id": "19-b1718e97"
   },
   "attempt_records": [
     {
       "attempt_index": 1,
       "plan": {
-        "reasoning": "Step 0: SMILES CC=O represents acetaldehyde (CH3CHO). Atom list: index 0 (C, SP3, degree 1), index 1 (C, SP2, degree 2), index 2 (O, SP2, degree 1). No radicals (all radical_electrons=0). Hybridization matches the molecule description; no warnings needed. Step 1: History is None, so no previous attempts, successes, failures, or tags. No unstable sites identified. Step 2: Formulate new plan to find lowest energy configuration. Since no history, propose an initial plan. Step 3: User's intent is to find the lowest-energy adsorption configuration for acetaldehyde on the surface. Step 4: Adsorbate is acetaldehyde with carbonyl group (C=O). No unpaired electrons, so use 'Molecule' type. Potential binding via O lone pairs or pi-bond (C=O). Step 5: Surface has Zn and Hf atoms. Available bridge sites: Hf-Hf, Hf-Zn, Zn-Zn. Step 6: For aldehydes, eta2 adsorption (side-on via C and O) on bridge sites is often stable. Select bridge site with Hf-Hf for strong binding, as Hf is a transition metal. Adsorbate binding indices [1,2] for carbonyl C and O. This aligns with rules: 'Molecule' type, bridge with 2 binding indices. Defaults for other parameters. Since this is the first attempt and process has a hard limit of 1 attempts, but no results yet, proceed with continue; termination would follow after this if limit enforced, but reasoning prioritizes starting exploration.",
+        "reasoning": "SMILES Consistency Check: The SMILES CC=O represents acetaldehyde (CH3CHO). Atom list confirms: index 0 (C, SP3, no radical), index 1 (C, SP2, no radical), index 2 (O, SP2, no radical). No mismatches in hybridization or radicals. History is None, so this is the first attempt. User's intent is to find the lowest-energy adsorption configuration for acetaldehyde on the Hf2Zn6(110) surface. Adsorbate analysis: Acetaldehyde has a carbonyl group (C=O), with major functional group being the aldehyde. Common adsorption modes include eta1 (via O lone pair) or eta2 (side-on via C and O). Since it's a stable molecule with no radicals, use 'Molecule' type. Surface analysis: Available ontop sites include Hf and Zn; Hf is more oxophilic, so start with ontop Hf via O (index 2) for eta1 mode, as this is a physically sensible initial plan. Site_type restricted to ontop/bridge/hollow; here ontop with 1 binding index. Termination disabled, so action 'continue'. Hard limit of 1 attempt noted, but proposing this as the initial plan.",
         "adsorbate_type": "Molecule",
         "solution": {
           "action": "continue",
-          "site_type": "bridge",
+          "site_type": "ontop",
           "surface_binding_atoms": [
-            "Hf",
             "Hf"
           ],
           "adsorbate_binding_indices": [
-            1,
             2
           ],
           "relax_top_n": 1,
@@ -219,37 +182,28 @@
           "conformers_per_site_cap": 4
         }
       },
-      "plan_key": "bridge|Hf,Hf|1,2|Molecule|2.0",
+      "plan_key": "ontop|Hf|2|Molecule|2.0",
       "status": "success",
-      "most_stable_energy_eV": -3.5939178466796875,
+      "most_stable_energy_eV": -4.0125579833984375,
       "bond_change_count": 0,
       "is_dissociated": false,
       "is_chemical_slip": true,
-      "planned_site_type": "bridge",
-      "actual_site_type": "bridge",
-      "best_structure_file": "outputs/19-d308a2ec/BEST_CC_O_bridge_E-3.594.xyz",
-      "generated_conformers_file": "outputs/19-d308a2ec/conformers_CC_O.traj",
-      "relaxation_trajectory_file": "outputs/19-d308a2ec/final.xyz",
-      "message": "Most stable config adsorption energy: -3.5939 eV. Target Atom 1: C (from plan index 1, global index 64). -> Nearest: Hf (Index 16), Distance: 2.277 Å (Threshold: 2.761), Bound: True. Target Atom 2: O (from plan index 2, global index 65). -> Nearest: Hf (Index 18), Distance: 2.206 Å (Threshold: 2.651), Bound: True. Bonded Surface Atoms: O(65)-Hf(1.914Å), C(64)-Hf(2.42Å), C(64)-Hf(2.759Å), O(65)-Hf(3.329Å). Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Hf', 'Hf'] -> Actual ['Hf', 'Hf', 'Hf', 'Hf']).",
-      "history_entry": "【✅ Perfect Adsorption】 bridge @ ['Hf', 'Hf'] (Index [1, 2]) -> ⚠️【Unstable Site Warning】⚠️: Planned bridge (Hf-Hf) is unstable, adsorbate spontaneously slipped to bridge (Hf-Hf-Hf-Hf).This means Hf-Hf has insufficient affinity for this adsorbate. Please **FORBID** testing Hf-Hf type sites again! [🌟 New Best] | E=-3.594 eV"
+      "planned_site_type": "ontop",
+      "actual_site_type": "hollow (HCP/Subsurf-Atom)",
+      "best_structure_file": "outputs/19-b1718e97/BEST_CC_O_ontop_to_hollow_HCP-Subsurf-Atom_E-4.013.xyz",
+      "generated_conformers_file": "outputs/19-b1718e97/conformers_CC_O.traj",
+      "relaxation_trajectory_file": "outputs/19-b1718e97/final.xyz",
+      "message": "Most stable config adsorption energy: -4.0126 eV. Target Atom: O (from plan index 2, global index 64 in relaxed structure). -> Nearest: Hf (Index 16), Distance: 1.897 Å (Threshold: 3.494), Bound: True. Bonded Surface Atoms: Hf-1.897Å, Hf-2.368Å, Hf-3.256Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Hf'] -> Actual ['Hf', 'Hf', 'Hf']).",
+      "history_entry": "【✅ Perfect Adsorption】 ontop @ ['Hf'] (Index [2]) -> Site: hollow (HCP/Subsurf-Atom) (Hf,Hf,Hf) | E=-4.013 eV"
     }
   ],
   "history": [
-    "【✅ Perfect Adsorption】 bridge @ ['Hf', 'Hf'] (Index [1, 2]) -> ⚠️【Unstable Site Warning】⚠️: Planned bridge (Hf-Hf) is unstable, adsorbate spontaneously slipped to bridge (Hf-Hf-Hf-Hf).This means Hf-Hf has insufficient affinity for this adsorbate. Please **FORBID** testing Hf-Hf type sites again! [🌟 New Best] | E=-3.594 eV"
+    "【✅ Perfect Adsorption】 ontop @ ['Hf'] (Index [2]) -> Site: hollow (HCP/Subsurf-Atom) (Hf,Hf,Hf) | E=-4.013 eV"
   ],
   "error": null,
   "perfect_count": 1,
   "dissociation_count": 0,
   "rearrangement_count": 0,
   "calc_failure_count": 0,
-  "chemical_slip_count": 1,
-  "provenance": {
-    "result_tree": "research/results/basic_experiments/cmu20/grok4_mace_mp0_small/one_shot",
-    "dataset": "cmu20",
-    "backend": "grok4_mace_mp0_small",
-    "variant": "one_shot",
-    "artifact_status": "result_json_restored_from_git_history_without_heavy_artifacts",
-    "restored_from_commit": "ba317df76802c090bc365a99bdbe8ca9f8396fe9",
-    "note": "The lightweight result.json was recovered from git history during result-tree cleanup; heavy .xyz/.traj artifacts were not tracked and are not available locally."
-  }
+  "chemical_slip_count": 1
 }

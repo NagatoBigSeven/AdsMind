@@ -259,22 +259,25 @@ def add_adsorbagent_columns(table: pd.DataFrame, dataset: str) -> None:
     table["adsorbagent_relax"] = np.nan
     table["adsorbagent_success"] = np.nan
 
-    if dataset != "cmu20":
-        return
-
-    path = (
+    baseline_dir = (
         BASIC_ROOT
-        / "cmu20"
+        / dataset
         / "baselines"
-        / "adsorbagent_gpt54_mace_mp0_small"
-        / "summary.csv"
+        / "adsorb-agent"
+        / "adsorb-agent_gpt54_mace_mp0_small_5config"
     )
+    path = baseline_dir / "summary.csv"
+    if not path.exists():
+        raise FileNotFoundError(
+            f"{dataset}: expected matched Adsorb-Agent 5-config summary at {path.relative_to(ROOT)}"
+        )
+
     df = read_csv(path)
     df["case_id"] = df["case_id"].map(lambda value: pad_case_id(value, dataset))
     df["energy"] = to_num(df["best_adsorption_energy_eV"])
-    df["relax"] = to_num(df["adsorbagent_configs_tested"])
+    df["relax"] = to_num(df["adsorbagent_configs_tested"]).fillna(0)
     df["success"] = to_success(df["status"]) & (to_num(df["valid_traj_count"]) > 0) & df["energy"].notna()
-    df.loc[~df["success"], ["energy", "relax"]] = np.nan
+    df.loc[~df["success"], "energy"] = np.nan
     rows = df.set_index("case_id")
 
     table["adsorbagent_energy"] = table["case_id"].map(rows["energy"])
@@ -337,8 +340,6 @@ METHODS = [
 def method_long_frame(table: pd.DataFrame, dataset: str) -> pd.DataFrame:
     frames = []
     for method, prefix in METHODS:
-        if dataset != "cmu20" and method == "AdsorbAgent":
-            continue
         frames.append(
             pd.DataFrame(
                 {
@@ -381,7 +382,6 @@ def summarize_tables(tables: dict[str, pd.DataFrame]) -> pd.DataFrame:
             (dataset, method)
             for dataset in tables
             for method, _ in METHODS
-            if not (dataset != "cmu20" and method == "AdsorbAgent")
         )
     }
     summary["_order"] = summary.apply(lambda row: order[(row["method"], row["dataset"])], axis=1)
@@ -533,8 +533,8 @@ def validate_outputs(tables: dict[str, pd.DataFrame], summary: pd.DataFrame) -> 
         observed = len(tables[dataset])
         if observed != expected:
             raise ValueError(f"{dataset}: expected {expected} rows, observed {observed}")
-    if len(summary) != 9:
-        raise ValueError(f"Expected 9 main summary rows, observed {len(summary)}")
+    if len(summary) != 10:
+        raise ValueError(f"Expected 10 main summary rows, observed {len(summary)}")
 
 
 def main() -> None:
