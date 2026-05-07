@@ -13,43 +13,54 @@
     "notes": "Strong slip in prior run; Mo3Pd benchmark"
   },
   "status": "success",
-  "best_energy_eV": -3.6311686038970947,
+  "best_energy_eV": -3.619694471359253,
   "iteration_count": 1,
   "max_attempts": 1,
-  "final_site_type": "hollow (HCP/Subsurf-Atom)",
+  "final_site_type": "hollow (FCC/No-Subsurf)",
   "converged_tag": false,
-  "wall_clock_sec": 94.14500774996122,
-  "total_input_tokens": 4904,
-  "total_output_tokens": 1515,
-  "artifact_paths": {},
+  "wall_clock_sec": 2924.6155237331986,
+  "total_input_tokens": 4358,
+  "total_output_tokens": 3974,
+  "artifact_paths": {
+    "BEST_H_ontop_to_hollow_FCC-No-Subsurf_E-3.620": "research/results/basic_experiments/cmu20/grok4_mace_mp0_small/one_shot/01/artifacts/BEST_H_ontop_to_hollow_FCC-No-Subsurf_E-3.620.xyz",
+    "BEST_H_ontop_to_hollow_FCC-No-Subsurf_E-3.620.xyz": "research/results/basic_experiments/cmu20/grok4_mace_mp0_small/one_shot/01/artifacts/BEST_H_ontop_to_hollow_FCC-No-Subsurf_E-3.620.xyz",
+    "best_structure_file": "research/results/basic_experiments/cmu20/grok4_mace_mp0_small/one_shot/01/artifacts/BEST_H_ontop_to_hollow_FCC-No-Subsurf_E-3.620.xyz",
+    "conformers_[H]": "research/results/basic_experiments/cmu20/grok4_mace_mp0_small/one_shot/01/artifacts/conformers_[H].traj",
+    "conformers_[H].traj": "research/results/basic_experiments/cmu20/grok4_mace_mp0_small/one_shot/01/artifacts/conformers_[H].traj",
+    "final": "research/results/basic_experiments/cmu20/grok4_mace_mp0_small/one_shot/01/artifacts/final.xyz",
+    "final.xyz": "research/results/basic_experiments/cmu20/grok4_mace_mp0_small/one_shot/01/artifacts/final.xyz",
+    "relaxation": "research/results/basic_experiments/cmu20/grok4_mace_mp0_small/one_shot/01/artifacts/relaxation.traj",
+    "relaxation.traj": "research/results/basic_experiments/cmu20/grok4_mace_mp0_small/one_shot/01/artifacts/relaxation.traj",
+    "relaxation_trajectory_file": "research/results/basic_experiments/cmu20/grok4_mace_mp0_small/one_shot/01/artifacts/relaxation.traj"
+  },
   "best_result": {
-    "most_stable_energy_eV": -3.6311686038970947,
+    "most_stable_energy_eV": -3.619694471359253,
     "analysis_json": {
       "status": "success",
-      "message": "Most stable config adsorption energy: -3.6312 eV. Target Atom: H (from plan index 0, global index 96 in relaxed structure). -> Nearest: Pd (Index 69), Distance: 1.829 Å (Threshold: 2.465), Bound: True. Bonded Surface Atoms: Pd-1.829Å, Mo-2.055Å, Mo-2.156Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: False (Planned ['Mo', 'Mo', 'Pd'] -> Actual ['Mo', 'Mo', 'Pd']).",
-      "most_stable_energy_eV": -3.6311686038970947,
+      "message": "Most stable config adsorption energy: -3.6197 eV. Target Atom: H (from plan index 0, global index 96 in relaxed structure). -> Nearest: Pd (Index 21), Distance: 1.835 Å (Threshold: 2.465), Bound: True. Bonded Surface Atoms: Pd-1.835Å, Mo-2.008Å, Mo-2.212Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Pd'] -> Actual ['Mo', 'Mo', 'Pd']).",
+      "most_stable_energy_eV": -3.619694471359253,
       "target_adsorbate_atom": "H",
       "target_adsorbate_atom_index": 96,
       "bonded_surface_atoms": [
         {
           "symbol": "Pd",
-          "index": 69,
-          "distance": 1.829
+          "index": 21,
+          "distance": 1.835
         },
         {
           "symbol": "Mo",
-          "index": 14,
-          "distance": 2.055
+          "index": 20,
+          "distance": 2.008
         },
         {
           "symbol": "Mo",
-          "index": 17,
-          "distance": 2.156
+          "index": 62,
+          "distance": 2.212
         }
       ],
       "nearest_slab_atom": "Pd",
-      "nearest_slab_atom_index": 69,
-      "final_bond_distance_A": 1.829,
+      "nearest_slab_atom_index": 21,
+      "final_bond_distance_A": 1.835,
       "estimated_covalent_cutoff_A": 1.87,
       "is_covalently_bound": true,
       "reaction_detected": false,
@@ -57,14 +68,12 @@
       "n_components": 1,
       "bond_change_count": 0,
       "site_analysis": {
-        "planned_site_type": "hollow",
-        "planned_connectivity": 3,
-        "actual_site_type": "hollow (HCP/Subsurf-Atom)",
+        "planned_site_type": "ontop",
+        "planned_connectivity": 1,
+        "actual_site_type": "hollow (FCC/No-Subsurf)",
         "actual_connectivity": 3,
-        "is_chemical_slip": false,
+        "is_chemical_slip": true,
         "planned_symbols": [
-          "Mo",
-          "Mo",
           "Pd"
         ],
         "actual_symbols": [
@@ -72,22 +81,20 @@
           "Mo",
           "Pd"
         ],
-        "site_fingerprint": "Pd69-Mo14-Mo17"
+        "site_fingerprint": "Pd21-Mo20-Mo62"
       },
-      "best_structure_file": "outputs/01-390fe22d/BEST_H_hollow_to_hollow_HCP-Subsurf-Atom_E-3.631.xyz",
-      "generated_conformers_file": "outputs/01-390fe22d/conformers_[H].traj",
-      "relaxation_trajectory_file": "outputs/01-390fe22d/final.xyz",
-      "session_id": "01-390fe22d"
+      "best_structure_file": "outputs/01-6dd62fe8/BEST_H_ontop_to_hollow_FCC-No-Subsurf_E-3.620.xyz",
+      "generated_conformers_file": "outputs/01-6dd62fe8/conformers_[H].traj",
+      "relaxation_trajectory_file": "outputs/01-6dd62fe8/final.xyz",
+      "session_id": "01-6dd62fe8"
     },
     "plan": {
-      "reasoning": "Step 0: SMILES Consistency Check. The SMILES is [H], representing atomic hydrogen, which is a radical with an unpaired electron. The heavy atom index list is [], as hydrogen is not a heavy atom. However, in the molecule, the hydrogen atom is at index 0. No hybridization mismatch, as it's atomic. Radical check: Yes, it has unpaired electrons, suitable for ReactiveSpecies. Step 1: Analyze Old Plans. History is None, so no previous attempts, successes, failures, or tags. No unstable sites identified yet. No convergence signals. Step 2: Formulate New Plan. Since no history, propose an initial plan. Goal is lowest energy adsorption. For atomic hydrogen on metal surfaces like (111), hollow sites are often preferred due to higher coordination. Avoid repeating plans (none yet). Step 3: User Request. Find the lowest-energy adsorption configuration for atomic hydrogen on the provided surface. Step 4: Analyze Adsorbate. SMILES [H]: Atomic hydrogen radical. No major functional groups beyond being a radical. Heavy atom indices: []. The binding atom is the hydrogen itself at index 0. Step 5: Analyze Surface. Available sites include ontop (Mo, Pd), bridge (Mo-Mo, Mo-Pd), hollow (Mo-Mo-Mo, Mo-Mo-Pd). Plan for existing combinations. Surface is heterogeneous alloy Mo3Pd(111). Step 6: Formulate Plan. Select ReactiveSpecies for radical adsorption. Start with a hollow site, choosing Mo-Mo-Pd as it includes Pd, which may stabilize H better than pure Mo. site_type: 'hollow' (3-fold). surface_binding_atoms: ['Mo', 'Mo', 'Pd']. adsorbate_binding_indices: [0] (single binding point for H). Defaults for other parameters. This is the first attempt, and the process allows systematic testing, so action: 'continue'.",
+      "reasoning": "SMILES is [H], representing atomic hydrogen, a radical with one unpaired electron. The heavy atom index list is empty since H is not a heavy atom, but the single H atom has index 0. User requests lowest-energy adsorption configuration for atomic hydrogen. No previous history, so this is the first attempt. Start with ontop site on Pd, as Pd is likely to bind H strongly. Use 'ReactiveSpecies' since it's a radical. Binding via the H atom at index 0. Site type 'ontop' aligns with len(adsorbate_binding_indices) == 1. Available sites include ontop Pd. Hard limit is 1 attempt, but termination disabled, so action 'continue'.",
       "adsorbate_type": "ReactiveSpecies",
       "solution": {
         "action": "continue",
-        "site_type": "hollow",
+        "site_type": "ontop",
         "surface_binding_atoms": [
-          "Mo",
-          "Mo",
           "Pd"
         ],
         "adsorbate_binding_indices": [
@@ -103,30 +110,30 @@
   },
   "last_analysis": {
     "status": "success",
-    "message": "Most stable config adsorption energy: -3.6312 eV. Target Atom: H (from plan index 0, global index 96 in relaxed structure). -> Nearest: Pd (Index 69), Distance: 1.829 Å (Threshold: 2.465), Bound: True. Bonded Surface Atoms: Pd-1.829Å, Mo-2.055Å, Mo-2.156Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: False (Planned ['Mo', 'Mo', 'Pd'] -> Actual ['Mo', 'Mo', 'Pd']).",
-    "most_stable_energy_eV": -3.6311686038970947,
+    "message": "Most stable config adsorption energy: -3.6197 eV. Target Atom: H (from plan index 0, global index 96 in relaxed structure). -> Nearest: Pd (Index 21), Distance: 1.835 Å (Threshold: 2.465), Bound: True. Bonded Surface Atoms: Pd-1.835Å, Mo-2.008Å, Mo-2.212Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Pd'] -> Actual ['Mo', 'Mo', 'Pd']).",
+    "most_stable_energy_eV": -3.619694471359253,
     "target_adsorbate_atom": "H",
     "target_adsorbate_atom_index": 96,
     "bonded_surface_atoms": [
       {
         "symbol": "Pd",
-        "index": 69,
-        "distance": 1.829
+        "index": 21,
+        "distance": 1.835
       },
       {
         "symbol": "Mo",
-        "index": 14,
-        "distance": 2.055
+        "index": 20,
+        "distance": 2.008
       },
       {
         "symbol": "Mo",
-        "index": 17,
-        "distance": 2.156
+        "index": 62,
+        "distance": 2.212
       }
     ],
     "nearest_slab_atom": "Pd",
-    "nearest_slab_atom_index": 69,
-    "final_bond_distance_A": 1.829,
+    "nearest_slab_atom_index": 21,
+    "final_bond_distance_A": 1.835,
     "estimated_covalent_cutoff_A": 1.87,
     "is_covalently_bound": true,
     "reaction_detected": false,
@@ -134,14 +141,12 @@
     "n_components": 1,
     "bond_change_count": 0,
     "site_analysis": {
-      "planned_site_type": "hollow",
-      "planned_connectivity": 3,
-      "actual_site_type": "hollow (HCP/Subsurf-Atom)",
+      "planned_site_type": "ontop",
+      "planned_connectivity": 1,
+      "actual_site_type": "hollow (FCC/No-Subsurf)",
       "actual_connectivity": 3,
-      "is_chemical_slip": false,
+      "is_chemical_slip": true,
       "planned_symbols": [
-        "Mo",
-        "Mo",
         "Pd"
       ],
       "actual_symbols": [
@@ -149,25 +154,23 @@
         "Mo",
         "Pd"
       ],
-      "site_fingerprint": "Pd69-Mo14-Mo17"
+      "site_fingerprint": "Pd21-Mo20-Mo62"
     },
-    "best_structure_file": "outputs/01-390fe22d/BEST_H_hollow_to_hollow_HCP-Subsurf-Atom_E-3.631.xyz",
-    "generated_conformers_file": "outputs/01-390fe22d/conformers_[H].traj",
-    "relaxation_trajectory_file": "outputs/01-390fe22d/final.xyz",
-    "session_id": "01-390fe22d"
+    "best_structure_file": "outputs/01-6dd62fe8/BEST_H_ontop_to_hollow_FCC-No-Subsurf_E-3.620.xyz",
+    "generated_conformers_file": "outputs/01-6dd62fe8/conformers_[H].traj",
+    "relaxation_trajectory_file": "outputs/01-6dd62fe8/final.xyz",
+    "session_id": "01-6dd62fe8"
   },
   "attempt_records": [
     {
       "attempt_index": 1,
       "plan": {
-        "reasoning": "Step 0: SMILES Consistency Check. The SMILES is [H], representing atomic hydrogen, which is a radical with an unpaired electron. The heavy atom index list is [], as hydrogen is not a heavy atom. However, in the molecule, the hydrogen atom is at index 0. No hybridization mismatch, as it's atomic. Radical check: Yes, it has unpaired electrons, suitable for ReactiveSpecies. Step 1: Analyze Old Plans. History is None, so no previous attempts, successes, failures, or tags. No unstable sites identified yet. No convergence signals. Step 2: Formulate New Plan. Since no history, propose an initial plan. Goal is lowest energy adsorption. For atomic hydrogen on metal surfaces like (111), hollow sites are often preferred due to higher coordination. Avoid repeating plans (none yet). Step 3: User Request. Find the lowest-energy adsorption configuration for atomic hydrogen on the provided surface. Step 4: Analyze Adsorbate. SMILES [H]: Atomic hydrogen radical. No major functional groups beyond being a radical. Heavy atom indices: []. The binding atom is the hydrogen itself at index 0. Step 5: Analyze Surface. Available sites include ontop (Mo, Pd), bridge (Mo-Mo, Mo-Pd), hollow (Mo-Mo-Mo, Mo-Mo-Pd). Plan for existing combinations. Surface is heterogeneous alloy Mo3Pd(111). Step 6: Formulate Plan. Select ReactiveSpecies for radical adsorption. Start with a hollow site, choosing Mo-Mo-Pd as it includes Pd, which may stabilize H better than pure Mo. site_type: 'hollow' (3-fold). surface_binding_atoms: ['Mo', 'Mo', 'Pd']. adsorbate_binding_indices: [0] (single binding point for H). Defaults for other parameters. This is the first attempt, and the process allows systematic testing, so action: 'continue'.",
+        "reasoning": "SMILES is [H], representing atomic hydrogen, a radical with one unpaired electron. The heavy atom index list is empty since H is not a heavy atom, but the single H atom has index 0. User requests lowest-energy adsorption configuration for atomic hydrogen. No previous history, so this is the first attempt. Start with ontop site on Pd, as Pd is likely to bind H strongly. Use 'ReactiveSpecies' since it's a radical. Binding via the H atom at index 0. Site type 'ontop' aligns with len(adsorbate_binding_indices) == 1. Available sites include ontop Pd. Hard limit is 1 attempt, but termination disabled, so action 'continue'.",
         "adsorbate_type": "ReactiveSpecies",
         "solution": {
           "action": "continue",
-          "site_type": "hollow",
+          "site_type": "ontop",
           "surface_binding_atoms": [
-            "Mo",
-            "Mo",
             "Pd"
           ],
           "adsorbate_binding_indices": [
@@ -179,37 +182,28 @@
           "conformers_per_site_cap": 4
         }
       },
-      "plan_key": "hollow|Mo,Mo,Pd|0|ReactiveSpecies|2.0",
+      "plan_key": "ontop|Pd|0|ReactiveSpecies|2.0",
       "status": "success",
-      "most_stable_energy_eV": -3.6311686038970947,
+      "most_stable_energy_eV": -3.619694471359253,
       "bond_change_count": 0,
       "is_dissociated": false,
-      "is_chemical_slip": false,
-      "planned_site_type": "hollow",
-      "actual_site_type": "hollow (HCP/Subsurf-Atom)",
-      "best_structure_file": "outputs/01-390fe22d/BEST_H_hollow_to_hollow_HCP-Subsurf-Atom_E-3.631.xyz",
-      "generated_conformers_file": "outputs/01-390fe22d/conformers_[H].traj",
-      "relaxation_trajectory_file": "outputs/01-390fe22d/final.xyz",
-      "message": "Most stable config adsorption energy: -3.6312 eV. Target Atom: H (from plan index 0, global index 96 in relaxed structure). -> Nearest: Pd (Index 69), Distance: 1.829 Å (Threshold: 2.465), Bound: True. Bonded Surface Atoms: Pd-1.829Å, Mo-2.055Å, Mo-2.156Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: False (Planned ['Mo', 'Mo', 'Pd'] -> Actual ['Mo', 'Mo', 'Pd']).",
-      "history_entry": "【✅ Perfect Adsorption】 hollow @ ['Mo', 'Mo', 'Pd'] (Index [0]) -> ⚠️ Geometric Slip: hollow -> hollow (HCP/Subsurf-Atom) [🌟 New Best] | E=-3.631 eV"
+      "is_chemical_slip": true,
+      "planned_site_type": "ontop",
+      "actual_site_type": "hollow (FCC/No-Subsurf)",
+      "best_structure_file": "outputs/01-6dd62fe8/BEST_H_ontop_to_hollow_FCC-No-Subsurf_E-3.620.xyz",
+      "generated_conformers_file": "outputs/01-6dd62fe8/conformers_[H].traj",
+      "relaxation_trajectory_file": "outputs/01-6dd62fe8/final.xyz",
+      "message": "Most stable config adsorption energy: -3.6197 eV. Target Atom: H (from plan index 0, global index 96 in relaxed structure). -> Nearest: Pd (Index 21), Distance: 1.835 Å (Threshold: 2.465), Bound: True. Bonded Surface Atoms: Pd-1.835Å, Mo-2.008Å, Mo-2.212Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Pd'] -> Actual ['Mo', 'Mo', 'Pd']).",
+      "history_entry": "【✅ Perfect Adsorption】 ontop @ ['Pd'] (Index [0]) -> Site: hollow (FCC/No-Subsurf) (Mo,Mo,Pd) | E=-3.620 eV"
     }
   ],
   "history": [
-    "【✅ Perfect Adsorption】 hollow @ ['Mo', 'Mo', 'Pd'] (Index [0]) -> ⚠️ Geometric Slip: hollow -> hollow (HCP/Subsurf-Atom) [🌟 New Best] | E=-3.631 eV"
+    "【✅ Perfect Adsorption】 ontop @ ['Pd'] (Index [0]) -> Site: hollow (FCC/No-Subsurf) (Mo,Mo,Pd) | E=-3.620 eV"
   ],
   "error": null,
   "perfect_count": 1,
   "dissociation_count": 0,
   "rearrangement_count": 0,
   "calc_failure_count": 0,
-  "chemical_slip_count": 0,
-  "provenance": {
-    "result_tree": "research/results/basic_experiments/cmu20/grok4_mace_mp0_small/one_shot",
-    "dataset": "cmu20",
-    "backend": "grok4_mace_mp0_small",
-    "variant": "one_shot",
-    "artifact_status": "result_json_restored_from_git_history_without_heavy_artifacts",
-    "restored_from_commit": "ba317df76802c090bc365a99bdbe8ca9f8396fe9",
-    "note": "The lightweight result.json was recovered from git history during result-tree cleanup; heavy .xyz/.traj artifacts were not tracked and are not available locally."
-  }
+  "chemical_slip_count": 1
 }

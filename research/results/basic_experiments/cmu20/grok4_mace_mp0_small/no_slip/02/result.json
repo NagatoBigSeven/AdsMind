@@ -2,7 +2,7 @@
   "case_id": "02",
   "case_metadata": {
     "case_id": "02",
-    "slab_file": "datasets/cmu20/02_Mo3Pd_111.xyz",
+    "slab_file": "benchmark_slabs/02_Mo3Pd_111.xyz",
     "smiles": "[N]=[NH]",
     "user_request": "Find the lowest-energy adsorption configuration for NNH on the provided surface.",
     "surface_family": "intermetallic",
@@ -13,85 +13,142 @@
     "notes": "Dissociation-prone in prior run; Mo3Pd benchmark"
   },
   "status": "success",
-  "best_energy_eV": -4.765958786010742,
-  "iteration_count": 5,
+  "best_energy_eV": -4.344356536865234,
+  "iteration_count": 2,
   "max_attempts": 5,
-  "final_site_type": "hollow (HCP/Subsurf-Atom)",
+  "final_site_type": "hollow (FCC/No-Subsurf)",
   "converged_tag": false,
-  "wall_clock_sec": 710.573164209025,
-  "total_input_tokens": 27532,
-  "total_output_tokens": 8180,
-  "artifact_paths": {},
+  "wall_clock_sec": 3568.822064705193,
+  "total_input_tokens": 10642,
+  "total_output_tokens": 12218,
+  "artifact_paths": {
+    "BEST_N_NH_bridge_to_hollow_FCC-No-Subsurf_E-4.344": "research/results/basic_experiments/cmu20/grok4_mace_mp0_small/no_slip/02/artifacts/BEST_N_NH_bridge_to_hollow_FCC-No-Subsurf_E-4.344.xyz",
+    "BEST_N_NH_bridge_to_hollow_FCC-No-Subsurf_E-4.344.xyz": "research/results/basic_experiments/cmu20/grok4_mace_mp0_small/no_slip/02/artifacts/BEST_N_NH_bridge_to_hollow_FCC-No-Subsurf_E-4.344.xyz",
+    "best_structure_file": "research/results/basic_experiments/cmu20/grok4_mace_mp0_small/no_slip/02/artifacts/BEST_N_NH_ontop_to_hollow_FCC-No-Subsurf_E-4.343.xyz",
+    "BEST_N_NH_ontop_to_hollow_FCC-No-Subsurf_E-4.343": "research/results/basic_experiments/cmu20/grok4_mace_mp0_small/no_slip/02/artifacts/BEST_N_NH_ontop_to_hollow_FCC-No-Subsurf_E-4.343.xyz",
+    "BEST_N_NH_ontop_to_hollow_FCC-No-Subsurf_E-4.343.xyz": "research/results/basic_experiments/cmu20/grok4_mace_mp0_small/no_slip/02/artifacts/BEST_N_NH_ontop_to_hollow_FCC-No-Subsurf_E-4.343.xyz",
+    "conformers_[N]_[NH]": "research/results/basic_experiments/cmu20/grok4_mace_mp0_small/no_slip/02/artifacts/conformers_[N]_[NH].traj",
+    "conformers_[N]_[NH].traj": "research/results/basic_experiments/cmu20/grok4_mace_mp0_small/no_slip/02/artifacts/conformers_[N]_[NH].traj",
+    "final": "research/results/basic_experiments/cmu20/grok4_mace_mp0_small/no_slip/02/artifacts/final.xyz",
+    "final.xyz": "research/results/basic_experiments/cmu20/grok4_mace_mp0_small/no_slip/02/artifacts/final.xyz",
+    "relaxation": "research/results/basic_experiments/cmu20/grok4_mace_mp0_small/no_slip/02/artifacts/relaxation.traj",
+    "relaxation.traj": "research/results/basic_experiments/cmu20/grok4_mace_mp0_small/no_slip/02/artifacts/relaxation.traj",
+    "relaxation_trajectory_file": "research/results/basic_experiments/cmu20/grok4_mace_mp0_small/no_slip/02/artifacts/relaxation.traj"
+  },
   "best_result": {
-    "most_stable_energy_eV": -4.765958786010742,
+    "most_stable_energy_eV": -4.344356536865234,
     "analysis_json": {
       "status": "success",
-      "message": "Most stable config adsorption energy: -4.7660 eV. Target Atom: N (from plan index 0, global index 96 in relaxed structure). -> Nearest: Mo (Index 65), Distance: 1.936 Å (Threshold: 3.262), Bound: True. Bonded Surface Atoms: Mo-1.936Å, Mo-2.169Å, Mo-2.175Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Mo', 'Mo', 'Pd'] -> Actual ['Mo', 'Mo', 'Mo']).",
-      "most_stable_energy_eV": -4.765958786010742,
-      "target_adsorbate_atom": "N",
-      "target_adsorbate_atom_index": 96,
+      "message": "Most stable config adsorption energy: -4.3444 eV. Target Atom 1: N (from plan index 0, global index 96). -> Nearest: Mo (Index 17), Distance: 1.919 Å (Threshold: 2.475), Bound: True. Target Atom 2: N (from plan index 1, global index 97). -> Nearest: Mo (Index 20), Distance: 2.134 Å (Threshold: 2.475), Bound: True. Bonded Surface Atoms: N(96)-Mo(1.962Å), N(97)-Mo(2.129Å), N(97)-Mo(2.157Å), N(96)-Mo(2.245Å), N(96)-Mo(2.26Å), N(97)-Pd(2.767Å), N(97)-Mo(3.124Å). Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Mo', 'Mo'] -> Actual ['Mo', 'Mo', 'Mo', 'Mo', 'Mo', 'Mo', 'Pd']).",
+      "most_stable_energy_eV": -4.344356536865234,
       "bonded_surface_atoms": [
         {
+          "adsorbate_atom": "N(96)",
+          "adsorbate_atom_index": 96,
           "symbol": "Mo",
-          "index": 65,
-          "distance": 1.936
+          "index": 17,
+          "distance": 1.962
         },
         {
+          "adsorbate_atom": "N(97)",
+          "adsorbate_atom_index": 97,
           "symbol": "Mo",
-          "index": 44,
-          "distance": 2.169
+          "index": 20,
+          "distance": 2.129
         },
         {
+          "adsorbate_atom": "N(97)",
+          "adsorbate_atom_index": 97,
           "symbol": "Mo",
-          "index": 86,
-          "distance": 2.175
+          "index": 14,
+          "distance": 2.157
+        },
+        {
+          "adsorbate_atom": "N(96)",
+          "adsorbate_atom_index": 96,
+          "symbol": "Mo",
+          "index": 14,
+          "distance": 2.245
+        },
+        {
+          "adsorbate_atom": "N(96)",
+          "adsorbate_atom_index": 96,
+          "symbol": "Mo",
+          "index": 20,
+          "distance": 2.26
+        },
+        {
+          "adsorbate_atom": "N(97)",
+          "adsorbate_atom_index": 97,
+          "symbol": "Pd",
+          "index": 45,
+          "distance": 2.767
+        },
+        {
+          "adsorbate_atom": "N(97)",
+          "adsorbate_atom_index": 97,
+          "symbol": "Mo",
+          "index": 17,
+          "distance": 3.124
         }
       ],
-      "nearest_slab_atom": "Mo",
-      "nearest_slab_atom_index": 65,
-      "final_bond_distance_A": 1.936,
-      "estimated_covalent_cutoff_A": 2.475,
+      "final_bond_distance_A": 1.962,
       "is_covalently_bound": true,
+      "atom_1": {
+        "symbol": "N",
+        "global_index": 96,
+        "distance_A": 1.919,
+        "is_bound": true
+      },
+      "atom_2": {
+        "symbol": "N",
+        "global_index": 97,
+        "distance_A": 2.134,
+        "is_bound": true
+      },
       "reaction_detected": false,
+      "bond_change_count": 0,
       "is_dissociated": false,
       "n_components": 1,
-      "bond_change_count": 0,
       "site_analysis": {
-        "planned_site_type": "hollow",
-        "planned_connectivity": 3,
-        "actual_site_type": "hollow (HCP/Subsurf-Atom)",
-        "actual_connectivity": 3,
+        "planned_site_type": "bridge",
+        "planned_connectivity": 2,
+        "actual_site_type": "hollow (FCC/No-Subsurf)",
+        "actual_connectivity": 4,
         "is_chemical_slip": true,
         "planned_symbols": [
           "Mo",
-          "Mo",
-          "Pd"
+          "Mo"
         ],
         "actual_symbols": [
           "Mo",
           "Mo",
-          "Mo"
-        ],
-        "site_fingerprint": "Mo65-Mo44-Mo86"
-      },
-      "best_structure_file": "outputs/02-a1c391e6/BEST_N_NH_hollow_to_hollow_HCP-Subsurf-Atom_E-4.766.xyz",
-      "generated_conformers_file": "outputs/02-a1c391e6/conformers_[N]_[NH].traj",
-      "relaxation_trajectory_file": "outputs/02-a1c391e6/final.xyz",
-      "session_id": "02-a1c391e6"
-    },
-    "plan": {
-      "reasoning": "Step 0: SMILES Consistency Check - The SMILES [N]=[NH] corresponds to NNH with atoms: index 0 (N, SP2, radical_electrons=1), index 1 (N, SP2, radical_electrons=0). This matches a radical species. No hybridization mismatch with user request for NNH. For ReactiveSpecies, binding atoms must have radical_electrons >0, so index 0 is valid. Step 1: Analyze Old Plans - One successful attempt: initial ontop on ['Mo'] via adsorbate index [0], relaxed to hollow (HCP/Subsurf-Atom) on (Mo,Mo,Mo) with E=-4.150 eV. This is the current best. No failed attempts. No [🔄 Converged to known best] tag, so continue. No energy degeneracy noted. Due to surface heterogeneity in Mo3Pd alloy, different hollow environments (Mo-Mo-Mo vs Mo-Mo-Pd) may yield different energies. Step 2: Formulate New Plan - To find potentially lower energy, propose a new initial configuration different from the previous ontop Mo via [0]. Since the species is a radical, use ReactiveSpecies and bind via index 0 (the radical atom). Test hollow site on Mo-Mo-Pd, as it differs from the previous Mo-Mo-Mo hollow and may have lower energy due to Pd involvement. This is physically consistent and explores surface heterogeneity. No termination needed yet, as major sites remain untested directly. Step 3: Analyze Request - User's core intent is to find the lowest-energy adsorption configuration for NNH on the surface, without specifying site or orientation. Step 4: Analyze Adsorbate - SMILES [N]=[NH] represents NNH radical, with major functional group being N=N double bond and a terminal NH, radical on index 0 N. Binding via radical atom for ReactiveSpecies. Step 5: Analyze Surface - Available hollow sites include Mo-Mo-Mo and Mo-Mo-Pd; proposing the latter to explore differences. Step 6: Formulate Plan - Select hollow site_type, surface_binding_atoms ['Mo', 'Mo', 'Pd'], adsorbate_binding_indices [0] (radical atom), defaults for other parameters.",
-      "adsorbate_type": "ReactiveSpecies",
-      "solution": {
-        "action": "continue",
-        "site_type": "hollow",
-        "surface_binding_atoms": [
+          "Mo",
+          "Mo",
           "Mo",
           "Mo",
           "Pd"
         ],
+        "site_fingerprint": "Mo17-Mo20-Mo14-Mo14-Mo20-Pd45-Mo17"
+      },
+      "best_structure_file": "outputs/02-2e9ea8b7/BEST_N_NH_bridge_to_hollow_FCC-No-Subsurf_E-4.344.xyz",
+      "generated_conformers_file": "outputs/02-2e9ea8b7/conformers_[N]_[NH].traj",
+      "relaxation_trajectory_file": "outputs/02-2e9ea8b7/final.xyz",
+      "session_id": "02-2e9ea8b7"
+    },
+    "plan": {
+      "reasoning": "0. SMILES Consistency Check: The provided atom list shows index 0 (N, SP2, radical_electrons=1) and index 1 (N, SP2, radical_electrons=0). No mismatch with user description of NNH. Hybridization is SP2 for both, no saturated alkyl issue. For ReactiveSpecies plans, binding atoms must have radical_electrons >0.\n1. Analyze Old Plans: One successful attempt: ontop on ['Mo'] with adsorbate index [0], relaxed to hollow (FCC/No-Subsurf) on (Mo,Mo,Mo) with E=-4.343 eV. This is the current best. No failed attempts. No [🔄 Converged to known best] or [⚠️ Energy Degenerate but Geometrically Distinct] tags, so not terminated. The attempt tested end-on adsorption via the radical N (index 0) on Mo ontop, which slipped to a Mo-dominated hollow site. Surface is heterogeneous (Mo-Pd alloy), so different site compositions may yield different energies.\n2. Formulate New Plan: Goal is lowest adsorption energy. Previous plan converged to a strong binding (-4.343 eV) in Mo-Mo-Mo hollow. To systematically explore, test a different orientation: side-on adsorption via both N atoms, which is common for N=N containing species in catalysis. This differs from the previous end-on via index 0. Use 'Molecule' type for pi-like adsorption via both atoms (indices [0,1]), as 'ReactiveSpecies' cannot be used for multi-point binding since index 1 lacks radicals. Select bridge site on Mo-Mo (available in site list), as the previous best involved pure Mo sites. This may yield a lower energy if side-on is preferred. Not terminating, as major orientations and sites remain untested, and heterogeneity suggests potential for better configurations.\n3. Analyze Request: User's core intent is to find the lowest-energy adsorption configuration for NNH on the surface, without specifying site or orientation.\n4. Analyze Adsorbate: SMILES [N]=[NH] represents NNH with a double bond; major functional group is N=N with a radical on index 0 N and H on index 1 N. Possible adsorption modes: end-on via index 0 (radical), end-on via index 1 (lone pair), or side-on via [0,1].\n5. Analyze Surface: Available sites include bridge Mo-Mo and Mo-Pd; selecting Mo-Mo for consistency with previous best.\n6. Formulate Plan: Propose bridge site with Mo-Mo, binding via [0,1] as Molecule.",
+      "adsorbate_type": "Molecule",
+      "solution": {
+        "action": "continue",
+        "site_type": "bridge",
+        "surface_binding_atoms": [
+          "Mo",
+          "Mo"
+        ],
         "adsorbate_binding_indices": [
-          0
+          0,
+          1
         ],
         "relax_top_n": 1,
         "touch_sphere_size": 2,
@@ -103,71 +160,71 @@
   },
   "last_analysis": {
     "status": "success",
-    "message": "Most stable config adsorption energy: -4.1328 eV. Target Atom 1: N (from plan index 0, global index 96). -> Nearest: Mo (Index 17), Distance: 2.056 Å (Threshold: 2.475), Bound: True. Target Atom 2: N (from plan index 1, global index 97). -> Nearest: Mo (Index 20), Distance: 1.959 Å (Threshold: 2.475), Bound: True. Bonded Surface Atoms: N(96)-Mo(2.032Å), N(97)-Mo(2.048Å), N(96)-Mo(2.077Å), N(97)-Mo(2.309Å), N(97)-Mo(2.481Å), N(96)-Pd(2.84Å), N(96)-Mo(3.015Å). Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Mo', 'Mo'] -> Actual ['Mo', 'Mo', 'Mo', 'Mo', 'Mo', 'Mo', 'Pd']).",
-    "most_stable_energy_eV": -4.132780075073242,
+    "message": "Most stable config adsorption energy: -4.3444 eV. Target Atom 1: N (from plan index 0, global index 96). -> Nearest: Mo (Index 17), Distance: 1.919 Å (Threshold: 2.475), Bound: True. Target Atom 2: N (from plan index 1, global index 97). -> Nearest: Mo (Index 20), Distance: 2.134 Å (Threshold: 2.475), Bound: True. Bonded Surface Atoms: N(96)-Mo(1.962Å), N(97)-Mo(2.129Å), N(97)-Mo(2.157Å), N(96)-Mo(2.245Å), N(96)-Mo(2.26Å), N(97)-Pd(2.767Å), N(97)-Mo(3.124Å). Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Mo', 'Mo'] -> Actual ['Mo', 'Mo', 'Mo', 'Mo', 'Mo', 'Mo', 'Pd']).",
+    "most_stable_energy_eV": -4.344356536865234,
     "bonded_surface_atoms": [
       {
         "adsorbate_atom": "N(96)",
         "adsorbate_atom_index": 96,
         "symbol": "Mo",
         "index": 17,
-        "distance": 2.032
+        "distance": 1.962
       },
       {
         "adsorbate_atom": "N(97)",
         "adsorbate_atom_index": 97,
         "symbol": "Mo",
         "index": 20,
-        "distance": 2.048
-      },
-      {
-        "adsorbate_atom": "N(96)",
-        "adsorbate_atom_index": 96,
-        "symbol": "Mo",
-        "index": 14,
-        "distance": 2.077
+        "distance": 2.129
       },
       {
         "adsorbate_atom": "N(97)",
         "adsorbate_atom_index": 97,
         "symbol": "Mo",
         "index": 14,
-        "distance": 2.309
+        "distance": 2.157
+      },
+      {
+        "adsorbate_atom": "N(96)",
+        "adsorbate_atom_index": 96,
+        "symbol": "Mo",
+        "index": 14,
+        "distance": 2.245
+      },
+      {
+        "adsorbate_atom": "N(96)",
+        "adsorbate_atom_index": 96,
+        "symbol": "Mo",
+        "index": 20,
+        "distance": 2.26
+      },
+      {
+        "adsorbate_atom": "N(97)",
+        "adsorbate_atom_index": 97,
+        "symbol": "Pd",
+        "index": 45,
+        "distance": 2.767
       },
       {
         "adsorbate_atom": "N(97)",
         "adsorbate_atom_index": 97,
         "symbol": "Mo",
         "index": 17,
-        "distance": 2.481
-      },
-      {
-        "adsorbate_atom": "N(96)",
-        "adsorbate_atom_index": 96,
-        "symbol": "Pd",
-        "index": 69,
-        "distance": 2.84
-      },
-      {
-        "adsorbate_atom": "N(96)",
-        "adsorbate_atom_index": 96,
-        "symbol": "Mo",
-        "index": 20,
-        "distance": 3.015
+        "distance": 3.124
       }
     ],
-    "final_bond_distance_A": 2.032,
+    "final_bond_distance_A": 1.962,
     "is_covalently_bound": true,
     "atom_1": {
       "symbol": "N",
       "global_index": 96,
-      "distance_A": 2.056,
+      "distance_A": 1.919,
       "is_bound": true
     },
     "atom_2": {
       "symbol": "N",
       "global_index": 97,
-      "distance_A": 1.959,
+      "distance_A": 2.134,
       "is_bound": true
     },
     "reaction_detected": false,
@@ -177,7 +234,7 @@
     "site_analysis": {
       "planned_site_type": "bridge",
       "planned_connectivity": 2,
-      "actual_site_type": "hollow (HCP/Subsurf-Atom)",
+      "actual_site_type": "hollow (FCC/No-Subsurf)",
       "actual_connectivity": 4,
       "is_chemical_slip": true,
       "planned_symbols": [
@@ -193,18 +250,18 @@
         "Mo",
         "Pd"
       ],
-      "site_fingerprint": "Mo17-Mo20-Mo14-Mo14-Mo17-Pd69-Mo20"
+      "site_fingerprint": "Mo17-Mo20-Mo14-Mo14-Mo20-Pd45-Mo17"
     },
-    "best_structure_file": "outputs/02-a1c391e6/BEST_N_NH_bridge_to_hollow_HCP-Subsurf-Atom_E-4.133.xyz",
-    "generated_conformers_file": "outputs/02-a1c391e6/conformers_[N]_[NH].traj",
-    "relaxation_trajectory_file": "outputs/02-a1c391e6/final.xyz",
-    "session_id": "02-a1c391e6"
+    "best_structure_file": "outputs/02-2e9ea8b7/BEST_N_NH_bridge_to_hollow_FCC-No-Subsurf_E-4.344.xyz",
+    "generated_conformers_file": "outputs/02-2e9ea8b7/conformers_[N]_[NH].traj",
+    "relaxation_trajectory_file": "outputs/02-2e9ea8b7/final.xyz",
+    "session_id": "02-2e9ea8b7"
   },
   "attempt_records": [
     {
       "attempt_index": 1,
       "plan": {
-        "reasoning": "Step 0: SMILES Consistency Check. The provided atom list shows index 0 (N, SP2, radical_electrons:1) and index 1 (N, SP2, radical_electrons:0). This matches a radical species •N=NH. No mismatch with user description of NNH. Hybridization is SP2 for both, consistent with double bond. No saturated alkyl requested. For ReactiveSpecies, planned binding via index 0 which has radical_electrons > 0. Step 1: Analyze Old Plans. History is None, so no previous attempts, successes, failures, or tags. No convergence signals. Surface is heterogeneous alloy (Mo3Pd), so different environments possible for same site type. Step 2: Formulate New Plan. Since history is empty, propose initial plan. Goal is lowest energy adsorption. Start with simplest high-symmetry site: ontop on Mo (Mo likely active in catalysis). Avoid repeating any plans (none exist). Step 3: Analyze Request. User's intent is to find the lowest-energy adsorption configuration for NNH on the surface. Step 4: Analyze Adsorbate. SMILES [N]=[NH] represents •N=NH with a double bond. Major functional group: azo (N=N) with radical on index 0 and H on index 1. Binding likely via radical N (index 0) for ReactiveSpecies. Step 5: Analyze Surface. Available ontop sites: Mo, Pd. Bridges: Mo-Mo, Mo-Pd. Hollows: Mo-Mo-Mo, Mo-Mo-Pd. Plan only for existing combinations. Step 6: Formulate Plan. Select ontop site via radical atom (index 0) on Mo. adsorbate_type: ReactiveSpecies due to radical. len(adsorbate_binding_indices)==1 matches ontop. Use defaults for other parameters.",
+        "reasoning": "SMILES Consistency Check: The atom list shows index 0 (N) with SP2 hybridization, radical_electrons 1, and index 1 (N) with SP2 hybridization, radical_electrons 0. No mismatch with user description of NNH. For ReactiveSpecies, binding via index 0 is valid as it has radical_electrons > 0. Analyze Old Plans: History is None, so no previous attempts. Formulate New Plan: This is the first attempt. The goal is to find the lowest adsorption energy. Since different sites need testing, start with a promising configuration. Analyze Request: User wants the lowest-energy adsorption configuration for NNH on the surface. Analyze Adsorbate: SMILES [N]=[NH] represents *N=NH, with a double bond between two N atoms, radical on index 0 (N), and H implicitly on index 1 (N). Major functional group is the N=N double bond with a radical. As a radical species, use 'ReactiveSpecies'. Binding via the radical atom (index 0) for monodentate adsorption. Bidentate not possible with ReactiveSpecies since only index 0 has a radical. Analyze Surface: Available ontop sites on Mo or Pd, bridges Mo-Mo or Mo-Pd, hollows Mo-Mo-Mo or Mo-Mo-Pd. Formulate Plan: Propose end-on adsorption via the radical N (index 0) at an ontop Mo site, as Mo likely provides stronger binding for nitrogenous species in catalysis. This is distinct from any prior (none exist).",
         "adsorbate_type": "ReactiveSpecies",
         "solution": {
           "action": "continue",
@@ -223,128 +280,22 @@
       },
       "plan_key": "ontop|Mo|0|ReactiveSpecies|2.0",
       "status": "success",
-      "most_stable_energy_eV": -4.150495529174805,
-      "bond_change_count": 0,
-      "is_dissociated": false,
-      "is_chemical_slip": true,
-      "planned_site_type": "ontop",
-      "actual_site_type": "hollow (HCP/Subsurf-Atom)",
-      "best_structure_file": "outputs/02-a1c391e6/BEST_N_NH_ontop_to_hollow_HCP-Subsurf-Atom_E-4.150.xyz",
-      "generated_conformers_file": "outputs/02-a1c391e6/conformers_[N]_[NH].traj",
-      "relaxation_trajectory_file": "outputs/02-a1c391e6/final.xyz",
-      "message": "Most stable config adsorption energy: -4.1505 eV. Target Atom: N (from plan index 0, global index 96 in relaxed structure). -> Nearest: Mo (Index 38), Distance: 2.055 Å (Threshold: 3.262), Bound: True. Bonded Surface Atoms: Mo-2.055Å, Mo-2.079Å, Mo-2.21Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Mo'] -> Actual ['Mo', 'Mo', 'Mo']).",
-      "history_entry": "【✅ Perfect Adsorption】 ontop @ ['Mo'] (Index [0]) -> Site: hollow (HCP/Subsurf-Atom) (Mo,Mo,Mo) [🌟 New Best] | E=-4.150 eV"
-    },
-    {
-      "attempt_index": 2,
-      "plan": {
-        "reasoning": "Step 0: SMILES Consistency Check - The SMILES [N]=[NH] corresponds to NNH with atoms: index 0 (N, SP2, radical_electrons=1), index 1 (N, SP2, radical_electrons=0). This matches a radical species. No hybridization mismatch with user request for NNH. For ReactiveSpecies, binding atoms must have radical_electrons >0, so index 0 is valid. Step 1: Analyze Old Plans - One successful attempt: initial ontop on ['Mo'] via adsorbate index [0], relaxed to hollow (HCP/Subsurf-Atom) on (Mo,Mo,Mo) with E=-4.150 eV. This is the current best. No failed attempts. No [🔄 Converged to known best] tag, so continue. No energy degeneracy noted. Due to surface heterogeneity in Mo3Pd alloy, different hollow environments (Mo-Mo-Mo vs Mo-Mo-Pd) may yield different energies. Step 2: Formulate New Plan - To find potentially lower energy, propose a new initial configuration different from the previous ontop Mo via [0]. Since the species is a radical, use ReactiveSpecies and bind via index 0 (the radical atom). Test hollow site on Mo-Mo-Pd, as it differs from the previous Mo-Mo-Mo hollow and may have lower energy due to Pd involvement. This is physically consistent and explores surface heterogeneity. No termination needed yet, as major sites remain untested directly. Step 3: Analyze Request - User's core intent is to find the lowest-energy adsorption configuration for NNH on the surface, without specifying site or orientation. Step 4: Analyze Adsorbate - SMILES [N]=[NH] represents NNH radical, with major functional group being N=N double bond and a terminal NH, radical on index 0 N. Binding via radical atom for ReactiveSpecies. Step 5: Analyze Surface - Available hollow sites include Mo-Mo-Mo and Mo-Mo-Pd; proposing the latter to explore differences. Step 6: Formulate Plan - Select hollow site_type, surface_binding_atoms ['Mo', 'Mo', 'Pd'], adsorbate_binding_indices [0] (radical atom), defaults for other parameters.",
-        "adsorbate_type": "ReactiveSpecies",
-        "solution": {
-          "action": "continue",
-          "site_type": "hollow",
-          "surface_binding_atoms": [
-            "Mo",
-            "Mo",
-            "Pd"
-          ],
-          "adsorbate_binding_indices": [
-            0
-          ],
-          "relax_top_n": 1,
-          "touch_sphere_size": 2,
-          "overlap_thr": 0.1,
-          "conformers_per_site_cap": 4
-        }
-      },
-      "plan_key": "hollow|Mo,Mo,Pd|0|ReactiveSpecies|2.0",
-      "status": "success",
-      "most_stable_energy_eV": -4.765958786010742,
-      "bond_change_count": 0,
-      "is_dissociated": false,
-      "is_chemical_slip": true,
-      "planned_site_type": "hollow",
-      "actual_site_type": "hollow (HCP/Subsurf-Atom)",
-      "best_structure_file": "outputs/02-a1c391e6/BEST_N_NH_hollow_to_hollow_HCP-Subsurf-Atom_E-4.766.xyz",
-      "generated_conformers_file": "outputs/02-a1c391e6/conformers_[N]_[NH].traj",
-      "relaxation_trajectory_file": "outputs/02-a1c391e6/final.xyz",
-      "message": "Most stable config adsorption energy: -4.7660 eV. Target Atom: N (from plan index 0, global index 96 in relaxed structure). -> Nearest: Mo (Index 65), Distance: 1.936 Å (Threshold: 3.262), Bound: True. Bonded Surface Atoms: Mo-1.936Å, Mo-2.169Å, Mo-2.175Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Mo', 'Mo', 'Pd'] -> Actual ['Mo', 'Mo', 'Mo']).",
-      "history_entry": "【✅ Perfect Adsorption】 hollow @ ['Mo', 'Mo', 'Pd'] (Index [0]) -> Site: hollow (HCP/Subsurf-Atom) (Mo,Mo,Mo) [🌟 New Best] | E=-4.766 eV"
-    },
-    {
-      "attempt_index": 3,
-      "plan": {
-        "reasoning": "Step 0: SMILES Consistency Check. The provided RDKit analysis shows atoms at indices 0 (N, SP2, radical_electrons=1) and 1 (N, SP2, radical_electrons=0). No mismatch with user description of NNH. For ReactiveSpecies, binding via index 0 is valid due to radical_electrons > 0. Step 1: Analyze Old Plans. Two successful adsorptions: (1) Started as ontop on Mo with adsorbate index [0], relaxed to hollow (HCP/Subsurf-Atom) on Mo-Mo-Mo with E=-4.150 eV. (2) Started as hollow on Mo-Mo-Pd with adsorbate index [0], relaxed to hollow (HCP/Subsurf-Atom) on Mo-Mo-Mo with E=-4.766 eV. Both succeeded and updated the best energy, but converged to the same site description with significantly different energies (difference >0.05 eV), indicating geometrically distinct configurations or different environments due to surface heterogeneity. No failures in history. No [🔄 Converged to known best] tag, so continue. The current best is -4.766 eV. Tested sites: ontop Mo and hollow Mo-Mo-Pd, both via single binding at index 0. Step 2: Formulate New Plan. To find the lowest energy, systematically test untested sites and orientations. Previous plans used single-point binding via the radical N (index 0). Now, propose a side-on orientation (two-point binding) to explore a different adsorption mode, which is common for NNH-like species in catalysis. Since only index 0 has a radical, use 'Molecule' type for multi-point binding via lone pairs/valid donor atoms on both N (both SP2, not saturated). Select bridge site on Mo-Pd for heterogeneity, as Pd was involved in the better-energy initial site. This is completely different from previous plans. No termination since no convergence tag and potential for lower energy in new mode. Step 3: User intent is to find the lowest-energy adsorption configuration for NNH. Step 4: Adsorbate analysis - SMILES [N]=[NH] represents •N=NH (N2H radical), with double bond between N atoms, H on index 1, radical on index 0. Major functional group: azo-like with radical. Step 5: Surface has ontop Mo/Pd, bridge Mo-Mo/Mo-Pd, hollow Mo-Mo-Mo/Mo-Mo-Pd; plan within these. Step 6: Plan formulated as below.",
-        "adsorbate_type": "Molecule",
-        "solution": {
-          "action": "continue",
-          "site_type": "bridge",
-          "surface_binding_atoms": [
-            "Mo",
-            "Pd"
-          ],
-          "adsorbate_binding_indices": [
-            0,
-            1
-          ],
-          "relax_top_n": 1,
-          "touch_sphere_size": 2,
-          "overlap_thr": 0.1,
-          "conformers_per_site_cap": 4
-        }
-      },
-      "plan_key": "bridge|Mo,Pd|0,1|Molecule|2.0",
-      "status": "success",
-      "most_stable_energy_eV": -2.383207321166992,
-      "bond_change_count": 0,
-      "is_dissociated": false,
-      "is_chemical_slip": true,
-      "planned_site_type": "bridge",
-      "actual_site_type": "hollow (HCP/Subsurf-Atom)",
-      "best_structure_file": "outputs/02-a1c391e6/BEST_N_NH_bridge_to_hollow_HCP-Subsurf-Atom_E-2.383.xyz",
-      "generated_conformers_file": "outputs/02-a1c391e6/conformers_[N]_[NH].traj",
-      "relaxation_trajectory_file": "outputs/02-a1c391e6/final.xyz",
-      "message": "Most stable config adsorption energy: -2.3832 eV. Target Atom 1: N (from plan index 0, global index 96). -> Nearest: Mo (Index 14), Distance: 2.255 Å (Threshold: 2.475), Bound: True. Target Atom 2: N (from plan index 1, global index 97). -> Nearest: Pd (Index 69), Distance: 2.962 Å (Threshold: 2.31), Bound: False. Bonded Surface Atoms: N(96)-Mo(1.988Å), N(96)-Pd(2.589Å), N(96)-Mo(3.15Å), N(97)-Mo(3.193Å), N(96)-Mo(3.214Å). Is Bound: False. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Mo', 'Pd'] -> Actual ['Mo', 'Mo', 'Mo', 'Mo', 'Pd']).",
-      "history_entry": "【✅ Perfect Adsorption】 bridge @ ['Mo', 'Pd'] (Index [0, 1]) -> Site: hollow (HCP/Subsurf-Atom) (Mo,Mo,Mo,Mo,Pd) | E=-2.383 eV"
-    },
-    {
-      "attempt_index": 4,
-      "plan": {
-        "reasoning": "Step 0: SMILES Consistency Check. The SMILES is [N]=[NH], with atoms at index 0 (N, SP2, radical_electrons=1) and index 1 (N, SP2, radical_electrons=0). No mismatch with user description of NNH. For ReactiveSpecies, binding atoms must have radical_electrons >0, which index 0 does, but index 1 does not.\nStep 1: Analyze Old Plans. Tested: (1) ontop on Mo with adsorbate index [0], converged to hollow (Mo,Mo,Mo), E=-4.150 eV; (2) hollow on Mo-Mo-Pd with [0], converged to hollow (Mo,Mo,Mo), E=-4.766 eV (current best); (3) bridge on Mo-Pd with [0,1], converged to hollow (Mo,Mo,Mo,Mo,Pd), E=-2.383 eV. All succeeded as perfect adsorptions with no dissociation or failures noted. No [🔄 Converged to known best] tags, so do not terminate. The lowest energy is -4.766 eV at a Mo-rich hollow. Different initial sites converged to similar but not identical geometries/energies (e.g., -4.150 vs -4.766, and -2.383 is distinct). Due to surface heterogeneity (Mo-Pd alloy), chemically distinct environments may exist, warranting exploration of untested sites like ontop Pd or bridge Mo-Mo.\nStep 2: Formulate New Plan. Goal is lowest adsorption energy. Untested high-symmetry sites include ontop Pd, bridge Mo-Mo, and hollow Mo-Mo-Mo. Previous attempts show convergence to hollow sites, but no termination signal. To systematically explore, propose ontop on Pd, which is untested and may differ due to Pd vs Mo chemistry. Avoid repeating exact previous plans. No need to terminate as energies differ and heterogeneity suggests potential for better sites.\nStep 3: Analyze Request. User's core intent is to find the lowest-energy adsorption configuration of NNH on the surface, without specifying site or orientation.\nStep 4: Analyze Adsorbate. SMILES [N]=[NH] represents NNH, with major functional group being a double-bonded N-N radical species. Index 0 is the radical N, suitable for ReactiveSpecies binding; index 1 is NH-like, potentially for Molecule binding via lone pair.\nStep 5: Analyze Surface. Available sites: ontop Mo/Pd, bridge Mo-Mo/Mo-Pd, hollow Mo-Mo-Mo/Mo-Mo-Pd. Plan only for existing combinations.\nStep 6: Formulate Plan. Select ontop site on Pd for new test, binding via radical atom index 0 as ReactiveSpecies (since it has radical_electrons=1). This is physically consistent for end-on binding of the radical N. Use defaults for other parameters.",
-        "adsorbate_type": "ReactiveSpecies",
-        "solution": {
-          "action": "continue",
-          "site_type": "ontop",
-          "surface_binding_atoms": [
-            "Pd"
-          ],
-          "adsorbate_binding_indices": [
-            0
-          ],
-          "relax_top_n": 1,
-          "touch_sphere_size": 2,
-          "overlap_thr": 0.1,
-          "conformers_per_site_cap": 4
-        }
-      },
-      "plan_key": "ontop|Pd|0|ReactiveSpecies|2.0",
-      "status": "success",
-      "most_stable_energy_eV": -4.333600997924805,
+      "most_stable_energy_eV": -4.342861175537109,
       "bond_change_count": 0,
       "is_dissociated": false,
       "is_chemical_slip": true,
       "planned_site_type": "ontop",
       "actual_site_type": "hollow (FCC/No-Subsurf)",
-      "best_structure_file": "outputs/02-a1c391e6/BEST_N_NH_ontop_to_hollow_FCC-No-Subsurf_E-4.334.xyz",
-      "generated_conformers_file": "outputs/02-a1c391e6/conformers_[N]_[NH].traj",
-      "relaxation_trajectory_file": "outputs/02-a1c391e6/final.xyz",
-      "message": "Most stable config adsorption energy: -4.3336 eV. Target Atom: N (from plan index 0, global index 96 in relaxed structure). -> Nearest: Mo (Index 68), Distance: 1.958 Å (Threshold: 3.262), Bound: True. Bonded Surface Atoms: Mo-1.958Å, Mo-2.248Å, Mo-2.252Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Pd'] -> Actual ['Mo', 'Mo', 'Mo']).",
-      "history_entry": "【✅ Perfect Adsorption】 ontop @ ['Pd'] (Index [0]) -> Site: hollow (FCC/No-Subsurf) (Mo,Mo,Mo) | E=-4.334 eV"
+      "best_structure_file": "outputs/02-2e9ea8b7/BEST_N_NH_ontop_to_hollow_FCC-No-Subsurf_E-4.343.xyz",
+      "generated_conformers_file": "outputs/02-2e9ea8b7/conformers_[N]_[NH].traj",
+      "relaxation_trajectory_file": "outputs/02-2e9ea8b7/final.xyz",
+      "message": "Most stable config adsorption energy: -4.3429 eV. Target Atom: N (from plan index 0, global index 96 in relaxed structure). -> Nearest: Mo (Index 92), Distance: 1.965 Å (Threshold: 3.262), Bound: True. Bonded Surface Atoms: Mo-1.965Å, Mo-2.249Å, Mo-2.252Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Mo'] -> Actual ['Mo', 'Mo', 'Mo']).",
+      "history_entry": "【✅ Perfect Adsorption】 ontop @ ['Mo'] (Index [0]) -> Site: hollow (FCC/No-Subsurf) (Mo,Mo,Mo) [🌟 New Best] | E=-4.343 eV"
     },
     {
-      "attempt_index": 5,
+      "attempt_index": 2,
       "plan": {
-        "reasoning": "Step 0: SMILES Consistency Check. The SMILES is [N]=[NH], with atoms: index 0 (N, SP2, radical_electrons=1), index 1 (N, SP2, radical_electrons=0). User requested NNH, which matches the SMILES structure as a radical species. No hybridization mismatch noted. For ReactiveSpecies, binding atoms must have radical_electrons >0.\nStep 1: Analyze Old Plans. Four successful adsorptions: (1) ontop Mo converged to hollow (HCP/Subsurf-Atom) (Mo,Mo,Mo) at -4.150 eV; (2) hollow Mo-Mo-Pd converged to hollow (HCP/Subsurf-Atom) (Mo,Mo,Mo) at -4.766 eV (current best); (3) bridge Mo-Pd converged to hollow (HCP/Subsurf-Atom) (Mo,Mo,Mo,Mo,Pd) at -2.383 eV; (4) ontop Pd converged to hollow (FCC/No-Subsurf) (Mo,Mo,Mo) at -4.334 eV. All succeeded with no failures or bond changes mentioned. No [🔄 Converged to known best] tag, so continue. Energies vary even for similar sites, suggesting heterogeneity in the Mo3Pd(111) surface. Untested sites: bridge Mo-Mo, hollow Mo-Mo-Mo.\nStep 2: Formulate New Plan. Goal is lowest energy configuration. Many initial sites converge to Mo-rich hollows, with best at -4.766 eV. To explore potentially lower energy, propose a new site: bridge on Mo-Mo, not previously tested. The adsorbate is NNH radical, but to test side-on adsorption (eta2 binding via both N atoms), use 'Molecule' type to allow binding via indices [0,1], as 'ReactiveSpecies' would restrict to atoms with radicals (only index 0). This may enable a different configuration. If it fails, it could indicate preference for end-on. This is distinct from prior plans. Hard limit is 5 attempts; this is the 5th.\nStep 3: Analyze Request. User's intent is to find the lowest-energy adsorption configuration for NNH on the surface, without specifying orientation.\nStep 4: Analyze Adsorbate. SMILES [N]=[NH]: linear N=N-H structure with radical on first N (index 0). Functional groups: N=N double bond, N-H. Potential binding modes: end-on via radical N or side-on via N=N.\nStep 5: Analyze Surface. Available: ontop Mo/Pd, bridge Mo-Mo/Mo-Pd, hollow Mo-Mo-Mo/Mo-Mo-Pd. Proposing bridge Mo-Mo.\nStep 6: Formulate Plan. Select bridge site on Mo-Mo for side-on binding.",
+        "reasoning": "0. SMILES Consistency Check: The provided atom list shows index 0 (N, SP2, radical_electrons=1) and index 1 (N, SP2, radical_electrons=0). No mismatch with user description of NNH. Hybridization is SP2 for both, no saturated alkyl issue. For ReactiveSpecies plans, binding atoms must have radical_electrons >0.\n1. Analyze Old Plans: One successful attempt: ontop on ['Mo'] with adsorbate index [0], relaxed to hollow (FCC/No-Subsurf) on (Mo,Mo,Mo) with E=-4.343 eV. This is the current best. No failed attempts. No [🔄 Converged to known best] or [⚠️ Energy Degenerate but Geometrically Distinct] tags, so not terminated. The attempt tested end-on adsorption via the radical N (index 0) on Mo ontop, which slipped to a Mo-dominated hollow site. Surface is heterogeneous (Mo-Pd alloy), so different site compositions may yield different energies.\n2. Formulate New Plan: Goal is lowest adsorption energy. Previous plan converged to a strong binding (-4.343 eV) in Mo-Mo-Mo hollow. To systematically explore, test a different orientation: side-on adsorption via both N atoms, which is common for N=N containing species in catalysis. This differs from the previous end-on via index 0. Use 'Molecule' type for pi-like adsorption via both atoms (indices [0,1]), as 'ReactiveSpecies' cannot be used for multi-point binding since index 1 lacks radicals. Select bridge site on Mo-Mo (available in site list), as the previous best involved pure Mo sites. This may yield a lower energy if side-on is preferred. Not terminating, as major orientations and sites remain untested, and heterogeneity suggests potential for better configurations.\n3. Analyze Request: User's core intent is to find the lowest-energy adsorption configuration for NNH on the surface, without specifying site or orientation.\n4. Analyze Adsorbate: SMILES [N]=[NH] represents NNH with a double bond; major functional group is N=N with a radical on index 0 N and H on index 1 N. Possible adsorption modes: end-on via index 0 (radical), end-on via index 1 (lone pair), or side-on via [0,1].\n5. Analyze Surface: Available sites include bridge Mo-Mo and Mo-Pd; selecting Mo-Mo for consistency with previous best.\n6. Formulate Plan: Propose bridge site with Mo-Mo, binding via [0,1] as Molecule.",
         "adsorbate_type": "Molecule",
         "solution": {
           "action": "continue",
@@ -365,30 +316,27 @@
       },
       "plan_key": "bridge|Mo,Mo|0,1|Molecule|2.0",
       "status": "success",
-      "most_stable_energy_eV": -4.132780075073242,
+      "most_stable_energy_eV": -4.344356536865234,
       "bond_change_count": 0,
       "is_dissociated": false,
       "is_chemical_slip": true,
       "planned_site_type": "bridge",
-      "actual_site_type": "hollow (HCP/Subsurf-Atom)",
-      "best_structure_file": "outputs/02-a1c391e6/BEST_N_NH_bridge_to_hollow_HCP-Subsurf-Atom_E-4.133.xyz",
-      "generated_conformers_file": "outputs/02-a1c391e6/conformers_[N]_[NH].traj",
-      "relaxation_trajectory_file": "outputs/02-a1c391e6/final.xyz",
-      "message": "Most stable config adsorption energy: -4.1328 eV. Target Atom 1: N (from plan index 0, global index 96). -> Nearest: Mo (Index 17), Distance: 2.056 Å (Threshold: 2.475), Bound: True. Target Atom 2: N (from plan index 1, global index 97). -> Nearest: Mo (Index 20), Distance: 1.959 Å (Threshold: 2.475), Bound: True. Bonded Surface Atoms: N(96)-Mo(2.032Å), N(97)-Mo(2.048Å), N(96)-Mo(2.077Å), N(97)-Mo(2.309Å), N(97)-Mo(2.481Å), N(96)-Pd(2.84Å), N(96)-Mo(3.015Å). Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Mo', 'Mo'] -> Actual ['Mo', 'Mo', 'Mo', 'Mo', 'Mo', 'Mo', 'Pd']).",
-      "history_entry": "【✅ Perfect Adsorption】 bridge @ ['Mo', 'Mo'] (Index [0, 1]) -> Site: hollow (HCP/Subsurf-Atom) (Mo,Mo,Mo,Mo,Mo,Mo,Pd) | E=-4.133 eV"
+      "actual_site_type": "hollow (FCC/No-Subsurf)",
+      "best_structure_file": "outputs/02-2e9ea8b7/BEST_N_NH_bridge_to_hollow_FCC-No-Subsurf_E-4.344.xyz",
+      "generated_conformers_file": "outputs/02-2e9ea8b7/conformers_[N]_[NH].traj",
+      "relaxation_trajectory_file": "outputs/02-2e9ea8b7/final.xyz",
+      "message": "Most stable config adsorption energy: -4.3444 eV. Target Atom 1: N (from plan index 0, global index 96). -> Nearest: Mo (Index 17), Distance: 1.919 Å (Threshold: 2.475), Bound: True. Target Atom 2: N (from plan index 1, global index 97). -> Nearest: Mo (Index 20), Distance: 2.134 Å (Threshold: 2.475), Bound: True. Bonded Surface Atoms: N(96)-Mo(1.962Å), N(97)-Mo(2.129Å), N(97)-Mo(2.157Å), N(96)-Mo(2.245Å), N(96)-Mo(2.26Å), N(97)-Pd(2.767Å), N(97)-Mo(3.124Å). Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Mo', 'Mo'] -> Actual ['Mo', 'Mo', 'Mo', 'Mo', 'Mo', 'Mo', 'Pd']).",
+      "history_entry": "【✅ Perfect Adsorption】 bridge @ ['Mo', 'Mo'] (Index [0, 1]) -> Site: hollow (FCC/No-Subsurf) (Mo,Mo,Mo,Mo,Mo,Mo,Pd) [🌟 New Best] | E=-4.344 eV"
     }
   ],
   "history": [
-    "【✅ Perfect Adsorption】 ontop @ ['Mo'] (Index [0]) -> Site: hollow (HCP/Subsurf-Atom) (Mo,Mo,Mo) [🌟 New Best] | E=-4.150 eV",
-    "【✅ Perfect Adsorption】 hollow @ ['Mo', 'Mo', 'Pd'] (Index [0]) -> Site: hollow (HCP/Subsurf-Atom) (Mo,Mo,Mo) [🌟 New Best] | E=-4.766 eV",
-    "【✅ Perfect Adsorption】 bridge @ ['Mo', 'Pd'] (Index [0, 1]) -> Site: hollow (HCP/Subsurf-Atom) (Mo,Mo,Mo,Mo,Pd) | E=-2.383 eV",
-    "【✅ Perfect Adsorption】 ontop @ ['Pd'] (Index [0]) -> Site: hollow (FCC/No-Subsurf) (Mo,Mo,Mo) | E=-4.334 eV",
-    "【✅ Perfect Adsorption】 bridge @ ['Mo', 'Mo'] (Index [0, 1]) -> Site: hollow (HCP/Subsurf-Atom) (Mo,Mo,Mo,Mo,Mo,Mo,Pd) | E=-4.133 eV"
+    "【✅ Perfect Adsorption】 ontop @ ['Mo'] (Index [0]) -> Site: hollow (FCC/No-Subsurf) (Mo,Mo,Mo) [🌟 New Best] | E=-4.343 eV",
+    "【✅ Perfect Adsorption】 bridge @ ['Mo', 'Mo'] (Index [0, 1]) -> Site: hollow (FCC/No-Subsurf) (Mo,Mo,Mo,Mo,Mo,Mo,Pd) [🌟 New Best] | E=-4.344 eV"
   ],
   "error": null,
-  "perfect_count": 5,
+  "perfect_count": 2,
   "dissociation_count": 0,
   "rearrangement_count": 0,
   "calc_failure_count": 0,
-  "chemical_slip_count": 5
+  "chemical_slip_count": 2
 }
