@@ -94,7 +94,7 @@ def process_baselines():
     baselines_sherry = {
         'random_n20': 'random_n20',
         'heuristic': 'heuristic',
-        'adsorbagent_mace_mp0_small_gpt54': 'adsorbagent_gpt54_mace_mp0_small',
+        'adsorbagent_mace_mp0_small_gpt54': 'adsorb-agent\\adsorb-agent_gpt54_mace_mp0_small_5config',
     }
     n = 0
     for short_name, long_name in baselines_sherry.items():
