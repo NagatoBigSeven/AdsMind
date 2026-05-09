@@ -43,7 +43,7 @@ def dataset_summary_dir(dataset: str) -> Path:
 
 
 def backend_dir(dataset: str, backend: str) -> Path:
-    return BASIC_ROOT / dataset / backend_result_dir(backend)
+    return BASIC_ROOT / dataset / "adsmind" / backend_result_dir(backend)
 
 
 def case_ids(dataset: str) -> list[str]:

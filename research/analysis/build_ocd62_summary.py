@@ -106,7 +106,7 @@ def ocd_id(row: dict[str, str]) -> str:
 
 
 def backend_dir(dataset: str, backend: str) -> Path:
-    return BASIC_ROOT / dataset / backend_result_dir(backend)
+    return BASIC_ROOT / dataset / "adsmind" / backend_result_dir(backend)
 
 
 def run_dir(dataset: str, backend: str, variant: str, case_id: str) -> Path:

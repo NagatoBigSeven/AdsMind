@@ -52,7 +52,7 @@
     "most_stable_energy_eV": -11.654779434204102,
     "analysis_json": {
       "status": "success",
-      "message": "Most stable config adsorption energy: -11.6548 eV. Target Atom: N (from plan index 0, global index 54 in relaxed structure). -> Nearest: Re (Index 53), Distance: 2.085 \u00c5 (Threshold: 3.219), Bound: True. Bonded Surface Atoms: Re-2.085\u00c5, Re-2.097\u00c5, Ti-2.267\u00c5, Ti-3.345\u00c5. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Re'] -> Actual ['Re', 'Re', 'Ti', 'Ti']).",
+      "message": "Most stable config adsorption energy: -11.6548 eV. Target Atom: N (from plan index 0, global index 54 in relaxed structure). -> Nearest: Re (Index 53), Distance: 2.085 Å (Threshold: 3.219), Bound: True. Bonded Surface Atoms: Re-2.085Å, Re-2.097Å, Ti-2.267Å, Ti-3.345Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Re'] -> Actual ['Re', 'Re', 'Ti', 'Ti']).",
       "most_stable_energy_eV": -11.654779434204102,
       "target_adsorbate_atom": "N",
       "target_adsorbate_atom_index": 54,
@@ -104,13 +104,13 @@
         ],
         "site_fingerprint": "Re53-Re35-Ti26-Ti23"
       },
-      "best_structure_file": "outputs/011-bfff090b/BEST_NH2_ontop_to_hollow_FCC-No-Subsurf_E-11.655.xyz",
-      "generated_conformers_file": "outputs/011-bfff090b/conformers_[NH2].traj",
-      "relaxation_trajectory_file": "outputs/011-bfff090b/final.xyz",
+      "best_structure_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/claude_sonnet46_mace_mp0_small/no_forbid/011/artifacts/BEST_NH2_ontop_to_hollow_FCC-No-Subsurf_E-11.655.xyz",
+      "generated_conformers_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/claude_sonnet46_mace_mp0_small/no_forbid/011/artifacts/conformers_[NH2].traj",
+      "relaxation_trajectory_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/claude_sonnet46_mace_mp0_small/no_forbid/011/artifacts/final.xyz",
       "session_id": "011-bfff090b"
     },
     "plan": {
-      "reasoning": "**Step 0: SMILES Consistency Check**\nThe SMILES [NH2] represents an NH2 radical. The RDKit analysis confirms: N (index 0), SP3 hybridization, degree 0, radical_electrons=1, formal_charge=0. This is a reactive radical species (NH2\u2022), so adsorbate_type='ReactiveSpecies'. The binding atom is N (index 0) with 1 unpaired electron.\n\n**Step 1: Analyze History**\n- hollow @ ['Re','Re','Ti'] (Index [0]): Planned hollow-3 (Re-Re-Ti) was UNSTABLE, slipped to hollow (Re-Re-Re-Re-Ti). E=-6.984 eV. [New Best at that time]\n- hollow @ ['Re','Re','Re','Ti'] (Index [0]): Planned hollow-4 (Re-Re-Re-Ti) was UNSTABLE, slipped to hollow (Re-Re-Re-Re-Ti). E=-6.960 eV. [Energy Degenerate but Geometrically Distinct]\n- bridge @ ['Re','Re'] (Index [0]): Planned bridge (Re-Re) was UNSTABLE, slipped to hollow FCC/No-Subsurf (Re-Re-Ti). E=-10.631 eV. [New Best]\n\nSo the actual configurations found are:\n1. hollow (Re-Re-Re-Re-Ti) via hollow-3 attempt: E=-6.984 eV\n2. hollow (Re-Re-Re-Re-Ti) via hollow-4 attempt: E=-6.960 eV (geometrically distinct)\n3. hollow (Re-Re-Ti) via bridge attempt: E=-10.631 eV (BEST)\n\nThe only untested site from the available list is: [Ontop]: Re.\n\n**Step 2: Formulate New Plan**\nThe remaining untested site is ontop @ Re. All hollow and bridge sites have been tested (and slipped to other configurations). The ontop site is the last remaining option to explore. NH2 radical can bind via N to a single Re atom in an ontop configuration.\n\n**Step 3: Analysis**\n- Site: ontop @ Re\n- Binding atom: N (index 0, radical_electrons=1)\n- This is a ReactiveSpecies\n- site_type='ontop', surface_binding_atoms=['Re'], adsorbate_binding_indices=[0]\n- ontop requires len(adsorbate_binding_indices)==1 \u2713\n\n**Step 4: Decision**\nAll 4 available site types have now been attempted (hollow-3, hollow-4, bridge, and now ontop). After this attempt, if ontop is also tested, all sites will be exhausted and we should terminate. The current best is E=-10.631 eV at the FCC hollow (Re-Re-Ti) site reached via bridge slip. Let's test ontop to be thorough.",
+      "reasoning": "**Step 0: SMILES Consistency Check**\nThe SMILES [NH2] represents an NH2 radical. The RDKit analysis confirms: N (index 0), SP3 hybridization, degree 0, radical_electrons=1, formal_charge=0. This is a reactive radical species (NH2•), so adsorbate_type='ReactiveSpecies'. The binding atom is N (index 0) with 1 unpaired electron.\n\n**Step 1: Analyze History**\n- hollow @ ['Re','Re','Ti'] (Index [0]): Planned hollow-3 (Re-Re-Ti) was UNSTABLE, slipped to hollow (Re-Re-Re-Re-Ti). E=-6.984 eV. [New Best at that time]\n- hollow @ ['Re','Re','Re','Ti'] (Index [0]): Planned hollow-4 (Re-Re-Re-Ti) was UNSTABLE, slipped to hollow (Re-Re-Re-Re-Ti). E=-6.960 eV. [Energy Degenerate but Geometrically Distinct]\n- bridge @ ['Re','Re'] (Index [0]): Planned bridge (Re-Re) was UNSTABLE, slipped to hollow FCC/No-Subsurf (Re-Re-Ti). E=-10.631 eV. [New Best]\n\nSo the actual configurations found are:\n1. hollow (Re-Re-Re-Re-Ti) via hollow-3 attempt: E=-6.984 eV\n2. hollow (Re-Re-Re-Re-Ti) via hollow-4 attempt: E=-6.960 eV (geometrically distinct)\n3. hollow (Re-Re-Ti) via bridge attempt: E=-10.631 eV (BEST)\n\nThe only untested site from the available list is: [Ontop]: Re.\n\n**Step 2: Formulate New Plan**\nThe remaining untested site is ontop @ Re. All hollow and bridge sites have been tested (and slipped to other configurations). The ontop site is the last remaining option to explore. NH2 radical can bind via N to a single Re atom in an ontop configuration.\n\n**Step 3: Analysis**\n- Site: ontop @ Re\n- Binding atom: N (index 0, radical_electrons=1)\n- This is a ReactiveSpecies\n- site_type='ontop', surface_binding_atoms=['Re'], adsorbate_binding_indices=[0]\n- ontop requires len(adsorbate_binding_indices)==1 ✓\n\n**Step 4: Decision**\nAll 4 available site types have now been attempted (hollow-3, hollow-4, bridge, and now ontop). After this attempt, if ontop is also tested, all sites will be exhausted and we should terminate. The current best is E=-10.631 eV at the FCC hollow (Re-Re-Ti) site reached via bridge slip. Let's test ontop to be thorough.",
       "adsorbate_type": "ReactiveSpecies",
       "solution": {
         "action": "continue",
@@ -131,7 +131,7 @@
   },
   "last_analysis": {
     "status": "success",
-    "message": "Most stable config adsorption energy: -11.6548 eV. Target Atom: N (from plan index 0, global index 54 in relaxed structure). -> Nearest: Re (Index 53), Distance: 2.085 \u00c5 (Threshold: 3.219), Bound: True. Bonded Surface Atoms: Re-2.085\u00c5, Re-2.097\u00c5, Ti-2.267\u00c5, Ti-3.345\u00c5. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Re'] -> Actual ['Re', 'Re', 'Ti', 'Ti']).",
+    "message": "Most stable config adsorption energy: -11.6548 eV. Target Atom: N (from plan index 0, global index 54 in relaxed structure). -> Nearest: Re (Index 53), Distance: 2.085 Å (Threshold: 3.219), Bound: True. Bonded Surface Atoms: Re-2.085Å, Re-2.097Å, Ti-2.267Å, Ti-3.345Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Re'] -> Actual ['Re', 'Re', 'Ti', 'Ti']).",
     "most_stable_energy_eV": -11.654779434204102,
     "target_adsorbate_atom": "N",
     "target_adsorbate_atom_index": 54,
@@ -183,9 +183,9 @@
       ],
       "site_fingerprint": "Re53-Re35-Ti26-Ti23"
     },
-    "best_structure_file": "outputs/011-bfff090b/BEST_NH2_ontop_to_hollow_FCC-No-Subsurf_E-11.655.xyz",
-    "generated_conformers_file": "outputs/011-bfff090b/conformers_[NH2].traj",
-    "relaxation_trajectory_file": "outputs/011-bfff090b/final.xyz",
+    "best_structure_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/claude_sonnet46_mace_mp0_small/no_forbid/011/artifacts/BEST_NH2_ontop_to_hollow_FCC-No-Subsurf_E-11.655.xyz",
+    "generated_conformers_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/claude_sonnet46_mace_mp0_small/no_forbid/011/artifacts/conformers_[NH2].traj",
+    "relaxation_trajectory_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/claude_sonnet46_mace_mp0_small/no_forbid/011/artifacts/final.xyz",
     "session_id": "011-bfff090b"
   },
   "attempt_records": [
@@ -219,11 +219,11 @@
       "is_chemical_slip": true,
       "planned_site_type": "hollow",
       "actual_site_type": "hollow (HCP/Subsurf-Atom)",
-      "best_structure_file": "outputs/011-bfff090b/BEST_NH2_hollow_to_hollow_HCP-Subsurf-Atom_E-6.984.xyz",
-      "generated_conformers_file": "outputs/011-bfff090b/conformers_[NH2].traj",
-      "relaxation_trajectory_file": "outputs/011-bfff090b/final.xyz",
-      "message": "Most stable config adsorption energy: -6.9835 eV. Target Atom: N (from plan index 0, global index 54 in relaxed structure). -> Nearest: Re (Index 32), Distance: 2.164 \u00c5 (Threshold: 3.219), Bound: True. Bonded Surface Atoms: Re-2.164\u00c5, Re-2.169\u00c5, Ti-2.196\u00c5, Re-2.333\u00c5, Re-2.339\u00c5. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Re', 'Re', 'Ti'] -> Actual ['Re', 'Re', 'Re', 'Re', 'Ti']).",
-      "history_entry": "\u3010\u2705 Perfect Adsorption\u3011 hollow @ ['Re', 'Re', 'Ti'] (Index [0]) -> \u26a0\ufe0f\u3010Unstable Site Warning\u3011\u26a0\ufe0f: Planned hollow (Re-Re-Ti) is unstable, adsorbate spontaneously slipped to hollow (HCP/Subsurf-Atom) (Re-Re-Re-Re-Ti).This means Re-Re-Ti has insufficient affinity for this adsorbate. [\ud83c\udf1f New Best] | E=-6.984 eV"
+      "best_structure_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/claude_sonnet46_mace_mp0_small/no_forbid/011/artifacts/BEST_NH2_hollow_to_hollow_HCP-Subsurf-Atom_E-6.984.xyz",
+      "generated_conformers_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/claude_sonnet46_mace_mp0_small/no_forbid/011/artifacts/conformers_[NH2].traj",
+      "relaxation_trajectory_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/claude_sonnet46_mace_mp0_small/no_forbid/011/artifacts/final.xyz",
+      "message": "Most stable config adsorption energy: -6.9835 eV. Target Atom: N (from plan index 0, global index 54 in relaxed structure). -> Nearest: Re (Index 32), Distance: 2.164 Å (Threshold: 3.219), Bound: True. Bonded Surface Atoms: Re-2.164Å, Re-2.169Å, Ti-2.196Å, Re-2.333Å, Re-2.339Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Re', 'Re', 'Ti'] -> Actual ['Re', 'Re', 'Re', 'Re', 'Ti']).",
+      "history_entry": "【✅ Perfect Adsorption】 hollow @ ['Re', 'Re', 'Ti'] (Index [0]) -> ⚠️【Unstable Site Warning】⚠️: Planned hollow (Re-Re-Ti) is unstable, adsorbate spontaneously slipped to hollow (HCP/Subsurf-Atom) (Re-Re-Re-Re-Ti).This means Re-Re-Ti has insufficient affinity for this adsorbate. [🌟 New Best] | E=-6.984 eV"
     },
     {
       "attempt_index": 2,
@@ -256,11 +256,11 @@
       "is_chemical_slip": true,
       "planned_site_type": "hollow",
       "actual_site_type": "hollow (HCP/Subsurf-Atom)",
-      "best_structure_file": "outputs/011-bfff090b/BEST_NH2_hollow_to_hollow_HCP-Subsurf-Atom_E-6.960.xyz",
-      "generated_conformers_file": "outputs/011-bfff090b/conformers_[NH2].traj",
-      "relaxation_trajectory_file": "outputs/011-bfff090b/final.xyz",
-      "message": "Most stable config adsorption energy: -6.9598 eV. Target Atom: N (from plan index 0, global index 54 in relaxed structure). -> Nearest: Ti (Index 2), Distance: 2.147 \u00c5 (Threshold: 3.35), Bound: True. Bonded Surface Atoms: Ti-2.147\u00c5, Re-2.243\u00c5, Re-2.25\u00c5, Re-2.277\u00c5, Re-2.278\u00c5. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Re', 'Re', 'Re', 'Ti'] -> Actual ['Re', 'Re', 'Re', 'Re', 'Ti']).",
-      "history_entry": "\u3010\u2705 Perfect Adsorption\u3011 hollow @ ['Re', 'Re', 'Re', 'Ti'] (Index [0]) -> \u26a0\ufe0f\u3010Unstable Site Warning\u3011\u26a0\ufe0f: Planned hollow (Re-Re-Re-Ti) is unstable, adsorbate spontaneously slipped to hollow (HCP/Subsurf-Atom) (Re-Re-Re-Re-Ti).This means Re-Re-Re-Ti has insufficient affinity for this adsorbate. [\u26a0\ufe0f Energy Degenerate but Geometrically Distinct] | E=-6.960 eV"
+      "best_structure_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/claude_sonnet46_mace_mp0_small/no_forbid/011/artifacts/BEST_NH2_hollow_to_hollow_HCP-Subsurf-Atom_E-6.960.xyz",
+      "generated_conformers_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/claude_sonnet46_mace_mp0_small/no_forbid/011/artifacts/conformers_[NH2].traj",
+      "relaxation_trajectory_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/claude_sonnet46_mace_mp0_small/no_forbid/011/artifacts/final.xyz",
+      "message": "Most stable config adsorption energy: -6.9598 eV. Target Atom: N (from plan index 0, global index 54 in relaxed structure). -> Nearest: Ti (Index 2), Distance: 2.147 Å (Threshold: 3.35), Bound: True. Bonded Surface Atoms: Ti-2.147Å, Re-2.243Å, Re-2.25Å, Re-2.277Å, Re-2.278Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Re', 'Re', 'Re', 'Ti'] -> Actual ['Re', 'Re', 'Re', 'Re', 'Ti']).",
+      "history_entry": "【✅ Perfect Adsorption】 hollow @ ['Re', 'Re', 'Re', 'Ti'] (Index [0]) -> ⚠️【Unstable Site Warning】⚠️: Planned hollow (Re-Re-Re-Ti) is unstable, adsorbate spontaneously slipped to hollow (HCP/Subsurf-Atom) (Re-Re-Re-Re-Ti).This means Re-Re-Re-Ti has insufficient affinity for this adsorbate. [⚠️ Energy Degenerate but Geometrically Distinct] | E=-6.960 eV"
     },
     {
       "attempt_index": 3,
@@ -291,16 +291,16 @@
       "is_chemical_slip": true,
       "planned_site_type": "bridge",
       "actual_site_type": "hollow (FCC/No-Subsurf)",
-      "best_structure_file": "outputs/011-bfff090b/BEST_NH2_bridge_to_hollow_FCC-No-Subsurf_E-10.631.xyz",
-      "generated_conformers_file": "outputs/011-bfff090b/conformers_[NH2].traj",
-      "relaxation_trajectory_file": "outputs/011-bfff090b/final.xyz",
-      "message": "Most stable config adsorption energy: -10.6306 eV. Target Atom: N (from plan index 0, global index 54 in relaxed structure). -> Nearest: Re (Index 35), Distance: 2.092 \u00c5 (Threshold: 3.219), Bound: True. Bonded Surface Atoms: Re-2.092\u00c5, Re-2.1\u00c5, Ti-2.227\u00c5. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Re', 'Re'] -> Actual ['Re', 'Re', 'Ti']).",
-      "history_entry": "\u3010\u2705 Perfect Adsorption\u3011 bridge @ ['Re', 'Re'] (Index [0]) -> \u26a0\ufe0f\u3010Unstable Site Warning\u3011\u26a0\ufe0f: Planned bridge (Re-Re) is unstable, adsorbate spontaneously slipped to hollow (FCC/No-Subsurf) (Re-Re-Ti).This means Re-Re has insufficient affinity for this adsorbate. [\ud83c\udf1f New Best] | E=-10.631 eV"
+      "best_structure_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/claude_sonnet46_mace_mp0_small/no_forbid/011/artifacts/BEST_NH2_bridge_to_hollow_FCC-No-Subsurf_E-10.631.xyz",
+      "generated_conformers_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/claude_sonnet46_mace_mp0_small/no_forbid/011/artifacts/conformers_[NH2].traj",
+      "relaxation_trajectory_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/claude_sonnet46_mace_mp0_small/no_forbid/011/artifacts/final.xyz",
+      "message": "Most stable config adsorption energy: -10.6306 eV. Target Atom: N (from plan index 0, global index 54 in relaxed structure). -> Nearest: Re (Index 35), Distance: 2.092 Å (Threshold: 3.219), Bound: True. Bonded Surface Atoms: Re-2.092Å, Re-2.1Å, Ti-2.227Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Re', 'Re'] -> Actual ['Re', 'Re', 'Ti']).",
+      "history_entry": "【✅ Perfect Adsorption】 bridge @ ['Re', 'Re'] (Index [0]) -> ⚠️【Unstable Site Warning】⚠️: Planned bridge (Re-Re) is unstable, adsorbate spontaneously slipped to hollow (FCC/No-Subsurf) (Re-Re-Ti).This means Re-Re has insufficient affinity for this adsorbate. [🌟 New Best] | E=-10.631 eV"
     },
     {
       "attempt_index": 4,
       "plan": {
-        "reasoning": "**Step 0: SMILES Consistency Check**\nThe SMILES [NH2] represents an NH2 radical. The RDKit analysis confirms: N (index 0), SP3 hybridization, degree 0, radical_electrons=1, formal_charge=0. This is a reactive radical species (NH2\u2022), so adsorbate_type='ReactiveSpecies'. The binding atom is N (index 0) with 1 unpaired electron.\n\n**Step 1: Analyze History**\n- hollow @ ['Re','Re','Ti'] (Index [0]): Planned hollow-3 (Re-Re-Ti) was UNSTABLE, slipped to hollow (Re-Re-Re-Re-Ti). E=-6.984 eV. [New Best at that time]\n- hollow @ ['Re','Re','Re','Ti'] (Index [0]): Planned hollow-4 (Re-Re-Re-Ti) was UNSTABLE, slipped to hollow (Re-Re-Re-Re-Ti). E=-6.960 eV. [Energy Degenerate but Geometrically Distinct]\n- bridge @ ['Re','Re'] (Index [0]): Planned bridge (Re-Re) was UNSTABLE, slipped to hollow FCC/No-Subsurf (Re-Re-Ti). E=-10.631 eV. [New Best]\n\nSo the actual configurations found are:\n1. hollow (Re-Re-Re-Re-Ti) via hollow-3 attempt: E=-6.984 eV\n2. hollow (Re-Re-Re-Re-Ti) via hollow-4 attempt: E=-6.960 eV (geometrically distinct)\n3. hollow (Re-Re-Ti) via bridge attempt: E=-10.631 eV (BEST)\n\nThe only untested site from the available list is: [Ontop]: Re.\n\n**Step 2: Formulate New Plan**\nThe remaining untested site is ontop @ Re. All hollow and bridge sites have been tested (and slipped to other configurations). The ontop site is the last remaining option to explore. NH2 radical can bind via N to a single Re atom in an ontop configuration.\n\n**Step 3: Analysis**\n- Site: ontop @ Re\n- Binding atom: N (index 0, radical_electrons=1)\n- This is a ReactiveSpecies\n- site_type='ontop', surface_binding_atoms=['Re'], adsorbate_binding_indices=[0]\n- ontop requires len(adsorbate_binding_indices)==1 \u2713\n\n**Step 4: Decision**\nAll 4 available site types have now been attempted (hollow-3, hollow-4, bridge, and now ontop). After this attempt, if ontop is also tested, all sites will be exhausted and we should terminate. The current best is E=-10.631 eV at the FCC hollow (Re-Re-Ti) site reached via bridge slip. Let's test ontop to be thorough.",
+        "reasoning": "**Step 0: SMILES Consistency Check**\nThe SMILES [NH2] represents an NH2 radical. The RDKit analysis confirms: N (index 0), SP3 hybridization, degree 0, radical_electrons=1, formal_charge=0. This is a reactive radical species (NH2•), so adsorbate_type='ReactiveSpecies'. The binding atom is N (index 0) with 1 unpaired electron.\n\n**Step 1: Analyze History**\n- hollow @ ['Re','Re','Ti'] (Index [0]): Planned hollow-3 (Re-Re-Ti) was UNSTABLE, slipped to hollow (Re-Re-Re-Re-Ti). E=-6.984 eV. [New Best at that time]\n- hollow @ ['Re','Re','Re','Ti'] (Index [0]): Planned hollow-4 (Re-Re-Re-Ti) was UNSTABLE, slipped to hollow (Re-Re-Re-Re-Ti). E=-6.960 eV. [Energy Degenerate but Geometrically Distinct]\n- bridge @ ['Re','Re'] (Index [0]): Planned bridge (Re-Re) was UNSTABLE, slipped to hollow FCC/No-Subsurf (Re-Re-Ti). E=-10.631 eV. [New Best]\n\nSo the actual configurations found are:\n1. hollow (Re-Re-Re-Re-Ti) via hollow-3 attempt: E=-6.984 eV\n2. hollow (Re-Re-Re-Re-Ti) via hollow-4 attempt: E=-6.960 eV (geometrically distinct)\n3. hollow (Re-Re-Ti) via bridge attempt: E=-10.631 eV (BEST)\n\nThe only untested site from the available list is: [Ontop]: Re.\n\n**Step 2: Formulate New Plan**\nThe remaining untested site is ontop @ Re. All hollow and bridge sites have been tested (and slipped to other configurations). The ontop site is the last remaining option to explore. NH2 radical can bind via N to a single Re atom in an ontop configuration.\n\n**Step 3: Analysis**\n- Site: ontop @ Re\n- Binding atom: N (index 0, radical_electrons=1)\n- This is a ReactiveSpecies\n- site_type='ontop', surface_binding_atoms=['Re'], adsorbate_binding_indices=[0]\n- ontop requires len(adsorbate_binding_indices)==1 ✓\n\n**Step 4: Decision**\nAll 4 available site types have now been attempted (hollow-3, hollow-4, bridge, and now ontop). After this attempt, if ontop is also tested, all sites will be exhausted and we should terminate. The current best is E=-10.631 eV at the FCC hollow (Re-Re-Ti) site reached via bridge slip. Let's test ontop to be thorough.",
         "adsorbate_type": "ReactiveSpecies",
         "solution": {
           "action": "continue",
@@ -325,23 +325,24 @@
       "is_chemical_slip": true,
       "planned_site_type": "ontop",
       "actual_site_type": "hollow (FCC/No-Subsurf)",
-      "best_structure_file": "outputs/011-bfff090b/BEST_NH2_ontop_to_hollow_FCC-No-Subsurf_E-11.655.xyz",
-      "generated_conformers_file": "outputs/011-bfff090b/conformers_[NH2].traj",
-      "relaxation_trajectory_file": "outputs/011-bfff090b/final.xyz",
-      "message": "Most stable config adsorption energy: -11.6548 eV. Target Atom: N (from plan index 0, global index 54 in relaxed structure). -> Nearest: Re (Index 53), Distance: 2.085 \u00c5 (Threshold: 3.219), Bound: True. Bonded Surface Atoms: Re-2.085\u00c5, Re-2.097\u00c5, Ti-2.267\u00c5, Ti-3.345\u00c5. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Re'] -> Actual ['Re', 'Re', 'Ti', 'Ti']).",
-      "history_entry": "\u3010\u2705 Perfect Adsorption\u3011 ontop @ ['Re'] (Index [0]) -> \u26a0\ufe0f\u3010Unstable Site Warning\u3011\u26a0\ufe0f: Planned ontop (Re) is unstable, adsorbate spontaneously slipped to hollow (FCC/No-Subsurf) (Re-Re-Ti-Ti).This means Re has insufficient affinity for this adsorbate. [\ud83c\udf1f New Best] | E=-11.655 eV"
+      "best_structure_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/claude_sonnet46_mace_mp0_small/no_forbid/011/artifacts/BEST_NH2_ontop_to_hollow_FCC-No-Subsurf_E-11.655.xyz",
+      "generated_conformers_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/claude_sonnet46_mace_mp0_small/no_forbid/011/artifacts/conformers_[NH2].traj",
+      "relaxation_trajectory_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/claude_sonnet46_mace_mp0_small/no_forbid/011/artifacts/final.xyz",
+      "message": "Most stable config adsorption energy: -11.6548 eV. Target Atom: N (from plan index 0, global index 54 in relaxed structure). -> Nearest: Re (Index 53), Distance: 2.085 Å (Threshold: 3.219), Bound: True. Bonded Surface Atoms: Re-2.085Å, Re-2.097Å, Ti-2.267Å, Ti-3.345Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Re'] -> Actual ['Re', 'Re', 'Ti', 'Ti']).",
+      "history_entry": "【✅ Perfect Adsorption】 ontop @ ['Re'] (Index [0]) -> ⚠️【Unstable Site Warning】⚠️: Planned ontop (Re) is unstable, adsorbate spontaneously slipped to hollow (FCC/No-Subsurf) (Re-Re-Ti-Ti).This means Re has insufficient affinity for this adsorbate. [🌟 New Best] | E=-11.655 eV"
     }
   ],
   "history": [
-    "\u3010\u2705 Perfect Adsorption\u3011 hollow @ ['Re', 'Re', 'Ti'] (Index [0]) -> \u26a0\ufe0f\u3010Unstable Site Warning\u3011\u26a0\ufe0f: Planned hollow (Re-Re-Ti) is unstable, adsorbate spontaneously slipped to hollow (HCP/Subsurf-Atom) (Re-Re-Re-Re-Ti).This means Re-Re-Ti has insufficient affinity for this adsorbate. [\ud83c\udf1f New Best] | E=-6.984 eV",
-    "\u3010\u2705 Perfect Adsorption\u3011 hollow @ ['Re', 'Re', 'Re', 'Ti'] (Index [0]) -> \u26a0\ufe0f\u3010Unstable Site Warning\u3011\u26a0\ufe0f: Planned hollow (Re-Re-Re-Ti) is unstable, adsorbate spontaneously slipped to hollow (HCP/Subsurf-Atom) (Re-Re-Re-Re-Ti).This means Re-Re-Re-Ti has insufficient affinity for this adsorbate. [\u26a0\ufe0f Energy Degenerate but Geometrically Distinct] | E=-6.960 eV",
-    "\u3010\u2705 Perfect Adsorption\u3011 bridge @ ['Re', 'Re'] (Index [0]) -> \u26a0\ufe0f\u3010Unstable Site Warning\u3011\u26a0\ufe0f: Planned bridge (Re-Re) is unstable, adsorbate spontaneously slipped to hollow (FCC/No-Subsurf) (Re-Re-Ti).This means Re-Re has insufficient affinity for this adsorbate. [\ud83c\udf1f New Best] | E=-10.631 eV",
-    "\u3010\u2705 Perfect Adsorption\u3011 ontop @ ['Re'] (Index [0]) -> \u26a0\ufe0f\u3010Unstable Site Warning\u3011\u26a0\ufe0f: Planned ontop (Re) is unstable, adsorbate spontaneously slipped to hollow (FCC/No-Subsurf) (Re-Re-Ti-Ti).This means Re has insufficient affinity for this adsorbate. [\ud83c\udf1f New Best] | E=-11.655 eV"
+    "【✅ Perfect Adsorption】 hollow @ ['Re', 'Re', 'Ti'] (Index [0]) -> ⚠️【Unstable Site Warning】⚠️: Planned hollow (Re-Re-Ti) is unstable, adsorbate spontaneously slipped to hollow (HCP/Subsurf-Atom) (Re-Re-Re-Re-Ti).This means Re-Re-Ti has insufficient affinity for this adsorbate. [🌟 New Best] | E=-6.984 eV",
+    "【✅ Perfect Adsorption】 hollow @ ['Re', 'Re', 'Re', 'Ti'] (Index [0]) -> ⚠️【Unstable Site Warning】⚠️: Planned hollow (Re-Re-Re-Ti) is unstable, adsorbate spontaneously slipped to hollow (HCP/Subsurf-Atom) (Re-Re-Re-Re-Ti).This means Re-Re-Re-Ti has insufficient affinity for this adsorbate. [⚠️ Energy Degenerate but Geometrically Distinct] | E=-6.960 eV",
+    "【✅ Perfect Adsorption】 bridge @ ['Re', 'Re'] (Index [0]) -> ⚠️【Unstable Site Warning】⚠️: Planned bridge (Re-Re) is unstable, adsorbate spontaneously slipped to hollow (FCC/No-Subsurf) (Re-Re-Ti).This means Re-Re has insufficient affinity for this adsorbate. [🌟 New Best] | E=-10.631 eV",
+    "【✅ Perfect Adsorption】 ontop @ ['Re'] (Index [0]) -> ⚠️【Unstable Site Warning】⚠️: Planned ontop (Re) is unstable, adsorbate spontaneously slipped to hollow (FCC/No-Subsurf) (Re-Re-Ti-Ti).This means Re has insufficient affinity for this adsorbate. [🌟 New Best] | E=-11.655 eV"
   ],
   "error": null,
   "perfect_count": 4,
   "dissociation_count": 0,
   "rearrangement_count": 0,
   "calc_failure_count": 0,
-  "chemical_slip_count": 4
+  "chemical_slip_count": 4,
+  "best_structure_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/claude_sonnet46_mace_mp0_small/no_forbid/011/artifacts/BEST_NH2_ontop_to_hollow_FCC-No-Subsurf_E-11.655.xyz"
 }

@@ -23,13 +23,15 @@
 !**/*.py
 !**/*.sh
 
-# Keep the local directory layout usable without committing heavy artifacts.
+# Keep the local directory layout usable without committing non-curated noise.
 **/.DS_Store
+**/__pycache__/
 **/agent_log.txt
 **/config.json
 **/comparison_snapshot.json
 **/artifacts/
 **/traj/
+**/*.pyc
 **/*.traj
 **/*.xyz
 **/*.pkl
@@ -39,3 +41,30 @@
 **/*.svg
 **/*.pdf
 **/*.zip
+
+# Paper-facing structural evidence is versioned via Git LFS where appropriate.
+# Keep broad result ignores above, then explicitly re-include the evidence
+# directories that support published tables.
+!**/artifacts/
+!**/artifacts/**
+!**/traj/
+!**/traj/**
+!**/*.traj
+!**/*.xyz
+!**/*.pkl
+
+# Adsorb-Agent baseline provenance belongs inside the corresponding baseline
+# directory, not under a separate source_run wrapper.
+!basic_experiments/*/baselines/adsorb-agent/adsorb-agent_gpt54_mace_mp0_small_5config/config/
+!basic_experiments/*/baselines/adsorb-agent/adsorb-agent_gpt54_mace_mp0_small_5config/config/**
+!basic_experiments/*/baselines/adsorb-agent/adsorb-agent_gpt54_mace_mp0_small_5config/results/
+!basic_experiments/*/baselines/adsorb-agent/adsorb-agent_gpt54_mace_mp0_small_5config/results/**
+!basic_experiments/*/baselines/adsorb-agent/adsorb-agent_gpt54_mace_mp0_small_5config/catalyst_tools/
+!basic_experiments/*/baselines/adsorb-agent/adsorb-agent_gpt54_mace_mp0_small_5config/catalyst_tools/**
+**/__pycache__/
+**/*.pyc
+
+# Curated remote run logs that explain the repaired OCD62 overlap12 run4/run5
+# pulls. Keep this narrow so ad hoc agent logs remain ignored.
+!advanced_experiments/reproducibility/ocd62_overlap12_rerun/logs/
+!advanced_experiments/reproducibility/ocd62_overlap12_rerun/logs/**

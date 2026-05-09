@@ -54,7 +54,7 @@
     "most_stable_energy_eV": -7.8788909912109375,
     "analysis_json": {
       "status": "success",
-      "message": "Most stable config adsorption energy: -7.8789 eV. Target Atom: N (from plan index 1, global index 72 in relaxed structure). -> Nearest: Ti (Index 64), Distance: 1.908 \u00c5 (Threshold: 3.35), Bound: True. Bonded Surface Atoms: Ti-1.908\u00c5, Ti-3.165\u00c5. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['In'] -> Actual ['Ti', 'Ti']).",
+      "message": "Most stable config adsorption energy: -7.8789 eV. Target Atom: N (from plan index 1, global index 72 in relaxed structure). -> Nearest: Ti (Index 64), Distance: 1.908 Å (Threshold: 3.35), Bound: True. Bonded Surface Atoms: Ti-1.908Å, Ti-3.165Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['In'] -> Actual ['Ti', 'Ti']).",
       "most_stable_energy_eV": -7.8788909912109375,
       "target_adsorbate_atom": "N",
       "target_adsorbate_atom_index": 72,
@@ -94,9 +94,9 @@
         ],
         "site_fingerprint": "Ti64-Ti63"
       },
-      "best_structure_file": "outputs/006-086d15b2/BEST_O_N_ontop_to_bridge_E-7.879.xyz",
-      "generated_conformers_file": "outputs/006-086d15b2/conformers_O_N.traj",
-      "relaxation_trajectory_file": "outputs/006-086d15b2/final.xyz",
+      "best_structure_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/gpt54_mace_mp0_small/no_termination/006/artifacts/BEST_O_N_ontop_to_bridge_E-7.879.xyz",
+      "generated_conformers_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/gpt54_mace_mp0_small/no_termination/006/artifacts/conformers_O_N.traj",
+      "relaxation_trajectory_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/gpt54_mace_mp0_small/no_termination/006/artifacts/final.xyz",
       "session_id": "006-086d15b2"
     },
     "plan": {
@@ -121,7 +121,7 @@
   },
   "last_analysis": {
     "status": "success",
-    "message": "Most stable config adsorption energy: -6.0224 eV. Target Atom 1: O (from plan index 0, global index 72). -> Nearest: Ti (Index 67), Distance: 1.809 \u00c5 (Threshold: 2.486), Bound: True. Target Atom 2: N (from plan index 1, global index 73). -> Nearest: N (Index 30), Distance: 1.005 \u00c5 (Threshold: 1.562), Bound: True. Bonded Surface Atoms: N(73)-N(1.367\u00c5), O(72)-Ti(1.928\u00c5), N(73)-Ti(2.089\u00c5), N(73)-Ti(2.293\u00c5), O(72)-Ti(3.099\u00c5), N(73)-Ti(3.248\u00c5). Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['N', 'Ti'] -> Actual ['N', 'Ti', 'Ti', 'Ti', 'Ti', 'Ti']).",
+    "message": "Most stable config adsorption energy: -6.0224 eV. Target Atom 1: O (from plan index 0, global index 72). -> Nearest: Ti (Index 67), Distance: 1.809 Å (Threshold: 2.486), Bound: True. Target Atom 2: N (from plan index 1, global index 73). -> Nearest: N (Index 30), Distance: 1.005 Å (Threshold: 1.562), Bound: True. Bonded Surface Atoms: N(73)-N(1.367Å), O(72)-Ti(1.928Å), N(73)-Ti(2.089Å), N(73)-Ti(2.293Å), O(72)-Ti(3.099Å), N(73)-Ti(3.248Å). Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['N', 'Ti'] -> Actual ['N', 'Ti', 'Ti', 'Ti', 'Ti', 'Ti']).",
     "most_stable_energy_eV": -6.0224151611328125,
     "bonded_surface_atoms": [
       {
@@ -205,16 +205,16 @@
       ],
       "site_fingerprint": "N30-Ti67-Ti66-Ti67-Ti66-Ti71"
     },
-    "best_structure_file": "outputs/006-086d15b2/BEST_O_N_bridge_to_hollow_HCP-Subsurf-Atom_E-6.022.xyz",
-    "generated_conformers_file": "outputs/006-086d15b2/conformers_O_N.traj",
-    "relaxation_trajectory_file": "outputs/006-086d15b2/final.xyz",
+    "best_structure_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/gpt54_mace_mp0_small/no_termination/006/artifacts/BEST_O_N_bridge_to_hollow_HCP-Subsurf-Atom_E-6.022.xyz",
+    "generated_conformers_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/gpt54_mace_mp0_small/no_termination/006/artifacts/conformers_O_N.traj",
+    "relaxation_trajectory_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/gpt54_mace_mp0_small/no_termination/006/artifacts/final.xyz",
     "session_id": "006-086d15b2"
   },
   "attempt_records": [
     {
       "attempt_index": 1,
       "plan": {
-        "reasoning": "SMILES consistency check: the adsorbate is O=N with two heavy atoms from the provided index list, O at index 0 and N at index 1. Both are SP2 and have 0 radical electrons, so this is a closed-shell molecule, not a radical; therefore adsorbate_type must be Molecule. There is no mismatch between a user-described saturated species and the SMILES because no such conflicting description was given. Since there is no history, no sites have been tested yet and no instability information is available. The user\u2019s core intent is to identify the lowest-energy adsorption configuration, so the correct strategy is to begin with the most chemically plausible strongest-binding initial guess. For NO written as O=N on a mixed Ti/In/N surface, the most likely donor/binding atom is N (index 1), because N in NO commonly binds more strongly to electropositive/transition-metal-like cationic surface sites than O, especially on Ti-containing surfaces. Among the available sites, Ti ontop is the most chemically promising first trial because Ti should provide the strongest specific interaction compared with In or surface N, while keeping the molecule intact. A bridge or hollow mode could also be important later, but with no prior data the best initial low-energy hypothesis is N-end adsorption on a Ti ontop site. This satisfies all constraints: Molecule adsorption through a chemically valid donor atom, one binding index for an ontop site, and only existing site chemistry is used.",
+        "reasoning": "SMILES consistency check: the adsorbate is O=N with two heavy atoms from the provided index list, O at index 0 and N at index 1. Both are SP2 and have 0 radical electrons, so this is a closed-shell molecule, not a radical; therefore adsorbate_type must be Molecule. There is no mismatch between a user-described saturated species and the SMILES because no such conflicting description was given. Since there is no history, no sites have been tested yet and no instability information is available. The user’s core intent is to identify the lowest-energy adsorption configuration, so the correct strategy is to begin with the most chemically plausible strongest-binding initial guess. For NO written as O=N on a mixed Ti/In/N surface, the most likely donor/binding atom is N (index 1), because N in NO commonly binds more strongly to electropositive/transition-metal-like cationic surface sites than O, especially on Ti-containing surfaces. Among the available sites, Ti ontop is the most chemically promising first trial because Ti should provide the strongest specific interaction compared with In or surface N, while keeping the molecule intact. A bridge or hollow mode could also be important later, but with no prior data the best initial low-energy hypothesis is N-end adsorption on a Ti ontop site. This satisfies all constraints: Molecule adsorption through a chemically valid donor atom, one binding index for an ontop site, and only existing site chemistry is used.",
         "adsorbate_type": "Molecule",
         "solution": {
           "action": "continue",
@@ -239,11 +239,11 @@
       "is_chemical_slip": true,
       "planned_site_type": "ontop",
       "actual_site_type": "hollow (HCP/Subsurf-Atom)",
-      "best_structure_file": "outputs/006-086d15b2/BEST_O_N_ontop_to_hollow_HCP-Subsurf-Atom_DISS_E-11.352.xyz",
-      "generated_conformers_file": "outputs/006-086d15b2/conformers_O_N.traj",
-      "relaxation_trajectory_file": "outputs/006-086d15b2/final.xyz",
-      "message": "Most stable config adsorption energy: -11.3517 eV. Target Atom: N (from plan index 1, global index 72 in relaxed structure). -> Nearest: Ti (Index 60), Distance: 1.94 \u00c5 (Threshold: 3.35), Bound: True. Bonded Surface Atoms: Ti-1.94\u00c5, Ti-2.014\u00c5, Ti-2.04\u00c5. Is Bound: True. Reactivity Change Detected: True (Bond Changes: 1). Chemical Slip: True (Planned ['Ti'] -> Actual ['Ti', 'Ti', 'Ti']).",
-      "history_entry": "\u3010\u274c Dissociated\u3011 ontop @ ['Ti'] (Index [1]) -> \u26a0\ufe0f\u3010Unstable Site Warning\u3011\u26a0\ufe0f: Planned ontop (Ti) is unstable, adsorbate spontaneously slipped to hollow (HCP/Subsurf-Atom) (Ti-Ti-Ti).This means Ti has insufficient affinity for this adsorbate. Please **FORBID** testing Ti type sites again! | E=-11.352 eV"
+      "best_structure_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/gpt54_mace_mp0_small/no_termination/006/artifacts/BEST_O_N_ontop_to_hollow_HCP-Subsurf-Atom_DISS_E-11.352.xyz",
+      "generated_conformers_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/gpt54_mace_mp0_small/no_termination/006/artifacts/conformers_O_N.traj",
+      "relaxation_trajectory_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/gpt54_mace_mp0_small/no_termination/006/artifacts/final.xyz",
+      "message": "Most stable config adsorption energy: -11.3517 eV. Target Atom: N (from plan index 1, global index 72 in relaxed structure). -> Nearest: Ti (Index 60), Distance: 1.94 Å (Threshold: 3.35), Bound: True. Bonded Surface Atoms: Ti-1.94Å, Ti-2.014Å, Ti-2.04Å. Is Bound: True. Reactivity Change Detected: True (Bond Changes: 1). Chemical Slip: True (Planned ['Ti'] -> Actual ['Ti', 'Ti', 'Ti']).",
+      "history_entry": "【❌ Dissociated】 ontop @ ['Ti'] (Index [1]) -> ⚠️【Unstable Site Warning】⚠️: Planned ontop (Ti) is unstable, adsorbate spontaneously slipped to hollow (HCP/Subsurf-Atom) (Ti-Ti-Ti).This means Ti has insufficient affinity for this adsorbate. Please **FORBID** testing Ti type sites again! | E=-11.352 eV"
     },
     {
       "attempt_index": 2,
@@ -273,11 +273,11 @@
       "is_chemical_slip": true,
       "planned_site_type": "ontop",
       "actual_site_type": "bridge",
-      "best_structure_file": "outputs/006-086d15b2/BEST_O_N_ontop_to_bridge_E-7.879.xyz",
-      "generated_conformers_file": "outputs/006-086d15b2/conformers_O_N.traj",
-      "relaxation_trajectory_file": "outputs/006-086d15b2/final.xyz",
-      "message": "Most stable config adsorption energy: -7.8789 eV. Target Atom: N (from plan index 1, global index 72 in relaxed structure). -> Nearest: Ti (Index 64), Distance: 1.908 \u00c5 (Threshold: 3.35), Bound: True. Bonded Surface Atoms: Ti-1.908\u00c5, Ti-3.165\u00c5. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['In'] -> Actual ['Ti', 'Ti']).",
-      "history_entry": "\u3010\u2705 Perfect Adsorption\u3011 ontop @ ['In'] (Index [1]) -> \u26a0\ufe0f\u3010Unstable Site Warning\u3011\u26a0\ufe0f: Planned ontop (In) is unstable, adsorbate spontaneously slipped to bridge (Ti-Ti).This means In has insufficient affinity for this adsorbate. Please **FORBID** testing In type sites again! | E=-7.879 eV"
+      "best_structure_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/gpt54_mace_mp0_small/no_termination/006/artifacts/BEST_O_N_ontop_to_bridge_E-7.879.xyz",
+      "generated_conformers_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/gpt54_mace_mp0_small/no_termination/006/artifacts/conformers_O_N.traj",
+      "relaxation_trajectory_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/gpt54_mace_mp0_small/no_termination/006/artifacts/final.xyz",
+      "message": "Most stable config adsorption energy: -7.8789 eV. Target Atom: N (from plan index 1, global index 72 in relaxed structure). -> Nearest: Ti (Index 64), Distance: 1.908 Å (Threshold: 3.35), Bound: True. Bonded Surface Atoms: Ti-1.908Å, Ti-3.165Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['In'] -> Actual ['Ti', 'Ti']).",
+      "history_entry": "【✅ Perfect Adsorption】 ontop @ ['In'] (Index [1]) -> ⚠️【Unstable Site Warning】⚠️: Planned ontop (In) is unstable, adsorbate spontaneously slipped to bridge (Ti-Ti).This means In has insufficient affinity for this adsorbate. Please **FORBID** testing In type sites again! | E=-7.879 eV"
     },
     {
       "attempt_index": 3,
@@ -307,11 +307,11 @@
       "is_chemical_slip": true,
       "planned_site_type": "ontop",
       "actual_site_type": "hollow (HCP/Subsurf-Atom)",
-      "best_structure_file": "outputs/006-086d15b2/BEST_O_N_ontop_to_hollow_HCP-Subsurf-Atom_DISS_E-10.818.xyz",
-      "generated_conformers_file": "outputs/006-086d15b2/conformers_O_N.traj",
-      "relaxation_trajectory_file": "outputs/006-086d15b2/final.xyz",
-      "message": "Most stable config adsorption energy: -10.8177 eV. Target Atom: N (from plan index 1, global index 72 in relaxed structure). -> Nearest: Ti (Index 64), Distance: 1.829 \u00c5 (Threshold: 3.35), Bound: True. Bonded Surface Atoms: Ti-1.829\u00c5, Ti-1.957\u00c5, Ti-3.231\u00c5. Is Bound: True. Reactivity Change Detected: True (Bond Changes: 1). Chemical Slip: True (Planned ['N'] -> Actual ['Ti', 'Ti', 'Ti']).",
-      "history_entry": "\u3010\u274c Dissociated\u3011 ontop @ ['N'] (Index [1]) -> \u26a0\ufe0f\u3010Unstable Site Warning\u3011\u26a0\ufe0f: Planned ontop (N) is unstable, adsorbate spontaneously slipped to hollow (HCP/Subsurf-Atom) (Ti-Ti-Ti).This means N has insufficient affinity for this adsorbate. Please **FORBID** testing N type sites again! | E=-10.818 eV"
+      "best_structure_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/gpt54_mace_mp0_small/no_termination/006/artifacts/BEST_O_N_ontop_to_hollow_HCP-Subsurf-Atom_DISS_E-10.818.xyz",
+      "generated_conformers_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/gpt54_mace_mp0_small/no_termination/006/artifacts/conformers_O_N.traj",
+      "relaxation_trajectory_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/gpt54_mace_mp0_small/no_termination/006/artifacts/final.xyz",
+      "message": "Most stable config adsorption energy: -10.8177 eV. Target Atom: N (from plan index 1, global index 72 in relaxed structure). -> Nearest: Ti (Index 64), Distance: 1.829 Å (Threshold: 3.35), Bound: True. Bonded Surface Atoms: Ti-1.829Å, Ti-1.957Å, Ti-3.231Å. Is Bound: True. Reactivity Change Detected: True (Bond Changes: 1). Chemical Slip: True (Planned ['N'] -> Actual ['Ti', 'Ti', 'Ti']).",
+      "history_entry": "【❌ Dissociated】 ontop @ ['N'] (Index [1]) -> ⚠️【Unstable Site Warning】⚠️: Planned ontop (N) is unstable, adsorbate spontaneously slipped to hollow (HCP/Subsurf-Atom) (Ti-Ti-Ti).This means N has insufficient affinity for this adsorbate. Please **FORBID** testing N type sites again! | E=-10.818 eV"
     },
     {
       "attempt_index": 4,
@@ -343,11 +343,11 @@
       "is_chemical_slip": false,
       "planned_site_type": "hollow",
       "actual_site_type": "hollow (HCP/Subsurf-Atom)",
-      "best_structure_file": "outputs/006-086d15b2/BEST_O_N_hollow_to_hollow_HCP-Subsurf-Atom_DISS_E-10.646.xyz",
-      "generated_conformers_file": "outputs/006-086d15b2/conformers_O_N.traj",
-      "relaxation_trajectory_file": "outputs/006-086d15b2/final.xyz",
-      "message": "Most stable config adsorption energy: -10.6461 eV. Target Atom: N (from plan index 1, global index 72 in relaxed structure). -> Nearest: Ti (Index 64), Distance: 1.852 \u00c5 (Threshold: 3.35), Bound: True. Bonded Surface Atoms: Ti-1.852\u00c5, Ti-1.93\u00c5, Ti-2.684\u00c5. Is Bound: True. Reactivity Change Detected: True (Bond Changes: 1). Chemical Slip: False (Planned ['Ti', 'Ti', 'Ti'] -> Actual ['Ti', 'Ti', 'Ti']).",
-      "history_entry": "\u3010\u274c Dissociated\u3011 hollow @ ['Ti', 'Ti', 'Ti'] (Index [1]) -> \u26a0\ufe0f Geometric Slip: hollow -> hollow (HCP/Subsurf-Atom) | E=-10.646 eV"
+      "best_structure_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/gpt54_mace_mp0_small/no_termination/006/artifacts/BEST_O_N_hollow_to_hollow_HCP-Subsurf-Atom_DISS_E-10.646.xyz",
+      "generated_conformers_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/gpt54_mace_mp0_small/no_termination/006/artifacts/conformers_O_N.traj",
+      "relaxation_trajectory_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/gpt54_mace_mp0_small/no_termination/006/artifacts/final.xyz",
+      "message": "Most stable config adsorption energy: -10.6461 eV. Target Atom: N (from plan index 1, global index 72 in relaxed structure). -> Nearest: Ti (Index 64), Distance: 1.852 Å (Threshold: 3.35), Bound: True. Bonded Surface Atoms: Ti-1.852Å, Ti-1.93Å, Ti-2.684Å. Is Bound: True. Reactivity Change Detected: True (Bond Changes: 1). Chemical Slip: False (Planned ['Ti', 'Ti', 'Ti'] -> Actual ['Ti', 'Ti', 'Ti']).",
+      "history_entry": "【❌ Dissociated】 hollow @ ['Ti', 'Ti', 'Ti'] (Index [1]) -> ⚠️ Geometric Slip: hollow -> hollow (HCP/Subsurf-Atom) | E=-10.646 eV"
     },
     {
       "attempt_index": 5,
@@ -379,24 +379,25 @@
       "is_chemical_slip": true,
       "planned_site_type": "bridge",
       "actual_site_type": "hollow (HCP/Subsurf-Atom)",
-      "best_structure_file": "outputs/006-086d15b2/BEST_O_N_bridge_to_hollow_HCP-Subsurf-Atom_E-6.022.xyz",
-      "generated_conformers_file": "outputs/006-086d15b2/conformers_O_N.traj",
-      "relaxation_trajectory_file": "outputs/006-086d15b2/final.xyz",
-      "message": "Most stable config adsorption energy: -6.0224 eV. Target Atom 1: O (from plan index 0, global index 72). -> Nearest: Ti (Index 67), Distance: 1.809 \u00c5 (Threshold: 2.486), Bound: True. Target Atom 2: N (from plan index 1, global index 73). -> Nearest: N (Index 30), Distance: 1.005 \u00c5 (Threshold: 1.562), Bound: True. Bonded Surface Atoms: N(73)-N(1.367\u00c5), O(72)-Ti(1.928\u00c5), N(73)-Ti(2.089\u00c5), N(73)-Ti(2.293\u00c5), O(72)-Ti(3.099\u00c5), N(73)-Ti(3.248\u00c5). Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['N', 'Ti'] -> Actual ['N', 'Ti', 'Ti', 'Ti', 'Ti', 'Ti']).",
-      "history_entry": "\u3010\u2705 Perfect Adsorption\u3011 bridge @ ['N', 'Ti'] (Index [0, 1]) -> \u26a0\ufe0f\u3010Unstable Site Warning\u3011\u26a0\ufe0f: Planned bridge (N-Ti) is unstable, adsorbate spontaneously slipped to hollow (HCP/Subsurf-Atom) (N-Ti-Ti-Ti-Ti-Ti).This means N-Ti has insufficient affinity for this adsorbate. Please **FORBID** testing N-Ti type sites again! | E=-6.022 eV"
+      "best_structure_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/gpt54_mace_mp0_small/no_termination/006/artifacts/BEST_O_N_bridge_to_hollow_HCP-Subsurf-Atom_E-6.022.xyz",
+      "generated_conformers_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/gpt54_mace_mp0_small/no_termination/006/artifacts/conformers_O_N.traj",
+      "relaxation_trajectory_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/gpt54_mace_mp0_small/no_termination/006/artifacts/final.xyz",
+      "message": "Most stable config adsorption energy: -6.0224 eV. Target Atom 1: O (from plan index 0, global index 72). -> Nearest: Ti (Index 67), Distance: 1.809 Å (Threshold: 2.486), Bound: True. Target Atom 2: N (from plan index 1, global index 73). -> Nearest: N (Index 30), Distance: 1.005 Å (Threshold: 1.562), Bound: True. Bonded Surface Atoms: N(73)-N(1.367Å), O(72)-Ti(1.928Å), N(73)-Ti(2.089Å), N(73)-Ti(2.293Å), O(72)-Ti(3.099Å), N(73)-Ti(3.248Å). Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['N', 'Ti'] -> Actual ['N', 'Ti', 'Ti', 'Ti', 'Ti', 'Ti']).",
+      "history_entry": "【✅ Perfect Adsorption】 bridge @ ['N', 'Ti'] (Index [0, 1]) -> ⚠️【Unstable Site Warning】⚠️: Planned bridge (N-Ti) is unstable, adsorbate spontaneously slipped to hollow (HCP/Subsurf-Atom) (N-Ti-Ti-Ti-Ti-Ti).This means N-Ti has insufficient affinity for this adsorbate. Please **FORBID** testing N-Ti type sites again! | E=-6.022 eV"
     }
   ],
   "history": [
-    "\u3010\u274c Dissociated\u3011 ontop @ ['Ti'] (Index [1]) -> \u26a0\ufe0f\u3010Unstable Site Warning\u3011\u26a0\ufe0f: Planned ontop (Ti) is unstable, adsorbate spontaneously slipped to hollow (HCP/Subsurf-Atom) (Ti-Ti-Ti).This means Ti has insufficient affinity for this adsorbate. Please **FORBID** testing Ti type sites again! | E=-11.352 eV",
-    "\u3010\u2705 Perfect Adsorption\u3011 ontop @ ['In'] (Index [1]) -> \u26a0\ufe0f\u3010Unstable Site Warning\u3011\u26a0\ufe0f: Planned ontop (In) is unstable, adsorbate spontaneously slipped to bridge (Ti-Ti).This means In has insufficient affinity for this adsorbate. Please **FORBID** testing In type sites again! | E=-7.879 eV",
-    "\u3010\u274c Dissociated\u3011 ontop @ ['N'] (Index [1]) -> \u26a0\ufe0f\u3010Unstable Site Warning\u3011\u26a0\ufe0f: Planned ontop (N) is unstable, adsorbate spontaneously slipped to hollow (HCP/Subsurf-Atom) (Ti-Ti-Ti).This means N has insufficient affinity for this adsorbate. Please **FORBID** testing N type sites again! | E=-10.818 eV",
-    "\u3010\u274c Dissociated\u3011 hollow @ ['Ti', 'Ti', 'Ti'] (Index [1]) -> \u26a0\ufe0f Geometric Slip: hollow -> hollow (HCP/Subsurf-Atom) | E=-10.646 eV",
-    "\u3010\u2705 Perfect Adsorption\u3011 bridge @ ['N', 'Ti'] (Index [0, 1]) -> \u26a0\ufe0f\u3010Unstable Site Warning\u3011\u26a0\ufe0f: Planned bridge (N-Ti) is unstable, adsorbate spontaneously slipped to hollow (HCP/Subsurf-Atom) (N-Ti-Ti-Ti-Ti-Ti).This means N-Ti has insufficient affinity for this adsorbate. Please **FORBID** testing N-Ti type sites again! | E=-6.022 eV"
+    "【❌ Dissociated】 ontop @ ['Ti'] (Index [1]) -> ⚠️【Unstable Site Warning】⚠️: Planned ontop (Ti) is unstable, adsorbate spontaneously slipped to hollow (HCP/Subsurf-Atom) (Ti-Ti-Ti).This means Ti has insufficient affinity for this adsorbate. Please **FORBID** testing Ti type sites again! | E=-11.352 eV",
+    "【✅ Perfect Adsorption】 ontop @ ['In'] (Index [1]) -> ⚠️【Unstable Site Warning】⚠️: Planned ontop (In) is unstable, adsorbate spontaneously slipped to bridge (Ti-Ti).This means In has insufficient affinity for this adsorbate. Please **FORBID** testing In type sites again! | E=-7.879 eV",
+    "【❌ Dissociated】 ontop @ ['N'] (Index [1]) -> ⚠️【Unstable Site Warning】⚠️: Planned ontop (N) is unstable, adsorbate spontaneously slipped to hollow (HCP/Subsurf-Atom) (Ti-Ti-Ti).This means N has insufficient affinity for this adsorbate. Please **FORBID** testing N type sites again! | E=-10.818 eV",
+    "【❌ Dissociated】 hollow @ ['Ti', 'Ti', 'Ti'] (Index [1]) -> ⚠️ Geometric Slip: hollow -> hollow (HCP/Subsurf-Atom) | E=-10.646 eV",
+    "【✅ Perfect Adsorption】 bridge @ ['N', 'Ti'] (Index [0, 1]) -> ⚠️【Unstable Site Warning】⚠️: Planned bridge (N-Ti) is unstable, adsorbate spontaneously slipped to hollow (HCP/Subsurf-Atom) (N-Ti-Ti-Ti-Ti-Ti).This means N-Ti has insufficient affinity for this adsorbate. Please **FORBID** testing N-Ti type sites again! | E=-6.022 eV"
   ],
   "error": null,
   "perfect_count": 2,
   "dissociation_count": 3,
   "rearrangement_count": 0,
   "calc_failure_count": 0,
-  "chemical_slip_count": 4
+  "chemical_slip_count": 4,
+  "best_structure_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/gpt54_mace_mp0_small/no_termination/006/artifacts/BEST_O_N_ontop_to_hollow_HCP-Subsurf-Atom_DISS_E-11.352.xyz"
 }

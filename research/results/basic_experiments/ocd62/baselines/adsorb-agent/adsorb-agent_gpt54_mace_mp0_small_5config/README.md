@@ -18,6 +18,11 @@ Files:
 - `comparison.csv`: paired AdsMind Full vs Adsorb-Agent comparison.
 - `comparison_stats.json`: Wilcoxon, McNemar, rank-biserial, bootstrap, and
   Benjamini-Hochberg statistics derived from `comparison.csv`.
+- `config/`: frozen CatalystAIgent/Adsorb-Agent YAML inputs used for the rerun.
+- `results/`: raw Adsorb-Agent outputs, including `progress.csv`, per-case
+  `result.txt`, `result.pkl`, copied YAML, and relaxation trajectories.
+- `catalyst_tools/`: local parser/anomaly helper used to summarize the raw
+  CatalystAIgent outputs.
 
 Outcome in this rerun: 62 cases total, 49 successful Adsorb-Agent cases, 10
 cases with no selected/generated configurations, and 3 cases rejected by

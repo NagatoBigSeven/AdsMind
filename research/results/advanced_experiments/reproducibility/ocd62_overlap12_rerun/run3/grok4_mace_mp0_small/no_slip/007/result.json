@@ -54,7 +54,7 @@
     "most_stable_energy_eV": -6.6301116943359375,
     "analysis_json": {
       "status": "success",
-      "message": "Most stable config adsorption energy: -6.6301 eV. Target Atom: O (from plan index 0, global index 54 in relaxed structure). -> Nearest: Sc (Index 32), Distance: 1.959 \u00c5 (Threshold: 3.422), Bound: True. Bonded Surface Atoms: Sc-1.959\u00c5, Sc-2.184\u00c5. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Sc', 'Te'] -> Actual ['Sc', 'Sc']).",
+      "message": "Most stable config adsorption energy: -6.6301 eV. Target Atom: O (from plan index 0, global index 54 in relaxed structure). -> Nearest: Sc (Index 32), Distance: 1.959 Å (Threshold: 3.422), Bound: True. Bonded Surface Atoms: Sc-1.959Å, Sc-2.184Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Sc', 'Te'] -> Actual ['Sc', 'Sc']).",
       "most_stable_energy_eV": -6.6301116943359375,
       "target_adsorbate_atom": "O",
       "target_adsorbate_atom_index": 54,
@@ -95,13 +95,13 @@
         ],
         "site_fingerprint": "Sc32-Sc34"
       },
-      "best_structure_file": "outputs/007-da074b4e/BEST_OH_bridge_E-6.630.xyz",
-      "generated_conformers_file": "outputs/007-da074b4e/conformers_[OH].traj",
-      "relaxation_trajectory_file": "outputs/007-da074b4e/final.xyz",
+      "best_structure_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/grok4_mace_mp0_small/no_slip/007/artifacts/BEST_OH_bridge_E-6.630.xyz",
+      "generated_conformers_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/grok4_mace_mp0_small/no_slip/007/artifacts/conformers_[OH].traj",
+      "relaxation_trajectory_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/grok4_mace_mp0_small/no_slip/007/artifacts/final.xyz",
       "session_id": "007-da074b4e"
     },
     "plan": {
-      "reasoning": "Step 0: SMILES Consistency Check. SMILES is [OH], representing hydroxyl radical with radical on O (index 0, radical_electrons=1, SP3 hybridization). This matches the user request for hydroxyl radical. No mismatch in hybridization or saturation.\nStep 1: Analyze Old Plans. Tested: ontop Ni (successful, converged to bridge Sc-Sc, E=-6.577 eV, new best); ontop Sc (failed, dissociated to hollow, E=-9.476 eV); ontop Te (failed, dissociated to hollow, E=-8.631 eV); bridge Ni-Sc (successful, converged to bridge Sc-Sc, E=-6.576 eV, energy degenerate but geometrically distinct). All ontop sites tested. One bridge tested. No hollow tested yet. No [\ud83d\udd04 Converged to known best] tag, so do not terminate. Dissociated failures have lower energies but are invalid due to dissociation. Successful adsorptions are around -6.57 eV at bridge Sc-Sc sites. Surface heterogeneity may exist, so explore other bridge types like Sc-Te, which hasn't been tested.\nStep 2: Formulate New Plan. Goal is lowest energy perfect adsorption. Previous plans converged to bridge Sc-Sc, but other bridges like Sc-Te or hollows remain untested. Propose a new plan: bridge on Sc-Te, different from previous bridge Ni-Sc. This is distinct from history. If this converges differently, it may yield a new energy. Hard limit is 5 attempts; this is the 5th.\nStep 3: Analyze Request. User's core intent is to find the lowest-energy adsorption configuration for the hydroxyl radical, implying systematic testing of sites for stable adsorption.\nStep 4: Analyze Adsorbate. SMILES [OH]: Hydroxyl radical, major functional group is OH with radical on O. RDKit index: 0 (O, SP3, radical_electrons=1). Binding through index 0.\nStep 5: Analyze Surface. Available bridges include Ni-Sc, Sc-Sc, Sc-Te. Sc-Te is untested.\nStep 6: Formulate Plan. Select bridge site on Sc-Te, binding through O (index 0). Use ReactiveSpecies for radical. Defaults for other params.",
+      "reasoning": "Step 0: SMILES Consistency Check. SMILES is [OH], representing hydroxyl radical with radical on O (index 0, radical_electrons=1, SP3 hybridization). This matches the user request for hydroxyl radical. No mismatch in hybridization or saturation.\nStep 1: Analyze Old Plans. Tested: ontop Ni (successful, converged to bridge Sc-Sc, E=-6.577 eV, new best); ontop Sc (failed, dissociated to hollow, E=-9.476 eV); ontop Te (failed, dissociated to hollow, E=-8.631 eV); bridge Ni-Sc (successful, converged to bridge Sc-Sc, E=-6.576 eV, energy degenerate but geometrically distinct). All ontop sites tested. One bridge tested. No hollow tested yet. No [🔄 Converged to known best] tag, so do not terminate. Dissociated failures have lower energies but are invalid due to dissociation. Successful adsorptions are around -6.57 eV at bridge Sc-Sc sites. Surface heterogeneity may exist, so explore other bridge types like Sc-Te, which hasn't been tested.\nStep 2: Formulate New Plan. Goal is lowest energy perfect adsorption. Previous plans converged to bridge Sc-Sc, but other bridges like Sc-Te or hollows remain untested. Propose a new plan: bridge on Sc-Te, different from previous bridge Ni-Sc. This is distinct from history. If this converges differently, it may yield a new energy. Hard limit is 5 attempts; this is the 5th.\nStep 3: Analyze Request. User's core intent is to find the lowest-energy adsorption configuration for the hydroxyl radical, implying systematic testing of sites for stable adsorption.\nStep 4: Analyze Adsorbate. SMILES [OH]: Hydroxyl radical, major functional group is OH with radical on O. RDKit index: 0 (O, SP3, radical_electrons=1). Binding through index 0.\nStep 5: Analyze Surface. Available bridges include Ni-Sc, Sc-Sc, Sc-Te. Sc-Te is untested.\nStep 6: Formulate Plan. Select bridge site on Sc-Te, binding through O (index 0). Use ReactiveSpecies for radical. Defaults for other params.",
       "adsorbate_type": "ReactiveSpecies",
       "solution": {
         "action": "continue",
@@ -123,7 +123,7 @@
   },
   "last_analysis": {
     "status": "success",
-    "message": "Most stable config adsorption energy: -6.6301 eV. Target Atom: O (from plan index 0, global index 54 in relaxed structure). -> Nearest: Sc (Index 32), Distance: 1.959 \u00c5 (Threshold: 3.422), Bound: True. Bonded Surface Atoms: Sc-1.959\u00c5, Sc-2.184\u00c5. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Sc', 'Te'] -> Actual ['Sc', 'Sc']).",
+    "message": "Most stable config adsorption energy: -6.6301 eV. Target Atom: O (from plan index 0, global index 54 in relaxed structure). -> Nearest: Sc (Index 32), Distance: 1.959 Å (Threshold: 3.422), Bound: True. Bonded Surface Atoms: Sc-1.959Å, Sc-2.184Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Sc', 'Te'] -> Actual ['Sc', 'Sc']).",
     "most_stable_energy_eV": -6.6301116943359375,
     "target_adsorbate_atom": "O",
     "target_adsorbate_atom_index": 54,
@@ -164,9 +164,9 @@
       ],
       "site_fingerprint": "Sc32-Sc34"
     },
-    "best_structure_file": "outputs/007-da074b4e/BEST_OH_bridge_E-6.630.xyz",
-    "generated_conformers_file": "outputs/007-da074b4e/conformers_[OH].traj",
-    "relaxation_trajectory_file": "outputs/007-da074b4e/final.xyz",
+    "best_structure_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/grok4_mace_mp0_small/no_slip/007/artifacts/BEST_OH_bridge_E-6.630.xyz",
+    "generated_conformers_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/grok4_mace_mp0_small/no_slip/007/artifacts/conformers_[OH].traj",
+    "relaxation_trajectory_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/grok4_mace_mp0_small/no_slip/007/artifacts/final.xyz",
     "session_id": "007-da074b4e"
   },
   "attempt_records": [
@@ -198,16 +198,16 @@
       "is_chemical_slip": true,
       "planned_site_type": "ontop",
       "actual_site_type": "bridge",
-      "best_structure_file": "outputs/007-da074b4e/BEST_OH_ontop_to_bridge_E-6.577.xyz",
-      "generated_conformers_file": "outputs/007-da074b4e/conformers_[OH].traj",
-      "relaxation_trajectory_file": "outputs/007-da074b4e/final.xyz",
-      "message": "Most stable config adsorption energy: -6.5767 eV. Target Atom: O (from plan index 0, global index 54 in relaxed structure). -> Nearest: Sc (Index 25), Distance: 1.989 \u00c5 (Threshold: 3.422), Bound: True. Bonded Surface Atoms: Sc-1.989\u00c5, Sc-2.11\u00c5. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Ni'] -> Actual ['Sc', 'Sc']).",
-      "history_entry": "\u3010\u2705 Perfect Adsorption\u3011 ontop @ ['Ni'] (Index [0]) -> Site: bridge (Sc,Sc) [\ud83c\udf1f New Best] | E=-6.577 eV"
+      "best_structure_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/grok4_mace_mp0_small/no_slip/007/artifacts/BEST_OH_ontop_to_bridge_E-6.577.xyz",
+      "generated_conformers_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/grok4_mace_mp0_small/no_slip/007/artifacts/conformers_[OH].traj",
+      "relaxation_trajectory_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/grok4_mace_mp0_small/no_slip/007/artifacts/final.xyz",
+      "message": "Most stable config adsorption energy: -6.5767 eV. Target Atom: O (from plan index 0, global index 54 in relaxed structure). -> Nearest: Sc (Index 25), Distance: 1.989 Å (Threshold: 3.422), Bound: True. Bonded Surface Atoms: Sc-1.989Å, Sc-2.11Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Ni'] -> Actual ['Sc', 'Sc']).",
+      "history_entry": "【✅ Perfect Adsorption】 ontop @ ['Ni'] (Index [0]) -> Site: bridge (Sc,Sc) [🌟 New Best] | E=-6.577 eV"
     },
     {
       "attempt_index": 2,
       "plan": {
-        "reasoning": "Step 0: SMILES Consistency Check. The SMILES is [OH], representing a hydroxyl radical with the unpaired electron on oxygen (index 0, radical_electrons:1, SP3 hybridization). This matches a radical species, so proceed with ReactiveSpecies for adsorption via the radical atom. No hybridization mismatch with user request.\nStep 1: Analyze Old Plans. One successful attempt: Started as ontop on Ni with binding index [0], relaxed to bridge on Sc-Sc, energy -6.577 eV. This is the current best. No failures. No termination signals like [\ud83d\udd04 Converged to known best]. Surface is heterogeneous with Ni, Sc, Te, so different ontop sites may yield different energies due to chemical diversity.\nStep 2: Formulate New Plan. Need a new plan different from ontop Ni [0]. To systematically explore, test ontop on Sc, as Sc is involved in the current best bridge site, but ontop Sc hasn't been tested. This could reveal if ontop Sc is stable or relaxes to a lower energy configuration. If it converges to the same as before, future steps will handle termination.\nStep 3: Analyze Request. User's intent is to find the lowest-energy adsorption configuration for the hydroxyl radical on the surface.\nStep 4: Analyze Adsorbate. SMILES [OH]: Hydroxyl radical, major functional group is OH with radical on O (index 0). Binding via O (index 0) as it has the unpaired electron.\nStep 5: Analyze Surface. Available ontop sites include Sc, which is distinct from previous Ni.\nStep 6: Formulate Plan. Propose ontop adsorption on Sc via O (index 0). Use ReactiveSpecies since it's a radical.",
+        "reasoning": "Step 0: SMILES Consistency Check. The SMILES is [OH], representing a hydroxyl radical with the unpaired electron on oxygen (index 0, radical_electrons:1, SP3 hybridization). This matches a radical species, so proceed with ReactiveSpecies for adsorption via the radical atom. No hybridization mismatch with user request.\nStep 1: Analyze Old Plans. One successful attempt: Started as ontop on Ni with binding index [0], relaxed to bridge on Sc-Sc, energy -6.577 eV. This is the current best. No failures. No termination signals like [🔄 Converged to known best]. Surface is heterogeneous with Ni, Sc, Te, so different ontop sites may yield different energies due to chemical diversity.\nStep 2: Formulate New Plan. Need a new plan different from ontop Ni [0]. To systematically explore, test ontop on Sc, as Sc is involved in the current best bridge site, but ontop Sc hasn't been tested. This could reveal if ontop Sc is stable or relaxes to a lower energy configuration. If it converges to the same as before, future steps will handle termination.\nStep 3: Analyze Request. User's intent is to find the lowest-energy adsorption configuration for the hydroxyl radical on the surface.\nStep 4: Analyze Adsorbate. SMILES [OH]: Hydroxyl radical, major functional group is OH with radical on O (index 0). Binding via O (index 0) as it has the unpaired electron.\nStep 5: Analyze Surface. Available ontop sites include Sc, which is distinct from previous Ni.\nStep 6: Formulate Plan. Propose ontop adsorption on Sc via O (index 0). Use ReactiveSpecies since it's a radical.",
         "adsorbate_type": "ReactiveSpecies",
         "solution": {
           "action": "continue",
@@ -232,16 +232,16 @@
       "is_chemical_slip": true,
       "planned_site_type": "ontop",
       "actual_site_type": "hollow (HCP/Subsurf-Atom)",
-      "best_structure_file": "outputs/007-da074b4e/BEST_OH_ontop_to_hollow_HCP-Subsurf-Atom_DISS_E-9.476.xyz",
-      "generated_conformers_file": "outputs/007-da074b4e/conformers_[OH].traj",
-      "relaxation_trajectory_file": "outputs/007-da074b4e/final.xyz",
-      "message": "Most stable config adsorption energy: -9.4764 eV. Target Atom: O (from plan index 0, global index 54 in relaxed structure). -> Nearest: Sc (Index 35), Distance: 1.837 \u00c5 (Threshold: 3.422), Bound: True. Bonded Surface Atoms: Sc-1.837\u00c5, Sc-2.026\u00c5, Sc-2.239\u00c5, Sc-2.425\u00c5. Is Bound: True. Reactivity Change Detected: True (Bond Changes: 1). Chemical Slip: True (Planned ['Sc'] -> Actual ['Sc', 'Sc', 'Sc', 'Sc']).",
-      "history_entry": "\u3010\u274c Dissociated\u3011 ontop @ ['Sc'] (Index [0]) -> Site: hollow (HCP/Subsurf-Atom) (Sc,Sc,Sc,Sc) | E=-9.476 eV"
+      "best_structure_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/grok4_mace_mp0_small/no_slip/007/artifacts/BEST_OH_ontop_to_hollow_HCP-Subsurf-Atom_DISS_E-9.476.xyz",
+      "generated_conformers_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/grok4_mace_mp0_small/no_slip/007/artifacts/conformers_[OH].traj",
+      "relaxation_trajectory_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/grok4_mace_mp0_small/no_slip/007/artifacts/final.xyz",
+      "message": "Most stable config adsorption energy: -9.4764 eV. Target Atom: O (from plan index 0, global index 54 in relaxed structure). -> Nearest: Sc (Index 35), Distance: 1.837 Å (Threshold: 3.422), Bound: True. Bonded Surface Atoms: Sc-1.837Å, Sc-2.026Å, Sc-2.239Å, Sc-2.425Å. Is Bound: True. Reactivity Change Detected: True (Bond Changes: 1). Chemical Slip: True (Planned ['Sc'] -> Actual ['Sc', 'Sc', 'Sc', 'Sc']).",
+      "history_entry": "【❌ Dissociated】 ontop @ ['Sc'] (Index [0]) -> Site: hollow (HCP/Subsurf-Atom) (Sc,Sc,Sc,Sc) | E=-9.476 eV"
     },
     {
       "attempt_index": 3,
       "plan": {
-        "reasoning": "Step 0: SMILES Consistency Check. The SMILES is [OH], representing hydroxyl radical. The heavy atom list shows index 0: O with SP3 hybridization, degree 0, radical_electrons 1. This confirms a radical on O, suitable for ReactiveSpecies. No mismatch with user request for hydroxyl radical. Step 1: Analyze Old Plans. History shows two attempts: (1) Successful adsorption starting from ontop on Ni (index 0), relaxing to bridge Sc-Sc with E=-6.577 eV, marked as new best. (2) Failed dissociated adsorption starting from ontop on Sc (index 0), ending in hollow with E=-9.476 eV, but considered failure due to dissociation. Tested ontop sites on Ni and Sc via O (index 0). No termination signals like [\ud83d\udd04 Converged to known best]. No degeneracy tags. Surface has heterogeneity with Ni, Sc, Te. The dissociated attempt has lower energy but is invalid due to dissociation. Step 2: Formulate New Plan. Need a new plan different from previous ontop Ni and ontop Sc. To systematically explore, try ontop on Te, as it's an available ontop site and untested. This could yield a lower energy intact adsorption. Step 3: Analyze Request. User wants lowest-energy adsorption configuration for hydroxyl radical on the surface, implying intact adsorption. Step 4: Analyze Adsorbate. SMILES [OH]: Hydroxyl radical with radical on O (index 0). Binding via O. Step 5: Analyze Surface. Available ontop sites include Te, which is untested. Step 6: Formulate Plan. Propose ontop on Te via O (index 0). Defaults for other parameters.",
+        "reasoning": "Step 0: SMILES Consistency Check. The SMILES is [OH], representing hydroxyl radical. The heavy atom list shows index 0: O with SP3 hybridization, degree 0, radical_electrons 1. This confirms a radical on O, suitable for ReactiveSpecies. No mismatch with user request for hydroxyl radical. Step 1: Analyze Old Plans. History shows two attempts: (1) Successful adsorption starting from ontop on Ni (index 0), relaxing to bridge Sc-Sc with E=-6.577 eV, marked as new best. (2) Failed dissociated adsorption starting from ontop on Sc (index 0), ending in hollow with E=-9.476 eV, but considered failure due to dissociation. Tested ontop sites on Ni and Sc via O (index 0). No termination signals like [🔄 Converged to known best]. No degeneracy tags. Surface has heterogeneity with Ni, Sc, Te. The dissociated attempt has lower energy but is invalid due to dissociation. Step 2: Formulate New Plan. Need a new plan different from previous ontop Ni and ontop Sc. To systematically explore, try ontop on Te, as it's an available ontop site and untested. This could yield a lower energy intact adsorption. Step 3: Analyze Request. User wants lowest-energy adsorption configuration for hydroxyl radical on the surface, implying intact adsorption. Step 4: Analyze Adsorbate. SMILES [OH]: Hydroxyl radical with radical on O (index 0). Binding via O. Step 5: Analyze Surface. Available ontop sites include Te, which is untested. Step 6: Formulate Plan. Propose ontop on Te via O (index 0). Defaults for other parameters.",
         "adsorbate_type": "ReactiveSpecies",
         "solution": {
           "action": "continue",
@@ -266,16 +266,16 @@
       "is_chemical_slip": true,
       "planned_site_type": "ontop",
       "actual_site_type": "hollow (HCP/Subsurf-Atom)",
-      "best_structure_file": "outputs/007-da074b4e/BEST_OH_ontop_to_hollow_HCP-Subsurf-Atom_DISS_E-8.631.xyz",
-      "generated_conformers_file": "outputs/007-da074b4e/conformers_[OH].traj",
-      "relaxation_trajectory_file": "outputs/007-da074b4e/final.xyz",
-      "message": "Most stable config adsorption energy: -8.6305 eV. Target Atom: O (from plan index 0, global index 54 in relaxed structure). -> Nearest: Sc (Index 35), Distance: 1.841 \u00c5 (Threshold: 3.422), Bound: True. Bonded Surface Atoms: Sc-1.841\u00c5, Sc-2.157\u00c5, Sc-2.192\u00c5, Sc-3.312\u00c5. Is Bound: True. Reactivity Change Detected: True (Bond Changes: 1). Chemical Slip: True (Planned ['Te'] -> Actual ['Sc', 'Sc', 'Sc', 'Sc']).",
-      "history_entry": "\u3010\u274c Dissociated\u3011 ontop @ ['Te'] (Index [0]) -> Site: hollow (HCP/Subsurf-Atom) (Sc,Sc,Sc,Sc) | E=-8.631 eV"
+      "best_structure_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/grok4_mace_mp0_small/no_slip/007/artifacts/BEST_OH_ontop_to_hollow_HCP-Subsurf-Atom_DISS_E-8.631.xyz",
+      "generated_conformers_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/grok4_mace_mp0_small/no_slip/007/artifacts/conformers_[OH].traj",
+      "relaxation_trajectory_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/grok4_mace_mp0_small/no_slip/007/artifacts/final.xyz",
+      "message": "Most stable config adsorption energy: -8.6305 eV. Target Atom: O (from plan index 0, global index 54 in relaxed structure). -> Nearest: Sc (Index 35), Distance: 1.841 Å (Threshold: 3.422), Bound: True. Bonded Surface Atoms: Sc-1.841Å, Sc-2.157Å, Sc-2.192Å, Sc-3.312Å. Is Bound: True. Reactivity Change Detected: True (Bond Changes: 1). Chemical Slip: True (Planned ['Te'] -> Actual ['Sc', 'Sc', 'Sc', 'Sc']).",
+      "history_entry": "【❌ Dissociated】 ontop @ ['Te'] (Index [0]) -> Site: hollow (HCP/Subsurf-Atom) (Sc,Sc,Sc,Sc) | E=-8.631 eV"
     },
     {
       "attempt_index": 4,
       "plan": {
-        "reasoning": "Step 0: SMILES Consistency Check. The SMILES is [OH], representing the hydroxyl radical. The provided heavy atom index list shows only index 0: O with SP3 hybridization, degree 0, radical_electrons 1. This suggests the heavy atom is O, and H is implicit or not listed as heavy. For planning, binding is through O at index 0, which has unpaired electrons, suitable for ReactiveSpecies. Note: Degree 0 seems inconsistent for OH (should be 1), but proceeding based on given data. No hybridization mismatch with user request.\nStep 1: Analyze Old Plans. History shows three attempts: Successful adsorption starting from ontop Ni (binding index [0]), relaxing to bridge Sc-Sc with E=-6.577 eV (current best, intact). Two failures: ontop Sc and ontop Te, both dissociating to hollow (Sc,Sc,Sc,Sc) with lower energies (-9.476 eV and -8.631 eV) but invalid due to dissociation. Tested ontop sites for all elements (Ni, Sc, Te); only Ni succeeded without dissociation. No convergence tags like [\ud83d\udd04 Converged to known best], so continue. Surface heterogeneity (Ni, Sc, Te) suggests exploring mixed bridges or other sites for potentially better intact adsorption.\nStep 2: Formulate New Plan. Goal is lowest energy intact adsorption. Previous successful was ontop Ni relaxing to Sc-Sc bridge. Dissociated cases went to hollow but failed. To systematically explore, propose a new untested bridge site involving Ni (which led to success before) and Sc. This differs from prior initial plans (all ontop). No termination as major sites like mixed bridges and hollows remain untested directly.\nStep 3: Analyze Request. User's intent is to find the lowest-energy adsorption configuration for the hydroxyl radical (intact) on the surface.\nStep 4: Analyze Adsorbate. SMILES [OH]: Hydroxyl radical, major functional group is O-H with radical on O. Heavy atom: O at index 0 with radical. Binding through O (index 0).\nStep 5: Analyze Surface. Available bridges include Ni-Sc, which is untested directly.\nStep 6: Formulate Plan. Propose bridge site with Ni-Sc, binding through O (index 0). Use ReactiveSpecies for radical.\nStep 7: Output JSON.",
+        "reasoning": "Step 0: SMILES Consistency Check. The SMILES is [OH], representing the hydroxyl radical. The provided heavy atom index list shows only index 0: O with SP3 hybridization, degree 0, radical_electrons 1. This suggests the heavy atom is O, and H is implicit or not listed as heavy. For planning, binding is through O at index 0, which has unpaired electrons, suitable for ReactiveSpecies. Note: Degree 0 seems inconsistent for OH (should be 1), but proceeding based on given data. No hybridization mismatch with user request.\nStep 1: Analyze Old Plans. History shows three attempts: Successful adsorption starting from ontop Ni (binding index [0]), relaxing to bridge Sc-Sc with E=-6.577 eV (current best, intact). Two failures: ontop Sc and ontop Te, both dissociating to hollow (Sc,Sc,Sc,Sc) with lower energies (-9.476 eV and -8.631 eV) but invalid due to dissociation. Tested ontop sites for all elements (Ni, Sc, Te); only Ni succeeded without dissociation. No convergence tags like [🔄 Converged to known best], so continue. Surface heterogeneity (Ni, Sc, Te) suggests exploring mixed bridges or other sites for potentially better intact adsorption.\nStep 2: Formulate New Plan. Goal is lowest energy intact adsorption. Previous successful was ontop Ni relaxing to Sc-Sc bridge. Dissociated cases went to hollow but failed. To systematically explore, propose a new untested bridge site involving Ni (which led to success before) and Sc. This differs from prior initial plans (all ontop). No termination as major sites like mixed bridges and hollows remain untested directly.\nStep 3: Analyze Request. User's intent is to find the lowest-energy adsorption configuration for the hydroxyl radical (intact) on the surface.\nStep 4: Analyze Adsorbate. SMILES [OH]: Hydroxyl radical, major functional group is O-H with radical on O. Heavy atom: O at index 0 with radical. Binding through O (index 0).\nStep 5: Analyze Surface. Available bridges include Ni-Sc, which is untested directly.\nStep 6: Formulate Plan. Propose bridge site with Ni-Sc, binding through O (index 0). Use ReactiveSpecies for radical.\nStep 7: Output JSON.",
         "adsorbate_type": "ReactiveSpecies",
         "solution": {
           "action": "continue",
@@ -301,16 +301,16 @@
       "is_chemical_slip": true,
       "planned_site_type": "bridge",
       "actual_site_type": "bridge",
-      "best_structure_file": "outputs/007-da074b4e/BEST_OH_bridge_E-6.576.xyz",
-      "generated_conformers_file": "outputs/007-da074b4e/conformers_[OH].traj",
-      "relaxation_trajectory_file": "outputs/007-da074b4e/final.xyz",
-      "message": "Most stable config adsorption energy: -6.5765 eV. Target Atom: O (from plan index 0, global index 54 in relaxed structure). -> Nearest: Sc (Index 25), Distance: 1.99 \u00c5 (Threshold: 3.422), Bound: True. Bonded Surface Atoms: Sc-1.99\u00c5, Sc-2.117\u00c5. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Ni', 'Sc'] -> Actual ['Sc', 'Sc']).",
-      "history_entry": "\u3010\u2705 Perfect Adsorption\u3011 bridge @ ['Ni', 'Sc'] (Index [0]) -> Site: bridge (Sc,Sc) [\u26a0\ufe0f Energy Degenerate but Geometrically Distinct] | E=-6.576 eV"
+      "best_structure_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/grok4_mace_mp0_small/no_slip/007/artifacts/BEST_OH_bridge_E-6.576.xyz",
+      "generated_conformers_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/grok4_mace_mp0_small/no_slip/007/artifacts/conformers_[OH].traj",
+      "relaxation_trajectory_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/grok4_mace_mp0_small/no_slip/007/artifacts/final.xyz",
+      "message": "Most stable config adsorption energy: -6.5765 eV. Target Atom: O (from plan index 0, global index 54 in relaxed structure). -> Nearest: Sc (Index 25), Distance: 1.99 Å (Threshold: 3.422), Bound: True. Bonded Surface Atoms: Sc-1.99Å, Sc-2.117Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Ni', 'Sc'] -> Actual ['Sc', 'Sc']).",
+      "history_entry": "【✅ Perfect Adsorption】 bridge @ ['Ni', 'Sc'] (Index [0]) -> Site: bridge (Sc,Sc) [⚠️ Energy Degenerate but Geometrically Distinct] | E=-6.576 eV"
     },
     {
       "attempt_index": 5,
       "plan": {
-        "reasoning": "Step 0: SMILES Consistency Check. SMILES is [OH], representing hydroxyl radical with radical on O (index 0, radical_electrons=1, SP3 hybridization). This matches the user request for hydroxyl radical. No mismatch in hybridization or saturation.\nStep 1: Analyze Old Plans. Tested: ontop Ni (successful, converged to bridge Sc-Sc, E=-6.577 eV, new best); ontop Sc (failed, dissociated to hollow, E=-9.476 eV); ontop Te (failed, dissociated to hollow, E=-8.631 eV); bridge Ni-Sc (successful, converged to bridge Sc-Sc, E=-6.576 eV, energy degenerate but geometrically distinct). All ontop sites tested. One bridge tested. No hollow tested yet. No [\ud83d\udd04 Converged to known best] tag, so do not terminate. Dissociated failures have lower energies but are invalid due to dissociation. Successful adsorptions are around -6.57 eV at bridge Sc-Sc sites. Surface heterogeneity may exist, so explore other bridge types like Sc-Te, which hasn't been tested.\nStep 2: Formulate New Plan. Goal is lowest energy perfect adsorption. Previous plans converged to bridge Sc-Sc, but other bridges like Sc-Te or hollows remain untested. Propose a new plan: bridge on Sc-Te, different from previous bridge Ni-Sc. This is distinct from history. If this converges differently, it may yield a new energy. Hard limit is 5 attempts; this is the 5th.\nStep 3: Analyze Request. User's core intent is to find the lowest-energy adsorption configuration for the hydroxyl radical, implying systematic testing of sites for stable adsorption.\nStep 4: Analyze Adsorbate. SMILES [OH]: Hydroxyl radical, major functional group is OH with radical on O. RDKit index: 0 (O, SP3, radical_electrons=1). Binding through index 0.\nStep 5: Analyze Surface. Available bridges include Ni-Sc, Sc-Sc, Sc-Te. Sc-Te is untested.\nStep 6: Formulate Plan. Select bridge site on Sc-Te, binding through O (index 0). Use ReactiveSpecies for radical. Defaults for other params.",
+        "reasoning": "Step 0: SMILES Consistency Check. SMILES is [OH], representing hydroxyl radical with radical on O (index 0, radical_electrons=1, SP3 hybridization). This matches the user request for hydroxyl radical. No mismatch in hybridization or saturation.\nStep 1: Analyze Old Plans. Tested: ontop Ni (successful, converged to bridge Sc-Sc, E=-6.577 eV, new best); ontop Sc (failed, dissociated to hollow, E=-9.476 eV); ontop Te (failed, dissociated to hollow, E=-8.631 eV); bridge Ni-Sc (successful, converged to bridge Sc-Sc, E=-6.576 eV, energy degenerate but geometrically distinct). All ontop sites tested. One bridge tested. No hollow tested yet. No [🔄 Converged to known best] tag, so do not terminate. Dissociated failures have lower energies but are invalid due to dissociation. Successful adsorptions are around -6.57 eV at bridge Sc-Sc sites. Surface heterogeneity may exist, so explore other bridge types like Sc-Te, which hasn't been tested.\nStep 2: Formulate New Plan. Goal is lowest energy perfect adsorption. Previous plans converged to bridge Sc-Sc, but other bridges like Sc-Te or hollows remain untested. Propose a new plan: bridge on Sc-Te, different from previous bridge Ni-Sc. This is distinct from history. If this converges differently, it may yield a new energy. Hard limit is 5 attempts; this is the 5th.\nStep 3: Analyze Request. User's core intent is to find the lowest-energy adsorption configuration for the hydroxyl radical, implying systematic testing of sites for stable adsorption.\nStep 4: Analyze Adsorbate. SMILES [OH]: Hydroxyl radical, major functional group is OH with radical on O. RDKit index: 0 (O, SP3, radical_electrons=1). Binding through index 0.\nStep 5: Analyze Surface. Available bridges include Ni-Sc, Sc-Sc, Sc-Te. Sc-Te is untested.\nStep 6: Formulate Plan. Select bridge site on Sc-Te, binding through O (index 0). Use ReactiveSpecies for radical. Defaults for other params.",
         "adsorbate_type": "ReactiveSpecies",
         "solution": {
           "action": "continue",
@@ -336,24 +336,25 @@
       "is_chemical_slip": true,
       "planned_site_type": "bridge",
       "actual_site_type": "bridge",
-      "best_structure_file": "outputs/007-da074b4e/BEST_OH_bridge_E-6.630.xyz",
-      "generated_conformers_file": "outputs/007-da074b4e/conformers_[OH].traj",
-      "relaxation_trajectory_file": "outputs/007-da074b4e/final.xyz",
-      "message": "Most stable config adsorption energy: -6.6301 eV. Target Atom: O (from plan index 0, global index 54 in relaxed structure). -> Nearest: Sc (Index 32), Distance: 1.959 \u00c5 (Threshold: 3.422), Bound: True. Bonded Surface Atoms: Sc-1.959\u00c5, Sc-2.184\u00c5. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Sc', 'Te'] -> Actual ['Sc', 'Sc']).",
-      "history_entry": "\u3010\u2705 Perfect Adsorption\u3011 bridge @ ['Sc', 'Te'] (Index [0]) -> Site: bridge (Sc,Sc) [\ud83c\udf1f New Best] | E=-6.630 eV"
+      "best_structure_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/grok4_mace_mp0_small/no_slip/007/artifacts/BEST_OH_bridge_E-6.630.xyz",
+      "generated_conformers_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/grok4_mace_mp0_small/no_slip/007/artifacts/conformers_[OH].traj",
+      "relaxation_trajectory_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/grok4_mace_mp0_small/no_slip/007/artifacts/final.xyz",
+      "message": "Most stable config adsorption energy: -6.6301 eV. Target Atom: O (from plan index 0, global index 54 in relaxed structure). -> Nearest: Sc (Index 32), Distance: 1.959 Å (Threshold: 3.422), Bound: True. Bonded Surface Atoms: Sc-1.959Å, Sc-2.184Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Sc', 'Te'] -> Actual ['Sc', 'Sc']).",
+      "history_entry": "【✅ Perfect Adsorption】 bridge @ ['Sc', 'Te'] (Index [0]) -> Site: bridge (Sc,Sc) [🌟 New Best] | E=-6.630 eV"
     }
   ],
   "history": [
-    "\u3010\u2705 Perfect Adsorption\u3011 ontop @ ['Ni'] (Index [0]) -> Site: bridge (Sc,Sc) [\ud83c\udf1f New Best] | E=-6.577 eV",
-    "\u3010\u274c Dissociated\u3011 ontop @ ['Sc'] (Index [0]) -> Site: hollow (HCP/Subsurf-Atom) (Sc,Sc,Sc,Sc) | E=-9.476 eV",
-    "\u3010\u274c Dissociated\u3011 ontop @ ['Te'] (Index [0]) -> Site: hollow (HCP/Subsurf-Atom) (Sc,Sc,Sc,Sc) | E=-8.631 eV",
-    "\u3010\u2705 Perfect Adsorption\u3011 bridge @ ['Ni', 'Sc'] (Index [0]) -> Site: bridge (Sc,Sc) [\u26a0\ufe0f Energy Degenerate but Geometrically Distinct] | E=-6.576 eV",
-    "\u3010\u2705 Perfect Adsorption\u3011 bridge @ ['Sc', 'Te'] (Index [0]) -> Site: bridge (Sc,Sc) [\ud83c\udf1f New Best] | E=-6.630 eV"
+    "【✅ Perfect Adsorption】 ontop @ ['Ni'] (Index [0]) -> Site: bridge (Sc,Sc) [🌟 New Best] | E=-6.577 eV",
+    "【❌ Dissociated】 ontop @ ['Sc'] (Index [0]) -> Site: hollow (HCP/Subsurf-Atom) (Sc,Sc,Sc,Sc) | E=-9.476 eV",
+    "【❌ Dissociated】 ontop @ ['Te'] (Index [0]) -> Site: hollow (HCP/Subsurf-Atom) (Sc,Sc,Sc,Sc) | E=-8.631 eV",
+    "【✅ Perfect Adsorption】 bridge @ ['Ni', 'Sc'] (Index [0]) -> Site: bridge (Sc,Sc) [⚠️ Energy Degenerate but Geometrically Distinct] | E=-6.576 eV",
+    "【✅ Perfect Adsorption】 bridge @ ['Sc', 'Te'] (Index [0]) -> Site: bridge (Sc,Sc) [🌟 New Best] | E=-6.630 eV"
   ],
   "error": null,
   "perfect_count": 3,
   "dissociation_count": 2,
   "rearrangement_count": 0,
   "calc_failure_count": 0,
-  "chemical_slip_count": 5
+  "chemical_slip_count": 5,
+  "best_structure_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/grok4_mace_mp0_small/no_slip/007/artifacts/BEST_OH_ontop_to_hollow_HCP-Subsurf-Atom_DISS_E-9.476.xyz"
 }

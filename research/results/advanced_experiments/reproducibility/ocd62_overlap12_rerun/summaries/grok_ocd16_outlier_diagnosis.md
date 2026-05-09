@@ -9,7 +9,7 @@ This diagnosis covers OCD16 (`Hf18Sc18Si36` + `NO`) in the Grok OCD62 reproducib
 - `research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run2/grok4_mace_mp0_small/full/001/result.json`
 - `research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run2/grok4_mace_mp0_small/no_forbid/001/result.json`
 - related variants for the same case in `research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run2/grok4_mace_mp0_small/`
-- matching main OCD62 run `research/results/basic_experiments/ocd62/grok4_mace_mp0_small/full/002/`
+- matching main OCD62 run `research/results/basic_experiments/ocd62/adsmind/grok4_mace_mp0_small/full/002/`
 
 ## Findings
 

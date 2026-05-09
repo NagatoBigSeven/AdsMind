@@ -1,0 +1,195 @@
+{
+  "case_id": "16",
+  "case_metadata": {
+    "case_id": "16",
+    "slab_file": "benchmark_slabs/16_Au2Hf_102.xyz",
+    "smiles": "[CH2]CO",
+    "user_request": "Find the lowest-energy adsorption configuration for the 2-hydroxyethyl radical on the provided surface.",
+    "surface_family": "intermetallic",
+    "adsorbate_name": "CH2CH2OH",
+    "miller_index": "(102)",
+    "reaction_class": "COMPLEX",
+    "ablation_candidate": "FALSE",
+    "notes": "Resolved from prior AdsMind outputs; strong dissociation previously"
+  },
+  "status": "success",
+  "best_energy_eV": -4.662910461425781,
+  "iteration_count": 1,
+  "max_attempts": 1,
+  "final_site_type": "ontop",
+  "converged_tag": false,
+  "wall_clock_sec": 67.81010710820556,
+  "total_input_tokens": 3872,
+  "total_output_tokens": 1130,
+  "artifact_paths": {
+    "BEST_CH2CO_ontop_E-4.663.xyz": "research/results/basic_experiments/cmu20/adsmind/gpt54_mace_mp0_small/one_shot/16/artifacts/BEST_CH2CO_ontop_E-4.663.xyz",
+    "BEST_CH2CO_ontop_E-4.663": "research/results/basic_experiments/cmu20/adsmind/gpt54_mace_mp0_small/one_shot/16/artifacts/BEST_CH2CO_ontop_E-4.663.xyz",
+    "conformers_[CH2]CO.traj": "research/results/basic_experiments/cmu20/adsmind/gpt54_mace_mp0_small/one_shot/16/artifacts/conformers_[CH2]CO.traj",
+    "conformers_[CH2]CO": "research/results/basic_experiments/cmu20/adsmind/gpt54_mace_mp0_small/one_shot/16/artifacts/conformers_[CH2]CO.traj",
+    "final.xyz": "research/results/basic_experiments/cmu20/adsmind/gpt54_mace_mp0_small/one_shot/16/artifacts/final.xyz",
+    "final": "research/results/basic_experiments/cmu20/adsmind/gpt54_mace_mp0_small/one_shot/16/artifacts/final.xyz",
+    "relaxation.traj": "research/results/basic_experiments/cmu20/adsmind/gpt54_mace_mp0_small/one_shot/16/artifacts/relaxation.traj",
+    "relaxation": "research/results/basic_experiments/cmu20/adsmind/gpt54_mace_mp0_small/one_shot/16/artifacts/relaxation.traj",
+    "relaxation_trajectory_file": "research/results/basic_experiments/cmu20/adsmind/gpt54_mace_mp0_small/one_shot/16/artifacts/relaxation.traj",
+    "best_structure_file": "research/results/basic_experiments/cmu20/adsmind/gpt54_mace_mp0_small/one_shot/16/artifacts/BEST_CH2CO_ontop_E-4.663.xyz"
+  },
+  "best_result": {
+    "most_stable_energy_eV": -4.662910461425781,
+    "analysis_json": {
+      "status": "success",
+      "message": "Most stable config adsorption energy: -4.6629 eV. Target Atom: C (from plan index 0, global index 54 in relaxed structure). -> Nearest: Hf (Index 18), Distance: 2.25 Å (Threshold: 3.639), Bound: True. Bonded Surface Atoms: Hf-2.25Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: False (Planned ['Hf'] -> Actual ['Hf']).",
+      "most_stable_energy_eV": -4.662910461425781,
+      "target_adsorbate_atom": "C",
+      "target_adsorbate_atom_index": 54,
+      "bonded_surface_atoms": [
+        {
+          "symbol": "Hf",
+          "index": 18,
+          "distance": 2.25
+        }
+      ],
+      "nearest_slab_atom": "Hf",
+      "nearest_slab_atom_index": 18,
+      "final_bond_distance_A": 2.25,
+      "estimated_covalent_cutoff_A": 2.761,
+      "is_covalently_bound": true,
+      "reaction_detected": false,
+      "is_dissociated": false,
+      "n_components": 1,
+      "bond_change_count": 0,
+      "site_analysis": {
+        "planned_site_type": "ontop",
+        "planned_connectivity": 1,
+        "actual_site_type": "ontop",
+        "actual_connectivity": 1,
+        "is_chemical_slip": false,
+        "planned_symbols": [
+          "Hf"
+        ],
+        "actual_symbols": [
+          "Hf"
+        ],
+        "site_fingerprint": "Hf18"
+      },
+      "best_structure_file": "research/results/basic_experiments/cmu20/adsmind/gpt54_mace_mp0_small/one_shot/16/artifacts/BEST_CH2CO_ontop_E-4.663.xyz",
+      "generated_conformers_file": "research/results/basic_experiments/cmu20/adsmind/gpt54_mace_mp0_small/one_shot/16/artifacts/conformers_[CH2]CO.traj",
+      "relaxation_trajectory_file": "research/results/basic_experiments/cmu20/adsmind/gpt54_mace_mp0_small/one_shot/16/artifacts/final.xyz",
+      "session_id": "16-480a0f64"
+    },
+    "plan": {
+      "reasoning": "SMILES consistency check: the adsorbate is [CH2]CO, i.e. the 2-hydroxyethyl radical. The provided heavy-atom list shows atom 0 is C, SP3, with 1 radical electron; atom 1 is C, SP3; atom 2 is O, SP3. This is fully consistent with a carbon-centered radical and with the user request for the 2-hydroxyethyl radical. Because I plan adsorption through the radical center, ReactiveSpecies is the correct type, and the chosen binding atom must be index 0 since it is the only atom with unpaired electrons. History analysis: there are no previous attempts, so I should choose the best physically motivated initial plan rather than terminate. Adsorbate analysis: this species contains a radical methylene carbon and a terminal alcohol. For a radical on a metal/alloy surface, the most likely strongest chemisorption motif is sigma bonding through the radical carbon to a single surface atom. The OH oxygen can act as a donor in molecular adsorption, but under the strict rules ReactiveSpecies must bind via an atom with unpaired electrons, so O cannot be the planned binding atom here. Surface analysis: available sites are ontop Au/Hf, bridge Au-Au/Au-Hf/Hf-Hf, and hollow Au-Au-Au/Au-Au-Hf/Au-Hf-Hf. For an alkyl radical, ontop is the most chemically reasonable first trial because it allows formation of a localized C-metal bond with minimal geometric strain. On an Au-Hf alloy, Hf is more oxophilic and generally more reactive than Au; although the radical center is carbon rather than oxygen, the more electropositive/reactive Hf site is still the better first guess for stronger adsorption than Au. With no history and only one attempt allowed, the most systematic high-value initial plan is therefore C-radical adsorption on an Hf ontop site. This respects all constraints: ontop uses one adsorbate binding index, the binding index is the radical atom 0, and the surface atom list contains one valid element present in the ontop site list.",
+      "adsorbate_type": "ReactiveSpecies",
+      "solution": {
+        "action": "continue",
+        "site_type": "ontop",
+        "surface_binding_atoms": [
+          "Hf"
+        ],
+        "adsorbate_binding_indices": [
+          0
+        ],
+        "relax_top_n": 1,
+        "touch_sphere_size": 2,
+        "overlap_thr": 0.1,
+        "conformers_per_site_cap": 4
+      }
+    },
+    "result_type": "Perfect"
+  },
+  "last_analysis": {
+    "status": "success",
+    "message": "Most stable config adsorption energy: -4.6629 eV. Target Atom: C (from plan index 0, global index 54 in relaxed structure). -> Nearest: Hf (Index 18), Distance: 2.25 Å (Threshold: 3.639), Bound: True. Bonded Surface Atoms: Hf-2.25Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: False (Planned ['Hf'] -> Actual ['Hf']).",
+    "most_stable_energy_eV": -4.662910461425781,
+    "target_adsorbate_atom": "C",
+    "target_adsorbate_atom_index": 54,
+    "bonded_surface_atoms": [
+      {
+        "symbol": "Hf",
+        "index": 18,
+        "distance": 2.25
+      }
+    ],
+    "nearest_slab_atom": "Hf",
+    "nearest_slab_atom_index": 18,
+    "final_bond_distance_A": 2.25,
+    "estimated_covalent_cutoff_A": 2.761,
+    "is_covalently_bound": true,
+    "reaction_detected": false,
+    "is_dissociated": false,
+    "n_components": 1,
+    "bond_change_count": 0,
+    "site_analysis": {
+      "planned_site_type": "ontop",
+      "planned_connectivity": 1,
+      "actual_site_type": "ontop",
+      "actual_connectivity": 1,
+      "is_chemical_slip": false,
+      "planned_symbols": [
+        "Hf"
+      ],
+      "actual_symbols": [
+        "Hf"
+      ],
+      "site_fingerprint": "Hf18"
+    },
+    "best_structure_file": "research/results/basic_experiments/cmu20/adsmind/gpt54_mace_mp0_small/one_shot/16/artifacts/BEST_CH2CO_ontop_E-4.663.xyz",
+    "generated_conformers_file": "research/results/basic_experiments/cmu20/adsmind/gpt54_mace_mp0_small/one_shot/16/artifacts/conformers_[CH2]CO.traj",
+    "relaxation_trajectory_file": "research/results/basic_experiments/cmu20/adsmind/gpt54_mace_mp0_small/one_shot/16/artifacts/final.xyz",
+    "session_id": "16-480a0f64"
+  },
+  "attempt_records": [
+    {
+      "attempt_index": 1,
+      "plan": {
+        "reasoning": "SMILES consistency check: the adsorbate is [CH2]CO, i.e. the 2-hydroxyethyl radical. The provided heavy-atom list shows atom 0 is C, SP3, with 1 radical electron; atom 1 is C, SP3; atom 2 is O, SP3. This is fully consistent with a carbon-centered radical and with the user request for the 2-hydroxyethyl radical. Because I plan adsorption through the radical center, ReactiveSpecies is the correct type, and the chosen binding atom must be index 0 since it is the only atom with unpaired electrons. History analysis: there are no previous attempts, so I should choose the best physically motivated initial plan rather than terminate. Adsorbate analysis: this species contains a radical methylene carbon and a terminal alcohol. For a radical on a metal/alloy surface, the most likely strongest chemisorption motif is sigma bonding through the radical carbon to a single surface atom. The OH oxygen can act as a donor in molecular adsorption, but under the strict rules ReactiveSpecies must bind via an atom with unpaired electrons, so O cannot be the planned binding atom here. Surface analysis: available sites are ontop Au/Hf, bridge Au-Au/Au-Hf/Hf-Hf, and hollow Au-Au-Au/Au-Au-Hf/Au-Hf-Hf. For an alkyl radical, ontop is the most chemically reasonable first trial because it allows formation of a localized C-metal bond with minimal geometric strain. On an Au-Hf alloy, Hf is more oxophilic and generally more reactive than Au; although the radical center is carbon rather than oxygen, the more electropositive/reactive Hf site is still the better first guess for stronger adsorption than Au. With no history and only one attempt allowed, the most systematic high-value initial plan is therefore C-radical adsorption on an Hf ontop site. This respects all constraints: ontop uses one adsorbate binding index, the binding index is the radical atom 0, and the surface atom list contains one valid element present in the ontop site list.",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "ontop",
+          "surface_binding_atoms": [
+            "Hf"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "ontop|Hf|0|ReactiveSpecies|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -4.662910461425781,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": false,
+      "planned_site_type": "ontop",
+      "actual_site_type": "ontop",
+      "best_structure_file": "research/results/basic_experiments/cmu20/adsmind/gpt54_mace_mp0_small/one_shot/16/artifacts/BEST_CH2CO_ontop_E-4.663.xyz",
+      "generated_conformers_file": "research/results/basic_experiments/cmu20/adsmind/gpt54_mace_mp0_small/one_shot/16/artifacts/conformers_[CH2]CO.traj",
+      "relaxation_trajectory_file": "research/results/basic_experiments/cmu20/adsmind/gpt54_mace_mp0_small/one_shot/16/artifacts/final.xyz",
+      "message": "Most stable config adsorption energy: -4.6629 eV. Target Atom: C (from plan index 0, global index 54 in relaxed structure). -> Nearest: Hf (Index 18), Distance: 2.25 Å (Threshold: 3.639), Bound: True. Bonded Surface Atoms: Hf-2.25Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: False (Planned ['Hf'] -> Actual ['Hf']).",
+      "history_entry": "【✅ Perfect Adsorption】 ontop @ ['Hf'] (Index [0]) -> Site: ontop (Hf) [🌟 New Best] | E=-4.663 eV"
+    }
+  ],
+  "history": [
+    "【✅ Perfect Adsorption】 ontop @ ['Hf'] (Index [0]) -> Site: ontop (Hf) [🌟 New Best] | E=-4.663 eV"
+  ],
+  "error": null,
+  "perfect_count": 1,
+  "dissociation_count": 0,
+  "rearrangement_count": 0,
+  "calc_failure_count": 0,
+  "chemical_slip_count": 0,
+  "provenance": {
+    "result_tree": "research/results/basic_experiments/cmu20/adsmind/gpt54_mace_mp0_small/one_shot",
+    "dataset": "cmu20",
+    "backend": "gpt54_mace_mp0_small",
+    "variant": "one_shot",
+    "artifact_status": "result_json_restored_from_git_history_without_heavy_artifacts",
+    "restored_from_commit": "ba317df76802c090bc365a99bdbe8ca9f8396fe9",
+    "note": "The lightweight result.json was recovered from git history during result-tree cleanup; heavy .xyz/.traj artifacts were not tracked and are not available locally."
+  },
+  "best_structure_file": "research/results/basic_experiments/cmu20/adsmind/gpt54_mace_mp0_small/one_shot/16/artifacts/BEST_CH2CO_ontop_E-4.663.xyz"
+}

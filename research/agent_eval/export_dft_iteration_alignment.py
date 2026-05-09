@@ -32,7 +32,7 @@ from research.agent_eval.experiment_identity import (
 DEFAULT_RUNS = [
     (
         backend_result_dir(key),
-        f"research/results/basic_experiments/cmu20/{backend_result_dir(key)}/full",
+        f"research/results/basic_experiments/cmu20/adsmind/{backend_result_dir(key)}/full",
     )
     for key in BACKEND_KEYS
 ]

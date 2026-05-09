@@ -1,0 +1,198 @@
+{
+  "case_id": "18",
+  "case_metadata": {
+    "case_id": "18",
+    "slab_file": "benchmark_slabs/18_Al3Zr_101.xyz",
+    "smiles": "CC=O",
+    "user_request": "Find the lowest-energy adsorption configuration for acetaldehyde on the provided surface.",
+    "surface_family": "intermetallic",
+    "adsorbate_name": "OCHCH3",
+    "miller_index": "(101)",
+    "reaction_class": "COMPLEX",
+    "ablation_candidate": "FALSE",
+    "notes": "Best-available reconstruction from sanitized filename CC_O and formula C2H4O"
+  },
+  "status": "success",
+  "best_energy_eV": -2.5314483642578125,
+  "iteration_count": 1,
+  "max_attempts": 1,
+  "final_site_type": "bridge",
+  "converged_tag": false,
+  "wall_clock_sec": 163.16877265274525,
+  "total_input_tokens": 4632,
+  "total_output_tokens": 2982,
+  "artifact_paths": {
+    "BEST_CC_O_ontop_to_bridge_E-2.531": "research/results/basic_experiments/cmu20/adsmind/grok4_mace_mp0_small/one_shot/18/artifacts/BEST_CC_O_ontop_to_bridge_E-2.531.xyz",
+    "BEST_CC_O_ontop_to_bridge_E-2.531.xyz": "research/results/basic_experiments/cmu20/adsmind/grok4_mace_mp0_small/one_shot/18/artifacts/BEST_CC_O_ontop_to_bridge_E-2.531.xyz",
+    "best_structure_file": "research/results/basic_experiments/cmu20/adsmind/grok4_mace_mp0_small/one_shot/18/artifacts/BEST_CC_O_ontop_to_bridge_E-2.531.xyz",
+    "conformers_CC_O": "research/results/basic_experiments/cmu20/adsmind/grok4_mace_mp0_small/one_shot/18/artifacts/conformers_CC_O.traj",
+    "conformers_CC_O.traj": "research/results/basic_experiments/cmu20/adsmind/grok4_mace_mp0_small/one_shot/18/artifacts/conformers_CC_O.traj",
+    "final": "research/results/basic_experiments/cmu20/adsmind/grok4_mace_mp0_small/one_shot/18/artifacts/final.xyz",
+    "final.xyz": "research/results/basic_experiments/cmu20/adsmind/grok4_mace_mp0_small/one_shot/18/artifacts/final.xyz",
+    "relaxation": "research/results/basic_experiments/cmu20/adsmind/grok4_mace_mp0_small/one_shot/18/artifacts/relaxation.traj",
+    "relaxation.traj": "research/results/basic_experiments/cmu20/adsmind/grok4_mace_mp0_small/one_shot/18/artifacts/relaxation.traj",
+    "relaxation_trajectory_file": "research/results/basic_experiments/cmu20/adsmind/grok4_mace_mp0_small/one_shot/18/artifacts/relaxation.traj"
+  },
+  "best_result": {
+    "most_stable_energy_eV": -2.5314483642578125,
+    "analysis_json": {
+      "status": "success",
+      "message": "Most stable config adsorption energy: -2.5314 eV. Target Atom: O (from plan index 2, global index 48 in relaxed structure). -> Nearest: Al (Index 34), Distance: 1.923 Å (Threshold: 2.712), Bound: True. Bonded Surface Atoms: Al-1.923Å, Zr-2.343Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Zr'] -> Actual ['Al', 'Zr']).",
+      "most_stable_energy_eV": -2.5314483642578125,
+      "target_adsorbate_atom": "O",
+      "target_adsorbate_atom_index": 48,
+      "bonded_surface_atoms": [
+        {
+          "symbol": "Al",
+          "index": 34,
+          "distance": 1.923
+        },
+        {
+          "symbol": "Zr",
+          "index": 6,
+          "distance": 2.343
+        }
+      ],
+      "nearest_slab_atom": "Al",
+      "nearest_slab_atom_index": 34,
+      "final_bond_distance_A": 1.923,
+      "estimated_covalent_cutoff_A": 2.057,
+      "is_covalently_bound": true,
+      "reaction_detected": false,
+      "is_dissociated": false,
+      "n_components": 1,
+      "bond_change_count": 0,
+      "site_analysis": {
+        "planned_site_type": "ontop",
+        "planned_connectivity": 1,
+        "actual_site_type": "bridge",
+        "actual_connectivity": 2,
+        "is_chemical_slip": true,
+        "planned_symbols": [
+          "Zr"
+        ],
+        "actual_symbols": [
+          "Al",
+          "Zr"
+        ],
+        "site_fingerprint": "Al34-Zr6"
+      },
+      "best_structure_file": "research/results/basic_experiments/cmu20/adsmind/grok4_mace_mp0_small/one_shot/18/artifacts/BEST_CC_O_ontop_to_bridge_E-2.531.xyz",
+      "generated_conformers_file": "research/results/basic_experiments/cmu20/adsmind/grok4_mace_mp0_small/one_shot/18/artifacts/conformers_CC_O.traj",
+      "relaxation_trajectory_file": "research/results/basic_experiments/cmu20/adsmind/grok4_mace_mp0_small/one_shot/18/artifacts/final.xyz",
+      "session_id": "18-7571f7ad"
+    },
+    "plan": {
+      "reasoning": "SMILES Consistency Check: The SMILES CC=O represents acetaldehyde (CH3CHO). Atom list: Index 0 is methyl C (SP3), index 1 is carbonyl C (SP2), index 2 is O (SP2). No radicals (all radical_electrons=0). Hybridization matches the molecule description; no warnings needed. No mismatch with user request for acetaldehyde. History: None, so this is the first attempt. No previous plans to analyze. Formulate New Plan: Goal is to find the lowest adsorption energy configuration. Since termination is disabled, propose new plans until limit. Hard limit is 1 attempt, but proceed with initial plan. Analyze Request: User wants the lowest-energy adsorption for acetaldehyde on Al3Zr(101) surface. Analyze Adsorbate: Major functional group is aldehyde (C=O), with oxygen having lone pairs suitable for adsorption. Adsorbate is a stable molecule, so use 'Molecule'. No radicals, so not 'ReactiveSpecies'. Analyze Surface: Available ontop sites on Al or Zr; bridge on Al-Al or Al-Zr; hollow on Al-Al-Zr. Start with ontop adsorption via oxygen (index 2) on Zr, as Zr may be more active in Al3Zr alloy for Lewis acid-base interactions with carbonyl oxygen. This is a common mode for aldehydes on metal surfaces. Propose this as initial plan; if more attempts allowed, will explore others like eta2 (C-O bridge) next. Physical consistency: N/A yet. Site naming: Using 'ontop'.",
+      "adsorbate_type": "Molecule",
+      "solution": {
+        "action": "continue",
+        "site_type": "ontop",
+        "surface_binding_atoms": [
+          "Zr"
+        ],
+        "adsorbate_binding_indices": [
+          2
+        ],
+        "relax_top_n": 1,
+        "touch_sphere_size": 2,
+        "overlap_thr": 0.1,
+        "conformers_per_site_cap": 4
+      }
+    },
+    "result_type": "Perfect"
+  },
+  "last_analysis": {
+    "status": "success",
+    "message": "Most stable config adsorption energy: -2.5314 eV. Target Atom: O (from plan index 2, global index 48 in relaxed structure). -> Nearest: Al (Index 34), Distance: 1.923 Å (Threshold: 2.712), Bound: True. Bonded Surface Atoms: Al-1.923Å, Zr-2.343Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Zr'] -> Actual ['Al', 'Zr']).",
+    "most_stable_energy_eV": -2.5314483642578125,
+    "target_adsorbate_atom": "O",
+    "target_adsorbate_atom_index": 48,
+    "bonded_surface_atoms": [
+      {
+        "symbol": "Al",
+        "index": 34,
+        "distance": 1.923
+      },
+      {
+        "symbol": "Zr",
+        "index": 6,
+        "distance": 2.343
+      }
+    ],
+    "nearest_slab_atom": "Al",
+    "nearest_slab_atom_index": 34,
+    "final_bond_distance_A": 1.923,
+    "estimated_covalent_cutoff_A": 2.057,
+    "is_covalently_bound": true,
+    "reaction_detected": false,
+    "is_dissociated": false,
+    "n_components": 1,
+    "bond_change_count": 0,
+    "site_analysis": {
+      "planned_site_type": "ontop",
+      "planned_connectivity": 1,
+      "actual_site_type": "bridge",
+      "actual_connectivity": 2,
+      "is_chemical_slip": true,
+      "planned_symbols": [
+        "Zr"
+      ],
+      "actual_symbols": [
+        "Al",
+        "Zr"
+      ],
+      "site_fingerprint": "Al34-Zr6"
+    },
+    "best_structure_file": "research/results/basic_experiments/cmu20/adsmind/grok4_mace_mp0_small/one_shot/18/artifacts/BEST_CC_O_ontop_to_bridge_E-2.531.xyz",
+    "generated_conformers_file": "research/results/basic_experiments/cmu20/adsmind/grok4_mace_mp0_small/one_shot/18/artifacts/conformers_CC_O.traj",
+    "relaxation_trajectory_file": "research/results/basic_experiments/cmu20/adsmind/grok4_mace_mp0_small/one_shot/18/artifacts/final.xyz",
+    "session_id": "18-7571f7ad"
+  },
+  "attempt_records": [
+    {
+      "attempt_index": 1,
+      "plan": {
+        "reasoning": "SMILES Consistency Check: The SMILES CC=O represents acetaldehyde (CH3CHO). Atom list: Index 0 is methyl C (SP3), index 1 is carbonyl C (SP2), index 2 is O (SP2). No radicals (all radical_electrons=0). Hybridization matches the molecule description; no warnings needed. No mismatch with user request for acetaldehyde. History: None, so this is the first attempt. No previous plans to analyze. Formulate New Plan: Goal is to find the lowest adsorption energy configuration. Since termination is disabled, propose new plans until limit. Hard limit is 1 attempt, but proceed with initial plan. Analyze Request: User wants the lowest-energy adsorption for acetaldehyde on Al3Zr(101) surface. Analyze Adsorbate: Major functional group is aldehyde (C=O), with oxygen having lone pairs suitable for adsorption. Adsorbate is a stable molecule, so use 'Molecule'. No radicals, so not 'ReactiveSpecies'. Analyze Surface: Available ontop sites on Al or Zr; bridge on Al-Al or Al-Zr; hollow on Al-Al-Zr. Start with ontop adsorption via oxygen (index 2) on Zr, as Zr may be more active in Al3Zr alloy for Lewis acid-base interactions with carbonyl oxygen. This is a common mode for aldehydes on metal surfaces. Propose this as initial plan; if more attempts allowed, will explore others like eta2 (C-O bridge) next. Physical consistency: N/A yet. Site naming: Using 'ontop'.",
+        "adsorbate_type": "Molecule",
+        "solution": {
+          "action": "continue",
+          "site_type": "ontop",
+          "surface_binding_atoms": [
+            "Zr"
+          ],
+          "adsorbate_binding_indices": [
+            2
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "ontop|Zr|2|Molecule|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -2.5314483642578125,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": true,
+      "planned_site_type": "ontop",
+      "actual_site_type": "bridge",
+      "best_structure_file": "research/results/basic_experiments/cmu20/adsmind/grok4_mace_mp0_small/one_shot/18/artifacts/BEST_CC_O_ontop_to_bridge_E-2.531.xyz",
+      "generated_conformers_file": "research/results/basic_experiments/cmu20/adsmind/grok4_mace_mp0_small/one_shot/18/artifacts/conformers_CC_O.traj",
+      "relaxation_trajectory_file": "research/results/basic_experiments/cmu20/adsmind/grok4_mace_mp0_small/one_shot/18/artifacts/final.xyz",
+      "message": "Most stable config adsorption energy: -2.5314 eV. Target Atom: O (from plan index 2, global index 48 in relaxed structure). -> Nearest: Al (Index 34), Distance: 1.923 Å (Threshold: 2.712), Bound: True. Bonded Surface Atoms: Al-1.923Å, Zr-2.343Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Zr'] -> Actual ['Al', 'Zr']).",
+      "history_entry": "【✅ Perfect Adsorption】 ontop @ ['Zr'] (Index [2]) -> Site: bridge (Al,Zr) | E=-2.531 eV"
+    }
+  ],
+  "history": [
+    "【✅ Perfect Adsorption】 ontop @ ['Zr'] (Index [2]) -> Site: bridge (Al,Zr) | E=-2.531 eV"
+  ],
+  "error": null,
+  "perfect_count": 1,
+  "dissociation_count": 0,
+  "rearrangement_count": 0,
+  "calc_failure_count": 0,
+  "chemical_slip_count": 1,
+  "best_structure_file": "research/results/basic_experiments/cmu20/adsmind/grok4_mace_mp0_small/one_shot/18/artifacts/BEST_CC_O_ontop_to_bridge_E-2.531.xyz"
+}

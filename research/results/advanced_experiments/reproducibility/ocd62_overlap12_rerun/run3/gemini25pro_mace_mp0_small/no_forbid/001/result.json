@@ -54,7 +54,7 @@
     "most_stable_energy_eV": -4.346961975097656,
     "analysis_json": {
       "status": "success",
-      "message": "Most stable config adsorption energy: -4.3470 eV. Target Atom: N (from plan index 0, global index 72 in relaxed structure). -> Nearest: Hf (Index 10), Distance: 2.221 \u00c5 (Threshold: 3.567), Bound: True. Bonded Surface Atoms: Hf-2.221\u00c5, Si-2.542\u00c5, Hf-3.194\u00c5. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Hf'] -> Actual ['Hf', 'Hf', 'Si']).",
+      "message": "Most stable config adsorption energy: -4.3470 eV. Target Atom: N (from plan index 0, global index 72 in relaxed structure). -> Nearest: Hf (Index 10), Distance: 2.221 Å (Threshold: 3.567), Bound: True. Bonded Surface Atoms: Hf-2.221Å, Si-2.542Å, Hf-3.194Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Hf'] -> Actual ['Hf', 'Hf', 'Si']).",
       "most_stable_energy_eV": -4.346961975097656,
       "target_adsorbate_atom": "N",
       "target_adsorbate_atom_index": 72,
@@ -100,13 +100,13 @@
         ],
         "site_fingerprint": "Hf10-Si70-Hf16"
       },
-      "best_structure_file": "outputs/001-9cd28f5c/BEST_NO_ontop_to_hollow_HCP-Subsurf-Atom_E-4.347.xyz",
-      "generated_conformers_file": "outputs/001-9cd28f5c/conformers_NO.traj",
-      "relaxation_trajectory_file": "outputs/001-9cd28f5c/final.xyz",
+      "best_structure_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/gemini25pro_mace_mp0_small/no_forbid/001/artifacts/BEST_NO_ontop_to_hollow_HCP-Subsurf-Atom_E-4.347.xyz",
+      "generated_conformers_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/gemini25pro_mace_mp0_small/no_forbid/001/artifacts/conformers_NO.traj",
+      "relaxation_trajectory_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/gemini25pro_mace_mp0_small/no_forbid/001/artifacts/final.xyz",
       "session_id": "001-9cd28f5c"
     },
     "plan": {
-      "reasoning": "The user wants to find the lowest energy adsorption configuration for NO on a Hf-Sc-Si surface. The history is empty, so this is the first attempt. I will start by proposing a chemically intuitive and high-symmetry configuration.\n\n1.  **Adsorbate Analysis (NO):** The SMILES is `NO`, which represents nitric oxide. Nitric oxide is a radical molecule (\u2022N=O), with the unpaired electron primarily located on the nitrogen atom. The provided RDKit analysis shows `radical_electrons: 0`, which is a known limitation for this simple radical. I will proceed by treating it as a radical. Therefore, the `adsorbate_type` should be `ReactiveSpecies`. The most likely binding atom is the nitrogen (index 0).\n\n2.  **Surface Analysis:** The surface is composed of Hf, Sc, and Si. Transition metals like Hf and Sc are generally more reactive and likely to form stronger bonds with adsorbates like NO compared to Si. Therefore, I will prioritize testing sites involving Hf or Sc first.\n\n3.  **Initial Plan Formulation:** A good starting point for a systematic search is a high-symmetry ontop site. I will choose the Hf ontop site, as Hf is a reactive transition metal. The plan is to place the nitrogen atom (index 0) of the NO molecule directly on top of a Hf surface atom. This corresponds to an `ontop` site type with a single binding point.",
+      "reasoning": "The user wants to find the lowest energy adsorption configuration for NO on a Hf-Sc-Si surface. The history is empty, so this is the first attempt. I will start by proposing a chemically intuitive and high-symmetry configuration.\n\n1.  **Adsorbate Analysis (NO):** The SMILES is `NO`, which represents nitric oxide. Nitric oxide is a radical molecule (•N=O), with the unpaired electron primarily located on the nitrogen atom. The provided RDKit analysis shows `radical_electrons: 0`, which is a known limitation for this simple radical. I will proceed by treating it as a radical. Therefore, the `adsorbate_type` should be `ReactiveSpecies`. The most likely binding atom is the nitrogen (index 0).\n\n2.  **Surface Analysis:** The surface is composed of Hf, Sc, and Si. Transition metals like Hf and Sc are generally more reactive and likely to form stronger bonds with adsorbates like NO compared to Si. Therefore, I will prioritize testing sites involving Hf or Sc first.\n\n3.  **Initial Plan Formulation:** A good starting point for a systematic search is a high-symmetry ontop site. I will choose the Hf ontop site, as Hf is a reactive transition metal. The plan is to place the nitrogen atom (index 0) of the NO molecule directly on top of a Hf surface atom. This corresponds to an `ontop` site type with a single binding point.",
       "adsorbate_type": "ReactiveSpecies",
       "solution": {
         "action": "continue",
@@ -127,7 +127,7 @@
   },
   "last_analysis": {
     "status": "success",
-    "message": "Most stable config adsorption energy: -468461888.7337 eV. Target Atom: N (from plan index 0, global index 72 in relaxed structure). -> Nearest: Si (Index 71), Distance: 3.103 \u00c5 (Threshold: 2.639), Bound: False. Bonded Surface Atoms: None. Is Bound: False. Reactivity Change Detected: True (Bond Changes: 4). Chemical Slip: False (Planned ['Sc'] -> Actual []).",
+    "message": "Most stable config adsorption energy: -468461888.7337 eV. Target Atom: N (from plan index 0, global index 72 in relaxed structure). -> Nearest: Si (Index 71), Distance: 3.103 Å (Threshold: 2.639), Bound: False. Bonded Surface Atoms: None. Is Bound: False. Reactivity Change Detected: True (Bond Changes: 4). Chemical Slip: False (Planned ['Sc'] -> Actual []).",
     "most_stable_energy_eV": -468461888.7336807,
     "target_adsorbate_atom": "N",
     "target_adsorbate_atom_index": 72,
@@ -153,16 +153,16 @@
       "actual_symbols": [],
       "site_fingerprint": ""
     },
-    "best_structure_file": "outputs/001-9cd28f5c/BEST_NO_ontop_to_hollow_inferred_DISS_E-468461888.734.xyz",
-    "generated_conformers_file": "outputs/001-9cd28f5c/conformers_NO.traj",
-    "relaxation_trajectory_file": "outputs/001-9cd28f5c/final.xyz",
+    "best_structure_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/gemini25pro_mace_mp0_small/no_forbid/001/artifacts/BEST_NO_ontop_to_hollow_inferred_DISS_E-468461888.734.xyz",
+    "generated_conformers_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/gemini25pro_mace_mp0_small/no_forbid/001/artifacts/conformers_NO.traj",
+    "relaxation_trajectory_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/gemini25pro_mace_mp0_small/no_forbid/001/artifacts/final.xyz",
     "session_id": "001-9cd28f5c"
   },
   "attempt_records": [
     {
       "attempt_index": 1,
       "plan": {
-        "reasoning": "The user wants to find the lowest energy adsorption configuration for NO on a Hf-Sc-Si surface. The history is empty, so this is the first attempt. I will start by proposing a chemically intuitive and high-symmetry configuration.\n\n1.  **Adsorbate Analysis (NO):** The SMILES is `NO`, which represents nitric oxide. Nitric oxide is a radical molecule (\u2022N=O), with the unpaired electron primarily located on the nitrogen atom. The provided RDKit analysis shows `radical_electrons: 0`, which is a known limitation for this simple radical. I will proceed by treating it as a radical. Therefore, the `adsorbate_type` should be `ReactiveSpecies`. The most likely binding atom is the nitrogen (index 0).\n\n2.  **Surface Analysis:** The surface is composed of Hf, Sc, and Si. Transition metals like Hf and Sc are generally more reactive and likely to form stronger bonds with adsorbates like NO compared to Si. Therefore, I will prioritize testing sites involving Hf or Sc first.\n\n3.  **Initial Plan Formulation:** A good starting point for a systematic search is a high-symmetry ontop site. I will choose the Hf ontop site, as Hf is a reactive transition metal. The plan is to place the nitrogen atom (index 0) of the NO molecule directly on top of a Hf surface atom. This corresponds to an `ontop` site type with a single binding point.",
+        "reasoning": "The user wants to find the lowest energy adsorption configuration for NO on a Hf-Sc-Si surface. The history is empty, so this is the first attempt. I will start by proposing a chemically intuitive and high-symmetry configuration.\n\n1.  **Adsorbate Analysis (NO):** The SMILES is `NO`, which represents nitric oxide. Nitric oxide is a radical molecule (•N=O), with the unpaired electron primarily located on the nitrogen atom. The provided RDKit analysis shows `radical_electrons: 0`, which is a known limitation for this simple radical. I will proceed by treating it as a radical. Therefore, the `adsorbate_type` should be `ReactiveSpecies`. The most likely binding atom is the nitrogen (index 0).\n\n2.  **Surface Analysis:** The surface is composed of Hf, Sc, and Si. Transition metals like Hf and Sc are generally more reactive and likely to form stronger bonds with adsorbates like NO compared to Si. Therefore, I will prioritize testing sites involving Hf or Sc first.\n\n3.  **Initial Plan Formulation:** A good starting point for a systematic search is a high-symmetry ontop site. I will choose the Hf ontop site, as Hf is a reactive transition metal. The plan is to place the nitrogen atom (index 0) of the NO molecule directly on top of a Hf surface atom. This corresponds to an `ontop` site type with a single binding point.",
         "adsorbate_type": "ReactiveSpecies",
         "solution": {
           "action": "continue",
@@ -187,11 +187,11 @@
       "is_chemical_slip": true,
       "planned_site_type": "ontop",
       "actual_site_type": "hollow (HCP/Subsurf-Atom)",
-      "best_structure_file": "outputs/001-9cd28f5c/BEST_NO_ontop_to_hollow_HCP-Subsurf-Atom_E-4.347.xyz",
-      "generated_conformers_file": "outputs/001-9cd28f5c/conformers_NO.traj",
-      "relaxation_trajectory_file": "outputs/001-9cd28f5c/final.xyz",
-      "message": "Most stable config adsorption energy: -4.3470 eV. Target Atom: N (from plan index 0, global index 72 in relaxed structure). -> Nearest: Hf (Index 10), Distance: 2.221 \u00c5 (Threshold: 3.567), Bound: True. Bonded Surface Atoms: Hf-2.221\u00c5, Si-2.542\u00c5, Hf-3.194\u00c5. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Hf'] -> Actual ['Hf', 'Hf', 'Si']).",
-      "history_entry": "\u3010\u2705 Perfect Adsorption\u3011 ontop @ ['Hf'] (Index [0]) -> \u26a0\ufe0f\u3010Unstable Site Warning\u3011\u26a0\ufe0f: Planned ontop (Hf) is unstable, adsorbate spontaneously slipped to hollow (HCP/Subsurf-Atom) (Hf-Hf-Si).This means Hf has insufficient affinity for this adsorbate. [\ud83c\udf1f New Best] | E=-4.347 eV"
+      "best_structure_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/gemini25pro_mace_mp0_small/no_forbid/001/artifacts/BEST_NO_ontop_to_hollow_HCP-Subsurf-Atom_E-4.347.xyz",
+      "generated_conformers_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/gemini25pro_mace_mp0_small/no_forbid/001/artifacts/conformers_NO.traj",
+      "relaxation_trajectory_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/gemini25pro_mace_mp0_small/no_forbid/001/artifacts/final.xyz",
+      "message": "Most stable config adsorption energy: -4.3470 eV. Target Atom: N (from plan index 0, global index 72 in relaxed structure). -> Nearest: Hf (Index 10), Distance: 2.221 Å (Threshold: 3.567), Bound: True. Bonded Surface Atoms: Hf-2.221Å, Si-2.542Å, Hf-3.194Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Hf'] -> Actual ['Hf', 'Hf', 'Si']).",
+      "history_entry": "【✅ Perfect Adsorption】 ontop @ ['Hf'] (Index [0]) -> ⚠️【Unstable Site Warning】⚠️: Planned ontop (Hf) is unstable, adsorbate spontaneously slipped to hollow (HCP/Subsurf-Atom) (Hf-Hf-Si).This means Hf has insufficient affinity for this adsorbate. [🌟 New Best] | E=-4.347 eV"
     },
     {
       "attempt_index": 2,
@@ -224,11 +224,11 @@
       "is_chemical_slip": true,
       "planned_site_type": "hollow",
       "actual_site_type": "hollow (HCP/Subsurf-Atom)",
-      "best_structure_file": "outputs/001-9cd28f5c/BEST_NO_hollow_to_hollow_HCP-Subsurf-Atom_DISS_E-6.043.xyz",
-      "generated_conformers_file": "outputs/001-9cd28f5c/conformers_NO.traj",
-      "relaxation_trajectory_file": "outputs/001-9cd28f5c/final.xyz",
-      "message": "Most stable config adsorption energy: -6.0427 eV. Target Atom: N (from plan index 0, global index 72 in relaxed structure). -> Nearest: Si (Index 46), Distance: 1.842 \u00c5 (Threshold: 2.639), Bound: True. Bonded Surface Atoms: Si-1.842\u00c5, Hf-2.048\u00c5, Hf-2.058\u00c5. Is Bound: True. Reactivity Change Detected: True (Bond Changes: 1). Chemical Slip: True (Planned ['Hf', 'Hf', 'Sc', 'Si'] -> Actual ['Hf', 'Hf', 'Si']).",
-      "history_entry": "\u3010\u274c Dissociated\u3011 hollow @ ['Hf', 'Hf', 'Sc', 'Si'] (Index [0]) -> \u26a0\ufe0f\u3010Unstable Site Warning\u3011\u26a0\ufe0f: Planned hollow (Hf-Hf-Sc-Si) is unstable, adsorbate spontaneously slipped to hollow (HCP/Subsurf-Atom) (Hf-Hf-Si).This means Hf-Hf-Sc-Si has insufficient affinity for this adsorbate. | E=-6.043 eV"
+      "best_structure_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/gemini25pro_mace_mp0_small/no_forbid/001/artifacts/BEST_NO_hollow_to_hollow_HCP-Subsurf-Atom_DISS_E-6.043.xyz",
+      "generated_conformers_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/gemini25pro_mace_mp0_small/no_forbid/001/artifacts/conformers_NO.traj",
+      "relaxation_trajectory_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/gemini25pro_mace_mp0_small/no_forbid/001/artifacts/final.xyz",
+      "message": "Most stable config adsorption energy: -6.0427 eV. Target Atom: N (from plan index 0, global index 72 in relaxed structure). -> Nearest: Si (Index 46), Distance: 1.842 Å (Threshold: 2.639), Bound: True. Bonded Surface Atoms: Si-1.842Å, Hf-2.048Å, Hf-2.058Å. Is Bound: True. Reactivity Change Detected: True (Bond Changes: 1). Chemical Slip: True (Planned ['Hf', 'Hf', 'Sc', 'Si'] -> Actual ['Hf', 'Hf', 'Si']).",
+      "history_entry": "【❌ Dissociated】 hollow @ ['Hf', 'Hf', 'Sc', 'Si'] (Index [0]) -> ⚠️【Unstable Site Warning】⚠️: Planned hollow (Hf-Hf-Sc-Si) is unstable, adsorbate spontaneously slipped to hollow (HCP/Subsurf-Atom) (Hf-Hf-Si).This means Hf-Hf-Sc-Si has insufficient affinity for this adsorbate. | E=-6.043 eV"
     },
     {
       "attempt_index": 3,
@@ -260,11 +260,11 @@
       "is_chemical_slip": true,
       "planned_site_type": "bridge",
       "actual_site_type": "hollow (FCC/No-Subsurf)",
-      "best_structure_file": "outputs/001-9cd28f5c/BEST_NO_bridge_to_hollow_FCC-No-Subsurf_DISS_E-3.423.xyz",
-      "generated_conformers_file": "outputs/001-9cd28f5c/conformers_NO.traj",
-      "relaxation_trajectory_file": "outputs/001-9cd28f5c/final.xyz",
-      "message": "Most stable config adsorption energy: -3.4226 eV. Target Atom 1: N (from plan index 0, global index 72). -> Nearest: Hf (Index 16), Distance: 2.243 \u00c5 (Threshold: 2.706), Bound: True. Target Atom 2: O (from plan index 1, global index 73). -> Nearest: Hf (Index 16), Distance: 1.767 \u00c5 (Threshold: 2.651), Bound: True. Bonded Surface Atoms: O(73)-Hf(1.988\u00c5), O(73)-Sc(2.029\u00c5), N(72)-Hf(2.206\u00c5), N(72)-Hf(2.267\u00c5), O(73)-Si(2.405\u00c5), O(73)-Hf(2.652\u00c5), N(72)-Sc(3.057\u00c5). Is Bound: True. Reactivity Change Detected: True (Bond Changes: 1). Chemical Slip: True (Planned ['Hf', 'Sc'] -> Actual ['Hf', 'Hf', 'Hf', 'Hf', 'Sc', 'Sc', 'Si']).",
-      "history_entry": "\u3010\u274c Dissociated\u3011 bridge @ ['Hf', 'Sc'] (Index [0, 1]) -> \u26a0\ufe0f\u3010Unstable Site Warning\u3011\u26a0\ufe0f: Planned bridge (Hf-Sc) is unstable, adsorbate spontaneously slipped to hollow (FCC/No-Subsurf) (Hf-Hf-Hf-Hf-Sc-Sc-Si).This means Hf-Sc has insufficient affinity for this adsorbate. | E=-3.423 eV"
+      "best_structure_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/gemini25pro_mace_mp0_small/no_forbid/001/artifacts/BEST_NO_bridge_to_hollow_FCC-No-Subsurf_DISS_E-3.423.xyz",
+      "generated_conformers_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/gemini25pro_mace_mp0_small/no_forbid/001/artifacts/conformers_NO.traj",
+      "relaxation_trajectory_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/gemini25pro_mace_mp0_small/no_forbid/001/artifacts/final.xyz",
+      "message": "Most stable config adsorption energy: -3.4226 eV. Target Atom 1: N (from plan index 0, global index 72). -> Nearest: Hf (Index 16), Distance: 2.243 Å (Threshold: 2.706), Bound: True. Target Atom 2: O (from plan index 1, global index 73). -> Nearest: Hf (Index 16), Distance: 1.767 Å (Threshold: 2.651), Bound: True. Bonded Surface Atoms: O(73)-Hf(1.988Å), O(73)-Sc(2.029Å), N(72)-Hf(2.206Å), N(72)-Hf(2.267Å), O(73)-Si(2.405Å), O(73)-Hf(2.652Å), N(72)-Sc(3.057Å). Is Bound: True. Reactivity Change Detected: True (Bond Changes: 1). Chemical Slip: True (Planned ['Hf', 'Sc'] -> Actual ['Hf', 'Hf', 'Hf', 'Hf', 'Sc', 'Sc', 'Si']).",
+      "history_entry": "【❌ Dissociated】 bridge @ ['Hf', 'Sc'] (Index [0, 1]) -> ⚠️【Unstable Site Warning】⚠️: Planned bridge (Hf-Sc) is unstable, adsorbate spontaneously slipped to hollow (FCC/No-Subsurf) (Hf-Hf-Hf-Hf-Sc-Sc-Si).This means Hf-Sc has insufficient affinity for this adsorbate. | E=-3.423 eV"
     },
     {
       "attempt_index": 4,
@@ -296,11 +296,11 @@
       "is_chemical_slip": false,
       "planned_site_type": "hollow",
       "actual_site_type": "hollow (HCP/Subsurf-Atom)",
-      "best_structure_file": "outputs/001-9cd28f5c/BEST_NO_hollow_to_hollow_HCP-Subsurf-Atom_DISS_E-4.606.xyz",
-      "generated_conformers_file": "outputs/001-9cd28f5c/conformers_NO.traj",
-      "relaxation_trajectory_file": "outputs/001-9cd28f5c/final.xyz",
-      "message": "Most stable config adsorption energy: -4.6061 eV. Target Atom: N (from plan index 0, global index 72 in relaxed structure). -> Nearest: Si (Index 58), Distance: 2.023 \u00c5 (Threshold: 2.639), Bound: True. Bonded Surface Atoms: Si-2.023\u00c5, Hf-2.102\u00c5, Hf-2.245\u00c5. Is Bound: True. Reactivity Change Detected: True (Bond Changes: 1). Chemical Slip: False (Planned ['Hf', 'Hf', 'Si'] -> Actual ['Hf', 'Hf', 'Si']).",
-      "history_entry": "\u3010\u274c Dissociated\u3011 hollow @ ['Hf', 'Hf', 'Si'] (Index [0]) -> \u26a0\ufe0f Geometric Slip: hollow -> hollow (HCP/Subsurf-Atom) | E=-4.606 eV"
+      "best_structure_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/gemini25pro_mace_mp0_small/no_forbid/001/artifacts/BEST_NO_hollow_to_hollow_HCP-Subsurf-Atom_DISS_E-4.606.xyz",
+      "generated_conformers_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/gemini25pro_mace_mp0_small/no_forbid/001/artifacts/conformers_NO.traj",
+      "relaxation_trajectory_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/gemini25pro_mace_mp0_small/no_forbid/001/artifacts/final.xyz",
+      "message": "Most stable config adsorption energy: -4.6061 eV. Target Atom: N (from plan index 0, global index 72 in relaxed structure). -> Nearest: Si (Index 58), Distance: 2.023 Å (Threshold: 2.639), Bound: True. Bonded Surface Atoms: Si-2.023Å, Hf-2.102Å, Hf-2.245Å. Is Bound: True. Reactivity Change Detected: True (Bond Changes: 1). Chemical Slip: False (Planned ['Hf', 'Hf', 'Si'] -> Actual ['Hf', 'Hf', 'Si']).",
+      "history_entry": "【❌ Dissociated】 hollow @ ['Hf', 'Hf', 'Si'] (Index [0]) -> ⚠️ Geometric Slip: hollow -> hollow (HCP/Subsurf-Atom) | E=-4.606 eV"
     },
     {
       "attempt_index": 5,
@@ -330,24 +330,25 @@
       "is_chemical_slip": false,
       "planned_site_type": "ontop",
       "actual_site_type": "hollow (inferred)",
-      "best_structure_file": "outputs/001-9cd28f5c/BEST_NO_ontop_to_hollow_inferred_DISS_E-468461888.734.xyz",
-      "generated_conformers_file": "outputs/001-9cd28f5c/conformers_NO.traj",
-      "relaxation_trajectory_file": "outputs/001-9cd28f5c/final.xyz",
-      "message": "Most stable config adsorption energy: -468461888.7337 eV. Target Atom: N (from plan index 0, global index 72 in relaxed structure). -> Nearest: Si (Index 71), Distance: 3.103 \u00c5 (Threshold: 2.639), Bound: False. Bonded Surface Atoms: None. Is Bound: False. Reactivity Change Detected: True (Bond Changes: 4). Chemical Slip: False (Planned ['Sc'] -> Actual []).",
-      "history_entry": "\u3010\u274c Dissociated\u3011 ontop @ ['Sc'] (Index [0]) -> \u26a0\ufe0f Geometric Slip: ontop -> hollow (inferred) | E=-468461888.734 eV"
+      "best_structure_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/gemini25pro_mace_mp0_small/no_forbid/001/artifacts/BEST_NO_ontop_to_hollow_inferred_DISS_E-468461888.734.xyz",
+      "generated_conformers_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/gemini25pro_mace_mp0_small/no_forbid/001/artifacts/conformers_NO.traj",
+      "relaxation_trajectory_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/gemini25pro_mace_mp0_small/no_forbid/001/artifacts/final.xyz",
+      "message": "Most stable config adsorption energy: -468461888.7337 eV. Target Atom: N (from plan index 0, global index 72 in relaxed structure). -> Nearest: Si (Index 71), Distance: 3.103 Å (Threshold: 2.639), Bound: False. Bonded Surface Atoms: None. Is Bound: False. Reactivity Change Detected: True (Bond Changes: 4). Chemical Slip: False (Planned ['Sc'] -> Actual []).",
+      "history_entry": "【❌ Dissociated】 ontop @ ['Sc'] (Index [0]) -> ⚠️ Geometric Slip: ontop -> hollow (inferred) | E=-468461888.734 eV"
     }
   ],
   "history": [
-    "\u3010\u2705 Perfect Adsorption\u3011 ontop @ ['Hf'] (Index [0]) -> \u26a0\ufe0f\u3010Unstable Site Warning\u3011\u26a0\ufe0f: Planned ontop (Hf) is unstable, adsorbate spontaneously slipped to hollow (HCP/Subsurf-Atom) (Hf-Hf-Si).This means Hf has insufficient affinity for this adsorbate. [\ud83c\udf1f New Best] | E=-4.347 eV",
-    "\u3010\u274c Dissociated\u3011 hollow @ ['Hf', 'Hf', 'Sc', 'Si'] (Index [0]) -> \u26a0\ufe0f\u3010Unstable Site Warning\u3011\u26a0\ufe0f: Planned hollow (Hf-Hf-Sc-Si) is unstable, adsorbate spontaneously slipped to hollow (HCP/Subsurf-Atom) (Hf-Hf-Si).This means Hf-Hf-Sc-Si has insufficient affinity for this adsorbate. | E=-6.043 eV",
-    "\u3010\u274c Dissociated\u3011 bridge @ ['Hf', 'Sc'] (Index [0, 1]) -> \u26a0\ufe0f\u3010Unstable Site Warning\u3011\u26a0\ufe0f: Planned bridge (Hf-Sc) is unstable, adsorbate spontaneously slipped to hollow (FCC/No-Subsurf) (Hf-Hf-Hf-Hf-Sc-Sc-Si).This means Hf-Sc has insufficient affinity for this adsorbate. | E=-3.423 eV",
-    "\u3010\u274c Dissociated\u3011 hollow @ ['Hf', 'Hf', 'Si'] (Index [0]) -> \u26a0\ufe0f Geometric Slip: hollow -> hollow (HCP/Subsurf-Atom) | E=-4.606 eV",
-    "\u3010\u274c Dissociated\u3011 ontop @ ['Sc'] (Index [0]) -> \u26a0\ufe0f Geometric Slip: ontop -> hollow (inferred) | E=-468461888.734 eV"
+    "【✅ Perfect Adsorption】 ontop @ ['Hf'] (Index [0]) -> ⚠️【Unstable Site Warning】⚠️: Planned ontop (Hf) is unstable, adsorbate spontaneously slipped to hollow (HCP/Subsurf-Atom) (Hf-Hf-Si).This means Hf has insufficient affinity for this adsorbate. [🌟 New Best] | E=-4.347 eV",
+    "【❌ Dissociated】 hollow @ ['Hf', 'Hf', 'Sc', 'Si'] (Index [0]) -> ⚠️【Unstable Site Warning】⚠️: Planned hollow (Hf-Hf-Sc-Si) is unstable, adsorbate spontaneously slipped to hollow (HCP/Subsurf-Atom) (Hf-Hf-Si).This means Hf-Hf-Sc-Si has insufficient affinity for this adsorbate. | E=-6.043 eV",
+    "【❌ Dissociated】 bridge @ ['Hf', 'Sc'] (Index [0, 1]) -> ⚠️【Unstable Site Warning】⚠️: Planned bridge (Hf-Sc) is unstable, adsorbate spontaneously slipped to hollow (FCC/No-Subsurf) (Hf-Hf-Hf-Hf-Sc-Sc-Si).This means Hf-Sc has insufficient affinity for this adsorbate. | E=-3.423 eV",
+    "【❌ Dissociated】 hollow @ ['Hf', 'Hf', 'Si'] (Index [0]) -> ⚠️ Geometric Slip: hollow -> hollow (HCP/Subsurf-Atom) | E=-4.606 eV",
+    "【❌ Dissociated】 ontop @ ['Sc'] (Index [0]) -> ⚠️ Geometric Slip: ontop -> hollow (inferred) | E=-468461888.734 eV"
   ],
   "error": null,
   "perfect_count": 1,
   "dissociation_count": 4,
   "rearrangement_count": 0,
   "calc_failure_count": 0,
-  "chemical_slip_count": 3
+  "chemical_slip_count": 3,
+  "best_structure_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/gemini25pro_mace_mp0_small/no_forbid/001/artifacts/BEST_NO_ontop_to_hollow_inferred_DISS_E-468461888.734.xyz"
 }

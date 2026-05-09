@@ -20,6 +20,8 @@ runs. This is not a separate benchmark dataset.
 - `run5_manifest.csv`: audit record for accepted run5 data. All four backends
   have been pulled; no external credit/billing failures remain in the accepted
   run5 directories.
+- `../logs/run45/`: audited remote pull and recovery logs for the run4/run5
+  ingestion, including the Grok run5 credit-recovery rerun.
 - `grok_ocd16_outlier_diagnosis.md`: diagnosis of the Grok OCD16 numerical
   collapse.
 - `grok_ocd16_outlier_patch.csv`: summary-layer patch record for that outlier.

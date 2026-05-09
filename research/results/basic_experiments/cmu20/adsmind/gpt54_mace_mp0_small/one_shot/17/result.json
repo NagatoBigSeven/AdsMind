@@ -1,0 +1,207 @@
+{
+  "case_id": "17",
+  "case_metadata": {
+    "case_id": "17",
+    "slab_file": "benchmark_slabs/17_Rh2Ti2_111.xyz",
+    "smiles": "CC=O",
+    "user_request": "Find the lowest-energy adsorption configuration for acetaldehyde on the provided surface.",
+    "surface_family": "intermetallic",
+    "adsorbate_name": "OCHCH3",
+    "miller_index": "(111)",
+    "reaction_class": "COMPLEX",
+    "ablation_candidate": "FALSE",
+    "notes": "Best-available reconstruction from sanitized filename CC_O and formula C2H4O"
+  },
+  "status": "success",
+  "best_energy_eV": -2.692474365234375,
+  "iteration_count": 1,
+  "max_attempts": 1,
+  "final_site_type": "bridge",
+  "converged_tag": false,
+  "wall_clock_sec": 47.03027582541108,
+  "total_input_tokens": 3715,
+  "total_output_tokens": 1143,
+  "artifact_paths": {
+    "BEST_CC_O_ontop_to_bridge_E-2.692.xyz": "research/results/basic_experiments/cmu20/adsmind/gpt54_mace_mp0_small/one_shot/17/artifacts/BEST_CC_O_ontop_to_bridge_E-2.692.xyz",
+    "BEST_CC_O_ontop_to_bridge_E-2.692": "research/results/basic_experiments/cmu20/adsmind/gpt54_mace_mp0_small/one_shot/17/artifacts/BEST_CC_O_ontop_to_bridge_E-2.692.xyz",
+    "conformers_CC_O.traj": "research/results/basic_experiments/cmu20/adsmind/gpt54_mace_mp0_small/one_shot/17/artifacts/conformers_CC_O.traj",
+    "conformers_CC_O": "research/results/basic_experiments/cmu20/adsmind/gpt54_mace_mp0_small/one_shot/17/artifacts/conformers_CC_O.traj",
+    "final.xyz": "research/results/basic_experiments/cmu20/adsmind/gpt54_mace_mp0_small/one_shot/17/artifacts/final.xyz",
+    "final": "research/results/basic_experiments/cmu20/adsmind/gpt54_mace_mp0_small/one_shot/17/artifacts/final.xyz",
+    "relaxation.traj": "research/results/basic_experiments/cmu20/adsmind/gpt54_mace_mp0_small/one_shot/17/artifacts/relaxation.traj",
+    "relaxation": "research/results/basic_experiments/cmu20/adsmind/gpt54_mace_mp0_small/one_shot/17/artifacts/relaxation.traj",
+    "relaxation_trajectory_file": "research/results/basic_experiments/cmu20/adsmind/gpt54_mace_mp0_small/one_shot/17/artifacts/relaxation.traj",
+    "best_structure_file": "research/results/basic_experiments/cmu20/adsmind/gpt54_mace_mp0_small/one_shot/17/artifacts/BEST_CC_O_ontop_to_bridge_E-2.692.xyz"
+  },
+  "best_result": {
+    "most_stable_energy_eV": -2.692474365234375,
+    "analysis_json": {
+      "status": "success",
+      "message": "Most stable config adsorption energy: -2.6925 eV. Target Atom: O (from plan index 2, global index 48 in relaxed structure). -> Nearest: Ti (Index 19), Distance: 1.862 Å (Threshold: 3.277), Bound: True. Bonded Surface Atoms: Ti-1.862Å, Rh-2.358Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Ti'] -> Actual ['Rh', 'Ti']).",
+      "most_stable_energy_eV": -2.692474365234375,
+      "target_adsorbate_atom": "O",
+      "target_adsorbate_atom_index": 48,
+      "bonded_surface_atoms": [
+        {
+          "symbol": "Ti",
+          "index": 19,
+          "distance": 1.862
+        },
+        {
+          "symbol": "Rh",
+          "index": 45,
+          "distance": 2.358
+        }
+      ],
+      "nearest_slab_atom": "Ti",
+      "nearest_slab_atom_index": 19,
+      "final_bond_distance_A": 1.862,
+      "estimated_covalent_cutoff_A": 2.486,
+      "is_covalently_bound": true,
+      "reaction_detected": false,
+      "is_dissociated": false,
+      "n_components": 1,
+      "bond_change_count": 0,
+      "site_analysis": {
+        "planned_site_type": "ontop",
+        "planned_connectivity": 1,
+        "actual_site_type": "bridge",
+        "actual_connectivity": 2,
+        "is_chemical_slip": true,
+        "planned_symbols": [
+          "Ti"
+        ],
+        "actual_symbols": [
+          "Rh",
+          "Ti"
+        ],
+        "site_fingerprint": "Ti19-Rh45"
+      },
+      "best_structure_file": "research/results/basic_experiments/cmu20/adsmind/gpt54_mace_mp0_small/one_shot/17/artifacts/BEST_CC_O_ontop_to_bridge_E-2.692.xyz",
+      "generated_conformers_file": "research/results/basic_experiments/cmu20/adsmind/gpt54_mace_mp0_small/one_shot/17/artifacts/conformers_CC_O.traj",
+      "relaxation_trajectory_file": "research/results/basic_experiments/cmu20/adsmind/gpt54_mace_mp0_small/one_shot/17/artifacts/final.xyz",
+      "session_id": "17-83da863a"
+    },
+    "plan": {
+      "reasoning": "SMILES consistency check: CC=O corresponds to acetaldehyde, which matches the user request. The heavy-atom list is consistent with a methyl carbon at index 0 (SP3), a carbonyl carbon at index 1 (SP2), and an oxygen at index 2 (SP2). No radicals are present on any heavy atom, so this must be treated as a closed-shell Molecule, not a ReactiveSpecies. History analysis: there are no previous attempts, so I should propose the best physically motivated initial plan rather than terminate. User intent is to find the lowest-energy adsorption configuration for acetaldehyde on a mixed Rh/Ti surface. For intact acetaldehyde, the most chemically reasonable donor atom is the carbonyl oxygen due to its lone pairs; adsorption through the methyl carbon is forbidden for Molecule adsorption, and adsorption through the carbonyl carbon is less appropriate as an intact donor than O-binding. On an alloy surface containing Ti and Rh, the more oxophilic Ti site is the strongest first guess for oxygen coordination. Among the available sites, an ontop Ti configuration using the O atom is the most plausible lowest-energy starting point for intact molecular adsorption. This obeys all constraints: ontop uses one binding index, and index 2 is the correct oxygen atom from the provided list.",
+      "adsorbate_type": "Molecule",
+      "solution": {
+        "action": "continue",
+        "site_type": "ontop",
+        "surface_binding_atoms": [
+          "Ti"
+        ],
+        "adsorbate_binding_indices": [
+          2
+        ],
+        "relax_top_n": 1,
+        "touch_sphere_size": 2,
+        "overlap_thr": 0.1,
+        "conformers_per_site_cap": 4
+      }
+    },
+    "result_type": "Perfect"
+  },
+  "last_analysis": {
+    "status": "success",
+    "message": "Most stable config adsorption energy: -2.6925 eV. Target Atom: O (from plan index 2, global index 48 in relaxed structure). -> Nearest: Ti (Index 19), Distance: 1.862 Å (Threshold: 3.277), Bound: True. Bonded Surface Atoms: Ti-1.862Å, Rh-2.358Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Ti'] -> Actual ['Rh', 'Ti']).",
+    "most_stable_energy_eV": -2.692474365234375,
+    "target_adsorbate_atom": "O",
+    "target_adsorbate_atom_index": 48,
+    "bonded_surface_atoms": [
+      {
+        "symbol": "Ti",
+        "index": 19,
+        "distance": 1.862
+      },
+      {
+        "symbol": "Rh",
+        "index": 45,
+        "distance": 2.358
+      }
+    ],
+    "nearest_slab_atom": "Ti",
+    "nearest_slab_atom_index": 19,
+    "final_bond_distance_A": 1.862,
+    "estimated_covalent_cutoff_A": 2.486,
+    "is_covalently_bound": true,
+    "reaction_detected": false,
+    "is_dissociated": false,
+    "n_components": 1,
+    "bond_change_count": 0,
+    "site_analysis": {
+      "planned_site_type": "ontop",
+      "planned_connectivity": 1,
+      "actual_site_type": "bridge",
+      "actual_connectivity": 2,
+      "is_chemical_slip": true,
+      "planned_symbols": [
+        "Ti"
+      ],
+      "actual_symbols": [
+        "Rh",
+        "Ti"
+      ],
+      "site_fingerprint": "Ti19-Rh45"
+    },
+    "best_structure_file": "research/results/basic_experiments/cmu20/adsmind/gpt54_mace_mp0_small/one_shot/17/artifacts/BEST_CC_O_ontop_to_bridge_E-2.692.xyz",
+    "generated_conformers_file": "research/results/basic_experiments/cmu20/adsmind/gpt54_mace_mp0_small/one_shot/17/artifacts/conformers_CC_O.traj",
+    "relaxation_trajectory_file": "research/results/basic_experiments/cmu20/adsmind/gpt54_mace_mp0_small/one_shot/17/artifacts/final.xyz",
+    "session_id": "17-83da863a"
+  },
+  "attempt_records": [
+    {
+      "attempt_index": 1,
+      "plan": {
+        "reasoning": "SMILES consistency check: CC=O corresponds to acetaldehyde, which matches the user request. The heavy-atom list is consistent with a methyl carbon at index 0 (SP3), a carbonyl carbon at index 1 (SP2), and an oxygen at index 2 (SP2). No radicals are present on any heavy atom, so this must be treated as a closed-shell Molecule, not a ReactiveSpecies. History analysis: there are no previous attempts, so I should propose the best physically motivated initial plan rather than terminate. User intent is to find the lowest-energy adsorption configuration for acetaldehyde on a mixed Rh/Ti surface. For intact acetaldehyde, the most chemically reasonable donor atom is the carbonyl oxygen due to its lone pairs; adsorption through the methyl carbon is forbidden for Molecule adsorption, and adsorption through the carbonyl carbon is less appropriate as an intact donor than O-binding. On an alloy surface containing Ti and Rh, the more oxophilic Ti site is the strongest first guess for oxygen coordination. Among the available sites, an ontop Ti configuration using the O atom is the most plausible lowest-energy starting point for intact molecular adsorption. This obeys all constraints: ontop uses one binding index, and index 2 is the correct oxygen atom from the provided list.",
+        "adsorbate_type": "Molecule",
+        "solution": {
+          "action": "continue",
+          "site_type": "ontop",
+          "surface_binding_atoms": [
+            "Ti"
+          ],
+          "adsorbate_binding_indices": [
+            2
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "ontop|Ti|2|Molecule|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -2.692474365234375,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": true,
+      "planned_site_type": "ontop",
+      "actual_site_type": "bridge",
+      "best_structure_file": "research/results/basic_experiments/cmu20/adsmind/gpt54_mace_mp0_small/one_shot/17/artifacts/BEST_CC_O_ontop_to_bridge_E-2.692.xyz",
+      "generated_conformers_file": "research/results/basic_experiments/cmu20/adsmind/gpt54_mace_mp0_small/one_shot/17/artifacts/conformers_CC_O.traj",
+      "relaxation_trajectory_file": "research/results/basic_experiments/cmu20/adsmind/gpt54_mace_mp0_small/one_shot/17/artifacts/final.xyz",
+      "message": "Most stable config adsorption energy: -2.6925 eV. Target Atom: O (from plan index 2, global index 48 in relaxed structure). -> Nearest: Ti (Index 19), Distance: 1.862 Å (Threshold: 3.277), Bound: True. Bonded Surface Atoms: Ti-1.862Å, Rh-2.358Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Ti'] -> Actual ['Rh', 'Ti']).",
+      "history_entry": "【✅ Perfect Adsorption】 ontop @ ['Ti'] (Index [2]) -> ⚠️【Unstable Site Warning】⚠️: Planned ontop (Ti) is unstable, adsorbate spontaneously slipped to bridge (Rh-Ti).This means Ti has insufficient affinity for this adsorbate. Please **FORBID** testing Ti type sites again! [🌟 New Best] | E=-2.692 eV"
+    }
+  ],
+  "history": [
+    "【✅ Perfect Adsorption】 ontop @ ['Ti'] (Index [2]) -> ⚠️【Unstable Site Warning】⚠️: Planned ontop (Ti) is unstable, adsorbate spontaneously slipped to bridge (Rh-Ti).This means Ti has insufficient affinity for this adsorbate. Please **FORBID** testing Ti type sites again! [🌟 New Best] | E=-2.692 eV"
+  ],
+  "error": null,
+  "perfect_count": 1,
+  "dissociation_count": 0,
+  "rearrangement_count": 0,
+  "calc_failure_count": 0,
+  "chemical_slip_count": 1,
+  "provenance": {
+    "result_tree": "research/results/basic_experiments/cmu20/adsmind/gpt54_mace_mp0_small/one_shot",
+    "dataset": "cmu20",
+    "backend": "gpt54_mace_mp0_small",
+    "variant": "one_shot",
+    "artifact_status": "result_json_restored_from_git_history_without_heavy_artifacts",
+    "restored_from_commit": "ba317df76802c090bc365a99bdbe8ca9f8396fe9",
+    "note": "The lightweight result.json was recovered from git history during result-tree cleanup; heavy .xyz/.traj artifacts were not tracked and are not available locally."
+  },
+  "best_structure_file": "research/results/basic_experiments/cmu20/adsmind/gpt54_mace_mp0_small/one_shot/17/artifacts/BEST_CC_O_ontop_to_bridge_E-2.692.xyz"
+}

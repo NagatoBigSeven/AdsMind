@@ -39,8 +39,8 @@ OUT_DIR = ROOT / "research/figures/panel_b_structure_assets/panel_b_assets_20260
 CMU_MANIFEST = ROOT / "datasets/cmu20/cmu20_manifest.csv"
 OCD62_MANIFEST = ROOT / "datasets/ocd62/ocd62_manifest.csv"
 
-CMU_MAIN_RESULT = ROOT / "research/results/basic_experiments/cmu20" / backend_result_dir("gpt") / "full"
-OCD62_RESULT = ROOT / "research/results/basic_experiments/ocd62" / backend_result_dir("gpt") / "full"
+CMU_MAIN_RESULT = ROOT / "research/results/basic_experiments/cmu20/adsmind" / backend_result_dir("gpt") / "full"
+OCD62_RESULT = ROOT / "research/results/basic_experiments/ocd62/adsmind" / backend_result_dir("gpt") / "full"
 
 BACKEND_LABEL = "GPT-5.4"
 VARIANT_LABEL = "Full"
@@ -403,8 +403,8 @@ def write_readme(manifest_rows: list[dict[str, str]], selected_count: int) -> No
                 "",
                 "Source convention:",
                 "",
-                f"- CMU20 thumbnails use {BACKEND_LABEL} {VARIANT_LABEL} relaxed structures from `basic_experiments/cmu20/{backend_result_dir('gpt')}/full`.",
-                f"- OCD62 thumbnails use {BACKEND_LABEL} {VARIANT_LABEL} relaxed structures from `basic_experiments/ocd62/{backend_result_dir('gpt')}/full`.",
+                f"- CMU20 thumbnails use {BACKEND_LABEL} {VARIANT_LABEL} relaxed structures from `basic_experiments/cmu20/adsmind/{backend_result_dir('gpt')}/full`.",
+                f"- OCD62 thumbnails use {BACKEND_LABEL} {VARIANT_LABEL} relaxed structures from `basic_experiments/ocd62/adsmind/{backend_result_dir('gpt')}/full`.",
                 f"- Force field/checkpoint label for these rendered structures: {CHECKPOINT_LABEL}.",
                 "- Individual PNGs use transparent backgrounds.",
                 "- Contact sheets are white-background previews for quick review; use individual PNGs for figure assembly.",

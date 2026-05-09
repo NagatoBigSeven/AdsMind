@@ -92,7 +92,7 @@ SI Figure S1 (2 rows):
 │   └─ Panel a: Method Comparison
 │       └─ Grouped bar chart (20 cases, 4 methods)
 │       └─ Methods: AdsMind Full, Random (n=20), Heuristic, Adsorb-Agent
-│       └─ Data: basic_experiments/cmu20/gpt54_mace_mp0_small/full/summary.csv + baselines/*
+│       └─ Data: basic_experiments/cmu20/adsmind/gpt54_mace_mp0_small/full/summary.csv + baselines/*
 │       └─ Key message: "AdsMind trades raw energy depth for fewer relaxations and higher closed-loop reliability"
 │
 └─ Row 2: Panel b (left) + Panel c (right, c1 scatter + c2 histogram)

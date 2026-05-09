@@ -54,7 +54,7 @@
     "most_stable_energy_eV": -3.3456077575683594,
     "analysis_json": {
       "status": "success",
-      "message": "Most stable config adsorption energy: -3.3456 eV. Target Atom: N (from plan index 0, global index 45 in relaxed structure). -> Nearest: Ag (Index 36), Distance: 2.187 \u00c5 (Threshold: 3.132), Bound: True. Bonded Surface Atoms: Ag-2.187\u00c5, Sr-2.401\u00c5, Sr-2.497\u00c5. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Ag', 'Sr'] -> Actual ['Ag', 'Sr', 'Sr']).",
+      "message": "Most stable config adsorption energy: -3.3456 eV. Target Atom: N (from plan index 0, global index 45 in relaxed structure). -> Nearest: Ag (Index 36), Distance: 2.187 Å (Threshold: 3.132), Bound: True. Bonded Surface Atoms: Ag-2.187Å, Sr-2.401Å, Sr-2.497Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Ag', 'Sr'] -> Actual ['Ag', 'Sr', 'Sr']).",
       "most_stable_energy_eV": -3.3456077575683594,
       "target_adsorbate_atom": "N",
       "target_adsorbate_atom_index": 45,
@@ -101,13 +101,13 @@
         ],
         "site_fingerprint": "Ag36-Sr14-Sr0"
       },
-      "best_structure_file": "outputs/002-8ef10a52/BEST_N_N_bridge_to_hollow_FCC-No-Subsurf_E-3.346.xyz",
-      "generated_conformers_file": "outputs/002-8ef10a52/conformers_[N]_N.traj",
-      "relaxation_trajectory_file": "outputs/002-8ef10a52/final.xyz",
+      "best_structure_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/claude_sonnet46_mace_mp0_small/no_forbid/002/artifacts/BEST_N_N_bridge_to_hollow_FCC-No-Subsurf_E-3.346.xyz",
+      "generated_conformers_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/claude_sonnet46_mace_mp0_small/no_forbid/002/artifacts/conformers_[N]_N.traj",
+      "relaxation_trajectory_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/claude_sonnet46_mace_mp0_small/no_forbid/002/artifacts/final.xyz",
       "session_id": "002-8ef10a52"
     },
     "plan": {
-      "reasoning": "**Step 0: SMILES Consistency Check**\nThe SMILES [N]=N represents diazene (N2H0 - actually this is N2 with a double bond, i.e., molecular nitrogen N=N). RDKit reports: N(0) is SP2 with radical_electrons=1, N(1) is SP2 with radical_electrons=0. So N(0) has an unpaired electron, making this a ReactiveSpecies. The molecule is N=N (dinitrogen-like but with radical character on N(0)).\n\n**Step 1: Analyze History**\n- ontop @ Sr (Index [0]): \u274c Dissociated - slipped to hollow Sr-Sr-Sr-Sr. E=-5.608 eV (dissociation, invalid)\n- ontop @ Ag (Index [0]): \u2705 Perfect - slipped to hollow Ag-Ag-Sr. E=-2.736 eV (new best at time)\n- bridge @ Ag-Ag (Index [0,1]): \u2705 Perfect - slipped to hollow Ag-Ag-Sr-Sr. E=-2.760 eV (current best)\n- hollow @ Ag-Ag-Sr (Index [0]): \u274c Dissociated - slipped to hollow Ag-Sr-Sr-Sr-Sr. E=-4.690 eV (dissociation, invalid)\n\nAll available site types have been tested:\n- ontop Ag: tested \u2705\n- ontop Sr: tested \u274c\n- bridge Ag-Ag: tested \u2705\n- bridge Ag-Sr: NOT tested yet\n- bridge Sr-Sr: NOT tested yet\n- hollow Ag-Ag-Sr: tested \u274c\n\nThe remaining untested sites are bridge Ag-Sr and bridge Sr-Sr. However, Sr-based sites tend to cause dissociation (as seen with ontop Sr and hollow Ag-Ag-Sr slipping to Sr-rich hollows). The bridge Ag-Sr is a mixed site that might be worth trying. But given that Sr-containing sites have consistently led to dissociation, and the current best is bridge Ag-Ag at -2.760 eV, I should try bridge Ag-Sr as the last remaining reasonable option.\n\nActually, looking more carefully: bridge Sr-Sr would likely dissociate (Sr has insufficient affinity). Bridge Ag-Sr is a mixed site - it could go either way. Let me try bridge Ag-Sr with N(0) as the binding atom (radical electron on N(0)).\n\n**Step 2: Formulate New Plan**\nTry bridge @ Ag-Sr with adsorbate_binding_indices=[0] (N with radical electron). This is the only major untested site combination that could potentially give a lower energy than -2.760 eV without causing dissociation.\n\n**Step 3-6: Plan Details**\n- site_type: bridge\n- surface_binding_atoms: ['Ag', 'Sr']\n- adsorbate_binding_indices: [0] (N with radical_electrons=1)\n- adsorbate_type: ReactiveSpecies (N(0) has radical_electrons=1)\n\nThis is the last reasonable untested site. If this also slips or dissociates, I should terminate with the current best of -2.760 eV.",
+      "reasoning": "**Step 0: SMILES Consistency Check**\nThe SMILES [N]=N represents diazene (N2H0 - actually this is N2 with a double bond, i.e., molecular nitrogen N=N). RDKit reports: N(0) is SP2 with radical_electrons=1, N(1) is SP2 with radical_electrons=0. So N(0) has an unpaired electron, making this a ReactiveSpecies. The molecule is N=N (dinitrogen-like but with radical character on N(0)).\n\n**Step 1: Analyze History**\n- ontop @ Sr (Index [0]): ❌ Dissociated - slipped to hollow Sr-Sr-Sr-Sr. E=-5.608 eV (dissociation, invalid)\n- ontop @ Ag (Index [0]): ✅ Perfect - slipped to hollow Ag-Ag-Sr. E=-2.736 eV (new best at time)\n- bridge @ Ag-Ag (Index [0,1]): ✅ Perfect - slipped to hollow Ag-Ag-Sr-Sr. E=-2.760 eV (current best)\n- hollow @ Ag-Ag-Sr (Index [0]): ❌ Dissociated - slipped to hollow Ag-Sr-Sr-Sr-Sr. E=-4.690 eV (dissociation, invalid)\n\nAll available site types have been tested:\n- ontop Ag: tested ✅\n- ontop Sr: tested ❌\n- bridge Ag-Ag: tested ✅\n- bridge Ag-Sr: NOT tested yet\n- bridge Sr-Sr: NOT tested yet\n- hollow Ag-Ag-Sr: tested ❌\n\nThe remaining untested sites are bridge Ag-Sr and bridge Sr-Sr. However, Sr-based sites tend to cause dissociation (as seen with ontop Sr and hollow Ag-Ag-Sr slipping to Sr-rich hollows). The bridge Ag-Sr is a mixed site that might be worth trying. But given that Sr-containing sites have consistently led to dissociation, and the current best is bridge Ag-Ag at -2.760 eV, I should try bridge Ag-Sr as the last remaining reasonable option.\n\nActually, looking more carefully: bridge Sr-Sr would likely dissociate (Sr has insufficient affinity). Bridge Ag-Sr is a mixed site - it could go either way. Let me try bridge Ag-Sr with N(0) as the binding atom (radical electron on N(0)).\n\n**Step 2: Formulate New Plan**\nTry bridge @ Ag-Sr with adsorbate_binding_indices=[0] (N with radical electron). This is the only major untested site combination that could potentially give a lower energy than -2.760 eV without causing dissociation.\n\n**Step 3-6: Plan Details**\n- site_type: bridge\n- surface_binding_atoms: ['Ag', 'Sr']\n- adsorbate_binding_indices: [0] (N with radical_electrons=1)\n- adsorbate_type: ReactiveSpecies (N(0) has radical_electrons=1)\n\nThis is the last reasonable untested site. If this also slips or dissociates, I should terminate with the current best of -2.760 eV.",
       "adsorbate_type": "ReactiveSpecies",
       "solution": {
         "action": "continue",
@@ -129,7 +129,7 @@
   },
   "last_analysis": {
     "status": "success",
-    "message": "Most stable config adsorption energy: -3.3456 eV. Target Atom: N (from plan index 0, global index 45 in relaxed structure). -> Nearest: Ag (Index 36), Distance: 2.187 \u00c5 (Threshold: 3.132), Bound: True. Bonded Surface Atoms: Ag-2.187\u00c5, Sr-2.401\u00c5, Sr-2.497\u00c5. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Ag', 'Sr'] -> Actual ['Ag', 'Sr', 'Sr']).",
+    "message": "Most stable config adsorption energy: -3.3456 eV. Target Atom: N (from plan index 0, global index 45 in relaxed structure). -> Nearest: Ag (Index 36), Distance: 2.187 Å (Threshold: 3.132), Bound: True. Bonded Surface Atoms: Ag-2.187Å, Sr-2.401Å, Sr-2.497Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Ag', 'Sr'] -> Actual ['Ag', 'Sr', 'Sr']).",
     "most_stable_energy_eV": -3.3456077575683594,
     "target_adsorbate_atom": "N",
     "target_adsorbate_atom_index": 45,
@@ -176,9 +176,9 @@
       ],
       "site_fingerprint": "Ag36-Sr14-Sr0"
     },
-    "best_structure_file": "outputs/002-8ef10a52/BEST_N_N_bridge_to_hollow_FCC-No-Subsurf_E-3.346.xyz",
-    "generated_conformers_file": "outputs/002-8ef10a52/conformers_[N]_N.traj",
-    "relaxation_trajectory_file": "outputs/002-8ef10a52/final.xyz",
+    "best_structure_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/claude_sonnet46_mace_mp0_small/no_forbid/002/artifacts/BEST_N_N_bridge_to_hollow_FCC-No-Subsurf_E-3.346.xyz",
+    "generated_conformers_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/claude_sonnet46_mace_mp0_small/no_forbid/002/artifacts/conformers_[N]_N.traj",
+    "relaxation_trajectory_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/claude_sonnet46_mace_mp0_small/no_forbid/002/artifacts/final.xyz",
     "session_id": "002-8ef10a52"
   },
   "attempt_records": [
@@ -210,11 +210,11 @@
       "is_chemical_slip": true,
       "planned_site_type": "ontop",
       "actual_site_type": "hollow (FCC/No-Subsurf)",
-      "best_structure_file": "outputs/002-8ef10a52/BEST_N_N_ontop_to_hollow_FCC-No-Subsurf_DISS_E-5.608.xyz",
-      "generated_conformers_file": "outputs/002-8ef10a52/conformers_[N]_N.traj",
-      "relaxation_trajectory_file": "outputs/002-8ef10a52/final.xyz",
-      "message": "Most stable config adsorption energy: -5.6078 eV. Target Atom: N (from plan index 0, global index 45 in relaxed structure). -> Nearest: Sr (Index 16), Distance: 2.358 \u00c5 (Threshold: 3.857), Bound: True. Bonded Surface Atoms: Sr-2.358\u00c5, Sr-2.404\u00c5, Sr-2.59\u00c5, Sr-3.689\u00c5. Is Bound: True. Reactivity Change Detected: True (Bond Changes: 1). Chemical Slip: True (Planned ['Sr'] -> Actual ['Sr', 'Sr', 'Sr', 'Sr']).",
-      "history_entry": "\u3010\u274c Dissociated\u3011 ontop @ ['Sr'] (Index [0]) -> \u26a0\ufe0f\u3010Unstable Site Warning\u3011\u26a0\ufe0f: Planned ontop (Sr) is unstable, adsorbate spontaneously slipped to hollow (FCC/No-Subsurf) (Sr-Sr-Sr-Sr).This means Sr has insufficient affinity for this adsorbate. | E=-5.608 eV"
+      "best_structure_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/claude_sonnet46_mace_mp0_small/no_forbid/002/artifacts/BEST_N_N_ontop_to_hollow_FCC-No-Subsurf_DISS_E-5.608.xyz",
+      "generated_conformers_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/claude_sonnet46_mace_mp0_small/no_forbid/002/artifacts/conformers_[N]_N.traj",
+      "relaxation_trajectory_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/claude_sonnet46_mace_mp0_small/no_forbid/002/artifacts/final.xyz",
+      "message": "Most stable config adsorption energy: -5.6078 eV. Target Atom: N (from plan index 0, global index 45 in relaxed structure). -> Nearest: Sr (Index 16), Distance: 2.358 Å (Threshold: 3.857), Bound: True. Bonded Surface Atoms: Sr-2.358Å, Sr-2.404Å, Sr-2.59Å, Sr-3.689Å. Is Bound: True. Reactivity Change Detected: True (Bond Changes: 1). Chemical Slip: True (Planned ['Sr'] -> Actual ['Sr', 'Sr', 'Sr', 'Sr']).",
+      "history_entry": "【❌ Dissociated】 ontop @ ['Sr'] (Index [0]) -> ⚠️【Unstable Site Warning】⚠️: Planned ontop (Sr) is unstable, adsorbate spontaneously slipped to hollow (FCC/No-Subsurf) (Sr-Sr-Sr-Sr).This means Sr has insufficient affinity for this adsorbate. | E=-5.608 eV"
     },
     {
       "attempt_index": 2,
@@ -244,11 +244,11 @@
       "is_chemical_slip": true,
       "planned_site_type": "ontop",
       "actual_site_type": "hollow (FCC/No-Subsurf)",
-      "best_structure_file": "outputs/002-8ef10a52/BEST_N_N_ontop_to_hollow_FCC-No-Subsurf_E-2.736.xyz",
-      "generated_conformers_file": "outputs/002-8ef10a52/conformers_[N]_N.traj",
-      "relaxation_trajectory_file": "outputs/002-8ef10a52/final.xyz",
-      "message": "Most stable config adsorption energy: -2.7359 eV. Target Atom: N (from plan index 0, global index 45 in relaxed structure). -> Nearest: Ag (Index 40), Distance: 2.2 \u00c5 (Threshold: 3.132), Bound: True. Bonded Surface Atoms: Ag-2.2\u00c5, Ag-2.212\u00c5, Sr-2.358\u00c5. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Ag'] -> Actual ['Ag', 'Ag', 'Sr']).",
-      "history_entry": "\u3010\u2705 Perfect Adsorption\u3011 ontop @ ['Ag'] (Index [0]) -> \u26a0\ufe0f\u3010Unstable Site Warning\u3011\u26a0\ufe0f: Planned ontop (Ag) is unstable, adsorbate spontaneously slipped to hollow (FCC/No-Subsurf) (Ag-Ag-Sr).This means Ag has insufficient affinity for this adsorbate. [\ud83c\udf1f New Best] | E=-2.736 eV"
+      "best_structure_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/claude_sonnet46_mace_mp0_small/no_forbid/002/artifacts/BEST_N_N_ontop_to_hollow_FCC-No-Subsurf_E-2.736.xyz",
+      "generated_conformers_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/claude_sonnet46_mace_mp0_small/no_forbid/002/artifacts/conformers_[N]_N.traj",
+      "relaxation_trajectory_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/claude_sonnet46_mace_mp0_small/no_forbid/002/artifacts/final.xyz",
+      "message": "Most stable config adsorption energy: -2.7359 eV. Target Atom: N (from plan index 0, global index 45 in relaxed structure). -> Nearest: Ag (Index 40), Distance: 2.2 Å (Threshold: 3.132), Bound: True. Bonded Surface Atoms: Ag-2.2Å, Ag-2.212Å, Sr-2.358Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Ag'] -> Actual ['Ag', 'Ag', 'Sr']).",
+      "history_entry": "【✅ Perfect Adsorption】 ontop @ ['Ag'] (Index [0]) -> ⚠️【Unstable Site Warning】⚠️: Planned ontop (Ag) is unstable, adsorbate spontaneously slipped to hollow (FCC/No-Subsurf) (Ag-Ag-Sr).This means Ag has insufficient affinity for this adsorbate. [🌟 New Best] | E=-2.736 eV"
     },
     {
       "attempt_index": 3,
@@ -280,11 +280,11 @@
       "is_chemical_slip": true,
       "planned_site_type": "bridge",
       "actual_site_type": "hollow (FCC/No-Subsurf)",
-      "best_structure_file": "outputs/002-8ef10a52/BEST_N_N_bridge_to_hollow_FCC-No-Subsurf_E-2.760.xyz",
-      "generated_conformers_file": "outputs/002-8ef10a52/conformers_[N]_N.traj",
-      "relaxation_trajectory_file": "outputs/002-8ef10a52/final.xyz",
-      "message": "Most stable config adsorption energy: -2.7598 eV. Target Atom 1: N (from plan index 0, global index 45). -> Nearest: Ag (Index 31), Distance: 1.745 \u00c5 (Threshold: 2.376), Bound: True. Target Atom 2: N (from plan index 1, global index 46). -> Nearest: Ag (Index 31), Distance: 2.809 \u00c5 (Threshold: 2.376), Bound: False. Bonded Surface Atoms: N(45)-Ag(2.213\u00c5), N(45)-Ag(2.22\u00c5), N(46)-Sr(2.342\u00c5), N(45)-Sr(2.41\u00c5). Is Bound: False. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Ag', 'Ag'] -> Actual ['Ag', 'Ag', 'Sr', 'Sr']).",
-      "history_entry": "\u3010\u2705 Perfect Adsorption\u3011 bridge @ ['Ag', 'Ag'] (Index [0, 1]) -> \u26a0\ufe0f\u3010Unstable Site Warning\u3011\u26a0\ufe0f: Planned bridge (Ag-Ag) is unstable, adsorbate spontaneously slipped to hollow (FCC/No-Subsurf) (Ag-Ag-Sr-Sr).This means Ag-Ag has insufficient affinity for this adsorbate. [\ud83c\udf1f New Best] | E=-2.760 eV"
+      "best_structure_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/claude_sonnet46_mace_mp0_small/no_forbid/002/artifacts/BEST_N_N_bridge_to_hollow_FCC-No-Subsurf_E-2.760.xyz",
+      "generated_conformers_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/claude_sonnet46_mace_mp0_small/no_forbid/002/artifacts/conformers_[N]_N.traj",
+      "relaxation_trajectory_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/claude_sonnet46_mace_mp0_small/no_forbid/002/artifacts/final.xyz",
+      "message": "Most stable config adsorption energy: -2.7598 eV. Target Atom 1: N (from plan index 0, global index 45). -> Nearest: Ag (Index 31), Distance: 1.745 Å (Threshold: 2.376), Bound: True. Target Atom 2: N (from plan index 1, global index 46). -> Nearest: Ag (Index 31), Distance: 2.809 Å (Threshold: 2.376), Bound: False. Bonded Surface Atoms: N(45)-Ag(2.213Å), N(45)-Ag(2.22Å), N(46)-Sr(2.342Å), N(45)-Sr(2.41Å). Is Bound: False. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Ag', 'Ag'] -> Actual ['Ag', 'Ag', 'Sr', 'Sr']).",
+      "history_entry": "【✅ Perfect Adsorption】 bridge @ ['Ag', 'Ag'] (Index [0, 1]) -> ⚠️【Unstable Site Warning】⚠️: Planned bridge (Ag-Ag) is unstable, adsorbate spontaneously slipped to hollow (FCC/No-Subsurf) (Ag-Ag-Sr-Sr).This means Ag-Ag has insufficient affinity for this adsorbate. [🌟 New Best] | E=-2.760 eV"
     },
     {
       "attempt_index": 4,
@@ -316,16 +316,16 @@
       "is_chemical_slip": true,
       "planned_site_type": "hollow",
       "actual_site_type": "hollow (FCC/No-Subsurf)",
-      "best_structure_file": "outputs/002-8ef10a52/BEST_N_N_hollow_to_hollow_FCC-No-Subsurf_DISS_E-4.690.xyz",
-      "generated_conformers_file": "outputs/002-8ef10a52/conformers_[N]_N.traj",
-      "relaxation_trajectory_file": "outputs/002-8ef10a52/final.xyz",
-      "message": "Most stable config adsorption energy: -4.6904 eV. Target Atom: N (from plan index 0, global index 45 in relaxed structure). -> Nearest: Ag (Index 39), Distance: 2.208 \u00c5 (Threshold: 3.132), Bound: True. Bonded Surface Atoms: Ag-2.208\u00c5, Sr-2.334\u00c5, Sr-2.554\u00c5, Sr-2.61\u00c5, Sr-2.697\u00c5. Is Bound: True. Reactivity Change Detected: True (Bond Changes: 1). Chemical Slip: True (Planned ['Ag', 'Ag', 'Sr'] -> Actual ['Ag', 'Sr', 'Sr', 'Sr', 'Sr']).",
-      "history_entry": "\u3010\u274c Dissociated\u3011 hollow @ ['Ag', 'Ag', 'Sr'] (Index [0]) -> \u26a0\ufe0f\u3010Unstable Site Warning\u3011\u26a0\ufe0f: Planned hollow (Ag-Ag-Sr) is unstable, adsorbate spontaneously slipped to hollow (FCC/No-Subsurf) (Ag-Sr-Sr-Sr-Sr).This means Ag-Ag-Sr has insufficient affinity for this adsorbate. | E=-4.690 eV"
+      "best_structure_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/claude_sonnet46_mace_mp0_small/no_forbid/002/artifacts/BEST_N_N_hollow_to_hollow_FCC-No-Subsurf_DISS_E-4.690.xyz",
+      "generated_conformers_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/claude_sonnet46_mace_mp0_small/no_forbid/002/artifacts/conformers_[N]_N.traj",
+      "relaxation_trajectory_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/claude_sonnet46_mace_mp0_small/no_forbid/002/artifacts/final.xyz",
+      "message": "Most stable config adsorption energy: -4.6904 eV. Target Atom: N (from plan index 0, global index 45 in relaxed structure). -> Nearest: Ag (Index 39), Distance: 2.208 Å (Threshold: 3.132), Bound: True. Bonded Surface Atoms: Ag-2.208Å, Sr-2.334Å, Sr-2.554Å, Sr-2.61Å, Sr-2.697Å. Is Bound: True. Reactivity Change Detected: True (Bond Changes: 1). Chemical Slip: True (Planned ['Ag', 'Ag', 'Sr'] -> Actual ['Ag', 'Sr', 'Sr', 'Sr', 'Sr']).",
+      "history_entry": "【❌ Dissociated】 hollow @ ['Ag', 'Ag', 'Sr'] (Index [0]) -> ⚠️【Unstable Site Warning】⚠️: Planned hollow (Ag-Ag-Sr) is unstable, adsorbate spontaneously slipped to hollow (FCC/No-Subsurf) (Ag-Sr-Sr-Sr-Sr).This means Ag-Ag-Sr has insufficient affinity for this adsorbate. | E=-4.690 eV"
     },
     {
       "attempt_index": 5,
       "plan": {
-        "reasoning": "**Step 0: SMILES Consistency Check**\nThe SMILES [N]=N represents diazene (N2H0 - actually this is N2 with a double bond, i.e., molecular nitrogen N=N). RDKit reports: N(0) is SP2 with radical_electrons=1, N(1) is SP2 with radical_electrons=0. So N(0) has an unpaired electron, making this a ReactiveSpecies. The molecule is N=N (dinitrogen-like but with radical character on N(0)).\n\n**Step 1: Analyze History**\n- ontop @ Sr (Index [0]): \u274c Dissociated - slipped to hollow Sr-Sr-Sr-Sr. E=-5.608 eV (dissociation, invalid)\n- ontop @ Ag (Index [0]): \u2705 Perfect - slipped to hollow Ag-Ag-Sr. E=-2.736 eV (new best at time)\n- bridge @ Ag-Ag (Index [0,1]): \u2705 Perfect - slipped to hollow Ag-Ag-Sr-Sr. E=-2.760 eV (current best)\n- hollow @ Ag-Ag-Sr (Index [0]): \u274c Dissociated - slipped to hollow Ag-Sr-Sr-Sr-Sr. E=-4.690 eV (dissociation, invalid)\n\nAll available site types have been tested:\n- ontop Ag: tested \u2705\n- ontop Sr: tested \u274c\n- bridge Ag-Ag: tested \u2705\n- bridge Ag-Sr: NOT tested yet\n- bridge Sr-Sr: NOT tested yet\n- hollow Ag-Ag-Sr: tested \u274c\n\nThe remaining untested sites are bridge Ag-Sr and bridge Sr-Sr. However, Sr-based sites tend to cause dissociation (as seen with ontop Sr and hollow Ag-Ag-Sr slipping to Sr-rich hollows). The bridge Ag-Sr is a mixed site that might be worth trying. But given that Sr-containing sites have consistently led to dissociation, and the current best is bridge Ag-Ag at -2.760 eV, I should try bridge Ag-Sr as the last remaining reasonable option.\n\nActually, looking more carefully: bridge Sr-Sr would likely dissociate (Sr has insufficient affinity). Bridge Ag-Sr is a mixed site - it could go either way. Let me try bridge Ag-Sr with N(0) as the binding atom (radical electron on N(0)).\n\n**Step 2: Formulate New Plan**\nTry bridge @ Ag-Sr with adsorbate_binding_indices=[0] (N with radical electron). This is the only major untested site combination that could potentially give a lower energy than -2.760 eV without causing dissociation.\n\n**Step 3-6: Plan Details**\n- site_type: bridge\n- surface_binding_atoms: ['Ag', 'Sr']\n- adsorbate_binding_indices: [0] (N with radical_electrons=1)\n- adsorbate_type: ReactiveSpecies (N(0) has radical_electrons=1)\n\nThis is the last reasonable untested site. If this also slips or dissociates, I should terminate with the current best of -2.760 eV.",
+        "reasoning": "**Step 0: SMILES Consistency Check**\nThe SMILES [N]=N represents diazene (N2H0 - actually this is N2 with a double bond, i.e., molecular nitrogen N=N). RDKit reports: N(0) is SP2 with radical_electrons=1, N(1) is SP2 with radical_electrons=0. So N(0) has an unpaired electron, making this a ReactiveSpecies. The molecule is N=N (dinitrogen-like but with radical character on N(0)).\n\n**Step 1: Analyze History**\n- ontop @ Sr (Index [0]): ❌ Dissociated - slipped to hollow Sr-Sr-Sr-Sr. E=-5.608 eV (dissociation, invalid)\n- ontop @ Ag (Index [0]): ✅ Perfect - slipped to hollow Ag-Ag-Sr. E=-2.736 eV (new best at time)\n- bridge @ Ag-Ag (Index [0,1]): ✅ Perfect - slipped to hollow Ag-Ag-Sr-Sr. E=-2.760 eV (current best)\n- hollow @ Ag-Ag-Sr (Index [0]): ❌ Dissociated - slipped to hollow Ag-Sr-Sr-Sr-Sr. E=-4.690 eV (dissociation, invalid)\n\nAll available site types have been tested:\n- ontop Ag: tested ✅\n- ontop Sr: tested ❌\n- bridge Ag-Ag: tested ✅\n- bridge Ag-Sr: NOT tested yet\n- bridge Sr-Sr: NOT tested yet\n- hollow Ag-Ag-Sr: tested ❌\n\nThe remaining untested sites are bridge Ag-Sr and bridge Sr-Sr. However, Sr-based sites tend to cause dissociation (as seen with ontop Sr and hollow Ag-Ag-Sr slipping to Sr-rich hollows). The bridge Ag-Sr is a mixed site that might be worth trying. But given that Sr-containing sites have consistently led to dissociation, and the current best is bridge Ag-Ag at -2.760 eV, I should try bridge Ag-Sr as the last remaining reasonable option.\n\nActually, looking more carefully: bridge Sr-Sr would likely dissociate (Sr has insufficient affinity). Bridge Ag-Sr is a mixed site - it could go either way. Let me try bridge Ag-Sr with N(0) as the binding atom (radical electron on N(0)).\n\n**Step 2: Formulate New Plan**\nTry bridge @ Ag-Sr with adsorbate_binding_indices=[0] (N with radical electron). This is the only major untested site combination that could potentially give a lower energy than -2.760 eV without causing dissociation.\n\n**Step 3-6: Plan Details**\n- site_type: bridge\n- surface_binding_atoms: ['Ag', 'Sr']\n- adsorbate_binding_indices: [0] (N with radical_electrons=1)\n- adsorbate_type: ReactiveSpecies (N(0) has radical_electrons=1)\n\nThis is the last reasonable untested site. If this also slips or dissociates, I should terminate with the current best of -2.760 eV.",
         "adsorbate_type": "ReactiveSpecies",
         "solution": {
           "action": "continue",
@@ -351,24 +351,25 @@
       "is_chemical_slip": true,
       "planned_site_type": "bridge",
       "actual_site_type": "hollow (FCC/No-Subsurf)",
-      "best_structure_file": "outputs/002-8ef10a52/BEST_N_N_bridge_to_hollow_FCC-No-Subsurf_E-3.346.xyz",
-      "generated_conformers_file": "outputs/002-8ef10a52/conformers_[N]_N.traj",
-      "relaxation_trajectory_file": "outputs/002-8ef10a52/final.xyz",
-      "message": "Most stable config adsorption energy: -3.3456 eV. Target Atom: N (from plan index 0, global index 45 in relaxed structure). -> Nearest: Ag (Index 36), Distance: 2.187 \u00c5 (Threshold: 3.132), Bound: True. Bonded Surface Atoms: Ag-2.187\u00c5, Sr-2.401\u00c5, Sr-2.497\u00c5. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Ag', 'Sr'] -> Actual ['Ag', 'Sr', 'Sr']).",
-      "history_entry": "\u3010\u2705 Perfect Adsorption\u3011 bridge @ ['Ag', 'Sr'] (Index [0]) -> \u26a0\ufe0f\u3010Unstable Site Warning\u3011\u26a0\ufe0f: Planned bridge (Ag-Sr) is unstable, adsorbate spontaneously slipped to hollow (FCC/No-Subsurf) (Ag-Sr-Sr).This means Ag-Sr has insufficient affinity for this adsorbate. [\ud83c\udf1f New Best] | E=-3.346 eV"
+      "best_structure_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/claude_sonnet46_mace_mp0_small/no_forbid/002/artifacts/BEST_N_N_bridge_to_hollow_FCC-No-Subsurf_E-3.346.xyz",
+      "generated_conformers_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/claude_sonnet46_mace_mp0_small/no_forbid/002/artifacts/conformers_[N]_N.traj",
+      "relaxation_trajectory_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/claude_sonnet46_mace_mp0_small/no_forbid/002/artifacts/final.xyz",
+      "message": "Most stable config adsorption energy: -3.3456 eV. Target Atom: N (from plan index 0, global index 45 in relaxed structure). -> Nearest: Ag (Index 36), Distance: 2.187 Å (Threshold: 3.132), Bound: True. Bonded Surface Atoms: Ag-2.187Å, Sr-2.401Å, Sr-2.497Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Ag', 'Sr'] -> Actual ['Ag', 'Sr', 'Sr']).",
+      "history_entry": "【✅ Perfect Adsorption】 bridge @ ['Ag', 'Sr'] (Index [0]) -> ⚠️【Unstable Site Warning】⚠️: Planned bridge (Ag-Sr) is unstable, adsorbate spontaneously slipped to hollow (FCC/No-Subsurf) (Ag-Sr-Sr).This means Ag-Sr has insufficient affinity for this adsorbate. [🌟 New Best] | E=-3.346 eV"
     }
   ],
   "history": [
-    "\u3010\u274c Dissociated\u3011 ontop @ ['Sr'] (Index [0]) -> \u26a0\ufe0f\u3010Unstable Site Warning\u3011\u26a0\ufe0f: Planned ontop (Sr) is unstable, adsorbate spontaneously slipped to hollow (FCC/No-Subsurf) (Sr-Sr-Sr-Sr).This means Sr has insufficient affinity for this adsorbate. | E=-5.608 eV",
-    "\u3010\u2705 Perfect Adsorption\u3011 ontop @ ['Ag'] (Index [0]) -> \u26a0\ufe0f\u3010Unstable Site Warning\u3011\u26a0\ufe0f: Planned ontop (Ag) is unstable, adsorbate spontaneously slipped to hollow (FCC/No-Subsurf) (Ag-Ag-Sr).This means Ag has insufficient affinity for this adsorbate. [\ud83c\udf1f New Best] | E=-2.736 eV",
-    "\u3010\u2705 Perfect Adsorption\u3011 bridge @ ['Ag', 'Ag'] (Index [0, 1]) -> \u26a0\ufe0f\u3010Unstable Site Warning\u3011\u26a0\ufe0f: Planned bridge (Ag-Ag) is unstable, adsorbate spontaneously slipped to hollow (FCC/No-Subsurf) (Ag-Ag-Sr-Sr).This means Ag-Ag has insufficient affinity for this adsorbate. [\ud83c\udf1f New Best] | E=-2.760 eV",
-    "\u3010\u274c Dissociated\u3011 hollow @ ['Ag', 'Ag', 'Sr'] (Index [0]) -> \u26a0\ufe0f\u3010Unstable Site Warning\u3011\u26a0\ufe0f: Planned hollow (Ag-Ag-Sr) is unstable, adsorbate spontaneously slipped to hollow (FCC/No-Subsurf) (Ag-Sr-Sr-Sr-Sr).This means Ag-Ag-Sr has insufficient affinity for this adsorbate. | E=-4.690 eV",
-    "\u3010\u2705 Perfect Adsorption\u3011 bridge @ ['Ag', 'Sr'] (Index [0]) -> \u26a0\ufe0f\u3010Unstable Site Warning\u3011\u26a0\ufe0f: Planned bridge (Ag-Sr) is unstable, adsorbate spontaneously slipped to hollow (FCC/No-Subsurf) (Ag-Sr-Sr).This means Ag-Sr has insufficient affinity for this adsorbate. [\ud83c\udf1f New Best] | E=-3.346 eV"
+    "【❌ Dissociated】 ontop @ ['Sr'] (Index [0]) -> ⚠️【Unstable Site Warning】⚠️: Planned ontop (Sr) is unstable, adsorbate spontaneously slipped to hollow (FCC/No-Subsurf) (Sr-Sr-Sr-Sr).This means Sr has insufficient affinity for this adsorbate. | E=-5.608 eV",
+    "【✅ Perfect Adsorption】 ontop @ ['Ag'] (Index [0]) -> ⚠️【Unstable Site Warning】⚠️: Planned ontop (Ag) is unstable, adsorbate spontaneously slipped to hollow (FCC/No-Subsurf) (Ag-Ag-Sr).This means Ag has insufficient affinity for this adsorbate. [🌟 New Best] | E=-2.736 eV",
+    "【✅ Perfect Adsorption】 bridge @ ['Ag', 'Ag'] (Index [0, 1]) -> ⚠️【Unstable Site Warning】⚠️: Planned bridge (Ag-Ag) is unstable, adsorbate spontaneously slipped to hollow (FCC/No-Subsurf) (Ag-Ag-Sr-Sr).This means Ag-Ag has insufficient affinity for this adsorbate. [🌟 New Best] | E=-2.760 eV",
+    "【❌ Dissociated】 hollow @ ['Ag', 'Ag', 'Sr'] (Index [0]) -> ⚠️【Unstable Site Warning】⚠️: Planned hollow (Ag-Ag-Sr) is unstable, adsorbate spontaneously slipped to hollow (FCC/No-Subsurf) (Ag-Sr-Sr-Sr-Sr).This means Ag-Ag-Sr has insufficient affinity for this adsorbate. | E=-4.690 eV",
+    "【✅ Perfect Adsorption】 bridge @ ['Ag', 'Sr'] (Index [0]) -> ⚠️【Unstable Site Warning】⚠️: Planned bridge (Ag-Sr) is unstable, adsorbate spontaneously slipped to hollow (FCC/No-Subsurf) (Ag-Sr-Sr).This means Ag-Sr has insufficient affinity for this adsorbate. [🌟 New Best] | E=-3.346 eV"
   ],
   "error": null,
   "perfect_count": 3,
   "dissociation_count": 2,
   "rearrangement_count": 0,
   "calc_failure_count": 0,
-  "chemical_slip_count": 5
+  "chemical_slip_count": 5,
+  "best_structure_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/claude_sonnet46_mace_mp0_small/no_forbid/002/artifacts/BEST_N_N_ontop_to_hollow_FCC-No-Subsurf_E-2.736.xyz"
 }
