@@ -44,6 +44,7 @@ REPRO_RUN_DIRS = {
     2: "run2",
     3: "run3",
     4: "run4",
+    5: "run5",
 }
 OUTLIER_KEYS = {("grok", "full", 16), ("grok", "no_forbid", 16)}
 OUTLIER_THRESHOLD_EV = -10_000.0
@@ -253,8 +254,8 @@ def agreement_class(delta: float | None, *, outlier: bool = False) -> str:
 
 
 def paired_rows(run_count: int) -> list[dict[str, Any]]:
-    if run_count not in {2, 3, 4}:
-        raise ValueError("run_count must be 2, 3, or 4")
+    if run_count not in {2, 3, 4, 5}:
+        raise ValueError("run_count must be 2, 3, 4, or 5")
 
     overlap = overlap_by_case()
     run_names = [REPRO_RUN_DIRS[i] for i in range(1, run_count + 1)]
@@ -385,7 +386,7 @@ def write_reproducibility_outputs(run_count: int) -> None:
     (OVERLAP12_SUMMARY_DIR / f"reproducibility_n{run_count}.md").write_text(report, encoding="utf-8")
 
 
-def write_outputs(write_n3: bool, write_n4: bool) -> None:
+def write_outputs(write_n3: bool, write_n4: bool, write_n5: bool) -> None:
     unified_fields = [
         "case_id",
         "ocd_id",
@@ -418,15 +419,18 @@ def write_outputs(write_n3: bool, write_n4: bool) -> None:
         write_reproducibility_outputs(3)
     if write_n4:
         write_reproducibility_outputs(4)
+    if write_n5:
+        write_reproducibility_outputs(5)
 
 
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--write-n3", action="store_true", help="Also write N=3 outputs after RUN3 is present")
     parser.add_argument("--write-n4", action="store_true", help="Also write N=4 outputs after RUN4 is present")
+    parser.add_argument("--write-n5", action="store_true", help="Also write N=5 outputs after RUN5 is present")
     parser.add_argument("--policy", default="", help=argparse.SUPPRESS)
     args = parser.parse_args(argv)
-    write_outputs(args.write_n3, args.write_n4)
+    write_outputs(args.write_n3, args.write_n4, args.write_n5)
     return 0
 
 

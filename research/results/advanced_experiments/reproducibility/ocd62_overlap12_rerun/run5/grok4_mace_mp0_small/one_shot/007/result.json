@@ -1,0 +1,206 @@
+{
+  "case_id": "007",
+  "case_metadata": {
+    "case_id": "007",
+    "slab_file": "datasets/ocd62_overlap12/007_ocd_479_Ni6Sc36Te12_OH.xyz",
+    "smiles": "[OH]",
+    "user_request": "Find the lowest-energy adsorption configuration for hydroxyl radical on the provided surface.",
+    "surface_family": "intermetallic",
+    "adsorbate_name": "OH",
+    "miller_index": "",
+    "reaction_class": "ORR",
+    "ablation_candidate": "FALSE",
+    "notes": "OCD-GMAE source key=479; original_ads_smi=[OH]; surface_formula=Ni6Sc36Te12; y_relaxed=-2.695426 eV; site=[27, 28, 30]; OCD62 overlap12 RUN3 symlink to representative50 source file; sha256=b3b675c823410b8df5a93aa574987ca77927a5d7902e8199e3de5e283bd71aba",
+    "source_key": "479",
+    "original_ads_smi": "[OH]",
+    "surface_formula": "Ni6Sc36Te12",
+    "surface_elements": "Ni;Sc;Te",
+    "bare_slab_atoms": "54",
+    "adsorbate_atoms": "2",
+    "y_relaxed": "-2.695426",
+    "site_indices": "27;28;30",
+    "selection_bucket": "cmu_exact"
+  },
+  "status": "success",
+  "best_energy_eV": -6.576652526855469,
+  "iteration_count": 1,
+  "max_attempts": 1,
+  "final_site_type": "bridge",
+  "converged_tag": false,
+  "wall_clock_sec": 93.81069051474333,
+  "total_input_tokens": 4574,
+  "total_output_tokens": 3112,
+  "artifact_paths": {
+    "BEST_OH_ontop_to_bridge_E-6.577": "/data/zongmin/workspace/AdsMind/research/results/canonical_raw/ocd62_overlap12_run5_grok4_ablation/single_shot/007/artifacts/BEST_OH_ontop_to_bridge_E-6.577.xyz",
+    "BEST_OH_ontop_to_bridge_E-6.577.xyz": "/data/zongmin/workspace/AdsMind/research/results/canonical_raw/ocd62_overlap12_run5_grok4_ablation/single_shot/007/artifacts/BEST_OH_ontop_to_bridge_E-6.577.xyz",
+    "best_structure_file": "/data/zongmin/workspace/AdsMind/research/results/canonical_raw/ocd62_overlap12_run5_grok4_ablation/single_shot/007/artifacts/BEST_OH_ontop_to_bridge_E-6.577.xyz",
+    "conformers_[OH]": "/data/zongmin/workspace/AdsMind/research/results/canonical_raw/ocd62_overlap12_run5_grok4_ablation/single_shot/007/artifacts/conformers_[OH].traj",
+    "conformers_[OH].traj": "/data/zongmin/workspace/AdsMind/research/results/canonical_raw/ocd62_overlap12_run5_grok4_ablation/single_shot/007/artifacts/conformers_[OH].traj",
+    "final": "/data/zongmin/workspace/AdsMind/research/results/canonical_raw/ocd62_overlap12_run5_grok4_ablation/single_shot/007/artifacts/final.xyz",
+    "final.xyz": "/data/zongmin/workspace/AdsMind/research/results/canonical_raw/ocd62_overlap12_run5_grok4_ablation/single_shot/007/artifacts/final.xyz",
+    "relaxation": "/data/zongmin/workspace/AdsMind/research/results/canonical_raw/ocd62_overlap12_run5_grok4_ablation/single_shot/007/artifacts/relaxation.traj",
+    "relaxation.traj": "/data/zongmin/workspace/AdsMind/research/results/canonical_raw/ocd62_overlap12_run5_grok4_ablation/single_shot/007/artifacts/relaxation.traj",
+    "relaxation_trajectory_file": "/data/zongmin/workspace/AdsMind/research/results/canonical_raw/ocd62_overlap12_run5_grok4_ablation/single_shot/007/artifacts/relaxation.traj"
+  },
+  "best_result": {
+    "most_stable_energy_eV": -6.576652526855469,
+    "analysis_json": {
+      "status": "success",
+      "message": "Most stable config adsorption energy: -6.5767 eV. Target Atom: O (from plan index 0, global index 54 in relaxed structure). -> Nearest: Sc (Index 25), Distance: 1.989 Å (Threshold: 3.422), Bound: True. Bonded Surface Atoms: Sc-1.989Å, Sc-2.11Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Ni'] -> Actual ['Sc', 'Sc']).",
+      "most_stable_energy_eV": -6.576652526855469,
+      "target_adsorbate_atom": "O",
+      "target_adsorbate_atom_index": 54,
+      "bonded_surface_atoms": [
+        {
+          "symbol": "Sc",
+          "index": 25,
+          "distance": 1.989
+        },
+        {
+          "symbol": "Sc",
+          "index": 34,
+          "distance": 2.11
+        }
+      ],
+      "nearest_slab_atom": "Sc",
+      "nearest_slab_atom_index": 25,
+      "final_bond_distance_A": 1.989,
+      "estimated_covalent_cutoff_A": 2.596,
+      "is_covalently_bound": true,
+      "reaction_detected": false,
+      "is_dissociated": false,
+      "n_components": 1,
+      "bond_change_count": 0,
+      "site_analysis": {
+        "planned_site_type": "ontop",
+        "planned_connectivity": 1,
+        "actual_site_type": "bridge",
+        "actual_connectivity": 2,
+        "is_chemical_slip": true,
+        "planned_symbols": [
+          "Ni"
+        ],
+        "actual_symbols": [
+          "Sc",
+          "Sc"
+        ],
+        "site_fingerprint": "Sc25-Sc34"
+      },
+      "best_structure_file": "outputs/007-4985c247/BEST_OH_ontop_to_bridge_E-6.577.xyz",
+      "generated_conformers_file": "outputs/007-4985c247/conformers_[OH].traj",
+      "relaxation_trajectory_file": "outputs/007-4985c247/final.xyz",
+      "session_id": "007-4985c247"
+    },
+    "plan": {
+      "reasoning": "SMILES Consistency Check: The provided heavy atom list shows index 0 as O with SP3 hybridization, degree 0, radical_electrons 1, formal_charge 0. This matches the hydroxyl radical [OH], where O is the heavy atom with an unpaired electron, and H is implicit (not listed as it's not heavy). No mismatch with user description of hydroxyl radical. For ReactiveSpecies, the binding atom O has radical_electrons > 0, which is confirmed. History is None, so this is the first attempt. No previous plans to analyze. User intent: Find the lowest-energy adsorption configuration for hydroxyl radical on the surface. Adsorbate analysis: [OH] is a radical species with the radical on O (index 0). It typically adsorbs via the O atom in monodentate fashion. Surface analysis: Available ontop sites include Ni, Sc, Te. Given the surface composition includes Ni (a transition metal often active in catalysis), starting with ontop adsorption on Ni is reasonable as an initial plan to probe likely stable sites. OH radical should be treated as ReactiveSpecies due to the unpaired electron on O. Proposing single-point adsorption via O at ontop Ni site. Since termination is disabled but hard limit is 1, proceeding with 'continue' for this attempt. If heterogeneity in Ni sites leads to varying energies later, may need to refine in future plans, but none yet.",
+      "adsorbate_type": "ReactiveSpecies",
+      "solution": {
+        "action": "continue",
+        "site_type": "ontop",
+        "surface_binding_atoms": [
+          "Ni"
+        ],
+        "adsorbate_binding_indices": [
+          0
+        ],
+        "relax_top_n": 1,
+        "touch_sphere_size": 2,
+        "overlap_thr": 0.1,
+        "conformers_per_site_cap": 4
+      }
+    },
+    "result_type": "Perfect"
+  },
+  "last_analysis": {
+    "status": "success",
+    "message": "Most stable config adsorption energy: -6.5767 eV. Target Atom: O (from plan index 0, global index 54 in relaxed structure). -> Nearest: Sc (Index 25), Distance: 1.989 Å (Threshold: 3.422), Bound: True. Bonded Surface Atoms: Sc-1.989Å, Sc-2.11Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Ni'] -> Actual ['Sc', 'Sc']).",
+    "most_stable_energy_eV": -6.576652526855469,
+    "target_adsorbate_atom": "O",
+    "target_adsorbate_atom_index": 54,
+    "bonded_surface_atoms": [
+      {
+        "symbol": "Sc",
+        "index": 25,
+        "distance": 1.989
+      },
+      {
+        "symbol": "Sc",
+        "index": 34,
+        "distance": 2.11
+      }
+    ],
+    "nearest_slab_atom": "Sc",
+    "nearest_slab_atom_index": 25,
+    "final_bond_distance_A": 1.989,
+    "estimated_covalent_cutoff_A": 2.596,
+    "is_covalently_bound": true,
+    "reaction_detected": false,
+    "is_dissociated": false,
+    "n_components": 1,
+    "bond_change_count": 0,
+    "site_analysis": {
+      "planned_site_type": "ontop",
+      "planned_connectivity": 1,
+      "actual_site_type": "bridge",
+      "actual_connectivity": 2,
+      "is_chemical_slip": true,
+      "planned_symbols": [
+        "Ni"
+      ],
+      "actual_symbols": [
+        "Sc",
+        "Sc"
+      ],
+      "site_fingerprint": "Sc25-Sc34"
+    },
+    "best_structure_file": "outputs/007-4985c247/BEST_OH_ontop_to_bridge_E-6.577.xyz",
+    "generated_conformers_file": "outputs/007-4985c247/conformers_[OH].traj",
+    "relaxation_trajectory_file": "outputs/007-4985c247/final.xyz",
+    "session_id": "007-4985c247"
+  },
+  "attempt_records": [
+    {
+      "attempt_index": 1,
+      "plan": {
+        "reasoning": "SMILES Consistency Check: The provided heavy atom list shows index 0 as O with SP3 hybridization, degree 0, radical_electrons 1, formal_charge 0. This matches the hydroxyl radical [OH], where O is the heavy atom with an unpaired electron, and H is implicit (not listed as it's not heavy). No mismatch with user description of hydroxyl radical. For ReactiveSpecies, the binding atom O has radical_electrons > 0, which is confirmed. History is None, so this is the first attempt. No previous plans to analyze. User intent: Find the lowest-energy adsorption configuration for hydroxyl radical on the surface. Adsorbate analysis: [OH] is a radical species with the radical on O (index 0). It typically adsorbs via the O atom in monodentate fashion. Surface analysis: Available ontop sites include Ni, Sc, Te. Given the surface composition includes Ni (a transition metal often active in catalysis), starting with ontop adsorption on Ni is reasonable as an initial plan to probe likely stable sites. OH radical should be treated as ReactiveSpecies due to the unpaired electron on O. Proposing single-point adsorption via O at ontop Ni site. Since termination is disabled but hard limit is 1, proceeding with 'continue' for this attempt. If heterogeneity in Ni sites leads to varying energies later, may need to refine in future plans, but none yet.",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "ontop",
+          "surface_binding_atoms": [
+            "Ni"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "ontop|Ni|0|ReactiveSpecies|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -6.576652526855469,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": true,
+      "planned_site_type": "ontop",
+      "actual_site_type": "bridge",
+      "best_structure_file": "outputs/007-4985c247/BEST_OH_ontop_to_bridge_E-6.577.xyz",
+      "generated_conformers_file": "outputs/007-4985c247/conformers_[OH].traj",
+      "relaxation_trajectory_file": "outputs/007-4985c247/final.xyz",
+      "message": "Most stable config adsorption energy: -6.5767 eV. Target Atom: O (from plan index 0, global index 54 in relaxed structure). -> Nearest: Sc (Index 25), Distance: 1.989 Å (Threshold: 3.422), Bound: True. Bonded Surface Atoms: Sc-1.989Å, Sc-2.11Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Ni'] -> Actual ['Sc', 'Sc']).",
+      "history_entry": "【✅ Perfect Adsorption】 ontop @ ['Ni'] (Index [0]) -> Site: bridge (Sc,Sc) | E=-6.577 eV"
+    }
+  ],
+  "history": [
+    "【✅ Perfect Adsorption】 ontop @ ['Ni'] (Index [0]) -> Site: bridge (Sc,Sc) | E=-6.577 eV"
+  ],
+  "error": null,
+  "perfect_count": 1,
+  "dissociation_count": 0,
+  "rearrangement_count": 0,
+  "calc_failure_count": 0,
+  "chemical_slip_count": 1
+}
