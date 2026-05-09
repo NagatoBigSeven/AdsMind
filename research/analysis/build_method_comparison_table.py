@@ -39,7 +39,11 @@ DATASETS = {
 
 
 def dataset_summary_dir(dataset: str) -> Path:
-    return BASIC_ROOT / dataset / "summaries"
+    return BASIC_SUMMARY_DIR
+
+
+def dataset_summary_path(dataset: str, name: str) -> Path:
+    return dataset_summary_dir(dataset) / f"{dataset}_{name}"
 
 
 def backend_dir(dataset: str, backend: str) -> Path:
@@ -545,11 +549,11 @@ def main() -> None:
     for dataset, table in tables.items():
         output_dir = dataset_summary_dir(dataset)
         output_dir.mkdir(parents=True, exist_ok=True)
-        public_path = output_dir / "method_comparison.csv"
+        public_path = dataset_summary_path(dataset, "method_comparison.csv")
         table.to_csv(public_path, index=False)
         print(f"Wrote {public_path.relative_to(ROOT)} ({len(table)} rows)")
         if dataset == "cmu20":
-            ablation_path = output_dir / "ablation_4backend.csv"
+            ablation_path = dataset_summary_path(dataset, "ablation_4backend.csv")
             build_ablation_4backend(dataset).to_csv(ablation_path, index=False)
             print(f"Wrote {ablation_path.relative_to(ROOT)}")
 

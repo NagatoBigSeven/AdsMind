@@ -13,7 +13,7 @@ Output:
     research/results/processed/si_figures/
         basic_experiments/cmu20/{backend}/{variant}/summary.csv
         basic_experiments/cmu20/baselines/{method}/summary.csv
-        basic_experiments/cmu20/summaries/ablation_4backend.csv
+        basic_experiments/summaries/cmu20_ablation_4backend.csv
         advanced_experiments/chemical_slip_interpretability/cmu20/slip_analysis.csv
         advanced_experiments/mace_force_field_sensitivity/.../ablation_summary.csv
         advanced_experiments/gpt54_multiseed_cmu20/{seed}/ablation_summary.csv

@@ -1,0 +1,91 @@
+{
+  "_public_config": {
+    "redacted_fields": [
+      "api_key_source",
+      "frozen_config.llm_api_key_env_var"
+    ],
+    "schema_version": 1,
+    "source_file": "config.json"
+  },
+  "api_key_source": "<redacted>",
+  "case": {
+    "ablation_candidate": "FALSE",
+    "adsorbate_atoms": "3",
+    "adsorbate_name": "[N]=N",
+    "bare_slab_atoms": "96",
+    "case_id": "014",
+    "miller_index": "",
+    "notes": "OCD id=118; adsorbate=[N]=N; surface_formula=Ge36V60; y_relaxed=-2.727881 eV; site=37;47;53;62;65;86",
+    "original_ads_smi": "[N]=N",
+    "reaction_class": "GENERALIZATION",
+    "selection_bucket": "small_n_species",
+    "site_indices": "37;47;53;62;65;86",
+    "slab_file": "datasets/ocd62/014_ocd_118_Ge36V60_N_N.xyz",
+    "smiles": "[N]=N",
+    "source_key": "118",
+    "surface_elements": "Ge;V",
+    "surface_family": "compound",
+    "surface_formula": "Ge36V60",
+    "user_request": "Find the lowest-energy adsorption configuration for the adsorbate with SMILES [N]=N on the provided surface.",
+    "y_relaxed": "-2.727881"
+  },
+  "dry_run": false,
+  "frozen_config": {
+    "calculator_backend": "mace",
+    "fmax": 0.1,
+    "llm_api_key_env_var": "<redacted>",
+    "llm_backend": "openai",
+    "llm_base_url": "https://api.openai.com/v1",
+    "llm_model": "gpt-5.4-2026-03-05",
+    "mace_device": "cpu",
+    "mace_model": "small",
+    "mace_precision": "float32",
+    "mace_use_dispersion": false,
+    "manifest_version": "ocd62_manifest_v1",
+    "max_retries": 5,
+    "max_tokens": 4096,
+    "notes": [
+      "Paper benchmark route: GPT-5.4 is accessed through not_distinguished.",
+      "The model is pinned to gpt-5.4-2026-03-05 for reproducibility.",
+      "The physics protocol remains locked to MACE-MP-0 small unless this file explicitly belongs to a force-field sensitivity run."
+    ],
+    "platform": "EPFL-workstation-cpu-float32",
+    "random_seed": 42,
+    "relaxation_mode": "standard",
+    "temperature": 0,
+    "timeout_sec": 120,
+    "transport_variant": "openai-official",
+    "user_request_mode": "per-case explicit request string from datasets/ocd62/ocd62_manifest.csv"
+  },
+  "git_sha": "53f1eb1776d3411b2cf02257e26756a273f24a53",
+  "resolved_runtime_flags": {
+    "calculator_backend": "mace",
+    "calculator_config": {
+      "device": "cpu",
+      "model": "small",
+      "precision": "float32",
+      "use_dispersion": false
+    },
+    "enable_forbid": false,
+    "enable_slip_feedback": true,
+    "enable_termination": true,
+    "llm_backend": "openai",
+    "llm_config": {
+      "extra_options": {
+        "base_url": "https://api.openai.com/v1"
+      },
+      "max_tokens": 4096,
+      "model": "gpt-5.4-2026-03-05",
+      "temperature": 0,
+      "timeout": 120
+    },
+    "max_attempts": 5,
+    "random_seed": 42,
+    "relaxation_config": {
+      "fmax": 0.1
+    },
+    "relaxation_mode": "standard"
+  },
+  "session_id": "004-607a74d8",
+  "timestamp": "2026-04-15T07:56:39+00:00"
+}

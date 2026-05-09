@@ -1,0 +1,91 @@
+{
+  "_public_config": {
+    "redacted_fields": [
+      "api_key_source",
+      "frozen_config.llm_api_key_env_var"
+    ],
+    "schema_version": 1,
+    "source_file": "config.json"
+  },
+  "api_key_source": "<redacted>",
+  "case": {
+    "ablation_candidate": "FALSE",
+    "adsorbate_atoms": "2",
+    "adsorbate_name": "[NH]",
+    "bare_slab_atoms": "80",
+    "case_id": "036",
+    "miller_index": "",
+    "notes": "OCD id=530; adsorbate=[NH]; surface_formula=Co32Y48; y_relaxed=-2.517605 eV; site=65;66;77",
+    "original_ads_smi": "[NH]",
+    "reaction_class": "GENERALIZATION",
+    "selection_bucket": "small_n_species",
+    "site_indices": "65;66;77",
+    "slab_file": "datasets/ocd62/036_ocd_530_Co32Y48_NH.xyz",
+    "smiles": "[NH]",
+    "source_key": "530",
+    "surface_elements": "Co;Y",
+    "surface_family": "intermetallic",
+    "surface_formula": "Co32Y48",
+    "user_request": "Find the lowest-energy adsorption configuration for the adsorbate with SMILES [NH] on the provided surface.",
+    "y_relaxed": "-2.517605"
+  },
+  "dry_run": false,
+  "frozen_config": {
+    "calculator_backend": "mace",
+    "fmax": 0.1,
+    "llm_api_key_env_var": "<redacted>",
+    "llm_backend": "anthropic",
+    "llm_base_url": "https://api.anthropic.com/v1/",
+    "llm_model": "claude-sonnet-4-6",
+    "mace_device": "cpu",
+    "mace_model": "small",
+    "mace_precision": "float32",
+    "mace_use_dispersion": false,
+    "manifest_version": "ocd62_manifest_v1",
+    "max_retries": 5,
+    "max_tokens": 4096,
+    "notes": [
+      "Paper benchmark route: Claude Sonnet 4.6 is accessed through not_distinguished.",
+      "The model is pinned to claude-sonnet-4-6 for reproducibility.",
+      "The physics protocol remains locked to MACE-MP-0 small unless this file explicitly belongs to a force-field sensitivity run."
+    ],
+    "platform": "EPFL-workstation-cpu-float32",
+    "random_seed": 42,
+    "relaxation_mode": "standard",
+    "temperature": 0,
+    "timeout_sec": 120,
+    "transport_variant": "anthropic-official",
+    "user_request_mode": "per-case explicit request string from datasets/ocd62/ocd62_manifest.csv"
+  },
+  "git_sha": "54d129d4bd712530229cd49b37fad7d4b0241f34",
+  "resolved_runtime_flags": {
+    "calculator_backend": "mace",
+    "calculator_config": {
+      "device": "cpu",
+      "model": "small",
+      "precision": "float32",
+      "use_dispersion": false
+    },
+    "enable_forbid": true,
+    "enable_slip_feedback": true,
+    "enable_termination": true,
+    "llm_backend": "anthropic",
+    "llm_config": {
+      "extra_options": {
+        "base_url": "https://api.anthropic.com/v1/"
+      },
+      "max_tokens": 4096,
+      "model": "claude-sonnet-4-6",
+      "temperature": 0,
+      "timeout": 120
+    },
+    "max_attempts": 5,
+    "random_seed": 42,
+    "relaxation_config": {
+      "fmax": 0.1
+    },
+    "relaxation_mode": "standard"
+  },
+  "session_id": "015-f4506ee4",
+  "timestamp": "2026-04-23T15:39:10+00:00"
+}

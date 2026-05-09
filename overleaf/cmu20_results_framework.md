@@ -10,7 +10,7 @@
 ### Basic Testing Data ✅ (All Plotted)
 | Data | File | Plot Status |
 |------|------|-------------|
-| 5-variant ablation (80 runs, 4 backends) | `basic_experiments/cmu20/summaries/ablation_4backend.csv` | ✅ Figure 2a+b |
+| 5-variant ablation (80 runs, 4 backends) | `basic_experiments/summaries/cmu20_ablation_4backend.csv` | ✅ Figure 2a+b |
 | 4-backend range per case | `advanced_experiments/ablation_and_chemical_slip_diagnostics/ablation_effects/cross_backend_agreement.csv` | ✅ Figure 3c heatmap |
 | Full vs 1-Shot head-to-head | `basic_experiments/summaries/full_vs_one_shot_summary.csv` | ✅ Figure 2a (trapezoid) |
 | Baseline: Random (n=20) | `basic_experiments/cmu20/baselines/random_n20/summary.csv` | ✅ SI S1a |
@@ -41,7 +41,7 @@ Figure 2 (2 panels, side by side):
 │   └─ 4 LLM backends (Gemini 2.5 Pro, GPT-5.4, Claude 4, Grok-4)
 │   └─ 5 ablation variants (Full, 1-Shot, w/o Slip, w/o Forbid, w/o Term)
 │   └─ y: Energy Δ distribution (IQR boxes + mean diamond + jittered scatter)
-│   └─ Data: basic_experiments/cmu20/summaries/ablation_4backend.csv
+│   └─ Data: basic_experiments/summaries/cmu20_ablation_4backend.csv
 │   └─ Key message: "1-Shot is the dominant degradation; iterative ablations stay near Full in median energy"
 │
 └─ Panel b: Radar chart
@@ -77,7 +77,7 @@ Figure 3 (2 rows):
         └─ x: Case ID (01-20), y: Backend (4)
         └─ Heatmap colored by Adsorption Energy (RdYlBu_r)
         └─ Annotated with energy values
-        └─ Data: basic_experiments/cmu20/summaries/ablation_4backend.csv
+        └─ Data: basic_experiments/summaries/cmu20_ablation_4backend.csv
 ```
 
 ---

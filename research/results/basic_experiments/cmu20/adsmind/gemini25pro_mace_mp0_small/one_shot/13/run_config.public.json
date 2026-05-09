@@ -1,0 +1,81 @@
+{
+  "_public_config": {
+    "redacted_fields": [
+      "api_key_source",
+      "frozen_config.llm_api_key_env_var"
+    ],
+    "schema_version": 1,
+    "source_file": "config.json"
+  },
+  "api_key_source": "<redacted>",
+  "case": {
+    "ablation_candidate": "FALSE",
+    "adsorbate_name": "OH",
+    "case_id": "13",
+    "miller_index": "(100)",
+    "notes": "Prior runs labeled all final sites as desorbed",
+    "reaction_class": "ORR",
+    "slab_file": "benchmark_slabs/13_Ag_100.xyz",
+    "smiles": "[OH]",
+    "surface_family": "monometallic",
+    "user_request": "Find the lowest-energy adsorption configuration for hydroxyl radical on the provided surface."
+  },
+  "dry_run": false,
+  "frozen_config": {
+    "calculator_backend": "mace",
+    "fmax": 0.1,
+    "llm_api_key_env_var": "<redacted>",
+    "llm_backend": "openrouter",
+    "llm_base_url": "https://openrouter.ai/api/v1",
+    "llm_model": "google/gemini-2.5-pro",
+    "mace_device": "cpu",
+    "mace_model": "small",
+    "mace_precision": "float32",
+    "mace_use_dispersion": false,
+    "manifest_version": "cmu20_manifest_v1",
+    "max_retries": 2,
+    "max_tokens": 4096,
+    "notes": [
+      "Recovery for CMU20 Gemini one-shot cases whose original VertexAI attempts failed before execution due to billing being disabled.",
+      "Results are written into the existing google_vertexai_gemini25pro_mace_mp0_small/one_shot directory per project cleanup policy."
+    ],
+    "platform": "EPFL-workstation-cpu-float32",
+    "random_seed": 42,
+    "relaxation_mode": "standard",
+    "temperature": 0.0,
+    "timeout_sec": 120,
+    "transport_variant": "openrouter-official-gemini25pro-cmu20-one-shot-recovery",
+    "user_request_mode": "per-case explicit request string from research/agent_eval/manifests/cmu_manifest.csv"
+  },
+  "git_sha": "54d129d4bd712530229cd49b37fad7d4b0241f34",
+  "resolved_runtime_flags": {
+    "calculator_backend": "mace",
+    "calculator_config": {
+      "device": "cpu",
+      "model": "small",
+      "precision": "float32",
+      "use_dispersion": false
+    },
+    "enable_forbid": false,
+    "enable_slip_feedback": false,
+    "enable_termination": false,
+    "llm_backend": "openrouter",
+    "llm_config": {
+      "extra_options": {
+        "base_url": "https://openrouter.ai/api/v1"
+      },
+      "max_tokens": 4096,
+      "model": "google/gemini-2.5-pro",
+      "temperature": 0.0,
+      "timeout": 120
+    },
+    "max_attempts": 1,
+    "random_seed": 42,
+    "relaxation_config": {
+      "fmax": 0.1
+    },
+    "relaxation_mode": "standard"
+  },
+  "session_id": "13-53ebdc70",
+  "timestamp": "2026-05-04T19:03:12+00:00"
+}

@@ -1,0 +1,82 @@
+{
+  "_public_config": {
+    "redacted_fields": [
+      "api_key_source",
+      "frozen_config.llm_api_key_env_var"
+    ],
+    "schema_version": 1,
+    "source_file": "config.json"
+  },
+  "api_key_source": "<redacted>",
+  "case": {
+    "ablation_candidate": "FALSE",
+    "adsorbate_name": "OCHCH3",
+    "case_id": "18",
+    "miller_index": "(101)",
+    "notes": "Best-available reconstruction from sanitized filename CC_O and formula C2H4O",
+    "reaction_class": "COMPLEX",
+    "slab_file": "benchmark_slabs/18_Al3Zr_101.xyz",
+    "smiles": "CC=O",
+    "surface_family": "intermetallic",
+    "user_request": "Find the lowest-energy adsorption configuration for acetaldehyde on the provided surface."
+  },
+  "dry_run": false,
+  "frozen_config": {
+    "calculator_backend": "mace",
+    "fmax": 0.1,
+    "llm_api_key_env_var": "<redacted>",
+    "llm_backend": "openrouter",
+    "llm_base_url": "https://openrouter.ai/api/v1",
+    "llm_model": "gemini-2.5-pro",
+    "mace_device": "cpu",
+    "mace_model": "small",
+    "mace_precision": "float32",
+    "mace_use_dispersion": false,
+    "manifest_version": "cmu_manifest",
+    "max_retries": 5,
+    "max_tokens": 4096,
+    "notes": [
+      "Paper benchmark route: Gemini 2.5 Pro is accessed through not_distinguished.",
+      "The target model is gemini-2.5-pro.",
+      "The physics protocol remains locked to MACE-MP-0 small unless this file explicitly belongs to a force-field sensitivity run."
+    ],
+    "platform": "macOS-M3Pro-float32",
+    "random_seed": 42,
+    "relaxation_mode": "standard",
+    "temperature": 0,
+    "timeout_sec": 120,
+    "transport_variant": "openrouter",
+    "user_request_mode": "per-case explicit request string from manifests/cmu_manifest.csv"
+  },
+  "git_sha": "53f1eb1776d3411b2cf02257e26756a273f24a53",
+  "resolved_runtime_flags": {
+    "calculator_backend": "mace",
+    "calculator_config": {
+      "device": "cpu",
+      "model": "small",
+      "precision": "float32",
+      "use_dispersion": false
+    },
+    "enable_forbid": false,
+    "enable_slip_feedback": false,
+    "enable_termination": true,
+    "llm_backend": "openrouter",
+    "llm_config": {
+      "extra_options": {
+        "base_url": "https://openrouter.ai/api/v1"
+      },
+      "max_tokens": 4096,
+      "model": "gemini-2.5-pro",
+      "temperature": 0,
+      "timeout": 120
+    },
+    "max_attempts": 5,
+    "random_seed": 42,
+    "relaxation_config": {
+      "fmax": 0.1
+    },
+    "relaxation_mode": "standard"
+  },
+  "session_id": "18-0a9f066c",
+  "timestamp": "2026-04-14T10:24:23+00:00"
+}

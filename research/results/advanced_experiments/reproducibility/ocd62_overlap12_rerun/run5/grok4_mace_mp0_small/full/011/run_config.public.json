@@ -1,0 +1,100 @@
+{
+  "_public_config": {
+    "redacted_fields": [
+      "api_key_source",
+      "frozen_config.llm_api_key_env_var"
+    ],
+    "schema_version": 1,
+    "source_file": "config.json"
+  },
+  "api_key_source": "<redacted>",
+  "case": {
+    "ablation_candidate": "FALSE",
+    "adsorbate_atoms": "3",
+    "adsorbate_name": "[NH2]",
+    "bare_slab_atoms": "54",
+    "case_id": "011",
+    "miller_index": "",
+    "notes": "OCD-GMAE source key=735; original_ads_smi=[NH2]; surface_formula=Re27Ti27; y_relaxed=-4.360505 eV; site=[29, 38]; OCD62 overlap12 RUN3 symlink to representative50 source file; sha256=ca91c00f266a7091e281809854ee97137a4cad472c15a00abb31031cfc56e80a",
+    "original_ads_smi": "[NH2]",
+    "reaction_class": "GENERALIZATION",
+    "selection_bucket": "small_n_species",
+    "site_indices": "29;38",
+    "slab_file": "datasets/ocd62_overlap12/011_ocd_735_Re27Ti27_NH2.xyz",
+    "smiles": "[NH2]",
+    "source_key": "735",
+    "surface_elements": "Re;Ti",
+    "surface_family": "intermetallic",
+    "surface_formula": "Re27Ti27",
+    "user_request": "Find the lowest-energy adsorption configuration for the adsorbate with SMILES [NH2] on the provided surface.",
+    "y_relaxed": "-4.360505"
+  },
+  "dry_run": false,
+  "frozen_config": {
+    "calculator_backend": "mace",
+    "fmax": 0.1,
+    "llm_api_key_env_var": "<redacted>",
+    "llm_backend": "openrouter",
+    "llm_base_url": "https://openrouter.ai/api/v1",
+    "llm_default_headers": {
+      "HTTP-Referer": "https://github.com/zongmin/AdsMind",
+      "X-Title": "AdsMind OCD62 RUN3 Grok-4"
+    },
+    "llm_model": "x-ai/grok-4",
+    "mace_device": "cpu",
+    "mace_model": "small",
+    "mace_precision": "float32",
+    "mace_use_dispersion": false,
+    "manifest_version": "ocd62_overlap12_run3_manifest_v1",
+    "max_retries": 5,
+    "max_tokens": 4096,
+    "notes": [
+      "OCD62 overlap12 RUN3 reproducibility rerun through OpenRouter.",
+      "Backend label remains grok4 for analysis; model route is x-ai/grok-4.",
+      "API key is provided at runtime and is not stored in this config.",
+      "Physics protocol remains locked: MACE small on CPU with float32 precision and no dispersion."
+    ],
+    "platform": "EPFL-LIACPC12-cpu-float32",
+    "random_seed": 42,
+    "relaxation_mode": "standard",
+    "temperature": 0.0,
+    "timeout_sec": 120,
+    "transport_variant": "openrouter-ocd62-run3",
+    "user_request_mode": "per-case explicit request string from datasets/ocd62_overlap12/manifest.csv"
+  },
+  "git_sha": "54d129d4bd712530229cd49b37fad7d4b0241f34",
+  "resolved_runtime_flags": {
+    "calculator_backend": "mace",
+    "calculator_config": {
+      "device": "cpu",
+      "model": "small",
+      "precision": "float32",
+      "use_dispersion": false
+    },
+    "enable_forbid": true,
+    "enable_slip_feedback": true,
+    "enable_termination": true,
+    "llm_backend": "openrouter",
+    "llm_config": {
+      "extra_options": {
+        "base_url": "https://openrouter.ai/api/v1",
+        "default_headers": {
+          "HTTP-Referer": "https://github.com/zongmin/AdsMind",
+          "X-Title": "AdsMind OCD62 RUN3 Grok-4"
+        }
+      },
+      "max_tokens": 4096,
+      "model": "x-ai/grok-4",
+      "temperature": 0.0,
+      "timeout": 120
+    },
+    "max_attempts": 5,
+    "random_seed": 42,
+    "relaxation_config": {
+      "fmax": 0.1
+    },
+    "relaxation_mode": "standard"
+  },
+  "session_id": "011-96a13358",
+  "timestamp": "2026-05-05T17:02:35+00:00"
+}

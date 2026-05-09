@@ -1,0 +1,83 @@
+{
+  "_public_config": {
+    "redacted_fields": [
+      "api_key_source",
+      "frozen_config.llm_api_key_env_var"
+    ],
+    "schema_version": 1,
+    "source_file": "config.json"
+  },
+  "api_key_source": "<redacted>",
+  "case": {
+    "ablation_candidate": "FALSE",
+    "adsorbate_name": "ONN(CH3)2",
+    "case_id": "20",
+    "miller_index": "(211)",
+    "notes": "Recovered from top-level results artifacts; case directory is empty and needs archival repair",
+    "reaction_class": "COMPLEX",
+    "slab_file": "benchmark_slabs/20_Bi2Ti6_211.xyz",
+    "smiles": "CN(C)N=O",
+    "surface_family": "intermetallic",
+    "user_request": "Find the lowest-energy adsorption configuration for dimethylnitrosamine on the provided surface."
+  },
+  "dry_run": false,
+  "frozen_config": {
+    "calculator_backend": "mace",
+    "fmax": 0.1,
+    "llm_api_key_env_var": "<redacted>",
+    "llm_backend": "openrouter",
+    "llm_base_url": "https://openrouter.ai/api/v1",
+    "llm_model": "x-ai/grok-4",
+    "mace_device": "cpu",
+    "mace_model": "small",
+    "mace_precision": "float32",
+    "mace_use_dispersion": false,
+    "manifest_version": "ocd_gmae_recovery",
+    "max_retries": 5,
+    "max_tokens": 4096,
+    "notes": [
+      "Recovery config for Grok-4 reruns after external quota failures.",
+      "The target model remains Grok-4.",
+      "API key is read from the OPENROUTER_API_KEY environment variable.",
+      "The physics protocol remains locked: MACE small on CPU with float32 precision and no dispersion."
+    ],
+    "platform": "linux-x86_64-cpu-float32",
+    "random_seed": 44,
+    "relaxation_mode": "standard",
+    "temperature": 0.0,
+    "timeout_sec": 120,
+    "transport_variant": "grok4-compatible-recovery",
+    "user_request_mode": "per-case explicit request string from manifest CSV"
+  },
+  "git_sha": "54d129d4bd712530229cd49b37fad7d4b0241f34",
+  "resolved_runtime_flags": {
+    "calculator_backend": "mace",
+    "calculator_config": {
+      "device": "cpu",
+      "model": "small",
+      "precision": "float32",
+      "use_dispersion": false
+    },
+    "enable_forbid": false,
+    "enable_slip_feedback": false,
+    "enable_termination": false,
+    "llm_backend": "openrouter",
+    "llm_config": {
+      "extra_options": {
+        "base_url": "https://openrouter.ai/api/v1"
+      },
+      "max_tokens": 4096,
+      "model": "x-ai/grok-4",
+      "temperature": 0.0,
+      "timeout": 120
+    },
+    "max_attempts": 1,
+    "random_seed": 44,
+    "relaxation_config": {
+      "fmax": 0.1
+    },
+    "relaxation_mode": "standard"
+  },
+  "session_id": "20-961307f6",
+  "timestamp": "2026-05-08T13:31:38+00:00"
+}

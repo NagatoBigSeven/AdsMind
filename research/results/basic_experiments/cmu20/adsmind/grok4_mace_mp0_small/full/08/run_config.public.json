@@ -1,0 +1,82 @@
+{
+  "_public_config": {
+    "redacted_fields": [
+      "api_key_source",
+      "frozen_config.llm_api_key_env_var"
+    ],
+    "schema_version": 1,
+    "source_file": "config.json"
+  },
+  "api_key_source": "<redacted>",
+  "case": {
+    "ablation_candidate": "FALSE",
+    "adsorbate_name": "NNH",
+    "case_id": "08",
+    "miller_index": "(111)",
+    "notes": "Ru3Mo NNH benchmark; strongest prior energy",
+    "reaction_class": "NRR",
+    "slab_file": "benchmark_slabs/08_Ru3Mo_111.xyz",
+    "smiles": "[N]=[NH]",
+    "surface_family": "intermetallic",
+    "user_request": "Find the lowest-energy adsorption configuration for NNH on the provided surface."
+  },
+  "dry_run": false,
+  "frozen_config": {
+    "calculator_backend": "mace",
+    "fmax": 0.1,
+    "llm_api_key_env_var": "<redacted>",
+    "llm_backend": "openrouter",
+    "llm_base_url": "https://openrouter.ai/api/v1",
+    "llm_model": "grok-4",
+    "mace_device": "cpu",
+    "mace_model": "small",
+    "mace_precision": "float32",
+    "mace_use_dispersion": false,
+    "manifest_version": "cmu_manifest",
+    "max_retries": 5,
+    "max_tokens": 4096,
+    "notes": [
+      "Paper benchmark route: Grok-4 is accessed through not_distinguished.",
+      "The target model is grok-4.",
+      "The physics protocol remains locked to MACE-MP-0 small unless this file explicitly belongs to a force-field sensitivity run."
+    ],
+    "platform": "macOS-M3Pro-float32",
+    "random_seed": 42,
+    "relaxation_mode": "standard",
+    "temperature": 0,
+    "timeout_sec": 120,
+    "transport_variant": "openrouter",
+    "user_request_mode": "per-case explicit request string from manifests/cmu_manifest.csv"
+  },
+  "git_sha": "54d129d4bd712530229cd49b37fad7d4b0241f34",
+  "resolved_runtime_flags": {
+    "calculator_backend": "mace",
+    "calculator_config": {
+      "device": "cpu",
+      "model": "small",
+      "precision": "float32",
+      "use_dispersion": false
+    },
+    "enable_forbid": true,
+    "enable_slip_feedback": true,
+    "enable_termination": true,
+    "llm_backend": "openrouter",
+    "llm_config": {
+      "extra_options": {
+        "base_url": "https://openrouter.ai/api/v1"
+      },
+      "max_tokens": 4096,
+      "model": "grok-4",
+      "temperature": 0,
+      "timeout": 120
+    },
+    "max_attempts": 5,
+    "random_seed": 42,
+    "relaxation_config": {
+      "fmax": 0.1
+    },
+    "relaxation_mode": "standard"
+  },
+  "session_id": "08-05bc6791",
+  "timestamp": "2026-04-21T22:21:31+00:00"
+}

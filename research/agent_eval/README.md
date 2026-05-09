@@ -98,8 +98,8 @@ python -m research.agent_eval.aggregate_ablation_across_backends \
   --summary claude_sonnet46_mace_mp0_small=research/results/basic_experiments/cmu20/adsmind/claude_sonnet46_mace_mp0_small/all_variants_summary.csv \
   --summary gemini25pro_mace_mp0_small=research/results/basic_experiments/cmu20/adsmind/gemini25pro_mace_mp0_small/all_variants_summary.csv \
   --summary grok4_mace_mp0_small=research/results/basic_experiments/cmu20/adsmind/grok4_mace_mp0_small/all_variants_summary.csv \
-  --output-csv research/results/basic_experiments/cmu20/summaries/ablation_4backend.csv \
-  --output-json research/results/basic_experiments/cmu20/summaries/ablation_4backend.json
+  --output-csv research/results/basic_experiments/summaries/cmu20_ablation_4backend.csv \
+  --output-json research/results/basic_experiments/summaries/cmu20_ablation_4backend.json
 ```
 
 ## Results

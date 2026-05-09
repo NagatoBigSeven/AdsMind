@@ -22,7 +22,7 @@ from research.agent_eval.experiment_identity import BACKEND_KEYS, backend_identi
 RESULTS_ROOT = ROOT / "research" / "results"
 BASIC_ROOT = RESULTS_ROOT / "basic_experiments"
 ADVANCED_ROOT = RESULTS_ROOT / "advanced_experiments"
-OCD62_SUMMARY_DIR = BASIC_ROOT / "ocd62" / "summaries"
+BASIC_SUMMARY_DIR = BASIC_ROOT / "summaries"
 OVERLAP12_ROOT = ADVANCED_ROOT / "reproducibility" / "ocd62_overlap12_rerun"
 OVERLAP12_SUMMARY_DIR = OVERLAP12_ROOT / "summaries"
 DATASET_DIR = ROOT / "datasets" / "ocd62"
@@ -415,7 +415,7 @@ def write_outputs(write_n3: bool, write_n4: bool, write_n5: bool) -> None:
         "tokens_used",
     ]
     unified = unified_rows()
-    write_csv(OCD62_SUMMARY_DIR / "ablation_4backend.csv", unified, unified_fields)
+    write_csv(BASIC_SUMMARY_DIR / "ocd62_ablation_4backend.csv", unified, unified_fields)
 
     write_reproducibility_outputs(2)
 

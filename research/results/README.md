@@ -14,8 +14,8 @@ research/results/
           one_shot|full|no_slip|no_termination|no_forbid/
             summary.csv
             <case_id>/result.json
+            <case_id>/run_config.public.json
       baselines/
-      summaries/
     ocd62/
       adsmind/
         gpt54_mace_mp0_small/
@@ -25,8 +25,8 @@ research/results/
           one_shot|full|no_slip|no_termination|no_forbid/
             summary.csv
             <case_id>/result.json
+            <case_id>/run_config.public.json
       baselines/
-      summaries/
     summaries/
   advanced_experiments/
     ablation_and_chemical_slip_diagnostics/
@@ -52,11 +52,12 @@ AdsMind runs live under each dataset's `adsmind/` directory, parallel to
 table. Each variant directory also has its own `summary.csv` beside the case
 result directories.
 
-Dataset-level summaries:
+Paper-facing summary entry point:
 
-- `basic_experiments/cmu20/summaries/method_comparison.csv`
-- `basic_experiments/ocd62/summaries/method_comparison.csv`
-- `basic_experiments/ocd62/summaries/ablation_4backend.csv`
+- `basic_experiments/summaries/cmu20_method_comparison.csv`
+- `basic_experiments/summaries/cmu20_ablation_4backend.csv`
+- `basic_experiments/summaries/ocd62_method_comparison.csv`
+- `basic_experiments/summaries/ocd62_ablation_4backend.csv`
 - `basic_experiments/summaries/full_vs_one_shot_summary.csv`
 - `basic_experiments/summaries/method_comparison_summary.csv`
 - `basic_experiments/summaries/method_comparison_table.md`
@@ -110,6 +111,9 @@ PYTHONPATH=. .venv/bin/python research/analysis/build_ocd62_summary.py
 
 Structural evidence used to audit the paper-facing results is versioned with
 Git LFS where appropriate: AdsMind `artifacts/`, relaxation `traj/` directories,
-`.xyz`, `.traj`, `.pkl`, curated figures, and audited run logs. Ad hoc runtime
-noise such as `agent_log.txt`, per-process `config.json`, Python bytecode, and
-uncurated local scratch output remains ignored.
+`.xyz`, `.traj`, `.pkl`, curated figures, and audited run logs. Each run with a
+raw `config.json` also has a sanitized `run_config.public.json` sidecar that
+keeps reproducibility fields such as `git_sha`, `frozen_config`, and runtime
+flags while redacting credential-source fields. Ad hoc runtime noise such as
+`agent_log.txt`, raw per-process `config.json`, Python bytecode, and uncurated
+local scratch output remains ignored.
