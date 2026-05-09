@@ -177,6 +177,8 @@ def energy_from_result(dataset: str, backend: str, variant: str, case_id: str) -
     if best is not None:
         return best
     last = result.get("last_analysis") or {}
+    if last.get("is_dissociated"):
+        return None
     return parse_float(last.get("most_stable_energy_eV"))
 
 
@@ -192,7 +194,26 @@ def energy_from_repro_result(run_name: str, backend: str, variant: str, case_id:
     if best is not None:
         return best
     last = result.get("last_analysis") or {}
+    if last.get("is_dissociated"):
+        return None
     return parse_float(last.get("most_stable_energy_eV"))
+
+
+def repro_run_dissociated(run_name: str, backend: str, variant: str, case_id: str) -> bool:
+    path = repro_run_dir(run_name, backend, variant, case_id) / "result.json"
+    if not path.exists():
+        return False
+    try:
+        result = json.loads(path.read_text(encoding="utf-8"))
+    except json.JSONDecodeError:
+        return False
+    last = result.get("last_analysis") or {}
+    if last.get("is_dissociated"):
+        return True
+    diss = parse_float(result.get("dissociation_count"))
+    if diss is not None and diss >= 1 and parse_float(result.get("best_energy_eV")) is None:
+        return True
+    return False
 
 
 def value_from_row(row: dict[str, Any], key: str, fallback: str = "") -> str:
@@ -282,7 +303,24 @@ def paired_rows(run_count: int) -> list[dict[str, Any]]:
                 missing_value = any(value is None for value in values)
                 clean = [value for value in values if value is not None and value >= OUTLIER_THRESHOLD_EV]
                 range_ev = (max(clean) - min(clean)) if len(clean) >= 2 else None
-                agreement = "missing" if missing_value else agreement_class(range_ev, outlier=outlier)
+                dissoc_flags = [
+                    repro_run_dissociated(run_name, backend, variant, case_id)
+                    for run_name in run_names
+                ]
+                none_indices = [i for i, value in enumerate(values) if value is None]
+                all_none_dissociated = (
+                    bool(none_indices)
+                    and len(none_indices) == run_count
+                    and all(dissoc_flags[i] for i in none_indices)
+                )
+                if outlier:
+                    agreement = "outlier_excluded"
+                elif all_none_dissociated:
+                    agreement = "dissociation_excluded"
+                elif missing_value:
+                    agreement = "missing"
+                else:
+                    agreement = agreement_class(range_ev)
                 row: dict[str, Any] = {
                     "case_id": case_id,
                     "ocd62_case_id": meta.get("ocd62_case_id") or meta.get("ocd62_seq_id"),
@@ -310,8 +348,9 @@ def reproducibility_report(rows: list[dict[str, Any]], run_count: int) -> str:
     within_001 = counts["exact_match"]
     within_01 = counts["exact_match"] + counts["match"]
     outliers = counts["outlier_excluded"]
+    dissociated = counts["dissociation_excluded"]
     missing = counts["missing"]
-    mismatches = total - within_01 - outliers - missing
+    mismatches = total - within_01 - outliers - dissociated - missing
 
     ranges = [parse_float(row.get("range_eV")) for row in rows]
     ranges = [value for value in ranges if value is not None]
@@ -327,14 +366,15 @@ def reproducibility_report(rows: list[dict[str, Any]], run_count: int) -> str:
         f"- Matches within 0.01 eV: {within_01} ({within_01 / total:.1%}).",
         f"- Non-outlier mismatches above 0.01 eV: {mismatches} ({mismatches / total:.1%}).",
         f"- Excluded numerical-collapse outliers: {outliers} ({outliers / total:.1%}).",
-        f"- Missing run energies: {missing} ({missing / total:.1%}).",
+        f"- All-N dissociated (one_shot physics): {dissociated} ({dissociated / total:.1%}).",
+        f"- Missing run energies (mixed dissoc + API failures): {missing} ({missing / total:.1%}).",
     ]
     if ranges:
         lines.append(f"- Mean run range: {mean(ranges):.3f} eV.")
         lines.append(f"- Max run range: {max(ranges):.3f} eV.")
 
     lines.extend(["", "## Counts By Agreement Class", "", "| agreement_class | count |", "|---|---:|"])
-    for key in ("exact_match", "match", "minor", "moderate", "divergent", "large_divergent", "severe", "outlier_excluded", "missing"):
+    for key in ("exact_match", "match", "minor", "moderate", "divergent", "large_divergent", "severe", "outlier_excluded", "dissociation_excluded", "missing"):
         if counts[key]:
             lines.append(f"| {key} | {counts[key]} |")
     lines.append("")
