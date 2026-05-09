@@ -279,8 +279,10 @@ def paired_rows(run_count: int) -> list[dict[str, Any]]:
 
                 outlier = (backend, variant, current_ocd_id) in OUTLIER_KEYS
                 outlier = outlier or any(value is not None and value < OUTLIER_THRESHOLD_EV for value in values)
+                missing_value = any(value is None for value in values)
                 clean = [value for value in values if value is not None and value >= OUTLIER_THRESHOLD_EV]
                 range_ev = (max(clean) - min(clean)) if len(clean) >= 2 else None
+                agreement = "missing" if missing_value else agreement_class(range_ev, outlier=outlier)
                 row: dict[str, Any] = {
                     "case_id": case_id,
                     "ocd62_case_id": meta.get("ocd62_case_id") or meta.get("ocd62_seq_id"),
@@ -290,7 +292,7 @@ def paired_rows(run_count: int) -> list[dict[str, Any]]:
                     **summary_metadata(backend_identity(backend, run_name=run_names[0])),
                     "variant": variant,
                     "range_eV": format_float(range_ev),
-                    "agreement_class": agreement_class(range_ev, outlier=outlier),
+                    "agreement_class": agreement,
                 }
                 for idx, value in enumerate(values, start=1):
                     row[f"e_run{idx}"] = format_float(value)
@@ -308,7 +310,8 @@ def reproducibility_report(rows: list[dict[str, Any]], run_count: int) -> str:
     within_001 = counts["exact_match"]
     within_01 = counts["exact_match"] + counts["match"]
     outliers = counts["outlier_excluded"]
-    mismatches = total - within_01 - outliers
+    missing = counts["missing"]
+    mismatches = total - within_01 - outliers - missing
 
     ranges = [parse_float(row.get("range_eV")) for row in rows]
     ranges = [value for value in ranges if value is not None]
@@ -324,6 +327,7 @@ def reproducibility_report(rows: list[dict[str, Any]], run_count: int) -> str:
         f"- Matches within 0.01 eV: {within_01} ({within_01 / total:.1%}).",
         f"- Non-outlier mismatches above 0.01 eV: {mismatches} ({mismatches / total:.1%}).",
         f"- Excluded numerical-collapse outliers: {outliers} ({outliers / total:.1%}).",
+        f"- Missing run energies: {missing} ({missing / total:.1%}).",
     ]
     if ranges:
         lines.append(f"- Mean run range: {mean(ranges):.3f} eV.")

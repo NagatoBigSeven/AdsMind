@@ -19,10 +19,10 @@
     "site_indices": "4"
   },
   "status": "success",
-  "best_energy_eV": -4.346963882446289,
+  "best_energy_eV": -1124687200.7336826,
   "iteration_count": 5,
   "max_attempts": 5,
-  "final_site_type": "hollow (HCP/Subsurf-Atom)",
+  "final_site_type": "hollow (FCC/No-Subsurf)",
   "converged_tag": false,
   "wall_clock_sec": 3110.167676884681,
   "total_input_tokens": 33949,
@@ -48,31 +48,170 @@
     "relaxation_trajectory_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run2/grok4_mace_mp0_small/full/001/artifacts/relaxation.traj"
   },
   "best_result": {
-    "result_type": "molecular",
-    "most_stable_energy_eV": -4.346963882446289,
+    "most_stable_energy_eV": -1124687200.7336826,
     "analysis_json": {
       "status": "success",
-      "message": "Most stable config adsorption energy: -4.3470 eV. Target Atom: N (from plan index 0, global index 72 in relaxed structure). -> Nearest: Hf (Index 10), Distance: 2.221 Å (Threshold: 3.567), Bound: True. Bonded Surface Atoms: Hf-2.221Å, Si-2.542Å, Hf-3.194Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Hf'] -> Actual ['Hf', 'Hf', 'Si']).",
-      "most_stable_energy_eV": -4.346963882446289,
-      "bond_change_count": 0,
+      "message": "Most stable config adsorption energy: -1124687200.7337 eV. Target Atom: N (from plan index 0, global index 72 in relaxed structure). -> Nearest: Hf (Index 2), Distance: 0.834 Å (Threshold: 3.567), Bound: True. Bonded Surface Atoms: Hf-0.834Å, Si-1.22Å, Si-1.46Å, Hf-1.544Å, Si-1.59Å, Si-1.739Å, Si-1.791Å, Hf-2.023Å, Sc-2.036Å, Si-2.066Å, Sc-2.095Å, Hf-2.167Å, Hf-2.382Å, Hf-3.068Å, Hf-3.069Å, Hf-3.115Å, Hf-3.115Å, Sc-3.182Å, Sc-3.298Å, Sc-3.4Å. Is Bound: True. Reactivity Change Detected: True (Bond Changes: 1). Chemical Slip: True (Planned ['Sc'] -> Actual ['Hf', 'Hf', 'Hf', 'Hf', 'Hf', 'Hf', 'Hf', 'Hf', 'Hf', 'Sc', 'Sc', 'Sc', 'Sc', 'Sc', 'Si', 'Si', 'Si', 'Si', 'Si', 'Si']).",
+      "most_stable_energy_eV": -1124687200.7336826,
+      "target_adsorbate_atom": "N",
+      "target_adsorbate_atom_index": 72,
+      "bonded_surface_atoms": [
+        {
+          "symbol": "Hf",
+          "index": 2,
+          "distance": 0.834
+        },
+        {
+          "symbol": "Si",
+          "index": 68,
+          "distance": 1.22
+        },
+        {
+          "symbol": "Si",
+          "index": 41,
+          "distance": 1.46
+        },
+        {
+          "symbol": "Hf",
+          "index": 14,
+          "distance": 1.544
+        },
+        {
+          "symbol": "Si",
+          "index": 46,
+          "distance": 1.59
+        },
+        {
+          "symbol": "Si",
+          "index": 42,
+          "distance": 1.739
+        },
+        {
+          "symbol": "Si",
+          "index": 66,
+          "distance": 1.791
+        },
+        {
+          "symbol": "Hf",
+          "index": 4,
+          "distance": 2.023
+        },
+        {
+          "symbol": "Sc",
+          "index": 33,
+          "distance": 2.036
+        },
+        {
+          "symbol": "Si",
+          "index": 70,
+          "distance": 2.066
+        },
+        {
+          "symbol": "Sc",
+          "index": 34,
+          "distance": 2.095
+        },
+        {
+          "symbol": "Hf",
+          "index": 10,
+          "distance": 2.167
+        },
+        {
+          "symbol": "Hf",
+          "index": 8,
+          "distance": 2.382
+        },
+        {
+          "symbol": "Hf",
+          "index": 15,
+          "distance": 3.068
+        },
+        {
+          "symbol": "Hf",
+          "index": 11,
+          "distance": 3.069
+        },
+        {
+          "symbol": "Hf",
+          "index": 3,
+          "distance": 3.115
+        },
+        {
+          "symbol": "Hf",
+          "index": 16,
+          "distance": 3.115
+        },
+        {
+          "symbol": "Sc",
+          "index": 27,
+          "distance": 3.182
+        },
+        {
+          "symbol": "Sc",
+          "index": 32,
+          "distance": 3.298
+        },
+        {
+          "symbol": "Sc",
+          "index": 35,
+          "distance": 3.4
+        }
+      ],
+      "nearest_slab_atom": "Hf",
+      "nearest_slab_atom_index": 2,
+      "final_bond_distance_A": 0.834,
+      "estimated_covalent_cutoff_A": 2.706,
+      "is_covalently_bound": true,
+      "reaction_detected": true,
       "is_dissociated": false,
+      "n_components": 1,
+      "bond_change_count": 1,
       "site_analysis": {
         "planned_site_type": "ontop",
-        "actual_site_type": "hollow (HCP/Subsurf-Atom)",
-        "is_chemical_slip": true
+        "planned_connectivity": 1,
+        "actual_site_type": "hollow (FCC/No-Subsurf)",
+        "actual_connectivity": 20,
+        "is_chemical_slip": true,
+        "planned_symbols": [
+          "Sc"
+        ],
+        "actual_symbols": [
+          "Hf",
+          "Hf",
+          "Hf",
+          "Hf",
+          "Hf",
+          "Hf",
+          "Hf",
+          "Hf",
+          "Hf",
+          "Sc",
+          "Sc",
+          "Sc",
+          "Sc",
+          "Sc",
+          "Si",
+          "Si",
+          "Si",
+          "Si",
+          "Si",
+          "Si"
+        ],
+        "site_fingerprint": "Hf2-Si68-Si41-Hf14-Si46-Si42-Si66-Hf4-Sc33-Si70-Sc34-Hf10-Hf8-Hf15-Hf11-Hf3-Hf16-Sc27-Sc32-Sc35"
       },
-      "best_structure_file": "outputs/008-c1a8521d/BEST_NO_ontop_to_hollow_HCP-Subsurf-Atom_E-4.347.xyz",
+      "best_structure_file": "outputs/008-c1a8521d/BEST_NO_ontop_to_hollow_FCC-No-Subsurf_ISO_E-1124687200.734.xyz",
       "generated_conformers_file": "outputs/008-c1a8521d/conformers_NO.traj",
-      "relaxation_trajectory_file": "outputs/008-c1a8521d/final.xyz"
+      "relaxation_trajectory_file": "outputs/008-c1a8521d/final.xyz",
+      "session_id": "008-c1a8521d"
     },
     "plan": {
-      "reasoning": "SMILES is NO, representing nitric oxide. RDKit analysis shows atom 0 as N (SP3, degree 1, no radical) and atom 1 as O (SP3, degree 1, no radical). No mismatch with user description. Since radical_electrons are 0 for both atoms, I must use 'Molecule' type, not 'ReactiveSpecies'. History is None, so this is the first attempt. For NO adsorption, it typically binds via the N atom on metal surfaces. The surface has Hf, Sc, Si atoms. Starting with ontop site on Hf via N (index 0), as Hf is a metal likely to provide strong binding. This is a systematic starting point to explore lowest energy configuration. Site_type 'ontop' aligns with single binding index.",
+      "reasoning": "0. SMILES Consistency Check: The atom list shows N (index 0, SP3, degree 1, radical_electrons 0) and O (index 1, SP3, degree 1, radical_electrons 0). Hybridization is SP3 for both, suggesting a single bond, but SMILES is NO, treated as a stable molecule with no radicals. No mismatch with user description, as none is provided beyond SMILES. No radicals present, so ReactiveSpecies not applicable.\n1. Analyze Old Plans: One previous attempt: ontop on Hf (index 0), but it was unstable and slipped to hollow (HCP/Subsurf-Atom) Hf-Hf-Si, with E=-4.347 eV. This is marked as [🌟 New Best] but with [Unstable Site Warning], forbidding further testing of Hf type sites due to insufficient affinity. No other attempts. No convergence tags like [🔄 Converged to known best] or [⚠️ Energy Degenerate but Geometrically Distinct]. Surface heterogeneity possible given alloy composition, but must avoid Hf-involving sites.\n2. Formulate New Plan: Goal is lowest adsorption energy. Previous slipped to a hollow site with Hf, but we must avoid Hf sites. Propose a new site without Hf. Viable options: ontop Sc or Si; bridge Sc-Si or Si-Si; hollow Sc-Sc-Si. Start with ontop on Sc, as Sc is metallic and likely has better affinity than Si. Avoid repeating any Hf-involving site. No indication of convergence yet.\n3. Analyze Request: User's core intent is to find the lowest-energy adsorption configuration for NO on the surface, without specifying site or orientation.\n4. Analyze Adsorbate: SMILES NO, major functional group is N-O (apparently single bond per hybridization). Heavy atoms: N (0), O (1). No radicals, so treat as Molecule. Likely binds via N.\n5. Analyze Surface: Available sites without Hf: ontop Sc, Si; hollow Sc-Sc-Si; bridge Sc-Si, Si-Si. Select ontop Sc.\n6. Formulate Plan: Propose ontop on Sc via N (index 0). Defaults for other params.",
       "adsorbate_type": "Molecule",
       "solution": {
         "action": "continue",
         "site_type": "ontop",
         "surface_binding_atoms": [
-          "Hf"
+          "Sc"
         ],
         "adsorbate_binding_indices": [
           0
@@ -82,22 +221,62 @@
         "overlap_thr": 0.1,
         "conformers_per_site_cap": 4
       }
-    }
+    },
+    "result_type": "Isomerized"
   },
   "last_analysis": {
     "status": "success",
-    "message": "Most stable config adsorption energy: -4.3470 eV. Target Atom: N (from plan index 0, global index 72 in relaxed structure). -> Nearest: Hf (Index 10), Distance: 2.221 Å (Threshold: 3.567), Bound: True. Bonded Surface Atoms: Hf-2.221Å, Si-2.542Å, Hf-3.194Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Hf'] -> Actual ['Hf', 'Hf', 'Si']).",
-    "most_stable_energy_eV": -4.346963882446289,
-    "bond_change_count": 0,
-    "is_dissociated": false,
+    "message": "Most stable config adsorption energy: -8.2467 eV. Target Atom: N (from plan index 0, global index 72 in relaxed structure). -> Nearest: Hf (Index 4), Distance: 2.125 Å (Threshold: 3.567), Bound: True. Bonded Surface Atoms: Hf-2.125Å, Hf-2.173Å, Sc-2.208Å. Is Bound: True. Reactivity Change Detected: True (Bond Changes: 1). Chemical Slip: True (Planned ['Hf', 'Hf'] -> Actual ['Hf', 'Hf', 'Sc']).",
+    "most_stable_energy_eV": -8.246662139892578,
+    "target_adsorbate_atom": "N",
+    "target_adsorbate_atom_index": 72,
+    "bonded_surface_atoms": [
+      {
+        "symbol": "Hf",
+        "index": 4,
+        "distance": 2.125
+      },
+      {
+        "symbol": "Hf",
+        "index": 10,
+        "distance": 2.173
+      },
+      {
+        "symbol": "Sc",
+        "index": 28,
+        "distance": 2.208
+      }
+    ],
+    "nearest_slab_atom": "Hf",
+    "nearest_slab_atom_index": 4,
+    "final_bond_distance_A": 2.125,
+    "estimated_covalent_cutoff_A": 2.706,
+    "is_covalently_bound": true,
+    "reaction_detected": true,
+    "is_dissociated": true,
+    "n_components": 3,
+    "bond_change_count": 1,
     "site_analysis": {
-      "planned_site_type": "ontop",
-      "actual_site_type": "hollow (HCP/Subsurf-Atom)",
-      "is_chemical_slip": true
+      "planned_site_type": "bridge",
+      "planned_connectivity": 2,
+      "actual_site_type": "hollow (FCC/No-Subsurf)",
+      "actual_connectivity": 3,
+      "is_chemical_slip": true,
+      "planned_symbols": [
+        "Hf",
+        "Hf"
+      ],
+      "actual_symbols": [
+        "Hf",
+        "Hf",
+        "Sc"
+      ],
+      "site_fingerprint": "Hf4-Hf10-Sc28"
     },
-    "best_structure_file": "outputs/008-c1a8521d/BEST_NO_ontop_to_hollow_HCP-Subsurf-Atom_E-4.347.xyz",
+    "best_structure_file": "outputs/008-c1a8521d/BEST_NO_bridge_to_hollow_FCC-No-Subsurf_DISS_E-8.247.xyz",
     "generated_conformers_file": "outputs/008-c1a8521d/conformers_NO.traj",
-    "relaxation_trajectory_file": "outputs/008-c1a8521d/final.xyz"
+    "relaxation_trajectory_file": "outputs/008-c1a8521d/final.xyz",
+    "session_id": "008-c1a8521d"
   },
   "attempt_records": [
     {
@@ -286,20 +465,5 @@
   "dissociation_count": 3,
   "rearrangement_count": 1,
   "calc_failure_count": 0,
-  "chemical_slip_count": 5,
-  "patch_provenance": {
-    "patched_at_utc": "2026-05-09T05:50:55+00:00",
-    "patch_reason": "excluded MACE-MP-0 numerical-collapse attempts from paper-facing result fields",
-    "raw_result_backup": "result.raw_mace_collapse.json",
-    "energy_threshold_eV": -10000.0,
-    "selected_attempt_index": 1,
-    "selected_energy_eV": -4.346963882446289,
-    "excluded_attempts": [
-      {
-        "attempt_index": 2,
-        "energy_eV": -1124687200.7336826,
-        "reason": "mace_numerical_collapse"
-      }
-    ]
-  }
+  "chemical_slip_count": 5
 }

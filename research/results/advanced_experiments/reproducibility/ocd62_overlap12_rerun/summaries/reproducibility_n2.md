@@ -5,10 +5,11 @@ This report summarizes the 12 duplicated OCD62 cases used for run-to-run reprodu
 ## Headline Counts
 
 - Paired comparisons: 240 = 12 cases x 4 backends x 5 variants.
-- Matches within 0.001 eV: 143 (59.6%).
-- Matches within 0.01 eV: 155 (64.6%).
-- Non-outlier mismatches above 0.01 eV: 83 (34.6%).
+- Matches within 0.001 eV: 144 (60.0%).
+- Matches within 0.01 eV: 156 (65.0%).
+- Non-outlier mismatches above 0.01 eV: 82 (34.2%).
 - Excluded numerical-collapse outliers: 2 (0.8%).
+- Missing run energies: 0 (0.0%).
 - Mean run range: 0.189 eV.
 - Max run range: 4.671 eV.
 
@@ -16,7 +17,7 @@ This report summarizes the 12 duplicated OCD62 cases used for run-to-run reprodu
 
 | agreement_class | count |
 |---|---:|
-| exact_match | 143 |
+| exact_match | 144 |
 | match | 12 |
 | minor | 17 |
 | moderate | 12 |
@@ -24,4 +25,3 @@ This report summarizes the 12 duplicated OCD62 cases used for run-to-run reprodu
 | large_divergent | 17 |
 | severe | 9 |
 | outlier_excluded | 2 |
-| missing | 1 |
