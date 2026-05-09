@@ -1,0 +1,234 @@
+{
+  "case_id": "011",
+  "case_metadata": {
+    "case_id": "011",
+    "slab_file": "datasets/ocd62_overlap12/011_ocd_735_Re27Ti27_NH2.xyz",
+    "smiles": "[NH2]",
+    "user_request": "Find the lowest-energy adsorption configuration for the adsorbate with SMILES [NH2] on the provided surface.",
+    "surface_family": "intermetallic",
+    "adsorbate_name": "[NH2]",
+    "miller_index": "",
+    "reaction_class": "GENERALIZATION",
+    "ablation_candidate": "FALSE",
+    "notes": "OCD-GMAE source key=735; original_ads_smi=[NH2]; surface_formula=Re27Ti27; y_relaxed=-4.360505 eV; site=[29, 38]; OCD62 overlap12 RUN3 symlink to representative50 source file; sha256=ca91c00f266a7091e281809854ee97137a4cad472c15a00abb31031cfc56e80a",
+    "source_key": "735",
+    "original_ads_smi": "[NH2]",
+    "surface_formula": "Re27Ti27",
+    "surface_elements": "Re;Ti",
+    "bare_slab_atoms": "54",
+    "adsorbate_atoms": "3",
+    "y_relaxed": "-4.360505",
+    "site_indices": "29;38",
+    "selection_bucket": "small_n_species"
+  },
+  "status": "success",
+  "best_energy_eV": -11.615777015686035,
+  "iteration_count": 1,
+  "max_attempts": 1,
+  "final_site_type": "hollow (FCC/No-Subsurf)",
+  "converged_tag": false,
+  "wall_clock_sec": 166.2950552776456,
+  "total_input_tokens": 4633,
+  "total_output_tokens": 4392,
+  "artifact_paths": {
+    "BEST_NH2_bridge_to_hollow_FCC-No-Subsurf_E-11.616": "/data/zongmin/workspace/AdsMind/research/results/canonical_raw/ocd62_overlap12_grok_outlier_seed_sweep_20260509/seed_500/single_shot/011/artifacts/BEST_NH2_bridge_to_hollow_FCC-No-Subsurf_E-11.616.xyz",
+    "BEST_NH2_bridge_to_hollow_FCC-No-Subsurf_E-11.616.xyz": "/data/zongmin/workspace/AdsMind/research/results/canonical_raw/ocd62_overlap12_grok_outlier_seed_sweep_20260509/seed_500/single_shot/011/artifacts/BEST_NH2_bridge_to_hollow_FCC-No-Subsurf_E-11.616.xyz",
+    "best_structure_file": "/data/zongmin/workspace/AdsMind/research/results/canonical_raw/ocd62_overlap12_grok_outlier_seed_sweep_20260509/seed_500/single_shot/011/artifacts/BEST_NH2_bridge_to_hollow_FCC-No-Subsurf_E-11.616.xyz",
+    "conformers_[NH2]": "/data/zongmin/workspace/AdsMind/research/results/canonical_raw/ocd62_overlap12_grok_outlier_seed_sweep_20260509/seed_500/single_shot/011/artifacts/conformers_[NH2].traj",
+    "conformers_[NH2].traj": "/data/zongmin/workspace/AdsMind/research/results/canonical_raw/ocd62_overlap12_grok_outlier_seed_sweep_20260509/seed_500/single_shot/011/artifacts/conformers_[NH2].traj",
+    "final": "/data/zongmin/workspace/AdsMind/research/results/canonical_raw/ocd62_overlap12_grok_outlier_seed_sweep_20260509/seed_500/single_shot/011/artifacts/final.xyz",
+    "final.xyz": "/data/zongmin/workspace/AdsMind/research/results/canonical_raw/ocd62_overlap12_grok_outlier_seed_sweep_20260509/seed_500/single_shot/011/artifacts/final.xyz",
+    "relaxation": "/data/zongmin/workspace/AdsMind/research/results/canonical_raw/ocd62_overlap12_grok_outlier_seed_sweep_20260509/seed_500/single_shot/011/artifacts/relaxation.traj",
+    "relaxation.traj": "/data/zongmin/workspace/AdsMind/research/results/canonical_raw/ocd62_overlap12_grok_outlier_seed_sweep_20260509/seed_500/single_shot/011/artifacts/relaxation.traj",
+    "relaxation_trajectory_file": "/data/zongmin/workspace/AdsMind/research/results/canonical_raw/ocd62_overlap12_grok_outlier_seed_sweep_20260509/seed_500/single_shot/011/artifacts/relaxation.traj"
+  },
+  "best_result": {
+    "most_stable_energy_eV": -11.615777015686035,
+    "analysis_json": {
+      "status": "success",
+      "message": "Most stable config adsorption energy: -11.6158 eV. Target Atom: N (from plan index 0, global index 54 in relaxed structure). -> Nearest: Re (Index 38), Distance: 2.09 Å (Threshold: 3.219), Bound: True. Bonded Surface Atoms: Re-2.09Å, Re-2.103Å, Ti-2.25Å, Ti-3.321Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Re', 'Re'] -> Actual ['Re', 'Re', 'Ti', 'Ti']).",
+      "most_stable_energy_eV": -11.615777015686035,
+      "target_adsorbate_atom": "N",
+      "target_adsorbate_atom_index": 54,
+      "bonded_surface_atoms": [
+        {
+          "symbol": "Re",
+          "index": 38,
+          "distance": 2.09
+        },
+        {
+          "symbol": "Re",
+          "index": 44,
+          "distance": 2.103
+        },
+        {
+          "symbol": "Ti",
+          "index": 17,
+          "distance": 2.25
+        },
+        {
+          "symbol": "Ti",
+          "index": 8,
+          "distance": 3.321
+        }
+      ],
+      "nearest_slab_atom": "Re",
+      "nearest_slab_atom_index": 38,
+      "final_bond_distance_A": 2.09,
+      "estimated_covalent_cutoff_A": 2.442,
+      "is_covalently_bound": true,
+      "reaction_detected": false,
+      "is_dissociated": false,
+      "n_components": 1,
+      "bond_change_count": 0,
+      "site_analysis": {
+        "planned_site_type": "bridge",
+        "planned_connectivity": 2,
+        "actual_site_type": "hollow (FCC/No-Subsurf)",
+        "actual_connectivity": 4,
+        "is_chemical_slip": true,
+        "planned_symbols": [
+          "Re",
+          "Re"
+        ],
+        "actual_symbols": [
+          "Re",
+          "Re",
+          "Ti",
+          "Ti"
+        ],
+        "site_fingerprint": "Re38-Re44-Ti17-Ti8"
+      },
+      "best_structure_file": "outputs/011-845fe4a5/BEST_NH2_bridge_to_hollow_FCC-No-Subsurf_E-11.616.xyz",
+      "generated_conformers_file": "outputs/011-845fe4a5/conformers_[NH2].traj",
+      "relaxation_trajectory_file": "outputs/011-845fe4a5/final.xyz",
+      "session_id": "011-845fe4a5"
+    },
+    "plan": {
+      "reasoning": "SMILES Consistency Check: The adsorbate is [NH2], a radical with one nitrogen atom (index 0, symbol N, SP3 hybridization, radical_electrons=1). This matches a reactive species, so use 'ReactiveSpecies'. No hybridization mismatch with user request. Binding atom N has unpaired electrons, suitable for ReactiveSpecies. Analyze Old Plans: History is None, no previous attempts. This is the first plan. Termination disabled, so action 'continue'. Surface Heterogeneity: Surface is Re-Ti alloy with specific site compositions; may have distinct environments, but start with basic exploration. Formulate New Plan: Goal is lowest energy configuration. Since history is none, propose initial plan. [NH2] is an amino radical, typically adsorbs via N atom. In heterogeneous catalysis on transition metals, NH2 often prefers bridge sites over ontop. Start with bridge Re-Re, as available and likely stable for N-binding to two Re atoms. Physical consistency noted. Site type restricted to 'bridge'. Analyze Request: Find lowest-energy adsorption for [NH2] on surface. Analyze Adsorbate: Major functional group is amino radical; binding via N (index 0, the only heavy atom). Analyze Surface: Available bridge is Re-Re, suitable. Formulate Plan: Single binding point via N (len=1, allowed for bridge), to two Re atoms.",
+      "adsorbate_type": "ReactiveSpecies",
+      "solution": {
+        "action": "continue",
+        "site_type": "bridge",
+        "surface_binding_atoms": [
+          "Re",
+          "Re"
+        ],
+        "adsorbate_binding_indices": [
+          0
+        ],
+        "relax_top_n": 1,
+        "touch_sphere_size": 2,
+        "overlap_thr": 0.1,
+        "conformers_per_site_cap": 4
+      }
+    },
+    "result_type": "Perfect"
+  },
+  "last_analysis": {
+    "status": "success",
+    "message": "Most stable config adsorption energy: -11.6158 eV. Target Atom: N (from plan index 0, global index 54 in relaxed structure). -> Nearest: Re (Index 38), Distance: 2.09 Å (Threshold: 3.219), Bound: True. Bonded Surface Atoms: Re-2.09Å, Re-2.103Å, Ti-2.25Å, Ti-3.321Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Re', 'Re'] -> Actual ['Re', 'Re', 'Ti', 'Ti']).",
+    "most_stable_energy_eV": -11.615777015686035,
+    "target_adsorbate_atom": "N",
+    "target_adsorbate_atom_index": 54,
+    "bonded_surface_atoms": [
+      {
+        "symbol": "Re",
+        "index": 38,
+        "distance": 2.09
+      },
+      {
+        "symbol": "Re",
+        "index": 44,
+        "distance": 2.103
+      },
+      {
+        "symbol": "Ti",
+        "index": 17,
+        "distance": 2.25
+      },
+      {
+        "symbol": "Ti",
+        "index": 8,
+        "distance": 3.321
+      }
+    ],
+    "nearest_slab_atom": "Re",
+    "nearest_slab_atom_index": 38,
+    "final_bond_distance_A": 2.09,
+    "estimated_covalent_cutoff_A": 2.442,
+    "is_covalently_bound": true,
+    "reaction_detected": false,
+    "is_dissociated": false,
+    "n_components": 1,
+    "bond_change_count": 0,
+    "site_analysis": {
+      "planned_site_type": "bridge",
+      "planned_connectivity": 2,
+      "actual_site_type": "hollow (FCC/No-Subsurf)",
+      "actual_connectivity": 4,
+      "is_chemical_slip": true,
+      "planned_symbols": [
+        "Re",
+        "Re"
+      ],
+      "actual_symbols": [
+        "Re",
+        "Re",
+        "Ti",
+        "Ti"
+      ],
+      "site_fingerprint": "Re38-Re44-Ti17-Ti8"
+    },
+    "best_structure_file": "outputs/011-845fe4a5/BEST_NH2_bridge_to_hollow_FCC-No-Subsurf_E-11.616.xyz",
+    "generated_conformers_file": "outputs/011-845fe4a5/conformers_[NH2].traj",
+    "relaxation_trajectory_file": "outputs/011-845fe4a5/final.xyz",
+    "session_id": "011-845fe4a5"
+  },
+  "attempt_records": [
+    {
+      "attempt_index": 1,
+      "plan": {
+        "reasoning": "SMILES Consistency Check: The adsorbate is [NH2], a radical with one nitrogen atom (index 0, symbol N, SP3 hybridization, radical_electrons=1). This matches a reactive species, so use 'ReactiveSpecies'. No hybridization mismatch with user request. Binding atom N has unpaired electrons, suitable for ReactiveSpecies. Analyze Old Plans: History is None, no previous attempts. This is the first plan. Termination disabled, so action 'continue'. Surface Heterogeneity: Surface is Re-Ti alloy with specific site compositions; may have distinct environments, but start with basic exploration. Formulate New Plan: Goal is lowest energy configuration. Since history is none, propose initial plan. [NH2] is an amino radical, typically adsorbs via N atom. In heterogeneous catalysis on transition metals, NH2 often prefers bridge sites over ontop. Start with bridge Re-Re, as available and likely stable for N-binding to two Re atoms. Physical consistency noted. Site type restricted to 'bridge'. Analyze Request: Find lowest-energy adsorption for [NH2] on surface. Analyze Adsorbate: Major functional group is amino radical; binding via N (index 0, the only heavy atom). Analyze Surface: Available bridge is Re-Re, suitable. Formulate Plan: Single binding point via N (len=1, allowed for bridge), to two Re atoms.",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "bridge",
+          "surface_binding_atoms": [
+            "Re",
+            "Re"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "bridge|Re,Re|0|ReactiveSpecies|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -11.615777015686035,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": true,
+      "planned_site_type": "bridge",
+      "actual_site_type": "hollow (FCC/No-Subsurf)",
+      "best_structure_file": "outputs/011-845fe4a5/BEST_NH2_bridge_to_hollow_FCC-No-Subsurf_E-11.616.xyz",
+      "generated_conformers_file": "outputs/011-845fe4a5/conformers_[NH2].traj",
+      "relaxation_trajectory_file": "outputs/011-845fe4a5/final.xyz",
+      "message": "Most stable config adsorption energy: -11.6158 eV. Target Atom: N (from plan index 0, global index 54 in relaxed structure). -> Nearest: Re (Index 38), Distance: 2.09 Å (Threshold: 3.219), Bound: True. Bonded Surface Atoms: Re-2.09Å, Re-2.103Å, Ti-2.25Å, Ti-3.321Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Re', 'Re'] -> Actual ['Re', 'Re', 'Ti', 'Ti']).",
+      "history_entry": "【✅ Perfect Adsorption】 bridge @ ['Re', 'Re'] (Index [0]) -> Site: hollow (FCC/No-Subsurf) (Re,Re,Ti,Ti) | E=-11.616 eV"
+    }
+  ],
+  "history": [
+    "【✅ Perfect Adsorption】 bridge @ ['Re', 'Re'] (Index [0]) -> Site: hollow (FCC/No-Subsurf) (Re,Re,Ti,Ti) | E=-11.616 eV"
+  ],
+  "error": null,
+  "perfect_count": 1,
+  "dissociation_count": 0,
+  "rearrangement_count": 0,
+  "calc_failure_count": 0,
+  "chemical_slip_count": 1
+}
