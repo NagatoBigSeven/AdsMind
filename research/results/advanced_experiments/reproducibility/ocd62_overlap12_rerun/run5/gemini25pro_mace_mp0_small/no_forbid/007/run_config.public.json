@@ -1,5 +1,14 @@
 {
   "_public_config": {
+    "model_family": "gemini-2.5-pro",
+    "normalized_fields": [
+      "frozen_config.llm_model_openrouter_alias",
+      "frozen_config.manifest_version.ocd62_manifest_version_normalized",
+      "frozen_config.transport_variant_normalized",
+      "resolved_runtime_flags.llm_config.model_openrouter_alias"
+    ],
+    "omitted_operational_field_count": 4,
+    "provider_transport": "openrouter",
     "redacted_fields": [
       "api_key_source",
       "frozen_config.llm_api_key_env_var"
@@ -15,7 +24,6 @@
     "bare_slab_atoms": "54",
     "case_id": "007",
     "miller_index": "",
-    "notes": "OCD-GMAE source key=479; original_ads_smi=[OH]; surface_formula=Ni6Sc36Te12; y_relaxed=-2.695426 eV; site=[27, 28, 30]; OCD62 overlap12 RUN3 symlink to representative50 source file; sha256=b3b675c823410b8df5a93aa574987ca77927a5d7902e8199e3de5e283bd71aba",
     "original_ads_smi": "[OH]",
     "reaction_class": "ORR",
     "selection_bucket": "cmu_exact",
@@ -36,30 +44,21 @@
     "llm_api_key_env_var": "<redacted>",
     "llm_backend": "openrouter",
     "llm_base_url": "https://openrouter.ai/api/v1",
-    "llm_default_headers": {
-      "HTTP-Referer": "https://github.com/zongmin/AdsMind",
-      "X-Title": "AdsMind OCD62 RUN3 Gemini"
-    },
-    "llm_model": "google/gemini-2.5-pro",
+    "llm_model": "gemini-2.5-pro",
     "mace_device": "cpu",
     "mace_model": "small",
     "mace_precision": "float32",
     "mace_use_dispersion": false,
-    "manifest_version": "ocd62_overlap12_run3_manifest_v1",
+    "manifest_version": "ocd62_overlap12_manifest_v1",
     "max_retries": 5,
     "max_tokens": 4096,
-    "notes": [
-      "OCD62 overlap12 RUN3 reproducibility rerun through OpenRouter.",
-      "Backend label remains gemini for analysis; model route is google/gemini-2.5-pro.",
-      "API key is provided at runtime and is not stored in this config.",
-      "Physics protocol remains locked: MACE small on CPU with float32 precision and no dispersion."
-    ],
+    "openrouter_model_id": "google/gemini-2.5-pro",
     "platform": "EPFL-LIACPC12-cpu-float32",
     "random_seed": 42,
     "relaxation_mode": "standard",
     "temperature": 0.0,
     "timeout_sec": 120,
-    "transport_variant": "openrouter-ocd62-run3",
+    "transport_variant": "openrouter",
     "user_request_mode": "per-case explicit request string from datasets/ocd62_overlap12/manifest.csv"
   },
   "git_sha": "54d129d4bd712530229cd49b37fad7d4b0241f34",
@@ -77,14 +76,11 @@
     "llm_backend": "openrouter",
     "llm_config": {
       "extra_options": {
-        "base_url": "https://openrouter.ai/api/v1",
-        "default_headers": {
-          "HTTP-Referer": "https://github.com/zongmin/AdsMind",
-          "X-Title": "AdsMind OCD62 RUN3 Gemini"
-        }
+        "base_url": "https://openrouter.ai/api/v1"
       },
       "max_tokens": 4096,
-      "model": "google/gemini-2.5-pro",
+      "model": "gemini-2.5-pro",
+      "openrouter_model_id": "google/gemini-2.5-pro",
       "temperature": 0.0,
       "timeout": 120
     },

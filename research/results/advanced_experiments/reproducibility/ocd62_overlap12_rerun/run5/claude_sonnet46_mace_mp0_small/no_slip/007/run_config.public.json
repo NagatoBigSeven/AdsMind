@@ -1,5 +1,10 @@
 {
   "_public_config": {
+    "normalized_fields": [
+      "frozen_config.manifest_version.ocd62_manifest_version_normalized",
+      "frozen_config.transport_variant_normalized"
+    ],
+    "omitted_operational_field_count": 2,
     "redacted_fields": [
       "api_key_source",
       "frozen_config.llm_api_key_env_var"
@@ -15,7 +20,6 @@
     "bare_slab_atoms": "54",
     "case_id": "007",
     "miller_index": "",
-    "notes": "OCD-GMAE source key=479; original_ads_smi=[OH]; surface_formula=Ni6Sc36Te12; y_relaxed=-2.695426 eV; site=[27, 28, 30]; OCD62 overlap12 RUN3 symlink to representative50 source file; sha256=b3b675c823410b8df5a93aa574987ca77927a5d7902e8199e3de5e283bd71aba",
     "original_ads_smi": "[OH]",
     "reaction_class": "ORR",
     "selection_bucket": "cmu_exact",
@@ -41,23 +45,15 @@
     "mace_model": "small",
     "mace_precision": "float32",
     "mace_use_dispersion": false,
-    "manifest_version": "ocd62_overlap12_run3_manifest_v1",
+    "manifest_version": "ocd62_overlap12_manifest_v1",
     "max_retries": 5,
     "max_tokens": 4096,
-    "notes": [
-      "Official Anthropic route through Anthropic's OpenAI-compatible Chat Completions endpoint.",
-      "This config is for the Claude Sonnet 4.6 full/ablation runs.",
-      "The model is set to the stable alias claude-sonnet-4-6; record the resolved model id from each result config for provenance.",
-      "This config preserves the same physics protocol as Gemini, Grok-4, and GPT-5.4: MACE small on CPU with float32 precision and no dispersion.",
-      "API key is read from the ANTHROPIC_API_KEY environment variable.",
-      "OCD62 overlap12 RUN3 reproducibility rerun: 12 overlap source ids, all five ablation variants, no base-matrix rerun."
-    ],
     "platform": "EPFL-LIACPC12-cpu-float32",
     "random_seed": 42,
     "relaxation_mode": "standard",
     "temperature": 0.0,
     "timeout_sec": 120,
-    "transport_variant": "anthropic-official-openai-compatible",
+    "transport_variant": "anthropic-official",
     "user_request_mode": "per-case explicit request string from datasets/ocd62_overlap12/manifest.csv"
   },
   "git_sha": "54d129d4bd712530229cd49b37fad7d4b0241f34",

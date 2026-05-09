@@ -1,5 +1,11 @@
 {
   "_public_config": {
+    "model_family": "grok-4",
+    "normalized_fields": [
+      "frozen_config.manifest_version.ocd62_manifest_version_normalized"
+    ],
+    "omitted_operational_field_count": 4,
+    "provider_transport": "openrouter",
     "redacted_fields": [
       "api_key_source",
       "frozen_config.llm_api_key_env_var"
@@ -15,7 +21,6 @@
     "bare_slab_atoms": "84",
     "case_id": "005",
     "miller_index": "",
-    "notes": "OCD-GMAE source key=201; original_ads_smi=[CH]=O; surface_formula=Cr36N48; y_relaxed=-4.026478 eV; site=[4, 6, 36]; OCD62 overlap12 RUN3 symlink to representative50 source file; sha256=b5c73af519a5d1b538be622d4572742cef48b39b2b240ce24d4b887ff388ebb0",
     "original_ads_smi": "[CH]=O",
     "reaction_class": "GENERALIZATION",
     "selection_bucket": "small_organic",
@@ -36,23 +41,14 @@
     "llm_api_key_env_var": "<redacted>",
     "llm_backend": "openrouter",
     "llm_base_url": "https://openrouter.ai/api/v1",
-    "llm_default_headers": {
-      "HTTP-Referer": "https://github.com/zongmin/AdsMind",
-      "X-Title": "AdsMind OCD62 RUN3 Grok-4"
-    },
     "llm_model": "grok-4",
     "mace_device": "cpu",
     "mace_model": "small",
     "mace_precision": "float32",
     "mace_use_dispersion": false,
-    "manifest_version": "ocd62_overlap12_run3_manifest_v1",
+    "manifest_version": "ocd62_overlap12_manifest_v1",
     "max_retries": 5,
     "max_tokens": 4096,
-    "notes": [
-      "Paper benchmark route: Grok-4 is accessed through not_distinguished.",
-      "The target model is grok-4.",
-      "The physics protocol remains locked to MACE-MP-0 small unless this file explicitly belongs to a force-field sensitivity run."
-    ],
     "platform": "EPFL-LIACPC12-cpu-float32",
     "random_seed": 42,
     "relaxation_mode": "standard",
@@ -76,11 +72,7 @@
     "llm_backend": "openrouter",
     "llm_config": {
       "extra_options": {
-        "base_url": "https://openrouter.ai/api/v1",
-        "default_headers": {
-          "HTTP-Referer": "https://github.com/zongmin/AdsMind",
-          "X-Title": "AdsMind OCD62 RUN3 Grok-4"
-        }
+        "base_url": "https://openrouter.ai/api/v1"
       },
       "max_tokens": 4096,
       "model": "grok-4",

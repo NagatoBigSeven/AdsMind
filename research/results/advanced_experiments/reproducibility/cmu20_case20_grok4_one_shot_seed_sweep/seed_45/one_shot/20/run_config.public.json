@@ -1,5 +1,14 @@
 {
   "_public_config": {
+    "model_family": "grok-4",
+    "normalized_fields": [
+      "case.slab_file.cmu20_slab_path_normalized",
+      "frozen_config.llm_model_openrouter_alias",
+      "frozen_config.transport_variant_normalized",
+      "resolved_runtime_flags.llm_config.model_openrouter_alias"
+    ],
+    "omitted_operational_field_count": 3,
+    "provider_transport": "openrouter",
     "redacted_fields": [
       "api_key_source",
       "frozen_config.llm_api_key_env_var"
@@ -13,9 +22,8 @@
     "adsorbate_name": "ONN(CH3)2",
     "case_id": "20",
     "miller_index": "(211)",
-    "notes": "Recovered from top-level results artifacts; case directory is empty and needs archival repair",
     "reaction_class": "COMPLEX",
-    "slab_file": "benchmark_slabs/20_Bi2Ti6_211.xyz",
+    "slab_file": "datasets/cmu20/20_Bi2Ti6_211.xyz",
     "smiles": "CN(C)N=O",
     "surface_family": "intermetallic",
     "user_request": "Find the lowest-energy adsorption configuration for dimethylnitrosamine on the provided surface."
@@ -27,26 +35,20 @@
     "llm_api_key_env_var": "<redacted>",
     "llm_backend": "openrouter",
     "llm_base_url": "https://openrouter.ai/api/v1",
-    "llm_model": "x-ai/grok-4",
+    "llm_model": "grok-4",
     "mace_device": "cpu",
     "mace_model": "small",
     "mace_precision": "float32",
     "mace_use_dispersion": false,
-    "manifest_version": "ocd_gmae_recovery",
     "max_retries": 5,
     "max_tokens": 4096,
-    "notes": [
-      "Recovery config for Grok-4 reruns after external quota failures.",
-      "The target model remains Grok-4.",
-      "API key is read from the OPENROUTER_API_KEY environment variable.",
-      "The physics protocol remains locked: MACE small on CPU with float32 precision and no dispersion."
-    ],
+    "openrouter_model_id": "x-ai/grok-4",
     "platform": "linux-x86_64-cpu-float32",
     "random_seed": 45,
     "relaxation_mode": "standard",
     "temperature": 0.0,
     "timeout_sec": 120,
-    "transport_variant": "grok4-compatible-recovery",
+    "transport_variant": "openrouter",
     "user_request_mode": "per-case explicit request string from manifest CSV"
   },
   "git_sha": "54d129d4bd712530229cd49b37fad7d4b0241f34",
@@ -67,7 +69,8 @@
         "base_url": "https://openrouter.ai/api/v1"
       },
       "max_tokens": 4096,
-      "model": "x-ai/grok-4",
+      "model": "grok-4",
+      "openrouter_model_id": "x-ai/grok-4",
       "temperature": 0.0,
       "timeout": 120
     },

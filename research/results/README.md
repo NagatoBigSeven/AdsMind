@@ -114,6 +114,7 @@ Git LFS where appropriate: AdsMind `artifacts/`, relaxation `traj/` directories,
 `.xyz`, `.traj`, `.pkl`, curated figures, and audited run logs. Each run with a
 raw `config.json` also has a sanitized `run_config.public.json` sidecar that
 keeps reproducibility fields such as `git_sha`, `frozen_config`, and runtime
-flags while redacting credential-source fields. Ad hoc runtime noise such as
-`agent_log.txt`, raw per-process `config.json`, Python bytecode, and uncurated
-local scratch output remains ignored.
+flags while redacting credential-source fields, omitting non-scientific
+transport notes, and normalizing public model/backend labels. Ad hoc runtime
+noise such as `agent_log.txt`, raw per-process `config.json`, Python bytecode,
+and uncurated local scratch output remains ignored.

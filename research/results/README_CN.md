@@ -108,5 +108,6 @@ PYTHONPATH=. .venv/bin/python research/analysis/build_ocd62_summary.py
 relaxation `traj/` 目录、`.xyz`、`.traj`、`.pkl`、精选图片以及经过审计的运行日志。
 每个存在原始 `config.json` 的 run 目录旁边都有脱敏后的 `run_config.public.json`，
 保留 `git_sha`、`frozen_config` 和 runtime flags 等复现实验字段，但移除 credential
-source 相关信息。临时运行噪声，例如 `agent_log.txt`、原始逐进程 `config.json`、
-Python bytecode 和未整理的 local scratch output 继续忽略。
+source 相关信息、非科学性的传输备注，并统一公开的模型/后端标签。临时运行噪声，
+例如 `agent_log.txt`、原始逐进程 `config.json`、Python bytecode 和未整理的 local
+scratch output 继续忽略。

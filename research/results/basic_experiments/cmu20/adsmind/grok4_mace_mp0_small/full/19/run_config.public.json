@@ -1,5 +1,14 @@
 {
   "_public_config": {
+    "model_family": "grok-4",
+    "normalized_fields": [
+      "case.slab_file.cmu20_slab_path_normalized",
+      "frozen_config.llm_model_openrouter_alias",
+      "frozen_config.transport_variant_normalized",
+      "resolved_runtime_flags.llm_config.model_openrouter_alias"
+    ],
+    "omitted_operational_field_count": 2,
+    "provider_transport": "openrouter",
     "redacted_fields": [
       "api_key_source",
       "frozen_config.llm_api_key_env_var"
@@ -13,9 +22,8 @@
     "adsorbate_name": "OCHCH3",
     "case_id": "19",
     "miller_index": "(110)",
-    "notes": "Best-available reconstruction from sanitized filename CC_O and formula C2H4O; large-adsorbate ablation candidate",
     "reaction_class": "COMPLEX",
-    "slab_file": "benchmark_slabs/19_Hf2Zn6_110.xyz",
+    "slab_file": "datasets/cmu20/19_Hf2Zn6_110.xyz",
     "smiles": "CC=O",
     "surface_family": "intermetallic",
     "user_request": "Find the lowest-energy adsorption configuration for acetaldehyde on the provided surface."
@@ -27,7 +35,7 @@
     "llm_api_key_env_var": "<redacted>",
     "llm_backend": "openrouter",
     "llm_base_url": "https://openrouter.ai/api/v1",
-    "llm_model": "x-ai/grok-4",
+    "llm_model": "grok-4",
     "mace_device": "cpu",
     "mace_model": "small",
     "mace_precision": "float32",
@@ -35,17 +43,13 @@
     "manifest_version": "cmu20_manifest_v1",
     "max_retries": 5,
     "max_tokens": 4096,
-    "notes": [
-      "CMU20 artifact recovery rerun for successful cases whose structure artifacts were missing.",
-      "Model identity is kept fixed; OpenRouter is used only as the transport endpoint for Gemini/Grok.",
-      "Physics settings remain locked: MACE-MP-0 small on CPU with float32 precision and no dispersion."
-    ],
+    "openrouter_model_id": "x-ai/grok-4",
     "platform": "linux-x86_64-cpu-float32",
     "random_seed": 42,
     "relaxation_mode": "standard",
     "temperature": 0.0,
     "timeout_sec": 120,
-    "transport_variant": "openrouter-cmu20-artifact-recovery",
+    "transport_variant": "openrouter",
     "user_request_mode": "per-case explicit request string from manifests/cmu_manifest.csv"
   },
   "git_sha": "54d129d4bd712530229cd49b37fad7d4b0241f34",
@@ -66,7 +70,8 @@
         "base_url": "https://openrouter.ai/api/v1"
       },
       "max_tokens": 4096,
-      "model": "x-ai/grok-4",
+      "model": "grok-4",
+      "openrouter_model_id": "x-ai/grok-4",
       "temperature": 0.0,
       "timeout": 120
     },

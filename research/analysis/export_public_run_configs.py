@@ -33,22 +33,136 @@ ENV_ASSIGNMENT_RE = re.compile(
     r"((?:OPENROUTER|ANTHROPIC|OPENAI|GOOGLE)_API_KEY\s*=\s*.+)"
 )
 LOCAL_ABS_PATH_RE = re.compile(r"^(/Users/|/data/)")
+OPENROUTER_MODEL_ALIASES = {
+    "google/gemini-2.5-pro": "gemini-2.5-pro",
+    "x-ai/grok-4": "grok-4",
+}
+OCD62_RUN_MANIFEST_RE = re.compile(r"^ocd62_overlap12_run\d+_manifest_v1$")
+OMIT_PUBLIC_KEYS = {
+    "default_headers",
+    "llm_default_headers",
+    "notes",
+    "recovery_note",
+}
+_OMIT = object()
 
 
-def _sanitize(value: Any, path: tuple[str, ...], redacted: list[str]) -> Any:
+def _normalize_public_string(value: str, path: tuple[str, ...], normalizations: list[str]) -> str:
+    if value.startswith("benchmark_slabs/"):
+        normalizations.append(".".join((*path, "cmu20_slab_path_normalized")))
+        return value.replace("benchmark_slabs/", "datasets/cmu20/", 1)
+    if OCD62_RUN_MANIFEST_RE.match(value):
+        normalizations.append(".".join((*path, "ocd62_manifest_version_normalized")))
+        return "ocd62_overlap12_manifest_v1"
+
+    return value
+
+
+def _canonical_transport_variant(value: str) -> str:
+    lowered = value.lower()
+    if "openrouter" in lowered or "grok4-compatible" in lowered:
+        return "openrouter"
+    if "anthropic" in lowered:
+        return "anthropic-official"
+    if "openai" in lowered:
+        return "openai-official"
+    return value
+
+
+def _normalize_public_config(public: dict[str, Any]) -> list[str]:
+    normalizations: list[str] = []
+
+    def walk(value: Any, path: tuple[str, ...]) -> Any:
+        if isinstance(value, dict):
+            for key, child in list(value.items()):
+                value[key] = walk(child, (*path, str(key)))
+
+            llm_model = value.get("llm_model")
+            if isinstance(llm_model, str) and llm_model in OPENROUTER_MODEL_ALIASES:
+                value.setdefault("openrouter_model_id", llm_model)
+                value["llm_model"] = OPENROUTER_MODEL_ALIASES[llm_model]
+                normalizations.append(".".join((*path, "llm_model_openrouter_alias")))
+
+            model = value.get("model")
+            if isinstance(model, str) and model in OPENROUTER_MODEL_ALIASES:
+                value.setdefault("openrouter_model_id", model)
+                value["model"] = OPENROUTER_MODEL_ALIASES[model]
+                normalizations.append(".".join((*path, "model_openrouter_alias")))
+
+            transport_variant = value.get("transport_variant")
+            if isinstance(transport_variant, str):
+                canonical = _canonical_transport_variant(transport_variant)
+                if canonical != transport_variant:
+                    value["transport_variant"] = canonical
+                    normalizations.append(".".join((*path, "transport_variant_normalized")))
+
+            return value
+
+        if isinstance(value, list):
+            return [walk(child, (*path, "[]")) for child in value]
+
+        if isinstance(value, str):
+            return _normalize_public_string(value, path, normalizations)
+
+        return value
+
+    walk(public, ())
+
+    frozen_config = public.get("frozen_config")
+    if isinstance(frozen_config, dict):
+        backend = frozen_config.get("llm_backend")
+        base_url = frozen_config.get("llm_base_url")
+        if backend == "openrouter" or base_url == "https://openrouter.ai/api/v1":
+            public["_public_config"]["provider_transport"] = "openrouter"
+            model = frozen_config.get("llm_model")
+            if isinstance(model, str):
+                public["_public_config"]["model_family"] = model
+
+    return sorted(set(normalizations))
+
+
+def _should_omit_public_field(key: str, child: Any) -> bool:
+    lowered_key = key.lower()
+    if lowered_key in OMIT_PUBLIC_KEYS:
+        return True
+    if (
+        lowered_key == "manifest_version"
+        and isinstance(child, str)
+        and "recovery" in child.lower()
+    ):
+        return True
+    return False
+
+
+def _sanitize(
+    value: Any,
+    path: tuple[str, ...],
+    redacted: list[str],
+    omitted: list[str],
+) -> Any:
     if isinstance(value, dict):
         sanitized: dict[str, Any] = {}
         for key, child in value.items():
             child_path = (*path, str(key))
+            if _should_omit_public_field(str(key), child):
+                omitted.append(".".join(child_path))
+                continue
             if SENSITIVE_KEY_RE.search(str(key)):
                 sanitized[key] = "<redacted>"
                 redacted.append(".".join(child_path))
             else:
-                sanitized[key] = _sanitize(child, child_path, redacted)
+                sanitized_child = _sanitize(child, child_path, redacted, omitted)
+                if sanitized_child is not _OMIT:
+                    sanitized[key] = sanitized_child
         return sanitized
 
     if isinstance(value, list):
-        return [_sanitize(child, (*path, "[]"), redacted) for child in value]
+        sanitized_items = []
+        for child in value:
+            sanitized_child = _sanitize(child, (*path, "[]"), redacted, omitted)
+            if sanitized_child is not _OMIT:
+                sanitized_items.append(sanitized_child)
+        return sanitized_items
 
     if isinstance(value, str):
         if SECRET_VALUE_RE.search(value) or ENV_ASSIGNMENT_RE.search(value):
@@ -68,12 +182,15 @@ def export_one(raw_path: Path, *, dry_run: bool = False) -> bool:
         raw = json.load(handle)
 
     redacted: list[str] = []
-    public = _sanitize(raw, (), redacted)
+    omitted: list[str] = []
+    public = _sanitize(raw, (), redacted, omitted)
     public["_public_config"] = {
         "schema_version": 1,
         "source_file": RAW_CONFIG_NAME,
         "redacted_fields": sorted(set(redacted)),
+        "omitted_operational_field_count": len(set(omitted)),
     }
+    public["_public_config"]["normalized_fields"] = _normalize_public_config(public)
 
     output_path = raw_path.with_name(PUBLIC_CONFIG_NAME)
     text = json.dumps(public, indent=2, sort_keys=True) + "\n"

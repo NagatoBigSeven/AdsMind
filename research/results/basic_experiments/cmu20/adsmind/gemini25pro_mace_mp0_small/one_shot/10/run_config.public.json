@@ -1,5 +1,14 @@
 {
   "_public_config": {
+    "model_family": "gemini-2.5-pro",
+    "normalized_fields": [
+      "case.slab_file.cmu20_slab_path_normalized",
+      "frozen_config.llm_model_openrouter_alias",
+      "frozen_config.transport_variant_normalized",
+      "resolved_runtime_flags.llm_config.model_openrouter_alias"
+    ],
+    "omitted_operational_field_count": 2,
+    "provider_transport": "openrouter",
     "redacted_fields": [
       "api_key_source",
       "frozen_config.llm_api_key_env_var"
@@ -13,9 +22,8 @@
     "adsorbate_name": "OH",
     "case_id": "10",
     "miller_index": "(100)",
-    "notes": "Facet sensitivity test; DFT handoff target",
     "reaction_class": "ORR",
-    "slab_file": "benchmark_slabs/10_Pt_100.xyz",
+    "slab_file": "datasets/cmu20/10_Pt_100.xyz",
     "smiles": "[OH]",
     "surface_family": "monometallic",
     "user_request": "Find the lowest-energy adsorption configuration for hydroxyl radical on the provided surface."
@@ -27,7 +35,7 @@
     "llm_api_key_env_var": "<redacted>",
     "llm_backend": "openrouter",
     "llm_base_url": "https://openrouter.ai/api/v1",
-    "llm_model": "google/gemini-2.5-pro",
+    "llm_model": "gemini-2.5-pro",
     "mace_device": "cpu",
     "mace_model": "small",
     "mace_precision": "float32",
@@ -35,16 +43,13 @@
     "manifest_version": "cmu20_manifest_v1",
     "max_retries": 2,
     "max_tokens": 4096,
-    "notes": [
-      "Recovery for CMU20 Gemini one-shot cases whose original VertexAI attempts failed before execution due to billing being disabled.",
-      "Results are written into the existing google_vertexai_gemini25pro_mace_mp0_small/one_shot directory per project cleanup policy."
-    ],
+    "openrouter_model_id": "google/gemini-2.5-pro",
     "platform": "EPFL-workstation-cpu-float32",
     "random_seed": 42,
     "relaxation_mode": "standard",
     "temperature": 0.0,
     "timeout_sec": 120,
-    "transport_variant": "openrouter-official-gemini25pro-cmu20-one-shot-recovery",
+    "transport_variant": "openrouter",
     "user_request_mode": "per-case explicit request string from research/agent_eval/manifests/cmu_manifest.csv"
   },
   "git_sha": "54d129d4bd712530229cd49b37fad7d4b0241f34",
@@ -65,7 +70,8 @@
         "base_url": "https://openrouter.ai/api/v1"
       },
       "max_tokens": 4096,
-      "model": "google/gemini-2.5-pro",
+      "model": "gemini-2.5-pro",
+      "openrouter_model_id": "google/gemini-2.5-pro",
       "temperature": 0.0,
       "timeout": 120
     },
