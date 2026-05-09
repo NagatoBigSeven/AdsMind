@@ -58,8 +58,9 @@ represent real adsorbate physics, not infrastructure noise.
 ## Methods
 
 - Script:
-  [research/results/_staging/run_grok_outlier_seed_sweep_20260509.py](../../../_staging/run_grok_outlier_seed_sweep_20260509.py)
-  (uploaded to remote workspace, this dir holds the pulled results).
+  [run_grok_outlier_seed_sweep_20260509.py](run_grok_outlier_seed_sweep_20260509.py)
+  (kept alongside the pulled results; uploaded copy lives on the remote
+  workspace under `research/results/_staging/` and is not version-controlled).
 - Config: `frozen_config_ocd62_run5_grok4_recovery_max2000.json` (max_tokens=2000
   to avoid OpenRouter 402 quota issues observed during the run5 recovery).
 - Output layout:
