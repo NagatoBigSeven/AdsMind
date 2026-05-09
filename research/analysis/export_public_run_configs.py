@@ -37,6 +37,14 @@ OPENROUTER_MODEL_ALIASES = {
     "google/gemini-2.5-pro": "gemini-2.5-pro",
     "x-ai/grok-4": "grok-4",
 }
+MANIFEST_ID_ALIASES = {
+    "cmu_manifest": "cmu20_manifest",
+    "cmu_manifest_v1": "cmu20_manifest",
+    "cmu20_manifest_v1": "cmu20_manifest",
+    "ocd_gmae_recovery": "cmu20_manifest",
+    "ocd62_manifest_v1": "ocd62_manifest",
+    "ocd62_overlap12_manifest_v1": "ocd62_overlap12_manifest",
+}
 OCD62_RUN_MANIFEST_RE = re.compile(r"^ocd62_overlap12_run\d+_manifest_v1$")
 OMIT_PUBLIC_KEYS = {
     "default_headers",
@@ -51,10 +59,14 @@ def _normalize_public_string(value: str, path: tuple[str, ...], normalizations: 
     if value.startswith("benchmark_slabs/"):
         normalizations.append(".".join((*path, "cmu20_slab_path_normalized")))
         return value.replace("benchmark_slabs/", "datasets/cmu20/", 1)
-    if OCD62_RUN_MANIFEST_RE.match(value):
-        normalizations.append(".".join((*path, "ocd62_manifest_version_normalized")))
-        return "ocd62_overlap12_manifest_v1"
+    return value
 
+
+def _canonical_manifest_id(value: str) -> str:
+    if value in MANIFEST_ID_ALIASES:
+        return MANIFEST_ID_ALIASES[value]
+    if OCD62_RUN_MANIFEST_RE.match(value):
+        return "ocd62_overlap12_manifest"
     return value
 
 
@@ -67,6 +79,22 @@ def _canonical_transport_variant(value: str) -> str:
     if "openai" in lowered:
         return "openai-official"
     return value
+
+
+def _infer_manifest_id(public: dict[str, Any]) -> str | None:
+    case = public.get("case")
+    if not isinstance(case, dict):
+        return None
+    slab_file = case.get("slab_file")
+    if not isinstance(slab_file, str):
+        return None
+    if "ocd62_overlap12" in slab_file:
+        return "ocd62_overlap12_manifest"
+    if "ocd62" in slab_file:
+        return "ocd62_manifest"
+    if "cmu20" in slab_file:
+        return "cmu20_manifest"
+    return None
 
 
 def _normalize_public_config(public: dict[str, Any]) -> list[str]:
@@ -96,6 +124,11 @@ def _normalize_public_config(public: dict[str, Any]) -> list[str]:
                     value["transport_variant"] = canonical
                     normalizations.append(".".join((*path, "transport_variant_normalized")))
 
+            manifest_version = value.pop("manifest_version", None)
+            if isinstance(manifest_version, str):
+                value["manifest_id"] = _canonical_manifest_id(manifest_version)
+                normalizations.append(".".join((*path, "manifest_id_normalized")))
+
             return value
 
         if isinstance(value, list):
@@ -110,6 +143,12 @@ def _normalize_public_config(public: dict[str, Any]) -> list[str]:
 
     frozen_config = public.get("frozen_config")
     if isinstance(frozen_config, dict):
+        if "manifest_id" not in frozen_config:
+            inferred_manifest_id = _infer_manifest_id(public)
+            if inferred_manifest_id:
+                frozen_config["manifest_id"] = inferred_manifest_id
+                normalizations.append("frozen_config.manifest_id_inferred_from_case")
+
         backend = frozen_config.get("llm_backend")
         base_url = frozen_config.get("llm_base_url")
         if backend == "openrouter" or base_url == "https://openrouter.ai/api/v1":
@@ -124,12 +163,6 @@ def _normalize_public_config(public: dict[str, Any]) -> list[str]:
 def _should_omit_public_field(key: str, child: Any) -> bool:
     lowered_key = key.lower()
     if lowered_key in OMIT_PUBLIC_KEYS:
-        return True
-    if (
-        lowered_key == "manifest_version"
-        and isinstance(child, str)
-        and "recovery" in child.lower()
-    ):
         return True
     return False
 
