@@ -1,0 +1,214 @@
+{
+  "case_id": "12",
+  "case_metadata": {
+    "case_id": "12",
+    "slab_file": "benchmark_slabs/12_Au_111.xyz",
+    "smiles": "[OH]",
+    "user_request": "Find the lowest-energy adsorption configuration for hydroxyl radical on the provided surface.",
+    "surface_family": "monometallic",
+    "adsorbate_name": "OH",
+    "miller_index": "(111)",
+    "reaction_class": "ORR",
+    "ablation_candidate": "FALSE",
+    "notes": "Prior runs labeled all final sites as desorbed"
+  },
+  "status": "success",
+  "best_energy_eV": -2.3513641357421875,
+  "iteration_count": 1,
+  "max_attempts": 1,
+  "final_site_type": "hollow (FCC/No-Subsurf)",
+  "converged_tag": false,
+  "wall_clock_sec": 237.36506498605013,
+  "total_input_tokens": 4522,
+  "total_output_tokens": 3142,
+  "artifact_paths": {
+    "BEST_OH_bridge_to_hollow_FCC-No-Subsurf_E-2.351": "research/results/basic_experiments/cmu20/adsmind/grok4_mace_mp0_small/one_shot/12/artifacts/BEST_OH_bridge_to_hollow_FCC-No-Subsurf_E-2.351.xyz",
+    "BEST_OH_bridge_to_hollow_FCC-No-Subsurf_E-2.351.xyz": "research/results/basic_experiments/cmu20/adsmind/grok4_mace_mp0_small/one_shot/12/artifacts/BEST_OH_bridge_to_hollow_FCC-No-Subsurf_E-2.351.xyz",
+    "best_structure_file": "research/results/basic_experiments/cmu20/adsmind/grok4_mace_mp0_small/one_shot/12/artifacts/BEST_OH_bridge_to_hollow_FCC-No-Subsurf_E-2.351.xyz",
+    "conformers_[OH]": "research/results/basic_experiments/cmu20/adsmind/grok4_mace_mp0_small/one_shot/12/artifacts/conformers_[OH].traj",
+    "conformers_[OH].traj": "research/results/basic_experiments/cmu20/adsmind/grok4_mace_mp0_small/one_shot/12/artifacts/conformers_[OH].traj",
+    "final": "research/results/basic_experiments/cmu20/adsmind/grok4_mace_mp0_small/one_shot/12/artifacts/final.xyz",
+    "final.xyz": "research/results/basic_experiments/cmu20/adsmind/grok4_mace_mp0_small/one_shot/12/artifacts/final.xyz",
+    "relaxation": "research/results/basic_experiments/cmu20/adsmind/grok4_mace_mp0_small/one_shot/12/artifacts/relaxation.traj",
+    "relaxation.traj": "research/results/basic_experiments/cmu20/adsmind/grok4_mace_mp0_small/one_shot/12/artifacts/relaxation.traj",
+    "relaxation_trajectory_file": "research/results/basic_experiments/cmu20/adsmind/grok4_mace_mp0_small/one_shot/12/artifacts/relaxation.traj"
+  },
+  "best_result": {
+    "most_stable_energy_eV": -2.3513641357421875,
+    "analysis_json": {
+      "status": "success",
+      "message": "Most stable config adsorption energy: -2.3514 eV. Target Atom: O (from plan index 0, global index 27 in relaxed structure). -> Nearest: Au (Index 18), Distance: 2.242 Å (Threshold: 2.929), Bound: True. Bonded Surface Atoms: Au-2.242Å, Au-2.252Å, Au-2.273Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Au', 'Au'] -> Actual ['Au', 'Au', 'Au']).",
+      "most_stable_energy_eV": -2.3513641357421875,
+      "target_adsorbate_atom": "O",
+      "target_adsorbate_atom_index": 27,
+      "bonded_surface_atoms": [
+        {
+          "symbol": "Au",
+          "index": 18,
+          "distance": 2.242
+        },
+        {
+          "symbol": "Au",
+          "index": 3,
+          "distance": 2.252
+        },
+        {
+          "symbol": "Au",
+          "index": 21,
+          "distance": 2.273
+        }
+      ],
+      "nearest_slab_atom": "Au",
+      "nearest_slab_atom_index": 18,
+      "final_bond_distance_A": 2.242,
+      "estimated_covalent_cutoff_A": 2.222,
+      "is_covalently_bound": true,
+      "reaction_detected": false,
+      "is_dissociated": false,
+      "n_components": 1,
+      "bond_change_count": 0,
+      "site_analysis": {
+        "planned_site_type": "bridge",
+        "planned_connectivity": 2,
+        "actual_site_type": "hollow (FCC/No-Subsurf)",
+        "actual_connectivity": 3,
+        "is_chemical_slip": true,
+        "planned_symbols": [
+          "Au",
+          "Au"
+        ],
+        "actual_symbols": [
+          "Au",
+          "Au",
+          "Au"
+        ],
+        "site_fingerprint": "Au18-Au3-Au21"
+      },
+      "best_structure_file": "research/results/basic_experiments/cmu20/adsmind/grok4_mace_mp0_small/one_shot/12/artifacts/BEST_OH_bridge_to_hollow_FCC-No-Subsurf_E-2.351.xyz",
+      "generated_conformers_file": "research/results/basic_experiments/cmu20/adsmind/grok4_mace_mp0_small/one_shot/12/artifacts/conformers_[OH].traj",
+      "relaxation_trajectory_file": "research/results/basic_experiments/cmu20/adsmind/grok4_mace_mp0_small/one_shot/12/artifacts/final.xyz",
+      "session_id": "12-080bdb86"
+    },
+    "plan": {
+      "reasoning": "SMILES Consistency Check: The provided RDKit heavy atom index list shows only O at index 0 with SP3 hybridization, degree 0, radical_electrons 1, formal_charge 0. This aligns with [OH] as hydroxyl radical, where O is the heavy atom with an unpaired electron and attached H (not listed as heavy). No hybridization mismatch with user request for hydroxyl radical. Radical check: Binding atom index 0 has radical_electrons > 0, suitable for ReactiveSpecies. Analyze Old Plans: History is None, so this is the initial plan. No previous successes or failures. Surface Heterogeneity: Surface is pure Au, no alloys, so sites are homogeneous. Formulate New Plan: Goal is lowest energy adsorption. For OH radical on Au(111), literature suggests preference for bridge site with O binding. Propose testing bridge site first, as it's physically sensible and distinct from any prior (none). Adsorbate is reactive radical, so use ReactiveSpecies. Binding via O at index 0 (unpaired electron). Site is bridge, with 1 adsorbate binding index (monodentate). Surface binding atoms are Au-Au as per available sites. Use defaults for other parameters. Termination disabled, so action is continue. Note: Process has hard limit of 1 attempt, but proceeding with initial plan.",
+      "adsorbate_type": "ReactiveSpecies",
+      "solution": {
+        "action": "continue",
+        "site_type": "bridge",
+        "surface_binding_atoms": [
+          "Au",
+          "Au"
+        ],
+        "adsorbate_binding_indices": [
+          0
+        ],
+        "relax_top_n": 1,
+        "touch_sphere_size": 2,
+        "overlap_thr": 0.1,
+        "conformers_per_site_cap": 4
+      }
+    },
+    "result_type": "Perfect"
+  },
+  "last_analysis": {
+    "status": "success",
+    "message": "Most stable config adsorption energy: -2.3514 eV. Target Atom: O (from plan index 0, global index 27 in relaxed structure). -> Nearest: Au (Index 18), Distance: 2.242 Å (Threshold: 2.929), Bound: True. Bonded Surface Atoms: Au-2.242Å, Au-2.252Å, Au-2.273Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Au', 'Au'] -> Actual ['Au', 'Au', 'Au']).",
+    "most_stable_energy_eV": -2.3513641357421875,
+    "target_adsorbate_atom": "O",
+    "target_adsorbate_atom_index": 27,
+    "bonded_surface_atoms": [
+      {
+        "symbol": "Au",
+        "index": 18,
+        "distance": 2.242
+      },
+      {
+        "symbol": "Au",
+        "index": 3,
+        "distance": 2.252
+      },
+      {
+        "symbol": "Au",
+        "index": 21,
+        "distance": 2.273
+      }
+    ],
+    "nearest_slab_atom": "Au",
+    "nearest_slab_atom_index": 18,
+    "final_bond_distance_A": 2.242,
+    "estimated_covalent_cutoff_A": 2.222,
+    "is_covalently_bound": true,
+    "reaction_detected": false,
+    "is_dissociated": false,
+    "n_components": 1,
+    "bond_change_count": 0,
+    "site_analysis": {
+      "planned_site_type": "bridge",
+      "planned_connectivity": 2,
+      "actual_site_type": "hollow (FCC/No-Subsurf)",
+      "actual_connectivity": 3,
+      "is_chemical_slip": true,
+      "planned_symbols": [
+        "Au",
+        "Au"
+      ],
+      "actual_symbols": [
+        "Au",
+        "Au",
+        "Au"
+      ],
+      "site_fingerprint": "Au18-Au3-Au21"
+    },
+    "best_structure_file": "research/results/basic_experiments/cmu20/adsmind/grok4_mace_mp0_small/one_shot/12/artifacts/BEST_OH_bridge_to_hollow_FCC-No-Subsurf_E-2.351.xyz",
+    "generated_conformers_file": "research/results/basic_experiments/cmu20/adsmind/grok4_mace_mp0_small/one_shot/12/artifacts/conformers_[OH].traj",
+    "relaxation_trajectory_file": "research/results/basic_experiments/cmu20/adsmind/grok4_mace_mp0_small/one_shot/12/artifacts/final.xyz",
+    "session_id": "12-080bdb86"
+  },
+  "attempt_records": [
+    {
+      "attempt_index": 1,
+      "plan": {
+        "reasoning": "SMILES Consistency Check: The provided RDKit heavy atom index list shows only O at index 0 with SP3 hybridization, degree 0, radical_electrons 1, formal_charge 0. This aligns with [OH] as hydroxyl radical, where O is the heavy atom with an unpaired electron and attached H (not listed as heavy). No hybridization mismatch with user request for hydroxyl radical. Radical check: Binding atom index 0 has radical_electrons > 0, suitable for ReactiveSpecies. Analyze Old Plans: History is None, so this is the initial plan. No previous successes or failures. Surface Heterogeneity: Surface is pure Au, no alloys, so sites are homogeneous. Formulate New Plan: Goal is lowest energy adsorption. For OH radical on Au(111), literature suggests preference for bridge site with O binding. Propose testing bridge site first, as it's physically sensible and distinct from any prior (none). Adsorbate is reactive radical, so use ReactiveSpecies. Binding via O at index 0 (unpaired electron). Site is bridge, with 1 adsorbate binding index (monodentate). Surface binding atoms are Au-Au as per available sites. Use defaults for other parameters. Termination disabled, so action is continue. Note: Process has hard limit of 1 attempt, but proceeding with initial plan.",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "bridge",
+          "surface_binding_atoms": [
+            "Au",
+            "Au"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "bridge|Au,Au|0|ReactiveSpecies|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -2.3513641357421875,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": true,
+      "planned_site_type": "bridge",
+      "actual_site_type": "hollow (FCC/No-Subsurf)",
+      "best_structure_file": "research/results/basic_experiments/cmu20/adsmind/grok4_mace_mp0_small/one_shot/12/artifacts/BEST_OH_bridge_to_hollow_FCC-No-Subsurf_E-2.351.xyz",
+      "generated_conformers_file": "research/results/basic_experiments/cmu20/adsmind/grok4_mace_mp0_small/one_shot/12/artifacts/conformers_[OH].traj",
+      "relaxation_trajectory_file": "research/results/basic_experiments/cmu20/adsmind/grok4_mace_mp0_small/one_shot/12/artifacts/final.xyz",
+      "message": "Most stable config adsorption energy: -2.3514 eV. Target Atom: O (from plan index 0, global index 27 in relaxed structure). -> Nearest: Au (Index 18), Distance: 2.242 Å (Threshold: 2.929), Bound: True. Bonded Surface Atoms: Au-2.242Å, Au-2.252Å, Au-2.273Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Au', 'Au'] -> Actual ['Au', 'Au', 'Au']).",
+      "history_entry": "【✅ Perfect Adsorption】 bridge @ ['Au', 'Au'] (Index [0]) -> Site: hollow (FCC/No-Subsurf) (Au,Au,Au) | E=-2.351 eV"
+    }
+  ],
+  "history": [
+    "【✅ Perfect Adsorption】 bridge @ ['Au', 'Au'] (Index [0]) -> Site: hollow (FCC/No-Subsurf) (Au,Au,Au) | E=-2.351 eV"
+  ],
+  "error": null,
+  "perfect_count": 1,
+  "dissociation_count": 0,
+  "rearrangement_count": 0,
+  "calc_failure_count": 0,
+  "chemical_slip_count": 1,
+  "best_structure_file": "research/results/basic_experiments/cmu20/adsmind/grok4_mace_mp0_small/one_shot/12/artifacts/BEST_OH_bridge_to_hollow_FCC-No-Subsurf_E-2.351.xyz"
+}

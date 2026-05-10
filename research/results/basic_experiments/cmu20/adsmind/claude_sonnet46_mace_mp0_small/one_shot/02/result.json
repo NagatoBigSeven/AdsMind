@@ -1,0 +1,210 @@
+{
+  "case_id": "02",
+  "case_metadata": {
+    "case_id": "02",
+    "slab_file": "datasets/cmu20/02_Mo3Pd_111.xyz",
+    "smiles": "[N]=[NH]",
+    "user_request": "Find the lowest-energy adsorption configuration for NNH on the provided surface.",
+    "surface_family": "intermetallic",
+    "adsorbate_name": "NNH",
+    "miller_index": "(111)",
+    "reaction_class": "NRR",
+    "ablation_candidate": "TRUE",
+    "notes": "Dissociation-prone in prior run; Mo3Pd benchmark"
+  },
+  "status": "success",
+  "best_energy_eV": -4.342861175537109,
+  "iteration_count": 1,
+  "max_attempts": 1,
+  "final_site_type": "hollow (FCC/No-Subsurf)",
+  "converged_tag": false,
+  "wall_clock_sec": 99.32555906102061,
+  "total_input_tokens": 4079,
+  "total_output_tokens": 1603,
+  "artifact_paths": {
+    "BEST_N_NH_ontop_to_hollow_FCC-No-Subsurf_E-4.343": "research/results/basic_experiments/cmu20/adsmind/claude_sonnet46_mace_mp0_small/one_shot/02/artifacts/BEST_N_NH_ontop_to_hollow_FCC-No-Subsurf_E-4.343.xyz",
+    "BEST_N_NH_ontop_to_hollow_FCC-No-Subsurf_E-4.343.xyz": "research/results/basic_experiments/cmu20/adsmind/claude_sonnet46_mace_mp0_small/one_shot/02/artifacts/BEST_N_NH_ontop_to_hollow_FCC-No-Subsurf_E-4.343.xyz",
+    "best_structure_file": "research/results/basic_experiments/cmu20/adsmind/claude_sonnet46_mace_mp0_small/one_shot/02/artifacts/BEST_N_NH_ontop_to_hollow_FCC-No-Subsurf_E-4.343.xyz",
+    "conformers_[N]_[NH]": "research/results/basic_experiments/cmu20/adsmind/claude_sonnet46_mace_mp0_small/one_shot/02/artifacts/conformers_[N]_[NH].traj",
+    "conformers_[N]_[NH].traj": "research/results/basic_experiments/cmu20/adsmind/claude_sonnet46_mace_mp0_small/one_shot/02/artifacts/conformers_[N]_[NH].traj",
+    "final": "research/results/basic_experiments/cmu20/adsmind/claude_sonnet46_mace_mp0_small/one_shot/02/artifacts/final.xyz",
+    "final.xyz": "research/results/basic_experiments/cmu20/adsmind/claude_sonnet46_mace_mp0_small/one_shot/02/artifacts/final.xyz",
+    "relaxation": "research/results/basic_experiments/cmu20/adsmind/claude_sonnet46_mace_mp0_small/one_shot/02/artifacts/relaxation.traj",
+    "relaxation.traj": "research/results/basic_experiments/cmu20/adsmind/claude_sonnet46_mace_mp0_small/one_shot/02/artifacts/relaxation.traj",
+    "relaxation_trajectory_file": "research/results/basic_experiments/cmu20/adsmind/claude_sonnet46_mace_mp0_small/one_shot/02/artifacts/relaxation.traj"
+  },
+  "best_result": {
+    "most_stable_energy_eV": -4.342861175537109,
+    "analysis_json": {
+      "status": "success",
+      "message": "Most stable config adsorption energy: -4.3429 eV. Target Atom: N (from plan index 0, global index 96 in relaxed structure). -> Nearest: Mo (Index 92), Distance: 1.965 Å (Threshold: 3.262), Bound: True. Bonded Surface Atoms: Mo-1.965Å, Mo-2.249Å, Mo-2.252Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Mo'] -> Actual ['Mo', 'Mo', 'Mo']).",
+      "most_stable_energy_eV": -4.342861175537109,
+      "target_adsorbate_atom": "N",
+      "target_adsorbate_atom_index": 96,
+      "bonded_surface_atoms": [
+        {
+          "symbol": "Mo",
+          "index": 92,
+          "distance": 1.965
+        },
+        {
+          "symbol": "Mo",
+          "index": 86,
+          "distance": 2.249
+        },
+        {
+          "symbol": "Mo",
+          "index": 89,
+          "distance": 2.252
+        }
+      ],
+      "nearest_slab_atom": "Mo",
+      "nearest_slab_atom_index": 92,
+      "final_bond_distance_A": 1.965,
+      "estimated_covalent_cutoff_A": 2.475,
+      "is_covalently_bound": true,
+      "reaction_detected": false,
+      "is_dissociated": false,
+      "n_components": 1,
+      "bond_change_count": 0,
+      "site_analysis": {
+        "planned_site_type": "ontop",
+        "planned_connectivity": 1,
+        "actual_site_type": "hollow (FCC/No-Subsurf)",
+        "actual_connectivity": 3,
+        "is_chemical_slip": true,
+        "planned_symbols": [
+          "Mo"
+        ],
+        "actual_symbols": [
+          "Mo",
+          "Mo",
+          "Mo"
+        ],
+        "site_fingerprint": "Mo92-Mo86-Mo89"
+      },
+      "best_structure_file": "research/results/basic_experiments/cmu20/adsmind/claude_sonnet46_mace_mp0_small/one_shot/02/artifacts/BEST_N_NH_ontop_to_hollow_FCC-No-Subsurf_E-4.343.xyz",
+      "generated_conformers_file": "research/results/basic_experiments/cmu20/adsmind/claude_sonnet46_mace_mp0_small/one_shot/02/artifacts/conformers_[N]_[NH].traj",
+      "relaxation_trajectory_file": "research/results/basic_experiments/cmu20/adsmind/claude_sonnet46_mace_mp0_small/one_shot/02/artifacts/final.xyz",
+      "session_id": "02-c9b7c15d"
+    },
+    "plan": {
+      "reasoning": "SMILES Consistency Check: The SMILES [N]=[NH] represents NNH (diazene-like radical). From RDKit analysis: atom 0 is N with SP2 hybridization, degree 1, and 1 radical electron (unpaired electron). Atom 1 is N with SP2 hybridization, degree 1, and 0 radical electrons. This is a reactive species (radical) since atom 0 has an unpaired electron.\n\nAdsorbate Analysis: NNH has two nitrogen atoms. Atom 0 (N, radical) is the terminal nitrogen with an unpaired electron - this is the chemically active binding site. Atom 1 (NH) has no radical electrons. Since atom 0 has a radical electron, this should be treated as ReactiveSpecies, binding through atom 0.\n\nSurface Analysis: Available sites include ontop Mo, ontop Pd, bridge Mo-Mo, bridge Mo-Pd, hollow Mo-Mo-Mo, hollow Mo-Mo-Pd. For NNH adsorption on transition metal surfaces, the most common and energetically favorable configuration is end-on adsorption through the terminal N (atom 0, the radical N) at an ontop site. Mo is typically more reactive than Pd for N-containing species.\n\nPlan: Start with the most physically motivated configuration - ReactiveSpecies adsorption of NNH through the radical N (atom 0) at an ontop Mo site. This is the classic end-on N-binding mode seen in nitrogen reduction catalysis. The radical electron on atom 0 will form a bond with the Mo surface atom. This is the first attempt and represents the most likely lowest-energy configuration based on chemical intuition and literature precedent for NNH on Mo-containing surfaces.",
+      "adsorbate_type": "ReactiveSpecies",
+      "solution": {
+        "action": "continue",
+        "site_type": "ontop",
+        "surface_binding_atoms": [
+          "Mo"
+        ],
+        "adsorbate_binding_indices": [
+          0
+        ],
+        "relax_top_n": 1,
+        "touch_sphere_size": 2,
+        "overlap_thr": 0.1,
+        "conformers_per_site_cap": 4
+      }
+    },
+    "result_type": "Perfect"
+  },
+  "last_analysis": {
+    "status": "success",
+    "message": "Most stable config adsorption energy: -4.3429 eV. Target Atom: N (from plan index 0, global index 96 in relaxed structure). -> Nearest: Mo (Index 92), Distance: 1.965 Å (Threshold: 3.262), Bound: True. Bonded Surface Atoms: Mo-1.965Å, Mo-2.249Å, Mo-2.252Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Mo'] -> Actual ['Mo', 'Mo', 'Mo']).",
+    "most_stable_energy_eV": -4.342861175537109,
+    "target_adsorbate_atom": "N",
+    "target_adsorbate_atom_index": 96,
+    "bonded_surface_atoms": [
+      {
+        "symbol": "Mo",
+        "index": 92,
+        "distance": 1.965
+      },
+      {
+        "symbol": "Mo",
+        "index": 86,
+        "distance": 2.249
+      },
+      {
+        "symbol": "Mo",
+        "index": 89,
+        "distance": 2.252
+      }
+    ],
+    "nearest_slab_atom": "Mo",
+    "nearest_slab_atom_index": 92,
+    "final_bond_distance_A": 1.965,
+    "estimated_covalent_cutoff_A": 2.475,
+    "is_covalently_bound": true,
+    "reaction_detected": false,
+    "is_dissociated": false,
+    "n_components": 1,
+    "bond_change_count": 0,
+    "site_analysis": {
+      "planned_site_type": "ontop",
+      "planned_connectivity": 1,
+      "actual_site_type": "hollow (FCC/No-Subsurf)",
+      "actual_connectivity": 3,
+      "is_chemical_slip": true,
+      "planned_symbols": [
+        "Mo"
+      ],
+      "actual_symbols": [
+        "Mo",
+        "Mo",
+        "Mo"
+      ],
+      "site_fingerprint": "Mo92-Mo86-Mo89"
+    },
+    "best_structure_file": "research/results/basic_experiments/cmu20/adsmind/claude_sonnet46_mace_mp0_small/one_shot/02/artifacts/BEST_N_NH_ontop_to_hollow_FCC-No-Subsurf_E-4.343.xyz",
+    "generated_conformers_file": "research/results/basic_experiments/cmu20/adsmind/claude_sonnet46_mace_mp0_small/one_shot/02/artifacts/conformers_[N]_[NH].traj",
+    "relaxation_trajectory_file": "research/results/basic_experiments/cmu20/adsmind/claude_sonnet46_mace_mp0_small/one_shot/02/artifacts/final.xyz",
+    "session_id": "02-c9b7c15d"
+  },
+  "attempt_records": [
+    {
+      "attempt_index": 1,
+      "plan": {
+        "reasoning": "SMILES Consistency Check: The SMILES [N]=[NH] represents NNH (diazene-like radical). From RDKit analysis: atom 0 is N with SP2 hybridization, degree 1, and 1 radical electron (unpaired electron). Atom 1 is N with SP2 hybridization, degree 1, and 0 radical electrons. This is a reactive species (radical) since atom 0 has an unpaired electron.\n\nAdsorbate Analysis: NNH has two nitrogen atoms. Atom 0 (N, radical) is the terminal nitrogen with an unpaired electron - this is the chemically active binding site. Atom 1 (NH) has no radical electrons. Since atom 0 has a radical electron, this should be treated as ReactiveSpecies, binding through atom 0.\n\nSurface Analysis: Available sites include ontop Mo, ontop Pd, bridge Mo-Mo, bridge Mo-Pd, hollow Mo-Mo-Mo, hollow Mo-Mo-Pd. For NNH adsorption on transition metal surfaces, the most common and energetically favorable configuration is end-on adsorption through the terminal N (atom 0, the radical N) at an ontop site. Mo is typically more reactive than Pd for N-containing species.\n\nPlan: Start with the most physically motivated configuration - ReactiveSpecies adsorption of NNH through the radical N (atom 0) at an ontop Mo site. This is the classic end-on N-binding mode seen in nitrogen reduction catalysis. The radical electron on atom 0 will form a bond with the Mo surface atom. This is the first attempt and represents the most likely lowest-energy configuration based on chemical intuition and literature precedent for NNH on Mo-containing surfaces.",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "ontop",
+          "surface_binding_atoms": [
+            "Mo"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "ontop|Mo|0|ReactiveSpecies|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -4.342861175537109,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": true,
+      "planned_site_type": "ontop",
+      "actual_site_type": "hollow (FCC/No-Subsurf)",
+      "best_structure_file": "research/results/basic_experiments/cmu20/adsmind/claude_sonnet46_mace_mp0_small/one_shot/02/artifacts/BEST_N_NH_ontop_to_hollow_FCC-No-Subsurf_E-4.343.xyz",
+      "generated_conformers_file": "research/results/basic_experiments/cmu20/adsmind/claude_sonnet46_mace_mp0_small/one_shot/02/artifacts/conformers_[N]_[NH].traj",
+      "relaxation_trajectory_file": "research/results/basic_experiments/cmu20/adsmind/claude_sonnet46_mace_mp0_small/one_shot/02/artifacts/final.xyz",
+      "message": "Most stable config adsorption energy: -4.3429 eV. Target Atom: N (from plan index 0, global index 96 in relaxed structure). -> Nearest: Mo (Index 92), Distance: 1.965 Å (Threshold: 3.262), Bound: True. Bonded Surface Atoms: Mo-1.965Å, Mo-2.249Å, Mo-2.252Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Mo'] -> Actual ['Mo', 'Mo', 'Mo']).",
+      "history_entry": "【✅ Perfect Adsorption】 ontop @ ['Mo'] (Index [0]) -> Site: hollow (FCC/No-Subsurf) (Mo,Mo,Mo) | E=-4.343 eV"
+    }
+  ],
+  "history": [
+    "【✅ Perfect Adsorption】 ontop @ ['Mo'] (Index [0]) -> Site: hollow (FCC/No-Subsurf) (Mo,Mo,Mo) | E=-4.343 eV"
+  ],
+  "error": null,
+  "perfect_count": 1,
+  "dissociation_count": 0,
+  "rearrangement_count": 0,
+  "calc_failure_count": 0,
+  "chemical_slip_count": 1,
+  "best_structure_file": "research/results/basic_experiments/cmu20/adsmind/claude_sonnet46_mace_mp0_small/one_shot/02/artifacts/BEST_N_NH_ontop_to_hollow_FCC-No-Subsurf_E-4.343.xyz"
+}

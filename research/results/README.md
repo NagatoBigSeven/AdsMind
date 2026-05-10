@@ -6,25 +6,27 @@ The active result tree is organized by experiment type first.
 research/results/
   basic_experiments/
     cmu20/
-      gpt54_mace_mp0_small/
-      claude_sonnet46_mace_mp0_small/
-      gemini25pro_mace_mp0_small/
-      grok4_mace_mp0_small/
-        one_shot|full|no_slip|no_termination|no_forbid/
-          summary.csv
-          <case_id>/result.json
+      adsmind/
+        gpt54_mace_mp0_small/
+        claude_sonnet46_mace_mp0_small/
+        gemini25pro_mace_mp0_small/
+        grok4_mace_mp0_small/
+          one_shot|full|no_slip|no_termination|no_forbid/
+            summary.csv
+            <case_id>/result.json
+            <case_id>/run_config.public.json
       baselines/
-      summaries/
     ocd62/
-      gpt54_mace_mp0_small/
-      claude_sonnet46_mace_mp0_small/
-      gemini25pro_mace_mp0_small/
-      grok4_mace_mp0_small/
-        one_shot|full|no_slip|no_termination|no_forbid/
-          summary.csv
-          <case_id>/result.json
+      adsmind/
+        gpt54_mace_mp0_small/
+        claude_sonnet46_mace_mp0_small/
+        gemini25pro_mace_mp0_small/
+        grok4_mace_mp0_small/
+          one_shot|full|no_slip|no_termination|no_forbid/
+            summary.csv
+            <case_id>/result.json
+            <case_id>/run_config.public.json
       baselines/
-      summaries/
     summaries/
   advanced_experiments/
     ablation_and_chemical_slip_diagnostics/
@@ -45,15 +47,17 @@ Basic experiments are the matched CMU20 and OCD62 evaluation matrix:
   `grok4_mace_mp0_small`
 - variants: `one_shot`, `full`, `no_slip`, `no_termination`, `no_forbid`
 
-Each backend has `all_variants_summary.csv` for the full backend table. Each
-variant directory also has its own `summary.csv` beside the case result
-directories.
+AdsMind runs live under each dataset's `adsmind/` directory, parallel to
+`baselines/`. Each backend has `all_variants_summary.csv` for the full backend
+table. Each variant directory also has its own `summary.csv` beside the case
+result directories.
 
-Dataset-level summaries:
+Paper-facing summary entry point:
 
-- `basic_experiments/cmu20/summaries/method_comparison.csv`
-- `basic_experiments/ocd62/summaries/method_comparison.csv`
-- `basic_experiments/ocd62/summaries/ablation_4backend.csv`
+- `basic_experiments/summaries/cmu20_method_comparison.csv`
+- `basic_experiments/summaries/cmu20_ablation_4backend.csv`
+- `basic_experiments/summaries/ocd62_method_comparison.csv`
+- `basic_experiments/summaries/ocd62_ablation_4backend.csv`
 - `basic_experiments/summaries/full_vs_one_shot_summary.csv`
 - `basic_experiments/summaries/method_comparison_summary.csv`
 - `basic_experiments/summaries/method_comparison_table.md`
@@ -80,8 +84,8 @@ main dataset/backend/variant matrix:
 - `ablation_and_chemical_slip_diagnostics/chemical_slip_interpretability/`:
   chemical-slip interpretation tables and trajectories.
 - `reproducibility/ocd62_overlap12_rerun/`: repeated runs on the 12 overlapping OCD62
-  cases, including complete run1/run2/run3/run4 directories, a partial audited
-  run5, and N=2/N=3/N=4 summaries.
+  cases, including accepted run1 through run5 result directories, audited
+  run4/run5 pull logs under `logs/run45/`, and N=2/N=3/N=4/N=5 summaries.
 - `reproducibility/cmu20_gpt54_mace_mp0_small_multiseed/`:
   GPT-5.4 CMU20 full-run seed sensitivity under MACE-MP-0 small.
 - `force_field_sensitivity/mace_mp0_large_vs_mace_mp0_small/`: MACE-MP-0 large vs
@@ -95,15 +99,22 @@ main dataset/backend/variant matrix:
 Reproducibility summaries can be refreshed from the run directories with:
 
 ```bash
-.venv/bin/python research/analysis/build_ocd62_summary.py --write-n3
+PYTHONPATH=. .venv/bin/python research/analysis/build_ocd62_summary.py
 ```
 
 ## Refresh Commands
 
 ```bash
-.venv/bin/python research/analysis/build_method_comparison_table.py
-.venv/bin/python research/analysis/build_ocd62_summary.py
+PYTHONPATH=. .venv/bin/python research/analysis/build_method_comparison_table.py
+PYTHONPATH=. .venv/bin/python research/analysis/build_ocd62_summary.py
 ```
 
-Large local artifacts such as `.xyz`, `.traj`, logs, and per-run configs may be
-present in this tree, but they are ignored by Git by default.
+Structural evidence used to audit the paper-facing results is versioned with
+Git LFS where appropriate: AdsMind `artifacts/`, relaxation `traj/` directories,
+`.xyz`, `.traj`, `.pkl`, curated figures, and audited run logs. Each run with a
+raw `config.json` also has a sanitized `run_config.public.json` sidecar that
+keeps reproducibility fields such as `git_sha`, `frozen_config`, and runtime
+flags while redacting credential-source fields, omitting non-scientific
+transport notes, and normalizing public model/backend and manifest labels. Ad
+hoc runtime noise such as `agent_log.txt`, raw per-process `config.json`, Python
+bytecode, and uncurated local scratch output remains ignored.

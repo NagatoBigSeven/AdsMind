@@ -1,0 +1,82 @@
+{
+  "_public_config": {
+    "model_family": "gemini-2.5-pro",
+    "normalized_fields": [
+      "case.slab_file.cmu20_slab_path_normalized",
+      "frozen_config.manifest_id_inferred_from_case"
+    ],
+    "omitted_operational_field_count": 2,
+    "provider_transport": "openrouter",
+    "redacted_fields": [
+      "api_key_source",
+      "frozen_config.llm_api_key_env_var"
+    ],
+    "schema_version": 1,
+    "source_file": "config.json"
+  },
+  "api_key_source": "<redacted>",
+  "case": {
+    "ablation_candidate": "FALSE",
+    "adsorbate_name": "H",
+    "case_id": "07",
+    "miller_index": "(111)",
+    "reaction_class": "HER",
+    "slab_file": "datasets/cmu20/07_Ru3Mo_111.xyz",
+    "smiles": "[H]",
+    "surface_family": "intermetallic",
+    "user_request": "Find the lowest-energy adsorption configuration for atomic hydrogen on the provided surface."
+  },
+  "dry_run": false,
+  "frozen_config": {
+    "calculator_backend": "mace",
+    "fmax": 0.1,
+    "llm_api_key_env_var": "<redacted>",
+    "llm_backend": "openrouter",
+    "llm_base_url": "https://openrouter.ai/api/v1",
+    "llm_model": "gemini-2.5-pro",
+    "mace_device": "cpu",
+    "mace_model": "small",
+    "mace_precision": "float32",
+    "mace_use_dispersion": false,
+    "manifest_id": "cmu20_manifest",
+    "max_retries": 5,
+    "max_tokens": 4096,
+    "platform": "Ubuntu-22.04-x86_64-float32",
+    "random_seed": 42,
+    "relaxation_mode": "standard",
+    "temperature": 0,
+    "timeout_sec": 120,
+    "transport_variant": "openrouter"
+  },
+  "git_sha": "54d129d4bd712530229cd49b37fad7d4b0241f34",
+  "resolved_runtime_flags": {
+    "calculator_backend": "mace",
+    "calculator_config": {
+      "device": "cpu",
+      "model": "small",
+      "precision": "float32",
+      "use_dispersion": false
+    },
+    "enable_forbid": false,
+    "enable_slip_feedback": false,
+    "enable_termination": true,
+    "llm_backend": "openrouter",
+    "llm_config": {
+      "extra_options": {
+        "base_url": "https://openrouter.ai/api/v1"
+      },
+      "max_tokens": 4096,
+      "model": "gemini-2.5-pro",
+      "temperature": 0,
+      "timeout": 120
+    },
+    "max_attempts": 5,
+    "random_seed": 42,
+    "relaxation_config": {
+      "fmax": 0.1
+    },
+    "relaxation_mode": "standard"
+  },
+  "session_id": "07-ce9323ba",
+  "timestamp": "2026-04-22T08:44:42+00:00"
+}

@@ -52,7 +52,7 @@
     "most_stable_energy_eV": -6.2311553955078125,
     "analysis_json": {
       "status": "success",
-      "message": "Most stable config adsorption energy: -6.2312 eV. Target Atom: O (from plan index 0, global index 48 in relaxed structure). -> Nearest: Zr (Index 19), Distance: 2.129 \u00c5 (Threshold: 3.494), Bound: True. Bonded Surface Atoms: Zr-2.129\u00c5, Zr-2.142\u00c5, Pd-2.858\u00c5. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Zr', 'Zr', 'Zr'] -> Actual ['Pd', 'Zr', 'Zr']).",
+      "message": "Most stable config adsorption energy: -6.2312 eV. Target Atom: O (from plan index 0, global index 48 in relaxed structure). -> Nearest: Zr (Index 19), Distance: 2.129 Å (Threshold: 3.494), Bound: True. Bonded Surface Atoms: Zr-2.129Å, Zr-2.142Å, Pd-2.858Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Zr', 'Zr', 'Zr'] -> Actual ['Pd', 'Zr', 'Zr']).",
       "most_stable_energy_eV": -6.2311553955078125,
       "target_adsorbate_atom": "O",
       "target_adsorbate_atom_index": 48,
@@ -100,13 +100,13 @@
         ],
         "site_fingerprint": "Zr19-Zr3-Pd25"
       },
-      "best_structure_file": "outputs/008-cc0cec73/BEST_OH_hollow_to_hollow_HCP-Subsurf-Atom_E-6.231.xyz",
-      "generated_conformers_file": "outputs/008-cc0cec73/conformers_[OH].traj",
-      "relaxation_trajectory_file": "outputs/008-cc0cec73/final.xyz",
+      "best_structure_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/gpt54_mace_mp0_small/no_forbid/008/artifacts/BEST_OH_hollow_to_hollow_HCP-Subsurf-Atom_E-6.231.xyz",
+      "generated_conformers_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/gpt54_mace_mp0_small/no_forbid/008/artifacts/conformers_[OH].traj",
+      "relaxation_trajectory_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/gpt54_mace_mp0_small/no_forbid/008/artifacts/final.xyz",
       "session_id": "008-cc0cec73"
     },
     "plan": {
-      "reasoning": "SMILES consistency check: the adsorbate is [OH], i.e. hydroxyl radical. The provided RDKit atom list contains one heavy atom, O at index 0, hybridization SP3, radical_electrons = 1, formal charge 0. This is chemically consistent with a reactive radical adsorbing through O, so adsorbate_type should be ReactiveSpecies and the only valid binding index is [0]. History analysis: two plans have already been tested successfully. (1) Planned ontop on Zr slipped to a hollow Pd-Zr-Zr site and gave the current best energy of -6.176 eV; this explicitly marks ontop-Zr as unstable/invalid. (2) Planned hollow Pd-Pd-Zr also slipped to hollow Pd-Zr-Zr and gave -6.155 eV, tagged as energy-degenerate but geometrically distinct; this means the planned Pd-Pd-Zr hollow is also unstable/invalid, while confirming a Pd-Zr-Zr hollow basin is favorable. There is no [\ud83d\udd04 Converged to known best] termination tag, so we should not terminate yet. To systematically search for a lower-energy configuration, we should test a genuinely new high-symmetry site that has not been attempted. Since O-centered OH often prefers more oxophilic environments on Zr-containing alloys, and the discovered favorable basin already contains two Zr atoms, a reasonable unexplored candidate is the pure Zr-Zr-Zr hollow. This is distinct from both prior plans and may reveal whether increasing Zr coordination further stabilizes OH. User intent is to find the lowest-energy adsorption configuration for hydroxyl on this Pd-Zr surface, so continuing the search with an untested hollow environment is appropriate.",
+      "reasoning": "SMILES consistency check: the adsorbate is [OH], i.e. hydroxyl radical. The provided RDKit atom list contains one heavy atom, O at index 0, hybridization SP3, radical_electrons = 1, formal charge 0. This is chemically consistent with a reactive radical adsorbing through O, so adsorbate_type should be ReactiveSpecies and the only valid binding index is [0]. History analysis: two plans have already been tested successfully. (1) Planned ontop on Zr slipped to a hollow Pd-Zr-Zr site and gave the current best energy of -6.176 eV; this explicitly marks ontop-Zr as unstable/invalid. (2) Planned hollow Pd-Pd-Zr also slipped to hollow Pd-Zr-Zr and gave -6.155 eV, tagged as energy-degenerate but geometrically distinct; this means the planned Pd-Pd-Zr hollow is also unstable/invalid, while confirming a Pd-Zr-Zr hollow basin is favorable. There is no [🔄 Converged to known best] termination tag, so we should not terminate yet. To systematically search for a lower-energy configuration, we should test a genuinely new high-symmetry site that has not been attempted. Since O-centered OH often prefers more oxophilic environments on Zr-containing alloys, and the discovered favorable basin already contains two Zr atoms, a reasonable unexplored candidate is the pure Zr-Zr-Zr hollow. This is distinct from both prior plans and may reveal whether increasing Zr coordination further stabilizes OH. User intent is to find the lowest-energy adsorption configuration for hydroxyl on this Pd-Zr surface, so continuing the search with an untested hollow environment is appropriate.",
       "adsorbate_type": "ReactiveSpecies",
       "solution": {
         "action": "continue",
@@ -129,7 +129,7 @@
   },
   "last_analysis": {
     "status": "success",
-    "message": "Most stable config adsorption energy: -6.1058 eV. Target Atom: O (from plan index 0, global index 48 in relaxed structure). -> Nearest: Zr (Index 3), Distance: 2.165 \u00c5 (Threshold: 3.494), Bound: True. Bonded Surface Atoms: Zr-2.165\u00c5, Zr-2.214\u00c5, Pd-2.226\u00c5. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: False (Planned ['Pd', 'Zr', 'Zr'] -> Actual ['Pd', 'Zr', 'Zr']).",
+    "message": "Most stable config adsorption energy: -6.1058 eV. Target Atom: O (from plan index 0, global index 48 in relaxed structure). -> Nearest: Zr (Index 3), Distance: 2.165 Å (Threshold: 3.494), Bound: True. Bonded Surface Atoms: Zr-2.165Å, Zr-2.214Å, Pd-2.226Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: False (Planned ['Pd', 'Zr', 'Zr'] -> Actual ['Pd', 'Zr', 'Zr']).",
     "most_stable_energy_eV": -6.1058197021484375,
     "target_adsorbate_atom": "O",
     "target_adsorbate_atom_index": 48,
@@ -177,9 +177,9 @@
       ],
       "site_fingerprint": "Zr3-Zr19-Pd25"
     },
-    "best_structure_file": "outputs/008-cc0cec73/BEST_OH_hollow_to_hollow_HCP-Subsurf-Atom_E-6.106.xyz",
-    "generated_conformers_file": "outputs/008-cc0cec73/conformers_[OH].traj",
-    "relaxation_trajectory_file": "outputs/008-cc0cec73/final.xyz",
+    "best_structure_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/gpt54_mace_mp0_small/no_forbid/008/artifacts/BEST_OH_hollow_to_hollow_HCP-Subsurf-Atom_E-6.106.xyz",
+    "generated_conformers_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/gpt54_mace_mp0_small/no_forbid/008/artifacts/conformers_[OH].traj",
+    "relaxation_trajectory_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/gpt54_mace_mp0_small/no_forbid/008/artifacts/final.xyz",
     "session_id": "008-cc0cec73"
   },
   "attempt_records": [
@@ -211,11 +211,11 @@
       "is_chemical_slip": true,
       "planned_site_type": "ontop",
       "actual_site_type": "hollow (HCP/Subsurf-Atom)",
-      "best_structure_file": "outputs/008-cc0cec73/BEST_OH_ontop_to_hollow_HCP-Subsurf-Atom_E-6.176.xyz",
-      "generated_conformers_file": "outputs/008-cc0cec73/conformers_[OH].traj",
-      "relaxation_trajectory_file": "outputs/008-cc0cec73/final.xyz",
-      "message": "Most stable config adsorption energy: -6.1763 eV. Target Atom: O (from plan index 0, global index 48 in relaxed structure). -> Nearest: Zr (Index 19), Distance: 2.13 \u00c5 (Threshold: 3.494), Bound: True. Bonded Surface Atoms: Zr-2.13\u00c5, Zr-2.135\u00c5, Pd-2.853\u00c5. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Zr'] -> Actual ['Pd', 'Zr', 'Zr']).",
-      "history_entry": "\u3010\u2705 Perfect Adsorption\u3011 ontop @ ['Zr'] (Index [0]) -> \u26a0\ufe0f\u3010Unstable Site Warning\u3011\u26a0\ufe0f: Planned ontop (Zr) is unstable, adsorbate spontaneously slipped to hollow (HCP/Subsurf-Atom) (Pd-Zr-Zr).This means Zr has insufficient affinity for this adsorbate. [\ud83c\udf1f New Best] | E=-6.176 eV"
+      "best_structure_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/gpt54_mace_mp0_small/no_forbid/008/artifacts/BEST_OH_ontop_to_hollow_HCP-Subsurf-Atom_E-6.176.xyz",
+      "generated_conformers_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/gpt54_mace_mp0_small/no_forbid/008/artifacts/conformers_[OH].traj",
+      "relaxation_trajectory_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/gpt54_mace_mp0_small/no_forbid/008/artifacts/final.xyz",
+      "message": "Most stable config adsorption energy: -6.1763 eV. Target Atom: O (from plan index 0, global index 48 in relaxed structure). -> Nearest: Zr (Index 19), Distance: 2.13 Å (Threshold: 3.494), Bound: True. Bonded Surface Atoms: Zr-2.13Å, Zr-2.135Å, Pd-2.853Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Zr'] -> Actual ['Pd', 'Zr', 'Zr']).",
+      "history_entry": "【✅ Perfect Adsorption】 ontop @ ['Zr'] (Index [0]) -> ⚠️【Unstable Site Warning】⚠️: Planned ontop (Zr) is unstable, adsorbate spontaneously slipped to hollow (HCP/Subsurf-Atom) (Pd-Zr-Zr).This means Zr has insufficient affinity for this adsorbate. [🌟 New Best] | E=-6.176 eV"
     },
     {
       "attempt_index": 2,
@@ -247,16 +247,16 @@
       "is_chemical_slip": true,
       "planned_site_type": "hollow",
       "actual_site_type": "hollow (HCP/Subsurf-Atom)",
-      "best_structure_file": "outputs/008-cc0cec73/BEST_OH_hollow_to_hollow_HCP-Subsurf-Atom_E-6.155.xyz",
-      "generated_conformers_file": "outputs/008-cc0cec73/conformers_[OH].traj",
-      "relaxation_trajectory_file": "outputs/008-cc0cec73/final.xyz",
-      "message": "Most stable config adsorption energy: -6.1554 eV. Target Atom: O (from plan index 0, global index 48 in relaxed structure). -> Nearest: Zr (Index 11), Distance: 2.166 \u00c5 (Threshold: 3.494), Bound: True. Bonded Surface Atoms: Zr-2.166\u00c5, Zr-2.207\u00c5, Pd-2.219\u00c5. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Pd', 'Pd', 'Zr'] -> Actual ['Pd', 'Zr', 'Zr']).",
-      "history_entry": "\u3010\u2705 Perfect Adsorption\u3011 hollow @ ['Pd', 'Pd', 'Zr'] (Index [0]) -> \u26a0\ufe0f\u3010Unstable Site Warning\u3011\u26a0\ufe0f: Planned hollow (Pd-Pd-Zr) is unstable, adsorbate spontaneously slipped to hollow (HCP/Subsurf-Atom) (Pd-Zr-Zr).This means Pd-Pd-Zr has insufficient affinity for this adsorbate. [\u26a0\ufe0f Energy Degenerate but Geometrically Distinct] | E=-6.155 eV"
+      "best_structure_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/gpt54_mace_mp0_small/no_forbid/008/artifacts/BEST_OH_hollow_to_hollow_HCP-Subsurf-Atom_E-6.155.xyz",
+      "generated_conformers_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/gpt54_mace_mp0_small/no_forbid/008/artifacts/conformers_[OH].traj",
+      "relaxation_trajectory_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/gpt54_mace_mp0_small/no_forbid/008/artifacts/final.xyz",
+      "message": "Most stable config adsorption energy: -6.1554 eV. Target Atom: O (from plan index 0, global index 48 in relaxed structure). -> Nearest: Zr (Index 11), Distance: 2.166 Å (Threshold: 3.494), Bound: True. Bonded Surface Atoms: Zr-2.166Å, Zr-2.207Å, Pd-2.219Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Pd', 'Pd', 'Zr'] -> Actual ['Pd', 'Zr', 'Zr']).",
+      "history_entry": "【✅ Perfect Adsorption】 hollow @ ['Pd', 'Pd', 'Zr'] (Index [0]) -> ⚠️【Unstable Site Warning】⚠️: Planned hollow (Pd-Pd-Zr) is unstable, adsorbate spontaneously slipped to hollow (HCP/Subsurf-Atom) (Pd-Zr-Zr).This means Pd-Pd-Zr has insufficient affinity for this adsorbate. [⚠️ Energy Degenerate but Geometrically Distinct] | E=-6.155 eV"
     },
     {
       "attempt_index": 3,
       "plan": {
-        "reasoning": "SMILES consistency check: the adsorbate is [OH], i.e. hydroxyl radical. The provided RDKit atom list contains one heavy atom, O at index 0, hybridization SP3, radical_electrons = 1, formal charge 0. This is chemically consistent with a reactive radical adsorbing through O, so adsorbate_type should be ReactiveSpecies and the only valid binding index is [0]. History analysis: two plans have already been tested successfully. (1) Planned ontop on Zr slipped to a hollow Pd-Zr-Zr site and gave the current best energy of -6.176 eV; this explicitly marks ontop-Zr as unstable/invalid. (2) Planned hollow Pd-Pd-Zr also slipped to hollow Pd-Zr-Zr and gave -6.155 eV, tagged as energy-degenerate but geometrically distinct; this means the planned Pd-Pd-Zr hollow is also unstable/invalid, while confirming a Pd-Zr-Zr hollow basin is favorable. There is no [\ud83d\udd04 Converged to known best] termination tag, so we should not terminate yet. To systematically search for a lower-energy configuration, we should test a genuinely new high-symmetry site that has not been attempted. Since O-centered OH often prefers more oxophilic environments on Zr-containing alloys, and the discovered favorable basin already contains two Zr atoms, a reasonable unexplored candidate is the pure Zr-Zr-Zr hollow. This is distinct from both prior plans and may reveal whether increasing Zr coordination further stabilizes OH. User intent is to find the lowest-energy adsorption configuration for hydroxyl on this Pd-Zr surface, so continuing the search with an untested hollow environment is appropriate.",
+        "reasoning": "SMILES consistency check: the adsorbate is [OH], i.e. hydroxyl radical. The provided RDKit atom list contains one heavy atom, O at index 0, hybridization SP3, radical_electrons = 1, formal charge 0. This is chemically consistent with a reactive radical adsorbing through O, so adsorbate_type should be ReactiveSpecies and the only valid binding index is [0]. History analysis: two plans have already been tested successfully. (1) Planned ontop on Zr slipped to a hollow Pd-Zr-Zr site and gave the current best energy of -6.176 eV; this explicitly marks ontop-Zr as unstable/invalid. (2) Planned hollow Pd-Pd-Zr also slipped to hollow Pd-Zr-Zr and gave -6.155 eV, tagged as energy-degenerate but geometrically distinct; this means the planned Pd-Pd-Zr hollow is also unstable/invalid, while confirming a Pd-Zr-Zr hollow basin is favorable. There is no [🔄 Converged to known best] termination tag, so we should not terminate yet. To systematically search for a lower-energy configuration, we should test a genuinely new high-symmetry site that has not been attempted. Since O-centered OH often prefers more oxophilic environments on Zr-containing alloys, and the discovered favorable basin already contains two Zr atoms, a reasonable unexplored candidate is the pure Zr-Zr-Zr hollow. This is distinct from both prior plans and may reveal whether increasing Zr coordination further stabilizes OH. User intent is to find the lowest-energy adsorption configuration for hydroxyl on this Pd-Zr surface, so continuing the search with an untested hollow environment is appropriate.",
         "adsorbate_type": "ReactiveSpecies",
         "solution": {
           "action": "continue",
@@ -283,11 +283,11 @@
       "is_chemical_slip": true,
       "planned_site_type": "hollow",
       "actual_site_type": "hollow (HCP/Subsurf-Atom)",
-      "best_structure_file": "outputs/008-cc0cec73/BEST_OH_hollow_to_hollow_HCP-Subsurf-Atom_E-6.231.xyz",
-      "generated_conformers_file": "outputs/008-cc0cec73/conformers_[OH].traj",
-      "relaxation_trajectory_file": "outputs/008-cc0cec73/final.xyz",
-      "message": "Most stable config adsorption energy: -6.2312 eV. Target Atom: O (from plan index 0, global index 48 in relaxed structure). -> Nearest: Zr (Index 19), Distance: 2.129 \u00c5 (Threshold: 3.494), Bound: True. Bonded Surface Atoms: Zr-2.129\u00c5, Zr-2.142\u00c5, Pd-2.858\u00c5. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Zr', 'Zr', 'Zr'] -> Actual ['Pd', 'Zr', 'Zr']).",
-      "history_entry": "\u3010\u2705 Perfect Adsorption\u3011 hollow @ ['Zr', 'Zr', 'Zr'] (Index [0]) -> \u26a0\ufe0f\u3010Unstable Site Warning\u3011\u26a0\ufe0f: Planned hollow (Zr-Zr-Zr) is unstable, adsorbate spontaneously slipped to hollow (HCP/Subsurf-Atom) (Pd-Zr-Zr).This means Zr-Zr-Zr has insufficient affinity for this adsorbate. [\ud83c\udf1f New Best] | E=-6.231 eV"
+      "best_structure_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/gpt54_mace_mp0_small/no_forbid/008/artifacts/BEST_OH_hollow_to_hollow_HCP-Subsurf-Atom_E-6.231.xyz",
+      "generated_conformers_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/gpt54_mace_mp0_small/no_forbid/008/artifacts/conformers_[OH].traj",
+      "relaxation_trajectory_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/gpt54_mace_mp0_small/no_forbid/008/artifacts/final.xyz",
+      "message": "Most stable config adsorption energy: -6.2312 eV. Target Atom: O (from plan index 0, global index 48 in relaxed structure). -> Nearest: Zr (Index 19), Distance: 2.129 Å (Threshold: 3.494), Bound: True. Bonded Surface Atoms: Zr-2.129Å, Zr-2.142Å, Pd-2.858Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Zr', 'Zr', 'Zr'] -> Actual ['Pd', 'Zr', 'Zr']).",
+      "history_entry": "【✅ Perfect Adsorption】 hollow @ ['Zr', 'Zr', 'Zr'] (Index [0]) -> ⚠️【Unstable Site Warning】⚠️: Planned hollow (Zr-Zr-Zr) is unstable, adsorbate spontaneously slipped to hollow (HCP/Subsurf-Atom) (Pd-Zr-Zr).This means Zr-Zr-Zr has insufficient affinity for this adsorbate. [🌟 New Best] | E=-6.231 eV"
     },
     {
       "attempt_index": 4,
@@ -319,23 +319,24 @@
       "is_chemical_slip": false,
       "planned_site_type": "hollow",
       "actual_site_type": "hollow (HCP/Subsurf-Atom)",
-      "best_structure_file": "outputs/008-cc0cec73/BEST_OH_hollow_to_hollow_HCP-Subsurf-Atom_E-6.106.xyz",
-      "generated_conformers_file": "outputs/008-cc0cec73/conformers_[OH].traj",
-      "relaxation_trajectory_file": "outputs/008-cc0cec73/final.xyz",
-      "message": "Most stable config adsorption energy: -6.1058 eV. Target Atom: O (from plan index 0, global index 48 in relaxed structure). -> Nearest: Zr (Index 3), Distance: 2.165 \u00c5 (Threshold: 3.494), Bound: True. Bonded Surface Atoms: Zr-2.165\u00c5, Zr-2.214\u00c5, Pd-2.226\u00c5. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: False (Planned ['Pd', 'Zr', 'Zr'] -> Actual ['Pd', 'Zr', 'Zr']).",
-      "history_entry": "\u3010\u2705 Perfect Adsorption\u3011 hollow @ ['Pd', 'Zr', 'Zr'] (Index [0]) -> \u26a0\ufe0f Geometric Slip: hollow -> hollow (HCP/Subsurf-Atom) | E=-6.106 eV"
+      "best_structure_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/gpt54_mace_mp0_small/no_forbid/008/artifacts/BEST_OH_hollow_to_hollow_HCP-Subsurf-Atom_E-6.106.xyz",
+      "generated_conformers_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/gpt54_mace_mp0_small/no_forbid/008/artifacts/conformers_[OH].traj",
+      "relaxation_trajectory_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/gpt54_mace_mp0_small/no_forbid/008/artifacts/final.xyz",
+      "message": "Most stable config adsorption energy: -6.1058 eV. Target Atom: O (from plan index 0, global index 48 in relaxed structure). -> Nearest: Zr (Index 3), Distance: 2.165 Å (Threshold: 3.494), Bound: True. Bonded Surface Atoms: Zr-2.165Å, Zr-2.214Å, Pd-2.226Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: False (Planned ['Pd', 'Zr', 'Zr'] -> Actual ['Pd', 'Zr', 'Zr']).",
+      "history_entry": "【✅ Perfect Adsorption】 hollow @ ['Pd', 'Zr', 'Zr'] (Index [0]) -> ⚠️ Geometric Slip: hollow -> hollow (HCP/Subsurf-Atom) | E=-6.106 eV"
     }
   ],
   "history": [
-    "\u3010\u2705 Perfect Adsorption\u3011 ontop @ ['Zr'] (Index [0]) -> \u26a0\ufe0f\u3010Unstable Site Warning\u3011\u26a0\ufe0f: Planned ontop (Zr) is unstable, adsorbate spontaneously slipped to hollow (HCP/Subsurf-Atom) (Pd-Zr-Zr).This means Zr has insufficient affinity for this adsorbate. [\ud83c\udf1f New Best] | E=-6.176 eV",
-    "\u3010\u2705 Perfect Adsorption\u3011 hollow @ ['Pd', 'Pd', 'Zr'] (Index [0]) -> \u26a0\ufe0f\u3010Unstable Site Warning\u3011\u26a0\ufe0f: Planned hollow (Pd-Pd-Zr) is unstable, adsorbate spontaneously slipped to hollow (HCP/Subsurf-Atom) (Pd-Zr-Zr).This means Pd-Pd-Zr has insufficient affinity for this adsorbate. [\u26a0\ufe0f Energy Degenerate but Geometrically Distinct] | E=-6.155 eV",
-    "\u3010\u2705 Perfect Adsorption\u3011 hollow @ ['Zr', 'Zr', 'Zr'] (Index [0]) -> \u26a0\ufe0f\u3010Unstable Site Warning\u3011\u26a0\ufe0f: Planned hollow (Zr-Zr-Zr) is unstable, adsorbate spontaneously slipped to hollow (HCP/Subsurf-Atom) (Pd-Zr-Zr).This means Zr-Zr-Zr has insufficient affinity for this adsorbate. [\ud83c\udf1f New Best] | E=-6.231 eV",
-    "\u3010\u2705 Perfect Adsorption\u3011 hollow @ ['Pd', 'Zr', 'Zr'] (Index [0]) -> \u26a0\ufe0f Geometric Slip: hollow -> hollow (HCP/Subsurf-Atom) | E=-6.106 eV"
+    "【✅ Perfect Adsorption】 ontop @ ['Zr'] (Index [0]) -> ⚠️【Unstable Site Warning】⚠️: Planned ontop (Zr) is unstable, adsorbate spontaneously slipped to hollow (HCP/Subsurf-Atom) (Pd-Zr-Zr).This means Zr has insufficient affinity for this adsorbate. [🌟 New Best] | E=-6.176 eV",
+    "【✅ Perfect Adsorption】 hollow @ ['Pd', 'Pd', 'Zr'] (Index [0]) -> ⚠️【Unstable Site Warning】⚠️: Planned hollow (Pd-Pd-Zr) is unstable, adsorbate spontaneously slipped to hollow (HCP/Subsurf-Atom) (Pd-Zr-Zr).This means Pd-Pd-Zr has insufficient affinity for this adsorbate. [⚠️ Energy Degenerate but Geometrically Distinct] | E=-6.155 eV",
+    "【✅ Perfect Adsorption】 hollow @ ['Zr', 'Zr', 'Zr'] (Index [0]) -> ⚠️【Unstable Site Warning】⚠️: Planned hollow (Zr-Zr-Zr) is unstable, adsorbate spontaneously slipped to hollow (HCP/Subsurf-Atom) (Pd-Zr-Zr).This means Zr-Zr-Zr has insufficient affinity for this adsorbate. [🌟 New Best] | E=-6.231 eV",
+    "【✅ Perfect Adsorption】 hollow @ ['Pd', 'Zr', 'Zr'] (Index [0]) -> ⚠️ Geometric Slip: hollow -> hollow (HCP/Subsurf-Atom) | E=-6.106 eV"
   ],
   "error": null,
   "perfect_count": 4,
   "dissociation_count": 0,
   "rearrangement_count": 0,
   "calc_failure_count": 0,
-  "chemical_slip_count": 3
+  "chemical_slip_count": 3,
+  "best_structure_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/gpt54_mace_mp0_small/no_forbid/008/artifacts/BEST_OH_ontop_to_hollow_HCP-Subsurf-Atom_E-6.176.xyz"
 }

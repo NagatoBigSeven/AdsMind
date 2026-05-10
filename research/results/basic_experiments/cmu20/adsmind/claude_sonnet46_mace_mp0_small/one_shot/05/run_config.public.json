@@ -1,0 +1,81 @@
+{
+  "_public_config": {
+    "normalized_fields": [
+      "case.slab_file.cmu20_slab_path_normalized",
+      "frozen_config.manifest_id_normalized"
+    ],
+    "omitted_operational_field_count": 2,
+    "redacted_fields": [
+      "api_key_source",
+      "frozen_config.llm_api_key_env_var"
+    ],
+    "schema_version": 1,
+    "source_file": "config.json"
+  },
+  "api_key_source": "<redacted>",
+  "case": {
+    "ablation_candidate": "FALSE",
+    "adsorbate_name": "H",
+    "case_id": "05",
+    "miller_index": "(111)",
+    "reaction_class": "HER",
+    "slab_file": "datasets/cmu20/05_Cu3Ag_111.xyz",
+    "smiles": "[H]",
+    "surface_family": "intermetallic",
+    "user_request": "Find the lowest-energy adsorption configuration for atomic hydrogen on the provided surface."
+  },
+  "dry_run": false,
+  "frozen_config": {
+    "calculator_backend": "mace",
+    "fmax": 0.1,
+    "llm_api_key_env_var": "<redacted>",
+    "llm_backend": "anthropic",
+    "llm_base_url": "https://api.anthropic.com/v1/",
+    "llm_model": "claude-sonnet-4-6",
+    "mace_device": "cpu",
+    "mace_model": "small",
+    "mace_precision": "float32",
+    "mace_use_dispersion": false,
+    "manifest_id": "cmu20_manifest",
+    "max_retries": 1,
+    "max_tokens": 4096,
+    "platform": "EPFL-workstation-cpu-float32",
+    "random_seed": 42,
+    "relaxation_mode": "standard",
+    "temperature": 0,
+    "timeout_sec": 120,
+    "transport_variant": "anthropic-official",
+    "user_request_mode": "per-case explicit request string from manifests/cmu_manifest.csv"
+  },
+  "git_sha": "6913c1a33abd1d0eb393ff8432c04eadb673b84e",
+  "resolved_runtime_flags": {
+    "calculator_backend": "mace",
+    "calculator_config": {
+      "device": "cpu",
+      "model": "small",
+      "precision": "float32",
+      "use_dispersion": false
+    },
+    "enable_forbid": true,
+    "enable_slip_feedback": true,
+    "enable_termination": true,
+    "llm_backend": "anthropic",
+    "llm_config": {
+      "extra_options": {
+        "base_url": "https://api.anthropic.com/v1/"
+      },
+      "max_tokens": 4096,
+      "model": "claude-sonnet-4-6",
+      "temperature": 0,
+      "timeout": 120
+    },
+    "max_attempts": 1,
+    "random_seed": 42,
+    "relaxation_config": {
+      "fmax": 0.1
+    },
+    "relaxation_mode": "standard"
+  },
+  "session_id": "05-85597547",
+  "timestamp": "2026-04-13T13:37:37+00:00"
+}

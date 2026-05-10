@@ -54,7 +54,7 @@
     "most_stable_energy_eV": -3.5041396617889404,
     "analysis_json": {
       "status": "success",
-      "message": "Most stable config adsorption energy: -3.5041 eV. Target Atom: H (from plan index 0, global index 48 in relaxed structure). -> Nearest: Y (Index 33), Distance: 2.305 \u00c5 (Threshold: 3.204), Bound: True. Bonded Surface Atoms: Y-2.305\u00c5, Y-2.341\u00c5, Y-2.344\u00c5, Y-2.368\u00c5. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Ga', 'Y', 'Y'] -> Actual ['Y', 'Y', 'Y', 'Y']).",
+      "message": "Most stable config adsorption energy: -3.5041 eV. Target Atom: H (from plan index 0, global index 48 in relaxed structure). -> Nearest: Y (Index 33), Distance: 2.305 Å (Threshold: 3.204), Bound: True. Bonded Surface Atoms: Y-2.305Å, Y-2.341Å, Y-2.344Å, Y-2.368Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Ga', 'Y', 'Y'] -> Actual ['Y', 'Y', 'Y', 'Y']).",
       "most_stable_energy_eV": -3.5041396617889404,
       "target_adsorbate_atom": "H",
       "target_adsorbate_atom_index": 48,
@@ -108,13 +108,13 @@
         ],
         "site_fingerprint": "Y33-Y29-Y31-Y32"
       },
-      "best_structure_file": "outputs/012-ff735d8a/BEST_H_hollow_to_hollow_FCC-No-Subsurf_E-3.504.xyz",
-      "generated_conformers_file": "outputs/012-ff735d8a/conformers_[H].traj",
-      "relaxation_trajectory_file": "outputs/012-ff735d8a/final.xyz",
+      "best_structure_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/gpt54_mace_mp0_small/no_slip/012/artifacts/BEST_H_hollow_to_hollow_FCC-No-Subsurf_E-3.504.xyz",
+      "generated_conformers_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/gpt54_mace_mp0_small/no_slip/012/artifacts/conformers_[H].traj",
+      "relaxation_trajectory_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/gpt54_mace_mp0_small/no_slip/012/artifacts/final.xyz",
       "session_id": "012-ff735d8a"
     },
     "plan": {
-      "reasoning": "SMILES consistency check: the adsorbate is [H], i.e. atomic hydrogen. This is a radical species, so ReactiveSpecies is the chemically correct classification, and the binding atom is the single H atom with an unpaired electron. The provided heavy atom index list is empty because hydrogen is not a heavy atom; for this monoatomic adsorbate, the only valid binding atom is index 0, and no alternative atom indices should be guessed. History analysis: one successful perfect adsorption has already been found at a hollow site with surface atoms ['Ga','Ga','Y'], giving E = -3.257 eV and marked as the current best. There is no [\ud83d\udd04 Converged to known best] tag, so termination is not yet forced. To continue systematic exploration, I must choose a completely new plan different from the tested hollow ['Ga','Ga','Y'] configuration. For atomic H on a heterogeneous Ga/Y surface, other high-symmetry sites can still compete, especially chemically distinct alloy hollows. Among the remaining untested canonical options, the other hollow family ['Ga','Y','Y'] is the most directly comparable and could plausibly be lower due to surface heterogeneity. User intent: find the lowest-energy adsorption configuration for atomic hydrogen on this surface by systematically testing sites. Therefore the next best plan is to probe the alternative 3-fold hollow environment rather than inventing an unreasonable low-symmetry placement.",
+      "reasoning": "SMILES consistency check: the adsorbate is [H], i.e. atomic hydrogen. This is a radical species, so ReactiveSpecies is the chemically correct classification, and the binding atom is the single H atom with an unpaired electron. The provided heavy atom index list is empty because hydrogen is not a heavy atom; for this monoatomic adsorbate, the only valid binding atom is index 0, and no alternative atom indices should be guessed. History analysis: one successful perfect adsorption has already been found at a hollow site with surface atoms ['Ga','Ga','Y'], giving E = -3.257 eV and marked as the current best. There is no [🔄 Converged to known best] tag, so termination is not yet forced. To continue systematic exploration, I must choose a completely new plan different from the tested hollow ['Ga','Ga','Y'] configuration. For atomic H on a heterogeneous Ga/Y surface, other high-symmetry sites can still compete, especially chemically distinct alloy hollows. Among the remaining untested canonical options, the other hollow family ['Ga','Y','Y'] is the most directly comparable and could plausibly be lower due to surface heterogeneity. User intent: find the lowest-energy adsorption configuration for atomic hydrogen on this surface by systematically testing sites. Therefore the next best plan is to probe the alternative 3-fold hollow environment rather than inventing an unreasonable low-symmetry placement.",
       "adsorbate_type": "ReactiveSpecies",
       "solution": {
         "action": "continue",
@@ -137,7 +137,7 @@
   },
   "last_analysis": {
     "status": "success",
-    "message": "Most stable config adsorption energy: -3.3365 eV. Target Atom: H (from plan index 0, global index 48 in relaxed structure). -> Nearest: Ga (Index 23), Distance: 2.018 \u00c5 (Threshold: 2.218), Bound: True. Bonded Surface Atoms: Ga-2.018\u00c5, Y-2.163\u00c5, Y-2.257\u00c5. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Ga', 'Y'] -> Actual ['Ga', 'Y', 'Y']).",
+    "message": "Most stable config adsorption energy: -3.3365 eV. Target Atom: H (from plan index 0, global index 48 in relaxed structure). -> Nearest: Ga (Index 23), Distance: 2.018 Å (Threshold: 2.218), Bound: True. Bonded Surface Atoms: Ga-2.018Å, Y-2.163Å, Y-2.257Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Ga', 'Y'] -> Actual ['Ga', 'Y', 'Y']).",
     "most_stable_energy_eV": -3.336491346359253,
     "target_adsorbate_atom": "H",
     "target_adsorbate_atom_index": 48,
@@ -184,9 +184,9 @@
       ],
       "site_fingerprint": "Ga23-Y35-Y30"
     },
-    "best_structure_file": "outputs/012-ff735d8a/BEST_H_bridge_to_hollow_FCC-No-Subsurf_E-3.336.xyz",
-    "generated_conformers_file": "outputs/012-ff735d8a/conformers_[H].traj",
-    "relaxation_trajectory_file": "outputs/012-ff735d8a/final.xyz",
+    "best_structure_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/gpt54_mace_mp0_small/no_slip/012/artifacts/BEST_H_bridge_to_hollow_FCC-No-Subsurf_E-3.336.xyz",
+    "generated_conformers_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/gpt54_mace_mp0_small/no_slip/012/artifacts/conformers_[H].traj",
+    "relaxation_trajectory_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/gpt54_mace_mp0_small/no_slip/012/artifacts/final.xyz",
     "session_id": "012-ff735d8a"
   },
   "attempt_records": [
@@ -220,16 +220,16 @@
       "is_chemical_slip": true,
       "planned_site_type": "hollow",
       "actual_site_type": "hollow (FCC/No-Subsurf)",
-      "best_structure_file": "outputs/012-ff735d8a/BEST_H_hollow_to_hollow_FCC-No-Subsurf_E-3.257.xyz",
-      "generated_conformers_file": "outputs/012-ff735d8a/conformers_[H].traj",
-      "relaxation_trajectory_file": "outputs/012-ff735d8a/final.xyz",
-      "message": "Most stable config adsorption energy: -3.2567 eV. Target Atom: H (from plan index 0, global index 48 in relaxed structure). -> Nearest: Ga (Index 23), Distance: 1.767 \u00c5 (Threshold: 2.218), Bound: True. Bonded Surface Atoms: Ga-1.767\u00c5, Y-2.307\u00c5, Y-2.386\u00c5. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Ga', 'Ga', 'Y'] -> Actual ['Ga', 'Y', 'Y']).",
-      "history_entry": "\u3010\u2705 Perfect Adsorption\u3011 hollow @ ['Ga', 'Ga', 'Y'] (Index [0]) -> Site: hollow (FCC/No-Subsurf) (Ga,Y,Y) [\ud83c\udf1f New Best] | E=-3.257 eV"
+      "best_structure_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/gpt54_mace_mp0_small/no_slip/012/artifacts/BEST_H_hollow_to_hollow_FCC-No-Subsurf_E-3.257.xyz",
+      "generated_conformers_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/gpt54_mace_mp0_small/no_slip/012/artifacts/conformers_[H].traj",
+      "relaxation_trajectory_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/gpt54_mace_mp0_small/no_slip/012/artifacts/final.xyz",
+      "message": "Most stable config adsorption energy: -3.2567 eV. Target Atom: H (from plan index 0, global index 48 in relaxed structure). -> Nearest: Ga (Index 23), Distance: 1.767 Å (Threshold: 2.218), Bound: True. Bonded Surface Atoms: Ga-1.767Å, Y-2.307Å, Y-2.386Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Ga', 'Ga', 'Y'] -> Actual ['Ga', 'Y', 'Y']).",
+      "history_entry": "【✅ Perfect Adsorption】 hollow @ ['Ga', 'Ga', 'Y'] (Index [0]) -> Site: hollow (FCC/No-Subsurf) (Ga,Y,Y) [🌟 New Best] | E=-3.257 eV"
     },
     {
       "attempt_index": 2,
       "plan": {
-        "reasoning": "SMILES consistency check: the adsorbate is [H], i.e. atomic hydrogen. This is a radical species, so ReactiveSpecies is the chemically correct classification, and the binding atom is the single H atom with an unpaired electron. The provided heavy atom index list is empty because hydrogen is not a heavy atom; for this monoatomic adsorbate, the only valid binding atom is index 0, and no alternative atom indices should be guessed. History analysis: one successful perfect adsorption has already been found at a hollow site with surface atoms ['Ga','Ga','Y'], giving E = -3.257 eV and marked as the current best. There is no [\ud83d\udd04 Converged to known best] tag, so termination is not yet forced. To continue systematic exploration, I must choose a completely new plan different from the tested hollow ['Ga','Ga','Y'] configuration. For atomic H on a heterogeneous Ga/Y surface, other high-symmetry sites can still compete, especially chemically distinct alloy hollows. Among the remaining untested canonical options, the other hollow family ['Ga','Y','Y'] is the most directly comparable and could plausibly be lower due to surface heterogeneity. User intent: find the lowest-energy adsorption configuration for atomic hydrogen on this surface by systematically testing sites. Therefore the next best plan is to probe the alternative 3-fold hollow environment rather than inventing an unreasonable low-symmetry placement.",
+        "reasoning": "SMILES consistency check: the adsorbate is [H], i.e. atomic hydrogen. This is a radical species, so ReactiveSpecies is the chemically correct classification, and the binding atom is the single H atom with an unpaired electron. The provided heavy atom index list is empty because hydrogen is not a heavy atom; for this monoatomic adsorbate, the only valid binding atom is index 0, and no alternative atom indices should be guessed. History analysis: one successful perfect adsorption has already been found at a hollow site with surface atoms ['Ga','Ga','Y'], giving E = -3.257 eV and marked as the current best. There is no [🔄 Converged to known best] tag, so termination is not yet forced. To continue systematic exploration, I must choose a completely new plan different from the tested hollow ['Ga','Ga','Y'] configuration. For atomic H on a heterogeneous Ga/Y surface, other high-symmetry sites can still compete, especially chemically distinct alloy hollows. Among the remaining untested canonical options, the other hollow family ['Ga','Y','Y'] is the most directly comparable and could plausibly be lower due to surface heterogeneity. User intent: find the lowest-energy adsorption configuration for atomic hydrogen on this surface by systematically testing sites. Therefore the next best plan is to probe the alternative 3-fold hollow environment rather than inventing an unreasonable low-symmetry placement.",
         "adsorbate_type": "ReactiveSpecies",
         "solution": {
           "action": "continue",
@@ -256,11 +256,11 @@
       "is_chemical_slip": true,
       "planned_site_type": "hollow",
       "actual_site_type": "hollow (FCC/No-Subsurf)",
-      "best_structure_file": "outputs/012-ff735d8a/BEST_H_hollow_to_hollow_FCC-No-Subsurf_E-3.504.xyz",
-      "generated_conformers_file": "outputs/012-ff735d8a/conformers_[H].traj",
-      "relaxation_trajectory_file": "outputs/012-ff735d8a/final.xyz",
-      "message": "Most stable config adsorption energy: -3.5041 eV. Target Atom: H (from plan index 0, global index 48 in relaxed structure). -> Nearest: Y (Index 33), Distance: 2.305 \u00c5 (Threshold: 3.204), Bound: True. Bonded Surface Atoms: Y-2.305\u00c5, Y-2.341\u00c5, Y-2.344\u00c5, Y-2.368\u00c5. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Ga', 'Y', 'Y'] -> Actual ['Y', 'Y', 'Y', 'Y']).",
-      "history_entry": "\u3010\u2705 Perfect Adsorption\u3011 hollow @ ['Ga', 'Y', 'Y'] (Index [0]) -> Site: hollow (FCC/No-Subsurf) (Y,Y,Y,Y) [\ud83c\udf1f New Best] | E=-3.504 eV"
+      "best_structure_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/gpt54_mace_mp0_small/no_slip/012/artifacts/BEST_H_hollow_to_hollow_FCC-No-Subsurf_E-3.504.xyz",
+      "generated_conformers_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/gpt54_mace_mp0_small/no_slip/012/artifacts/conformers_[H].traj",
+      "relaxation_trajectory_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/gpt54_mace_mp0_small/no_slip/012/artifacts/final.xyz",
+      "message": "Most stable config adsorption energy: -3.5041 eV. Target Atom: H (from plan index 0, global index 48 in relaxed structure). -> Nearest: Y (Index 33), Distance: 2.305 Å (Threshold: 3.204), Bound: True. Bonded Surface Atoms: Y-2.305Å, Y-2.341Å, Y-2.344Å, Y-2.368Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Ga', 'Y', 'Y'] -> Actual ['Y', 'Y', 'Y', 'Y']).",
+      "history_entry": "【✅ Perfect Adsorption】 hollow @ ['Ga', 'Y', 'Y'] (Index [0]) -> Site: hollow (FCC/No-Subsurf) (Y,Y,Y,Y) [🌟 New Best] | E=-3.504 eV"
     },
     {
       "attempt_index": 3,
@@ -291,16 +291,16 @@
       "is_chemical_slip": false,
       "planned_site_type": "bridge",
       "actual_site_type": "bridge",
-      "best_structure_file": "outputs/012-ff735d8a/BEST_H_bridge_E-3.302.xyz",
-      "generated_conformers_file": "outputs/012-ff735d8a/conformers_[H].traj",
-      "relaxation_trajectory_file": "outputs/012-ff735d8a/final.xyz",
-      "message": "Most stable config adsorption energy: -3.3023 eV. Target Atom: H (from plan index 0, global index 48 in relaxed structure). -> Nearest: Y (Index 35), Distance: 2.131 \u00c5 (Threshold: 3.204), Bound: True. Bonded Surface Atoms: Y-2.131\u00c5, Y-2.158\u00c5. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: False (Planned ['Y', 'Y'] -> Actual ['Y', 'Y']).",
-      "history_entry": "\u3010\u2705 Perfect Adsorption\u3011 bridge @ ['Y', 'Y'] (Index [0]) -> Site: bridge (Y,Y) | E=-3.302 eV"
+      "best_structure_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/gpt54_mace_mp0_small/no_slip/012/artifacts/BEST_H_bridge_E-3.302.xyz",
+      "generated_conformers_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/gpt54_mace_mp0_small/no_slip/012/artifacts/conformers_[H].traj",
+      "relaxation_trajectory_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/gpt54_mace_mp0_small/no_slip/012/artifacts/final.xyz",
+      "message": "Most stable config adsorption energy: -3.3023 eV. Target Atom: H (from plan index 0, global index 48 in relaxed structure). -> Nearest: Y (Index 35), Distance: 2.131 Å (Threshold: 3.204), Bound: True. Bonded Surface Atoms: Y-2.131Å, Y-2.158Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: False (Planned ['Y', 'Y'] -> Actual ['Y', 'Y']).",
+      "history_entry": "【✅ Perfect Adsorption】 bridge @ ['Y', 'Y'] (Index [0]) -> Site: bridge (Y,Y) | E=-3.302 eV"
     },
     {
       "attempt_index": 4,
       "plan": {
-        "reasoning": "SMILES consistency check: the adsorbate is [H], i.e., atomic hydrogen, which is a radical species with one unpaired electron, so ReactiveSpecies is appropriate. The provided heavy atom index list is empty because hydrogen is not a heavy atom; for this monoatomic adsorbate, the only valid binding atom is the single H atom, so the adsorption plan must use the sole atom as binding center. History analysis: tested successful configurations are hollow on Ga-Ga-Y with E = -3.257 eV, hollow on Ga-Y-Y with E = -3.504 eV (current best), and bridge on Y-Y with E = -3.302 eV. No failures or reactivity changes are reported. No [\ud83d\udd04 Converged to known best] tag is present, so termination is not forced yet. To continue systematically, we should test a chemically distinct untried high-symmetry site from the allowed list rather than repeat an explored one. Since Y-rich environments have been more favorable than the mixed Ga-containing hollow, an ontop Y site is a reasonable next distinct trial; it is allowed, untested, and could in principle compete for atomic H. User intent is to locate the lowest-energy adsorption configuration for atomic hydrogen on the Ga/Y surface. Surface options available include ontop Ga, ontop Y, bridge Ga-Ga, bridge Ga-Y, bridge Y-Y, hollow Ga-Ga-Y, and hollow Ga-Y-Y; among these, ontop Y is untested and distinct from prior plans.",
+        "reasoning": "SMILES consistency check: the adsorbate is [H], i.e., atomic hydrogen, which is a radical species with one unpaired electron, so ReactiveSpecies is appropriate. The provided heavy atom index list is empty because hydrogen is not a heavy atom; for this monoatomic adsorbate, the only valid binding atom is the single H atom, so the adsorption plan must use the sole atom as binding center. History analysis: tested successful configurations are hollow on Ga-Ga-Y with E = -3.257 eV, hollow on Ga-Y-Y with E = -3.504 eV (current best), and bridge on Y-Y with E = -3.302 eV. No failures or reactivity changes are reported. No [🔄 Converged to known best] tag is present, so termination is not forced yet. To continue systematically, we should test a chemically distinct untried high-symmetry site from the allowed list rather than repeat an explored one. Since Y-rich environments have been more favorable than the mixed Ga-containing hollow, an ontop Y site is a reasonable next distinct trial; it is allowed, untested, and could in principle compete for atomic H. User intent is to locate the lowest-energy adsorption configuration for atomic hydrogen on the Ga/Y surface. Surface options available include ontop Ga, ontop Y, bridge Ga-Ga, bridge Ga-Y, bridge Y-Y, hollow Ga-Ga-Y, and hollow Ga-Y-Y; among these, ontop Y is untested and distinct from prior plans.",
         "adsorbate_type": "ReactiveSpecies",
         "solution": {
           "action": "continue",
@@ -325,11 +325,11 @@
       "is_chemical_slip": true,
       "planned_site_type": "ontop",
       "actual_site_type": "hollow (FCC/No-Subsurf)",
-      "best_structure_file": "outputs/012-ff735d8a/BEST_H_ontop_to_hollow_FCC-No-Subsurf_E-3.338.xyz",
-      "generated_conformers_file": "outputs/012-ff735d8a/conformers_[H].traj",
-      "relaxation_trajectory_file": "outputs/012-ff735d8a/final.xyz",
-      "message": "Most stable config adsorption energy: -3.3381 eV. Target Atom: H (from plan index 0, global index 48 in relaxed structure). -> Nearest: Ga (Index 23), Distance: 1.985 \u00c5 (Threshold: 2.218), Bound: True. Bonded Surface Atoms: Ga-1.985\u00c5, Y-2.161\u00c5, Y-2.234\u00c5. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Y'] -> Actual ['Ga', 'Y', 'Y']).",
-      "history_entry": "\u3010\u2705 Perfect Adsorption\u3011 ontop @ ['Y'] (Index [0]) -> Site: hollow (FCC/No-Subsurf) (Ga,Y,Y) | E=-3.338 eV"
+      "best_structure_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/gpt54_mace_mp0_small/no_slip/012/artifacts/BEST_H_ontop_to_hollow_FCC-No-Subsurf_E-3.338.xyz",
+      "generated_conformers_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/gpt54_mace_mp0_small/no_slip/012/artifacts/conformers_[H].traj",
+      "relaxation_trajectory_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/gpt54_mace_mp0_small/no_slip/012/artifacts/final.xyz",
+      "message": "Most stable config adsorption energy: -3.3381 eV. Target Atom: H (from plan index 0, global index 48 in relaxed structure). -> Nearest: Ga (Index 23), Distance: 1.985 Å (Threshold: 2.218), Bound: True. Bonded Surface Atoms: Ga-1.985Å, Y-2.161Å, Y-2.234Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Y'] -> Actual ['Ga', 'Y', 'Y']).",
+      "history_entry": "【✅ Perfect Adsorption】 ontop @ ['Y'] (Index [0]) -> Site: hollow (FCC/No-Subsurf) (Ga,Y,Y) | E=-3.338 eV"
     },
     {
       "attempt_index": 5,
@@ -360,24 +360,25 @@
       "is_chemical_slip": true,
       "planned_site_type": "bridge",
       "actual_site_type": "hollow (FCC/No-Subsurf)",
-      "best_structure_file": "outputs/012-ff735d8a/BEST_H_bridge_to_hollow_FCC-No-Subsurf_E-3.336.xyz",
-      "generated_conformers_file": "outputs/012-ff735d8a/conformers_[H].traj",
-      "relaxation_trajectory_file": "outputs/012-ff735d8a/final.xyz",
-      "message": "Most stable config adsorption energy: -3.3365 eV. Target Atom: H (from plan index 0, global index 48 in relaxed structure). -> Nearest: Ga (Index 23), Distance: 2.018 \u00c5 (Threshold: 2.218), Bound: True. Bonded Surface Atoms: Ga-2.018\u00c5, Y-2.163\u00c5, Y-2.257\u00c5. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Ga', 'Y'] -> Actual ['Ga', 'Y', 'Y']).",
-      "history_entry": "\u3010\u2705 Perfect Adsorption\u3011 bridge @ ['Ga', 'Y'] (Index [0]) -> Site: hollow (FCC/No-Subsurf) (Ga,Y,Y) | E=-3.336 eV"
+      "best_structure_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/gpt54_mace_mp0_small/no_slip/012/artifacts/BEST_H_bridge_to_hollow_FCC-No-Subsurf_E-3.336.xyz",
+      "generated_conformers_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/gpt54_mace_mp0_small/no_slip/012/artifacts/conformers_[H].traj",
+      "relaxation_trajectory_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/gpt54_mace_mp0_small/no_slip/012/artifacts/final.xyz",
+      "message": "Most stable config adsorption energy: -3.3365 eV. Target Atom: H (from plan index 0, global index 48 in relaxed structure). -> Nearest: Ga (Index 23), Distance: 2.018 Å (Threshold: 2.218), Bound: True. Bonded Surface Atoms: Ga-2.018Å, Y-2.163Å, Y-2.257Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Ga', 'Y'] -> Actual ['Ga', 'Y', 'Y']).",
+      "history_entry": "【✅ Perfect Adsorption】 bridge @ ['Ga', 'Y'] (Index [0]) -> Site: hollow (FCC/No-Subsurf) (Ga,Y,Y) | E=-3.336 eV"
     }
   ],
   "history": [
-    "\u3010\u2705 Perfect Adsorption\u3011 hollow @ ['Ga', 'Ga', 'Y'] (Index [0]) -> Site: hollow (FCC/No-Subsurf) (Ga,Y,Y) [\ud83c\udf1f New Best] | E=-3.257 eV",
-    "\u3010\u2705 Perfect Adsorption\u3011 hollow @ ['Ga', 'Y', 'Y'] (Index [0]) -> Site: hollow (FCC/No-Subsurf) (Y,Y,Y,Y) [\ud83c\udf1f New Best] | E=-3.504 eV",
-    "\u3010\u2705 Perfect Adsorption\u3011 bridge @ ['Y', 'Y'] (Index [0]) -> Site: bridge (Y,Y) | E=-3.302 eV",
-    "\u3010\u2705 Perfect Adsorption\u3011 ontop @ ['Y'] (Index [0]) -> Site: hollow (FCC/No-Subsurf) (Ga,Y,Y) | E=-3.338 eV",
-    "\u3010\u2705 Perfect Adsorption\u3011 bridge @ ['Ga', 'Y'] (Index [0]) -> Site: hollow (FCC/No-Subsurf) (Ga,Y,Y) | E=-3.336 eV"
+    "【✅ Perfect Adsorption】 hollow @ ['Ga', 'Ga', 'Y'] (Index [0]) -> Site: hollow (FCC/No-Subsurf) (Ga,Y,Y) [🌟 New Best] | E=-3.257 eV",
+    "【✅ Perfect Adsorption】 hollow @ ['Ga', 'Y', 'Y'] (Index [0]) -> Site: hollow (FCC/No-Subsurf) (Y,Y,Y,Y) [🌟 New Best] | E=-3.504 eV",
+    "【✅ Perfect Adsorption】 bridge @ ['Y', 'Y'] (Index [0]) -> Site: bridge (Y,Y) | E=-3.302 eV",
+    "【✅ Perfect Adsorption】 ontop @ ['Y'] (Index [0]) -> Site: hollow (FCC/No-Subsurf) (Ga,Y,Y) | E=-3.338 eV",
+    "【✅ Perfect Adsorption】 bridge @ ['Ga', 'Y'] (Index [0]) -> Site: hollow (FCC/No-Subsurf) (Ga,Y,Y) | E=-3.336 eV"
   ],
   "error": null,
   "perfect_count": 5,
   "dissociation_count": 0,
   "rearrangement_count": 0,
   "calc_failure_count": 0,
-  "chemical_slip_count": 4
+  "chemical_slip_count": 4,
+  "best_structure_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/gpt54_mace_mp0_small/no_slip/012/artifacts/BEST_H_ontop_to_hollow_FCC-No-Subsurf_E-3.338.xyz"
 }
