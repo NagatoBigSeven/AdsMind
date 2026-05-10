@@ -1,0 +1,125 @@
+\documentclass[%
+ preprint,
+superscriptaddress,
+%groupedaddress,
+%unsortedaddress,
+%runinaddress,
+%frontmatterverbose, 
+%preprint,
+%preprintnumbers,
+%nofootinbib,
+%nobibnotes,
+%bibnotes,
+ amsmath,amssymb,
+ aps,
+ linenumbers,
+%pra,
+%prb,
+%rmp,
+%prstab,
+%prstper,
+%floatfix,
+]{revtex4-2}
+
+\usepackage{physics}
+\usepackage{booktabs}
+\usepackage{braket}
+\usepackage{qcircuit}
+\usepackage{graphicx}% Include figure files
+\usepackage{dcolumn}% Align table columns on decimal point
+\usepackage{bm}% bold math
+\usepackage[hidelinks]{hyperref}% add hypertext capabilities
+\usepackage{tensor}
+\usepackage{xcolor}
+\usepackage{threeparttable}
+\usepackage{chemformula}
+\newcommand{\sherry}[1]{#1}
+\newcommand{\yuyang}[1]{\textcolor{blue}}
+\counterwithin{subsection}{section}                     % 让subsection随section重置
+\renewcommand{\thesubsection}{\thesection.\arabic{subsection}} 
+\makeatletter
+\def\switch@array{}
+\makeatother
+
+\begin{document}
+
+
+\title{AdsMind: A Physics-Grounded Multi-agent System for Self-Correcting Discovery of Adsorption Configurations on Heterogeneous Catalyst Surfaces}
+%
+\author{Zongmin Zhang}
+\affiliation{Department of Computer Science and Engineering, Hong Kong University of Science and Technology, Kowloon, Hong Kong 999077, China}
+\author{Bowen Zhang}
+\affiliation{Department of Chemistry, Hong Kong University of Science and Technology, Kowloon, Hong Kong 999077, China}
+\author{Yuyang Lou}
+\affiliation{Department of Chemistry, Hong Kong University of Science and Technology, Kowloon, Hong Kong 999077, China}
+\author{Edvin Fako}
+\affiliation{Laboratory of Artificial Chemical Intelligence (LIAC), EPFL, Lausanne, Switzerland}
+\author{Ryo Kuroki}
+\affiliation{Laboratory of Artificial Chemical Intelligence (LIAC), EPFL, Lausanne, Switzerland}
+\author{Xuan Vu Nguyen}
+\affiliation{Laboratory of Artificial Chemical Intelligence (LIAC), EPFL, Lausanne, Switzerland}
+\author{Junwu Chen}
+\email{junwu.chen@epfl.ch}
+\affiliation{Laboratory of Artificial Chemical Intelligence (LIAC), EPFL, Lausanne, Switzerland}
+\author{Lixue Cheng}
+\email{lixuecheng@ust.hk}
+\affiliation{Department of Chemistry, Hong Kong University of Science and Technology, Kowloon, Hong Kong 999077, China}
+\author{Philippe Schwaller}
+\email{philippe.schwaller@epfl.ch}
+\affiliation{Laboratory of Artificial Chemical Intelligence (LIAC), EPFL, Lausanne, Switzerland}
+\date{\today}
+
+
+
+\begin{abstract}
+Identifying the most stable adsorbate--surface configuration is central to heterogeneous catalysis and electrochemical energy conversion, yet remains computationally expensive and expert-intensive.
+While machine learning force fields (MLFFs) have dramatically reduced per-evaluation cost, the upstream \textit{search strategy} problem---deciding which configurations to evaluate---remains unsolved.
+Existing LLM-based agents for this task operate in an open-loop, single-pass regime that cannot recover from incorrect site predictions.
+This work introduces \textbf{AdsMind} (\textbf{Ads}orption with \textbf{M}achine \textbf{I}ntelligence \textbf{\&} Fee\textbf{d}back), the first closed-loop multi-agent framework that enables autonomous error correction through MLFF relaxation feedback.
+Three mechanisms implement this closed loop: \textit{Chemical Slip} detection diagnoses mismatches between planned and realized coordination; \textit{FORBID} constraints prevent retry of failed site families; and convergence-based early stopping avoids unnecessary computation.
+Evaluated on 880~ablation attempts across four LLM backends (Gemini~2.5~Pro, Grok-4, GPT-5.4, Claude~Sonnet~4.6) and the OCD-GMAE62 benchmark with a three-tier evaluation protocol, AdsMind achieves 100\% search reliability, reduces cross-backend energy variance by 2.3$\times$, and consumes 5--25$\times$ fewer MLFF relaxations than brute-force baselines.
+Notably, we report the negative result that broader initial sampling outperforms closed-loop refinement on energy depth for complex adsorbates, a trade-off that clarifies the operating envelope of LLM-driven reasoning.
+Chemical Slip further provides a physically grounded evaluation signal for LLM chemical reasoning quality.
+By delivering reliability, efficiency, and interpretability simultaneously, AdsMind establishes a foundation for autonomous chemistry workflows.
+\end{abstract}
+
+
+%\keywords{Suggested keywords}%Use showkeys class option if keyword
+                              %display desired
+\maketitle 
+
+\section{Introduction}
+\input{sections/1_Introduction}
+
+\section{Method}
+\input{sections/2_Method}
+
+\section{Results}
+\input{sections/3_Results}
+
+
+\input{sections/4_DiscussionConclusion}
+
+\section*{Data Availability}
+\input{sections/5_Data_Availability}
+
+
+
+
+\section*{Acknowledgements}
+We acknowledge financial support from the Swiss National Science Foundation (SNSF) through the National Centre of Competence in Research (NCCR) Catalysis (grant number 180544). We also thank the EPFL Scientific IT and Application Support team for their computational support. Z.Z. thanks the support from Hong Kong Special Administrative Region Government Scholarship Fund Scholarship
+
+\textbf{AI Disclosure Statement.}
+The authors used generative AI tools (including large language models such as GPT-4, Claude, and Grammarly) for \textbf{grammar polishing, language editing, and minor phrasing improvements} in preparing this manuscript. All scientific content, analysis, interpretations, and conclusions were solely produced by the authors. The authors reviewed and edited the output of these tools and take full responsibility for the content of the published article.
+
+
+\section*{Competing Interests}
+
+The authors declare no competing interests.
+
+
+\bibliography{refs}
+
+\end{document}
+%
+% ****** End of file apssamp.tex ******

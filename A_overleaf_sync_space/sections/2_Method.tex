@@ -1,0 +1,105 @@
+As introduced in Section~1, AdsMind comprises five modules: \textbf{Planner}, \textbf{Validator}, \textbf{Executor}, \textbf{Analyzer}, and \textbf{Summarizer}.
+We now detail their implementation.
+
+\subsection{Closed-Loop Agent Architecture}
+
+\subsubsection{Planner and Validator: Adsorption Hypothesis Generation}
+
+The user provides a request prompt, adsorbate SMILES string, and surface slab file.
+At each iteration, the \textbf{Planner} proposes a structured adsorption hypothesis in JSON format, including the canonical site type (\textit{ontop}, \textit{bridge}, or \textit{hollow}), intended surface symbols, and adsorbate binding indices~\cite{norskov2004density,shriver2006inorganic}.
+
+In the closed-loop architecture, updated context from other modules is entered into the \textbf{Planner} prompt as physical feedback.
+The prompt is assembled from conditional sections controlled by three runtime switches:
+\textit{Slip feedback} frames prior slips as evidence that the planned site is unstable;
+\textit{Forbid} converts slipped or failed site intents into explicit prohibitions;
+\textit{Termination} surfaces convergence-to-known-best signals and allows early stopping.
+The three switches are independent; disabling all three yields the 1-Shot baseline (loop continues until attempt budget is exhausted, default: 5).
+
+Convergence and stopping criteria are managed by the \textbf{Summarizer} (see below).
+
+After the hypothesis is proposed, the \textbf{Validator} enforces chemistry- and schema-level constraints before any expensive physics simulation:
+(1)~requested adsorbate binding indices are valid and correspond to non-hydrogen heavy atoms (unless the adsorbate is a single atom);
+(2)~cardinality of binding indices matches the site type (e.g., \textit{ontop} requires exactly one index);
+(3)~the hypothesis has not been previously evaluated, preventing redundant calculations.
+Failed hypotheses elicit an immediate penalty feedback, directing the LLM to refine its proposal without advancing to physical simulation.
+
+\subsubsection{Executor and Analyzer: Physical Simulation and Scientific Analysis}
+
+The \textbf{Executor} instantiates the validated plan on the slab, performs physical relaxation, and returns structured post-relaxation analysis.
+The \textbf{Analyzer} records whether the final structure remained bound, whether dissociation or rearrangement occurred, and whether the realized coordination environment differs from the \textbf{Planner}'s intent.
+\textit{Chemical Slip} is detected when the relaxed structure exhibits a different surface-symbol fingerprint (sorted element symbols within the first coordination shell of the anchor atom) than the Planner's intent; canonical site-family mismatch is retained separately as a geometric slip signal.
+
+The proposal is pre-processed through a surrogate-SMILES geometry layer that maps binding atoms to proxy markers and constructs initial placements for \textit{ontop}, \textit{bridge}, and \textit{hollow} adsorption.
+It samples a capped set of candidate surface sites and conformers (default: eight filtered coordinates, four conformers per site; one top-ranked candidate proceeds to full relaxation).
+
+A \textbf{two-step evaluation procedure} is employed: candidates are first screened with the MACE-MP calculator to discard pathological configurations and rank by screened energy (Langevin warmup disabled in primary benchmark: \texttt{md\_steps=0}); the best surviving candidate (\texttt{relax\_top\_n=1}) is then fully relaxed and analyzed.
+
+The adsorption energy is:
+\begin{equation}
+    E_{\text{ads}} = E_{\text{total}} - E_{\text{surface}} - E_{\text{adsorbate}}
+\end{equation}
+where $E_{\text{total}}$ is the relaxed adsorbate-slab energy, $E_{\text{surface}}$ is the bare surface single-point energy, and $E_{\text{adsorbate}}$ is the isolated adsorbate energy.
+
+Relaxation uses the BFGS algorithm~\cite{nocedal2006numerical} with maximum force below $f_{\text{max}}$:
+\begin{equation}
+    \max_{i} \| \mathbf{F}_i \|_{\infty} \le f_{\text{max}}
+\end{equation}
+The bottom third of the slab is fixed; upper layers and adsorbate are fully relaxed.
+
+The \textbf{Analyzer} parses the relaxed trajectory to extract the local coordination environment.
+Connectivity is established via an adjacency matrix $A$: atoms $i$ and $j$ are bonded if $d_{ij} \le \gamma(R_i + R_j)$, with $\gamma=1.35$ for intramolecular dissociation checks and $\gamma=1.30$ (relaxed to $1.45$ for $E_{\text{ads}} < -0.5$~eV) for adsorbate--surface coordination.
+Dissociation is flagged if the adsorbate subgraph has $>1$ connected component; the coordination environment classifies the site as \textit{ontop}, \textit{bridge}, or \textit{hollow}.
+Slip is logged if the realized site or surface-symbol fingerprint differs from the Planner's intent.
+The \textbf{Analyzer} updates running memory with adsorption energy, bond integrity, and slip status, enabling dynamic adjustment of the exploration strategy.
+
+\subsubsection{Summarizer: Convergence Monitoring and Early Stopping}
+
+The \textbf{Summarizer} consolidates the running memory maintained by the Analyzer across iterations.
+Convergence is declared when the same site family is proposed in three consecutive iterations without finding a lower-energy configuration.
+Upon convergence, the Summarizer emits a STOP signal to terminate the search early, preventing unnecessary computation when further exploration is unlikely to improve the result.
+
+\subsection{Physical Backend: MACE-MP-0 Calculator}
+\label{sec:mace_config}
+
+The physical engine uses the MACE equivariant message-passing architecture with the MACE-MP foundation model~\cite{batatia2022mace,batatia2023foundation}.
+Two configurations are employed:
+\textbf{Primary benchmark}: MACE-MP-0 small, CPU, float32, dispersion disabled (conservative setting held fixed across all ablations).
+\textbf{Sensitivity checks}: MACE-MP-0 large, CUDA, float64, dispersion enabled (probes force-field sensitivity separately).
+All primary benchmark and matched-baseline experiments use the same MACE-MP-0 small backend so that observed differences reflect search strategy, not energy-function choice. Key parameters are in Table~\ref{tab:mace_config}.
+
+\subsection{Evaluation Protocol and Experimental Setup}
+\label{sec:eval_setup}
+
+We evaluate five variants in a systematic ablation:
+\begin{enumerate}
+  \item \textbf{Full}: all mechanisms enabled
+  \item \textbf{w/o Slip}: removes slip feedback and FORBID constraints
+  \item \textbf{w/o Forbid}: retains slip detection but suppresses prohibition
+  \item \textbf{w/o Term}: disables early stopping
+  \item \textbf{1-Shot}: single attempt, all mechanisms disabled
+\end{enumerate}
+
+All benchmark runs use frozen experiment configurations. Four reasoning backends are evaluated at zero temperature: Gemini~2.5~Pro, Grok-4, GPT-5.4, and Claude~Sonnet~4.6 (see SI for model identifiers).
+The physical backend is locked to MACE-MP-0 small (\S~\ref{sec:mace_config}).
+
+\subsection{CMU20 Experimental Setup}
+
+The CMU20 benchmark uses the completed 20-case manifest, spanning H, OH, NNH, CH$_2$CH$_2$OH, OCHCH$_3$, and ONN(CH$_3$)$_2$ across intermetallic and monometallic surfaces.
+Full runs use max five attempts; 1-shot restricts to a single attempt.
+The five-variant ablation matrix is executed on all four LLM backends, yielding 400 total attempts.
+Natural failures (dissociation/reaction) are retained in the success-rate denominator; only external service/calculator errors are excluded.
+
+\subsection{OCD-GMAE62 Benchmark and Two-Tier Evaluation Protocol}
+
+For validation beyond CMU20, we assemble \textbf{OCD-GMAE62}: a 62-case dataset spanning diverse surfaces (intermetallic, monometallic, compound) and adsorbates (H, OH, NNH, CH$_2$CH$_2$OH, OCHCH$_3$, ONN(CH$_3$)$_2$, and others).
+To systematically evaluate performance and stability, we employ a \textbf{two-tier protocol}:
+Tier~1 is a full-matrix evaluation across all 62 cases and five variants (Full, w/o Slip, w/o Forbid, w/o Term, 1-Shot), providing baseline reliability, 1-Shot penalty quantification, and cross-backend agreement.
+Tier~2 is a stability audit on 12 subsampled cases with $N=5$ independent repeated runs each, quantifying run-to-run variance and diagnosing stochasticity.
+All experiments use four LLM backends under fixed MACE-MP-0 small CPU protocol; external service failures are excluded, natural failures are retained.
+
+The 62-case OCD-GMAE62 dataset includes 12 cases that were part of a preliminary evaluation conducted prior to the full dataset construction.
+These 12 cases were selected for the stability audit because they (1) span diverse surface compositions (intermetallic and monometallic),
+(2) include diverse adsorbates (H, OH, NNH, OCHCH$_3$, etc.), and (3) have existing single-run records from the preliminary evaluation,
+enabling a direct comparison of run-to-run variability.
+The remaining 50 cases---together with 10 of the 12 that have single-run records---form the Tier~1 full-matrix cohort (one run per case per backend).
+The 12 Tier~2 cases are a subset of the 62-case dataset, not an independent collection; the preliminary evaluation records are used only for reproducibility audit, not for performance evaluation.
