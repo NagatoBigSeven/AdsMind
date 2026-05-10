@@ -64,6 +64,7 @@ class AgentState(TypedDict):
     analysis_json: Optional[str]
     history: List[str]
     attempt_records: List[Dict[str, Any]]
+    validation_attempt_records: List[Dict[str, Any]]
     best_result: Optional[dict]
     best_dissociated_result: Optional[dict]
     attempted_keys: List[str]
@@ -72,6 +73,9 @@ class AgentState(TypedDict):
     best_configuration_png: Optional[str]
     iteration_energy_curve_png: Optional[str]
     visualization_error: Optional[str]
+    terminal_tldr: Optional[str]
+    termination_record: Optional[Dict[str, Any]]
+    last_planner_raw_output: Optional[str]
 
 # --- 2. Setup Environment and LLM ---
 load_dotenv()
@@ -333,6 +337,7 @@ def solution_planner_node(state: AgentState) -> dict:
             "plan": plan_json,
             "messages": [AIMessage(content=response.content)],
             "validation_error": None,
+            "last_planner_raw_output": None,
             "total_input_tokens": total_input_tokens,
             "total_output_tokens": total_output_tokens,
         }
@@ -343,6 +348,7 @@ def solution_planner_node(state: AgentState) -> dict:
             "plan": None,
             "validation_error": f"False, Planner output format error: {e}. Please output strictly in JSON format.",
             "messages": [AIMessage(content=response.content)],
+            "last_planner_raw_output": response.content,
             "total_input_tokens": total_input_tokens,
             "total_output_tokens": total_output_tokens,
         }
@@ -354,9 +360,30 @@ def plan_validator_node(state: AgentState) -> dict:
 
     def fail_validation(error: str, *, clear_plan: bool = False) -> dict:
         logger.info(f"Validation Failed: {error}")
+        bad_plan = state.get("plan")
+        bad_plan_dict = bad_plan if isinstance(bad_plan, dict) else None
+        # When the planner failed JSON parsing, plan is None — fall back to the
+        # raw LLM text the planner stashed so the report can show what was
+        # actually emitted.
+        raw_output = state.get("last_planner_raw_output") if bad_plan_dict is None else None
+        val_records = list(state.get("validation_attempt_records", []) or [])
+        val_records.append(
+            {
+                "for_round": len(state.get("attempt_records", []) or []) + 1,
+                "validation_index": validation_retry_count + 1,
+                "failed_plan_reasoning": (bad_plan_dict or {}).get("reasoning"),
+                "failed_plan": bad_plan_dict,
+                "failed_raw_output": raw_output,
+                "error": error,
+            }
+        )
         payload = {
             "validation_error": error,
             "validation_retry_count": validation_retry_count + 1,
+            "validation_attempt_records": val_records,
+            # Clear the transient raw-output stash so it isn't reused on the
+            # next failure in the same run.
+            "last_planner_raw_output": None,
         }
         if clear_plan:
             payload["plan"] = None
@@ -407,7 +434,17 @@ def plan_validator_node(state: AgentState) -> dict:
 
     if solution.get("action") == "terminate":
         logger.error("Planner decided to terminate (converged or no more plans)")
-        return {"validation_error": None, "validation_retry_count": validation_retry_count}  # Pass directly
+        plan_dict = plan_json if isinstance(plan_json, dict) else {}
+        termination_record = {
+            "round": len(state.get("attempt_records", []) or []) + 1,
+            "reasoning": plan_dict.get("reasoning"),
+            "plan": plan_dict,
+        }
+        return {
+            "validation_error": None,
+            "validation_retry_count": validation_retry_count,
+            "termination_record": termination_record,
+        }
 
     site_type = solution.get("site_type", "")
     surf_atoms = solution.get("surface_binding_atoms", [])
@@ -758,11 +795,17 @@ def tool_executor_node(state: AgentState) -> dict:
     updated_attempt_records = list(state.get("attempt_records", []))
     if isinstance(analysis_json, dict):
         site_info = analysis_json.get("site_analysis", {}) or {}
+        current_plan = state.get("plan") or {}
+        planner_reasoning = (
+            current_plan.get("reasoning") if isinstance(current_plan, dict) else None
+        )
         updated_attempt_records.append(
             {
                 "attempt_index": len(updated_attempt_records) + 1,
                 "plan": state.get("plan"),
                 "plan_key": plan_key,
+                "planner_reasoning": planner_reasoning,
+                "tool_logs": list(tool_logs),
                 "status": analysis_json.get("status"),
                 "most_stable_energy_eV": analysis_json.get("most_stable_energy_eV"),
                 "bond_change_count": analysis_json.get("bond_change_count"),
@@ -911,7 +954,7 @@ def summarizer_node(state: AgentState) -> dict:
     }
     if should_end_after_summarizer(state):
         try:
-            from adsmind.agent.reporting import write_summarizer_report
+            from adsmind.agent.reporting import build_terminal_tldr, write_summarizer_report
 
             report_artifacts = write_summarizer_report(
                 state=state,
@@ -921,6 +964,12 @@ def summarizer_node(state: AgentState) -> dict:
                 source_type=source_type,
             )
             payload.update(report_artifacts)
+            payload["terminal_tldr"] = build_terminal_tldr(
+                state=state,
+                target_data=target_data,
+                plan_used=plan_used,
+                source_type=source_type,
+            )
             logger.info("Summarizer report written to %s", report_artifacts.get("summary_report_file"))
         except Exception as report_error:
             logger.error("Summarizer report generation failed: %s", report_error)
@@ -1085,6 +1134,7 @@ def _prepare_initial_state(
         "analysis_json": None,
         "history": [],
         "attempt_records": [],
+        "validation_attempt_records": [],
         "best_result": None,
         "best_dissociated_result": None,
         "attempted_keys": [],
@@ -1093,6 +1143,9 @@ def _prepare_initial_state(
         "best_configuration_png": None,
         "iteration_energy_curve_png": None,
         "visualization_error": None,
+        "terminal_tldr": None,
+        "termination_record": None,
+        "last_planner_raw_output": None,
     }
 
 def parse_args():
@@ -1155,14 +1208,25 @@ def main_cli():
                 print(last_message.content)
                 print("---\n")
     print("\n--- 🏁 AdsMind Task Completed ---\n")
-    print("Final Analysis Report:")
-    if final_state and "messages" in final_state:
-        for msg in reversed(final_state["messages"]):
-            if isinstance(msg, AIMessage):
-                print(msg.content)
-                break
+
+    if final_state:
+        tldr = final_state.get("terminal_tldr")
+        if tldr:
+            print(tldr)
+            print()
+
+        report_path = final_state.get("summary_report_file")
+        if report_path:
+            print(f"📄 Full reasoning log: {report_path}")
         else:
-             print("No final AI message found.")
+            print("⚠️  Reasoning log was not produced (run did not reach the summarizer end state).")
+
+        if "messages" in final_state:
+            for msg in reversed(final_state["messages"]):
+                if isinstance(msg, AIMessage):
+                    print("\n--- Final narrative ---")
+                    print(msg.content)
+                    break
 
 if __name__ == '__main__':
     main_cli()
