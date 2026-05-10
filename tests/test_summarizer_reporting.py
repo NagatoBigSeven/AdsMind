@@ -7,7 +7,7 @@ from unittest.mock import patch
 
 import numpy as np
 
-from adsmind.agent.reporting import write_summarizer_report
+from adsmind.agent.reporting import build_terminal_tldr, write_summarizer_report
 from adsmind.tools.visualization import (
     infer_bonds,
     normalize_render_style,
@@ -257,3 +257,217 @@ class TestSummarizerReporting(unittest.TestCase):
             self.assertTrue(report.exists())
             self.assertIsNone(artifacts["best_configuration_png"])
             self.assertIn("No stable structure was found.", report.read_text(encoding="utf-8"))
+
+    def test_round_section_renders_planner_reasoning_and_tool_logs(self):
+        """Each round must surface the LLM's chain of thought and the executor's log lines."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            fake_output_root = Path(tmpdir) / "outputs"
+            state = {
+                "session_id": "reasoning-session",
+                "user_request": "Find H on Pt.",
+                "smiles": "[H]",
+                "slab_path": "slabs/pt.xyz",
+                "llm_backend": "openrouter",
+                "calculator_backend": "mace",
+                "random_seed": 42,
+                "relaxation_mode": "fast",
+                "max_attempts": 3,
+                "attempt_records": [
+                    {
+                        "attempt_index": 1,
+                        "status": "success",
+                        "most_stable_energy_eV": -1.5,
+                        "planned_site_type": "ontop",
+                        "actual_site_type": "ontop",
+                        "is_chemical_slip": False,
+                        "is_dissociated": False,
+                        "bond_change_count": 0,
+                        "planner_reasoning": "REASONING_TOKEN_42: I picked ontop because Pt loves H.",
+                        "tool_logs": [
+                            "Success: Read slab atoms",
+                            "Success: E_surface = -1234.5 eV",
+                            "Success: Analysis tool executed.",
+                        ],
+                        "plan": {
+                            "reasoning": "REASONING_TOKEN_42: I picked ontop because Pt loves H.",
+                            "adsorbate_type": "ReactiveSpecies",
+                            "solution": {
+                                "action": "continue",
+                                "site_type": "ontop",
+                                "surface_binding_atoms": ["Pt"],
+                                "adsorbate_binding_indices": [0],
+                            },
+                        },
+                        "history_entry": "Round 1 verdict line",
+                    },
+                ],
+            }
+
+            with patch("adsmind.tools.common.OUTPUT_ROOT", fake_output_root):
+                artifacts = write_summarizer_report(
+                    state=state,
+                    final_text="H prefers ontop on Pt.",
+                    target_data={"most_stable_energy_eV": -1.5},
+                    plan_used=state["attempt_records"][0]["plan"],
+                    source_type="success",
+                )
+
+            text = Path(artifacts["summary_report_file"]).read_text(encoding="utf-8")
+            self.assertIn("REASONING_TOKEN_42", text)
+            self.assertIn("Success: E_surface = -1234.5 eV", text)
+            self.assertIn("Round 1 verdict line", text)
+            self.assertIn("**🧠 Planner reasoning**", text)
+            self.assertIn("**⚙️ Execution**", text)
+
+    def test_validation_failure_block_renders_raw_llm_output(self):
+        """When the planner emitted invalid JSON, the raw text must appear in the report."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            fake_output_root = Path(tmpdir) / "outputs"
+            state = {
+                "session_id": "raw-output-session",
+                "user_request": "Find adsorption.",
+                "smiles": "O",
+                "slab_path": "slabs/example.xyz",
+                "attempt_records": [],
+                "validation_attempt_records": [
+                    {
+                        "for_round": 1,
+                        "validation_index": 1,
+                        "failed_plan_reasoning": None,
+                        "failed_plan": None,
+                        "failed_raw_output": "RAW_LLM_BLURB_999 not actually JSON",
+                        "error": "Planner output format error",
+                    },
+                ],
+            }
+
+            with patch("adsmind.tools.common.OUTPUT_ROOT", fake_output_root):
+                artifacts = write_summarizer_report(
+                    state=state,
+                    final_text="Failed.",
+                    target_data=None,
+                    plan_used=None,
+                    source_type="failure",
+                )
+
+            text = Path(artifacts["summary_report_file"]).read_text(encoding="utf-8")
+            self.assertIn("Validation retry 1", text)
+            self.assertIn("RAW_LLM_BLURB_999 not actually JSON", text)
+            self.assertIn("Raw LLM output", text)
+
+    def test_termination_record_renders_as_dedicated_round(self):
+        """When the planner emits action=terminate, its reasoning must be visible."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            fake_output_root = Path(tmpdir) / "outputs"
+            state = {
+                "session_id": "terminate-session",
+                "user_request": "Find adsorption.",
+                "smiles": "O",
+                "slab_path": "slabs/example.xyz",
+                "attempt_records": [
+                    {
+                        "attempt_index": 1,
+                        "status": "success",
+                        "most_stable_energy_eV": -1.0,
+                        "planned_site_type": "ontop",
+                        "actual_site_type": "ontop",
+                        "is_chemical_slip": False,
+                        "is_dissociated": False,
+                        "bond_change_count": 0,
+                        "planner_reasoning": "First round.",
+                        "tool_logs": ["Success"],
+                        "plan": {"solution": {"site_type": "ontop"}},
+                        "history_entry": "round 1 ok",
+                    },
+                ],
+                "termination_record": {
+                    "round": 2,
+                    "reasoning": "TERMINATION_REASON_123: All viable sites converged.",
+                    "plan": {"solution": {"action": "terminate"}, "reasoning": "..."},
+                },
+            }
+
+            with patch("adsmind.tools.common.OUTPUT_ROOT", fake_output_root):
+                artifacts = write_summarizer_report(
+                    state=state,
+                    final_text="Done.",
+                    target_data={"most_stable_energy_eV": -1.0},
+                    plan_used=state["attempt_records"][0]["plan"],
+                    source_type="success",
+                )
+
+            text = Path(artifacts["summary_report_file"]).read_text(encoding="utf-8")
+            self.assertIn("Agent decided to terminate", text)
+            self.assertIn("TERMINATION_REASON_123", text)
+            self.assertIn("Agent terminated early", text)  # TL;DR mention
+
+    def test_setup_section_includes_reproducibility_metadata(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            fake_output_root = Path(tmpdir) / "outputs"
+            state = {
+                "session_id": "repro-session",
+                "user_request": "Find H on Pt.",
+                "smiles": "[H]",
+                "slab_path": "slabs/pt.xyz",
+                "llm_backend": "openrouter",
+                "llm_config": {"model": "google/gemini-2.5-pro"},
+                "calculator_backend": "mace",
+                "calculator_config": {"model": "small"},
+                "random_seed": 137,
+                "relaxation_mode": "standard",
+                "max_attempts": 5,
+                "attempt_records": [],
+            }
+
+            with patch("adsmind.tools.common.OUTPUT_ROOT", fake_output_root):
+                artifacts = write_summarizer_report(
+                    state=state,
+                    final_text="No result.",
+                    target_data=None,
+                    plan_used=None,
+                    source_type="failure",
+                )
+
+            text = Path(artifacts["summary_report_file"]).read_text(encoding="utf-8")
+            self.assertIn("openrouter", text)
+            self.assertIn("google/gemini-2.5-pro", text)
+            self.assertIn("mace", text)
+            self.assertIn("`small`", text)
+            self.assertIn("`137`", text)
+            self.assertIn("standard", text)
+            self.assertIn("`5`", text)
+
+    def test_terminal_tldr_includes_best_energy_and_per_round_verdicts(self):
+        state = {
+            "session_id": "tldr-session",
+            "smiles": "O",
+            "slab_path": "slabs/example.xyz",
+            "user_request": "Find water adsorption.",
+            "llm_backend": "openrouter",
+            "attempt_records": [
+                {
+                    "attempt_index": 1,
+                    "status": "success",
+                    "most_stable_energy_eV": -1.0,
+                    "history_entry": "round 1 verdict text",
+                },
+                {
+                    "attempt_index": 2,
+                    "status": "success",
+                    "most_stable_energy_eV": -1.4,
+                    "history_entry": "round 2 verdict text",
+                },
+            ],
+            "validation_attempt_records": [],
+        }
+        tldr = build_terminal_tldr(
+            state=state,
+            target_data={"most_stable_energy_eV": -1.4},
+            plan_used={"solution": {"site_type": "bridge", "surface_binding_atoms": ["Rh", "Ti"]}},
+            source_type="success",
+        )
+        self.assertIn("TL;DR", tldr)
+        self.assertIn("-1.400", tldr)
+        self.assertIn("bridge", tldr)
+        self.assertIn("round 1 verdict text", tldr)
+        self.assertIn("round 2 verdict text", tldr)
