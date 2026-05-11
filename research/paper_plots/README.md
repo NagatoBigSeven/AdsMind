@@ -1,39 +1,43 @@
 # Paper Plots
 
-论文图表 notebook 及数据处理脚本。
+Plotting notebooks and data processing scripts.
 
-## 数据管道
+## Scripts
 
-| 脚本                              | 用途                                                                                           |
-| --------------------------------- | ---------------------------------------------------------------------------------------------- |
-| `scripts/prepare_figure3_data.py` | Figure 3：iteration_convergence, method_comparison, slip_analysis, ablation_4backend           |
-| `scripts/prepare_si_data.py`      | Figure2 and SI：per-variant summaries, baselines, slip, ablation, multi-seed, MACE sensitivity |
+| Script                       | Description                                                                                 |
+| ---------------------------- | ------------------------------------------------------------------------------------------- |
+| `build_n3_minvar.py`         | Select min-volatility N=3 runs from N=5 reproducibility data                                |
+| `CMU20_results_in_paper.csv` | Literature reference adsorption energies for CMU20                                          |
+| `prepare_figure3_data.py`    | Extract Figure 3 data from raw results, remap backend keys                                  |
+| `prepare_si_data.py`         | Extract SI data from raw results (summaries, baselines, slip, MACE sensitivity, multi-seed) |
 
-所有处理后的数据输出到 `research/results/processed/`。
-
-## 目录结构
+## Notebooks
 
 ```
 paper_plots/
 ├── README.md
-├── TODO.md
 ├── scripts/
-│   ├── prepare_figure3_data.py
-│   └── prepare_si_data.py
 ├── figure2/
-│   ├── plot_cmu20_llm_performance_v3_panelabc.ipynb
+│   ├── figure2_llm_performance.ipynb     # Panel abc: LLM energy comparison & ablation
 │   └── figure2_combined_panelabc.png
 ├── figure3/
-│   ├── figure3_panels_updated.ipynb
+│   ├── figure3_panels_iter_ref_cmu.ipynb # Iteration & reference convergence panels
+│   ├── figure3_panels_updated.ipynb      # Updated Figure 3 panels
 │   └── figure3_complete.png
 ├── figure4/
-│   ├── figure4_ocd_2tier_overview.ipynb
+│   ├── figure4_ocd_2tier_overview.ipynb  # 2-tier ablation analysis (OCD62)
 │   └── figure4_ocd_2tier_overview.png
 ├── figure5/
-│   ├── figure5_vasp_validation.ipynb
+│   ├── figure5_vasp_validation.ipynb     # VASP validation
 │   ├── figure5_vasp_validation.png
-│   └── reference/
-├── figure_SI_1/
+│   └── reference/                        # Slab reference images
+│       ├── 01_Mo3Pd_111_H_template_v6.png
+│       ├── 02_Mo3Pd_111_NNH.png
+│       ├── 03_Pd3Cu_111_H.png
+│       ├── 04_Pd3Cu_111_NNH.png
+│       ├── 09_Pt_111_OH.png
+│       └── 10_Pt_100_OH.png
+└── figure_SI_1/
     ├── si_figure_S1_panels.ipynb
     └── si_figure_S1_combined.png
 ```
