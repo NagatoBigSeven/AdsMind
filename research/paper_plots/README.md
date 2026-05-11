@@ -1,15 +1,6 @@
 # Paper Plots
 
 论文图表 notebook 及数据处理脚本。
-- 一些细节可能不对应，但notebook代码正确。
-
-## 图表状态
-
-| 图表        | Notebook                                               | 数据源                          | 状态  |
-| ----------- | ------------------------------------------------------ | ------------------------------- | :---: |
-| Figure 2    | `figure2/plot_cmu20_llm_performance_v3_panelabc.ipynb` | `results/` 直接数据             |   ✅   |
-| Figure 3    | `figure3/figure3_panels_updated.ipynb`                 | `results/processed/figure3/`    |   ✅   |
-| SI Figure 1 | `figure_SI_1/si_figure_S1_panels.ipynb`                | `results/processed/si_figures/` |   ✅   |
 
 ## 数据管道
 
@@ -35,6 +26,13 @@ paper_plots/
 ├── figure3/
 │   ├── figure3_panels_updated.ipynb
 │   └── figure3_complete.png
+├── figure4/
+│   ├── figure4_ocd_2tier_overview.ipynb
+│   └── figure4_ocd_2tier_overview.png
+├── figure5/
+│   ├── figure5_vasp_validation.ipynb
+│   ├── figure5_vasp_validation.png
+│   └── reference/
 ├── figure_SI_1/
     ├── si_figure_S1_panels.ipynb
     └── si_figure_S1_combined.png
