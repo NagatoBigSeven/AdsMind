@@ -13,7 +13,7 @@ Output:
     research/results/processed/si_figures/
         basic_experiments/cmu20/{backend}/{variant}/summary.csv
         basic_experiments/cmu20/baselines/{method}/summary.csv
-        basic_experiments/summaries/cmu20_ablation_4backend.csv
+        basic_experiments/cmu20/summaries/ablation_4backend.csv
         advanced_experiments/chemical_slip_interpretability/cmu20/slip_analysis.csv
         advanced_experiments/mace_force_field_sensitivity/.../ablation_summary.csv
         advanced_experiments/gpt54_multiseed_cmu20/{seed}/ablation_summary.csv
@@ -94,7 +94,7 @@ def process_baselines():
     baselines_sherry = {
         'random_n20': 'random_n20',
         'heuristic': 'heuristic',
-        'adsorbagent_mace_mp0_small_gpt54': 'adsorbagent_gpt54_mace_mp0_small',
+        'adsorbagent_mace_mp0_small_gpt54': 'adsorb-agent\\adsorb-agent_gpt54_mace_mp0_small_5config',
     }
     n = 0
     for short_name, long_name in baselines_sherry.items():
