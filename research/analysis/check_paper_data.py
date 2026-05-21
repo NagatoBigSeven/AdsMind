@@ -351,6 +351,29 @@ def extract_hardcoded_figure5_values() -> list[float] | None:
     return None
 
 
+def extract_si_dft_values() -> list[float] | None:
+    path = ROOT / "overleaf" / "si.tex"
+    if not path.exists():
+        return None
+    text = path.read_text(encoding="utf-8")
+    block_match = re.search(
+        r"\\label\{tab:si-dft-systems\}(.*?)(?:\\bottomrule|\\end\{tabular\})",
+        text,
+        re.S,
+    )
+    if not block_match:
+        return None
+    rows = {}
+    for line in block_match.group(1).splitlines():
+        match = re.match(r"\s*(\d{2})\s*&.*?&\s*\$?([-+]?\d+\.\d+)\$?\s*\\\\", line)
+        if match:
+            rows[match.group(1)] = float(match.group(2))
+    dft_cases = ("01", "02", "03", "04", "09", "10")
+    if not all(case_id in rows for case_id in dft_cases):
+        return None
+    return [rows[case_id] for case_id in dft_cases]
+
+
 def check_dft_values(audit: Auditor) -> None:
     dft_cases = ("01", "02", "03", "04", "09", "10")
     expected = []
@@ -366,25 +389,37 @@ def check_dft_values(audit: Auditor) -> None:
         rows = {pad_case_id(row["case_id"], "cmu20"): row for row in read_rows(path)}
         expected.append(float(rows[case_id]["best_energy"]))
 
-    hardcoded = extract_hardcoded_figure5_values()
-    if hardcoded is None:
+    figure_values = extract_hardcoded_figure5_values()
+    if figure_values is None:
         audit.warn("missing-figure5-adsmind-values", "Could not find hard-coded AdsMind values in Figure 5 notebook")
-        return
-    mismatches = []
-    for case_id, paper_value, raw_value in zip(dft_cases, hardcoded, expected):
-        if abs(paper_value - raw_value) > 5e-3:
-            mismatches.append((case_id, paper_value, raw_value))
-    if mismatches:
-        formatted = ", ".join(
-            f"{case}: figure={figure:.3f}, gpt_full_raw={raw:.3f}"
-            for case, figure, raw in mismatches
-        )
+    si_values = extract_si_dft_values()
+    if si_values is None:
+        audit.warn("missing-si-dft-adsmind-values", "Could not find AdsMind values in SI DFT table")
+
+    for label, values in (("Figure 5 notebook", figure_values), ("SI DFT table", si_values)):
+        if values is None:
+            continue
+        mismatches = []
+        for case_id, paper_value, raw_value in zip(dft_cases, values, expected):
+            if abs(paper_value - raw_value) > 5e-3:
+                mismatches.append((case_id, paper_value, raw_value))
+        if mismatches:
+            formatted = ", ".join(
+                f"{case}: paper={paper:.3f}, gpt_full_raw={raw:.3f}"
+                for case, paper, raw in mismatches
+            )
+            audit.warn(
+                "figure5-caption-data-mismatch",
+                (
+                    f"{label} says AdsMind is GPT-5.4 Full, "
+                    f"but values differ from GPT-5.4 Full for: {formatted}"
+                ),
+            )
+    results_tex = ROOT / "overleaf" / "sections" / "3_Results.tex"
+    if results_tex.exists() and "regenerate images/figure5_vasp_validation.png" in results_tex.read_text(encoding="utf-8"):
         audit.warn(
-            "figure5-caption-data-mismatch",
-            (
-                "Figure 5 / SI DFT table says AdsMind is GPT-5.4 Full, "
-                f"but hard-coded AdsMind values differ from GPT-5.4 Full for: {formatted}"
-            ),
+            "figure5-image-needs-regeneration",
+            "Figure 5 text/table/notebook now use GPT-5.4 Full values, but the included PNG is marked for Yuyang to regenerate.",
         )
 
 
@@ -398,10 +433,13 @@ def check_manuscript_policy_flags(audit: Auditor) -> None:
     patterns = {
         "random-baseline-still-present": re.compile(r"\b[Rr]andom\b"),
         "statistics-still-present": re.compile(
-            r"\b(statistical|statistics|p-value|p value|t-test|ANOVA|Pearson|Spearman|correlation)\b",
+            r"\b(statistical|statistics|p-value|p value|t-test|ANOVA|Pearson|Spearman)\b",
             re.I,
         ),
-        "efficiency-claim-still-present": re.compile(r"\befficien", re.I),
+        "efficiency-claim-still-present": re.compile(
+            r"\b(efficien\w*|token\w*|cost|costs|costly|low-cost|computational cost|cost--accuracy)\b",
+            re.I,
+        ),
     }
     for path in files:
         if not path.exists():

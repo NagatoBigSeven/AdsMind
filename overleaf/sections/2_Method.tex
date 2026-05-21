@@ -94,7 +94,7 @@ To isolate the contribution of the LLM planner from that of the underlying MACE-
 % \subsection{Adsorb-Agent Comparison Protocol}
 \label{sec:adsorbagent_comparison}
 
-To isolate the effect of search strategy from the choice of force field, we forked the open-source Adsorb-Agent codebase~\cite{adsorbagent} and replaced its EquiformerV2~\cite{liao2024equiformerv2} relaxation backend with the same MACE-MP-0 small (CPU, float32, dispersion disabled) calculator used for the primary benchmark. All remaining protocol parameters were locked to AdsMind's settings: BFGS optimizer, $f_\mathrm{max} = 0.10$~eV/\AA, 200 steps, and identical \textsc{FixAtoms} constraints. We ran the modified Adsorb-Agent with GPT-5.4 on both the CMU20 and OCD-GMAE62 benchmarks. 
+To isolate the effect of search strategy from the choice of force field, we forked the open-source Adsorb-Agent codebase~\cite{adsorbagent} and replaced its EquiformerV2~\cite{liao2024equiformerv2} relaxation backend with the same MACE-MP-0 small (CPU, float32, dispersion disabled) calculator used for the primary benchmark. All remaining protocol parameters were locked to AdsMind's settings: BFGS optimizer, $f_\mathrm{max} = 0.10$~eV/\AA, 200 steps, and identical \textsc{FixAtoms} constraints. We ran the modified Adsorb-Agent with GPT-5.4 on both the CMU20 and OCD-GMAE62 benchmarks, capping the planner at five generated initial configurations per case.
 
 
 %  subsection 3: datasets

@@ -6,26 +6,27 @@ Mo$_3$Pd and CuPd$_3$ are both experimentally established catalysts for both hyd
 \begin{figure}[t]
     \centering
     \includegraphics[width=0.95\linewidth]{images/figure5_vasp_validation.png}
-    \caption{\textbf{DFT validation on six representative CMU20 systems.} Grouped bar chart comparing adsorption energies (eV) from Adsorb-Agent (EquiformerV2) results from Ref. ~\citep{ock2026adsorbagent}), PBE, and AdsMind (MACE-MP-0 small). AdsMind preserves the correct sign of adsorption energy across all six systems (MAE 1.48~eV); Adsorb-Agent exhibits qualitative sign errors on OH--Pt and NNH--CuPd$_3$ systems (MAE 1.84~eV).}
+    % TODO: regenerate images/figure5_vasp_validation.png from the GPT-5.4 Full raw AdsMind values used below; the current PNG was produced from an older mixed-value array.
+    \caption{\textbf{DFT validation on six representative CMU20 systems.} Grouped bar chart comparing adsorption energies (eV) from Adsorb-Agent (EquiformerV2) results from Ref.~\citep{ock2026adsorbagent}, PBE, and AdsMind (MACE-MP-0 small, GPT-5.4 Full). AdsMind preserves the correct sign of adsorption energy across all six systems (MAE 1.55~eV); Adsorb-Agent exhibits qualitative sign errors on OH--Pt and NNH--CuPd$_3$ systems (MAE 1.84~eV).}
     \label{fig:vasp_validation}
 \end{figure}
 
 Figure~\ref{fig:vasp_validation} compares the two LLM-driven strategies with the reference PBE calculation.
-Adsorb-Agent exhibits large systematic deviations from PBE calculations, with a mean absolute error (MAE) of 1.84~eV and a maximum deviation exceeding 3.5~eV on Pt(111)--OH, while AdsMind exhibits an MAE of 1.48~eV.
-The open-loop method produces qualitative sign errors on structurally complex adsorbates. It predicts endothermic binding for OH on both Pt(111) and Pt(100) ($+0.99$~eV for both), while PBE calculations yield strongly exothermic values ($-2.59$~eV and $-2.51$~eV, respectively). Similarly, NNH on CuPd$_3$(111) is predicted as endothermic in Adsorb-Agent ($+0.745$~eV vs.\ PBE $-0.996$~eV).
+Adsorb-Agent exhibits large systematic deviations from PBE calculations, with a mean absolute error (MAE) of 1.84~eV and a maximum deviation exceeding 3.5~eV on Pt(111)--OH, while AdsMind exhibits an MAE of 1.55~eV.
+The open-loop method produces qualitative sign errors on structurally complex molecular adsorbates. It predicts endothermic binding for OH on both Pt(111) and Pt(100) ($+0.99$~eV for both), while PBE calculations yield strongly exothermic values ($-2.59$~eV and $-2.51$~eV, respectively). Similarly, NNH on CuPd$_3$(111) is predicted as endothermic in Adsorb-Agent ($+0.745$~eV vs.\ PBE $-0.996$~eV).
 These sign errors would incorrectly eliminate Pt and CuPd$_3$ as unreasonable candidate catalysts (false negative results).
-For simple adsorbates such as atomic H, Adsorb-Agent achieves reasonable accuracy (maximum error $\le 0.36$~eV), but structurally complex adsorbates drive its MAE to 1.84~eV with a high rate of sign errors.
+For simple adsorbates such as atomic H, Adsorb-Agent achieves reasonable accuracy (maximum error $\le 0.36$~eV), but structurally complex molecular adsorbates in this validation subset drive its MAE to 1.84~eV with a high rate of sign errors.
 
-AdsMind achieves better agreement with PBE calculations (MAE 1.48~eV) and 100\% correctness in predicting the sign of adsorption energy across all six systems.
+AdsMind achieves better agreement with PBE calculations (MAE 1.55~eV) and 100\% correctness in predicting the sign of adsorption energy across all six systems.
 Although AdsMind quantitatively overbinds certain Mo$_3$Pd configurations, which is consistent with the known tendency of MACE-MP-0 on early-transition-metal alloys~\cite{casillas2024evaluating}, it correctly identifies exothermic binding in each case, including the Pt--OH and CuPd$_3$--NNH systems where the open-loop method fails.
-The quantitative MAE of 1.48~eV is partly attributable to the MACE-MP-0 small force field; a sensitivity analysis with MACE-MP-0 large shows mean absolute shifts exceeding 1~eV on the same systems (Supporting Information).
-No sign errors occur for simple H-on-metal systems under either architecture, implying that sign-correctness failures in open-loop search are likely contingent on adsorbate complexity.
-This comparison exposes a critical qualitative failure in open-loop search, namely, sign errors on complex adsorbates, that the closed-loop architecture systematically prevents. 
-%These findings complement the reliability and cost advantages demonstrated in the subsequent MACE-only experiments.
+The quantitative MAE of 1.55~eV is partly attributable to the MACE-MP-0 small force field; a sensitivity analysis with MACE-MP-0 large shows mean absolute shifts exceeding 1~eV across the full CMU20 benchmark (Supporting Information).
+No sign errors occur for simple H-on-metal systems under either architecture, implying that sign-correctness failures in open-loop search are likely contingent on adsorbate identity and binding complexity.
+This comparison exposes a critical qualitative failure in open-loop search, namely, sign errors on molecular adsorbates, that the closed-loop architecture systematically prevents.
+%These findings complement the reliability and relaxation-budget advantages demonstrated in the subsequent MACE-only experiments.
 
-AdsMind converges on sign-correct configurations for all six systems with $\sim$4 relaxations per case, while Adsorb-Agent produces sign errors on 3 of the 4 complex-adsorbate systems despite $\sim$21 relaxations on successful cases.
+AdsMind converges on sign-correct configurations for all six systems, while Adsorb-Agent produces sign errors on 3 of the 4 non-H systems.
 Such sign errors have direct effects on computational screening. Predicting an endothermic binding when the true interaction is strongly exothermic fundamentally misrepresents the surface chemistry and leads to negative elimination of viable catalyst candidates.
-AdsMind reduces failures and ensures robust reliability with minimal MLFF cost ($\sim$4 relaxations). 
+AdsMind reduces failures and ensures robust reliability through closed-loop physical feedback.
 
 \begin{figure}
     \centering
@@ -37,7 +38,7 @@ AdsMind reduces failures and ensures robust reliability with minimal MLFF cost (
 \paragraph {Baselines' comparison and the breadth--depth trade-off.}
 On the 20-case CMU benchmark, the heuristic enumeration (median 56 sites, range 25--98) identifies lower raw adsorption energies than AdsMind by exploring more of the same potential energy surface of MACE-MP-0 small model. This non-LLM method outperforms AdsMind in 8/20 cases, but a connectivity audit reveals that these raw gains are often chemically unstable: the top structures in 25\% (5/20) of cases exhibit fragmentation or unresolved anomalies, including NNH dissociation (cases~04, 08) and large-adsorbate fragmentation (cases~16, 19). When filtered for chemical validity, the heuristic advantage persists in only 3/20 cases.
 
-These results delineate a fundamental trade-off in automated adsorption discovery. Broader open-loop enumeration can identify deeper minima but incurs 5--25$\times$ the computational cost (heuristic: median 56) and produces chemically unreasonable outcomes in a non-negligible fraction of cases. AdsMind occupies the opposing quadrant of this trade-off: chemically-validated convergence within $\sim$4 relaxations per case, achieved by integrating dissociation detection and iterative physical feedback, at the cost of sampling breadth---prioritizing reliability and safety over exhaustive depth optimization.
+These results delineate a fundamental trade-off in automated adsorption discovery. Broader open-loop enumeration can identify deeper minima but requires a much larger MLFF relaxation budget (heuristic enumeration: median 56 relaxations, range 25--98, versus 4.11 relaxations per case for AdsMind Full on CMU20) and produces chemically unreasonable outcomes in a non-negligible fraction of cases. AdsMind occupies the reliability-first side of this trade-off: chemically validated convergence achieved by integrating dissociation detection and iterative physical feedback, while prioritizing reliability and safety over exhaustive depth optimization.
 
 
 \subsection{Ablation on the CMU20 benchmark}
@@ -49,7 +50,7 @@ The complete 20$\times$5 matrix was executed independently on four LLM backend, 
 
 Across the five ablation variants on the CMU20 benchmark, the \textit{1-Shot} configuration shows the largest deviation from \textit{Full}. 
 The \textit{w/o Slip} and \textit{w/o Forbid} variants yield adsorption energies nearly identical to \textit{Full}, with differences attributable to per-case fluctuation rather than systematic bias.
-\textit{w/o Term} occasionally reaches marginally lower energies than \textit{Full}, reflecting the expected trade-off where a relaxed stopping criterion permits deeper exploration at the expense of additional computation. Overall, the \textit{Full} configuration balances the trade-off between reliability and efficiency.
+\textit{w/o Term} occasionally reaches marginally lower energies than \textit{Full}, reflecting the expected trade-off where a relaxed stopping criterion permits deeper exploration with a larger relaxation budget. Overall, the \textit{Full} configuration balances reliability with controlled exploration.
 
 % When the full closed-loop feedback is active, iterative recovery eliminates this fragility, and the four-backend analysis reveals a more consistent cross-model behavior.
 Under the \textit{Full} configuration, the closed-loop architecture drives heterogeneous LLM backends toward consistent physical solutions.
@@ -67,14 +68,14 @@ This pattern---directionally universal gain whose magnitude is modulated by back
 
 The remaining three variants---\textit{w/o Slip}, \textit{w/o Forbid}, and \textit{w/o Term}---reveal the contribution of each individual feedback mechanism.
 \textit{w/o Slip} and \textit{w/o Forbid} yield adsorption energies nearly identical to \textit{Full}, with differences attributable to per-case fluctuation rather than systematic bias, suggesting partial redundancy among the three closed-loop channels.
-\textit{w/o Term} occasionally reaches marginally lower energies than \textit{Full} (e.g., Grok-4 mean $-0.047$~eV), reflecting the expected trade-off where a relaxed stopping criterion permits deeper exploration at the expense of 2--6$\times$ additional token consumption.
+\textit{w/o Term} occasionally reaches marginally lower energies than \textit{Full} (e.g., Grok-4 mean $-0.047$~eV), reflecting the expected trade-off where a relaxed stopping criterion permits deeper exploration with additional MLFF relaxations.
 Case-level analysis reveals that the value of each mechanism is conditional: on edge cases where an early attempt happens to land in a favorable basin (e.g., case~18: \textit{w/o Slip} $-0.491$~eV vs \textit{Full} on GPT-5.4), the FORBID constraint can over-prune the remaining search space, preventing exploration of potentially better solutions.
-This is a predictable trade-off: guardrails improve reliability and cross-backend consistency across the benchmark but carry a small expected cost when the initial trajectory is already favorable---the aggregate statistics confirm this, as \textit{w/o Forbid} and \textit{w/o Term} both trend toward improving over \textit{Full} on GPT-5.4, yet \textit{Full} maintains higher success rates and tighter backend convergence overall.
+This is a predictable trade-off: guardrails improve reliability and cross-backend consistency across the benchmark but can over-constrain cases where the initial trajectory is already favorable; \textit{w/o Forbid} and \textit{w/o Term} both trend toward improving over \textit{Full} on GPT-5.4, yet \textit{Full} maintains higher success rates and tighter backend convergence overall.
 
 Figure~\ref{fig:cmu20_ablation}c summarizes these findings in a multi-objective framework.
 The radar chart compares \textit{Full} and ablation variants across success rate, energy accuracy, backend robustness, and cross-LLM agreement.
 \textit{Full} provides the most balanced operating point: 100\% success rate and improved cross-backend consistency compared with other variants.
-The chart does not imply that \textit{Full} is strictly optimal in raw energy depth---\textit{w/o Term} can find lower energies beyond the default termination budget with higher token and relaxation cost---but supports the conclusion that the complete closed-loop design delivers the best reliability--efficiency--robustness trade-off.
+The chart does not imply that \textit{Full} is strictly optimal in raw energy depth---\textit{w/o Term} can find lower energies beyond the default termination budget---but supports the conclusion that the complete closed-loop design delivers the strongest reliability--relaxation-budget--robustness operating point.
 
 \begin{figure}
     \centering
@@ -93,7 +94,7 @@ The systematic failure of 1-Shot on intermetallic cases (case~06, 08) in the abl
 Beyond this corrective role, slip detection provides an interpretable diagnostic signal available only in a closed-loop system: without inspecting the relaxed structure, an open-loop agent would be blind to the gap between its planned and realized configurations.
 
 
-Iteration convergence (Figure~\ref{fig:cmu20_convergence}a) shows how quickly the closed loop closes this gap. Iteration~2 captures \~50\% over the initial proposal, after which returns diminish sharply across all four backends(Figure~\ref{fig:cmu20_convergence}a). Most closed-loop value is extracted within 2--3 iterations, making the default five-attempt budget near-optimal and explaining the low relaxation cost ($\sim$4 per case) reported above.
+Iteration convergence (Figure~\ref{fig:cmu20_convergence}a) shows how quickly the closed loop closes this gap. Iteration~2 captures \~50\% over the initial proposal, after which returns diminish sharply across all four backends(Figure~\ref{fig:cmu20_convergence}a). Most closed-loop value is extracted within 2--3 iterations, supporting the default five-attempt budget and explaining the low MLFF relaxation budget (4.11 relaxations per case on CMU20).
 Across the four backends, GPT-5.4 achieves the best initial proposal and the fastest convergence, consistent with its stronger single-pass planning capability.
 
 The four-backend heatmap (Figure~\ref{fig:cmu20_convergence}c) visualizes the cross-backend agreement quantified in the previous section, confirming that the iterative architecture drives heterogeneous LLM planners toward consistent physical solutions (2.42$\times$ variance reduction relative to 1-Shot, Table~\ref{tab:key-evaluation-metrics}).
@@ -118,7 +119,7 @@ Full achieves 98.8\% success on Tier~1 (245/248), while 1-Shot drops to 89.5\% (
 The three Full failures are concentrated on case~053 (K$_{20}$ + C([CH$_2$])O), where GPT-5.4, Gemini, and Grok-4 undergo natural adsorbate dissociation; Claude succeeds, confirming that the failure is a physical chemical event rather than a framework crash---the dissociating backends correctly identify surface instability, while Claude finds a bound configuration through an alternative site hypothesis.
 All 33 failures across the ablation matrix are natural chemistry outcomes, with no API or implementation errors.
 
-The aggregate 1-Shot penalty confirms that closed-loop iteration improves energy depth: mean $\Delta E = E_{\mathrm{1-Shot}} - E_{\mathrm{Full}} = +0.329$~eV (median 0.067~eV, Wilcoxon $p = 9.4 \times 10^{-24}$, $n=222$ paired cases), larger than the $+0.222$~eV penalty on CMU20 (Figure~\ref{fig:ocd62-two-tier}b).
+The aggregate 1-Shot penalty confirms that closed-loop iteration improves energy depth: mean $\Delta E = E_{\mathrm{1-Shot}} - E_{\mathrm{Full}} = +0.329$~eV (median 0.067~eV across 222 paired successful cases), larger than the $+0.222$~eV penalty on CMU20 (Figure~\ref{fig:ocd62-two-tier}b).
 However, this mean conceals extreme case-level heterogeneity that defines when closed-loop reasoning matters.
 On complex, multi-element surfaces where no single high-symmetry site dominates, iterative feedback provides large gains: case~004 (Pt$_{16}$V$_{48}$ + [N]=O) improves by 1.05~eV, case~005 (As$_{48}$Hf$_{48}$Ni$_{48}$ + [NH$_2$]) by 0.82~eV, case~021 by 0.79~eV---precisely the regime where CMU20 slip rates reach 71--77\%.
 On surfaces with a single dominant binding motif, iteration adds nothing: cases~007, 009, and 050 yield identical energies for Full and 1-Shot.
@@ -142,13 +143,13 @@ w/o Term & 247 & 99.6\% & $-0.039$ & $0.000$ & 0.213 & 24/62 \\
 \end{tabular}
 \end{table}
 
-Aggregate statistics (Table~\ref{tab:ocd62-tier1-full}) show the ablated variants at near parity with \textit{Full} (mean $|\Delta E| < 0.04$~eV), consistent with CMU20.
+Aggregate summaries (Table~\ref{tab:ocd62-tier1-full}) show the ablated variants at near parity with \textit{Full} (mean $|\Delta E| < 0.04$~eV), consistent with CMU20.
 At the case level, however, ablated variants occasionally outperform Full: on case~007, \textit{w/o Slip} reaches $-19.925$~eV vs.\ \textit{Full} $-19.717$~eV; on case~008, Full is the worst of all five variants; on case~049, w/o Slip ($-8.628$~eV) outperforms Full ($-8.249$~eV).
 These cases share a mechanism---when the first guess is already near-optimal, \texttt{FORBID} over-prunes---illustrating the reliability--exploration trade-off inherent to guardrail-based search.
-Full also reduces the mean four-backend energy range to 0.183~eV from 0.316~eV under 1-Shot (1.73$\times$ reduction), a smaller compression than the 2.42$\times$ observed on CMU20, reflecting the greater difficulty of suppressing backend-specific biases on complex oxide and multi-element surfaces (Levene's test, $p < 0.01$).
+Full also reduces the mean four-backend energy range to 0.183~eV from 0.316~eV under 1-Shot (1.73$\times$ reduction), a smaller compression than the 2.42$\times$ observed on CMU20, reflecting the greater difficulty of suppressing backend-specific biases on complex oxide and multi-element surfaces.
 
-The heuristic non-LLM baseline on OCD-GMAE62 confirms the breadth--depth trade-off established on CMU20: heuristic enumeration (median 56 sites) can find lower energies than AdsMind Full, but only by spending a much larger relaxation budget (see Supplementary Information for per-case data).
-Under a fixed force field, energy depth is determined by sampling breadth, not reasoning strategy; AdsMind occupies the reliability-first, low-cost corner of this trade-off space.
+The heuristic non-LLM baseline on OCD-GMAE62 confirms the breadth--depth trade-off established on CMU20: heuristic enumeration (median 61.5 relaxations, range 19--126) can find lower energies than AdsMind Full, but only by spending a much larger relaxation budget than AdsMind Full (4.67 relaxations per case; see Supplementary Information for per-case data).
+Under a fixed force field, energy depth is determined by sampling breadth, not reasoning strategy; AdsMind occupies the reliability-first, low-relaxation-budget corner of this trade-off space.
 
 \subsubsection{Tier~2: Stability audit}
 
@@ -165,8 +166,8 @@ Removing individual mechanisms modestly increases variance (they are partially r
 This ranking holds across all four backends, confirming that iterative feedback---not LLM choice---is the primary driver of reproducibility.
 
 Synthesizing across Tier~1 and Tier~2, OCD-GMAE62 defines the conditions under which AdsMind's closed-loop architecture adds value.
-On complex surfaces with multi-atom adsorbates, the closed loop provides both reliability (98.8\% vs.\ 89.5\%) and energy improvement (mean $+0.329$~eV) at $\sim$4 relaxations per case.
+On complex surfaces with multi-atom adsorbates, the closed loop provides both reliability (98.8\% vs.\ 89.5\%) and energy improvement (mean $+0.329$~eV) with a mean budget of 4.67 MLFF relaxations per case.
 On simple surfaces with a single dominant site, 1-Shot matches Full and iteration adds nothing beyond reliability guarantees.
 On rare edge cases (case~008), guardrails over-constrain a lucky first guess, making Full worse by up to $\sim$1~eV.
-For autonomous workflows where failure is costly and every relaxation is expensive, the 98.8\% success rate and $\sim$4-relaxation budget are decisive; for applications tolerating 10\% failure with 20--100 relaxations per case, brute-force enumeration will find deeper energies.
+For autonomous workflows where failures are costly and every relaxation is expensive, the 98.8\% success rate and $\sim$4-relaxation budget are decisive; for applications tolerating 10\% failure and 20--100 relaxations per case, brute-force enumeration will find deeper energies.
 The closed-loop architecture is a purpose-built tool for the reliability-first corner of this trade-off space---not a universal replacement for exhaustive search.
