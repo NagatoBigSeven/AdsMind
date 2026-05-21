@@ -49,6 +49,8 @@ class AgentState(TypedDict):
     enable_slip_feedback: bool
     enable_forbid: bool
     enable_termination: bool
+    enable_executor: bool
+    enable_validator: bool
     max_attempts: int
     validation_retry_count: int
     # Input data
@@ -307,6 +309,7 @@ def solution_planner_node(state: AgentState) -> dict:
         "enable_slip_feedback": state.get("enable_slip_feedback", True),
         "enable_forbid": state.get("enable_forbid", True),
         "enable_termination": state.get("enable_termination", True),
+        "enable_executor": state.get("enable_executor", True),
     }
     planner_prompt = build_planner_prompt(**prompt_input)
     
@@ -357,6 +360,37 @@ def plan_validator_node(state: AgentState) -> dict:
     """ Node 2: Python Validator """
     logger.info("Calling Python Validator Node")
     validation_retry_count = int(state.get("validation_retry_count", 0) or 0)
+
+    if not state.get("enable_validator", True):
+        logger.info("Validator disabled (ablation): minimal pass-through")
+        plan_json = state.get("plan")
+        if not isinstance(plan_json, dict) or "solution" not in plan_json:
+            return {
+                "validation_error": "False, Planner did not return a parseable plan with 'solution'.",
+                "validation_retry_count": validation_retry_count + 1,
+                "last_planner_raw_output": None,
+            }
+        solution = plan_json.get("solution", {}) or {}
+        if solution.get("action") == "terminate":
+            if not state.get("enable_termination", True):
+                return {
+                    "validation_error": (
+                        "False, Termination is disabled for this run. "
+                        "Please provide another adsorption plan instead of terminate."
+                    ),
+                    "validation_retry_count": validation_retry_count + 1,
+                }
+            plan_dict = plan_json if isinstance(plan_json, dict) else {}
+            return {
+                "validation_error": None,
+                "validation_retry_count": validation_retry_count,
+                "termination_record": {
+                    "round": len(state.get("attempt_records", []) or []) + 1,
+                    "reasoning": plan_dict.get("reasoning"),
+                    "plan": plan_dict,
+                },
+            }
+        return {"validation_error": None, "validation_retry_count": validation_retry_count}
 
     def fail_validation(error: str, *, clear_plan: bool = False) -> dict:
         logger.info(f"Validation Failed: {error}")
@@ -522,9 +556,173 @@ def plan_validator_node(state: AgentState) -> dict:
     logger.info("Validation Succeeded ")
     return {"validation_error": None, "validation_retry_count": validation_retry_count}
 
+def _tool_executor_llm_oracle(state: AgentState) -> dict:
+    """Executor ablation: skip MACE and adopt planner's predicted energy.
+
+    Returns the same state shape as :func:`tool_executor_node` so downstream
+    nodes (summarizer, history, attempt_records) do not need to branch.
+    """
+    logger.info("Tool Executor disabled (ablation): using LLM-predicted energy")
+    plan_json = state.get("plan") or {}
+    plan_solution = plan_json.get("solution", {}) or {}
+
+    new_best_molecular = state.get("best_result")
+    new_best_dissociated = state.get("best_dissociated_result")
+    tool_logs: List[str] = ["LLM-as-oracle mode: executor bypassed; predicted energy used in place of MACE relaxation."]
+
+    raw_energy = plan_json.get("predicted_relaxed_energy_eV")
+    try:
+        predicted_energy = float(raw_energy)
+        if not np.isfinite(predicted_energy):
+            raise ValueError("non-finite")
+    except (TypeError, ValueError):
+        error_message = (
+            f"LLM oracle Failed: planner output missing or invalid "
+            f"'predicted_relaxed_energy_eV' (got {raw_energy!r})."
+        )
+        logger.error(error_message)
+        analysis_json = {"status": "error", "message": error_message}
+        tool_logs.append(error_message)
+        updated_keys = list(state.get("attempted_keys", []))
+        plan_key = make_plan_key(state.get("plan"))
+        if plan_key is not None and plan_key not in updated_keys:
+            updated_keys.append(plan_key)
+        updated_history = list(state.get("history", []))
+        try:
+            updated_history.append(
+                build_history_entry(
+                    state.get("plan"),
+                    analysis_json,
+                    new_best_molecular,
+                    enable_slip_feedback=state.get("enable_slip_feedback", True),
+                    enable_forbid=state.get("enable_forbid", True),
+                    enable_termination=state.get("enable_termination", True),
+                )
+            )
+        except Exception as history_error:
+            updated_history.append(f"History generation exception: {history_error}")
+        updated_attempt_records = list(state.get("attempt_records", []))
+        updated_attempt_records.append(
+            {
+                "attempt_index": len(updated_attempt_records) + 1,
+                "plan": state.get("plan"),
+                "plan_key": plan_key,
+                "planner_reasoning": (state.get("plan") or {}).get("reasoning"),
+                "tool_logs": list(tool_logs),
+                "status": "error",
+                "message": error_message,
+                "energy_source": "llm_predicted",
+            }
+        )
+        return {
+            "messages": [ToolMessage(content="\n".join(tool_logs), tool_call_id="tool_executor")],
+            "analysis_json": json.dumps(analysis_json),
+            "history": updated_history,
+            "attempt_records": updated_attempt_records,
+            "best_result": new_best_molecular,
+            "best_dissociated_result": new_best_dissociated,
+            "attempted_keys": updated_keys,
+        }
+
+    site_type = plan_solution.get("site_type") or "unknown"
+    surf_atoms = plan_solution.get("surface_binding_atoms", []) or []
+    ads_indices = plan_solution.get("adsorbate_binding_indices", []) or []
+    site_fingerprint = (
+        f"llm-oracle::{site_type}::"
+        f"{'-'.join(map(str, surf_atoms))}::"
+        f"{'-'.join(map(str, ads_indices))}"
+    )
+
+    analysis_json = {
+        "status": "success",
+        "most_stable_energy_eV": predicted_energy,
+        "is_dissociated": False,
+        "is_covalently_bound": True,
+        "bond_change_count": 0,
+        "energy_source": "llm_predicted",
+        "site_analysis": {
+            "planned_site_type": site_type,
+            "actual_site_type": site_type,
+            "is_chemical_slip": False,
+            "planned_symbols": list(surf_atoms),
+            "actual_symbols": list(surf_atoms),
+            "site_fingerprint": site_fingerprint,
+        },
+    }
+    tool_logs.append(f"Success: predicted_relaxed_energy_eV = {predicted_energy:.4f} eV.")
+
+    e_old_mol = (
+        new_best_molecular.get("most_stable_energy_eV", float("inf"))
+        if isinstance(new_best_molecular, dict)
+        else float("inf")
+    )
+    if predicted_energy < e_old_mol:
+        logger.info(f"New Best Found [LLM oracle]: {predicted_energy:.4f} eV")
+        new_best_molecular = {
+            "most_stable_energy_eV": predicted_energy,
+            "analysis_json": analysis_json,
+            "plan": state.get("plan"),
+            "result_type": "Perfect",
+        }
+
+    updated_keys = list(state.get("attempted_keys", []))
+    plan_key = make_plan_key(state.get("plan"))
+    if plan_key is not None and plan_key not in updated_keys:
+        updated_keys.append(plan_key)
+
+    updated_history = list(state.get("history", []))
+    try:
+        updated_history.append(
+            build_history_entry(
+                state.get("plan"),
+                analysis_json,
+                new_best_molecular,
+                enable_slip_feedback=state.get("enable_slip_feedback", True),
+                enable_forbid=state.get("enable_forbid", True),
+                enable_termination=state.get("enable_termination", True),
+            )
+        )
+    except Exception as history_error:
+        updated_history.append(f"History generation exception: {history_error}")
+
+    updated_attempt_records = list(state.get("attempt_records", []))
+    current_plan = state.get("plan") or {}
+    planner_reasoning = current_plan.get("reasoning") if isinstance(current_plan, dict) else None
+    updated_attempt_records.append(
+        {
+            "attempt_index": len(updated_attempt_records) + 1,
+            "plan": state.get("plan"),
+            "plan_key": plan_key,
+            "planner_reasoning": planner_reasoning,
+            "tool_logs": list(tool_logs),
+            "status": "success",
+            "most_stable_energy_eV": predicted_energy,
+            "bond_change_count": 0,
+            "is_dissociated": False,
+            "is_chemical_slip": False,
+            "planned_site_type": site_type,
+            "actual_site_type": site_type,
+            "energy_source": "llm_predicted",
+            "history_entry": updated_history[-1] if updated_history else None,
+        }
+    )
+
+    return {
+        "messages": [ToolMessage(content="\n".join(tool_logs), tool_call_id="tool_executor")],
+        "analysis_json": json.dumps(analysis_json),
+        "history": updated_history,
+        "attempt_records": updated_attempt_records,
+        "best_result": new_best_molecular,
+        "best_dissociated_result": new_best_dissociated,
+        "attempted_keys": updated_keys,
+    }
+
+
 def tool_executor_node(state: AgentState) -> dict:
     """ Node 4: Tool Executor """
     logger.info("Calling Tool Executor Node")
+    if not state.get("enable_executor", True):
+        return _tool_executor_llm_oracle(state)
     from ase import units
     from ase.constraints import FixAtoms
     from ase.io import read
@@ -1090,6 +1288,8 @@ def _prepare_initial_state(
     enable_slip_feedback: bool = True,
     enable_forbid: bool = True,
     enable_termination: bool = True,
+    enable_executor: bool = True,
+    enable_validator: bool = True,
     max_attempts: int = DEFAULT_MAX_ATTEMPTS,
 ) -> AgentState:
     """
@@ -1122,6 +1322,8 @@ def _prepare_initial_state(
         "enable_slip_feedback": enable_slip_feedback,
         "enable_forbid": enable_forbid,
         "enable_termination": enable_termination,
+        "enable_executor": enable_executor,
+        "enable_validator": enable_validator,
         "max_attempts": max_attempts,
         "validation_retry_count": 0,
         "smiles": smiles,

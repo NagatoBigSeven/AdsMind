@@ -98,6 +98,22 @@ ABLATED_VARIANTS = {
         "enable_termination": False,
         "max_attempts": 1,
     },
+    "no_executor": {
+        "enable_slip_feedback": True,
+        "enable_forbid": True,
+        "enable_termination": True,
+        "enable_executor": False,
+        "enable_validator": True,
+        "max_attempts": 5,
+    },
+    "no_validator": {
+        "enable_slip_feedback": True,
+        "enable_forbid": True,
+        "enable_termination": True,
+        "enable_executor": True,
+        "enable_validator": False,
+        "max_attempts": 5,
+    },
 }
 
 
@@ -221,6 +237,8 @@ def resolve_runtime_flags(
         "enable_slip_feedback": overrides.get("enable_slip_feedback", True),
         "enable_forbid": overrides.get("enable_forbid", True),
         "enable_termination": overrides.get("enable_termination", True),
+        "enable_executor": overrides.get("enable_executor", True),
+        "enable_validator": overrides.get("enable_validator", True),
         "max_attempts": overrides.get(
             "max_attempts",
             frozen_config.get("max_retries", 5),
