@@ -36,10 +36,20 @@ def extract_convergence(result_json_path: Path) -> List[Optional[float]]:
     best_so_far = float("inf")
     for rec in records:
         energy = rec.get("most_stable_energy_eV")
-        if energy is not None and rec.get("status") == "success":
+        if energy is not None and is_valid_adsorption_attempt(rec):
             best_so_far = min(best_so_far, float(energy))
         running_best.append(None if best_so_far == float("inf") else best_so_far)
     return running_best
+
+
+def is_valid_adsorption_attempt(record: Dict[str, Any]) -> bool:
+    """Return True only for successful, non-dissociated adsorption attempts."""
+    if record.get("status") != "success":
+        return False
+    if record.get("is_dissociated"):
+        return False
+    history = str(record.get("history_entry") or "")
+    return "Dissociated" not in history
 
 
 def write_csv(path: Path, rows: List[Dict[str, Any]], fieldnames: List[str]) -> None:

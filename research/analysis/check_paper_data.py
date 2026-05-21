@@ -337,6 +337,43 @@ def check_processed_plot_inputs(audit: Auditor) -> None:
             "prepare_si_data.py still uses a Windows backslash in the Adsorb-Agent baseline path",
         )
 
+    convergence = (
+        RESULTS
+        / "advanced_experiments"
+        / "case_studies"
+        / "iteration_convergence"
+        / "cmu20"
+        / "all_backends"
+        / "full"
+        / "iteration_convergence.csv"
+    )
+    if convergence.exists():
+        summary_cache: dict[str, dict[str, str]] = {}
+        mismatches: list[str] = []
+        for row in read_rows(convergence):
+            backend = row.get("backend", "")
+            case_id = pad_case_id(row.get("case_id", ""), "cmu20")
+            if backend not in summary_cache:
+                summary_path = (
+                    BASIC / "cmu20" / "adsmind" / backend / "full" / "summary.csv"
+                )
+                if not summary_path.exists():
+                    continue
+                summary_cache[backend] = {
+                    pad_case_id(item["case_id"], "cmu20"): item.get("best_energy", "")
+                    for item in read_rows(summary_path)
+                }
+            expected = summary_cache[backend].get(case_id, "")
+            actual = row.get("final_best", "")
+            if not same_number(actual, expected, tol=1e-6):
+                mismatches.append(f"{backend}/case {case_id}: {actual} != {expected}")
+        if mismatches:
+            audit.error(
+                "iteration-convergence-final-best-mismatch",
+                "iteration_convergence.csv final_best does not match valid Full summary "
+                f"energies; first mismatches: {'; '.join(mismatches[:5])}",
+            )
+
 
 def extract_hardcoded_figure5_values() -> list[float] | None:
     path = ROOT / "research" / "paper_plots" / "figure5" / "figure5_vasp_validation.ipynb"

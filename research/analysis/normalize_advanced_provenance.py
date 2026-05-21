@@ -96,6 +96,8 @@ def dataset_case_width(dataset: str) -> int:
 
 def ablation_summary(dataset: str) -> list[dict[str, str]]:
     path = BASIC / dataset / "summaries" / "ablation_4backend.csv"
+    if not path.exists():
+        path = BASIC / "summaries" / f"{dataset}_ablation_4backend.csv"
     rows = read_csv(path)
     width = dataset_case_width(dataset)
     for row in rows:
@@ -129,7 +131,7 @@ def write_reach_full() -> None:
                     "full_energy_eV": f"{full_energy:.12g}",
                     "variant_energy_eV": f"{variant_energy:.12g}",
                     "delta_variant_minus_full_eV": f"{delta:.12g}",
-                    "within_0.01eV_of_full": "TRUE" if abs(delta) <= 0.01 else "FALSE",
+                    "within_0.01eV_of_full": "TRUE" if delta <= 0.01 else "FALSE",
                 }
             )
     write_csv(

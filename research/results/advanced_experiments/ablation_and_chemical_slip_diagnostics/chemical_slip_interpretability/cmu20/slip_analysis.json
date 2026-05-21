@@ -1,90 +1,61 @@
 {
   "overall_slip_rate": {
-    "gemini25pro_mace_mp0_small": 0.6,
-    "grok4_mace_mp0_small": 0.6,
-    "gpt54_mace_mp0_small": 0.6316,
-    "gpt54_mace_mp0_small_n": "12/19",
+    "gemini25pro_mace_mp0_small": 0.6842,
+    "gemini25pro_mace_mp0_small_n": "13/19",
+    "gpt54_mace_mp0_small": 0.5556,
+    "gpt54_mace_mp0_small_n": "10/18",
     "claude_sonnet46_mace_mp0_small": 0.6667,
-    "claude_sonnet46_mace_mp0_small_n": "12/18"
+    "claude_sonnet46_mace_mp0_small_n": "12/18",
+    "grok4_mace_mp0_small": 0.7222,
+    "grok4_mace_mp0_small_n": "13/18"
   },
   "by_surface_family": {
     "intermetallic": {
-      "gemini25pro_mace_mp0_small": 0.7333333333333333,
-      "grok4_mace_mp0_small": 0.7333333333333333,
-      "gpt54_mace_mp0_small": 0.7143,
-      "gpt54_mace_mp0_small_n": "10/14",
+      "gemini25pro_mace_mp0_small": 0.6429,
+      "gemini25pro_mace_mp0_small_n": "9/14",
+      "gpt54_mace_mp0_small": 0.6154,
+      "gpt54_mace_mp0_small_n": "8/13",
       "claude_sonnet46_mace_mp0_small": 0.7692,
-      "claude_sonnet46_mace_mp0_small_n": "10/13"
+      "claude_sonnet46_mace_mp0_small_n": "10/13",
+      "grok4_mace_mp0_small": 0.7692,
+      "grok4_mace_mp0_small_n": "10/13"
     },
     "monometallic": {
-      "gemini25pro_mace_mp0_small": 0.2,
-      "grok4_mace_mp0_small": 0.2,
+      "gemini25pro_mace_mp0_small": 0.8,
+      "gemini25pro_mace_mp0_small_n": "4/5",
       "gpt54_mace_mp0_small": 0.4,
       "gpt54_mace_mp0_small_n": "2/5",
       "claude_sonnet46_mace_mp0_small": 0.4,
-      "claude_sonnet46_mace_mp0_small_n": "2/5"
+      "claude_sonnet46_mace_mp0_small_n": "2/5",
+      "grok4_mace_mp0_small": 0.6,
+      "grok4_mace_mp0_small_n": "3/5"
     }
   },
   "cross_backend_slip_agreement": {
-    "matching_cases": 18,
-    "total_cases": 20,
-    "rate": 0.9
+    "matching_cases": 12,
+    "total_cases": 18,
+    "rate": 0.6667,
+    "definition": "unanimous slip/no-slip status across all four backends among cases with four valid one-shot runs"
   },
   "most_common_slip_pattern": "ontop -> hollow",
   "slip_type_counts": {
     "gemini25pro_mace_mp0_small": {
+      "hard": 12,
+      "none": 6,
+      "soft": 1
+    },
+    "gpt54_mace_mp0_small": {
       "hard": 9,
       "none": 8,
-      "soft": 3
-    },
-    "grok4_mace_mp0_small": {
-      "none": 8,
-      "hard": 10,
-      "soft": 2
-    }
-  },
-  "slip_vs_energy_correlation": {
-    "description": "Do slipped one-shot cases have better or worse energy?",
-    "slipped_mean_energy": -4.1703485151131945,
-    "non_slipped_mean_energy": -2.827943876385689,
-    "note": "Slip does not necessarily mean worse energy — it means the PES disagreed with the LLM's intuition"
-  },
-  "backend_metadata": {
-    "gpt54_mace_mp0_small": {
-      "backend_key": "gpt",
-      "backend": "gpt54_mace_mp0_small",
-      "llm_model": "gpt-5.4-2026-03-05",
-      "force_field": "MACE-MP-0 small",
-      "calculator_backend": "mace",
-      "force_field_model": "mace_mp0",
-      "force_field_size": "small"
+      "soft": 1
     },
     "claude_sonnet46_mace_mp0_small": {
-      "backend_key": "claude",
-      "backend": "claude_sonnet46_mace_mp0_small",
-      "llm_model": "claude-sonnet-4-6",
-      "force_field": "MACE-MP-0 small",
-      "calculator_backend": "mace",
-      "force_field_model": "mace_mp0",
-      "force_field_size": "small"
-    },
-    "gemini25pro_mace_mp0_small": {
-      "backend_key": "gemini",
-      "backend": "gemini25pro_mace_mp0_small",
-      "llm_model": "gemini-2.5-pro",
-      "force_field": "MACE-MP-0 small",
-      "calculator_backend": "mace",
-      "force_field_model": "mace_mp0",
-      "force_field_size": "small"
+      "hard": 12,
+      "none": 6
     },
     "grok4_mace_mp0_small": {
-      "backend_key": "grok",
-      "backend": "grok4_mace_mp0_small",
-      "llm_model": "grok-4",
-      "force_field": "MACE-MP-0 small",
-      "calculator_backend": "mace",
-      "force_field_model": "mace_mp0",
-      "force_field_size": "small"
+      "hard": 13,
+      "none": 5
     }
   }
 }

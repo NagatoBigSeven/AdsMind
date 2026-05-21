@@ -80,7 +80,7 @@ The chart does not imply that \textit{Full} is strictly optimal in raw energy de
 \begin{figure}
     \centering
     \includegraphics[width=0.95\linewidth]{images/figure3_complete.png}
-  \caption{\textbf{Advanced analysis on the CMU20 benchmark.} (a) Iteration convergence: mean iteration energy / Full energy of 20 cases across 4 LLM backends. The vertical dashed line marks iteration~2, where 49\% of the total improvement over iteration~1 has been achieved.  (b) Chemical slip analysis: one-shot slip rates stratified by surface family (intermetallic vs. monometallic) across 4 backends. Slip rates are consistently higher on intermetallic surfaces (71--77\%) than on monometallic surfaces (20--40\%).  (c) Four-backend agreement heatmap: adsorption energy of the Full variant across 20 cases and 4 backends. Color intensity indicates energy value, demonstrating that the iterative architecture drives heterogeneous LLM planners to consistent physical solutions.}
+  \caption{\textbf{Advanced analysis on the CMU20 benchmark.} (a) Iteration convergence: mean iteration energy / Full energy of 20 cases across 4 LLM backends, excluding dissociated attempts from running-best updates. The vertical dashed line marks iteration~2, where 43\% of the total improvement over iteration~1 has been achieved.  (b) Chemical slip analysis: one-shot slip rates stratified by surface family (intermetallic vs. monometallic) across 4 backends. Slip events are frequent across both surface families, with intermetallic rates spanning 61.5--76.9\% and monometallic rates spanning 40.0--80.0\%.  (c) Four-backend agreement heatmap: adsorption energy of the Full variant across 20 cases and 4 backends. Color intensity indicates energy value, demonstrating that the iterative architecture drives heterogeneous LLM planners to consistent physical solutions.}
   \label{fig:cmu20_convergence}
 \end{figure}
 
@@ -88,14 +88,15 @@ The chart does not imply that \textit{Full} is strictly optimal in raw energy de
 Figure~\ref{fig:cmu20_convergence} provides deeper insight into how the closed-loop mechanisms produce the observed ablation results by examining system behavior at three levels.
 
 Chemical slip, where the adsorbate relaxes to a different site than the LLM intended, provides insight into the difficulty of heterogeneous surface prediction.
-Figure~\ref{fig:cmu20_convergence}b shows one-shot slip rates stratified by surface family: consistently higher on intermetallic surfaces (71--77\%) than on monometallic surfaces (20--40\%) across all four backends.
-This pattern reflects the geometric complexity of intermetallic surfaces, where asymmetric adsorption sites and mixed metal coordination create more opportunities for structural relaxation to diverge from the planned configuration.
+Figure~\ref{fig:cmu20_convergence}b shows one-shot slip rates stratified by surface family.
+Slip is frequent across both families: intermetallic surfaces show 61.5--76.9\% slip across backends, while monometallic surfaces show 40.0--80.0\%, indicating that surface family alone does not determine whether the LLM-planned site survives relaxation.
+The high slip frequency reflects the geometric sensitivity of adsorption placement, where asymmetric local coordination and backend-specific planning choices create opportunities for structural relaxation to diverge from the planned configuration.
 The systematic failure of 1-Shot on intermetallic cases (case~06, 08) in the ablation thus originates from a structural property of the surface---not from outlying LLM behavior---and the closed-loop architecture addresses it by feeding the detected mismatch back into the Planner's context.
 Beyond this corrective role, slip detection provides an interpretable diagnostic signal available only in a closed-loop system: without inspecting the relaxed structure, an open-loop agent would be blind to the gap between its planned and realized configurations.
 
 
-Iteration convergence (Figure~\ref{fig:cmu20_convergence}a) shows how quickly the closed loop closes this gap. Iteration~2 captures \~50\% over the initial proposal, after which returns diminish sharply across all four backends(Figure~\ref{fig:cmu20_convergence}a). Most closed-loop value is extracted within 2--3 iterations, supporting the default five-attempt budget and explaining the low MLFF relaxation budget (4.11 relaxations per case on CMU20).
-Across the four backends, GPT-5.4 achieves the best initial proposal and the fastest convergence, consistent with its stronger single-pass planning capability.
+Iteration convergence (Figure~\ref{fig:cmu20_convergence}a) shows how quickly the closed loop closes this gap. After excluding dissociated attempts from running-best updates, iteration~2 captures approximately 43\% of the initial gap to the final valid adsorption energy, after which returns diminish across all four backends (Figure~\ref{fig:cmu20_convergence}a). Most closed-loop value is extracted within 2--3 iterations, supporting the default five-attempt budget and explaining the low MLFF relaxation budget (4.11 relaxations per case on CMU20).
+Across the four backends, Gemini and GPT-5.4 show the fastest early convergence after dissociation filtering, while backend differences become modest by iteration~3.
 
 The four-backend heatmap (Figure~\ref{fig:cmu20_convergence}c) visualizes the cross-backend agreement quantified in the previous section, confirming that the iterative architecture drives heterogeneous LLM planners toward consistent physical solutions (2.42$\times$ variance reduction relative to 1-Shot, Table~\ref{tab:key-evaluation-metrics}).
 
@@ -121,7 +122,7 @@ All 33 failures across the ablation matrix are natural chemistry outcomes, with 
 
 The aggregate 1-Shot penalty confirms that closed-loop iteration improves energy depth: mean $\Delta E = E_{\mathrm{1-Shot}} - E_{\mathrm{Full}} = +0.329$~eV (median 0.067~eV across 222 paired successful cases), larger than the $+0.222$~eV penalty on CMU20 (Figure~\ref{fig:ocd62-two-tier}b).
 However, this mean conceals extreme case-level heterogeneity that defines when closed-loop reasoning matters.
-On complex, multi-element surfaces where no single high-symmetry site dominates, iterative feedback provides large gains: case~004 (Pt$_{16}$V$_{48}$ + [N]=O) improves by 1.05~eV, case~005 (As$_{48}$Hf$_{48}$Ni$_{48}$ + [NH$_2$]) by 0.82~eV, case~021 by 0.79~eV---precisely the regime where CMU20 slip rates reach 71--77\%.
+On complex, multi-element surfaces where no single high-symmetry site dominates, iterative feedback provides large gains: case~004 (Pt$_{16}$V$_{48}$ + [N]=O) improves by 1.05~eV, case~005 (As$_{48}$Hf$_{48}$Ni$_{48}$ + [NH$_2$]) by 0.82~eV, case~021 by 0.79~eV---precisely the regime where CMU20 one-shot slip is common across backends.
 On surfaces with a single dominant binding motif, iteration adds nothing: cases~007, 009, and 050 yield identical energies for Full and 1-Shot.
 Conversely, on case~008 (Ga$_{12}$Pd$_{36}$ + [NH]), Full ($-7.48$~eV) is 0.99~eV \emph{worse} than 1-Shot ($-8.47$~eV): the LLM's first hypothesis is near-optimal, but the \texttt{FORBID} guardrail over-prunes the basin, trapping subsequent iterations in a shallower minimum.
 The closed-loop advantage is thus conditional---largest when first-guess placement is unreliable, absent when a single dominant site exists, and occasionally negative when guardrails over-constrain a lucky guess.

@@ -134,6 +134,8 @@ def process_slip_analysis():
         col_map[f'{long_be}_actual_site'] = f'{short_be}_actual_site'
         col_map[f'{long_be}_slip'] = f'{short_be}_slip'
         col_map[f'{long_be}_slip_type'] = f'{short_be}_slip_type'
+        col_map[f'{long_be}_valid'] = f'{short_be}_valid'
+        col_map[f'{long_be}_dissociated'] = f'{short_be}_dissociated'
 
     with open(src, 'r') as f:
         reader = csv.DictReader(f)
