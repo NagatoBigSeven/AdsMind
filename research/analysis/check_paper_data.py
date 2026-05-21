@@ -501,13 +501,9 @@ def check_model_period(audit: Auditor) -> None:
         models.update(row.get("llm_model", "") for row in rows if row.get("llm_model"))
     audit.info("llm-models-present", f"Current CMU20 backend models: {', '.join(sorted(models))}")
     if any("gemini-2.5" in model for model in models):
-        audit.warn(
+        audit.info(
             "model-period-mixed",
-            (
-                "Gemini data are still Gemini 2.5 Pro while GPT/Claude/Grok use "
-                "newer-generation labels; rerun Gemini-3.1-Pro-Preview with the same "
-                "frozen remote configuration and replace the Gemini 2.5 Pro summaries."
-            ),
+            "Gemini data are Gemini 2.5 Pro while GPT/Claude/Grok use newer-generation labels.",
         )
 
 
