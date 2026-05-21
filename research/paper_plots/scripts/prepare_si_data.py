@@ -76,7 +76,7 @@ def process_backend_variants():
     for short_be, long_be in BACKEND_SHORT_LONG.items():
         for var in ['full', 'one_shot', 'no_slip', 'no_forbid', 'no_termination']:
             src = os.path.join(RESULTS_DIR, 'basic_experiments', 'cmu20',
-                               long_be, var, 'summary.csv')
+                               'adsmind', long_be, var, 'summary.csv')
             dst = os.path.join(OUTPUT_DIR, 'basic_experiments', 'cmu20',
                                short_be, var, 'summary.csv')
             if not os.path.exists(src):
@@ -94,7 +94,10 @@ def process_baselines():
     baselines_sherry = {
         'random_n20': 'random_n20',
         'heuristic': 'heuristic',
-        'adsorbagent_mace_mp0_small_gpt54': 'adsorb-agent\\adsorb-agent_gpt54_mace_mp0_small_5config',
+        'adsorbagent_mace_mp0_small_gpt54': os.path.join(
+            'adsorb-agent',
+            'adsorb-agent_gpt54_mace_mp0_small_5config',
+        ),
     }
     n = 0
     for short_name, long_name in baselines_sherry.items():
@@ -149,11 +152,42 @@ def process_slip_analysis():
 
 def process_ablation_4backend():
     """Copy ablation_4backend.csv (already processed for Figure 3, reuse)."""
-    src = os.path.join(RESULTS_DIR, 'processed', 'figure3', 'ablation_4backend.csv')
+    src = os.path.join(
+        RESULTS_DIR,
+        'basic_experiments', 'summaries', 'cmu20_ablation_4backend.csv',
+    )
     dst = os.path.join(OUTPUT_DIR, 'basic_experiments', 'cmu20',
                        'summaries', 'ablation_4backend.csv')
-    rows = copy_csv(src, dst)
-    print(f"  ablation_4backend.csv: {rows} rows (reused from figure3)")
+    output_cols = [
+        'case_id', 'backend', 'variant', 'best_energy_eV', 'success',
+        'run_path', 'iterations', 'wasted_iterations', 'waste_ratio',
+        'slip_count', 'dissociation_count', 'tokens_used',
+    ]
+    os.makedirs(os.path.dirname(dst), exist_ok=True)
+    with open(src, 'r') as f:
+        reader = csv.DictReader(f)
+        rows = [
+            {
+                'case_id': row['case_id'],
+                'backend': row['backend_key'],
+                'variant': row['variant'],
+                'best_energy_eV': row['best_energy_eV'],
+                'success': row['success'],
+                'run_path': row['run_path'],
+                'iterations': row['iterations'],
+                'wasted_iterations': row['wasted_iterations'],
+                'waste_ratio': row['waste_ratio'],
+                'slip_count': row['slip_count'],
+                'dissociation_count': row['dissociation_count'],
+                'tokens_used': row['tokens_used'],
+            }
+            for row in reader
+        ]
+    with open(dst, 'w', newline='') as f:
+        writer = csv.DictWriter(f, fieldnames=output_cols)
+        writer.writeheader()
+        writer.writerows(rows)
+    print(f"  ablation_4backend.csv: {len(rows)} rows")
 
 
 def process_multiseed():

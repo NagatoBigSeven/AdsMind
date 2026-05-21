@@ -59,6 +59,7 @@ These artifacts are generated deterministically outside the LLM reasoning loop; 
 We evaluate five variants in a systematic ablation: \textbf{Full} (all mechanisms enabled); \textbf{w/o Slip} (removes slip feedback and FORBID constraints); \textbf{w/o Forbid} (retains slip detection but suppresses prohibition); \textbf{w/o Term} (disables early stopping); and \textbf{1-Shot} (single attempt, all mechanisms disabled).
 
 All benchmark runs use frozen experiment configurations. Four reasoning backends are evaluated at zero temperature: Gemini~2.5~Pro~\cite{gemini2026modelcard}, GPT-5.4~\cite{openai2026gpt5}, Claude~Sonnet~4.6~\cite{anthropic2026claude}, and Grok-4~\cite{grok2025blog} (see SI Table~S1 for model identifiers).
+% TODO: rerun the Gemini backend on EPFL LIAC's remote server workstation LIACPC12 with the same frozen AdsMind/MACE configuration using Gemini-3.1-Pro-Preview, then replace the Gemini-2.5-Pro rows in CMU20/OCD-GMAE62 summaries and regenerate figures/tables.
 The physical backend is locked to MACE-MP-0 small (\S~\ref{sec:mace_config}).
 
 % subsection 2: physical execution
@@ -88,7 +89,7 @@ Structural relaxations were performed for both pristine slabs and adsorbate-cove
 % \subsection{Non-LLM Baselines}
 \label{sec:nonllm_baselines}
 
-To isolate the contribution of the LLM planner from that of the underlying MACE-MP relaxation pipeline, we implement two non-LLM controls using the same MACE-MP-0 small force fields (FF). The \textit{random placement} baseline draws $N=20$ random adsorbate poses per case, each relaxed with the standard protocol (BFGS, $f_\mathrm{max}=0.10$~eV/\AA, 200 steps). The \textit{heuristic enumeration} baseline identifies all high-symmetry sites via Autoadsorbate~\cite{fako2025simple} (median 56 sites per case) and relaxes each under the same protocol. Both baselines operate in an open-loop regime without the chemical-safety filters (dissociation detection, connectivity audit) that AdsMind applies to its own summaries; this design choice preserves the baselines as faithful representatives of conventional enumeration strategies, while the absence of filtering is explained in the results interpretation.
+To isolate the contribution of the LLM planner from that of the underlying MACE-MP relaxation pipeline, we implement a non-LLM heuristic control using the same MACE-MP-0 small force field (FF). The \textit{heuristic enumeration} baseline identifies all high-symmetry sites via Autoadsorbate~\cite{fako2025simple} (median 56 sites per case) and relaxes each under the same protocol (BFGS, $f_\mathrm{max}=0.10$~eV/\AA, 200 steps). This baseline operates in an open-loop regime without the chemical-safety filters (dissociation detection, connectivity audit) that AdsMind applies to its own summaries; this design choice preserves the baseline as a faithful representative of conventional enumeration strategies, while the absence of filtering is explained in the results interpretation.
 
 % \subsection{Adsorb-Agent Comparison Protocol}
 \label{sec:adsorbagent_comparison}

@@ -107,7 +107,7 @@ def process_method_comparison():
     """
     src = os.path.join(
         RESULTS_DIR,
-        'basic_experiments', 'cmu20', 'summaries', 'method_comparison.csv',
+        'basic_experiments', 'summaries', 'cmu20_method_comparison.csv',
     )
     dst = os.path.join(OUTPUT_DIR, 'method_comparison.csv')
 
@@ -177,7 +177,7 @@ def process_ablation_4backend():
     """
     src = os.path.join(
         RESULTS_DIR,
-        'basic_experiments', 'cmu20', 'summaries', 'ablation_4backend.csv',
+        'basic_experiments', 'summaries', 'cmu20_ablation_4backend.csv',
     )
     dst = os.path.join(OUTPUT_DIR, 'ablation_4backend.csv')
 

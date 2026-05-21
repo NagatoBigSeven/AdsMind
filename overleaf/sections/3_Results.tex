@@ -30,7 +30,7 @@ AdsMind reduces failures and ensures robust reliability with minimal MLFF cost (
 \begin{figure}
     \centering
     \includegraphics[width=0.95\linewidth]{images/figure2_combined_panelabc.png}
-  \caption{\textbf{Ablation analysis on the CMU20 benchmark across four LLM backends.} [KEY NOTE: WE NEED TO CHECK THAT OUTLIER, ZONGMIN NEEDS ACTIONS](a) Best-energy distributions comparing Adsorb-Agent (EquiformerV2), Heuristic, Random, and AdsMind (MACE-MP-0 small) across the CMU20 cases. (b) Energy differences $\Delta E = E_{\mathrm{variant}} - E_{\mathrm{Full}}$ for each ablation variant (393/400 successful runs), with dashed-line at $\Delta E = 0$ marking parity. (c) Radar chart of Full against ablated variants across Success Rate, Energy Accuracy, Backend Robustness, and Cross-LLM Agreement; Full provides the strongest aggregate balance.}
+  \caption{\textbf{Ablation analysis on the CMU20 benchmark across four LLM backends.} [KEY NOTE: WE NEED TO CHECK THAT OUTLIER, ZONGMIN NEEDS ACTIONS](a) Best-energy distributions comparing Adsorb-Agent (EquiformerV2), Heuristic, and AdsMind (MACE-MP-0 small) across the CMU20 cases. (b) Energy differences $\Delta E = E_{\mathrm{variant}} - E_{\mathrm{Full}}$ for each ablation variant (393/400 successful runs), with dashed-line at $\Delta E = 0$ marking parity. (c) Radar chart of Full against ablated variants across Success Rate, Energy Accuracy, Backend Robustness, and Cross-LLM Agreement; Full provides the strongest aggregate balance.}
   \label{fig:cmu20_ablation}
 \end{figure}
 
@@ -147,7 +147,7 @@ At the case level, however, ablated variants occasionally outperform Full: on ca
 These cases share a mechanism---when the first guess is already near-optimal, \texttt{FORBID} over-prunes---illustrating the reliability--exploration trade-off inherent to guardrail-based search.
 Full also reduces the mean four-backend energy range to 0.183~eV from 0.316~eV under 1-Shot (1.73$\times$ reduction), a smaller compression than the 2.42$\times$ observed on CMU20, reflecting the greater difficulty of suppressing backend-specific biases on complex oxide and multi-element surfaces (Levene's test, $p < 0.01$).
 
-Non-LLM baselines on OCD-GMAE62 confirm the breadth--depth trade-off established on CMU20: random placement ($N=20$) and heuristic enumeration (median 56 sites) both find lower energies than AdsMind Full at 5--25$\times$ more relaxations (see Supplementary Information for per-case data).
+The heuristic non-LLM baseline on OCD-GMAE62 confirms the breadth--depth trade-off established on CMU20: heuristic enumeration (median 56 sites) can find lower energies than AdsMind Full, but only by spending a much larger relaxation budget (see Supplementary Information for per-case data).
 Under a fixed force field, energy depth is determined by sampling breadth, not reasoning strategy; AdsMind occupies the reliability-first, low-cost corner of this trade-off space.
 
 \subsubsection{Tier~2: Stability audit}
@@ -170,5 +170,3 @@ On simple surfaces with a single dominant site, 1-Shot matches Full and iteratio
 On rare edge cases (case~008), guardrails over-constrain a lucky first guess, making Full worse by up to $\sim$1~eV.
 For autonomous workflows where failure is costly and every relaxation is expensive, the 98.8\% success rate and $\sim$4-relaxation budget are decisive; for applications tolerating 10\% failure with 20--100 relaxations per case, brute-force enumeration will find deeper energies.
 The closed-loop architecture is a purpose-built tool for the reliability-first corner of this trade-off space---not a universal replacement for exhaustive search.
-
-

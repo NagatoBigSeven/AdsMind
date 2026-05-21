@@ -519,39 +519,37 @@ Table~\ref{tab:si-convergence} tracks the mean running-best adsorption energy as
 \centering
 \caption{Baseline comparison on CMU20 under identical MACE-MP-0 small force fields (FF). AdsMind columns report the best energy among the four LLM backends. Heuristic entries are raw energies; interpret with the connectivity audit in Table~\ref{tab:si-cmu20-heuristic}. Adsorb-Agent energies from Ref.~\citenum{ock2026adsorbagent} (EquiformerV2).}
 \label{tab:si-cmu20-baselines}
-\begin{tabular}{lccccc}
+\begin{tabular}{lcccc}
 \toprule
-Case & Random(20) & Heuristic & AdsMind 1-Shot & AdsMind Full & Adsorb-Agent \\
+Case & Heuristic & AdsMind 1-Shot & AdsMind Full & Adsorb-Agent \\
 \midrule
-01 & $-3.632$ & $-3.637$ & $-3.631$ & $-3.632$ & $-0.764$ \\
-02 & $-4.762$ & $-4.777$ & $-4.343$ & $-4.769$ & $-1.265$ \\
-03 & $-3.323$ & $-3.350$ & $-3.352$ & $-3.352$ & $-0.380$ \\
-04 & $-3.294$ & $-3.470$ & $-2.285$ & $-2.285$ & $0.745$ \\
-05 & $-2.965$ & $-2.967$ & $-2.962$ & $-2.962$ & $-0.019$ \\
-06 & $-2.679$ & $-2.168$ & --- & $-2.165$ & $1.504$ \\
-07 & $-7.042$ & $-7.051$ & $-6.883$ & $-7.051$ & $-0.587$ \\
-08 & $-7.188$ & $-9.209$ & $-6.414$ & $-7.191$ & $-0.498$ \\
-09 & $-1.990$ & $-1.993$ & $-1.991$ & $-1.991$ & $0.990$ \\
-10 & $-2.715$ & $-2.721$ & $-2.718$ & $-2.718$ & $0.991$ \\
-11 & $-2.440$ & $-2.636$ & $-2.418$ & $-2.418$ & $0.814$ \\
-12 & $-2.360$ & $-2.361$ & $-2.081$ & $-2.351$ & $1.408$ \\
-13 & $-2.825$ & $-2.828$ & $-2.825$ & $-2.825$ & $0.440$ \\
-14 & $-3.623$ & $-3.613$ & $-3.617$ & $-3.617$ & $-0.208$ \\
-15 & $-3.001$ & $-3.226$ & $-2.964$ & $-3.258$ & $-2.338$ \\
-16 & $-6.737$ & $-5.376$ & $-4.663$ & $-4.663$ & $-2.761$ \\
-17 & $-3.171$ & $-3.265$ & $-3.066$ & $-3.241$ & $-4.561$ \\
-18 & $-3.213$ & $-3.241$ & $-2.519$ & $-3.129$ & $-4.616$ \\
-19 & $-3.567$ & $-4.696$ & $-4.013$ & $-4.045$ & $-5.922$ \\
-20 & $-13.422$ & $-11.756$ & $-11.652$ & $-11.653$ & $-3.454$ \\
+01 & $-3.637$ & $-3.631$ & $-3.632$ & $-0.764$ \\
+02 & $-4.777$ & $-4.343$ & $-4.769$ & $-1.265$ \\
+03 & $-3.350$ & $-3.352$ & $-3.352$ & $-0.380$ \\
+04 & $-3.470$ & $-2.285$ & $-2.285$ & $0.745$ \\
+05 & $-2.967$ & $-2.962$ & $-2.962$ & $-0.019$ \\
+06 & $-2.168$ & --- & $-2.165$ & $1.504$ \\
+07 & $-7.051$ & $-6.883$ & $-7.051$ & $-0.587$ \\
+08 & $-9.209$ & $-6.414$ & $-7.191$ & $-0.498$ \\
+09 & $-1.993$ & $-1.991$ & $-1.991$ & $0.990$ \\
+10 & $-2.721$ & $-2.718$ & $-2.718$ & $0.991$ \\
+11 & $-2.636$ & $-2.418$ & $-2.418$ & $0.814$ \\
+12 & $-2.361$ & $-2.081$ & $-2.351$ & $1.408$ \\
+13 & $-2.828$ & $-2.825$ & $-2.825$ & $0.440$ \\
+14 & $-3.613$ & $-3.617$ & $-3.617$ & $-0.208$ \\
+15 & $-3.226$ & $-2.964$ & $-3.258$ & $-2.338$ \\
+16 & $-5.376$ & $-4.663$ & $-4.663$ & $-2.761$ \\
+17 & $-3.265$ & $-3.066$ & $-3.241$ & $-4.561$ \\
+18 & $-3.241$ & $-2.519$ & $-3.129$ & $-4.616$ \\
+19 & $-4.696$ & $-4.013$ & $-4.045$ & $-5.922$ \\
+20 & $-11.756$ & $-11.652$ & $-11.653$ & $-3.454$ \\
 \midrule
-\multicolumn{6}{l}{Relaxations per case: Random = 20; Heuristic median = 56 (range 25--98); AdsMind Full mean = 4.18.} \\
-\multicolumn{6}{l}{Random vs.\ AdsMind Full at 0.01~eV: random lower 6/20, AdsMind lower 4/20, tie 10/20;} \\
-\multicolumn{6}{l}{mean $\Delta = -0.232$~eV.} \\
+\multicolumn{5}{l}{Relaxations per case: Heuristic median = 56 (range 25--98); AdsMind Full mean = 4.18.} \\
 \bottomrule
 \end{tabular}%
 \end{table}
 
-Table~\ref{tab:si-cmu20-baselines} provides the complete baseline comparison on CMU20 under matched MACE-MP-0 small force fields (FF). AdsMind Full (best-of-four-backends) succeeds on all 20 cases (100\%). AdsMind Full is deeper than Adsorb-Agent on 17/20 cases, with Adsorb-Agent deeper on three complex-adsorbate cases (17--19: OCHCH$_3$, ONN(CH$_3$)$_2$), consistent with broader enumeration benefiting multi-atom adsorbates. The Random ($N=20$) baseline achieves the deepest energy on 6/20 cases at $5\times$ the relaxation budget, while Heuristic enumeration (median 56 relaxations) wins on 3/20 after connectivity filtering. These comparisons establish AdsMind as the most reliable and deepest method at low relaxation budget, with broader enumeration providing marginal gains on complex adsorbates at substantially higher cost.
+Table~\ref{tab:si-cmu20-baselines} provides the complete baseline comparison on CMU20 under matched MACE-MP-0 small force fields (FF). AdsMind Full (best-of-four-backends) succeeds on all 20 cases (100\%). AdsMind Full is deeper than Adsorb-Agent on 17/20 cases, with Adsorb-Agent deeper on three complex-adsorbate cases (17--19: OCHCH$_3$, ONN(CH$_3$)$_2$), consistent with broader enumeration benefiting multi-atom adsorbates. Heuristic enumeration (median 56 relaxations) wins on 3/20 after connectivity filtering. These comparisons establish AdsMind as a reliable low-relaxation-budget method, while broader enumeration provides marginal depth gains on selected complex adsorbates at substantially higher cost.
 
 \subsection{Heuristic Enumeration with Connectivity Audit}
 
@@ -616,7 +614,7 @@ Table~\ref{tab:si-mace-sensitivity} quantifies the force-field sensitivity of Ad
 \begin{figure}[ht]
     \centering
     \includegraphics[width=\textwidth]{si_figures/si_figure_S1_combined.png}
-    \caption{\textbf{Performance analysis across CMU20 and force-field sensitivity.} \textbf{(a)}~Grouped bar chart comparing best adsorption energies (eV) across four methods on the 20 CMU20 cases. AdsMind Full (blue) consistently reaches lower energies than 1-Shot (orange), while Random ($N=20$) and Heuristic enumeration (median 56 sites) achieve deeper minima on select cases at $5$--$25\times$ higher computational cost. \textbf{(b)}~Cost--accuracy trade-off: scatter plot of mean token consumption per run versus mean best energy across four LLM backends (Gemini, GPT-5.4, Claude, Grok-4) and five ablation variants. The Full variant (lower right) achieves the best balance of low token cost and deep energy. \textbf{(c)}~MACE-MP-0 force-field sensitivity: left panel, scatter plot of AdsMind Full energies under MACE-MP-0 small (CPU, float32, no dispersion) vs.\ large (CUDA, float64, dispersion enabled) on 20 CMU20 cases; the dashed line is parity. Right panel, histogram of the energy shift ($\Delta E = E_{\mathrm{large}} - E_{\mathrm{small}}$). The mean absolute shift is 1.255~eV (0.834~eV excluding the anomalous case~20), confirming that within-protocol comparisons are self-consistent and that absolute energies are force-field-dependent.}
+    \caption{\textbf{Performance analysis across CMU20 and force-field sensitivity.} \textbf{(a)}~Grouped bar chart comparing best adsorption energies (eV) across the CMU20 methods retained for analysis. AdsMind Full (blue) consistently reaches lower energies than 1-Shot (orange), while Heuristic enumeration (median 56 sites) achieves deeper minima on select cases at substantially higher computational cost. \textbf{(b)}~Cost--accuracy trade-off: scatter plot of mean token consumption per run versus mean best energy across four LLM backends (Gemini, GPT-5.4, Claude, Grok-4) and five ablation variants. The Full variant (lower right) achieves the best balance of low token cost and deep energy. \textbf{(c)}~MACE-MP-0 force-field sensitivity: left panel, scatter plot of AdsMind Full energies under MACE-MP-0 small (CPU, float32, no dispersion) vs.\ large (CUDA, float64, dispersion enabled) on 20 CMU20 cases; the dashed line is parity. Right panel, histogram of the energy shift ($\Delta E = E_{\mathrm{large}} - E_{\mathrm{small}}$). The mean absolute shift is 1.255~eV (0.834~eV excluding the anomalous case~20), confirming that within-protocol comparisons are self-consistent and that absolute energies are force-field-dependent.}
     \label{fig:si-s1}
 \end{figure}
 
