@@ -1,0 +1,303 @@
+{
+  "case_id": "14",
+  "case_metadata": {
+    "case_id": "14",
+    "slab_file": "datasets/cmu20/14_CoPt_111.xyz",
+    "smiles": "[OH]",
+    "user_request": "Find the lowest-energy adsorption configuration for hydroxyl radical on the provided surface.",
+    "surface_family": "intermetallic",
+    "adsorbate_name": "OH",
+    "miller_index": "(111)",
+    "reaction_class": "ORR",
+    "ablation_candidate": "TRUE",
+    "notes": "Bimetallic ORR benchmark; DFT handoff target"
+  },
+  "status": "success",
+  "best_energy_eV": -2.65,
+  "iteration_count": 5,
+  "max_attempts": 5,
+  "final_site_type": "ontop",
+  "converged_tag": false,
+  "wall_clock_sec": 115.33544398471713,
+  "total_input_tokens": 18240,
+  "total_output_tokens": 7619,
+  "artifact_paths": {
+    "iteration_energy_curve": "/data/zongmin/workspace/AdsMind/research/results/basic_experiments/cmu20/adsmind/grok4_mace_mp0_small/no_executor/14/artifacts/iteration_energy_curve.png",
+    "iteration_energy_curve.png": "/data/zongmin/workspace/AdsMind/research/results/basic_experiments/cmu20/adsmind/grok4_mace_mp0_small/no_executor/14/artifacts/iteration_energy_curve.png",
+    "iteration_energy_curve_png": "/data/zongmin/workspace/AdsMind/research/results/basic_experiments/cmu20/adsmind/grok4_mace_mp0_small/no_executor/14/artifacts/iteration_energy_curve.png",
+    "summary_report": "/data/zongmin/workspace/AdsMind/research/results/basic_experiments/cmu20/adsmind/grok4_mace_mp0_small/no_executor/14/artifacts/summary_report.md",
+    "summary_report.md": "/data/zongmin/workspace/AdsMind/research/results/basic_experiments/cmu20/adsmind/grok4_mace_mp0_small/no_executor/14/artifacts/summary_report.md",
+    "summary_report_file": "/data/zongmin/workspace/AdsMind/research/results/basic_experiments/cmu20/adsmind/grok4_mace_mp0_small/no_executor/14/artifacts/summary_report.md"
+  },
+  "best_result": {
+    "most_stable_energy_eV": -2.65,
+    "analysis_json": {
+      "status": "success",
+      "most_stable_energy_eV": -2.65,
+      "is_dissociated": false,
+      "is_covalently_bound": true,
+      "bond_change_count": 0,
+      "energy_source": "llm_predicted",
+      "site_analysis": {
+        "planned_site_type": "ontop",
+        "actual_site_type": "ontop",
+        "is_chemical_slip": false,
+        "planned_symbols": [
+          "Co"
+        ],
+        "actual_symbols": [
+          "Co"
+        ],
+        "site_fingerprint": "llm-oracle::ontop::Co::0"
+      }
+    },
+    "plan": {
+      "reasoning": "No prior history. SMILES [OH] is hydroxyl radical with O (index 0) bearing the unpaired electron, so ReactiveSpecies via O. Start with most probable stable site: ontop Co (oxophilic metal).",
+      "adsorbate_type": "ReactiveSpecies",
+      "solution": {
+        "action": "continue",
+        "site_type": "ontop",
+        "surface_binding_atoms": [
+          "Co"
+        ],
+        "adsorbate_binding_indices": [
+          0
+        ],
+        "relax_top_n": 1,
+        "touch_sphere_size": 2,
+        "overlap_thr": 0.1,
+        "conformers_per_site_cap": 4
+      },
+      "predicted_relaxed_energy_eV": -2.65
+    },
+    "result_type": "Perfect"
+  },
+  "last_analysis": {
+    "status": "success",
+    "most_stable_energy_eV": -2.38,
+    "is_dissociated": false,
+    "is_covalently_bound": true,
+    "bond_change_count": 0,
+    "energy_source": "llm_predicted",
+    "site_analysis": {
+      "planned_site_type": "hollow",
+      "actual_site_type": "hollow",
+      "is_chemical_slip": false,
+      "planned_symbols": [
+        "Co",
+        "Co",
+        "Pt"
+      ],
+      "actual_symbols": [
+        "Co",
+        "Co",
+        "Pt"
+      ],
+      "site_fingerprint": "llm-oracle::hollow::Co-Co-Pt::0"
+    }
+  },
+  "attempt_records": [
+    {
+      "attempt_index": 1,
+      "plan": {
+        "reasoning": "No prior history. SMILES [OH] is hydroxyl radical with O (index 0) bearing the unpaired electron, so ReactiveSpecies via O. Start with most probable stable site: ontop Co (oxophilic metal).",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "ontop",
+          "surface_binding_atoms": [
+            "Co"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        },
+        "predicted_relaxed_energy_eV": -2.65
+      },
+      "plan_key": "ontop|Co|0|ReactiveSpecies|2.0",
+      "planner_reasoning": "No prior history. SMILES [OH] is hydroxyl radical with O (index 0) bearing the unpaired electron, so ReactiveSpecies via O. Start with most probable stable site: ontop Co (oxophilic metal).",
+      "tool_logs": [
+        "LLM-as-oracle mode: executor bypassed; predicted energy used in place of MACE relaxation.",
+        "Success: predicted_relaxed_energy_eV = -2.6500 eV."
+      ],
+      "status": "success",
+      "most_stable_energy_eV": -2.65,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": false,
+      "planned_site_type": "ontop",
+      "actual_site_type": "ontop",
+      "energy_source": "llm_predicted",
+      "history_entry": "【✅ Perfect Adsorption】 ontop @ ['Co'] (Index [0]) -> Site: ontop (Co) [🌟 New Best] | E=-2.650 eV"
+    },
+    {
+      "attempt_index": 2,
+      "plan": {
+        "reasoning": "History contains only one successful ontop-Co adsorption (E=-2.650 eV). SMILES [OH] is a radical with unpaired electron on O (index 0, radical_electrons=1), so ReactiveSpecies is required. To explore a new chemically distinct environment on the alloy surface, the next logical high-symmetry site is ontop-Pt. This satisfies all site-alignment rules (single binding index) and has not been tested yet.",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "ontop",
+          "surface_binding_atoms": [
+            "Pt"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        },
+        "predicted_relaxed_energy_eV": -2.31
+      },
+      "plan_key": "ontop|Pt|0|ReactiveSpecies|2.0",
+      "planner_reasoning": "History contains only one successful ontop-Co adsorption (E=-2.650 eV). SMILES [OH] is a radical with unpaired electron on O (index 0, radical_electrons=1), so ReactiveSpecies is required. To explore a new chemically distinct environment on the alloy surface, the next logical high-symmetry site is ontop-Pt. This satisfies all site-alignment rules (single binding index) and has not been tested yet.",
+      "tool_logs": [
+        "LLM-as-oracle mode: executor bypassed; predicted energy used in place of MACE relaxation.",
+        "Success: predicted_relaxed_energy_eV = -2.3100 eV."
+      ],
+      "status": "success",
+      "most_stable_energy_eV": -2.31,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": false,
+      "planned_site_type": "ontop",
+      "actual_site_type": "ontop",
+      "energy_source": "llm_predicted",
+      "history_entry": "【✅ Perfect Adsorption】 ontop @ ['Pt'] (Index [0]) -> Site: ontop (Pt) | E=-2.310 eV"
+    },
+    {
+      "attempt_index": 3,
+      "plan": {
+        "reasoning": "History shows ontop-Co (-2.650 eV, new best) and ontop-Pt (-2.310 eV) already tested successfully with no slips or reactivity changes. [OH] is a radical (O index 0 has 1 unpaired electron), so ReactiveSpecies via O is required. Only ontop sites explored; to locate any lower-energy state we next test the chemically plausible Co-Co bridge while obeying canonical site naming. No convergence tag present, so action remains continue.",
+        "adsorbate_type": "ReactiveSpecies",
+        "predicted_relaxed_energy_eV": -2.4,
+        "solution": {
+          "action": "continue",
+          "site_type": "bridge",
+          "surface_binding_atoms": [
+            "Co",
+            "Co"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "bridge|Co,Co|0|ReactiveSpecies|2.0",
+      "planner_reasoning": "History shows ontop-Co (-2.650 eV, new best) and ontop-Pt (-2.310 eV) already tested successfully with no slips or reactivity changes. [OH] is a radical (O index 0 has 1 unpaired electron), so ReactiveSpecies via O is required. Only ontop sites explored; to locate any lower-energy state we next test the chemically plausible Co-Co bridge while obeying canonical site naming. No convergence tag present, so action remains continue.",
+      "tool_logs": [
+        "LLM-as-oracle mode: executor bypassed; predicted energy used in place of MACE relaxation.",
+        "Success: predicted_relaxed_energy_eV = -2.4000 eV."
+      ],
+      "status": "success",
+      "most_stable_energy_eV": -2.4,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": false,
+      "planned_site_type": "bridge",
+      "actual_site_type": "bridge",
+      "energy_source": "llm_predicted",
+      "history_entry": "【✅ Perfect Adsorption】 bridge @ ['Co', 'Co'] (Index [0]) -> Site: bridge (Co,Co) | E=-2.400 eV"
+    },
+    {
+      "attempt_index": 4,
+      "plan": {
+        "reasoning": "History tested ontop-Co (best, -2.650 eV), ontop-Pt (-2.310 eV) and bridge-CoCo (-2.400 eV). All succeeded without dissociation. SMILES [OH] shows O (index 0) with radical_electrons=1, confirming ReactiveSpecies binding via O. Untested chemically distinct bridge Co-Pt remains available per site list; propose it as next systematic trial. No convergence or slip signals observed.",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "bridge",
+          "surface_binding_atoms": [
+            "Co",
+            "Pt"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        },
+        "predicted_relaxed_energy_eV": -2.52
+      },
+      "plan_key": "bridge|Co,Pt|0|ReactiveSpecies|2.0",
+      "planner_reasoning": "History tested ontop-Co (best, -2.650 eV), ontop-Pt (-2.310 eV) and bridge-CoCo (-2.400 eV). All succeeded without dissociation. SMILES [OH] shows O (index 0) with radical_electrons=1, confirming ReactiveSpecies binding via O. Untested chemically distinct bridge Co-Pt remains available per site list; propose it as next systematic trial. No convergence or slip signals observed.",
+      "tool_logs": [
+        "LLM-as-oracle mode: executor bypassed; predicted energy used in place of MACE relaxation.",
+        "Success: predicted_relaxed_energy_eV = -2.5200 eV."
+      ],
+      "status": "success",
+      "most_stable_energy_eV": -2.52,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": false,
+      "planned_site_type": "bridge",
+      "actual_site_type": "bridge",
+      "energy_source": "llm_predicted",
+      "history_entry": "【✅ Perfect Adsorption】 bridge @ ['Co', 'Pt'] (Index [0]) -> Site: bridge (Co,Pt) | E=-2.520 eV"
+    },
+    {
+      "attempt_index": 5,
+      "plan": {
+        "reasoning": "History shows ontop-Co is current best at -2.650 eV; all ontop/bridge combinations tested. Hollow sites (Co-Co-Pt, Co-Pt-Pt) remain unexplored per available site list. OH radical binds via O (index 0, radical_electrons=1) so ReactiveSpecies. Propose hollow Co-Co-Pt to check for possible lower energy.",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "hollow",
+          "surface_binding_atoms": [
+            "Co",
+            "Co",
+            "Pt"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        },
+        "predicted_relaxed_energy_eV": -2.38
+      },
+      "plan_key": "hollow|Co,Co,Pt|0|ReactiveSpecies|2.0",
+      "planner_reasoning": "History shows ontop-Co is current best at -2.650 eV; all ontop/bridge combinations tested. Hollow sites (Co-Co-Pt, Co-Pt-Pt) remain unexplored per available site list. OH radical binds via O (index 0, radical_electrons=1) so ReactiveSpecies. Propose hollow Co-Co-Pt to check for possible lower energy.",
+      "tool_logs": [
+        "LLM-as-oracle mode: executor bypassed; predicted energy used in place of MACE relaxation.",
+        "Success: predicted_relaxed_energy_eV = -2.3800 eV."
+      ],
+      "status": "success",
+      "most_stable_energy_eV": -2.38,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": false,
+      "planned_site_type": "hollow",
+      "actual_site_type": "hollow",
+      "energy_source": "llm_predicted",
+      "history_entry": "【✅ Perfect Adsorption】 hollow @ ['Co', 'Co', 'Pt'] (Index [0]) -> Site: hollow (Co,Co,Pt) | E=-2.380 eV"
+    }
+  ],
+  "history": [
+    "【✅ Perfect Adsorption】 ontop @ ['Co'] (Index [0]) -> Site: ontop (Co) [🌟 New Best] | E=-2.650 eV",
+    "【✅ Perfect Adsorption】 ontop @ ['Pt'] (Index [0]) -> Site: ontop (Pt) | E=-2.310 eV",
+    "【✅ Perfect Adsorption】 bridge @ ['Co', 'Co'] (Index [0]) -> Site: bridge (Co,Co) | E=-2.400 eV",
+    "【✅ Perfect Adsorption】 bridge @ ['Co', 'Pt'] (Index [0]) -> Site: bridge (Co,Pt) | E=-2.520 eV",
+    "【✅ Perfect Adsorption】 hollow @ ['Co', 'Co', 'Pt'] (Index [0]) -> Site: hollow (Co,Co,Pt) | E=-2.380 eV"
+  ],
+  "error": null,
+  "perfect_count": 5,
+  "dissociation_count": 0,
+  "rearrangement_count": 0,
+  "calc_failure_count": 0,
+  "chemical_slip_count": 0
+}

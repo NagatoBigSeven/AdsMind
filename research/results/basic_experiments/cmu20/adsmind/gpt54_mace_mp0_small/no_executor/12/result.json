@@ -1,0 +1,226 @@
+{
+  "case_id": "12",
+  "case_metadata": {
+    "case_id": "12",
+    "slab_file": "datasets/cmu20/12_Au_111.xyz",
+    "smiles": "[OH]",
+    "user_request": "Find the lowest-energy adsorption configuration for hydroxyl radical on the provided surface.",
+    "surface_family": "monometallic",
+    "adsorbate_name": "OH",
+    "miller_index": "(111)",
+    "reaction_class": "ORR",
+    "ablation_candidate": "FALSE",
+    "notes": "Prior runs labeled all final sites as desorbed"
+  },
+  "status": "success",
+  "best_energy_eV": -0.65,
+  "iteration_count": 3,
+  "max_attempts": 5,
+  "final_site_type": "ontop",
+  "converged_tag": false,
+  "wall_clock_sec": 67.67413510754704,
+  "total_input_tokens": 14462,
+  "total_output_tokens": 3976,
+  "artifact_paths": {
+    "iteration_energy_curve": "/data/zongmin/workspace/AdsMind/research/results/basic_experiments/cmu20/adsmind/gpt54_mace_mp0_small/no_executor/12/artifacts/iteration_energy_curve.png",
+    "iteration_energy_curve.png": "/data/zongmin/workspace/AdsMind/research/results/basic_experiments/cmu20/adsmind/gpt54_mace_mp0_small/no_executor/12/artifacts/iteration_energy_curve.png",
+    "iteration_energy_curve_png": "/data/zongmin/workspace/AdsMind/research/results/basic_experiments/cmu20/adsmind/gpt54_mace_mp0_small/no_executor/12/artifacts/iteration_energy_curve.png",
+    "summary_report": "/data/zongmin/workspace/AdsMind/research/results/basic_experiments/cmu20/adsmind/gpt54_mace_mp0_small/no_executor/12/artifacts/summary_report.md",
+    "summary_report.md": "/data/zongmin/workspace/AdsMind/research/results/basic_experiments/cmu20/adsmind/gpt54_mace_mp0_small/no_executor/12/artifacts/summary_report.md",
+    "summary_report_file": "/data/zongmin/workspace/AdsMind/research/results/basic_experiments/cmu20/adsmind/gpt54_mace_mp0_small/no_executor/12/artifacts/summary_report.md"
+  },
+  "best_result": {
+    "most_stable_energy_eV": -0.65,
+    "analysis_json": {
+      "status": "success",
+      "most_stable_energy_eV": -0.65,
+      "is_dissociated": false,
+      "is_covalently_bound": true,
+      "bond_change_count": 0,
+      "energy_source": "llm_predicted",
+      "site_analysis": {
+        "planned_site_type": "ontop",
+        "actual_site_type": "ontop",
+        "is_chemical_slip": false,
+        "planned_symbols": [
+          "Au"
+        ],
+        "actual_symbols": [
+          "Au"
+        ],
+        "site_fingerprint": "llm-oracle::ontop::Au::0"
+      }
+    },
+    "plan": {
+      "reasoning": "No prior attempts exist, so I should propose the best physically motivated initial adsorption plan. The adsorbate SMILES is [OH], i.e. hydroxyl radical. The provided atom list contains one heavy atom: O at index 0, hybridization SP3, radical_electrons 1, formal charge 0. This confirms the binding atom I plan to use, O(0), genuinely carries an unpaired electron, so ReactiveSpecies is appropriate. On Au(111), OH generally binds through O. Because Au is relatively noble and weakly oxophilic, the most plausible low-energy intact adsorption motif is O-down at an ontop Au site rather than a strongly multi-coordinated hollow state. Hollow or bridge can be tested later if needed, but ontop is the best first systematic guess for the lowest-energy chemisorbed intact OH on Au(111). The user wants the lowest-energy adsorption configuration for hydroxyl radical on this surface, so I target O-bound intact OH with the O radical center coordinated to one surface Au atom. I predict the relaxed MACE-MP-0 small adsorption energy for this configuration to be moderately weakly exothermic, around -0.65 eV.",
+      "adsorbate_type": "ReactiveSpecies",
+      "solution": {
+        "action": "continue",
+        "site_type": "ontop",
+        "surface_binding_atoms": [
+          "Au"
+        ],
+        "adsorbate_binding_indices": [
+          0
+        ],
+        "relax_top_n": 1,
+        "touch_sphere_size": 2,
+        "overlap_thr": 0.1,
+        "conformers_per_site_cap": 4
+      },
+      "predicted_relaxed_energy_eV": -0.65
+    },
+    "result_type": "Perfect"
+  },
+  "last_analysis": {
+    "status": "success",
+    "most_stable_energy_eV": -0.45,
+    "is_dissociated": false,
+    "is_covalently_bound": true,
+    "bond_change_count": 0,
+    "energy_source": "llm_predicted",
+    "site_analysis": {
+      "planned_site_type": "hollow",
+      "actual_site_type": "hollow",
+      "is_chemical_slip": false,
+      "planned_symbols": [
+        "Au",
+        "Au",
+        "Au"
+      ],
+      "actual_symbols": [
+        "Au",
+        "Au",
+        "Au"
+      ],
+      "site_fingerprint": "llm-oracle::hollow::Au-Au-Au::0"
+    }
+  },
+  "attempt_records": [
+    {
+      "attempt_index": 1,
+      "plan": {
+        "reasoning": "No prior attempts exist, so I should propose the best physically motivated initial adsorption plan. The adsorbate SMILES is [OH], i.e. hydroxyl radical. The provided atom list contains one heavy atom: O at index 0, hybridization SP3, radical_electrons 1, formal charge 0. This confirms the binding atom I plan to use, O(0), genuinely carries an unpaired electron, so ReactiveSpecies is appropriate. On Au(111), OH generally binds through O. Because Au is relatively noble and weakly oxophilic, the most plausible low-energy intact adsorption motif is O-down at an ontop Au site rather than a strongly multi-coordinated hollow state. Hollow or bridge can be tested later if needed, but ontop is the best first systematic guess for the lowest-energy chemisorbed intact OH on Au(111). The user wants the lowest-energy adsorption configuration for hydroxyl radical on this surface, so I target O-bound intact OH with the O radical center coordinated to one surface Au atom. I predict the relaxed MACE-MP-0 small adsorption energy for this configuration to be moderately weakly exothermic, around -0.65 eV.",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "ontop",
+          "surface_binding_atoms": [
+            "Au"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        },
+        "predicted_relaxed_energy_eV": -0.65
+      },
+      "plan_key": "ontop|Au|0|ReactiveSpecies|2.0",
+      "planner_reasoning": "No prior attempts exist, so I should propose the best physically motivated initial adsorption plan. The adsorbate SMILES is [OH], i.e. hydroxyl radical. The provided atom list contains one heavy atom: O at index 0, hybridization SP3, radical_electrons 1, formal charge 0. This confirms the binding atom I plan to use, O(0), genuinely carries an unpaired electron, so ReactiveSpecies is appropriate. On Au(111), OH generally binds through O. Because Au is relatively noble and weakly oxophilic, the most plausible low-energy intact adsorption motif is O-down at an ontop Au site rather than a strongly multi-coordinated hollow state. Hollow or bridge can be tested later if needed, but ontop is the best first systematic guess for the lowest-energy chemisorbed intact OH on Au(111). The user wants the lowest-energy adsorption configuration for hydroxyl radical on this surface, so I target O-bound intact OH with the O radical center coordinated to one surface Au atom. I predict the relaxed MACE-MP-0 small adsorption energy for this configuration to be moderately weakly exothermic, around -0.65 eV.",
+      "tool_logs": [
+        "LLM-as-oracle mode: executor bypassed; predicted energy used in place of MACE relaxation.",
+        "Success: predicted_relaxed_energy_eV = -0.6500 eV."
+      ],
+      "status": "success",
+      "most_stable_energy_eV": -0.65,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": false,
+      "planned_site_type": "ontop",
+      "actual_site_type": "ontop",
+      "energy_source": "llm_predicted",
+      "history_entry": "【✅ Perfect Adsorption】 ontop @ ['Au'] (Index [0]) -> Site: ontop (Au) [🌟 New Best] | E=-0.650 eV"
+    },
+    {
+      "attempt_index": 2,
+      "plan": {
+        "reasoning": "SMILES [OH] corresponds to hydroxyl radical, not closed-shell water-derived hydroxide. The provided atom list contains a single heavy atom O at index 0 with SP3 hybridization and 1 radical electron, so ReactiveSpecies is appropriate and the binding atom must be O index 0. History shows one successful plan only: O-bound ontop on Au with predicted relaxed adsorption energy -0.650 eV, currently the best. No bridge or hollow trial has been attempted yet, and there is no convergence or slip signal. For OH on Au(111), atop O-binding is often favorable but bridge/hollow can still be competitive or metastable, so a systematic search should next test a distinct high-symmetry site rather than terminate. I will choose bridge as the next new plan because it is chemically plausible for an O-centered radical and is distinct from the tested ontop configuration. This satisfies the requirement to propose a completely new plan. My best estimate is that MACE-MP-0 small would relax this bridge-started OH/Au(111) configuration to a weaker adsorption than the known atop best, around -0.520 eV.",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "bridge",
+          "surface_binding_atoms": [
+            "Au",
+            "Au"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        },
+        "predicted_relaxed_energy_eV": -0.52
+      },
+      "plan_key": "bridge|Au,Au|0|ReactiveSpecies|2.0",
+      "planner_reasoning": "SMILES [OH] corresponds to hydroxyl radical, not closed-shell water-derived hydroxide. The provided atom list contains a single heavy atom O at index 0 with SP3 hybridization and 1 radical electron, so ReactiveSpecies is appropriate and the binding atom must be O index 0. History shows one successful plan only: O-bound ontop on Au with predicted relaxed adsorption energy -0.650 eV, currently the best. No bridge or hollow trial has been attempted yet, and there is no convergence or slip signal. For OH on Au(111), atop O-binding is often favorable but bridge/hollow can still be competitive or metastable, so a systematic search should next test a distinct high-symmetry site rather than terminate. I will choose bridge as the next new plan because it is chemically plausible for an O-centered radical and is distinct from the tested ontop configuration. This satisfies the requirement to propose a completely new plan. My best estimate is that MACE-MP-0 small would relax this bridge-started OH/Au(111) configuration to a weaker adsorption than the known atop best, around -0.520 eV.",
+      "tool_logs": [
+        "LLM-as-oracle mode: executor bypassed; predicted energy used in place of MACE relaxation.",
+        "Success: predicted_relaxed_energy_eV = -0.5200 eV."
+      ],
+      "status": "success",
+      "most_stable_energy_eV": -0.52,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": false,
+      "planned_site_type": "bridge",
+      "actual_site_type": "bridge",
+      "energy_source": "llm_predicted",
+      "history_entry": "【✅ Perfect Adsorption】 bridge @ ['Au', 'Au'] (Index [0]) -> Site: bridge (Au,Au) | E=-0.520 eV"
+    },
+    {
+      "attempt_index": 3,
+      "plan": {
+        "reasoning": "SMILES consistency check: [OH] is the hydroxyl radical, not closed-shell water or hydroxide. The provided RDKit atom list contains one heavy atom, O at index 0, hybridization SP3, with 1 radical electron. Therefore this must be treated as ReactiveSpecies, and binding through O index 0 is chemically consistent with the radical center. History analysis: two high-symmetry sites have already been tested successfully on Au(111): ontop on Au with predicted relaxed energy -0.650 eV, which is currently the best, and bridge on Au-Au with -0.520 eV. No failures, slips, or convergence-to-known-best tags are reported. The only remaining major high-symmetry site from the available list is hollow (Au-Au-Au), so the next systematic test should be hollow. For OH on coinage-metal Au(111), O-centered adsorption commonly prefers low coordination relative to hollow because Au binds oxygen-containing radicals only moderately; thus hollow is plausible but likely weaker than ontop here. Still, it is the only untested canonical site and should be checked before termination. User intent is to identify the lowest-energy adsorption configuration for hydroxyl radical on the given Au surface by systematic site exploration. Surface analysis: allowed sites are ontop, bridge, and hollow, all on Au ensembles. Adsorbate binding indices must use the provided index list, so O index 0 is selected. Predicted MACE-MP-0 small relaxed adsorption energy for OH initialized at hollow is estimated to be slightly less favorable than bridge on Au(111), around -0.45 eV.",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "hollow",
+          "surface_binding_atoms": [
+            "Au",
+            "Au",
+            "Au"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        },
+        "predicted_relaxed_energy_eV": -0.45
+      },
+      "plan_key": "hollow|Au,Au,Au|0|ReactiveSpecies|2.0",
+      "planner_reasoning": "SMILES consistency check: [OH] is the hydroxyl radical, not closed-shell water or hydroxide. The provided RDKit atom list contains one heavy atom, O at index 0, hybridization SP3, with 1 radical electron. Therefore this must be treated as ReactiveSpecies, and binding through O index 0 is chemically consistent with the radical center. History analysis: two high-symmetry sites have already been tested successfully on Au(111): ontop on Au with predicted relaxed energy -0.650 eV, which is currently the best, and bridge on Au-Au with -0.520 eV. No failures, slips, or convergence-to-known-best tags are reported. The only remaining major high-symmetry site from the available list is hollow (Au-Au-Au), so the next systematic test should be hollow. For OH on coinage-metal Au(111), O-centered adsorption commonly prefers low coordination relative to hollow because Au binds oxygen-containing radicals only moderately; thus hollow is plausible but likely weaker than ontop here. Still, it is the only untested canonical site and should be checked before termination. User intent is to identify the lowest-energy adsorption configuration for hydroxyl radical on the given Au surface by systematic site exploration. Surface analysis: allowed sites are ontop, bridge, and hollow, all on Au ensembles. Adsorbate binding indices must use the provided index list, so O index 0 is selected. Predicted MACE-MP-0 small relaxed adsorption energy for OH initialized at hollow is estimated to be slightly less favorable than bridge on Au(111), around -0.45 eV.",
+      "tool_logs": [
+        "LLM-as-oracle mode: executor bypassed; predicted energy used in place of MACE relaxation.",
+        "Success: predicted_relaxed_energy_eV = -0.4500 eV."
+      ],
+      "status": "success",
+      "most_stable_energy_eV": -0.45,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": false,
+      "planned_site_type": "hollow",
+      "actual_site_type": "hollow",
+      "energy_source": "llm_predicted",
+      "history_entry": "【✅ Perfect Adsorption】 hollow @ ['Au', 'Au', 'Au'] (Index [0]) -> Site: hollow (Au,Au,Au) | E=-0.450 eV"
+    }
+  ],
+  "history": [
+    "【✅ Perfect Adsorption】 ontop @ ['Au'] (Index [0]) -> Site: ontop (Au) [🌟 New Best] | E=-0.650 eV",
+    "【✅ Perfect Adsorption】 bridge @ ['Au', 'Au'] (Index [0]) -> Site: bridge (Au,Au) | E=-0.520 eV",
+    "【✅ Perfect Adsorption】 hollow @ ['Au', 'Au', 'Au'] (Index [0]) -> Site: hollow (Au,Au,Au) | E=-0.450 eV"
+  ],
+  "error": null,
+  "perfect_count": 3,
+  "dissociation_count": 0,
+  "rearrangement_count": 0,
+  "calc_failure_count": 0,
+  "chemical_slip_count": 0
+}

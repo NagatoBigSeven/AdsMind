@@ -1,0 +1,261 @@
+{
+  "case_id": "10",
+  "case_metadata": {
+    "case_id": "10",
+    "slab_file": "datasets/cmu20/10_Pt_100.xyz",
+    "smiles": "[OH]",
+    "user_request": "Find the lowest-energy adsorption configuration for hydroxyl radical on the provided surface.",
+    "surface_family": "monometallic",
+    "adsorbate_name": "OH",
+    "miller_index": "(100)",
+    "reaction_class": "ORR",
+    "ablation_candidate": "FALSE",
+    "notes": "Facet sensitivity test; DFT handoff target"
+  },
+  "status": "success",
+  "best_energy_eV": -2.05,
+  "iteration_count": 4,
+  "max_attempts": 5,
+  "final_site_type": "ontop",
+  "converged_tag": false,
+  "wall_clock_sec": 86.9957166314125,
+  "total_input_tokens": 18241,
+  "total_output_tokens": 4575,
+  "artifact_paths": {
+    "iteration_energy_curve": "/data/zongmin/workspace/AdsMind/research/results/basic_experiments/cmu20/adsmind/gpt54_mace_mp0_small/no_executor/10/artifacts/iteration_energy_curve.png",
+    "iteration_energy_curve.png": "/data/zongmin/workspace/AdsMind/research/results/basic_experiments/cmu20/adsmind/gpt54_mace_mp0_small/no_executor/10/artifacts/iteration_energy_curve.png",
+    "iteration_energy_curve_png": "/data/zongmin/workspace/AdsMind/research/results/basic_experiments/cmu20/adsmind/gpt54_mace_mp0_small/no_executor/10/artifacts/iteration_energy_curve.png",
+    "summary_report": "/data/zongmin/workspace/AdsMind/research/results/basic_experiments/cmu20/adsmind/gpt54_mace_mp0_small/no_executor/10/artifacts/summary_report.md",
+    "summary_report.md": "/data/zongmin/workspace/AdsMind/research/results/basic_experiments/cmu20/adsmind/gpt54_mace_mp0_small/no_executor/10/artifacts/summary_report.md",
+    "summary_report_file": "/data/zongmin/workspace/AdsMind/research/results/basic_experiments/cmu20/adsmind/gpt54_mace_mp0_small/no_executor/10/artifacts/summary_report.md"
+  },
+  "best_result": {
+    "most_stable_energy_eV": -2.05,
+    "analysis_json": {
+      "status": "success",
+      "most_stable_energy_eV": -2.05,
+      "is_dissociated": false,
+      "is_covalently_bound": true,
+      "bond_change_count": 0,
+      "energy_source": "llm_predicted",
+      "site_analysis": {
+        "planned_site_type": "ontop",
+        "actual_site_type": "ontop",
+        "is_chemical_slip": false,
+        "planned_symbols": [
+          "Pt"
+        ],
+        "actual_symbols": [
+          "Pt"
+        ],
+        "site_fingerprint": "llm-oracle::ontop::Pt::0"
+      }
+    },
+    "plan": {
+      "reasoning": "No prior attempts exist, so I should propose the best physically motivated initial adsorption plan. The adsorbate SMILES is [OH], i.e. hydroxyl radical. The provided atom list contains only heavy atoms and shows O at index 0 with SP3 hybridization and 1 radical electron, so the radical character is consistent and O index 0 is the correct reactive binding atom. Because the binding atom has an unpaired electron, this should be treated as ReactiveSpecies, not Molecule. On Pt surfaces, OH typically adsorbs strongly through O in an upright geometry with O bound to a single Pt atom; for close-packed and square Pt facets, O/OH often prefers ontop or bridge depending on coverage and model details, but hydroxyl commonly relaxes to an O-ontop motif on Pt(100), while higher coordination hollow sites can be less favorable for intact OH compared with atomic O. Since there is no history yet, the most reasonable lowest-energy initial guess is O-bound ontop on Pt. Surface composition is uniform Pt, so surface_binding_atoms should be ['Pt']. This respects the site rules: ontop with one adsorbate binding index. Predicted MACE-MP-0 small relaxed adsorption energy for OH on Pt(100) is moderately strong and I estimate about -2.05 eV.",
+      "adsorbate_type": "ReactiveSpecies",
+      "solution": {
+        "action": "continue",
+        "site_type": "ontop",
+        "surface_binding_atoms": [
+          "Pt"
+        ],
+        "adsorbate_binding_indices": [
+          0
+        ],
+        "relax_top_n": 1,
+        "touch_sphere_size": 2,
+        "overlap_thr": 0.1,
+        "conformers_per_site_cap": 4
+      },
+      "predicted_relaxed_energy_eV": -2.05
+    },
+    "result_type": "Perfect"
+  },
+  "last_analysis": {
+    "status": "success",
+    "most_stable_energy_eV": -1.82,
+    "is_dissociated": false,
+    "is_covalently_bound": true,
+    "bond_change_count": 0,
+    "energy_source": "llm_predicted",
+    "site_analysis": {
+      "planned_site_type": "hollow",
+      "actual_site_type": "hollow",
+      "is_chemical_slip": false,
+      "planned_symbols": [
+        "Pt",
+        "Pt",
+        "Pt"
+      ],
+      "actual_symbols": [
+        "Pt",
+        "Pt",
+        "Pt"
+      ],
+      "site_fingerprint": "llm-oracle::hollow::Pt-Pt-Pt::0"
+    }
+  },
+  "attempt_records": [
+    {
+      "attempt_index": 1,
+      "plan": {
+        "reasoning": "No prior attempts exist, so I should propose the best physically motivated initial adsorption plan. The adsorbate SMILES is [OH], i.e. hydroxyl radical. The provided atom list contains only heavy atoms and shows O at index 0 with SP3 hybridization and 1 radical electron, so the radical character is consistent and O index 0 is the correct reactive binding atom. Because the binding atom has an unpaired electron, this should be treated as ReactiveSpecies, not Molecule. On Pt surfaces, OH typically adsorbs strongly through O in an upright geometry with O bound to a single Pt atom; for close-packed and square Pt facets, O/OH often prefers ontop or bridge depending on coverage and model details, but hydroxyl commonly relaxes to an O-ontop motif on Pt(100), while higher coordination hollow sites can be less favorable for intact OH compared with atomic O. Since there is no history yet, the most reasonable lowest-energy initial guess is O-bound ontop on Pt. Surface composition is uniform Pt, so surface_binding_atoms should be ['Pt']. This respects the site rules: ontop with one adsorbate binding index. Predicted MACE-MP-0 small relaxed adsorption energy for OH on Pt(100) is moderately strong and I estimate about -2.05 eV.",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "ontop",
+          "surface_binding_atoms": [
+            "Pt"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        },
+        "predicted_relaxed_energy_eV": -2.05
+      },
+      "plan_key": "ontop|Pt|0|ReactiveSpecies|2.0",
+      "planner_reasoning": "No prior attempts exist, so I should propose the best physically motivated initial adsorption plan. The adsorbate SMILES is [OH], i.e. hydroxyl radical. The provided atom list contains only heavy atoms and shows O at index 0 with SP3 hybridization and 1 radical electron, so the radical character is consistent and O index 0 is the correct reactive binding atom. Because the binding atom has an unpaired electron, this should be treated as ReactiveSpecies, not Molecule. On Pt surfaces, OH typically adsorbs strongly through O in an upright geometry with O bound to a single Pt atom; for close-packed and square Pt facets, O/OH often prefers ontop or bridge depending on coverage and model details, but hydroxyl commonly relaxes to an O-ontop motif on Pt(100), while higher coordination hollow sites can be less favorable for intact OH compared with atomic O. Since there is no history yet, the most reasonable lowest-energy initial guess is O-bound ontop on Pt. Surface composition is uniform Pt, so surface_binding_atoms should be ['Pt']. This respects the site rules: ontop with one adsorbate binding index. Predicted MACE-MP-0 small relaxed adsorption energy for OH on Pt(100) is moderately strong and I estimate about -2.05 eV.",
+      "tool_logs": [
+        "LLM-as-oracle mode: executor bypassed; predicted energy used in place of MACE relaxation.",
+        "Success: predicted_relaxed_energy_eV = -2.0500 eV."
+      ],
+      "status": "success",
+      "most_stable_energy_eV": -2.05,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": false,
+      "planned_site_type": "ontop",
+      "actual_site_type": "ontop",
+      "energy_source": "llm_predicted",
+      "history_entry": "【✅ Perfect Adsorption】 ontop @ ['Pt'] (Index [0]) -> Site: ontop (Pt) [🌟 New Best] | E=-2.050 eV"
+    },
+    {
+      "attempt_index": 2,
+      "plan": {
+        "reasoning": "SMILES consistency check: the adsorbate is [OH], i.e. hydroxyl radical. The provided atom list contains one heavy atom, O at index 0, with SP3 hybridization and 1 radical electron. Therefore adsorption should be treated as ReactiveSpecies, and binding through O index 0 is chemically consistent. History analysis: only one successful plan has been tested so far, namely ontop on Pt with O bound through index 0, giving E = -2.050 eV and marked as the current best. No failures, no slips, no convergence-to-known-best tags, and no hollow or bridge trials have yet been explored. For OH on Pt(100), ontop O-bound OH is often very favorable, but bridge or hollow can still be competitive depending on the force field and local relaxation. Since the goal is systematic search for the lowest-energy configuration and major high-symmetry sites are not exhausted, the next physically reasonable new plan is to test a hollow adsorption motif. On Pt(100), the fourfold hollow is an important distinct site, and under the allowed canonical naming this should be encoded as site_type = hollow with Pt-Pt-Pt-Pt surface atoms. Core intent: find the lowest-energy adsorption configuration of hydroxyl on the supplied Pt surface. I therefore propose O-bound OH at a hollow site as the next unexplored high-symmetry configuration. Based on the prior ontop result and typical OH/Pt(100) energetics, I estimate this hollow-initialized structure would relax to a weaker adsorption state than the known ontop best, with predicted MACE-MP-0 small relaxed adsorption energy around -1.78.",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "hollow",
+          "surface_binding_atoms": [
+            "Pt",
+            "Pt",
+            "Pt",
+            "Pt"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4,
+          "predicted_relaxed_energy_eV": -1.78
+        }
+      },
+      "plan_key": "hollow|Pt,Pt,Pt,Pt|0|ReactiveSpecies|2.0",
+      "planner_reasoning": "SMILES consistency check: the adsorbate is [OH], i.e. hydroxyl radical. The provided atom list contains one heavy atom, O at index 0, with SP3 hybridization and 1 radical electron. Therefore adsorption should be treated as ReactiveSpecies, and binding through O index 0 is chemically consistent. History analysis: only one successful plan has been tested so far, namely ontop on Pt with O bound through index 0, giving E = -2.050 eV and marked as the current best. No failures, no slips, no convergence-to-known-best tags, and no hollow or bridge trials have yet been explored. For OH on Pt(100), ontop O-bound OH is often very favorable, but bridge or hollow can still be competitive depending on the force field and local relaxation. Since the goal is systematic search for the lowest-energy configuration and major high-symmetry sites are not exhausted, the next physically reasonable new plan is to test a hollow adsorption motif. On Pt(100), the fourfold hollow is an important distinct site, and under the allowed canonical naming this should be encoded as site_type = hollow with Pt-Pt-Pt-Pt surface atoms. Core intent: find the lowest-energy adsorption configuration of hydroxyl on the supplied Pt surface. I therefore propose O-bound OH at a hollow site as the next unexplored high-symmetry configuration. Based on the prior ontop result and typical OH/Pt(100) energetics, I estimate this hollow-initialized structure would relax to a weaker adsorption state than the known ontop best, with predicted MACE-MP-0 small relaxed adsorption energy around -1.78.",
+      "tool_logs": [
+        "LLM-as-oracle mode: executor bypassed; predicted energy used in place of MACE relaxation.",
+        "LLM oracle Failed: planner output missing or invalid 'predicted_relaxed_energy_eV' (got None)."
+      ],
+      "status": "error",
+      "message": "LLM oracle Failed: planner output missing or invalid 'predicted_relaxed_energy_eV' (got None).",
+      "energy_source": "llm_predicted"
+    },
+    {
+      "attempt_index": 3,
+      "plan": {
+        "reasoning": "SMILES consistency check: [OH] is hydroxyl radical. The provided atom list contains only heavy atom index 0 = O, hybridization SP3, radical_electrons 1, so reactive adsorption through O is chemically consistent and required for ReactiveSpecies. History analysis: one successful plan exists, ontop on Pt with O bound through index [0], giving E = -2.050 eV and currently best. One hollow attempt on a 4-fold Pt hollow did not yield a valid oracle energy, so it was not actually evaluated; this does not indicate instability, only missing prediction. To systematically search lower energy configurations on Pt(100), the most important untested high-symmetry site is bridge. For OH* on Pt surfaces, O-bound bridge can sometimes be competitive with ontop, though ontop is often strong; therefore bridge is the best new distinct plan to test before termination. User intent is to find the lowest-energy adsorption configuration of hydroxyl radical on the provided Pt surface. Surface offers ontop, bridge, hollow-3, hollow-4; JSON site_type must use canonical names only, so I choose bridge with Pt-Pt. Adsorbate binding index must be [0] because O is the only heavy atom and carries the unpaired electron. Predicted MACE-MP-0 small relaxed adsorption energy for this initial bridge OH configuration is slightly less favorable than the known ontop result, around -1.93 eV.",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "bridge",
+          "surface_binding_atoms": [
+            "Pt",
+            "Pt"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        },
+        "predicted_relaxed_energy_eV": -1.93
+      },
+      "plan_key": "bridge|Pt,Pt|0|ReactiveSpecies|2.0",
+      "planner_reasoning": "SMILES consistency check: [OH] is hydroxyl radical. The provided atom list contains only heavy atom index 0 = O, hybridization SP3, radical_electrons 1, so reactive adsorption through O is chemically consistent and required for ReactiveSpecies. History analysis: one successful plan exists, ontop on Pt with O bound through index [0], giving E = -2.050 eV and currently best. One hollow attempt on a 4-fold Pt hollow did not yield a valid oracle energy, so it was not actually evaluated; this does not indicate instability, only missing prediction. To systematically search lower energy configurations on Pt(100), the most important untested high-symmetry site is bridge. For OH* on Pt surfaces, O-bound bridge can sometimes be competitive with ontop, though ontop is often strong; therefore bridge is the best new distinct plan to test before termination. User intent is to find the lowest-energy adsorption configuration of hydroxyl radical on the provided Pt surface. Surface offers ontop, bridge, hollow-3, hollow-4; JSON site_type must use canonical names only, so I choose bridge with Pt-Pt. Adsorbate binding index must be [0] because O is the only heavy atom and carries the unpaired electron. Predicted MACE-MP-0 small relaxed adsorption energy for this initial bridge OH configuration is slightly less favorable than the known ontop result, around -1.93 eV.",
+      "tool_logs": [
+        "LLM-as-oracle mode: executor bypassed; predicted energy used in place of MACE relaxation.",
+        "Success: predicted_relaxed_energy_eV = -1.9300 eV."
+      ],
+      "status": "success",
+      "most_stable_energy_eV": -1.93,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": false,
+      "planned_site_type": "bridge",
+      "actual_site_type": "bridge",
+      "energy_source": "llm_predicted",
+      "history_entry": "【✅ Perfect Adsorption】 bridge @ ['Pt', 'Pt'] (Index [0]) -> Site: bridge (Pt,Pt) | E=-1.930 eV"
+    },
+    {
+      "attempt_index": 4,
+      "plan": {
+        "reasoning": "SMILES consistency check: [OH] is the hydroxyl radical. The provided heavy-atom list shows O at index 0 with SP3 hybridization and one radical electron, so ReactiveSpecies is the correct type and O index 0 is the only valid binding atom. History review: successful trials are ontop with ['Pt'] and [0] at -2.050 eV, and bridge with ['Pt','Pt'] and [0] at -1.930 eV. A previous hollow trial with ['Pt','Pt','Pt','Pt'] and [0] was already attempted in plan space, even though the oracle output failed, so I must not repeat that exact combination. The only remaining distinct allowed high-symmetry plan is the other hollow family available in the site list, namely the 3-fold hollow Pt-Pt-Pt, still encoded canonically as site_type='hollow' but with a different surface_binding_atoms tuple. This is a genuinely new combination in the required (site_type, surface_binding_atoms, adsorbate_binding_indices) space. For OH on Pt(100), 3-fold hollows are less native than ontop/bridge and likely not better than the current best, but it is the last chemically distinct site family available, so it should be evaluated before terminating. I therefore propose O-down adsorption at the Pt3 hollow. Predicted MACE-MP-0 small relaxed adsorption energy is slightly weaker than bridge and clearly weaker than ontop.",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "hollow",
+          "surface_binding_atoms": [
+            "Pt",
+            "Pt",
+            "Pt"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        },
+        "predicted_relaxed_energy_eV": -1.82
+      },
+      "plan_key": "hollow|Pt,Pt,Pt|0|ReactiveSpecies|2.0",
+      "planner_reasoning": "SMILES consistency check: [OH] is the hydroxyl radical. The provided heavy-atom list shows O at index 0 with SP3 hybridization and one radical electron, so ReactiveSpecies is the correct type and O index 0 is the only valid binding atom. History review: successful trials are ontop with ['Pt'] and [0] at -2.050 eV, and bridge with ['Pt','Pt'] and [0] at -1.930 eV. A previous hollow trial with ['Pt','Pt','Pt','Pt'] and [0] was already attempted in plan space, even though the oracle output failed, so I must not repeat that exact combination. The only remaining distinct allowed high-symmetry plan is the other hollow family available in the site list, namely the 3-fold hollow Pt-Pt-Pt, still encoded canonically as site_type='hollow' but with a different surface_binding_atoms tuple. This is a genuinely new combination in the required (site_type, surface_binding_atoms, adsorbate_binding_indices) space. For OH on Pt(100), 3-fold hollows are less native than ontop/bridge and likely not better than the current best, but it is the last chemically distinct site family available, so it should be evaluated before terminating. I therefore propose O-down adsorption at the Pt3 hollow. Predicted MACE-MP-0 small relaxed adsorption energy is slightly weaker than bridge and clearly weaker than ontop.",
+      "tool_logs": [
+        "LLM-as-oracle mode: executor bypassed; predicted energy used in place of MACE relaxation.",
+        "Success: predicted_relaxed_energy_eV = -1.8200 eV."
+      ],
+      "status": "success",
+      "most_stable_energy_eV": -1.82,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": false,
+      "planned_site_type": "hollow",
+      "actual_site_type": "hollow",
+      "energy_source": "llm_predicted",
+      "history_entry": "【✅ Perfect Adsorption】 hollow @ ['Pt', 'Pt', 'Pt'] (Index [0]) -> Site: hollow (Pt,Pt,Pt) | E=-1.820 eV"
+    }
+  ],
+  "history": [
+    "【✅ Perfect Adsorption】 ontop @ ['Pt'] (Index [0]) -> Site: ontop (Pt) [🌟 New Best] | E=-2.050 eV",
+    "【Calculation Failed】 hollow @ ['Pt', 'Pt', 'Pt', 'Pt'] (Index [0]) -> Reason: LLM oracle Failed: planner output missing or invalid 'predicted_relaxed_energy_eV' (got None).",
+    "【✅ Perfect Adsorption】 bridge @ ['Pt', 'Pt'] (Index [0]) -> Site: bridge (Pt,Pt) | E=-1.930 eV",
+    "【✅ Perfect Adsorption】 hollow @ ['Pt', 'Pt', 'Pt'] (Index [0]) -> Site: hollow (Pt,Pt,Pt) | E=-1.820 eV"
+  ],
+  "error": null,
+  "perfect_count": 3,
+  "dissociation_count": 0,
+  "rearrangement_count": 0,
+  "calc_failure_count": 1,
+  "chemical_slip_count": 0
+}

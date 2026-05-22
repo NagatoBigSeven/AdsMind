@@ -1,0 +1,276 @@
+{
+  "case_id": "10",
+  "case_metadata": {
+    "case_id": "10",
+    "slab_file": "datasets/cmu20/10_Pt_100.xyz",
+    "smiles": "[OH]",
+    "user_request": "Find the lowest-energy adsorption configuration for hydroxyl radical on the provided surface.",
+    "surface_family": "monometallic",
+    "adsorbate_name": "OH",
+    "miller_index": "(100)",
+    "reaction_class": "ORR",
+    "ablation_candidate": "FALSE",
+    "notes": "Facet sensitivity test; DFT handoff target"
+  },
+  "status": "success",
+  "best_energy_eV": -3.3,
+  "iteration_count": 4,
+  "max_attempts": 5,
+  "final_site_type": "hollow",
+  "converged_tag": false,
+  "wall_clock_sec": 205.55265689641237,
+  "total_input_tokens": 20611,
+  "total_output_tokens": 20401,
+  "artifact_paths": {
+    "iteration_energy_curve": "/data/zongmin/workspace/AdsMind/research/results/basic_experiments/cmu20/adsmind/gemini25pro_mace_mp0_small/no_executor/10/artifacts/iteration_energy_curve.png",
+    "iteration_energy_curve.png": "/data/zongmin/workspace/AdsMind/research/results/basic_experiments/cmu20/adsmind/gemini25pro_mace_mp0_small/no_executor/10/artifacts/iteration_energy_curve.png",
+    "iteration_energy_curve_png": "/data/zongmin/workspace/AdsMind/research/results/basic_experiments/cmu20/adsmind/gemini25pro_mace_mp0_small/no_executor/10/artifacts/iteration_energy_curve.png",
+    "summary_report": "/data/zongmin/workspace/AdsMind/research/results/basic_experiments/cmu20/adsmind/gemini25pro_mace_mp0_small/no_executor/10/artifacts/summary_report.md",
+    "summary_report.md": "/data/zongmin/workspace/AdsMind/research/results/basic_experiments/cmu20/adsmind/gemini25pro_mace_mp0_small/no_executor/10/artifacts/summary_report.md",
+    "summary_report_file": "/data/zongmin/workspace/AdsMind/research/results/basic_experiments/cmu20/adsmind/gemini25pro_mace_mp0_small/no_executor/10/artifacts/summary_report.md"
+  },
+  "best_result": {
+    "most_stable_energy_eV": -3.3,
+    "analysis_json": {
+      "status": "success",
+      "most_stable_energy_eV": -3.3,
+      "is_dissociated": false,
+      "is_covalently_bound": true,
+      "bond_change_count": 0,
+      "energy_source": "llm_predicted",
+      "site_analysis": {
+        "planned_site_type": "hollow",
+        "actual_site_type": "hollow",
+        "is_chemical_slip": false,
+        "planned_symbols": [
+          "Pt",
+          "Pt",
+          "Pt",
+          "Pt"
+        ],
+        "actual_symbols": [
+          "Pt",
+          "Pt",
+          "Pt",
+          "Pt"
+        ],
+        "site_fingerprint": "llm-oracle::hollow::Pt-Pt-Pt-Pt::0"
+      }
+    },
+    "plan": {
+      "reasoning": "0. **SMILES Consistency Check**: The SMILES `[OH]` corresponds to a hydroxyl radical. The provided context confirms the oxygen atom (index 0) has `radical_electrons: 1`. This is consistent and requires using `ReactiveSpecies`.\n1. **Analyze Old Plans**: The history shows two successful attempts: `bridge` site with E=-3.150 eV (the current best) and `ontop` site with E=-2.850 eV. The energy trend (bridge > ontop) is physically reasonable, suggesting higher coordination sites are more favorable.\n2. **Formulate New Plan**: To systematically find the lowest energy configuration, the next logical step is to test the remaining high-symmetry site: the `hollow` site. Given that the bridge site was more stable than the ontop site, it is highly probable that the hollow site, with the highest coordination number, will be even more stable. The available sites list indicates a 4-fold hollow site (`[Hollow-4]: Pt-Pt-Pt-Pt`) is present on the Pt(100) surface.\n3. **Analyze Request**: The user wants the lowest-energy configuration for OH on the Pt surface.\n4. **Analyze Adsorbate**: The adsorbate is a hydroxyl radical. The binding will occur through the oxygen atom, which has index 0 and one radical electron.\n5. **Analyze Surface**: The surface is Pt(100), which has ontop, bridge, and 4-fold hollow sites.\n6. **Formulate Plan**: I will place the oxygen atom (index 0) of the hydroxyl radical over a 4-fold hollow site. This corresponds to `site_type: \"hollow\"`, `surface_binding_atoms: [\"Pt\", \"Pt\", \"Pt\", \"Pt\"]`, and `adsorbate_binding_indices: [0]`. The `adsorbate_type` will be `ReactiveSpecies`.\n7. **Predict Energy**: Based on the trend that higher coordination leads to stronger binding (ontop: -2.850 eV, bridge: -3.150 eV), I predict the hollow site will be the most stable. A reasonable estimate for the adsorption energy is slightly lower (more negative) than the bridge site. I will predict -3.30 eV.",
+      "adsorbate_type": "ReactiveSpecies",
+      "solution": {
+        "action": "continue",
+        "site_type": "hollow",
+        "surface_binding_atoms": [
+          "Pt",
+          "Pt",
+          "Pt",
+          "Pt"
+        ],
+        "adsorbate_binding_indices": [
+          0
+        ],
+        "relax_top_n": 1,
+        "touch_sphere_size": 2,
+        "overlap_thr": 0.1,
+        "conformers_per_site_cap": 4
+      },
+      "predicted_relaxed_energy_eV": -3.3
+    },
+    "result_type": "Perfect"
+  },
+  "last_analysis": {
+    "status": "success",
+    "most_stable_energy_eV": -3.25,
+    "is_dissociated": false,
+    "is_covalently_bound": true,
+    "bond_change_count": 0,
+    "energy_source": "llm_predicted",
+    "site_analysis": {
+      "planned_site_type": "hollow",
+      "actual_site_type": "hollow",
+      "is_chemical_slip": false,
+      "planned_symbols": [
+        "Pt",
+        "Pt",
+        "Pt"
+      ],
+      "actual_symbols": [
+        "Pt",
+        "Pt",
+        "Pt"
+      ],
+      "site_fingerprint": "llm-oracle::hollow::Pt-Pt-Pt::0"
+    }
+  },
+  "attempt_records": [
+    {
+      "attempt_index": 1,
+      "plan": {
+        "reasoning": "This is the first attempt to find the lowest energy adsorption site for the hydroxyl radical on the Pt(100) surface. No previous attempts have been made. The adsorbate is a radical ([OH]), with the unpaired electron on the oxygen atom (index 0), as confirmed by the `radical_electrons` count. Therefore, the `adsorbate_type` must be 'ReactiveSpecies' and the `adsorbate_binding_indices` will be [0]. I will start by testing the bridge site, as it is a common high-coordination site for small adsorbates and is expected to be stable. The plan is to place the oxygen atom over a Pt-Pt bridge.",
+        "adsorbate_type": "ReactiveSpecies",
+        "predicted_relaxed_energy_eV": -3.15,
+        "solution": {
+          "action": "continue",
+          "site_type": "bridge",
+          "surface_binding_atoms": [
+            "Pt",
+            "Pt"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "bridge|Pt,Pt|0|ReactiveSpecies|2.0",
+      "planner_reasoning": "This is the first attempt to find the lowest energy adsorption site for the hydroxyl radical on the Pt(100) surface. No previous attempts have been made. The adsorbate is a radical ([OH]), with the unpaired electron on the oxygen atom (index 0), as confirmed by the `radical_electrons` count. Therefore, the `adsorbate_type` must be 'ReactiveSpecies' and the `adsorbate_binding_indices` will be [0]. I will start by testing the bridge site, as it is a common high-coordination site for small adsorbates and is expected to be stable. The plan is to place the oxygen atom over a Pt-Pt bridge.",
+      "tool_logs": [
+        "LLM-as-oracle mode: executor bypassed; predicted energy used in place of MACE relaxation.",
+        "Success: predicted_relaxed_energy_eV = -3.1500 eV."
+      ],
+      "status": "success",
+      "most_stable_energy_eV": -3.15,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": false,
+      "planned_site_type": "bridge",
+      "actual_site_type": "bridge",
+      "energy_source": "llm_predicted",
+      "history_entry": "【✅ Perfect Adsorption】 bridge @ ['Pt', 'Pt'] (Index [0]) -> Site: bridge (Pt,Pt) [🌟 New Best] | E=-3.150 eV"
+    },
+    {
+      "attempt_index": 2,
+      "plan": {
+        "reasoning": "0. **SMILES Consistency Check:** The SMILES is `[OH]`. The provided context confirms that the Oxygen atom (index 0) has `radical_electrons: 1`. This is consistent with a hydroxyl radical, so I will plan a `ReactiveSpecies` adsorption via this oxygen atom.\n1. **Analyze Old Plans:** The history shows one successful adsorption on a bridge site, resulting in an energy of -3.150 eV. This is the current best configuration. No other high-symmetry sites have been tested.\n2. **Formulate New Plan:** To systematically find the global minimum, I must test the other available high-symmetry sites. The `Available Sites List` includes `[Ontop]: Pt`. Therefore, my next logical step is to test the ontop adsorption site.\n3. **Analyze Request:** The user wants to find the lowest-energy adsorption configuration for a hydroxyl radical on the provided Pt(100) surface.\n4. **Analyze Adsorbate:** The adsorbate is a hydroxyl radical, `[OH]`. The provided RDKit analysis shows the reactive atom is Oxygen (index 0), which has one radical electron. I will use `adsorbate_type: \"ReactiveSpecies\"` and bind through this oxygen atom.\n5. **Analyze Surface:** The surface is Pt(100). The `Available Sites List` explicitly mentions `[Ontop]: Pt` as a possible site.\n6. **Formulate Plan:** I will create a plan for the hydroxyl radical to adsorb on an ontop site. The `adsorbate_type` will be `ReactiveSpecies`, binding through the radical oxygen atom (index 0). The `site_type` will be `ontop`, binding to a single `Pt` atom.",
+        "adsorbate_type": "ReactiveSpecies",
+        "predicted_relaxed_energy_eV": -2.85,
+        "solution": {
+          "action": "continue",
+          "site_type": "ontop",
+          "surface_binding_atoms": [
+            "Pt"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "ontop|Pt|0|ReactiveSpecies|2.0",
+      "planner_reasoning": "0. **SMILES Consistency Check:** The SMILES is `[OH]`. The provided context confirms that the Oxygen atom (index 0) has `radical_electrons: 1`. This is consistent with a hydroxyl radical, so I will plan a `ReactiveSpecies` adsorption via this oxygen atom.\n1. **Analyze Old Plans:** The history shows one successful adsorption on a bridge site, resulting in an energy of -3.150 eV. This is the current best configuration. No other high-symmetry sites have been tested.\n2. **Formulate New Plan:** To systematically find the global minimum, I must test the other available high-symmetry sites. The `Available Sites List` includes `[Ontop]: Pt`. Therefore, my next logical step is to test the ontop adsorption site.\n3. **Analyze Request:** The user wants to find the lowest-energy adsorption configuration for a hydroxyl radical on the provided Pt(100) surface.\n4. **Analyze Adsorbate:** The adsorbate is a hydroxyl radical, `[OH]`. The provided RDKit analysis shows the reactive atom is Oxygen (index 0), which has one radical electron. I will use `adsorbate_type: \"ReactiveSpecies\"` and bind through this oxygen atom.\n5. **Analyze Surface:** The surface is Pt(100). The `Available Sites List` explicitly mentions `[Ontop]: Pt` as a possible site.\n6. **Formulate Plan:** I will create a plan for the hydroxyl radical to adsorb on an ontop site. The `adsorbate_type` will be `ReactiveSpecies`, binding through the radical oxygen atom (index 0). The `site_type` will be `ontop`, binding to a single `Pt` atom.",
+      "tool_logs": [
+        "LLM-as-oracle mode: executor bypassed; predicted energy used in place of MACE relaxation.",
+        "Success: predicted_relaxed_energy_eV = -2.8500 eV."
+      ],
+      "status": "success",
+      "most_stable_energy_eV": -2.85,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": false,
+      "planned_site_type": "ontop",
+      "actual_site_type": "ontop",
+      "energy_source": "llm_predicted",
+      "history_entry": "【✅ Perfect Adsorption】 ontop @ ['Pt'] (Index [0]) -> Site: ontop (Pt) | E=-2.850 eV"
+    },
+    {
+      "attempt_index": 3,
+      "plan": {
+        "reasoning": "0. **SMILES Consistency Check**: The SMILES `[OH]` corresponds to a hydroxyl radical. The provided context confirms the oxygen atom (index 0) has `radical_electrons: 1`. This is consistent and requires using `ReactiveSpecies`.\n1. **Analyze Old Plans**: The history shows two successful attempts: `bridge` site with E=-3.150 eV (the current best) and `ontop` site with E=-2.850 eV. The energy trend (bridge > ontop) is physically reasonable, suggesting higher coordination sites are more favorable.\n2. **Formulate New Plan**: To systematically find the lowest energy configuration, the next logical step is to test the remaining high-symmetry site: the `hollow` site. Given that the bridge site was more stable than the ontop site, it is highly probable that the hollow site, with the highest coordination number, will be even more stable. The available sites list indicates a 4-fold hollow site (`[Hollow-4]: Pt-Pt-Pt-Pt`) is present on the Pt(100) surface.\n3. **Analyze Request**: The user wants the lowest-energy configuration for OH on the Pt surface.\n4. **Analyze Adsorbate**: The adsorbate is a hydroxyl radical. The binding will occur through the oxygen atom, which has index 0 and one radical electron.\n5. **Analyze Surface**: The surface is Pt(100), which has ontop, bridge, and 4-fold hollow sites.\n6. **Formulate Plan**: I will place the oxygen atom (index 0) of the hydroxyl radical over a 4-fold hollow site. This corresponds to `site_type: \"hollow\"`, `surface_binding_atoms: [\"Pt\", \"Pt\", \"Pt\", \"Pt\"]`, and `adsorbate_binding_indices: [0]`. The `adsorbate_type` will be `ReactiveSpecies`.\n7. **Predict Energy**: Based on the trend that higher coordination leads to stronger binding (ontop: -2.850 eV, bridge: -3.150 eV), I predict the hollow site will be the most stable. A reasonable estimate for the adsorption energy is slightly lower (more negative) than the bridge site. I will predict -3.30 eV.",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "hollow",
+          "surface_binding_atoms": [
+            "Pt",
+            "Pt",
+            "Pt",
+            "Pt"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        },
+        "predicted_relaxed_energy_eV": -3.3
+      },
+      "plan_key": "hollow|Pt,Pt,Pt,Pt|0|ReactiveSpecies|2.0",
+      "planner_reasoning": "0. **SMILES Consistency Check**: The SMILES `[OH]` corresponds to a hydroxyl radical. The provided context confirms the oxygen atom (index 0) has `radical_electrons: 1`. This is consistent and requires using `ReactiveSpecies`.\n1. **Analyze Old Plans**: The history shows two successful attempts: `bridge` site with E=-3.150 eV (the current best) and `ontop` site with E=-2.850 eV. The energy trend (bridge > ontop) is physically reasonable, suggesting higher coordination sites are more favorable.\n2. **Formulate New Plan**: To systematically find the lowest energy configuration, the next logical step is to test the remaining high-symmetry site: the `hollow` site. Given that the bridge site was more stable than the ontop site, it is highly probable that the hollow site, with the highest coordination number, will be even more stable. The available sites list indicates a 4-fold hollow site (`[Hollow-4]: Pt-Pt-Pt-Pt`) is present on the Pt(100) surface.\n3. **Analyze Request**: The user wants the lowest-energy configuration for OH on the Pt surface.\n4. **Analyze Adsorbate**: The adsorbate is a hydroxyl radical. The binding will occur through the oxygen atom, which has index 0 and one radical electron.\n5. **Analyze Surface**: The surface is Pt(100), which has ontop, bridge, and 4-fold hollow sites.\n6. **Formulate Plan**: I will place the oxygen atom (index 0) of the hydroxyl radical over a 4-fold hollow site. This corresponds to `site_type: \"hollow\"`, `surface_binding_atoms: [\"Pt\", \"Pt\", \"Pt\", \"Pt\"]`, and `adsorbate_binding_indices: [0]`. The `adsorbate_type` will be `ReactiveSpecies`.\n7. **Predict Energy**: Based on the trend that higher coordination leads to stronger binding (ontop: -2.850 eV, bridge: -3.150 eV), I predict the hollow site will be the most stable. A reasonable estimate for the adsorption energy is slightly lower (more negative) than the bridge site. I will predict -3.30 eV.",
+      "tool_logs": [
+        "LLM-as-oracle mode: executor bypassed; predicted energy used in place of MACE relaxation.",
+        "Success: predicted_relaxed_energy_eV = -3.3000 eV."
+      ],
+      "status": "success",
+      "most_stable_energy_eV": -3.3,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": false,
+      "planned_site_type": "hollow",
+      "actual_site_type": "hollow",
+      "energy_source": "llm_predicted",
+      "history_entry": "【✅ Perfect Adsorption】 hollow @ ['Pt', 'Pt', 'Pt', 'Pt'] (Index [0]) -> Site: hollow (Pt,Pt,Pt,Pt) [🌟 New Best] | E=-3.300 eV"
+    },
+    {
+      "attempt_index": 4,
+      "plan": {
+        "reasoning": "I have analyzed the previous attempts. So far, ontop, bridge (2-fold), and hollow (4-fold) sites have been tested for the hydroxyl radical. The adsorption energies were -2.850 eV, -3.150 eV, and -3.300 eV, respectively. The trend shows that higher coordination sites are more stable, with the 4-fold hollow site being the most stable so far. The list of available sites also includes a 3-fold hollow site ([Hollow-3]: Pt-Pt-Pt). This site has not been tested yet. To ensure a thorough search for the lowest energy configuration, my next plan is to test the adsorption of the hydroxyl radical on this 3-fold hollow site. The hydroxyl radical will bind through its oxygen atom (index 0), which has an unpaired electron, making it a 'ReactiveSpecies'. Based on the trend, I predict the energy for the 3-fold hollow site to be slightly less stable than the 4-fold hollow site, but more stable than the bridge site. I will estimate it to be around -3.25 eV.",
+        "adsorbate_type": "ReactiveSpecies",
+        "predicted_relaxed_energy_eV": -3.25,
+        "solution": {
+          "action": "continue",
+          "site_type": "hollow",
+          "surface_binding_atoms": [
+            "Pt",
+            "Pt",
+            "Pt"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "hollow|Pt,Pt,Pt|0|ReactiveSpecies|2.0",
+      "planner_reasoning": "I have analyzed the previous attempts. So far, ontop, bridge (2-fold), and hollow (4-fold) sites have been tested for the hydroxyl radical. The adsorption energies were -2.850 eV, -3.150 eV, and -3.300 eV, respectively. The trend shows that higher coordination sites are more stable, with the 4-fold hollow site being the most stable so far. The list of available sites also includes a 3-fold hollow site ([Hollow-3]: Pt-Pt-Pt). This site has not been tested yet. To ensure a thorough search for the lowest energy configuration, my next plan is to test the adsorption of the hydroxyl radical on this 3-fold hollow site. The hydroxyl radical will bind through its oxygen atom (index 0), which has an unpaired electron, making it a 'ReactiveSpecies'. Based on the trend, I predict the energy for the 3-fold hollow site to be slightly less stable than the 4-fold hollow site, but more stable than the bridge site. I will estimate it to be around -3.25 eV.",
+      "tool_logs": [
+        "LLM-as-oracle mode: executor bypassed; predicted energy used in place of MACE relaxation.",
+        "Success: predicted_relaxed_energy_eV = -3.2500 eV."
+      ],
+      "status": "success",
+      "most_stable_energy_eV": -3.25,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": false,
+      "planned_site_type": "hollow",
+      "actual_site_type": "hollow",
+      "energy_source": "llm_predicted",
+      "history_entry": "【✅ Perfect Adsorption】 hollow @ ['Pt', 'Pt', 'Pt'] (Index [0]) -> Site: hollow (Pt,Pt,Pt) [⚠️ Energy Degenerate but Geometrically Distinct] | E=-3.250 eV"
+    }
+  ],
+  "history": [
+    "【✅ Perfect Adsorption】 bridge @ ['Pt', 'Pt'] (Index [0]) -> Site: bridge (Pt,Pt) [🌟 New Best] | E=-3.150 eV",
+    "【✅ Perfect Adsorption】 ontop @ ['Pt'] (Index [0]) -> Site: ontop (Pt) | E=-2.850 eV",
+    "【✅ Perfect Adsorption】 hollow @ ['Pt', 'Pt', 'Pt', 'Pt'] (Index [0]) -> Site: hollow (Pt,Pt,Pt,Pt) [🌟 New Best] | E=-3.300 eV",
+    "【✅ Perfect Adsorption】 hollow @ ['Pt', 'Pt', 'Pt'] (Index [0]) -> Site: hollow (Pt,Pt,Pt) [⚠️ Energy Degenerate but Geometrically Distinct] | E=-3.250 eV"
+  ],
+  "error": null,
+  "perfect_count": 4,
+  "dissociation_count": 0,
+  "rearrangement_count": 0,
+  "calc_failure_count": 0,
+  "chemical_slip_count": 0
+}

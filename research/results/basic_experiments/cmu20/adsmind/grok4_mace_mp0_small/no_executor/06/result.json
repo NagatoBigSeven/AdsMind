@@ -1,0 +1,270 @@
+{
+  "case_id": "06",
+  "case_metadata": {
+    "case_id": "06",
+    "slab_file": "datasets/cmu20/06_Cu3Ag_111.xyz",
+    "smiles": "[N]=[NH]",
+    "user_request": "Find the lowest-energy adsorption configuration for NNH on the provided surface.",
+    "surface_family": "intermetallic",
+    "adsorbate_name": "NNH",
+    "miller_index": "(111)",
+    "reaction_class": "NRR",
+    "ablation_candidate": "FALSE",
+    "notes": "Cu3Ag NNH benchmark; dissociation observed before"
+  },
+  "status": "success",
+  "best_energy_eV": -1.39,
+  "iteration_count": 4,
+  "max_attempts": 5,
+  "final_site_type": "hollow",
+  "converged_tag": false,
+  "wall_clock_sec": 127.04978912323713,
+  "total_input_tokens": 18897,
+  "total_output_tokens": 8702,
+  "artifact_paths": {
+    "iteration_energy_curve": "/data/zongmin/workspace/AdsMind/research/results/basic_experiments/cmu20/adsmind/grok4_mace_mp0_small/no_executor/06/artifacts/iteration_energy_curve.png",
+    "iteration_energy_curve.png": "/data/zongmin/workspace/AdsMind/research/results/basic_experiments/cmu20/adsmind/grok4_mace_mp0_small/no_executor/06/artifacts/iteration_energy_curve.png",
+    "iteration_energy_curve_png": "/data/zongmin/workspace/AdsMind/research/results/basic_experiments/cmu20/adsmind/grok4_mace_mp0_small/no_executor/06/artifacts/iteration_energy_curve.png",
+    "summary_report": "/data/zongmin/workspace/AdsMind/research/results/basic_experiments/cmu20/adsmind/grok4_mace_mp0_small/no_executor/06/artifacts/summary_report.md",
+    "summary_report.md": "/data/zongmin/workspace/AdsMind/research/results/basic_experiments/cmu20/adsmind/grok4_mace_mp0_small/no_executor/06/artifacts/summary_report.md",
+    "summary_report_file": "/data/zongmin/workspace/AdsMind/research/results/basic_experiments/cmu20/adsmind/grok4_mace_mp0_small/no_executor/06/artifacts/summary_report.md"
+  },
+  "best_result": {
+    "most_stable_energy_eV": -1.39,
+    "analysis_json": {
+      "status": "success",
+      "most_stable_energy_eV": -1.39,
+      "is_dissociated": false,
+      "is_covalently_bound": true,
+      "bond_change_count": 0,
+      "energy_source": "llm_predicted",
+      "site_analysis": {
+        "planned_site_type": "hollow",
+        "actual_site_type": "hollow",
+        "is_chemical_slip": false,
+        "planned_symbols": [
+          "Cu",
+          "Cu",
+          "Cu"
+        ],
+        "actual_symbols": [
+          "Cu",
+          "Cu",
+          "Cu"
+        ],
+        "site_fingerprint": "llm-oracle::hollow::Cu-Cu-Cu::0"
+      }
+    },
+    "plan": {
+      "reasoning": "History shows ontop-Cu (-1.350 eV) is current best; ontop-Ag and bridge-Cu-Cu tested with higher energies. No hollow sites explored yet. SMILES [N]=[NH] has radical on N index 0 (SP2, radical_electrons=1), so bind via ReactiveSpecies at index [0]. Select hollow site on Cu-Cu-Cu (valid per available sites list) to test a new environment. Predict MACE-MP-0 energy slightly lower than current best due to possible stabilization on alloy hollow.",
+      "adsorbate_type": "ReactiveSpecies",
+      "solution": {
+        "action": "continue",
+        "site_type": "hollow",
+        "surface_binding_atoms": [
+          "Cu",
+          "Cu",
+          "Cu"
+        ],
+        "adsorbate_binding_indices": [
+          0
+        ],
+        "relax_top_n": 1,
+        "touch_sphere_size": 2,
+        "overlap_thr": 0.1,
+        "conformers_per_site_cap": 4
+      },
+      "predicted_relaxed_energy_eV": -1.39
+    },
+    "result_type": "Perfect"
+  },
+  "last_analysis": {
+    "status": "success",
+    "most_stable_energy_eV": -1.39,
+    "is_dissociated": false,
+    "is_covalently_bound": true,
+    "bond_change_count": 0,
+    "energy_source": "llm_predicted",
+    "site_analysis": {
+      "planned_site_type": "hollow",
+      "actual_site_type": "hollow",
+      "is_chemical_slip": false,
+      "planned_symbols": [
+        "Cu",
+        "Cu",
+        "Cu"
+      ],
+      "actual_symbols": [
+        "Cu",
+        "Cu",
+        "Cu"
+      ],
+      "site_fingerprint": "llm-oracle::hollow::Cu-Cu-Cu::0"
+    }
+  },
+  "attempt_records": [
+    {
+      "attempt_index": 1,
+      "plan": {
+        "reasoning": "History is empty so this is the first attempt. SMILES [N]=[NH] corresponds to a radical species (index 0 has radical_electrons=1). We therefore select ReactiveSpecies and bind exclusively via the radical N (index 0) at an ontop Cu site, which is a chemically reasonable starting point on the alloy surface.",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "ontop",
+          "surface_binding_atoms": [
+            "Cu"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        },
+        "predicted_relaxed_energy_eV": -1.35
+      },
+      "plan_key": "ontop|Cu|0|ReactiveSpecies|2.0",
+      "planner_reasoning": "History is empty so this is the first attempt. SMILES [N]=[NH] corresponds to a radical species (index 0 has radical_electrons=1). We therefore select ReactiveSpecies and bind exclusively via the radical N (index 0) at an ontop Cu site, which is a chemically reasonable starting point on the alloy surface.",
+      "tool_logs": [
+        "LLM-as-oracle mode: executor bypassed; predicted energy used in place of MACE relaxation.",
+        "Success: predicted_relaxed_energy_eV = -1.3500 eV."
+      ],
+      "status": "success",
+      "most_stable_energy_eV": -1.35,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": false,
+      "planned_site_type": "ontop",
+      "actual_site_type": "ontop",
+      "energy_source": "llm_predicted",
+      "history_entry": "【✅ Perfect Adsorption】 ontop @ ['Cu'] (Index [0]) -> Site: ontop (Cu) [🌟 New Best] | E=-1.350 eV"
+    },
+    {
+      "attempt_index": 2,
+      "plan": {
+        "reasoning": "History shows only ontop-Cu tested (E=-1.350 eV). NNH is a radical; bind via index 0 (radical N). Propose ontop-Ag as a distinct high-symmetry site on the alloy surface to check for possible lower energy.",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "ontop",
+          "surface_binding_atoms": [
+            "Ag"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        },
+        "predicted_relaxed_energy_eV": -1.12
+      },
+      "plan_key": "ontop|Ag|0|ReactiveSpecies|2.0",
+      "planner_reasoning": "History shows only ontop-Cu tested (E=-1.350 eV). NNH is a radical; bind via index 0 (radical N). Propose ontop-Ag as a distinct high-symmetry site on the alloy surface to check for possible lower energy.",
+      "tool_logs": [
+        "LLM-as-oracle mode: executor bypassed; predicted energy used in place of MACE relaxation.",
+        "Success: predicted_relaxed_energy_eV = -1.1200 eV."
+      ],
+      "status": "success",
+      "most_stable_energy_eV": -1.12,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": false,
+      "planned_site_type": "ontop",
+      "actual_site_type": "ontop",
+      "energy_source": "llm_predicted",
+      "history_entry": "【✅ Perfect Adsorption】 ontop @ ['Ag'] (Index [0]) -> Site: ontop (Ag) | E=-1.120 eV"
+    },
+    {
+      "attempt_index": 3,
+      "plan": {
+        "reasoning": "History shows ontop Cu (best, -1.350 eV) and ontop Ag tested successfully. NNH is a radical (index 0 has radical_electrons=1), so ReactiveSpecies via index 0. Propose new bridge plan on Cu-Cu to explore lower energy. Predict MACE-MP-0 energy slightly worse than best ontop.",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "bridge",
+          "surface_binding_atoms": [
+            "Cu",
+            "Cu"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        },
+        "predicted_relaxed_energy_eV": -1.28
+      },
+      "plan_key": "bridge|Cu,Cu|0|ReactiveSpecies|2.0",
+      "planner_reasoning": "History shows ontop Cu (best, -1.350 eV) and ontop Ag tested successfully. NNH is a radical (index 0 has radical_electrons=1), so ReactiveSpecies via index 0. Propose new bridge plan on Cu-Cu to explore lower energy. Predict MACE-MP-0 energy slightly worse than best ontop.",
+      "tool_logs": [
+        "LLM-as-oracle mode: executor bypassed; predicted energy used in place of MACE relaxation.",
+        "Success: predicted_relaxed_energy_eV = -1.2800 eV."
+      ],
+      "status": "success",
+      "most_stable_energy_eV": -1.28,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": false,
+      "planned_site_type": "bridge",
+      "actual_site_type": "bridge",
+      "energy_source": "llm_predicted",
+      "history_entry": "【✅ Perfect Adsorption】 bridge @ ['Cu', 'Cu'] (Index [0]) -> Site: bridge (Cu,Cu) | E=-1.280 eV"
+    },
+    {
+      "attempt_index": 4,
+      "plan": {
+        "reasoning": "History shows ontop-Cu (-1.350 eV) is current best; ontop-Ag and bridge-Cu-Cu tested with higher energies. No hollow sites explored yet. SMILES [N]=[NH] has radical on N index 0 (SP2, radical_electrons=1), so bind via ReactiveSpecies at index [0]. Select hollow site on Cu-Cu-Cu (valid per available sites list) to test a new environment. Predict MACE-MP-0 energy slightly lower than current best due to possible stabilization on alloy hollow.",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "hollow",
+          "surface_binding_atoms": [
+            "Cu",
+            "Cu",
+            "Cu"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        },
+        "predicted_relaxed_energy_eV": -1.39
+      },
+      "plan_key": "hollow|Cu,Cu,Cu|0|ReactiveSpecies|2.0",
+      "planner_reasoning": "History shows ontop-Cu (-1.350 eV) is current best; ontop-Ag and bridge-Cu-Cu tested with higher energies. No hollow sites explored yet. SMILES [N]=[NH] has radical on N index 0 (SP2, radical_electrons=1), so bind via ReactiveSpecies at index [0]. Select hollow site on Cu-Cu-Cu (valid per available sites list) to test a new environment. Predict MACE-MP-0 energy slightly lower than current best due to possible stabilization on alloy hollow.",
+      "tool_logs": [
+        "LLM-as-oracle mode: executor bypassed; predicted energy used in place of MACE relaxation.",
+        "Success: predicted_relaxed_energy_eV = -1.3900 eV."
+      ],
+      "status": "success",
+      "most_stable_energy_eV": -1.39,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": false,
+      "planned_site_type": "hollow",
+      "actual_site_type": "hollow",
+      "energy_source": "llm_predicted",
+      "history_entry": "【✅ Perfect Adsorption】 hollow @ ['Cu', 'Cu', 'Cu'] (Index [0]) -> Site: hollow (Cu,Cu,Cu) [🌟 New Best] | E=-1.390 eV"
+    }
+  ],
+  "history": [
+    "【✅ Perfect Adsorption】 ontop @ ['Cu'] (Index [0]) -> Site: ontop (Cu) [🌟 New Best] | E=-1.350 eV",
+    "【✅ Perfect Adsorption】 ontop @ ['Ag'] (Index [0]) -> Site: ontop (Ag) | E=-1.120 eV",
+    "【✅ Perfect Adsorption】 bridge @ ['Cu', 'Cu'] (Index [0]) -> Site: bridge (Cu,Cu) | E=-1.280 eV",
+    "【✅ Perfect Adsorption】 hollow @ ['Cu', 'Cu', 'Cu'] (Index [0]) -> Site: hollow (Cu,Cu,Cu) [🌟 New Best] | E=-1.390 eV"
+  ],
+  "error": null,
+  "perfect_count": 4,
+  "dissociation_count": 0,
+  "rearrangement_count": 0,
+  "calc_failure_count": 0,
+  "chemical_slip_count": 0
+}

@@ -35,11 +35,15 @@ RESULTS = ROOT / "research" / "results"
 BASIC = RESULTS / "basic_experiments"
 SUMMARIES = BASIC / "summaries"
 
+PAPER_VARIANTS = ("full", "no_slip", "no_forbid", "no_termination", "one_shot")
+PER_AGENT_VARIANTS = ("no_executor", "no_validator")
 DATASETS = {
-    "cmu20": {"n": 20, "width": 2},
-    "ocd62": {"n": 62, "width": 3},
+    "cmu20": {"n": 20, "width": 2,
+              "variants": PAPER_VARIANTS + PER_AGENT_VARIANTS},
+    "ocd62": {"n": 62, "width": 3,
+              "variants": PAPER_VARIANTS},
 }
-VARIANTS = ("full", "no_slip", "no_forbid", "no_termination", "one_shot")
+VARIANTS = PAPER_VARIANTS + PER_AGENT_VARIANTS
 SUMMARY_COMPARE_COLUMNS = (
     "backend_key",
     "backend",
@@ -145,6 +149,7 @@ def compare_csv_text(generated: pd.DataFrame, path: Path) -> bool:
 
 def check_basic_matrix(audit: Auditor) -> None:
     for dataset, spec in DATASETS.items():
+        dataset_variants = spec["variants"]
         cases = {f"{idx:0{spec['width']}d}" for idx in range(1, spec["n"] + 1)}
         for backend in BACKEND_KEYS:
             backend_dir = BASIC / dataset / "adsmind" / backend_result_dir(backend)
@@ -154,7 +159,7 @@ def check_basic_matrix(audit: Auditor) -> None:
                 continue
 
             all_rows = read_rows(all_path)
-            expected_rows = spec["n"] * len(VARIANTS)
+            expected_rows = spec["n"] * len(dataset_variants)
             if len(all_rows) != expected_rows:
                 audit.error(
                     "bad-all-variants-row-count",
@@ -171,7 +176,7 @@ def check_basic_matrix(audit: Auditor) -> None:
                     )
                 all_index[key] = row
 
-            expected_keys = {(case_id, variant) for case_id in cases for variant in VARIANTS}
+            expected_keys = {(case_id, variant) for case_id in cases for variant in dataset_variants}
             missing = sorted(expected_keys - set(all_index))
             extra = sorted(set(all_index) - expected_keys)
             if missing:
@@ -185,7 +190,7 @@ def check_basic_matrix(audit: Auditor) -> None:
                     f"{audit.path(all_path)} has {len(extra)} unexpected case/variant rows: {extra[:8]}",
                 )
 
-            for variant in VARIANTS:
+            for variant in dataset_variants:
                 variant_path = backend_dir / variant / "summary.csv"
                 if not variant_path.exists():
                     audit.error("missing-variant-summary", f"Missing {audit.path(variant_path)}")

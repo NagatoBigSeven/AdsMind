@@ -1,0 +1,229 @@
+{
+  "case_id": "12",
+  "case_metadata": {
+    "case_id": "12",
+    "slab_file": "datasets/cmu20/12_Au_111.xyz",
+    "smiles": "[OH]",
+    "user_request": "Find the lowest-energy adsorption configuration for hydroxyl radical on the provided surface.",
+    "surface_family": "monometallic",
+    "adsorbate_name": "OH",
+    "miller_index": "(111)",
+    "reaction_class": "ORR",
+    "ablation_candidate": "FALSE",
+    "notes": "Prior runs labeled all final sites as desorbed"
+  },
+  "status": "success",
+  "best_energy_eV": -2.55,
+  "iteration_count": 3,
+  "max_attempts": 5,
+  "final_site_type": "bridge",
+  "converged_tag": false,
+  "wall_clock_sec": 133.7988741695881,
+  "total_input_tokens": 14924,
+  "total_output_tokens": 12586,
+  "artifact_paths": {
+    "iteration_energy_curve": "/data/zongmin/workspace/AdsMind/research/results/basic_experiments/cmu20/adsmind/gemini25pro_mace_mp0_small/no_executor/12/artifacts/iteration_energy_curve.png",
+    "iteration_energy_curve.png": "/data/zongmin/workspace/AdsMind/research/results/basic_experiments/cmu20/adsmind/gemini25pro_mace_mp0_small/no_executor/12/artifacts/iteration_energy_curve.png",
+    "iteration_energy_curve_png": "/data/zongmin/workspace/AdsMind/research/results/basic_experiments/cmu20/adsmind/gemini25pro_mace_mp0_small/no_executor/12/artifacts/iteration_energy_curve.png",
+    "summary_report": "/data/zongmin/workspace/AdsMind/research/results/basic_experiments/cmu20/adsmind/gemini25pro_mace_mp0_small/no_executor/12/artifacts/summary_report.md",
+    "summary_report.md": "/data/zongmin/workspace/AdsMind/research/results/basic_experiments/cmu20/adsmind/gemini25pro_mace_mp0_small/no_executor/12/artifacts/summary_report.md",
+    "summary_report_file": "/data/zongmin/workspace/AdsMind/research/results/basic_experiments/cmu20/adsmind/gemini25pro_mace_mp0_small/no_executor/12/artifacts/summary_report.md"
+  },
+  "best_result": {
+    "most_stable_energy_eV": -2.55,
+    "analysis_json": {
+      "status": "success",
+      "most_stable_energy_eV": -2.55,
+      "is_dissociated": false,
+      "is_covalently_bound": true,
+      "bond_change_count": 0,
+      "energy_source": "llm_predicted",
+      "site_analysis": {
+        "planned_site_type": "bridge",
+        "actual_site_type": "bridge",
+        "is_chemical_slip": false,
+        "planned_symbols": [
+          "Au",
+          "Au"
+        ],
+        "actual_symbols": [
+          "Au",
+          "Au"
+        ],
+        "site_fingerprint": "llm-oracle::bridge::Au-Au::0"
+      }
+    },
+    "plan": {
+      "reasoning": "The history shows a successful adsorption on the on-top site with an energy of -2.450 eV. To systematically find the global minimum, I must now test the other available high-symmetry sites. The available sites list includes 'Bridge' and 'Hollow-3'. I will proceed by testing the 'bridge' site. The adsorbate is a hydroxyl radical ([OH]), which has one unpaired electron on the oxygen atom (index 0). Therefore, I will plan a 'ReactiveSpecies' adsorption, binding the oxygen atom to a bridge site composed of two surface Au atoms. I predict this site might be slightly more stable than the on-top site due to the increased coordination.",
+      "adsorbate_type": "ReactiveSpecies",
+      "predicted_relaxed_energy_eV": -2.55,
+      "solution": {
+        "action": "continue",
+        "site_type": "bridge",
+        "surface_binding_atoms": [
+          "Au",
+          "Au"
+        ],
+        "adsorbate_binding_indices": [
+          0
+        ],
+        "relax_top_n": 1,
+        "touch_sphere_size": 2,
+        "overlap_thr": 0.1,
+        "conformers_per_site_cap": 4
+      }
+    },
+    "result_type": "Perfect"
+  },
+  "last_analysis": {
+    "status": "success",
+    "most_stable_energy_eV": -2.51,
+    "is_dissociated": false,
+    "is_covalently_bound": true,
+    "bond_change_count": 0,
+    "energy_source": "llm_predicted",
+    "site_analysis": {
+      "planned_site_type": "hollow",
+      "actual_site_type": "hollow",
+      "is_chemical_slip": false,
+      "planned_symbols": [
+        "Au",
+        "Au",
+        "Au"
+      ],
+      "actual_symbols": [
+        "Au",
+        "Au",
+        "Au"
+      ],
+      "site_fingerprint": "llm-oracle::hollow::Au-Au-Au::0"
+    }
+  },
+  "attempt_records": [
+    {
+      "attempt_index": 1,
+      "plan": {
+        "reasoning": "The user wants to find the lowest energy adsorption site for a hydroxyl radical ([OH]) on an Au(111) surface. The history is empty, so this is the first attempt. I will start by systematically exploring the high-symmetry sites available. The provided adsorbate information shows that the oxygen atom (index 0) has one radical electron, making it the active binding site. Therefore, the `adsorbate_type` must be 'ReactiveSpecies' and the `adsorbate_binding_indices` will be [0]. For the first attempt, I will test the 'ontop' site, which is a common and often stable configuration for radical species like OH. This involves binding the oxygen atom to a single surface gold atom.",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "ontop",
+          "surface_binding_atoms": [
+            "Au"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        },
+        "predicted_relaxed_energy_eV": -2.45
+      },
+      "plan_key": "ontop|Au|0|ReactiveSpecies|2.0",
+      "planner_reasoning": "The user wants to find the lowest energy adsorption site for a hydroxyl radical ([OH]) on an Au(111) surface. The history is empty, so this is the first attempt. I will start by systematically exploring the high-symmetry sites available. The provided adsorbate information shows that the oxygen atom (index 0) has one radical electron, making it the active binding site. Therefore, the `adsorbate_type` must be 'ReactiveSpecies' and the `adsorbate_binding_indices` will be [0]. For the first attempt, I will test the 'ontop' site, which is a common and often stable configuration for radical species like OH. This involves binding the oxygen atom to a single surface gold atom.",
+      "tool_logs": [
+        "LLM-as-oracle mode: executor bypassed; predicted energy used in place of MACE relaxation.",
+        "Success: predicted_relaxed_energy_eV = -2.4500 eV."
+      ],
+      "status": "success",
+      "most_stable_energy_eV": -2.45,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": false,
+      "planned_site_type": "ontop",
+      "actual_site_type": "ontop",
+      "energy_source": "llm_predicted",
+      "history_entry": "【✅ Perfect Adsorption】 ontop @ ['Au'] (Index [0]) -> Site: ontop (Au) [🌟 New Best] | E=-2.450 eV"
+    },
+    {
+      "attempt_index": 2,
+      "plan": {
+        "reasoning": "The history shows a successful adsorption on the on-top site with an energy of -2.450 eV. To systematically find the global minimum, I must now test the other available high-symmetry sites. The available sites list includes 'Bridge' and 'Hollow-3'. I will proceed by testing the 'bridge' site. The adsorbate is a hydroxyl radical ([OH]), which has one unpaired electron on the oxygen atom (index 0). Therefore, I will plan a 'ReactiveSpecies' adsorption, binding the oxygen atom to a bridge site composed of two surface Au atoms. I predict this site might be slightly more stable than the on-top site due to the increased coordination.",
+        "adsorbate_type": "ReactiveSpecies",
+        "predicted_relaxed_energy_eV": -2.55,
+        "solution": {
+          "action": "continue",
+          "site_type": "bridge",
+          "surface_binding_atoms": [
+            "Au",
+            "Au"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "bridge|Au,Au|0|ReactiveSpecies|2.0",
+      "planner_reasoning": "The history shows a successful adsorption on the on-top site with an energy of -2.450 eV. To systematically find the global minimum, I must now test the other available high-symmetry sites. The available sites list includes 'Bridge' and 'Hollow-3'. I will proceed by testing the 'bridge' site. The adsorbate is a hydroxyl radical ([OH]), which has one unpaired electron on the oxygen atom (index 0). Therefore, I will plan a 'ReactiveSpecies' adsorption, binding the oxygen atom to a bridge site composed of two surface Au atoms. I predict this site might be slightly more stable than the on-top site due to the increased coordination.",
+      "tool_logs": [
+        "LLM-as-oracle mode: executor bypassed; predicted energy used in place of MACE relaxation.",
+        "Success: predicted_relaxed_energy_eV = -2.5500 eV."
+      ],
+      "status": "success",
+      "most_stable_energy_eV": -2.55,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": false,
+      "planned_site_type": "bridge",
+      "actual_site_type": "bridge",
+      "energy_source": "llm_predicted",
+      "history_entry": "【✅ Perfect Adsorption】 bridge @ ['Au', 'Au'] (Index [0]) -> Site: bridge (Au,Au) [🌟 New Best] | E=-2.550 eV"
+    },
+    {
+      "attempt_index": 3,
+      "plan": {
+        "reasoning": "I have analyzed the previous attempts. The ontop site resulted in an adsorption energy of -2.450 eV, and the bridge site resulted in a lower energy of -2.550 eV, which is the current best. To continue the systematic search for the lowest energy configuration, the next logical step is to test the remaining high-symmetry site available, which is the 3-fold hollow site. The adsorbate is a hydroxyl radical ([OH]), with the unpaired electron on the oxygen atom (index 0). Therefore, I will plan a 'ReactiveSpecies' adsorption on a 'hollow' site, binding through the oxygen atom.",
+        "adsorbate_type": "ReactiveSpecies",
+        "predicted_relaxed_energy_eV": -2.51,
+        "solution": {
+          "action": "continue",
+          "site_type": "hollow",
+          "surface_binding_atoms": [
+            "Au",
+            "Au",
+            "Au"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "hollow|Au,Au,Au|0|ReactiveSpecies|2.0",
+      "planner_reasoning": "I have analyzed the previous attempts. The ontop site resulted in an adsorption energy of -2.450 eV, and the bridge site resulted in a lower energy of -2.550 eV, which is the current best. To continue the systematic search for the lowest energy configuration, the next logical step is to test the remaining high-symmetry site available, which is the 3-fold hollow site. The adsorbate is a hydroxyl radical ([OH]), with the unpaired electron on the oxygen atom (index 0). Therefore, I will plan a 'ReactiveSpecies' adsorption on a 'hollow' site, binding through the oxygen atom.",
+      "tool_logs": [
+        "LLM-as-oracle mode: executor bypassed; predicted energy used in place of MACE relaxation.",
+        "Success: predicted_relaxed_energy_eV = -2.5100 eV."
+      ],
+      "status": "success",
+      "most_stable_energy_eV": -2.51,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": false,
+      "planned_site_type": "hollow",
+      "actual_site_type": "hollow",
+      "energy_source": "llm_predicted",
+      "history_entry": "【✅ Perfect Adsorption】 hollow @ ['Au', 'Au', 'Au'] (Index [0]) -> Site: hollow (Au,Au,Au) [⚠️ Energy Degenerate but Geometrically Distinct] | E=-2.510 eV"
+    }
+  ],
+  "history": [
+    "【✅ Perfect Adsorption】 ontop @ ['Au'] (Index [0]) -> Site: ontop (Au) [🌟 New Best] | E=-2.450 eV",
+    "【✅ Perfect Adsorption】 bridge @ ['Au', 'Au'] (Index [0]) -> Site: bridge (Au,Au) [🌟 New Best] | E=-2.550 eV",
+    "【✅ Perfect Adsorption】 hollow @ ['Au', 'Au', 'Au'] (Index [0]) -> Site: hollow (Au,Au,Au) [⚠️ Energy Degenerate but Geometrically Distinct] | E=-2.510 eV"
+  ],
+  "error": null,
+  "perfect_count": 3,
+  "dissociation_count": 0,
+  "rearrangement_count": 0,
+  "calc_failure_count": 0,
+  "chemical_slip_count": 0
+}

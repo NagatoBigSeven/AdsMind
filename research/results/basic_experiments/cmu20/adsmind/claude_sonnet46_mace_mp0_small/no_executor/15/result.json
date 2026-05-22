@@ -1,0 +1,272 @@
+{
+  "case_id": "15",
+  "case_metadata": {
+    "case_id": "15",
+    "slab_file": "datasets/cmu20/15_Cu6Ga2_100.xyz",
+    "smiles": "[CH2]CO",
+    "user_request": "Find the lowest-energy adsorption configuration for the 2-hydroxyethyl radical on the provided surface.",
+    "surface_family": "intermetallic",
+    "adsorbate_name": "CH2CH2OH",
+    "miller_index": "(100)",
+    "reaction_class": "COMPLEX",
+    "ablation_candidate": "FALSE",
+    "notes": "Resolved from prior AdsMind outputs; local evidence matches formula C2H5O"
+  },
+  "status": "success",
+  "best_energy_eV": -3.05,
+  "iteration_count": 4,
+  "max_attempts": 5,
+  "final_site_type": "hollow",
+  "converged_tag": false,
+  "wall_clock_sec": 183.1760851033032,
+  "total_input_tokens": 24811,
+  "total_output_tokens": 9571,
+  "artifact_paths": {
+    "iteration_energy_curve": "/data/zongmin/workspace/AdsMind/research/results/basic_experiments/cmu20/adsmind/claude_sonnet46_mace_mp0_small/no_executor/15/artifacts/iteration_energy_curve.png",
+    "iteration_energy_curve.png": "/data/zongmin/workspace/AdsMind/research/results/basic_experiments/cmu20/adsmind/claude_sonnet46_mace_mp0_small/no_executor/15/artifacts/iteration_energy_curve.png",
+    "iteration_energy_curve_png": "/data/zongmin/workspace/AdsMind/research/results/basic_experiments/cmu20/adsmind/claude_sonnet46_mace_mp0_small/no_executor/15/artifacts/iteration_energy_curve.png",
+    "summary_report": "/data/zongmin/workspace/AdsMind/research/results/basic_experiments/cmu20/adsmind/claude_sonnet46_mace_mp0_small/no_executor/15/artifacts/summary_report.md",
+    "summary_report.md": "/data/zongmin/workspace/AdsMind/research/results/basic_experiments/cmu20/adsmind/claude_sonnet46_mace_mp0_small/no_executor/15/artifacts/summary_report.md",
+    "summary_report_file": "/data/zongmin/workspace/AdsMind/research/results/basic_experiments/cmu20/adsmind/claude_sonnet46_mace_mp0_small/no_executor/15/artifacts/summary_report.md"
+  },
+  "best_result": {
+    "most_stable_energy_eV": -3.05,
+    "analysis_json": {
+      "status": "success",
+      "most_stable_energy_eV": -3.05,
+      "is_dissociated": false,
+      "is_covalently_bound": true,
+      "bond_change_count": 0,
+      "energy_source": "llm_predicted",
+      "site_analysis": {
+        "planned_site_type": "hollow",
+        "actual_site_type": "hollow",
+        "is_chemical_slip": false,
+        "planned_symbols": [
+          "Cu",
+          "Cu",
+          "Cu",
+          "Cu"
+        ],
+        "actual_symbols": [
+          "Cu",
+          "Cu",
+          "Cu",
+          "Cu"
+        ],
+        "site_fingerprint": "llm-oracle::hollow::Cu-Cu-Cu-Cu::0"
+      }
+    },
+    "plan": {
+      "reasoning": "Step 0 - SMILES Consistency Check: The SMILES [CH2]CO represents the 2-hydroxyethyl radical. Atom index 0 is C (SP3, radical_electrons=1), index 1 is C (SP3, degree=2), index 2 is O (SP3, degree=1). The radical is on C0, consistent with the user request. This is a ReactiveSpecies.\n\nStep 1 - Analyze History:\n- bridge @ Cu-Cu (Index [0]): E=-2.800 eV ✅ (binding via C0 radical at bridge site)\n- hollow @ Cu-Cu-Cu (Index [0]): E=-2.950 eV ✅ New Best (binding via C0 radical at hollow-3 site)\nNo convergence tags ([🔄 Converged to known best]) observed. The hollow-3 site is currently the best.\n\nStep 2 - Formulate New Plan:\nRemaining untested sites from the available list:\n- [Ontop]: Cu — not yet tested\n- [Hollow-4]: Cu-Cu-Cu-Cu — not yet tested\n\nThe hollow-4 site (4-fold hollow) is a high-symmetry site that could provide stronger binding than hollow-3 due to more metal-adsorbate interactions. This is a promising candidate to test next. The radical carbon (index 0) would bind at the 4-fold hollow site.\n\nStep 3 - User Intent: Find the lowest-energy adsorption configuration for the 2-hydroxyethyl radical.\n\nStep 4 - Adsorbate Analysis: C0 (index 0) has radical_electrons=1, SP3 hybridization — this is the binding atom for ReactiveSpecies adsorption.\n\nStep 5 - Surface Analysis: [Hollow-4]: Cu-Cu-Cu-Cu is available and untested.\n\nStep 6 - Plan: Test hollow (4-fold) site with C0 as binding atom on Cu-Cu-Cu-Cu. This is a new configuration not yet explored.\n\nPredicted energy: The hollow-3 gave -2.950 eV. The hollow-4 site on a Cu(100)-like surface typically provides similar or slightly stronger binding for radical species. I estimate the MACE-MP-0 relaxed energy to be approximately -3.05 eV, slightly lower than hollow-3 due to the additional coordination.",
+      "adsorbate_type": "ReactiveSpecies",
+      "predicted_relaxed_energy_eV": -3.05,
+      "solution": {
+        "action": "continue",
+        "site_type": "hollow",
+        "surface_binding_atoms": [
+          "Cu",
+          "Cu",
+          "Cu",
+          "Cu"
+        ],
+        "adsorbate_binding_indices": [
+          0
+        ],
+        "relax_top_n": 1,
+        "touch_sphere_size": 2,
+        "overlap_thr": 0.1,
+        "conformers_per_site_cap": 4
+      }
+    },
+    "result_type": "Perfect"
+  },
+  "last_analysis": {
+    "status": "success",
+    "most_stable_energy_eV": -2.6,
+    "is_dissociated": false,
+    "is_covalently_bound": true,
+    "bond_change_count": 0,
+    "energy_source": "llm_predicted",
+    "site_analysis": {
+      "planned_site_type": "ontop",
+      "actual_site_type": "ontop",
+      "is_chemical_slip": false,
+      "planned_symbols": [
+        "Cu"
+      ],
+      "actual_symbols": [
+        "Cu"
+      ],
+      "site_fingerprint": "llm-oracle::ontop::Cu::0"
+    }
+  },
+  "attempt_records": [
+    {
+      "attempt_index": 1,
+      "plan": {
+        "reasoning": "Step 0 - SMILES Consistency Check: The SMILES [CH2]CO represents the 2-hydroxyethyl radical. RDKit analysis confirms: atom 0 is C (SP3, radical_electrons=1), atom 1 is C (SP3, degree=2, no radical), atom 2 is O (SP3, degree=1, no radical). The user requests adsorption of the 2-hydroxyethyl radical, which matches the SMILES. The radical center is at atom index 0 (the CH2 group).\n\nStep 1 - Analyze History: No previous attempts. This is the first plan.\n\nStep 2 - Formulate New Plan: Since this is a ReactiveSpecies (radical at C index 0), the primary binding should be through the radical carbon (index 0). The most favorable initial site for a carbon radical on a Cu-Ga(100) surface is typically an ontop Cu site or a bridge Cu-Cu site. For a CH2 radical, bridge adsorption is often energetically favorable as it allows the carbon to form two bonds with surface metal atoms, maximizing orbital overlap.\n\nStep 3 - Analyze Request: Find the lowest-energy adsorption configuration for the 2-hydroxyethyl radical on the Cu6Ga2 (100) surface.\n\nStep 4 - Analyze Adsorbate: The 2-hydroxyethyl radical [CH2]CO has:\n- Atom 0: C (SP3, radical, degree=1) - this is the radical center, primary binding atom\n- Atom 1: C (SP3, degree=2) - methylene bridge\n- Atom 2: O (SP3, degree=1) - hydroxyl oxygen with lone pairs\nThe radical is at C0, making it the natural binding atom for ReactiveSpecies adsorption.\n\nStep 5 - Analyze Surface: Available sites include Bridge (Cu-Cu), Hollow-3 (Cu-Cu-Cu), Ontop (Cu), Hollow-4 (Cu-Cu-Cu-Cu). For a carbon radical, bridge Cu-Cu is a strong candidate as it allows bidentate-like interaction.\n\nStep 6 - Formulate Plan: Start with bridge Cu-Cu site with the radical carbon (index 0) as the binding atom. This is the most physically motivated first attempt for a carbon radical on a (100) surface.\n\nPredicted energy estimation: For a 2-hydroxyethyl radical on Cu-Ga surface at a bridge site, MACE-MP-0 small typically gives adsorption energies in the range of -2.0 to -3.5 eV for carbon radicals on Cu surfaces. Given the Cu6Ga2 composition and the CH2 radical nature, I estimate approximately -2.8 eV for the relaxed configuration.",
+        "adsorbate_type": "ReactiveSpecies",
+        "predicted_relaxed_energy_eV": -2.8,
+        "solution": {
+          "action": "continue",
+          "site_type": "bridge",
+          "surface_binding_atoms": [
+            "Cu",
+            "Cu"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "bridge|Cu,Cu|0|ReactiveSpecies|2.0",
+      "planner_reasoning": "Step 0 - SMILES Consistency Check: The SMILES [CH2]CO represents the 2-hydroxyethyl radical. RDKit analysis confirms: atom 0 is C (SP3, radical_electrons=1), atom 1 is C (SP3, degree=2, no radical), atom 2 is O (SP3, degree=1, no radical). The user requests adsorption of the 2-hydroxyethyl radical, which matches the SMILES. The radical center is at atom index 0 (the CH2 group).\n\nStep 1 - Analyze History: No previous attempts. This is the first plan.\n\nStep 2 - Formulate New Plan: Since this is a ReactiveSpecies (radical at C index 0), the primary binding should be through the radical carbon (index 0). The most favorable initial site for a carbon radical on a Cu-Ga(100) surface is typically an ontop Cu site or a bridge Cu-Cu site. For a CH2 radical, bridge adsorption is often energetically favorable as it allows the carbon to form two bonds with surface metal atoms, maximizing orbital overlap.\n\nStep 3 - Analyze Request: Find the lowest-energy adsorption configuration for the 2-hydroxyethyl radical on the Cu6Ga2 (100) surface.\n\nStep 4 - Analyze Adsorbate: The 2-hydroxyethyl radical [CH2]CO has:\n- Atom 0: C (SP3, radical, degree=1) - this is the radical center, primary binding atom\n- Atom 1: C (SP3, degree=2) - methylene bridge\n- Atom 2: O (SP3, degree=1) - hydroxyl oxygen with lone pairs\nThe radical is at C0, making it the natural binding atom for ReactiveSpecies adsorption.\n\nStep 5 - Analyze Surface: Available sites include Bridge (Cu-Cu), Hollow-3 (Cu-Cu-Cu), Ontop (Cu), Hollow-4 (Cu-Cu-Cu-Cu). For a carbon radical, bridge Cu-Cu is a strong candidate as it allows bidentate-like interaction.\n\nStep 6 - Formulate Plan: Start with bridge Cu-Cu site with the radical carbon (index 0) as the binding atom. This is the most physically motivated first attempt for a carbon radical on a (100) surface.\n\nPredicted energy estimation: For a 2-hydroxyethyl radical on Cu-Ga surface at a bridge site, MACE-MP-0 small typically gives adsorption energies in the range of -2.0 to -3.5 eV for carbon radicals on Cu surfaces. Given the Cu6Ga2 composition and the CH2 radical nature, I estimate approximately -2.8 eV for the relaxed configuration.",
+      "tool_logs": [
+        "LLM-as-oracle mode: executor bypassed; predicted energy used in place of MACE relaxation.",
+        "Success: predicted_relaxed_energy_eV = -2.8000 eV."
+      ],
+      "status": "success",
+      "most_stable_energy_eV": -2.8,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": false,
+      "planned_site_type": "bridge",
+      "actual_site_type": "bridge",
+      "energy_source": "llm_predicted",
+      "history_entry": "【✅ Perfect Adsorption】 bridge @ ['Cu', 'Cu'] (Index [0]) -> Site: bridge (Cu,Cu) [🌟 New Best] | E=-2.800 eV"
+    },
+    {
+      "attempt_index": 2,
+      "plan": {
+        "reasoning": "Step 0 - SMILES Consistency Check: The SMILES [CH2]CO represents the 2-hydroxyethyl radical. Atom index 0 is C (SP3, radical_electrons=1), index 1 is C (SP3, no radical), index 2 is O (SP3, no radical). The radical is on C0, consistent with a ReactiveSpecies. No hybridization mismatch.\n\nStep 1 - Analyze History: One successful attempt exists: bridge @ ['Cu','Cu'] (Index [0]) -> E=-2.800 eV. This used the radical carbon (index 0) bound to a Cu-Cu bridge site. No convergence or termination tags observed.\n\nStep 2 - Formulate New Plan: The best result so far is -2.800 eV at a Cu-Cu bridge site with the radical C0. To explore whether a lower energy configuration exists, I should try:\n- Hollow sites (Cu-Cu-Cu or Cu-Cu-Cu-Cu) with the radical C0, which may provide stronger coordination.\n- Ontop with C0.\n\nThe hollow-3 (Cu-Cu-Cu) site is a natural next candidate, as hollow sites often provide stronger binding for radicals due to higher coordination. I will try C0 at a hollow site with Cu-Cu-Cu.\n\nStep 3 - User Intent: Find the lowest-energy adsorption configuration for the 2-hydroxyethyl radical.\n\nStep 4 - Adsorbate Analysis: Radical center is C0 (index 0, SP3, radical_electrons=1). This is the primary binding atom for ReactiveSpecies.\n\nStep 5 - Surface Analysis: Available hollow-3 site: Cu-Cu-Cu. This is a valid site to test.\n\nStep 6 - Plan: site_type='hollow', surface_binding_atoms=['Cu','Cu','Cu'], adsorbate_binding_indices=[0]. This places the radical carbon at the 3-fold hollow site.\n\nPredicted energy: Hollow sites for radicals on Cu surfaces typically bind slightly stronger than bridge sites. I estimate the MACE-MP-0 relaxed energy to be around -2.95 eV, slightly lower than the bridge result of -2.800 eV, though it may also slip to the bridge. Best estimate: -2.95 eV.",
+        "adsorbate_type": "ReactiveSpecies",
+        "predicted_relaxed_energy_eV": -2.95,
+        "solution": {
+          "action": "continue",
+          "site_type": "hollow",
+          "surface_binding_atoms": [
+            "Cu",
+            "Cu",
+            "Cu"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "hollow|Cu,Cu,Cu|0|ReactiveSpecies|2.0",
+      "planner_reasoning": "Step 0 - SMILES Consistency Check: The SMILES [CH2]CO represents the 2-hydroxyethyl radical. Atom index 0 is C (SP3, radical_electrons=1), index 1 is C (SP3, no radical), index 2 is O (SP3, no radical). The radical is on C0, consistent with a ReactiveSpecies. No hybridization mismatch.\n\nStep 1 - Analyze History: One successful attempt exists: bridge @ ['Cu','Cu'] (Index [0]) -> E=-2.800 eV. This used the radical carbon (index 0) bound to a Cu-Cu bridge site. No convergence or termination tags observed.\n\nStep 2 - Formulate New Plan: The best result so far is -2.800 eV at a Cu-Cu bridge site with the radical C0. To explore whether a lower energy configuration exists, I should try:\n- Hollow sites (Cu-Cu-Cu or Cu-Cu-Cu-Cu) with the radical C0, which may provide stronger coordination.\n- Ontop with C0.\n\nThe hollow-3 (Cu-Cu-Cu) site is a natural next candidate, as hollow sites often provide stronger binding for radicals due to higher coordination. I will try C0 at a hollow site with Cu-Cu-Cu.\n\nStep 3 - User Intent: Find the lowest-energy adsorption configuration for the 2-hydroxyethyl radical.\n\nStep 4 - Adsorbate Analysis: Radical center is C0 (index 0, SP3, radical_electrons=1). This is the primary binding atom for ReactiveSpecies.\n\nStep 5 - Surface Analysis: Available hollow-3 site: Cu-Cu-Cu. This is a valid site to test.\n\nStep 6 - Plan: site_type='hollow', surface_binding_atoms=['Cu','Cu','Cu'], adsorbate_binding_indices=[0]. This places the radical carbon at the 3-fold hollow site.\n\nPredicted energy: Hollow sites for radicals on Cu surfaces typically bind slightly stronger than bridge sites. I estimate the MACE-MP-0 relaxed energy to be around -2.95 eV, slightly lower than the bridge result of -2.800 eV, though it may also slip to the bridge. Best estimate: -2.95 eV.",
+      "tool_logs": [
+        "LLM-as-oracle mode: executor bypassed; predicted energy used in place of MACE relaxation.",
+        "Success: predicted_relaxed_energy_eV = -2.9500 eV."
+      ],
+      "status": "success",
+      "most_stable_energy_eV": -2.95,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": false,
+      "planned_site_type": "hollow",
+      "actual_site_type": "hollow",
+      "energy_source": "llm_predicted",
+      "history_entry": "【✅ Perfect Adsorption】 hollow @ ['Cu', 'Cu', 'Cu'] (Index [0]) -> Site: hollow (Cu,Cu,Cu) [🌟 New Best] | E=-2.950 eV"
+    },
+    {
+      "attempt_index": 3,
+      "plan": {
+        "reasoning": "Step 0 - SMILES Consistency Check: The SMILES [CH2]CO represents the 2-hydroxyethyl radical. Atom index 0 is C (SP3, radical_electrons=1), index 1 is C (SP3, degree=2), index 2 is O (SP3, degree=1). The radical is on C0, consistent with the user request. This is a ReactiveSpecies.\n\nStep 1 - Analyze History:\n- bridge @ Cu-Cu (Index [0]): E=-2.800 eV ✅ (binding via C0 radical at bridge site)\n- hollow @ Cu-Cu-Cu (Index [0]): E=-2.950 eV ✅ New Best (binding via C0 radical at hollow-3 site)\nNo convergence tags ([🔄 Converged to known best]) observed. The hollow-3 site is currently the best.\n\nStep 2 - Formulate New Plan:\nRemaining untested sites from the available list:\n- [Ontop]: Cu — not yet tested\n- [Hollow-4]: Cu-Cu-Cu-Cu — not yet tested\n\nThe hollow-4 site (4-fold hollow) is a high-symmetry site that could provide stronger binding than hollow-3 due to more metal-adsorbate interactions. This is a promising candidate to test next. The radical carbon (index 0) would bind at the 4-fold hollow site.\n\nStep 3 - User Intent: Find the lowest-energy adsorption configuration for the 2-hydroxyethyl radical.\n\nStep 4 - Adsorbate Analysis: C0 (index 0) has radical_electrons=1, SP3 hybridization — this is the binding atom for ReactiveSpecies adsorption.\n\nStep 5 - Surface Analysis: [Hollow-4]: Cu-Cu-Cu-Cu is available and untested.\n\nStep 6 - Plan: Test hollow (4-fold) site with C0 as binding atom on Cu-Cu-Cu-Cu. This is a new configuration not yet explored.\n\nPredicted energy: The hollow-3 gave -2.950 eV. The hollow-4 site on a Cu(100)-like surface typically provides similar or slightly stronger binding for radical species. I estimate the MACE-MP-0 relaxed energy to be approximately -3.05 eV, slightly lower than hollow-3 due to the additional coordination.",
+        "adsorbate_type": "ReactiveSpecies",
+        "predicted_relaxed_energy_eV": -3.05,
+        "solution": {
+          "action": "continue",
+          "site_type": "hollow",
+          "surface_binding_atoms": [
+            "Cu",
+            "Cu",
+            "Cu",
+            "Cu"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "hollow|Cu,Cu,Cu,Cu|0|ReactiveSpecies|2.0",
+      "planner_reasoning": "Step 0 - SMILES Consistency Check: The SMILES [CH2]CO represents the 2-hydroxyethyl radical. Atom index 0 is C (SP3, radical_electrons=1), index 1 is C (SP3, degree=2), index 2 is O (SP3, degree=1). The radical is on C0, consistent with the user request. This is a ReactiveSpecies.\n\nStep 1 - Analyze History:\n- bridge @ Cu-Cu (Index [0]): E=-2.800 eV ✅ (binding via C0 radical at bridge site)\n- hollow @ Cu-Cu-Cu (Index [0]): E=-2.950 eV ✅ New Best (binding via C0 radical at hollow-3 site)\nNo convergence tags ([🔄 Converged to known best]) observed. The hollow-3 site is currently the best.\n\nStep 2 - Formulate New Plan:\nRemaining untested sites from the available list:\n- [Ontop]: Cu — not yet tested\n- [Hollow-4]: Cu-Cu-Cu-Cu — not yet tested\n\nThe hollow-4 site (4-fold hollow) is a high-symmetry site that could provide stronger binding than hollow-3 due to more metal-adsorbate interactions. This is a promising candidate to test next. The radical carbon (index 0) would bind at the 4-fold hollow site.\n\nStep 3 - User Intent: Find the lowest-energy adsorption configuration for the 2-hydroxyethyl radical.\n\nStep 4 - Adsorbate Analysis: C0 (index 0) has radical_electrons=1, SP3 hybridization — this is the binding atom for ReactiveSpecies adsorption.\n\nStep 5 - Surface Analysis: [Hollow-4]: Cu-Cu-Cu-Cu is available and untested.\n\nStep 6 - Plan: Test hollow (4-fold) site with C0 as binding atom on Cu-Cu-Cu-Cu. This is a new configuration not yet explored.\n\nPredicted energy: The hollow-3 gave -2.950 eV. The hollow-4 site on a Cu(100)-like surface typically provides similar or slightly stronger binding for radical species. I estimate the MACE-MP-0 relaxed energy to be approximately -3.05 eV, slightly lower than hollow-3 due to the additional coordination.",
+      "tool_logs": [
+        "LLM-as-oracle mode: executor bypassed; predicted energy used in place of MACE relaxation.",
+        "Success: predicted_relaxed_energy_eV = -3.0500 eV."
+      ],
+      "status": "success",
+      "most_stable_energy_eV": -3.05,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": false,
+      "planned_site_type": "hollow",
+      "actual_site_type": "hollow",
+      "energy_source": "llm_predicted",
+      "history_entry": "【✅ Perfect Adsorption】 hollow @ ['Cu', 'Cu', 'Cu', 'Cu'] (Index [0]) -> Site: hollow (Cu,Cu,Cu,Cu) [🌟 New Best] | E=-3.050 eV"
+    },
+    {
+      "attempt_index": 4,
+      "plan": {
+        "reasoning": "Step 0 - SMILES Consistency Check: The SMILES [CH2]CO represents the 2-hydroxyethyl radical. Atom index 0 is C (SP3, radical_electrons=1), index 1 is C (SP3, degree=2), index 2 is O (SP3, degree=1). The radical is on C0, consistent with the user request.\n\nStep 1 - Analyze History:\n- Bridge (Cu-Cu), binding via C0 (radical): E=-2.800 eV ✅\n- Hollow-3 (Cu-Cu-Cu), binding via C0: E=-2.950 eV ✅\n- Hollow-4 (Cu-Cu-Cu-Cu), binding via C0: E=-3.050 eV ✅ [Current Best]\n\nAll three major site types have been tested. The trend shows hollow > bridge in stability, with hollow-4 being the best. The only untested canonical site type is 'ontop'.\n\nStep 2 - Formulate New Plan:\nThe only remaining untested site type is 'ontop' (Cu). Given the trend (hollow-4 > hollow-3 > bridge), ontop is likely to be weaker (less coordinated), but it must be tested to be thorough. However, ontop typically gives weaker binding than hollow sites for radical species on Cu surfaces. The energy is expected to be around -2.5 to -2.7 eV, lower than the current best.\n\nAfter ontop, all four available site types will have been tested. The hollow-4 site is currently the best. Since all major site types (bridge, hollow-3, hollow-4) have been tested and the trend is clear, and ontop is the only remaining option, I should test it. But given the convergence principle - all high-symmetry sites have been tested and the hollow-4 is clearly the best - I should consider whether testing ontop adds value.\n\nActually, looking at the available sites: [Bridge]: Cu-Cu; [Hollow-3]: Cu-Cu-Cu; [Ontop]: Cu; [Hollow-4]: Cu-Cu-Cu-Cu - all four site types exist. Three have been tested. The ontop site has not been tested. I should test it for completeness, but it is very likely to give a higher (less negative) energy than hollow-4.\n\nHowever, given the convergence principle and that ontop is expected to be weaker, and all hollow/bridge sites have been explored, I could also consider whether there are alternative binding modes (e.g., O-down binding via index 2). The O atom (index 2) has no radical electrons, so ReactiveSpecies via O is not appropriate. The only radical atom is C0.\n\nI will test the ontop site with C0 binding to complete the systematic survey. After this, if ontop is weaker, I will terminate.\n\nStep 3 - Plan: ontop @ Cu, binding via C0 (radical carbon, index 0), ReactiveSpecies.\n\nPredicted energy for ontop: Based on the trend (hollow-4=-3.050, hollow-3=-2.950, bridge=-2.800), ontop is expected to be around -2.5 to -2.65 eV. I estimate approximately -2.60 eV.",
+        "adsorbate_type": "ReactiveSpecies",
+        "predicted_relaxed_energy_eV": -2.6,
+        "solution": {
+          "action": "continue",
+          "site_type": "ontop",
+          "surface_binding_atoms": [
+            "Cu"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "ontop|Cu|0|ReactiveSpecies|2.0",
+      "planner_reasoning": "Step 0 - SMILES Consistency Check: The SMILES [CH2]CO represents the 2-hydroxyethyl radical. Atom index 0 is C (SP3, radical_electrons=1), index 1 is C (SP3, degree=2), index 2 is O (SP3, degree=1). The radical is on C0, consistent with the user request.\n\nStep 1 - Analyze History:\n- Bridge (Cu-Cu), binding via C0 (radical): E=-2.800 eV ✅\n- Hollow-3 (Cu-Cu-Cu), binding via C0: E=-2.950 eV ✅\n- Hollow-4 (Cu-Cu-Cu-Cu), binding via C0: E=-3.050 eV ✅ [Current Best]\n\nAll three major site types have been tested. The trend shows hollow > bridge in stability, with hollow-4 being the best. The only untested canonical site type is 'ontop'.\n\nStep 2 - Formulate New Plan:\nThe only remaining untested site type is 'ontop' (Cu). Given the trend (hollow-4 > hollow-3 > bridge), ontop is likely to be weaker (less coordinated), but it must be tested to be thorough. However, ontop typically gives weaker binding than hollow sites for radical species on Cu surfaces. The energy is expected to be around -2.5 to -2.7 eV, lower than the current best.\n\nAfter ontop, all four available site types will have been tested. The hollow-4 site is currently the best. Since all major site types (bridge, hollow-3, hollow-4) have been tested and the trend is clear, and ontop is the only remaining option, I should test it. But given the convergence principle - all high-symmetry sites have been tested and the hollow-4 is clearly the best - I should consider whether testing ontop adds value.\n\nActually, looking at the available sites: [Bridge]: Cu-Cu; [Hollow-3]: Cu-Cu-Cu; [Ontop]: Cu; [Hollow-4]: Cu-Cu-Cu-Cu - all four site types exist. Three have been tested. The ontop site has not been tested. I should test it for completeness, but it is very likely to give a higher (less negative) energy than hollow-4.\n\nHowever, given the convergence principle and that ontop is expected to be weaker, and all hollow/bridge sites have been explored, I could also consider whether there are alternative binding modes (e.g., O-down binding via index 2). The O atom (index 2) has no radical electrons, so ReactiveSpecies via O is not appropriate. The only radical atom is C0.\n\nI will test the ontop site with C0 binding to complete the systematic survey. After this, if ontop is weaker, I will terminate.\n\nStep 3 - Plan: ontop @ Cu, binding via C0 (radical carbon, index 0), ReactiveSpecies.\n\nPredicted energy for ontop: Based on the trend (hollow-4=-3.050, hollow-3=-2.950, bridge=-2.800), ontop is expected to be around -2.5 to -2.65 eV. I estimate approximately -2.60 eV.",
+      "tool_logs": [
+        "LLM-as-oracle mode: executor bypassed; predicted energy used in place of MACE relaxation.",
+        "Success: predicted_relaxed_energy_eV = -2.6000 eV."
+      ],
+      "status": "success",
+      "most_stable_energy_eV": -2.6,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": false,
+      "planned_site_type": "ontop",
+      "actual_site_type": "ontop",
+      "energy_source": "llm_predicted",
+      "history_entry": "【✅ Perfect Adsorption】 ontop @ ['Cu'] (Index [0]) -> Site: ontop (Cu) | E=-2.600 eV"
+    }
+  ],
+  "history": [
+    "【✅ Perfect Adsorption】 bridge @ ['Cu', 'Cu'] (Index [0]) -> Site: bridge (Cu,Cu) [🌟 New Best] | E=-2.800 eV",
+    "【✅ Perfect Adsorption】 hollow @ ['Cu', 'Cu', 'Cu'] (Index [0]) -> Site: hollow (Cu,Cu,Cu) [🌟 New Best] | E=-2.950 eV",
+    "【✅ Perfect Adsorption】 hollow @ ['Cu', 'Cu', 'Cu', 'Cu'] (Index [0]) -> Site: hollow (Cu,Cu,Cu,Cu) [🌟 New Best] | E=-3.050 eV",
+    "【✅ Perfect Adsorption】 ontop @ ['Cu'] (Index [0]) -> Site: ontop (Cu) | E=-2.600 eV"
+  ],
+  "error": null,
+  "perfect_count": 4,
+  "dissociation_count": 0,
+  "rearrangement_count": 0,
+  "calc_failure_count": 0,
+  "chemical_slip_count": 0
+}

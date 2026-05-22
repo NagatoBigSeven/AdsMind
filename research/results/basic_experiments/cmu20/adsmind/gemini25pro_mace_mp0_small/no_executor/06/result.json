@@ -1,0 +1,314 @@
+{
+  "case_id": "06",
+  "case_metadata": {
+    "case_id": "06",
+    "slab_file": "datasets/cmu20/06_Cu3Ag_111.xyz",
+    "smiles": "[N]=[NH]",
+    "user_request": "Find the lowest-energy adsorption configuration for NNH on the provided surface.",
+    "surface_family": "intermetallic",
+    "adsorbate_name": "NNH",
+    "miller_index": "(111)",
+    "reaction_class": "NRR",
+    "ablation_candidate": "FALSE",
+    "notes": "Cu3Ag NNH benchmark; dissociation observed before"
+  },
+  "status": "success",
+  "best_energy_eV": -2.8,
+  "iteration_count": 5,
+  "max_attempts": 5,
+  "final_site_type": "hollow",
+  "converged_tag": false,
+  "wall_clock_sec": 195.89082691445947,
+  "total_input_tokens": 20405,
+  "total_output_tokens": 20150,
+  "artifact_paths": {
+    "iteration_energy_curve": "/data/zongmin/workspace/AdsMind/research/results/basic_experiments/cmu20/adsmind/gemini25pro_mace_mp0_small/no_executor/06/artifacts/iteration_energy_curve.png",
+    "iteration_energy_curve.png": "/data/zongmin/workspace/AdsMind/research/results/basic_experiments/cmu20/adsmind/gemini25pro_mace_mp0_small/no_executor/06/artifacts/iteration_energy_curve.png",
+    "iteration_energy_curve_png": "/data/zongmin/workspace/AdsMind/research/results/basic_experiments/cmu20/adsmind/gemini25pro_mace_mp0_small/no_executor/06/artifacts/iteration_energy_curve.png",
+    "summary_report": "/data/zongmin/workspace/AdsMind/research/results/basic_experiments/cmu20/adsmind/gemini25pro_mace_mp0_small/no_executor/06/artifacts/summary_report.md",
+    "summary_report.md": "/data/zongmin/workspace/AdsMind/research/results/basic_experiments/cmu20/adsmind/gemini25pro_mace_mp0_small/no_executor/06/artifacts/summary_report.md",
+    "summary_report_file": "/data/zongmin/workspace/AdsMind/research/results/basic_experiments/cmu20/adsmind/gemini25pro_mace_mp0_small/no_executor/06/artifacts/summary_report.md"
+  },
+  "best_result": {
+    "most_stable_energy_eV": -2.8,
+    "analysis_json": {
+      "status": "success",
+      "most_stable_energy_eV": -2.8,
+      "is_dissociated": false,
+      "is_covalently_bound": true,
+      "bond_change_count": 0,
+      "energy_source": "llm_predicted",
+      "site_analysis": {
+        "planned_site_type": "hollow",
+        "actual_site_type": "hollow",
+        "is_chemical_slip": false,
+        "planned_symbols": [
+          "Cu",
+          "Cu",
+          "Cu"
+        ],
+        "actual_symbols": [
+          "Cu",
+          "Cu",
+          "Cu"
+        ],
+        "site_fingerprint": "llm-oracle::hollow::Cu-Cu-Cu::0-1"
+      }
+    },
+    "plan": {
+      "reasoning": "This is the first attempt to find the lowest energy adsorption configuration for the diazene radical ([N]=[NH]) on the Cu3Ag(111) surface. The SMILES indicates that the adsorbate is a radical, with the unpaired electron on the terminal nitrogen (index 0). Therefore, the `adsorbate_type` is set to 'ReactiveSpecies'. To start the search, I will choose a high-coordination site, which often leads to the most stable configurations for reactive species. Among the available sites, the 'hollow-3' site composed of three copper atoms ('Cu-Cu-Cu') is a promising candidate due to the higher reactivity of Cu compared to Ag. I will test a side-on adsorption mode where both nitrogen atoms (indices 0 and 1) bind to the surface over this hollow site. This configuration allows for maximum interaction between the adsorbate's pi system and the surface d-orbitals, potentially leading to a very stable structure.",
+      "adsorbate_type": "ReactiveSpecies",
+      "solution": {
+        "action": "continue",
+        "site_type": "hollow",
+        "surface_binding_atoms": [
+          "Cu",
+          "Cu",
+          "Cu"
+        ],
+        "adsorbate_binding_indices": [
+          0,
+          1
+        ],
+        "relax_top_n": 1,
+        "touch_sphere_size": 2,
+        "overlap_thr": 0.1,
+        "conformers_per_site_cap": 4
+      },
+      "predicted_relaxed_energy_eV": -2.8
+    },
+    "result_type": "Perfect"
+  },
+  "last_analysis": {
+    "status": "success",
+    "most_stable_energy_eV": -2.5,
+    "is_dissociated": false,
+    "is_covalently_bound": true,
+    "bond_change_count": 0,
+    "energy_source": "llm_predicted",
+    "site_analysis": {
+      "planned_site_type": "bridge",
+      "actual_site_type": "bridge",
+      "is_chemical_slip": false,
+      "planned_symbols": [
+        "Ag",
+        "Cu"
+      ],
+      "actual_symbols": [
+        "Ag",
+        "Cu"
+      ],
+      "site_fingerprint": "llm-oracle::bridge::Ag-Cu::0-1"
+    }
+  },
+  "attempt_records": [
+    {
+      "attempt_index": 1,
+      "plan": {
+        "reasoning": "This is the first attempt to find the lowest energy adsorption configuration for the diazene radical ([N]=[NH]) on the Cu3Ag(111) surface. The SMILES indicates that the adsorbate is a radical, with the unpaired electron on the terminal nitrogen (index 0). Therefore, the `adsorbate_type` is set to 'ReactiveSpecies'. To start the search, I will choose a high-coordination site, which often leads to the most stable configurations for reactive species. Among the available sites, the 'hollow-3' site composed of three copper atoms ('Cu-Cu-Cu') is a promising candidate due to the higher reactivity of Cu compared to Ag. I will test a side-on adsorption mode where both nitrogen atoms (indices 0 and 1) bind to the surface over this hollow site. This configuration allows for maximum interaction between the adsorbate's pi system and the surface d-orbitals, potentially leading to a very stable structure.",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "hollow",
+          "surface_binding_atoms": [
+            "Cu",
+            "Cu",
+            "Cu"
+          ],
+          "adsorbate_binding_indices": [
+            0,
+            1
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        },
+        "predicted_relaxed_energy_eV": -2.8
+      },
+      "plan_key": "hollow|Cu,Cu,Cu|0,1|ReactiveSpecies|2.0",
+      "planner_reasoning": "This is the first attempt to find the lowest energy adsorption configuration for the diazene radical ([N]=[NH]) on the Cu3Ag(111) surface. The SMILES indicates that the adsorbate is a radical, with the unpaired electron on the terminal nitrogen (index 0). Therefore, the `adsorbate_type` is set to 'ReactiveSpecies'. To start the search, I will choose a high-coordination site, which often leads to the most stable configurations for reactive species. Among the available sites, the 'hollow-3' site composed of three copper atoms ('Cu-Cu-Cu') is a promising candidate due to the higher reactivity of Cu compared to Ag. I will test a side-on adsorption mode where both nitrogen atoms (indices 0 and 1) bind to the surface over this hollow site. This configuration allows for maximum interaction between the adsorbate's pi system and the surface d-orbitals, potentially leading to a very stable structure.",
+      "tool_logs": [
+        "LLM-as-oracle mode: executor bypassed; predicted energy used in place of MACE relaxation.",
+        "Success: predicted_relaxed_energy_eV = -2.8000 eV."
+      ],
+      "status": "success",
+      "most_stable_energy_eV": -2.8,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": false,
+      "planned_site_type": "hollow",
+      "actual_site_type": "hollow",
+      "energy_source": "llm_predicted",
+      "history_entry": "【✅ Perfect Adsorption】 hollow @ ['Cu', 'Cu', 'Cu'] (Index [0, 1]) -> Site: hollow (Cu,Cu,Cu) [🌟 New Best] | E=-2.800 eV"
+    },
+    {
+      "attempt_index": 2,
+      "plan": {
+        "reasoning": "0. **SMILES Consistency Check**: The SMILES `[N]=[NH]` corresponds to the diazene radical (HNN•). The provided atom list confirms that atom at index 0 is a nitrogen radical (`radical_electrons: 1`), while atom at index 1 is a standard SP2 nitrogen. This is consistent.\n1. **Analyze Old Plans**: The history shows a single, successful adsorption of NNH in a side-on configuration (binding via both N atoms, indices 0 and 1) at a `Cu-Cu-Cu` hollow site. This resulted in the current best energy of -2.800 eV. This is a very strong chemisorption, indicating that side-on binding is a favorable mode for this molecule on this surface.\n2. **Formulate New Plan**: To systematically find the lowest energy configuration, I must now test other available high-symmetry sites. The previous test was on a 3-fold hollow site. A logical next step is to test a 2-fold bridge site. Given that Cu is generally more reactive than Ag, I will prioritize the `Cu-Cu` bridge site. I will maintain the side-on binding orientation (using adsorbate indices [0, 1]) as it was proven to be stable and led to strong adsorption in the previous step. Since the adsorbate is a radical, the `adsorbate_type` will be `ReactiveSpecies`.\n3. **Analyze Request**: The user wants the lowest-energy configuration for NNH on the given surface.\n4. **Analyze Adsorbate**: The adsorbate is HNN•, with a radical on N(0) and a lone pair on N(1). The side-on binding mode involves both atoms.\n5. **Analyze Surface**: The surface is Cu3Ag(111) and offers `Cu-Cu` bridge sites.\n6. **Formulate Plan**: I will plan for a side-on adsorption at a `Cu-Cu` bridge site.\n   - `site_type`: \"bridge\"\n   - `surface_binding_atoms`: [\"Cu\", \"Cu\"]\n   - `adsorbate_binding_indices`: [0, 1]\n   - `adsorbate_type`: \"ReactiveSpecies\"\n7. **Predict Energy**: The bridge site has a lower coordination number (2) than the previously tested hollow site (3). Therefore, I predict the adsorption energy will be slightly less negative (weaker) than the current best of -2.800 eV. I estimate the energy to be around -2.61 eV.",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "bridge",
+          "surface_binding_atoms": [
+            "Cu",
+            "Cu"
+          ],
+          "adsorbate_binding_indices": [
+            0,
+            1
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        },
+        "predicted_relaxed_energy_eV": -2.61
+      },
+      "plan_key": "bridge|Cu,Cu|0,1|ReactiveSpecies|2.0",
+      "planner_reasoning": "0. **SMILES Consistency Check**: The SMILES `[N]=[NH]` corresponds to the diazene radical (HNN•). The provided atom list confirms that atom at index 0 is a nitrogen radical (`radical_electrons: 1`), while atom at index 1 is a standard SP2 nitrogen. This is consistent.\n1. **Analyze Old Plans**: The history shows a single, successful adsorption of NNH in a side-on configuration (binding via both N atoms, indices 0 and 1) at a `Cu-Cu-Cu` hollow site. This resulted in the current best energy of -2.800 eV. This is a very strong chemisorption, indicating that side-on binding is a favorable mode for this molecule on this surface.\n2. **Formulate New Plan**: To systematically find the lowest energy configuration, I must now test other available high-symmetry sites. The previous test was on a 3-fold hollow site. A logical next step is to test a 2-fold bridge site. Given that Cu is generally more reactive than Ag, I will prioritize the `Cu-Cu` bridge site. I will maintain the side-on binding orientation (using adsorbate indices [0, 1]) as it was proven to be stable and led to strong adsorption in the previous step. Since the adsorbate is a radical, the `adsorbate_type` will be `ReactiveSpecies`.\n3. **Analyze Request**: The user wants the lowest-energy configuration for NNH on the given surface.\n4. **Analyze Adsorbate**: The adsorbate is HNN•, with a radical on N(0) and a lone pair on N(1). The side-on binding mode involves both atoms.\n5. **Analyze Surface**: The surface is Cu3Ag(111) and offers `Cu-Cu` bridge sites.\n6. **Formulate Plan**: I will plan for a side-on adsorption at a `Cu-Cu` bridge site.\n   - `site_type`: \"bridge\"\n   - `surface_binding_atoms`: [\"Cu\", \"Cu\"]\n   - `adsorbate_binding_indices`: [0, 1]\n   - `adsorbate_type`: \"ReactiveSpecies\"\n7. **Predict Energy**: The bridge site has a lower coordination number (2) than the previously tested hollow site (3). Therefore, I predict the adsorption energy will be slightly less negative (weaker) than the current best of -2.800 eV. I estimate the energy to be around -2.61 eV.",
+      "tool_logs": [
+        "LLM-as-oracle mode: executor bypassed; predicted energy used in place of MACE relaxation.",
+        "Success: predicted_relaxed_energy_eV = -2.6100 eV."
+      ],
+      "status": "success",
+      "most_stable_energy_eV": -2.61,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": false,
+      "planned_site_type": "bridge",
+      "actual_site_type": "bridge",
+      "energy_source": "llm_predicted",
+      "history_entry": "【✅ Perfect Adsorption】 bridge @ ['Cu', 'Cu'] (Index [0, 1]) -> Site: bridge (Cu,Cu) | E=-2.610 eV"
+    },
+    {
+      "attempt_index": 3,
+      "plan": {
+        "reasoning": "I have analyzed the previous attempts, which successfully found stable adsorption configurations for NNH in a side-on orientation (binding through both N atoms, indices 0 and 1) at a Cu-Cu-Cu hollow site (E=-2.800 eV) and a Cu-Cu bridge site (E=-2.610 eV). The hollow site is currently the most stable configuration found. The adsorbate, diazene ([N]=[NH]), has a radical electron on the terminal nitrogen atom (index 0), as indicated by the provided `autoadsorbate_context`. To systematically explore the potential energy surface, I will now test a different binding mode: an 'end-on' configuration. This involves forming a bond between the single radical nitrogen atom (index 0) and a single surface atom. Based on the previous results showing strong binding to copper, I will test the ontop site on a Cu atom. This represents a chemically distinct and plausible binding motif that has not yet been evaluated.",
+        "adsorbate_type": "ReactiveSpecies",
+        "predicted_relaxed_energy_eV": -2.55,
+        "solution": {
+          "action": "continue",
+          "site_type": "ontop",
+          "surface_binding_atoms": [
+            "Cu"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "ontop|Cu|0|ReactiveSpecies|2.0",
+      "planner_reasoning": "I have analyzed the previous attempts, which successfully found stable adsorption configurations for NNH in a side-on orientation (binding through both N atoms, indices 0 and 1) at a Cu-Cu-Cu hollow site (E=-2.800 eV) and a Cu-Cu bridge site (E=-2.610 eV). The hollow site is currently the most stable configuration found. The adsorbate, diazene ([N]=[NH]), has a radical electron on the terminal nitrogen atom (index 0), as indicated by the provided `autoadsorbate_context`. To systematically explore the potential energy surface, I will now test a different binding mode: an 'end-on' configuration. This involves forming a bond between the single radical nitrogen atom (index 0) and a single surface atom. Based on the previous results showing strong binding to copper, I will test the ontop site on a Cu atom. This represents a chemically distinct and plausible binding motif that has not yet been evaluated.",
+      "tool_logs": [
+        "LLM-as-oracle mode: executor bypassed; predicted energy used in place of MACE relaxation.",
+        "Success: predicted_relaxed_energy_eV = -2.5500 eV."
+      ],
+      "status": "success",
+      "most_stable_energy_eV": -2.55,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": false,
+      "planned_site_type": "ontop",
+      "actual_site_type": "ontop",
+      "energy_source": "llm_predicted",
+      "history_entry": "【✅ Perfect Adsorption】 ontop @ ['Cu'] (Index [0]) -> Site: ontop (Cu) | E=-2.550 eV"
+    },
+    {
+      "attempt_index": 4,
+      "plan": {
+        "reasoning": "1.  **Analyze History:** The best configuration found so far is NNH adsorbed side-on (via both N atoms, indices [0, 1]) at a `Cu-Cu-Cu` hollow site, with an energy of -2.800 eV. Pure Cu sites (ontop, bridge, hollow) have been explored, showing a stability trend of hollow > bridge > ontop.\n2.  **Analyze System:** The surface is a `Cu-Ag` alloy, and the adsorbate is diazene (`[N]=[NH]`), which is a radical species as indicated by the `autoadsorbate_context` (N at index 0 has 1 radical electron).\n3.  **Identify Untested Sites:** The history shows that only pure `Cu` sites have been tested. The list of available sites includes mixed-metal sites such as `Ag-Cu` (bridge), `Ag-Cu-Cu` (hollow-3), and `Ag-Cu-Cu-Cu` (hollow-4), as well as a pure `Ag` ontop site. These have not been explored yet.\n4.  **Formulate New Plan:** To systematically search for the global minimum, the next logical step is to test the mixed-metal sites. Following the established trend that hollow sites are the most favorable for this adsorbate, I will now test the `Ag-Cu-Cu` hollow site. I will maintain the side-on binding orientation (`adsorbate_binding_indices: [0, 1]`) which has resulted in the most stable configurations so far.\n5.  **Set Adsorbate Type:** Since the adsorbate is a radical, the `adsorbate_type` must be `ReactiveSpecies`.\n6.  **Predict Energy:** Adsorption on Ag is generally weaker than on Cu. Therefore, I predict the adsorption energy on the mixed `Ag-Cu-Cu` site will be less negative (weaker) than on the pure `Cu-Cu-Cu` site (-2.800 eV). A reasonable estimate, accounting for the presence of one less-reactive Ag atom, would be around -2.70 eV.",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "hollow",
+          "surface_binding_atoms": [
+            "Ag",
+            "Cu",
+            "Cu"
+          ],
+          "adsorbate_binding_indices": [
+            0,
+            1
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        },
+        "predicted_relaxed_energy_eV": -2.7
+      },
+      "plan_key": "hollow|Ag,Cu,Cu|0,1|ReactiveSpecies|2.0",
+      "planner_reasoning": "1.  **Analyze History:** The best configuration found so far is NNH adsorbed side-on (via both N atoms, indices [0, 1]) at a `Cu-Cu-Cu` hollow site, with an energy of -2.800 eV. Pure Cu sites (ontop, bridge, hollow) have been explored, showing a stability trend of hollow > bridge > ontop.\n2.  **Analyze System:** The surface is a `Cu-Ag` alloy, and the adsorbate is diazene (`[N]=[NH]`), which is a radical species as indicated by the `autoadsorbate_context` (N at index 0 has 1 radical electron).\n3.  **Identify Untested Sites:** The history shows that only pure `Cu` sites have been tested. The list of available sites includes mixed-metal sites such as `Ag-Cu` (bridge), `Ag-Cu-Cu` (hollow-3), and `Ag-Cu-Cu-Cu` (hollow-4), as well as a pure `Ag` ontop site. These have not been explored yet.\n4.  **Formulate New Plan:** To systematically search for the global minimum, the next logical step is to test the mixed-metal sites. Following the established trend that hollow sites are the most favorable for this adsorbate, I will now test the `Ag-Cu-Cu` hollow site. I will maintain the side-on binding orientation (`adsorbate_binding_indices: [0, 1]`) which has resulted in the most stable configurations so far.\n5.  **Set Adsorbate Type:** Since the adsorbate is a radical, the `adsorbate_type` must be `ReactiveSpecies`.\n6.  **Predict Energy:** Adsorption on Ag is generally weaker than on Cu. Therefore, I predict the adsorption energy on the mixed `Ag-Cu-Cu` site will be less negative (weaker) than on the pure `Cu-Cu-Cu` site (-2.800 eV). A reasonable estimate, accounting for the presence of one less-reactive Ag atom, would be around -2.70 eV.",
+      "tool_logs": [
+        "LLM-as-oracle mode: executor bypassed; predicted energy used in place of MACE relaxation.",
+        "Success: predicted_relaxed_energy_eV = -2.7000 eV."
+      ],
+      "status": "success",
+      "most_stable_energy_eV": -2.7,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": false,
+      "planned_site_type": "hollow",
+      "actual_site_type": "hollow",
+      "energy_source": "llm_predicted",
+      "history_entry": "【✅ Perfect Adsorption】 hollow @ ['Ag', 'Cu', 'Cu'] (Index [0, 1]) -> Site: hollow (Ag,Cu,Cu) | E=-2.700 eV"
+    },
+    {
+      "attempt_index": 5,
+      "plan": {
+        "reasoning": "I have reviewed the history of adsorption attempts. The current best configuration is NNH adsorbed at a Cu-Cu-Cu hollow site with an energy of -2.800 eV. Other tested sites include a Cu-Cu bridge (-2.610 eV), a Cu ontop (-2.550 eV), and an Ag-Cu-Cu hollow site (-2.700 eV). The results suggest that binding to Cu is generally more favorable than binding to Ag. To continue the systematic search for the lowest energy configuration, I will now test the Ag-Cu bridge site, which is a distinct chemical environment available on the surface that has not yet been explored. Consistent with the successful bridge and hollow site adsorptions in the history, I will plan for a side-on binding mode involving both nitrogen atoms (indices 0 and 1). I predict this site will be less stable than the pure Cu-Cu bridge site due to the presence of the less reactive Ag atom.",
+        "adsorbate_type": "Molecule",
+        "predicted_relaxed_energy_eV": -2.5,
+        "solution": {
+          "action": "continue",
+          "site_type": "bridge",
+          "surface_binding_atoms": [
+            "Ag",
+            "Cu"
+          ],
+          "adsorbate_binding_indices": [
+            0,
+            1
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "bridge|Ag,Cu|0,1|Molecule|2.0",
+      "planner_reasoning": "I have reviewed the history of adsorption attempts. The current best configuration is NNH adsorbed at a Cu-Cu-Cu hollow site with an energy of -2.800 eV. Other tested sites include a Cu-Cu bridge (-2.610 eV), a Cu ontop (-2.550 eV), and an Ag-Cu-Cu hollow site (-2.700 eV). The results suggest that binding to Cu is generally more favorable than binding to Ag. To continue the systematic search for the lowest energy configuration, I will now test the Ag-Cu bridge site, which is a distinct chemical environment available on the surface that has not yet been explored. Consistent with the successful bridge and hollow site adsorptions in the history, I will plan for a side-on binding mode involving both nitrogen atoms (indices 0 and 1). I predict this site will be less stable than the pure Cu-Cu bridge site due to the presence of the less reactive Ag atom.",
+      "tool_logs": [
+        "LLM-as-oracle mode: executor bypassed; predicted energy used in place of MACE relaxation.",
+        "Success: predicted_relaxed_energy_eV = -2.5000 eV."
+      ],
+      "status": "success",
+      "most_stable_energy_eV": -2.5,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": false,
+      "planned_site_type": "bridge",
+      "actual_site_type": "bridge",
+      "energy_source": "llm_predicted",
+      "history_entry": "【✅ Perfect Adsorption】 bridge @ ['Ag', 'Cu'] (Index [0, 1]) -> Site: bridge (Ag,Cu) | E=-2.500 eV"
+    }
+  ],
+  "history": [
+    "【✅ Perfect Adsorption】 hollow @ ['Cu', 'Cu', 'Cu'] (Index [0, 1]) -> Site: hollow (Cu,Cu,Cu) [🌟 New Best] | E=-2.800 eV",
+    "【✅ Perfect Adsorption】 bridge @ ['Cu', 'Cu'] (Index [0, 1]) -> Site: bridge (Cu,Cu) | E=-2.610 eV",
+    "【✅ Perfect Adsorption】 ontop @ ['Cu'] (Index [0]) -> Site: ontop (Cu) | E=-2.550 eV",
+    "【✅ Perfect Adsorption】 hollow @ ['Ag', 'Cu', 'Cu'] (Index [0, 1]) -> Site: hollow (Ag,Cu,Cu) | E=-2.700 eV",
+    "【✅ Perfect Adsorption】 bridge @ ['Ag', 'Cu'] (Index [0, 1]) -> Site: bridge (Ag,Cu) | E=-2.500 eV"
+  ],
+  "error": null,
+  "perfect_count": 5,
+  "dissociation_count": 0,
+  "rearrangement_count": 0,
+  "calc_failure_count": 0,
+  "chemical_slip_count": 0
+}

@@ -1,0 +1,313 @@
+{
+  "case_id": "20",
+  "case_metadata": {
+    "case_id": "20",
+    "slab_file": "datasets/cmu20/20_Bi2Ti6_211.xyz",
+    "smiles": "CN(C)N=O",
+    "user_request": "Find the lowest-energy adsorption configuration for dimethylnitrosamine on the provided surface.",
+    "surface_family": "intermetallic",
+    "adsorbate_name": "ONN(CH3)2",
+    "miller_index": "(211)",
+    "reaction_class": "COMPLEX",
+    "ablation_candidate": "FALSE",
+    "notes": "Recovered from top-level results artifacts; case directory is empty and needs archival repair"
+  },
+  "status": "success",
+  "best_energy_eV": -1.27,
+  "iteration_count": 5,
+  "max_attempts": 5,
+  "final_site_type": "hollow",
+  "converged_tag": false,
+  "wall_clock_sec": 101.88140358030796,
+  "total_input_tokens": 21077,
+  "total_output_tokens": 5777,
+  "artifact_paths": {
+    "iteration_energy_curve": "/data/zongmin/workspace/AdsMind/research/results/basic_experiments/cmu20/adsmind/gpt54_mace_mp0_small/no_executor/20/artifacts/iteration_energy_curve.png",
+    "iteration_energy_curve.png": "/data/zongmin/workspace/AdsMind/research/results/basic_experiments/cmu20/adsmind/gpt54_mace_mp0_small/no_executor/20/artifacts/iteration_energy_curve.png",
+    "iteration_energy_curve_png": "/data/zongmin/workspace/AdsMind/research/results/basic_experiments/cmu20/adsmind/gpt54_mace_mp0_small/no_executor/20/artifacts/iteration_energy_curve.png",
+    "summary_report": "/data/zongmin/workspace/AdsMind/research/results/basic_experiments/cmu20/adsmind/gpt54_mace_mp0_small/no_executor/20/artifacts/summary_report.md",
+    "summary_report.md": "/data/zongmin/workspace/AdsMind/research/results/basic_experiments/cmu20/adsmind/gpt54_mace_mp0_small/no_executor/20/artifacts/summary_report.md",
+    "summary_report_file": "/data/zongmin/workspace/AdsMind/research/results/basic_experiments/cmu20/adsmind/gpt54_mace_mp0_small/no_executor/20/artifacts/summary_report.md"
+  },
+  "best_result": {
+    "most_stable_energy_eV": -1.27,
+    "analysis_json": {
+      "status": "success",
+      "most_stable_energy_eV": -1.27,
+      "is_dissociated": false,
+      "is_covalently_bound": true,
+      "bond_change_count": 0,
+      "energy_source": "llm_predicted",
+      "site_analysis": {
+        "planned_site_type": "hollow",
+        "actual_site_type": "hollow",
+        "is_chemical_slip": false,
+        "planned_symbols": [
+          "Ti",
+          "Ti",
+          "Ti"
+        ],
+        "actual_symbols": [
+          "Ti",
+          "Ti",
+          "Ti"
+        ],
+        "site_fingerprint": "llm-oracle::hollow::Ti-Ti-Ti::4"
+      }
+    },
+    "plan": {
+      "reasoning": "SMILES consistency check: CN(C)N=O corresponds to dimethylnitrosamine, with heavy atoms C0-N1-C2-N3-O4. The two methyl carbons are SP3 and saturated, while N1, N3, and O4 are SP2 and have no radical electrons. Therefore this must be treated as a closed-shell Molecule, not a ReactiveSpecies. The most plausible donor atoms are the nitroso O atom (index 4) and nitroso N atom (index 3); tertiary amine-like N1 is less available because it is already three-coordinate and conjugated to the N=O group. History analysis: Ti ontop with a donor atom gave -1.050 eV, and Ti-Ti bridge improved to -1.180 eV and is the current best. No failures or chemical slips are reported, and there is no converged-duplicate termination tag. Since Ti sites outperform the tested Ti ontop site and bridge coordination often stabilizes nitroso adsorption through O,N or primarily O interaction across adjacent Lewis-acidic cations, the most promising unexplored high-symmetry option is a Ti-Ti-Ti hollow site. On Bi2Ti6 oxide-like surfaces, Bi is typically less strongly binding than Ti for N/O donors, so I prioritize the all-Ti hollow over Bi-containing sites. For the adsorbate binding atom choice, O4 is the strongest lone-pair donor and should be used as the single anchoring atom for a hollow test, which is allowed by the rules. Core user intent is to identify the lowest-energy adsorption configuration, so the next systematic step is to test the strongest unexplored Ti-rich site. Based on the trend ontop Ti (-1.05) < bridge Ti-Ti (-1.18), I estimate Ti-Ti-Ti hollow with O-down orientation could be modestly more stable, around -1.27 eV.",
+      "adsorbate_type": "Molecule",
+      "solution": {
+        "action": "continue",
+        "site_type": "hollow",
+        "surface_binding_atoms": [
+          "Ti",
+          "Ti",
+          "Ti"
+        ],
+        "adsorbate_binding_indices": [
+          4
+        ],
+        "relax_top_n": 1,
+        "touch_sphere_size": 2,
+        "overlap_thr": 0.1,
+        "conformers_per_site_cap": 4
+      },
+      "predicted_relaxed_energy_eV": -1.27
+    },
+    "result_type": "Perfect"
+  },
+  "last_analysis": {
+    "status": "success",
+    "most_stable_energy_eV": -1.16,
+    "is_dissociated": false,
+    "is_covalently_bound": true,
+    "bond_change_count": 0,
+    "energy_source": "llm_predicted",
+    "site_analysis": {
+      "planned_site_type": "hollow",
+      "actual_site_type": "hollow",
+      "is_chemical_slip": false,
+      "planned_symbols": [
+        "Bi",
+        "Bi",
+        "Ti"
+      ],
+      "actual_symbols": [
+        "Bi",
+        "Bi",
+        "Ti"
+      ],
+      "site_fingerprint": "llm-oracle::hollow::Bi-Bi-Ti::4"
+    }
+  },
+  "attempt_records": [
+    {
+      "attempt_index": 1,
+      "plan": {
+        "reasoning": "No history exists, so this is the first attempt and I should choose the most chemically plausible strongest-binding initial configuration rather than terminate. The SMILES CN(C)N=O is dimethylnitrosamine. The provided heavy-atom list is consistent with an N-nitrosamine: atom 1 is the tertiary amine-like N bonded to two methyl carbons (0 and 2) and nitroso N (3); atom 3 is the nitroso N; atom 4 is O. There is no mismatch between user request and SMILES. No radicals are present on any atom, so this must be treated as a Molecule, not a ReactiveSpecies. For adsorption, saturated methyl carbons 0 and 2 are not valid donor sites. The best donor atoms are O(4) and possibly nitroso N(3); the tertiary amine N(1) is less favorable because its lone pair is strongly delocalized into the N-N=O group. On a mixed Bi/Ti oxide-related surface, Ti centers are expected to be the more Lewis acidic and stronger adsorption sites than Bi. Therefore the most likely lowest-energy motif is molecular coordination through the nitroso oxygen to a Ti site. As an initial systematic plan, I choose an ontop Ti site with O atom index 4 as the single binding atom. This satisfies the site/alignment rules and targets the most plausible strong interaction. Estimated MACE-MP-0 small relaxed adsorption energy for this configuration is moderately exothermic, characteristic of O-bound molecular adsorption on exposed Ti, around -1.05 eV.",
+        "adsorbate_type": "Molecule",
+        "predicted_relaxed_energy_eV": -1.05,
+        "solution": {
+          "action": "continue",
+          "site_type": "ontop",
+          "surface_binding_atoms": [
+            "Ti"
+          ],
+          "adsorbate_binding_indices": [
+            4
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "ontop|Ti|4|Molecule|2.0",
+      "planner_reasoning": "No history exists, so this is the first attempt and I should choose the most chemically plausible strongest-binding initial configuration rather than terminate. The SMILES CN(C)N=O is dimethylnitrosamine. The provided heavy-atom list is consistent with an N-nitrosamine: atom 1 is the tertiary amine-like N bonded to two methyl carbons (0 and 2) and nitroso N (3); atom 3 is the nitroso N; atom 4 is O. There is no mismatch between user request and SMILES. No radicals are present on any atom, so this must be treated as a Molecule, not a ReactiveSpecies. For adsorption, saturated methyl carbons 0 and 2 are not valid donor sites. The best donor atoms are O(4) and possibly nitroso N(3); the tertiary amine N(1) is less favorable because its lone pair is strongly delocalized into the N-N=O group. On a mixed Bi/Ti oxide-related surface, Ti centers are expected to be the more Lewis acidic and stronger adsorption sites than Bi. Therefore the most likely lowest-energy motif is molecular coordination through the nitroso oxygen to a Ti site. As an initial systematic plan, I choose an ontop Ti site with O atom index 4 as the single binding atom. This satisfies the site/alignment rules and targets the most plausible strong interaction. Estimated MACE-MP-0 small relaxed adsorption energy for this configuration is moderately exothermic, characteristic of O-bound molecular adsorption on exposed Ti, around -1.05 eV.",
+      "tool_logs": [
+        "LLM-as-oracle mode: executor bypassed; predicted energy used in place of MACE relaxation.",
+        "Success: predicted_relaxed_energy_eV = -1.0500 eV."
+      ],
+      "status": "success",
+      "most_stable_energy_eV": -1.05,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": false,
+      "planned_site_type": "ontop",
+      "actual_site_type": "ontop",
+      "energy_source": "llm_predicted",
+      "history_entry": "【✅ Perfect Adsorption】 ontop @ ['Ti'] (Index [4]) -> Site: ontop (Ti) [🌟 New Best] | E=-1.050 eV"
+    },
+    {
+      "attempt_index": 2,
+      "plan": {
+        "reasoning": "SMILES consistency check: CN(C)N=O is dimethylnitrosamine, with two methyl carbons (0,2) both SP3, amine/nitrosamine nitrogens at 1 and 3 both SP2, and oxygen at 4 SP2. There is no mismatch between the user description and the SMILES. No radicals are present, so this must be treated as a Molecule, not a ReactiveSpecies. History analysis: only one successful plan has been tested so far, namely ontop on Ti using adsorbate atom index 4, with predicted relaxed energy -1.050 eV, which is the current best. No convergence-to-known-best tag or unstable-slip warning is present, so termination is not justified. To systematically search for a lower-energy configuration, we should try a chemically distinct site and donor pattern. For nitrosamines on oxophilic Ti/Bi oxide-like surfaces, the strongest donor atoms are typically the nitroso oxygen (4) and nitroso nitrogen (3), while the tertiary amine nitrogen (1) is less available due to conjugation/substitution. Since O-on-Ti ontop is already tested, the next most plausible stronger motif is a bidentate interaction of the N=O group across a Ti-Ti bridge, using indices 3 and 4. This can capture cooperative binding of N and O to adjacent cationic Ti sites and may be slightly more stable than monodentate O-on-Ti if the geometry is accommodated. Surface analysis allows bridge Ti-Ti, so this is a valid new high-symmetry plan distinct from history. I therefore propose a bridge site on Ti-Ti with adsorbate binding through nitroso N (3) and O (4). Predicted MACE-MP-0 small relaxed energy is slightly lower than the current best, estimated at -1.18.",
+        "adsorbate_type": "Molecule",
+        "solution": {
+          "action": "continue",
+          "site_type": "bridge",
+          "surface_binding_atoms": [
+            "Ti",
+            "Ti"
+          ],
+          "adsorbate_binding_indices": [
+            3,
+            4
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        },
+        "predicted_relaxed_energy_eV": -1.18
+      },
+      "plan_key": "bridge|Ti,Ti|3,4|Molecule|2.0",
+      "planner_reasoning": "SMILES consistency check: CN(C)N=O is dimethylnitrosamine, with two methyl carbons (0,2) both SP3, amine/nitrosamine nitrogens at 1 and 3 both SP2, and oxygen at 4 SP2. There is no mismatch between the user description and the SMILES. No radicals are present, so this must be treated as a Molecule, not a ReactiveSpecies. History analysis: only one successful plan has been tested so far, namely ontop on Ti using adsorbate atom index 4, with predicted relaxed energy -1.050 eV, which is the current best. No convergence-to-known-best tag or unstable-slip warning is present, so termination is not justified. To systematically search for a lower-energy configuration, we should try a chemically distinct site and donor pattern. For nitrosamines on oxophilic Ti/Bi oxide-like surfaces, the strongest donor atoms are typically the nitroso oxygen (4) and nitroso nitrogen (3), while the tertiary amine nitrogen (1) is less available due to conjugation/substitution. Since O-on-Ti ontop is already tested, the next most plausible stronger motif is a bidentate interaction of the N=O group across a Ti-Ti bridge, using indices 3 and 4. This can capture cooperative binding of N and O to adjacent cationic Ti sites and may be slightly more stable than monodentate O-on-Ti if the geometry is accommodated. Surface analysis allows bridge Ti-Ti, so this is a valid new high-symmetry plan distinct from history. I therefore propose a bridge site on Ti-Ti with adsorbate binding through nitroso N (3) and O (4). Predicted MACE-MP-0 small relaxed energy is slightly lower than the current best, estimated at -1.18.",
+      "tool_logs": [
+        "LLM-as-oracle mode: executor bypassed; predicted energy used in place of MACE relaxation.",
+        "Success: predicted_relaxed_energy_eV = -1.1800 eV."
+      ],
+      "status": "success",
+      "most_stable_energy_eV": -1.18,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": false,
+      "planned_site_type": "bridge",
+      "actual_site_type": "bridge",
+      "energy_source": "llm_predicted",
+      "history_entry": "【✅ Perfect Adsorption】 bridge @ ['Ti', 'Ti'] (Index [3, 4]) -> Site: bridge (Ti,Ti) [🌟 New Best] | E=-1.180 eV"
+    },
+    {
+      "attempt_index": 3,
+      "plan": {
+        "reasoning": "SMILES consistency check: CN(C)N=O corresponds to dimethylnitrosamine, with heavy atoms C0-N1-C2-N3-O4. The two methyl carbons are SP3 and saturated, while N1, N3, and O4 are SP2 and have no radical electrons. Therefore this must be treated as a closed-shell Molecule, not a ReactiveSpecies. The most plausible donor atoms are the nitroso O atom (index 4) and nitroso N atom (index 3); tertiary amine-like N1 is less available because it is already three-coordinate and conjugated to the N=O group. History analysis: Ti ontop with a donor atom gave -1.050 eV, and Ti-Ti bridge improved to -1.180 eV and is the current best. No failures or chemical slips are reported, and there is no converged-duplicate termination tag. Since Ti sites outperform the tested Ti ontop site and bridge coordination often stabilizes nitroso adsorption through O,N or primarily O interaction across adjacent Lewis-acidic cations, the most promising unexplored high-symmetry option is a Ti-Ti-Ti hollow site. On Bi2Ti6 oxide-like surfaces, Bi is typically less strongly binding than Ti for N/O donors, so I prioritize the all-Ti hollow over Bi-containing sites. For the adsorbate binding atom choice, O4 is the strongest lone-pair donor and should be used as the single anchoring atom for a hollow test, which is allowed by the rules. Core user intent is to identify the lowest-energy adsorption configuration, so the next systematic step is to test the strongest unexplored Ti-rich site. Based on the trend ontop Ti (-1.05) < bridge Ti-Ti (-1.18), I estimate Ti-Ti-Ti hollow with O-down orientation could be modestly more stable, around -1.27 eV.",
+        "adsorbate_type": "Molecule",
+        "solution": {
+          "action": "continue",
+          "site_type": "hollow",
+          "surface_binding_atoms": [
+            "Ti",
+            "Ti",
+            "Ti"
+          ],
+          "adsorbate_binding_indices": [
+            4
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        },
+        "predicted_relaxed_energy_eV": -1.27
+      },
+      "plan_key": "hollow|Ti,Ti,Ti|4|Molecule|2.0",
+      "planner_reasoning": "SMILES consistency check: CN(C)N=O corresponds to dimethylnitrosamine, with heavy atoms C0-N1-C2-N3-O4. The two methyl carbons are SP3 and saturated, while N1, N3, and O4 are SP2 and have no radical electrons. Therefore this must be treated as a closed-shell Molecule, not a ReactiveSpecies. The most plausible donor atoms are the nitroso O atom (index 4) and nitroso N atom (index 3); tertiary amine-like N1 is less available because it is already three-coordinate and conjugated to the N=O group. History analysis: Ti ontop with a donor atom gave -1.050 eV, and Ti-Ti bridge improved to -1.180 eV and is the current best. No failures or chemical slips are reported, and there is no converged-duplicate termination tag. Since Ti sites outperform the tested Ti ontop site and bridge coordination often stabilizes nitroso adsorption through O,N or primarily O interaction across adjacent Lewis-acidic cations, the most promising unexplored high-symmetry option is a Ti-Ti-Ti hollow site. On Bi2Ti6 oxide-like surfaces, Bi is typically less strongly binding than Ti for N/O donors, so I prioritize the all-Ti hollow over Bi-containing sites. For the adsorbate binding atom choice, O4 is the strongest lone-pair donor and should be used as the single anchoring atom for a hollow test, which is allowed by the rules. Core user intent is to identify the lowest-energy adsorption configuration, so the next systematic step is to test the strongest unexplored Ti-rich site. Based on the trend ontop Ti (-1.05) < bridge Ti-Ti (-1.18), I estimate Ti-Ti-Ti hollow with O-down orientation could be modestly more stable, around -1.27 eV.",
+      "tool_logs": [
+        "LLM-as-oracle mode: executor bypassed; predicted energy used in place of MACE relaxation.",
+        "Success: predicted_relaxed_energy_eV = -1.2700 eV."
+      ],
+      "status": "success",
+      "most_stable_energy_eV": -1.27,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": false,
+      "planned_site_type": "hollow",
+      "actual_site_type": "hollow",
+      "energy_source": "llm_predicted",
+      "history_entry": "【✅ Perfect Adsorption】 hollow @ ['Ti', 'Ti', 'Ti'] (Index [4]) -> Site: hollow (Ti,Ti,Ti) [🌟 New Best] | E=-1.270 eV"
+    },
+    {
+      "attempt_index": 4,
+      "plan": {
+        "reasoning": "SMILES consistency check: CN(C)N=O corresponds to dimethylnitrosamine, with heavy atoms C0-N1-C2-N3-O4. The two methyl carbons are SP3, the amine-like N1 is SP2 and tertiary, the nitroso N3 is SP2, and O4 is SP2. There is no mismatch between user request and SMILES. No atoms have radical electrons, so this must be treated as a Molecule, not a ReactiveSpecies. Historical analysis: three successful perfect adsorptions have already been tested on Ti-only environments: ontop Ti with E=-1.050 eV, bridge Ti-Ti with E=-1.180 eV, and hollow Ti-Ti-Ti with E=-1.270 eV, with the Ti3 hollow currently best. No failures, slips, or converged-duplicate tags are present, so termination is not yet forced. To systematically search for a lower-energy state, the remaining untested high-symmetry chemically distinct environments involve Bi-containing sites. For dimethylnitrosamine on oxophilic/metal cation mixed oxide surfaces, the strongest donor is typically the nitroso oxygen lone pair, with possible stabilization near Lewis-acidic Bi/Ti mixed ensembles. Since Ti3 hollow is already strong, the most plausible untested competitor is a mixed hollow site rather than Bi ontop or Bi-Bi bridge, because three-center coordination can better stabilize the nitroso end while accommodating the bulky dimethylamino group. Among available hollow sites, Bi-Ti-Ti is likely more favorable than Bi-Bi-Ti because retaining two Ti cations preserves stronger adsorption while allowing heterogeneity. Therefore the next distinct plan should test O-bound hollow adsorption on a Bi-Ti-Ti site using the oxygen atom index 4 as the sole binding point. Predicted relaxed energy is estimated to be slightly less favorable than the best Ti3 hollow due to dilution of Ti acidity by Bi, but still competitive.",
+        "adsorbate_type": "Molecule",
+        "solution": {
+          "action": "continue",
+          "site_type": "hollow",
+          "surface_binding_atoms": [
+            "Bi",
+            "Ti",
+            "Ti"
+          ],
+          "adsorbate_binding_indices": [
+            4
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        },
+        "predicted_relaxed_energy_eV": -1.22
+      },
+      "plan_key": "hollow|Bi,Ti,Ti|4|Molecule|2.0",
+      "planner_reasoning": "SMILES consistency check: CN(C)N=O corresponds to dimethylnitrosamine, with heavy atoms C0-N1-C2-N3-O4. The two methyl carbons are SP3, the amine-like N1 is SP2 and tertiary, the nitroso N3 is SP2, and O4 is SP2. There is no mismatch between user request and SMILES. No atoms have radical electrons, so this must be treated as a Molecule, not a ReactiveSpecies. Historical analysis: three successful perfect adsorptions have already been tested on Ti-only environments: ontop Ti with E=-1.050 eV, bridge Ti-Ti with E=-1.180 eV, and hollow Ti-Ti-Ti with E=-1.270 eV, with the Ti3 hollow currently best. No failures, slips, or converged-duplicate tags are present, so termination is not yet forced. To systematically search for a lower-energy state, the remaining untested high-symmetry chemically distinct environments involve Bi-containing sites. For dimethylnitrosamine on oxophilic/metal cation mixed oxide surfaces, the strongest donor is typically the nitroso oxygen lone pair, with possible stabilization near Lewis-acidic Bi/Ti mixed ensembles. Since Ti3 hollow is already strong, the most plausible untested competitor is a mixed hollow site rather than Bi ontop or Bi-Bi bridge, because three-center coordination can better stabilize the nitroso end while accommodating the bulky dimethylamino group. Among available hollow sites, Bi-Ti-Ti is likely more favorable than Bi-Bi-Ti because retaining two Ti cations preserves stronger adsorption while allowing heterogeneity. Therefore the next distinct plan should test O-bound hollow adsorption on a Bi-Ti-Ti site using the oxygen atom index 4 as the sole binding point. Predicted relaxed energy is estimated to be slightly less favorable than the best Ti3 hollow due to dilution of Ti acidity by Bi, but still competitive.",
+      "tool_logs": [
+        "LLM-as-oracle mode: executor bypassed; predicted energy used in place of MACE relaxation.",
+        "Success: predicted_relaxed_energy_eV = -1.2200 eV."
+      ],
+      "status": "success",
+      "most_stable_energy_eV": -1.22,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": false,
+      "planned_site_type": "hollow",
+      "actual_site_type": "hollow",
+      "energy_source": "llm_predicted",
+      "history_entry": "【✅ Perfect Adsorption】 hollow @ ['Bi', 'Ti', 'Ti'] (Index [4]) -> Site: hollow (Bi,Ti,Ti) | E=-1.220 eV"
+    },
+    {
+      "attempt_index": 5,
+      "plan": {
+        "reasoning": "SMILES consistency check: CN(C)N=O corresponds to dimethylnitrosamine, with heavy-atom indices 0 C, 1 amine-like N, 2 C, 3 nitroso N, 4 O. No mismatch with the user request. No radicals are present on any heavy atom, so this must be treated as a closed-shell Molecule, not a ReactiveSpecies. Chemically plausible donor atoms for molecular adsorption are the nitroso O (index 4) and nitroso N (index 3); the methyl carbons are saturated SP3 and should not be used as binding atoms.\n\nHistory analysis: tested successful plans are ontop Ti via index [4] at -1.050 eV, bridge Ti-Ti via index [3,4] at -1.180 eV, hollow Ti-Ti-Ti via index [4] at -1.270 eV (current best), and hollow Bi-Ti-Ti via index [4] at -1.220 eV. No failures or slips are reported, and no convergence-to-known-best tag is present. Major Ti-rich high-coordination sites have been explored; Ti-Ti-Ti hollow is best so far, suggesting O-down adsorption into oxophilic Ti ensembles dominates. Remaining untested high-symmetry families include Bi ontop, Bi-Bi bridge, Bi-Ti bridge, and Bi-Bi-Ti hollow. Since Bi-containing hollow Bi-Ti-Ti was weaker than Ti-Ti-Ti by 0.05 eV, fully Bi-rich environments are unlikely to beat the Ti3 hollow. Still, to systematically finish the site space, the most chemically meaningful remaining candidate is the mixed Bi-Bi-Ti hollow with O-bound molecular adsorption. This is distinct from all previous plans and respects the available site list.\n\nUser intent is to find the lowest-energy adsorption configuration. Given current trends, I do not expect Bi-Bi-Ti hollow to outperform Ti-Ti-Ti hollow; I predict it will adsorb somewhat weaker than the current best but still be stable. Best estimate for the relaxed MACE-MP-0 small adsorption energy is -1.16 eV.",
+        "adsorbate_type": "Molecule",
+        "solution": {
+          "action": "continue",
+          "site_type": "hollow",
+          "surface_binding_atoms": [
+            "Bi",
+            "Bi",
+            "Ti"
+          ],
+          "adsorbate_binding_indices": [
+            4
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        },
+        "predicted_relaxed_energy_eV": -1.16
+      },
+      "plan_key": "hollow|Bi,Bi,Ti|4|Molecule|2.0",
+      "planner_reasoning": "SMILES consistency check: CN(C)N=O corresponds to dimethylnitrosamine, with heavy-atom indices 0 C, 1 amine-like N, 2 C, 3 nitroso N, 4 O. No mismatch with the user request. No radicals are present on any heavy atom, so this must be treated as a closed-shell Molecule, not a ReactiveSpecies. Chemically plausible donor atoms for molecular adsorption are the nitroso O (index 4) and nitroso N (index 3); the methyl carbons are saturated SP3 and should not be used as binding atoms.\n\nHistory analysis: tested successful plans are ontop Ti via index [4] at -1.050 eV, bridge Ti-Ti via index [3,4] at -1.180 eV, hollow Ti-Ti-Ti via index [4] at -1.270 eV (current best), and hollow Bi-Ti-Ti via index [4] at -1.220 eV. No failures or slips are reported, and no convergence-to-known-best tag is present. Major Ti-rich high-coordination sites have been explored; Ti-Ti-Ti hollow is best so far, suggesting O-down adsorption into oxophilic Ti ensembles dominates. Remaining untested high-symmetry families include Bi ontop, Bi-Bi bridge, Bi-Ti bridge, and Bi-Bi-Ti hollow. Since Bi-containing hollow Bi-Ti-Ti was weaker than Ti-Ti-Ti by 0.05 eV, fully Bi-rich environments are unlikely to beat the Ti3 hollow. Still, to systematically finish the site space, the most chemically meaningful remaining candidate is the mixed Bi-Bi-Ti hollow with O-bound molecular adsorption. This is distinct from all previous plans and respects the available site list.\n\nUser intent is to find the lowest-energy adsorption configuration. Given current trends, I do not expect Bi-Bi-Ti hollow to outperform Ti-Ti-Ti hollow; I predict it will adsorb somewhat weaker than the current best but still be stable. Best estimate for the relaxed MACE-MP-0 small adsorption energy is -1.16 eV.",
+      "tool_logs": [
+        "LLM-as-oracle mode: executor bypassed; predicted energy used in place of MACE relaxation.",
+        "Success: predicted_relaxed_energy_eV = -1.1600 eV."
+      ],
+      "status": "success",
+      "most_stable_energy_eV": -1.16,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": false,
+      "planned_site_type": "hollow",
+      "actual_site_type": "hollow",
+      "energy_source": "llm_predicted",
+      "history_entry": "【✅ Perfect Adsorption】 hollow @ ['Bi', 'Bi', 'Ti'] (Index [4]) -> Site: hollow (Bi,Bi,Ti) | E=-1.160 eV"
+    }
+  ],
+  "history": [
+    "【✅ Perfect Adsorption】 ontop @ ['Ti'] (Index [4]) -> Site: ontop (Ti) [🌟 New Best] | E=-1.050 eV",
+    "【✅ Perfect Adsorption】 bridge @ ['Ti', 'Ti'] (Index [3, 4]) -> Site: bridge (Ti,Ti) [🌟 New Best] | E=-1.180 eV",
+    "【✅ Perfect Adsorption】 hollow @ ['Ti', 'Ti', 'Ti'] (Index [4]) -> Site: hollow (Ti,Ti,Ti) [🌟 New Best] | E=-1.270 eV",
+    "【✅ Perfect Adsorption】 hollow @ ['Bi', 'Ti', 'Ti'] (Index [4]) -> Site: hollow (Bi,Ti,Ti) | E=-1.220 eV",
+    "【✅ Perfect Adsorption】 hollow @ ['Bi', 'Bi', 'Ti'] (Index [4]) -> Site: hollow (Bi,Bi,Ti) | E=-1.160 eV"
+  ],
+  "error": null,
+  "perfect_count": 5,
+  "dissociation_count": 0,
+  "rearrangement_count": 0,
+  "calc_failure_count": 0,
+  "chemical_slip_count": 0
+}
