@@ -1,16 +1,16 @@
 #!/usr/bin/env python3
 """
-Prepare Figure 3 data from results/ raw data.
+Prepare Figure 4 data from results/ raw data.
 
 Reads original data from research/results/ and writes processed versions to
-research/results/processed/figure3/ with backend key names remapped from long
-to short form, matching the format expected by figure3_panels_updated.ipynb.
+research/results/processed/figure4/ with backend key names remapped from long
+to short form, matching the format expected by figure4_panels_updated.ipynb.
 
 Usage:
     python research/paper_plots/scripts/prepare_figure3_data.py
 
 Output:
-    research/results/processed/figure3/
+    research/results/processed/figure4/
         iteration_convergence.csv   (Panel a)
         method_comparison.csv       (Panel a — reference energies)
         slip_analysis.json          (Panel b)
@@ -25,7 +25,7 @@ import sys
 # --- Paths relative to AdsMind project root ---
 PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..'))
 RESULTS_DIR = os.path.join(PROJECT_ROOT, 'research', 'results')
-OUTPUT_DIR = os.path.join(RESULTS_DIR, 'processed', 'figure3')
+OUTPUT_DIR = os.path.join(RESULTS_DIR, 'processed', 'figure4')
 
 # --- Backend key mapping: long (results/) → short (Sherry / notebook) ---
 # NOTE: Sherry uses TWO different short names for Claude across files:
@@ -219,7 +219,7 @@ def process_ablation_4backend():
 def run():
     ensure_output_dir()
 
-    print("\nProcessing Figure 3 data sources...")
+    print("\nProcessing Figure 4 data sources...")
     print("-" * 50)
 
     ok = True

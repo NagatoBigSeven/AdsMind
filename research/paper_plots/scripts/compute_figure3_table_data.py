@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """
-Compute radar-chart table data for figure2_llm_performance.ipynb
+Compute radar-chart table data for figure3_llm_performance.ipynb
 from the raw all_variants_summary.csv files across 4 LLM backends.
 
-Output: research/results/processed/figure2/radar_data.csv
+Output: research/results/processed/figure3/radar_data.csv
   Columns: Variant, Mean_dE_vs_full_eV, Success_rate,
            Mean_4backend_range_eV, Agreement_rate
 """
@@ -20,7 +20,7 @@ backend_dirs = [
     "gemini25pro_mace_mp0_small",
     "claude_sonnet46_mace_mp0_small",
 ]
-out_dir = BASE / "research/results/processed/figure2"
+out_dir = BASE / "research/results/processed/figure3"
 out_dir.mkdir(parents=True, exist_ok=True)
 
 AGREEMENT_THRESHOLD = 0.05  # eV — standard chemical accuracy
