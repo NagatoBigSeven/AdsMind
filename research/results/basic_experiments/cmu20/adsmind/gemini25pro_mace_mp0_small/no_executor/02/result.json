@@ -1,0 +1,309 @@
+{
+  "case_id": "02",
+  "case_metadata": {
+    "case_id": "02",
+    "slab_file": "datasets/cmu20/02_Mo3Pd_111.xyz",
+    "smiles": "[N]=[NH]",
+    "user_request": "Find the lowest-energy adsorption configuration for NNH on the provided surface.",
+    "surface_family": "intermetallic",
+    "adsorbate_name": "NNH",
+    "miller_index": "(111)",
+    "reaction_class": "NRR",
+    "ablation_candidate": "TRUE",
+    "notes": "Dissociation-prone in prior run; Mo3Pd benchmark"
+  },
+  "status": "success",
+  "best_energy_eV": -4.2,
+  "iteration_count": 5,
+  "max_attempts": 5,
+  "final_site_type": "hollow",
+  "converged_tag": false,
+  "wall_clock_sec": 199.6362086981535,
+  "total_input_tokens": 20145,
+  "total_output_tokens": 19805,
+  "artifact_paths": {
+    "iteration_energy_curve": "research/results/basic_experiments/cmu20/adsmind/gemini25pro_mace_mp0_small/no_executor/02/artifacts/iteration_energy_curve.png",
+    "iteration_energy_curve.png": "research/results/basic_experiments/cmu20/adsmind/gemini25pro_mace_mp0_small/no_executor/02/artifacts/iteration_energy_curve.png",
+    "iteration_energy_curve_png": "research/results/basic_experiments/cmu20/adsmind/gemini25pro_mace_mp0_small/no_executor/02/artifacts/iteration_energy_curve.png",
+    "summary_report": "research/results/basic_experiments/cmu20/adsmind/gemini25pro_mace_mp0_small/no_executor/02/artifacts/summary_report.md",
+    "summary_report.md": "research/results/basic_experiments/cmu20/adsmind/gemini25pro_mace_mp0_small/no_executor/02/artifacts/summary_report.md",
+    "summary_report_file": "research/results/basic_experiments/cmu20/adsmind/gemini25pro_mace_mp0_small/no_executor/02/artifacts/summary_report.md"
+  },
+  "best_result": {
+    "most_stable_energy_eV": -4.2,
+    "analysis_json": {
+      "status": "success",
+      "most_stable_energy_eV": -4.2,
+      "is_dissociated": false,
+      "is_covalently_bound": true,
+      "bond_change_count": 0,
+      "energy_source": "llm_predicted",
+      "site_analysis": {
+        "planned_site_type": "hollow",
+        "actual_site_type": "hollow",
+        "is_chemical_slip": false,
+        "planned_symbols": [
+          "Mo",
+          "Mo",
+          "Pd"
+        ],
+        "actual_symbols": [
+          "Mo",
+          "Mo",
+          "Pd"
+        ],
+        "site_fingerprint": "llm-oracle::hollow::Mo-Mo-Pd::0"
+      }
+    },
+    "plan": {
+      "reasoning": "The user wants to find the lowest energy adsorption configuration for the NNH radical on a Mo3Pd(111) surface. The history is empty, so this is the first attempt. I will start by exploring a high-coordination site, as these are often the most stable for radical species. The provided analysis of the NNH adsorbate (SMILES: [N]=[NH]) shows that the terminal nitrogen atom at index 0 has a radical electron, making it the most likely binding point. I will therefore plan an adsorption of this radical nitrogen onto a hollow site. The surface offers both Mo-Mo-Mo and Mo-Mo-Pd hollow sites. I will start with the mixed Mo-Mo-Pd site to probe the interaction with both metal types. This leads to a plan where the adsorbate is treated as a 'ReactiveSpecies', binding via index 0 to a 'hollow' site composed of ['Mo', 'Mo', 'Pd'] atoms. I predict a strong chemisorption energy due to the reactive nature of both the radical and the surface.",
+      "adsorbate_type": "ReactiveSpecies",
+      "predicted_relaxed_energy_eV": -4.2,
+      "solution": {
+        "action": "continue",
+        "site_type": "hollow",
+        "surface_binding_atoms": [
+          "Mo",
+          "Mo",
+          "Pd"
+        ],
+        "adsorbate_binding_indices": [
+          0
+        ],
+        "relax_top_n": 1,
+        "touch_sphere_size": 2,
+        "overlap_thr": 0.1,
+        "conformers_per_site_cap": 4
+      }
+    },
+    "result_type": "Perfect"
+  },
+  "last_analysis": {
+    "status": "success",
+    "most_stable_energy_eV": -4.12,
+    "is_dissociated": false,
+    "is_covalently_bound": true,
+    "bond_change_count": 0,
+    "energy_source": "llm_predicted",
+    "site_analysis": {
+      "planned_site_type": "bridge",
+      "actual_site_type": "bridge",
+      "is_chemical_slip": false,
+      "planned_symbols": [
+        "Mo",
+        "Mo"
+      ],
+      "actual_symbols": [
+        "Mo",
+        "Mo"
+      ],
+      "site_fingerprint": "llm-oracle::bridge::Mo-Mo::0-1"
+    }
+  },
+  "attempt_records": [
+    {
+      "attempt_index": 1,
+      "plan": {
+        "reasoning": "The user wants to find the lowest energy adsorption configuration for the NNH radical on a Mo3Pd(111) surface. The history is empty, so this is the first attempt. I will start by exploring a high-coordination site, as these are often the most stable for radical species. The provided analysis of the NNH adsorbate (SMILES: [N]=[NH]) shows that the terminal nitrogen atom at index 0 has a radical electron, making it the most likely binding point. I will therefore plan an adsorption of this radical nitrogen onto a hollow site. The surface offers both Mo-Mo-Mo and Mo-Mo-Pd hollow sites. I will start with the mixed Mo-Mo-Pd site to probe the interaction with both metal types. This leads to a plan where the adsorbate is treated as a 'ReactiveSpecies', binding via index 0 to a 'hollow' site composed of ['Mo', 'Mo', 'Pd'] atoms. I predict a strong chemisorption energy due to the reactive nature of both the radical and the surface.",
+        "adsorbate_type": "ReactiveSpecies",
+        "predicted_relaxed_energy_eV": -4.2,
+        "solution": {
+          "action": "continue",
+          "site_type": "hollow",
+          "surface_binding_atoms": [
+            "Mo",
+            "Mo",
+            "Pd"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "hollow|Mo,Mo,Pd|0|ReactiveSpecies|2.0",
+      "planner_reasoning": "The user wants to find the lowest energy adsorption configuration for the NNH radical on a Mo3Pd(111) surface. The history is empty, so this is the first attempt. I will start by exploring a high-coordination site, as these are often the most stable for radical species. The provided analysis of the NNH adsorbate (SMILES: [N]=[NH]) shows that the terminal nitrogen atom at index 0 has a radical electron, making it the most likely binding point. I will therefore plan an adsorption of this radical nitrogen onto a hollow site. The surface offers both Mo-Mo-Mo and Mo-Mo-Pd hollow sites. I will start with the mixed Mo-Mo-Pd site to probe the interaction with both metal types. This leads to a plan where the adsorbate is treated as a 'ReactiveSpecies', binding via index 0 to a 'hollow' site composed of ['Mo', 'Mo', 'Pd'] atoms. I predict a strong chemisorption energy due to the reactive nature of both the radical and the surface.",
+      "tool_logs": [
+        "LLM-as-oracle mode: executor bypassed; predicted energy used in place of MACE relaxation.",
+        "Success: predicted_relaxed_energy_eV = -4.2000 eV."
+      ],
+      "status": "success",
+      "most_stable_energy_eV": -4.2,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": false,
+      "planned_site_type": "hollow",
+      "actual_site_type": "hollow",
+      "energy_source": "llm_predicted",
+      "history_entry": "【✅ Perfect Adsorption】 hollow @ ['Mo', 'Mo', 'Pd'] (Index [0]) -> Site: hollow (Mo,Mo,Pd) [🌟 New Best] | E=-4.200 eV"
+    },
+    {
+      "attempt_index": 2,
+      "plan": {
+        "reasoning": "The previous best result was on a Mo-Mo-Pd hollow site with an adsorption energy of E=-4.200 eV. This is a very strong interaction, indicating the high reactivity of the NNH radical with the Mo3Pd surface. To systematically search for the global minimum, I need to explore other available high-symmetry sites. The available sites that have not been tested are ontop (Mo, Pd), bridge (Mo-Mo, Mo-Pd), and hollow (Mo-Mo-Mo). A bridge site is an excellent candidate for an unsaturated molecule like NNH. I will plan for a side-on adsorption, where both nitrogen atoms (indices 0 and 1) bind to the surface. I'll choose the heteroatomic Mo-Pd bridge site, as these often exhibit unique reactivity compared to homoatomic sites. Since the adsorbate [N]=[NH] is a radical (N at index 0 has one radical electron), the `adsorbate_type` must be 'ReactiveSpecies'. This new plan explores a different coordination environment and is a logical next step in the search for the lowest energy configuration.",
+        "adsorbate_type": "ReactiveSpecies",
+        "predicted_relaxed_energy_eV": -4.05,
+        "solution": {
+          "action": "continue",
+          "site_type": "bridge",
+          "surface_binding_atoms": [
+            "Mo",
+            "Pd"
+          ],
+          "adsorbate_binding_indices": [
+            0,
+            1
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "bridge|Mo,Pd|0,1|ReactiveSpecies|2.0",
+      "planner_reasoning": "The previous best result was on a Mo-Mo-Pd hollow site with an adsorption energy of E=-4.200 eV. This is a very strong interaction, indicating the high reactivity of the NNH radical with the Mo3Pd surface. To systematically search for the global minimum, I need to explore other available high-symmetry sites. The available sites that have not been tested are ontop (Mo, Pd), bridge (Mo-Mo, Mo-Pd), and hollow (Mo-Mo-Mo). A bridge site is an excellent candidate for an unsaturated molecule like NNH. I will plan for a side-on adsorption, where both nitrogen atoms (indices 0 and 1) bind to the surface. I'll choose the heteroatomic Mo-Pd bridge site, as these often exhibit unique reactivity compared to homoatomic sites. Since the adsorbate [N]=[NH] is a radical (N at index 0 has one radical electron), the `adsorbate_type` must be 'ReactiveSpecies'. This new plan explores a different coordination environment and is a logical next step in the search for the lowest energy configuration.",
+      "tool_logs": [
+        "LLM-as-oracle mode: executor bypassed; predicted energy used in place of MACE relaxation.",
+        "Success: predicted_relaxed_energy_eV = -4.0500 eV."
+      ],
+      "status": "success",
+      "most_stable_energy_eV": -4.05,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": false,
+      "planned_site_type": "bridge",
+      "actual_site_type": "bridge",
+      "energy_source": "llm_predicted",
+      "history_entry": "【✅ Perfect Adsorption】 bridge @ ['Mo', 'Pd'] (Index [0, 1]) -> Site: bridge (Mo,Pd) | E=-4.050 eV"
+    },
+    {
+      "attempt_index": 3,
+      "plan": {
+        "reasoning": "I have analyzed the history of previous attempts. The current best adsorption energy is -4.200 eV, found at a Mo-Mo-Pd hollow site, likely with the radical N atom (index 0) binding. A side-on configuration at a Mo-Pd bridge site was also found with a slightly higher energy of -4.050 eV. To continue the systematic search for the lowest energy configuration, I will now test a fundamentally different site type that has not yet been explored: the ontop site. The NNH adsorbate ([N]=[NH]) is a radical, with the unpaired electron located on the terminal nitrogen atom (index 0). This atom is the most likely binding point for a single-point attachment. I will plan for adsorption on a Mo ontop site, as Mo is often more reactive than Pd. Therefore, the plan is to adsorb the NNH radical via its terminal N atom onto a single Mo surface atom.",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "ontop",
+          "surface_binding_atoms": [
+            "Mo"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        },
+        "predicted_relaxed_energy_eV": -3.75
+      },
+      "plan_key": "ontop|Mo|0|ReactiveSpecies|2.0",
+      "planner_reasoning": "I have analyzed the history of previous attempts. The current best adsorption energy is -4.200 eV, found at a Mo-Mo-Pd hollow site, likely with the radical N atom (index 0) binding. A side-on configuration at a Mo-Pd bridge site was also found with a slightly higher energy of -4.050 eV. To continue the systematic search for the lowest energy configuration, I will now test a fundamentally different site type that has not yet been explored: the ontop site. The NNH adsorbate ([N]=[NH]) is a radical, with the unpaired electron located on the terminal nitrogen atom (index 0). This atom is the most likely binding point for a single-point attachment. I will plan for adsorption on a Mo ontop site, as Mo is often more reactive than Pd. Therefore, the plan is to adsorb the NNH radical via its terminal N atom onto a single Mo surface atom.",
+      "tool_logs": [
+        "LLM-as-oracle mode: executor bypassed; predicted energy used in place of MACE relaxation.",
+        "Success: predicted_relaxed_energy_eV = -3.7500 eV."
+      ],
+      "status": "success",
+      "most_stable_energy_eV": -3.75,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": false,
+      "planned_site_type": "ontop",
+      "actual_site_type": "ontop",
+      "energy_source": "llm_predicted",
+      "history_entry": "【✅ Perfect Adsorption】 ontop @ ['Mo'] (Index [0]) -> Site: ontop (Mo) | E=-3.750 eV"
+    },
+    {
+      "attempt_index": 4,
+      "plan": {
+        "reasoning": "My goal is to systematically find the lowest energy adsorption site for the NNH radical. The history shows I have successfully tested an ontop site on Mo (-3.750 eV), a bridge site on Mo-Pd (-4.050 eV), and a hollow site on Mo-Mo-Pd (-4.200 eV). The current best configuration is the Mo-Mo-Pd hollow site. To continue the systematic search, I must test the remaining high-symmetry sites. The list of available sites includes an ontop site on Pd, which has not been explored yet. Since the adsorbate is a radical with the unpaired electron on the terminal nitrogen (index 0), I will plan a `ReactiveSpecies` adsorption on the Pd ontop site via this radical nitrogen atom. This is a logical next step to ensure all primary site types are covered.",
+        "adsorbate_type": "ReactiveSpecies",
+        "predicted_relaxed_energy_eV": -3.9,
+        "solution": {
+          "action": "continue",
+          "site_type": "ontop",
+          "surface_binding_atoms": [
+            "Pd"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "ontop|Pd|0|ReactiveSpecies|2.0",
+      "planner_reasoning": "My goal is to systematically find the lowest energy adsorption site for the NNH radical. The history shows I have successfully tested an ontop site on Mo (-3.750 eV), a bridge site on Mo-Pd (-4.050 eV), and a hollow site on Mo-Mo-Pd (-4.200 eV). The current best configuration is the Mo-Mo-Pd hollow site. To continue the systematic search, I must test the remaining high-symmetry sites. The list of available sites includes an ontop site on Pd, which has not been explored yet. Since the adsorbate is a radical with the unpaired electron on the terminal nitrogen (index 0), I will plan a `ReactiveSpecies` adsorption on the Pd ontop site via this radical nitrogen atom. This is a logical next step to ensure all primary site types are covered.",
+      "tool_logs": [
+        "LLM-as-oracle mode: executor bypassed; predicted energy used in place of MACE relaxation.",
+        "Success: predicted_relaxed_energy_eV = -3.9000 eV."
+      ],
+      "status": "success",
+      "most_stable_energy_eV": -3.9,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": false,
+      "planned_site_type": "ontop",
+      "actual_site_type": "ontop",
+      "energy_source": "llm_predicted",
+      "history_entry": "【✅ Perfect Adsorption】 ontop @ ['Pd'] (Index [0]) -> Site: ontop (Pd) | E=-3.900 eV"
+    },
+    {
+      "attempt_index": 5,
+      "plan": {
+        "reasoning": "I have analyzed the previous attempts, which have successfully tested ontop sites on Mo and Pd, a bridge site on Mo-Pd, and a hollow site on Mo-Mo-Pd. The current lowest energy configuration is at the Mo-Mo-Pd hollow site with an energy of -4.200 eV. The trend suggests that higher coordination sites are more favorable. The list of available sites includes two that have not yet been tested: the Mo-Mo bridge site and the Mo-Mo-Mo hollow site. To continue the systematic search for the global minimum, I will now test the Mo-Mo bridge site. I will place the NNH adsorbate in a side-on configuration, with both nitrogen atoms (indices 0 and 1) interacting with the two Mo atoms of the bridge. Since the NNH species is a radical at atom index 0, I will set the adsorbate_type to 'ReactiveSpecies'. I predict the energy to be competitive, likely stronger than the Mo-Pd bridge (-4.050 eV) but perhaps not as strong as the best hollow site, so I will estimate -4.12 eV.",
+        "adsorbate_type": "ReactiveSpecies",
+        "predicted_relaxed_energy_eV": -4.12,
+        "solution": {
+          "action": "continue",
+          "site_type": "bridge",
+          "surface_binding_atoms": [
+            "Mo",
+            "Mo"
+          ],
+          "adsorbate_binding_indices": [
+            0,
+            1
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "bridge|Mo,Mo|0,1|ReactiveSpecies|2.0",
+      "planner_reasoning": "I have analyzed the previous attempts, which have successfully tested ontop sites on Mo and Pd, a bridge site on Mo-Pd, and a hollow site on Mo-Mo-Pd. The current lowest energy configuration is at the Mo-Mo-Pd hollow site with an energy of -4.200 eV. The trend suggests that higher coordination sites are more favorable. The list of available sites includes two that have not yet been tested: the Mo-Mo bridge site and the Mo-Mo-Mo hollow site. To continue the systematic search for the global minimum, I will now test the Mo-Mo bridge site. I will place the NNH adsorbate in a side-on configuration, with both nitrogen atoms (indices 0 and 1) interacting with the two Mo atoms of the bridge. Since the NNH species is a radical at atom index 0, I will set the adsorbate_type to 'ReactiveSpecies'. I predict the energy to be competitive, likely stronger than the Mo-Pd bridge (-4.050 eV) but perhaps not as strong as the best hollow site, so I will estimate -4.12 eV.",
+      "tool_logs": [
+        "LLM-as-oracle mode: executor bypassed; predicted energy used in place of MACE relaxation.",
+        "Success: predicted_relaxed_energy_eV = -4.1200 eV."
+      ],
+      "status": "success",
+      "most_stable_energy_eV": -4.12,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": false,
+      "planned_site_type": "bridge",
+      "actual_site_type": "bridge",
+      "energy_source": "llm_predicted",
+      "history_entry": "【✅ Perfect Adsorption】 bridge @ ['Mo', 'Mo'] (Index [0, 1]) -> Site: bridge (Mo,Mo) | E=-4.120 eV"
+    }
+  ],
+  "history": [
+    "【✅ Perfect Adsorption】 hollow @ ['Mo', 'Mo', 'Pd'] (Index [0]) -> Site: hollow (Mo,Mo,Pd) [🌟 New Best] | E=-4.200 eV",
+    "【✅ Perfect Adsorption】 bridge @ ['Mo', 'Pd'] (Index [0, 1]) -> Site: bridge (Mo,Pd) | E=-4.050 eV",
+    "【✅ Perfect Adsorption】 ontop @ ['Mo'] (Index [0]) -> Site: ontop (Mo) | E=-3.750 eV",
+    "【✅ Perfect Adsorption】 ontop @ ['Pd'] (Index [0]) -> Site: ontop (Pd) | E=-3.900 eV",
+    "【✅ Perfect Adsorption】 bridge @ ['Mo', 'Mo'] (Index [0, 1]) -> Site: bridge (Mo,Mo) | E=-4.120 eV"
+  ],
+  "error": null,
+  "perfect_count": 5,
+  "dissociation_count": 0,
+  "rearrangement_count": 0,
+  "calc_failure_count": 0,
+  "chemical_slip_count": 0
+}

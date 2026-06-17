@@ -1,0 +1,315 @@
+{
+  "case_id": "06",
+  "case_metadata": {
+    "case_id": "06",
+    "slab_file": "datasets/cmu20/06_Cu3Ag_111.xyz",
+    "smiles": "[N]=[NH]",
+    "user_request": "Find the lowest-energy adsorption configuration for NNH on the provided surface.",
+    "surface_family": "intermetallic",
+    "adsorbate_name": "NNH",
+    "miller_index": "(111)",
+    "reaction_class": "NRR",
+    "ablation_candidate": "FALSE",
+    "notes": "Cu3Ag NNH benchmark; dissociation observed before"
+  },
+  "status": "success",
+  "best_energy_eV": -1.08,
+  "iteration_count": 5,
+  "max_attempts": 5,
+  "final_site_type": "hollow",
+  "converged_tag": false,
+  "wall_clock_sec": 98.48517372459173,
+  "total_input_tokens": 20245,
+  "total_output_tokens": 5761,
+  "artifact_paths": {
+    "iteration_energy_curve": "research/results/basic_experiments/cmu20/adsmind/gpt54_mace_mp0_small/no_executor/06/artifacts/iteration_energy_curve.png",
+    "iteration_energy_curve.png": "research/results/basic_experiments/cmu20/adsmind/gpt54_mace_mp0_small/no_executor/06/artifacts/iteration_energy_curve.png",
+    "iteration_energy_curve_png": "research/results/basic_experiments/cmu20/adsmind/gpt54_mace_mp0_small/no_executor/06/artifacts/iteration_energy_curve.png",
+    "summary_report": "research/results/basic_experiments/cmu20/adsmind/gpt54_mace_mp0_small/no_executor/06/artifacts/summary_report.md",
+    "summary_report.md": "research/results/basic_experiments/cmu20/adsmind/gpt54_mace_mp0_small/no_executor/06/artifacts/summary_report.md",
+    "summary_report_file": "research/results/basic_experiments/cmu20/adsmind/gpt54_mace_mp0_small/no_executor/06/artifacts/summary_report.md"
+  },
+  "best_result": {
+    "most_stable_energy_eV": -1.08,
+    "analysis_json": {
+      "status": "success",
+      "most_stable_energy_eV": -1.08,
+      "is_dissociated": false,
+      "is_covalently_bound": true,
+      "bond_change_count": 0,
+      "energy_source": "llm_predicted",
+      "site_analysis": {
+        "planned_site_type": "hollow",
+        "actual_site_type": "hollow",
+        "is_chemical_slip": false,
+        "planned_symbols": [
+          "Cu",
+          "Cu",
+          "Cu"
+        ],
+        "actual_symbols": [
+          "Cu",
+          "Cu",
+          "Cu"
+        ],
+        "site_fingerprint": "llm-oracle::hollow::Cu-Cu-Cu::0"
+      }
+    },
+    "plan": {
+      "reasoning": "SMILES consistency check: the adsorbate is [N]=[NH], i.e. NNH/diazenyl-type species. The provided heavy-atom list has N index 0 as SP2 with 1 radical electron, and N index 1 as SP2 with 0 radical electrons. There is no mismatch with the requested NNH. Because I will bind through atom 0, which truly has an unpaired electron, classifying this as ReactiveSpecies is chemically consistent. History analysis: two successful plans exist already: ontop on Cu with E = -0.780 eV and bridge on Cu-Cu with E = -0.930 eV, which is the current best. No failures, slips, dissociation, or convergence-to-known-best tags are present, so termination is not warranted. A completely new plan is required. For N-containing unsaturated radicals on Cu/Ag(111), Cu sites are generally more binding than Ag, but higher coordination can further stabilize adsorption. Since Cu-Cu bridge is already better than Cu ontop, the most plausible remaining lower-energy candidate is a hollow site enriched in Cu, namely Hollow-3 Cu-Cu-Cu. Hollow-4 includes Ag and may be less favorable electronically for NNH. Using only one adsorbate binding atom is the most physically reasonable for end-on NNH adsorption on a metal surface; side-on di-sigma binding by both N atoms is possible in principle but is less likely to outperform the Cu-rich hollow end-on motif for this small radical. User intent is to find the lowest-energy adsorption configuration, so the next systematic test should target the strongest untested high-symmetry Cu-rich site. Selected binding atom is adsorbate index 0, the terminal radical N. Predicted MACE-MP-0 small relaxed energy for this configuration is slightly more stable than the current best bridge Cu-Cu result.",
+      "adsorbate_type": "ReactiveSpecies",
+      "solution": {
+        "action": "continue",
+        "site_type": "hollow",
+        "surface_binding_atoms": [
+          "Cu",
+          "Cu",
+          "Cu"
+        ],
+        "adsorbate_binding_indices": [
+          0
+        ],
+        "relax_top_n": 1,
+        "touch_sphere_size": 2,
+        "overlap_thr": 0.1,
+        "conformers_per_site_cap": 4
+      },
+      "predicted_relaxed_energy_eV": -1.08
+    },
+    "result_type": "Perfect"
+  },
+  "last_analysis": {
+    "status": "success",
+    "most_stable_energy_eV": -1.03,
+    "is_dissociated": false,
+    "is_covalently_bound": true,
+    "bond_change_count": 0,
+    "energy_source": "llm_predicted",
+    "site_analysis": {
+      "planned_site_type": "hollow",
+      "actual_site_type": "hollow",
+      "is_chemical_slip": false,
+      "planned_symbols": [
+        "Ag",
+        "Cu",
+        "Cu",
+        "Cu"
+      ],
+      "actual_symbols": [
+        "Ag",
+        "Cu",
+        "Cu",
+        "Cu"
+      ],
+      "site_fingerprint": "llm-oracle::hollow::Ag-Cu-Cu-Cu::0"
+    }
+  },
+  "attempt_records": [
+    {
+      "attempt_index": 1,
+      "plan": {
+        "reasoning": "No history exists, so this is the initial plan and no prior sites or orientations have been tested. The user wants the lowest-energy adsorption configuration for NNH on Cu3Ag(111). The SMILES [N]=[NH] corresponds to diazenyl/imide-like NNH, not a closed-shell saturated molecule. From the provided atom list, atom 0 is N with SP2 hybridization and 1 radical electron, while atom 1 is N with SP2 hybridization and 0 radical electrons. Therefore, if using ReactiveSpecies, the binding atom should be index 0 to respect the radical-electron rule. Chemically, on late-transition-metal (111) alloy surfaces, NNH-derived radicals typically bind most strongly through the terminal radical N atom in an end-on geometry rather than side-on through both nitrogens. Cu/Ag surfaces are relatively weak-binding compared with pure Cu or more reactive metals, and Ag is especially weak for N-containing adsorbates; thus Cu-centered adsorption should be favored over Ag-centered adsorption. Among available motifs, an ontop Cu site is the most physically reasonable initial low-energy guess because it allows localized N radical donation to a more reactive Cu atom without forcing less favorable multi-center bonding on a weakly interacting alloy surface. Bridge or hollow motifs may be too weak or may relax toward end-on Cu binding anyway. I therefore choose ReactiveSpecies adsorption via atom 0 on a Cu ontop site. Predicted MACE-MP-0 small relaxed adsorption energy is moderately exothermic, around -0.78 eV.",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "ontop",
+          "surface_binding_atoms": [
+            "Cu"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        },
+        "predicted_relaxed_energy_eV": -0.78
+      },
+      "plan_key": "ontop|Cu|0|ReactiveSpecies|2.0",
+      "planner_reasoning": "No history exists, so this is the initial plan and no prior sites or orientations have been tested. The user wants the lowest-energy adsorption configuration for NNH on Cu3Ag(111). The SMILES [N]=[NH] corresponds to diazenyl/imide-like NNH, not a closed-shell saturated molecule. From the provided atom list, atom 0 is N with SP2 hybridization and 1 radical electron, while atom 1 is N with SP2 hybridization and 0 radical electrons. Therefore, if using ReactiveSpecies, the binding atom should be index 0 to respect the radical-electron rule. Chemically, on late-transition-metal (111) alloy surfaces, NNH-derived radicals typically bind most strongly through the terminal radical N atom in an end-on geometry rather than side-on through both nitrogens. Cu/Ag surfaces are relatively weak-binding compared with pure Cu or more reactive metals, and Ag is especially weak for N-containing adsorbates; thus Cu-centered adsorption should be favored over Ag-centered adsorption. Among available motifs, an ontop Cu site is the most physically reasonable initial low-energy guess because it allows localized N radical donation to a more reactive Cu atom without forcing less favorable multi-center bonding on a weakly interacting alloy surface. Bridge or hollow motifs may be too weak or may relax toward end-on Cu binding anyway. I therefore choose ReactiveSpecies adsorption via atom 0 on a Cu ontop site. Predicted MACE-MP-0 small relaxed adsorption energy is moderately exothermic, around -0.78 eV.",
+      "tool_logs": [
+        "LLM-as-oracle mode: executor bypassed; predicted energy used in place of MACE relaxation.",
+        "Success: predicted_relaxed_energy_eV = -0.7800 eV."
+      ],
+      "status": "success",
+      "most_stable_energy_eV": -0.78,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": false,
+      "planned_site_type": "ontop",
+      "actual_site_type": "ontop",
+      "energy_source": "llm_predicted",
+      "history_entry": "【✅ Perfect Adsorption】 ontop @ ['Cu'] (Index [0]) -> Site: ontop (Cu) [🌟 New Best] | E=-0.780 eV"
+    },
+    {
+      "attempt_index": 2,
+      "plan": {
+        "reasoning": "SMILES consistency check: the adsorbate is [N]=[NH], i.e. NNH/diazene-like radical representation with two N atoms. The provided atom list is consistent with this: atom 0 is N, SP2, degree 1, radical_electrons 1; atom 1 is N, SP2, degree 1, radical_electrons 0. There is no mismatch between the requested NNH and the SMILES. Because atom 0 carries an unpaired electron, ReactiveSpecies adsorption through atom 0 is chemically valid. History analysis: only one successful plan has been tested so far, ontop on Cu using one Cu atom, with E = -0.780 eV, and it is the current best. There is no convergence tag, no chemical slip, and no evidence that other site families are invalid. Therefore I should propose a new, distinct high-symmetry adsorption motif rather than terminate. Request analysis: the user wants the lowest-energy adsorption configuration for NNH on Cu3Ag(111). For N-containing radicals on coinage/alloy surfaces, the radical terminal N commonly binds most strongly through the radical center. Since Cu already outperformed nothing else and Cu is typically more reactive than Ag, the next most promising unexplored motif is to increase coordination of the same radical N over a Cu-rich bridge. Among available bridge sites, Cu-Cu should generally bind stronger than Ag-Cu for N-centered adsorption. Adsorbate analysis: atom 0 is the correct binding atom for ReactiveSpecies because it has radical_electrons > 0; atom 1 should not be selected as the sole binding atom for ReactiveSpecies. Surface analysis: allowed sites include bridge Cu-Cu, which is a valid unexplored option and chemically more favorable than Ag-containing sites for stronger adsorption. Plan: test bridge adsorption with the radical N atom (index 0) coordinated to a Cu-Cu bridge. This is different from the previous ontop Cu plan, obeys canonical site naming, and is a systematic next step toward a lower energy state. Predicted MACE-MP-0 small relaxed energy is estimated to be modestly more stable than the known ontop Cu result due to increased coordination, about -0.93 eV.",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "bridge",
+          "surface_binding_atoms": [
+            "Cu",
+            "Cu"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        },
+        "predicted_relaxed_energy_eV": -0.93
+      },
+      "plan_key": "bridge|Cu,Cu|0|ReactiveSpecies|2.0",
+      "planner_reasoning": "SMILES consistency check: the adsorbate is [N]=[NH], i.e. NNH/diazene-like radical representation with two N atoms. The provided atom list is consistent with this: atom 0 is N, SP2, degree 1, radical_electrons 1; atom 1 is N, SP2, degree 1, radical_electrons 0. There is no mismatch between the requested NNH and the SMILES. Because atom 0 carries an unpaired electron, ReactiveSpecies adsorption through atom 0 is chemically valid. History analysis: only one successful plan has been tested so far, ontop on Cu using one Cu atom, with E = -0.780 eV, and it is the current best. There is no convergence tag, no chemical slip, and no evidence that other site families are invalid. Therefore I should propose a new, distinct high-symmetry adsorption motif rather than terminate. Request analysis: the user wants the lowest-energy adsorption configuration for NNH on Cu3Ag(111). For N-containing radicals on coinage/alloy surfaces, the radical terminal N commonly binds most strongly through the radical center. Since Cu already outperformed nothing else and Cu is typically more reactive than Ag, the next most promising unexplored motif is to increase coordination of the same radical N over a Cu-rich bridge. Among available bridge sites, Cu-Cu should generally bind stronger than Ag-Cu for N-centered adsorption. Adsorbate analysis: atom 0 is the correct binding atom for ReactiveSpecies because it has radical_electrons > 0; atom 1 should not be selected as the sole binding atom for ReactiveSpecies. Surface analysis: allowed sites include bridge Cu-Cu, which is a valid unexplored option and chemically more favorable than Ag-containing sites for stronger adsorption. Plan: test bridge adsorption with the radical N atom (index 0) coordinated to a Cu-Cu bridge. This is different from the previous ontop Cu plan, obeys canonical site naming, and is a systematic next step toward a lower energy state. Predicted MACE-MP-0 small relaxed energy is estimated to be modestly more stable than the known ontop Cu result due to increased coordination, about -0.93 eV.",
+      "tool_logs": [
+        "LLM-as-oracle mode: executor bypassed; predicted energy used in place of MACE relaxation.",
+        "Success: predicted_relaxed_energy_eV = -0.9300 eV."
+      ],
+      "status": "success",
+      "most_stable_energy_eV": -0.93,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": false,
+      "planned_site_type": "bridge",
+      "actual_site_type": "bridge",
+      "energy_source": "llm_predicted",
+      "history_entry": "【✅ Perfect Adsorption】 bridge @ ['Cu', 'Cu'] (Index [0]) -> Site: bridge (Cu,Cu) [🌟 New Best] | E=-0.930 eV"
+    },
+    {
+      "attempt_index": 3,
+      "plan": {
+        "reasoning": "SMILES consistency check: the adsorbate is [N]=[NH], i.e. NNH/diazenyl-type species. The provided heavy-atom list has N index 0 as SP2 with 1 radical electron, and N index 1 as SP2 with 0 radical electrons. There is no mismatch with the requested NNH. Because I will bind through atom 0, which truly has an unpaired electron, classifying this as ReactiveSpecies is chemically consistent. History analysis: two successful plans exist already: ontop on Cu with E = -0.780 eV and bridge on Cu-Cu with E = -0.930 eV, which is the current best. No failures, slips, dissociation, or convergence-to-known-best tags are present, so termination is not warranted. A completely new plan is required. For N-containing unsaturated radicals on Cu/Ag(111), Cu sites are generally more binding than Ag, but higher coordination can further stabilize adsorption. Since Cu-Cu bridge is already better than Cu ontop, the most plausible remaining lower-energy candidate is a hollow site enriched in Cu, namely Hollow-3 Cu-Cu-Cu. Hollow-4 includes Ag and may be less favorable electronically for NNH. Using only one adsorbate binding atom is the most physically reasonable for end-on NNH adsorption on a metal surface; side-on di-sigma binding by both N atoms is possible in principle but is less likely to outperform the Cu-rich hollow end-on motif for this small radical. User intent is to find the lowest-energy adsorption configuration, so the next systematic test should target the strongest untested high-symmetry Cu-rich site. Selected binding atom is adsorbate index 0, the terminal radical N. Predicted MACE-MP-0 small relaxed energy for this configuration is slightly more stable than the current best bridge Cu-Cu result.",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "hollow",
+          "surface_binding_atoms": [
+            "Cu",
+            "Cu",
+            "Cu"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        },
+        "predicted_relaxed_energy_eV": -1.08
+      },
+      "plan_key": "hollow|Cu,Cu,Cu|0|ReactiveSpecies|2.0",
+      "planner_reasoning": "SMILES consistency check: the adsorbate is [N]=[NH], i.e. NNH/diazenyl-type species. The provided heavy-atom list has N index 0 as SP2 with 1 radical electron, and N index 1 as SP2 with 0 radical electrons. There is no mismatch with the requested NNH. Because I will bind through atom 0, which truly has an unpaired electron, classifying this as ReactiveSpecies is chemically consistent. History analysis: two successful plans exist already: ontop on Cu with E = -0.780 eV and bridge on Cu-Cu with E = -0.930 eV, which is the current best. No failures, slips, dissociation, or convergence-to-known-best tags are present, so termination is not warranted. A completely new plan is required. For N-containing unsaturated radicals on Cu/Ag(111), Cu sites are generally more binding than Ag, but higher coordination can further stabilize adsorption. Since Cu-Cu bridge is already better than Cu ontop, the most plausible remaining lower-energy candidate is a hollow site enriched in Cu, namely Hollow-3 Cu-Cu-Cu. Hollow-4 includes Ag and may be less favorable electronically for NNH. Using only one adsorbate binding atom is the most physically reasonable for end-on NNH adsorption on a metal surface; side-on di-sigma binding by both N atoms is possible in principle but is less likely to outperform the Cu-rich hollow end-on motif for this small radical. User intent is to find the lowest-energy adsorption configuration, so the next systematic test should target the strongest untested high-symmetry Cu-rich site. Selected binding atom is adsorbate index 0, the terminal radical N. Predicted MACE-MP-0 small relaxed energy for this configuration is slightly more stable than the current best bridge Cu-Cu result.",
+      "tool_logs": [
+        "LLM-as-oracle mode: executor bypassed; predicted energy used in place of MACE relaxation.",
+        "Success: predicted_relaxed_energy_eV = -1.0800 eV."
+      ],
+      "status": "success",
+      "most_stable_energy_eV": -1.08,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": false,
+      "planned_site_type": "hollow",
+      "actual_site_type": "hollow",
+      "energy_source": "llm_predicted",
+      "history_entry": "【✅ Perfect Adsorption】 hollow @ ['Cu', 'Cu', 'Cu'] (Index [0]) -> Site: hollow (Cu,Cu,Cu) [🌟 New Best] | E=-1.080 eV"
+    },
+    {
+      "attempt_index": 4,
+      "plan": {
+        "reasoning": "SMILES consistency check: the adsorbate is [N]=[NH], i.e. NNH/diimide-like radical form. RDKit facts show two N atoms: index 0 is SP2 with 1 radical electron, index 1 is SP2 with 0 radical electrons. There is no mismatch with the requested NNH. Because I plan to bind through the radical center, this should be treated as ReactiveSpecies, and the selected binding atom 0 does indeed have an unpaired electron. History analysis: tested successful plans are ontop on Cu with E=-0.780 eV, bridge on Cu-Cu with E=-0.930 eV, and hollow on Cu-Cu-Cu with E=-1.080 eV, which is the current best. No failures, slips, or convergence tags are reported. Since the surface is a Cu-Ag alloy and only pure-Cu environments have been explored so far, a chemically distinct mixed hollow site remains plausible. N-containing radicals often prefer higher coordination and more electron-rich ensembles, but Ag alloying can tune binding; among the untested available motifs, hollow Ag-Cu-Cu is the most systematic next candidate because hollow was best so far and this mixed ensemble could still outperform or come close to Cu3. I will therefore test a new hollow configuration on the mixed Ag-Cu-Cu threefold site, binding through the radical terminal N atom (index 0). Predicted MACE-MP-0 small relaxed adsorption energy for this new configuration is slightly weaker than the Cu-Cu-Cu hollow best due to Ag dilution of the strongly binding Cu ensemble, estimated at -0.970.",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "hollow",
+          "surface_binding_atoms": [
+            "Ag",
+            "Cu",
+            "Cu"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        },
+        "predicted_relaxed_energy_eV": -0.97
+      },
+      "plan_key": "hollow|Ag,Cu,Cu|0|ReactiveSpecies|2.0",
+      "planner_reasoning": "SMILES consistency check: the adsorbate is [N]=[NH], i.e. NNH/diimide-like radical form. RDKit facts show two N atoms: index 0 is SP2 with 1 radical electron, index 1 is SP2 with 0 radical electrons. There is no mismatch with the requested NNH. Because I plan to bind through the radical center, this should be treated as ReactiveSpecies, and the selected binding atom 0 does indeed have an unpaired electron. History analysis: tested successful plans are ontop on Cu with E=-0.780 eV, bridge on Cu-Cu with E=-0.930 eV, and hollow on Cu-Cu-Cu with E=-1.080 eV, which is the current best. No failures, slips, or convergence tags are reported. Since the surface is a Cu-Ag alloy and only pure-Cu environments have been explored so far, a chemically distinct mixed hollow site remains plausible. N-containing radicals often prefer higher coordination and more electron-rich ensembles, but Ag alloying can tune binding; among the untested available motifs, hollow Ag-Cu-Cu is the most systematic next candidate because hollow was best so far and this mixed ensemble could still outperform or come close to Cu3. I will therefore test a new hollow configuration on the mixed Ag-Cu-Cu threefold site, binding through the radical terminal N atom (index 0). Predicted MACE-MP-0 small relaxed adsorption energy for this new configuration is slightly weaker than the Cu-Cu-Cu hollow best due to Ag dilution of the strongly binding Cu ensemble, estimated at -0.970.",
+      "tool_logs": [
+        "LLM-as-oracle mode: executor bypassed; predicted energy used in place of MACE relaxation.",
+        "Success: predicted_relaxed_energy_eV = -0.9700 eV."
+      ],
+      "status": "success",
+      "most_stable_energy_eV": -0.97,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": false,
+      "planned_site_type": "hollow",
+      "actual_site_type": "hollow",
+      "energy_source": "llm_predicted",
+      "history_entry": "【✅ Perfect Adsorption】 hollow @ ['Ag', 'Cu', 'Cu'] (Index [0]) -> Site: hollow (Ag,Cu,Cu) | E=-0.970 eV"
+    },
+    {
+      "attempt_index": 5,
+      "plan": {
+        "reasoning": "SMILES consistency check: the adsorbate is [N]=[NH], i.e. NNH/diazenyl-like species with two N atoms. The provided atom list is consistent with this: atom 0 is N, SP2, radical_electrons=1; atom 1 is N, SP2, radical_electrons=0. There is no mismatch between the requested NNH and the SMILES. Because atom 0 carries the unpaired electron, if using ReactiveSpecies the binding should involve atom 0. History analysis: tested successful sites are ontop Cu at -0.780 eV, bridge Cu-Cu at -0.930 eV, hollow Cu-Cu-Cu at -1.080 eV, and hollow Ag-Cu-Cu at -0.970 eV. No failures or slip/converged duplicate tags are reported. The current best is clearly the Cu-rich hollow site. Remaining distinct high-symmetry site chemistries not yet tested are ontop Ag, bridge Ag-Cu, and hollow Ag-Cu-Cu-Cu. Since adsorption strengthens with increasing Cu coordination in the history, Ag-containing sites are expected to be weaker than Cu-Cu-Cu, but the only untested high-coordination environment is the 4-fold Ag-Cu-Cu-Cu hollow, which could still compete due to increased coordination. To systematically search for the lowest energy, this is the most informative remaining new plan. User intent is to find the lowest-energy adsorption configuration for NNH on this Cu/Ag(111)-like alloy surface. Adsorbate analysis: NNH is an unsaturated N-containing reactive fragment; atom 0 is the radical terminus and is the chemically appropriate metal-binding atom. Therefore adsorbate_type should be ReactiveSpecies and adsorbate_binding_indices should be [0]. Site choice: use canonical site_type 'hollow' with the available surface combination ['Ag','Cu','Cu','Cu']; although listed as Hollow-4 in the site inventory, JSON must still use canonical 'hollow'. Predicted energy should be slightly weaker than Cu-Cu-Cu hollow because Ag dilutes the stronger Cu interaction, but the extra coordination may partly compensate. Best estimate for the MACE-MP-0 small relaxed adsorption energy is -1.03 eV.",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "hollow",
+          "surface_binding_atoms": [
+            "Ag",
+            "Cu",
+            "Cu",
+            "Cu"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        },
+        "predicted_relaxed_energy_eV": -1.03
+      },
+      "plan_key": "hollow|Ag,Cu,Cu,Cu|0|ReactiveSpecies|2.0",
+      "planner_reasoning": "SMILES consistency check: the adsorbate is [N]=[NH], i.e. NNH/diazenyl-like species with two N atoms. The provided atom list is consistent with this: atom 0 is N, SP2, radical_electrons=1; atom 1 is N, SP2, radical_electrons=0. There is no mismatch between the requested NNH and the SMILES. Because atom 0 carries the unpaired electron, if using ReactiveSpecies the binding should involve atom 0. History analysis: tested successful sites are ontop Cu at -0.780 eV, bridge Cu-Cu at -0.930 eV, hollow Cu-Cu-Cu at -1.080 eV, and hollow Ag-Cu-Cu at -0.970 eV. No failures or slip/converged duplicate tags are reported. The current best is clearly the Cu-rich hollow site. Remaining distinct high-symmetry site chemistries not yet tested are ontop Ag, bridge Ag-Cu, and hollow Ag-Cu-Cu-Cu. Since adsorption strengthens with increasing Cu coordination in the history, Ag-containing sites are expected to be weaker than Cu-Cu-Cu, but the only untested high-coordination environment is the 4-fold Ag-Cu-Cu-Cu hollow, which could still compete due to increased coordination. To systematically search for the lowest energy, this is the most informative remaining new plan. User intent is to find the lowest-energy adsorption configuration for NNH on this Cu/Ag(111)-like alloy surface. Adsorbate analysis: NNH is an unsaturated N-containing reactive fragment; atom 0 is the radical terminus and is the chemically appropriate metal-binding atom. Therefore adsorbate_type should be ReactiveSpecies and adsorbate_binding_indices should be [0]. Site choice: use canonical site_type 'hollow' with the available surface combination ['Ag','Cu','Cu','Cu']; although listed as Hollow-4 in the site inventory, JSON must still use canonical 'hollow'. Predicted energy should be slightly weaker than Cu-Cu-Cu hollow because Ag dilutes the stronger Cu interaction, but the extra coordination may partly compensate. Best estimate for the MACE-MP-0 small relaxed adsorption energy is -1.03 eV.",
+      "tool_logs": [
+        "LLM-as-oracle mode: executor bypassed; predicted energy used in place of MACE relaxation.",
+        "Success: predicted_relaxed_energy_eV = -1.0300 eV."
+      ],
+      "status": "success",
+      "most_stable_energy_eV": -1.03,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": false,
+      "planned_site_type": "hollow",
+      "actual_site_type": "hollow",
+      "energy_source": "llm_predicted",
+      "history_entry": "【✅ Perfect Adsorption】 hollow @ ['Ag', 'Cu', 'Cu', 'Cu'] (Index [0]) -> Site: hollow (Ag,Cu,Cu,Cu) | E=-1.030 eV"
+    }
+  ],
+  "history": [
+    "【✅ Perfect Adsorption】 ontop @ ['Cu'] (Index [0]) -> Site: ontop (Cu) [🌟 New Best] | E=-0.780 eV",
+    "【✅ Perfect Adsorption】 bridge @ ['Cu', 'Cu'] (Index [0]) -> Site: bridge (Cu,Cu) [🌟 New Best] | E=-0.930 eV",
+    "【✅ Perfect Adsorption】 hollow @ ['Cu', 'Cu', 'Cu'] (Index [0]) -> Site: hollow (Cu,Cu,Cu) [🌟 New Best] | E=-1.080 eV",
+    "【✅ Perfect Adsorption】 hollow @ ['Ag', 'Cu', 'Cu'] (Index [0]) -> Site: hollow (Ag,Cu,Cu) | E=-0.970 eV",
+    "【✅ Perfect Adsorption】 hollow @ ['Ag', 'Cu', 'Cu', 'Cu'] (Index [0]) -> Site: hollow (Ag,Cu,Cu,Cu) | E=-1.030 eV"
+  ],
+  "error": null,
+  "perfect_count": 5,
+  "dissociation_count": 0,
+  "rearrangement_count": 0,
+  "calc_failure_count": 0,
+  "chemical_slip_count": 0
+}

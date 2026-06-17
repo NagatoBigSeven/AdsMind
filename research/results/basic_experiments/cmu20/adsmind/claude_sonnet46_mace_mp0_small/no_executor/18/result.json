@@ -1,0 +1,307 @@
+{
+  "case_id": "18",
+  "case_metadata": {
+    "case_id": "18",
+    "slab_file": "datasets/cmu20/18_Al3Zr_101.xyz",
+    "smiles": "CC=O",
+    "user_request": "Find the lowest-energy adsorption configuration for acetaldehyde on the provided surface.",
+    "surface_family": "intermetallic",
+    "adsorbate_name": "OCHCH3",
+    "miller_index": "(101)",
+    "reaction_class": "COMPLEX",
+    "ablation_candidate": "FALSE",
+    "notes": "Best-available reconstruction from sanitized filename CC_O and formula C2H4O"
+  },
+  "status": "success",
+  "best_energy_eV": -1.1,
+  "iteration_count": 5,
+  "max_attempts": 5,
+  "final_site_type": "hollow",
+  "converged_tag": false,
+  "wall_clock_sec": 194.46730268001556,
+  "total_input_tokens": 24903,
+  "total_output_tokens": 10141,
+  "artifact_paths": {
+    "iteration_energy_curve": "research/results/basic_experiments/cmu20/adsmind/claude_sonnet46_mace_mp0_small/no_executor/18/artifacts/iteration_energy_curve.png",
+    "iteration_energy_curve.png": "research/results/basic_experiments/cmu20/adsmind/claude_sonnet46_mace_mp0_small/no_executor/18/artifacts/iteration_energy_curve.png",
+    "iteration_energy_curve_png": "research/results/basic_experiments/cmu20/adsmind/claude_sonnet46_mace_mp0_small/no_executor/18/artifacts/iteration_energy_curve.png",
+    "summary_report": "research/results/basic_experiments/cmu20/adsmind/claude_sonnet46_mace_mp0_small/no_executor/18/artifacts/summary_report.md",
+    "summary_report.md": "research/results/basic_experiments/cmu20/adsmind/claude_sonnet46_mace_mp0_small/no_executor/18/artifacts/summary_report.md",
+    "summary_report_file": "research/results/basic_experiments/cmu20/adsmind/claude_sonnet46_mace_mp0_small/no_executor/18/artifacts/summary_report.md"
+  },
+  "best_result": {
+    "most_stable_energy_eV": -1.1,
+    "analysis_json": {
+      "status": "success",
+      "most_stable_energy_eV": -1.1,
+      "is_dissociated": false,
+      "is_covalently_bound": true,
+      "bond_change_count": 0,
+      "energy_source": "llm_predicted",
+      "site_analysis": {
+        "planned_site_type": "hollow",
+        "actual_site_type": "hollow",
+        "is_chemical_slip": false,
+        "planned_symbols": [
+          "Al",
+          "Al",
+          "Zr"
+        ],
+        "actual_symbols": [
+          "Al",
+          "Al",
+          "Zr"
+        ],
+        "site_fingerprint": "llm-oracle::hollow::Al-Al-Zr::2"
+      }
+    },
+    "plan": {
+      "reasoning": "Step 0 - SMILES Consistency Check: CC=O is acetaldehyde. Atom indices: 0=C(SP3, methyl), 1=C(SP2, carbonyl carbon), 2=O(SP2, carbonyl oxygen). No radicals present, so this is a Molecule adsorption. No mismatch with user request.\n\nStep 1 - Analyze History:\n- ontop @ Zr (index [2], O-down): E=-1.000 eV ✅\n- bridge @ Al-Zr (index [2], O-down): E=-1.050 eV ✅ (current best)\nBoth used O (index 2) as the binding atom. No failures, no convergence tags.\n\nStep 2 - Formulate New Plan:\nThe remaining untested site is hollow @ Al-Al-Zr. I should try O-down adsorption at the hollow site, which could provide stronger binding due to multi-coordination. The hollow site involves Al-Al-Zr, so surface_binding_atoms = ['Al', 'Al', 'Zr'] but since we can only use 1-2 binding indices, I'll use O (index 2) as the single binding atom at the hollow site. This is a valid hollow adsorption with 1 adsorbate binding index.\n\nAlternatively, I could try the carbonyl C (index 1, SP2) as the binding atom at an ontop Al site, which hasn't been tested yet. The carbonyl carbon can coordinate to Lewis acid sites. Let me try ontop @ Al with C (index 1) binding - this is a completely new combination not yet tested.\n\nActually, the most systematic approach: I've tested O-ontop-Zr and O-bridge-Al-Zr. Remaining meaningful options:\n1. O-hollow-Al-Al-Zr (hollow site, O binding)\n2. C(carbonyl)-ontop-Al (ontop Al, C1 binding)\n3. O-ontop-Al (ontop Al, O binding)\n\nGiven that bridge Al-Zr gave the best energy so far (-1.050 eV), trying the hollow site with O binding is the most promising next step as hollow sites often provide stronger binding through multi-coordination. The hollow site is Al-Al-Zr type.\n\nPredicted energy: Hollow sites typically provide stronger binding than bridge sites for oxygen-containing adsorbates on metal surfaces. I estimate the hollow site might give around -1.10 to -1.15 eV based on the trend (ontop: -1.000, bridge: -1.050, hollow likely slightly more negative).\n\nStep 6 - Plan: hollow @ Al-Al-Zr, O (index 2) binding atom.\n\nPredicted relaxed energy: -1.10 eV (slightly more negative than bridge, following the trend).",
+      "adsorbate_type": "Molecule",
+      "solution": {
+        "action": "continue",
+        "site_type": "hollow",
+        "surface_binding_atoms": [
+          "Al",
+          "Al",
+          "Zr"
+        ],
+        "adsorbate_binding_indices": [
+          2
+        ],
+        "relax_top_n": 1,
+        "touch_sphere_size": 2,
+        "overlap_thr": 0.1,
+        "conformers_per_site_cap": 4
+      },
+      "predicted_relaxed_energy_eV": -1.1
+    },
+    "result_type": "Perfect"
+  },
+  "last_analysis": {
+    "status": "success",
+    "most_stable_energy_eV": -0.95,
+    "is_dissociated": false,
+    "is_covalently_bound": true,
+    "bond_change_count": 0,
+    "energy_source": "llm_predicted",
+    "site_analysis": {
+      "planned_site_type": "bridge",
+      "actual_site_type": "bridge",
+      "is_chemical_slip": false,
+      "planned_symbols": [
+        "Al",
+        "Al"
+      ],
+      "actual_symbols": [
+        "Al",
+        "Al"
+      ],
+      "site_fingerprint": "llm-oracle::bridge::Al-Al::2"
+    }
+  },
+  "attempt_records": [
+    {
+      "attempt_index": 1,
+      "plan": {
+        "reasoning": "Step 0 - SMILES Consistency Check: The SMILES CC=O corresponds to acetaldehyde. Atom indices: 0=C (SP3, methyl carbon), 1=C (SP2, carbonyl carbon), 2=O (SP2, carbonyl oxygen). No radicals present, so this is a Molecule adsorption. No mismatch with user request.\n\nStep 1 - Analyze Old Plans: No history exists. This is the first attempt.\n\nStep 2 & 3 - Analyze Request: Find the lowest-energy adsorption configuration for acetaldehyde on Al3Zr(101) surface.\n\nStep 4 - Analyze Adsorbate: Acetaldehyde (CH3CHO) has a carbonyl group (C=O). The oxygen atom (index 2) has lone pairs and is the primary donor for surface adsorption. The carbonyl carbon (index 1, SP2) can also interact with the surface. For molecular adsorption, the oxygen lone pair donation to surface metal atoms is the most common and energetically favorable binding mode.\n\nStep 5 - Analyze Surface: Available sites include ontop Al, ontop Zr, bridge Al-Al, bridge Al-Zr, and hollow Al-Al-Zr. Zr is more electropositive and oxophilic than Al, making Zr ontop sites particularly favorable for oxygen-containing adsorbates like acetaldehyde.\n\nStep 6 - Formulate Plan: For the first attempt, I will try the most physically motivated configuration: oxygen (index 2) adsorbing ontop of Zr via lone pair donation. This is the classic eta1-O binding mode for aldehydes on metal surfaces, and Zr being more oxophilic than Al makes this the most promising initial configuration. The oxygen atom has SP2 hybridization with lone pairs available for donation.\n\nPredicted energy: For acetaldehyde on Al3Zr(101) with O-ontop-Zr binding, MACE-MP-0 small typically gives moderate chemisorption energies for oxygen-containing molecules on Zr-containing surfaces. I estimate around -0.8 to -1.2 eV for this configuration. Best estimate: -1.0 eV.",
+        "adsorbate_type": "Molecule",
+        "solution": {
+          "action": "continue",
+          "site_type": "ontop",
+          "surface_binding_atoms": [
+            "Zr"
+          ],
+          "adsorbate_binding_indices": [
+            2
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        },
+        "predicted_relaxed_energy_eV": -1.0
+      },
+      "plan_key": "ontop|Zr|2|Molecule|2.0",
+      "planner_reasoning": "Step 0 - SMILES Consistency Check: The SMILES CC=O corresponds to acetaldehyde. Atom indices: 0=C (SP3, methyl carbon), 1=C (SP2, carbonyl carbon), 2=O (SP2, carbonyl oxygen). No radicals present, so this is a Molecule adsorption. No mismatch with user request.\n\nStep 1 - Analyze Old Plans: No history exists. This is the first attempt.\n\nStep 2 & 3 - Analyze Request: Find the lowest-energy adsorption configuration for acetaldehyde on Al3Zr(101) surface.\n\nStep 4 - Analyze Adsorbate: Acetaldehyde (CH3CHO) has a carbonyl group (C=O). The oxygen atom (index 2) has lone pairs and is the primary donor for surface adsorption. The carbonyl carbon (index 1, SP2) can also interact with the surface. For molecular adsorption, the oxygen lone pair donation to surface metal atoms is the most common and energetically favorable binding mode.\n\nStep 5 - Analyze Surface: Available sites include ontop Al, ontop Zr, bridge Al-Al, bridge Al-Zr, and hollow Al-Al-Zr. Zr is more electropositive and oxophilic than Al, making Zr ontop sites particularly favorable for oxygen-containing adsorbates like acetaldehyde.\n\nStep 6 - Formulate Plan: For the first attempt, I will try the most physically motivated configuration: oxygen (index 2) adsorbing ontop of Zr via lone pair donation. This is the classic eta1-O binding mode for aldehydes on metal surfaces, and Zr being more oxophilic than Al makes this the most promising initial configuration. The oxygen atom has SP2 hybridization with lone pairs available for donation.\n\nPredicted energy: For acetaldehyde on Al3Zr(101) with O-ontop-Zr binding, MACE-MP-0 small typically gives moderate chemisorption energies for oxygen-containing molecules on Zr-containing surfaces. I estimate around -0.8 to -1.2 eV for this configuration. Best estimate: -1.0 eV.",
+      "tool_logs": [
+        "LLM-as-oracle mode: executor bypassed; predicted energy used in place of MACE relaxation.",
+        "Success: predicted_relaxed_energy_eV = -1.0000 eV."
+      ],
+      "status": "success",
+      "most_stable_energy_eV": -1.0,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": false,
+      "planned_site_type": "ontop",
+      "actual_site_type": "ontop",
+      "energy_source": "llm_predicted",
+      "history_entry": "【✅ Perfect Adsorption】 ontop @ ['Zr'] (Index [2]) -> Site: ontop (Zr) [🌟 New Best] | E=-1.000 eV"
+    },
+    {
+      "attempt_index": 2,
+      "plan": {
+        "reasoning": "Step 0: SMILES Consistency Check. The SMILES CC=O corresponds to acetaldehyde. Atom indices: 0=C (SP3, methyl), 1=C (SP2, carbonyl carbon), 2=O (SP2, carbonyl oxygen). No radicals present, so this is a Molecule adsorption.\n\nStep 1: Analyze History. One successful attempt: ontop @ Zr (index [2]) with E=-1.000 eV. This used the oxygen atom (index 2) binding to Zr ontop site. This is the current best.\n\nStep 2: Formulate New Plan. I need to explore other sites to find potentially lower energy configurations. Options not yet tested:\n- Bridge Al-Zr with O binding (index 2)\n- Bridge Al-Al with O binding (index 2)\n- Hollow Al-Al-Zr with O binding (index 2)\n- Ontop Al with O binding (index 2)\n- Carbonyl carbon (index 1) binding to Zr ontop\n\nFor acetaldehyde, the oxygen lone pairs are the primary binding motif on metal surfaces. The Zr ontop gave -1.000 eV. Let me try the Al-Zr bridge site with O binding, as mixed metal bridge sites can sometimes provide stronger binding due to electronic effects. Alternatively, trying ontop Al with O could be informative.\n\nLet me try the bridge Al-Zr site with O (index 2) as the binding atom. This is a new configuration not yet tested. The Al-Zr bridge could provide stronger binding than pure Zr ontop due to bifunctional coordination.\n\nStep 3: User intent is to find the lowest energy adsorption configuration for acetaldehyde.\n\nStep 4: Adsorbate analysis. Acetaldehyde has O (index 2) as the primary donor atom via lone pairs. C=O carbonyl carbon (index 1) is SP2. Methyl C (index 0) is SP3 and not a good donor.\n\nStep 5: Available sites include Bridge Al-Zr which hasn't been tested yet.\n\nStep 6: Plan - bridge site with Al-Zr, O binding (index 2). This is a valid bridge configuration with 1 binding index.\n\nPredicted energy: For acetaldehyde on Al-Zr bridge via O, the mixed metal site may provide slightly stronger or similar binding compared to Zr ontop. Given that Zr is more oxophilic than Al, and the bridge site distributes the interaction, I estimate the energy to be around -0.95 to -1.05 eV. My best estimate is -1.05 eV, slightly more favorable than the Zr ontop due to additional Al interaction.",
+        "adsorbate_type": "Molecule",
+        "predicted_relaxed_energy_eV": -1.05,
+        "solution": {
+          "action": "continue",
+          "site_type": "bridge",
+          "surface_binding_atoms": [
+            "Al",
+            "Zr"
+          ],
+          "adsorbate_binding_indices": [
+            2
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "bridge|Al,Zr|2|Molecule|2.0",
+      "planner_reasoning": "Step 0: SMILES Consistency Check. The SMILES CC=O corresponds to acetaldehyde. Atom indices: 0=C (SP3, methyl), 1=C (SP2, carbonyl carbon), 2=O (SP2, carbonyl oxygen). No radicals present, so this is a Molecule adsorption.\n\nStep 1: Analyze History. One successful attempt: ontop @ Zr (index [2]) with E=-1.000 eV. This used the oxygen atom (index 2) binding to Zr ontop site. This is the current best.\n\nStep 2: Formulate New Plan. I need to explore other sites to find potentially lower energy configurations. Options not yet tested:\n- Bridge Al-Zr with O binding (index 2)\n- Bridge Al-Al with O binding (index 2)\n- Hollow Al-Al-Zr with O binding (index 2)\n- Ontop Al with O binding (index 2)\n- Carbonyl carbon (index 1) binding to Zr ontop\n\nFor acetaldehyde, the oxygen lone pairs are the primary binding motif on metal surfaces. The Zr ontop gave -1.000 eV. Let me try the Al-Zr bridge site with O binding, as mixed metal bridge sites can sometimes provide stronger binding due to electronic effects. Alternatively, trying ontop Al with O could be informative.\n\nLet me try the bridge Al-Zr site with O (index 2) as the binding atom. This is a new configuration not yet tested. The Al-Zr bridge could provide stronger binding than pure Zr ontop due to bifunctional coordination.\n\nStep 3: User intent is to find the lowest energy adsorption configuration for acetaldehyde.\n\nStep 4: Adsorbate analysis. Acetaldehyde has O (index 2) as the primary donor atom via lone pairs. C=O carbonyl carbon (index 1) is SP2. Methyl C (index 0) is SP3 and not a good donor.\n\nStep 5: Available sites include Bridge Al-Zr which hasn't been tested yet.\n\nStep 6: Plan - bridge site with Al-Zr, O binding (index 2). This is a valid bridge configuration with 1 binding index.\n\nPredicted energy: For acetaldehyde on Al-Zr bridge via O, the mixed metal site may provide slightly stronger or similar binding compared to Zr ontop. Given that Zr is more oxophilic than Al, and the bridge site distributes the interaction, I estimate the energy to be around -0.95 to -1.05 eV. My best estimate is -1.05 eV, slightly more favorable than the Zr ontop due to additional Al interaction.",
+      "tool_logs": [
+        "LLM-as-oracle mode: executor bypassed; predicted energy used in place of MACE relaxation.",
+        "Success: predicted_relaxed_energy_eV = -1.0500 eV."
+      ],
+      "status": "success",
+      "most_stable_energy_eV": -1.05,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": false,
+      "planned_site_type": "bridge",
+      "actual_site_type": "bridge",
+      "energy_source": "llm_predicted",
+      "history_entry": "【✅ Perfect Adsorption】 bridge @ ['Al', 'Zr'] (Index [2]) -> Site: bridge (Al,Zr) [🌟 New Best] | E=-1.050 eV"
+    },
+    {
+      "attempt_index": 3,
+      "plan": {
+        "reasoning": "Step 0 - SMILES Consistency Check: CC=O is acetaldehyde. Atom indices: 0=C(SP3, methyl), 1=C(SP2, carbonyl carbon), 2=O(SP2, carbonyl oxygen). No radicals present, so this is a Molecule adsorption. No mismatch with user request.\n\nStep 1 - Analyze History:\n- ontop @ Zr (index [2], O-down): E=-1.000 eV ✅\n- bridge @ Al-Zr (index [2], O-down): E=-1.050 eV ✅ (current best)\nBoth used O (index 2) as the binding atom. No failures, no convergence tags.\n\nStep 2 - Formulate New Plan:\nThe remaining untested site is hollow @ Al-Al-Zr. I should try O-down adsorption at the hollow site, which could provide stronger binding due to multi-coordination. The hollow site involves Al-Al-Zr, so surface_binding_atoms = ['Al', 'Al', 'Zr'] but since we can only use 1-2 binding indices, I'll use O (index 2) as the single binding atom at the hollow site. This is a valid hollow adsorption with 1 adsorbate binding index.\n\nAlternatively, I could try the carbonyl C (index 1, SP2) as the binding atom at an ontop Al site, which hasn't been tested yet. The carbonyl carbon can coordinate to Lewis acid sites. Let me try ontop @ Al with C (index 1) binding - this is a completely new combination not yet tested.\n\nActually, the most systematic approach: I've tested O-ontop-Zr and O-bridge-Al-Zr. Remaining meaningful options:\n1. O-hollow-Al-Al-Zr (hollow site, O binding)\n2. C(carbonyl)-ontop-Al (ontop Al, C1 binding)\n3. O-ontop-Al (ontop Al, O binding)\n\nGiven that bridge Al-Zr gave the best energy so far (-1.050 eV), trying the hollow site with O binding is the most promising next step as hollow sites often provide stronger binding through multi-coordination. The hollow site is Al-Al-Zr type.\n\nPredicted energy: Hollow sites typically provide stronger binding than bridge sites for oxygen-containing adsorbates on metal surfaces. I estimate the hollow site might give around -1.10 to -1.15 eV based on the trend (ontop: -1.000, bridge: -1.050, hollow likely slightly more negative).\n\nStep 6 - Plan: hollow @ Al-Al-Zr, O (index 2) binding atom.\n\nPredicted relaxed energy: -1.10 eV (slightly more negative than bridge, following the trend).",
+        "adsorbate_type": "Molecule",
+        "solution": {
+          "action": "continue",
+          "site_type": "hollow",
+          "surface_binding_atoms": [
+            "Al",
+            "Al",
+            "Zr"
+          ],
+          "adsorbate_binding_indices": [
+            2
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        },
+        "predicted_relaxed_energy_eV": -1.1
+      },
+      "plan_key": "hollow|Al,Al,Zr|2|Molecule|2.0",
+      "planner_reasoning": "Step 0 - SMILES Consistency Check: CC=O is acetaldehyde. Atom indices: 0=C(SP3, methyl), 1=C(SP2, carbonyl carbon), 2=O(SP2, carbonyl oxygen). No radicals present, so this is a Molecule adsorption. No mismatch with user request.\n\nStep 1 - Analyze History:\n- ontop @ Zr (index [2], O-down): E=-1.000 eV ✅\n- bridge @ Al-Zr (index [2], O-down): E=-1.050 eV ✅ (current best)\nBoth used O (index 2) as the binding atom. No failures, no convergence tags.\n\nStep 2 - Formulate New Plan:\nThe remaining untested site is hollow @ Al-Al-Zr. I should try O-down adsorption at the hollow site, which could provide stronger binding due to multi-coordination. The hollow site involves Al-Al-Zr, so surface_binding_atoms = ['Al', 'Al', 'Zr'] but since we can only use 1-2 binding indices, I'll use O (index 2) as the single binding atom at the hollow site. This is a valid hollow adsorption with 1 adsorbate binding index.\n\nAlternatively, I could try the carbonyl C (index 1, SP2) as the binding atom at an ontop Al site, which hasn't been tested yet. The carbonyl carbon can coordinate to Lewis acid sites. Let me try ontop @ Al with C (index 1) binding - this is a completely new combination not yet tested.\n\nActually, the most systematic approach: I've tested O-ontop-Zr and O-bridge-Al-Zr. Remaining meaningful options:\n1. O-hollow-Al-Al-Zr (hollow site, O binding)\n2. C(carbonyl)-ontop-Al (ontop Al, C1 binding)\n3. O-ontop-Al (ontop Al, O binding)\n\nGiven that bridge Al-Zr gave the best energy so far (-1.050 eV), trying the hollow site with O binding is the most promising next step as hollow sites often provide stronger binding through multi-coordination. The hollow site is Al-Al-Zr type.\n\nPredicted energy: Hollow sites typically provide stronger binding than bridge sites for oxygen-containing adsorbates on metal surfaces. I estimate the hollow site might give around -1.10 to -1.15 eV based on the trend (ontop: -1.000, bridge: -1.050, hollow likely slightly more negative).\n\nStep 6 - Plan: hollow @ Al-Al-Zr, O (index 2) binding atom.\n\nPredicted relaxed energy: -1.10 eV (slightly more negative than bridge, following the trend).",
+      "tool_logs": [
+        "LLM-as-oracle mode: executor bypassed; predicted energy used in place of MACE relaxation.",
+        "Success: predicted_relaxed_energy_eV = -1.1000 eV."
+      ],
+      "status": "success",
+      "most_stable_energy_eV": -1.1,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": false,
+      "planned_site_type": "hollow",
+      "actual_site_type": "hollow",
+      "energy_source": "llm_predicted",
+      "history_entry": "【✅ Perfect Adsorption】 hollow @ ['Al', 'Al', 'Zr'] (Index [2]) -> Site: hollow (Al,Al,Zr) [🌟 New Best] | E=-1.100 eV"
+    },
+    {
+      "attempt_index": 4,
+      "plan": {
+        "reasoning": "Step 0 - SMILES Consistency Check: CC=O is acetaldehyde. Atom indices: 0=C(SP3, methyl), 1=C(SP2, carbonyl carbon), 2=O(SP2, carbonyl oxygen). No radicals present, so this is a Molecule adsorption.\n\nStep 1 - Analyze History:\n- ontop @ Zr, O-binding (index 2): E=-1.000 eV ✅\n- bridge @ Al-Zr, O-binding (index 2): E=-1.050 eV ✅\n- hollow @ Al-Al-Zr, O-binding (index 2): E=-1.100 eV ✅ (current best)\n\nAll three major site types (ontop, bridge, hollow) have been tested with O as the binding atom. The trend shows hollow > bridge > ontop in binding strength. No convergence tags ([🔄 Converged to known best]) have been reported.\n\nStep 2 - Formulate New Plan:\nAll canonical site types have been tested with the oxygen binding atom. The remaining unexplored variation is using the carbonyl carbon (index 1, SP2) as the binding atom instead of oxygen. The carbonyl carbon can also coordinate to metal surfaces, particularly at ontop sites on Zr (which is more oxophilic but also can bind C). However, given that all three site types have been covered with O-binding and the energies are systematically improving from ontop to hollow, I should consider whether a different binding atom could yield lower energy.\n\nAlternatively, I could try the ontop @ Al site, which has not been tested yet (only ontop @ Zr was tested). The available ontop sites include both Al and Zr.\n\nLet me try ontop @ Al with O-binding (index 2). This is a genuinely new configuration not yet tested.\n\nStep 3 - User Intent: Find lowest energy adsorption configuration for acetaldehyde.\n\nStep 4 - Adsorbate: O (index 2) is the primary donor atom via lone pairs. C (index 1) is SP2 carbonyl carbon.\n\nStep 5 - Surface: Available ontop sites include Al (not yet tested). This is a valid new plan.\n\nStep 6 - Plan: ontop @ Al, O-binding (index 2). This tests the Al ontop site which was not explored in previous iterations.\n\nPredicted energy: Al is less oxophilic than Zr, so ontop @ Al with O-binding is expected to be weaker than ontop @ Zr (-1.000 eV). I estimate approximately -0.85 eV. However, since all hollow/bridge/ontop with Zr have been covered and the Al ontop is a new environment, this is worth testing. The predicted energy for this configuration would be around -0.85 eV, which is weaker than the current best of -1.100 eV.",
+        "adsorbate_type": "Molecule",
+        "predicted_relaxed_energy_eV": -0.85,
+        "solution": {
+          "action": "continue",
+          "site_type": "ontop",
+          "surface_binding_atoms": [
+            "Al"
+          ],
+          "adsorbate_binding_indices": [
+            2
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "ontop|Al|2|Molecule|2.0",
+      "planner_reasoning": "Step 0 - SMILES Consistency Check: CC=O is acetaldehyde. Atom indices: 0=C(SP3, methyl), 1=C(SP2, carbonyl carbon), 2=O(SP2, carbonyl oxygen). No radicals present, so this is a Molecule adsorption.\n\nStep 1 - Analyze History:\n- ontop @ Zr, O-binding (index 2): E=-1.000 eV ✅\n- bridge @ Al-Zr, O-binding (index 2): E=-1.050 eV ✅\n- hollow @ Al-Al-Zr, O-binding (index 2): E=-1.100 eV ✅ (current best)\n\nAll three major site types (ontop, bridge, hollow) have been tested with O as the binding atom. The trend shows hollow > bridge > ontop in binding strength. No convergence tags ([🔄 Converged to known best]) have been reported.\n\nStep 2 - Formulate New Plan:\nAll canonical site types have been tested with the oxygen binding atom. The remaining unexplored variation is using the carbonyl carbon (index 1, SP2) as the binding atom instead of oxygen. The carbonyl carbon can also coordinate to metal surfaces, particularly at ontop sites on Zr (which is more oxophilic but also can bind C). However, given that all three site types have been covered with O-binding and the energies are systematically improving from ontop to hollow, I should consider whether a different binding atom could yield lower energy.\n\nAlternatively, I could try the ontop @ Al site, which has not been tested yet (only ontop @ Zr was tested). The available ontop sites include both Al and Zr.\n\nLet me try ontop @ Al with O-binding (index 2). This is a genuinely new configuration not yet tested.\n\nStep 3 - User Intent: Find lowest energy adsorption configuration for acetaldehyde.\n\nStep 4 - Adsorbate: O (index 2) is the primary donor atom via lone pairs. C (index 1) is SP2 carbonyl carbon.\n\nStep 5 - Surface: Available ontop sites include Al (not yet tested). This is a valid new plan.\n\nStep 6 - Plan: ontop @ Al, O-binding (index 2). This tests the Al ontop site which was not explored in previous iterations.\n\nPredicted energy: Al is less oxophilic than Zr, so ontop @ Al with O-binding is expected to be weaker than ontop @ Zr (-1.000 eV). I estimate approximately -0.85 eV. However, since all hollow/bridge/ontop with Zr have been covered and the Al ontop is a new environment, this is worth testing. The predicted energy for this configuration would be around -0.85 eV, which is weaker than the current best of -1.100 eV.",
+      "tool_logs": [
+        "LLM-as-oracle mode: executor bypassed; predicted energy used in place of MACE relaxation.",
+        "Success: predicted_relaxed_energy_eV = -0.8500 eV."
+      ],
+      "status": "success",
+      "most_stable_energy_eV": -0.85,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": false,
+      "planned_site_type": "ontop",
+      "actual_site_type": "ontop",
+      "energy_source": "llm_predicted",
+      "history_entry": "【✅ Perfect Adsorption】 ontop @ ['Al'] (Index [2]) -> Site: ontop (Al) | E=-0.850 eV"
+    },
+    {
+      "attempt_index": 5,
+      "plan": {
+        "reasoning": "**Step 0: SMILES Consistency Check**\nSMILES: CC=O (acetaldehyde). Atom list: C(0, SP3), C(1, SP2), O(2, SP2). No radicals. This is a stable molecule. Adsorbate type: Molecule.\n\n**Step 1: Analyze History**\nAll four major site types have been tested:\n- ontop @ Zr: E = -1.000 eV ✅\n- bridge @ Al-Zr: E = -1.050 eV ✅\n- hollow @ Al-Al-Zr: E = -1.100 eV ✅ [Current Best]\n- ontop @ Al: E = -0.850 eV ✅\n\nAll available site types from the site list have been covered:\n- [Ontop]: Al ✅, Zr ✅\n- [Bridge]: Al-Al (not tested), Al-Zr ✅\n- [Hollow-3]: Al-Al-Zr ✅\n\nThere is one remaining untested site: Bridge @ Al-Al. This is a valid new plan that has not been attempted. The Al-Al bridge site could potentially offer a different energy due to the distinct chemical environment (no Zr involvement). Given the trend that hollow > bridge(Al-Zr) > ontop(Zr) > ontop(Al), the Al-Al bridge might be slightly weaker than Al-Zr bridge but worth testing.\n\n**Step 2: Formulate New Plan**\nTest bridge @ Al-Al site. For acetaldehyde, the oxygen atom (index 2, SP2, lone pairs available) is the most natural donor for surface bonding. Alternatively, the carbonyl carbon (index 1, SP2) could bind. Since O has lone pairs and is the primary donor in aldehyde adsorption, I will use O (index 2) as the binding atom at the Al-Al bridge site.\n\n**Step 3: Plan Details**\n- site_type: bridge\n- surface_binding_atoms: ['Al', 'Al']\n- adsorbate_binding_indices: [2] (oxygen atom)\n- This is a new, untested combination.\n\n**Predicted Energy:** The Al-Al bridge site lacks the stronger Zr-O interaction. Al is less oxophilic than Zr. The Al-Al bridge is expected to be weaker than Al-Zr bridge (-1.050 eV) but possibly stronger than ontop Al (-0.850 eV). I estimate approximately -0.950 eV.",
+        "adsorbate_type": "Molecule",
+        "solution": {
+          "action": "continue",
+          "site_type": "bridge",
+          "surface_binding_atoms": [
+            "Al",
+            "Al"
+          ],
+          "adsorbate_binding_indices": [
+            2
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        },
+        "predicted_relaxed_energy_eV": -0.95
+      },
+      "plan_key": "bridge|Al,Al|2|Molecule|2.0",
+      "planner_reasoning": "**Step 0: SMILES Consistency Check**\nSMILES: CC=O (acetaldehyde). Atom list: C(0, SP3), C(1, SP2), O(2, SP2). No radicals. This is a stable molecule. Adsorbate type: Molecule.\n\n**Step 1: Analyze History**\nAll four major site types have been tested:\n- ontop @ Zr: E = -1.000 eV ✅\n- bridge @ Al-Zr: E = -1.050 eV ✅\n- hollow @ Al-Al-Zr: E = -1.100 eV ✅ [Current Best]\n- ontop @ Al: E = -0.850 eV ✅\n\nAll available site types from the site list have been covered:\n- [Ontop]: Al ✅, Zr ✅\n- [Bridge]: Al-Al (not tested), Al-Zr ✅\n- [Hollow-3]: Al-Al-Zr ✅\n\nThere is one remaining untested site: Bridge @ Al-Al. This is a valid new plan that has not been attempted. The Al-Al bridge site could potentially offer a different energy due to the distinct chemical environment (no Zr involvement). Given the trend that hollow > bridge(Al-Zr) > ontop(Zr) > ontop(Al), the Al-Al bridge might be slightly weaker than Al-Zr bridge but worth testing.\n\n**Step 2: Formulate New Plan**\nTest bridge @ Al-Al site. For acetaldehyde, the oxygen atom (index 2, SP2, lone pairs available) is the most natural donor for surface bonding. Alternatively, the carbonyl carbon (index 1, SP2) could bind. Since O has lone pairs and is the primary donor in aldehyde adsorption, I will use O (index 2) as the binding atom at the Al-Al bridge site.\n\n**Step 3: Plan Details**\n- site_type: bridge\n- surface_binding_atoms: ['Al', 'Al']\n- adsorbate_binding_indices: [2] (oxygen atom)\n- This is a new, untested combination.\n\n**Predicted Energy:** The Al-Al bridge site lacks the stronger Zr-O interaction. Al is less oxophilic than Zr. The Al-Al bridge is expected to be weaker than Al-Zr bridge (-1.050 eV) but possibly stronger than ontop Al (-0.850 eV). I estimate approximately -0.950 eV.",
+      "tool_logs": [
+        "LLM-as-oracle mode: executor bypassed; predicted energy used in place of MACE relaxation.",
+        "Success: predicted_relaxed_energy_eV = -0.9500 eV."
+      ],
+      "status": "success",
+      "most_stable_energy_eV": -0.95,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": false,
+      "planned_site_type": "bridge",
+      "actual_site_type": "bridge",
+      "energy_source": "llm_predicted",
+      "history_entry": "【✅ Perfect Adsorption】 bridge @ ['Al', 'Al'] (Index [2]) -> Site: bridge (Al,Al) | E=-0.950 eV"
+    }
+  ],
+  "history": [
+    "【✅ Perfect Adsorption】 ontop @ ['Zr'] (Index [2]) -> Site: ontop (Zr) [🌟 New Best] | E=-1.000 eV",
+    "【✅ Perfect Adsorption】 bridge @ ['Al', 'Zr'] (Index [2]) -> Site: bridge (Al,Zr) [🌟 New Best] | E=-1.050 eV",
+    "【✅ Perfect Adsorption】 hollow @ ['Al', 'Al', 'Zr'] (Index [2]) -> Site: hollow (Al,Al,Zr) [🌟 New Best] | E=-1.100 eV",
+    "【✅ Perfect Adsorption】 ontop @ ['Al'] (Index [2]) -> Site: ontop (Al) | E=-0.850 eV",
+    "【✅ Perfect Adsorption】 bridge @ ['Al', 'Al'] (Index [2]) -> Site: bridge (Al,Al) | E=-0.950 eV"
+  ],
+  "error": null,
+  "perfect_count": 5,
+  "dissociation_count": 0,
+  "rearrangement_count": 0,
+  "calc_failure_count": 0,
+  "chemical_slip_count": 0
+}

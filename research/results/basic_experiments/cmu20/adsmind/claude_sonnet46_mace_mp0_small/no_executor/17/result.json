@@ -1,0 +1,316 @@
+{
+  "case_id": "17",
+  "case_metadata": {
+    "case_id": "17",
+    "slab_file": "datasets/cmu20/17_Rh2Ti2_111.xyz",
+    "smiles": "CC=O",
+    "user_request": "Find the lowest-energy adsorption configuration for acetaldehyde on the provided surface.",
+    "surface_family": "intermetallic",
+    "adsorbate_name": "OCHCH3",
+    "miller_index": "(111)",
+    "reaction_class": "COMPLEX",
+    "ablation_candidate": "FALSE",
+    "notes": "Best-available reconstruction from sanitized filename CC_O and formula C2H4O"
+  },
+  "status": "success",
+  "best_energy_eV": -1.4,
+  "iteration_count": 5,
+  "max_attempts": 5,
+  "final_site_type": "hollow",
+  "converged_tag": false,
+  "wall_clock_sec": 265.6877397187054,
+  "total_input_tokens": 26399,
+  "total_output_tokens": 11672,
+  "artifact_paths": {
+    "iteration_energy_curve": "research/results/basic_experiments/cmu20/adsmind/claude_sonnet46_mace_mp0_small/no_executor/17/artifacts/iteration_energy_curve.png",
+    "iteration_energy_curve.png": "research/results/basic_experiments/cmu20/adsmind/claude_sonnet46_mace_mp0_small/no_executor/17/artifacts/iteration_energy_curve.png",
+    "iteration_energy_curve_png": "research/results/basic_experiments/cmu20/adsmind/claude_sonnet46_mace_mp0_small/no_executor/17/artifacts/iteration_energy_curve.png",
+    "summary_report": "research/results/basic_experiments/cmu20/adsmind/claude_sonnet46_mace_mp0_small/no_executor/17/artifacts/summary_report.md",
+    "summary_report.md": "research/results/basic_experiments/cmu20/adsmind/claude_sonnet46_mace_mp0_small/no_executor/17/artifacts/summary_report.md",
+    "summary_report_file": "research/results/basic_experiments/cmu20/adsmind/claude_sonnet46_mace_mp0_small/no_executor/17/artifacts/summary_report.md"
+  },
+  "best_result": {
+    "most_stable_energy_eV": -1.4,
+    "analysis_json": {
+      "status": "success",
+      "most_stable_energy_eV": -1.4,
+      "is_dissociated": false,
+      "is_covalently_bound": true,
+      "bond_change_count": 0,
+      "energy_source": "llm_predicted",
+      "site_analysis": {
+        "planned_site_type": "hollow",
+        "actual_site_type": "hollow",
+        "is_chemical_slip": false,
+        "planned_symbols": [
+          "Rh",
+          "Rh",
+          "Rh",
+          "Ti"
+        ],
+        "actual_symbols": [
+          "Rh",
+          "Rh",
+          "Rh",
+          "Ti"
+        ],
+        "site_fingerprint": "llm-oracle::hollow::Rh-Rh-Rh-Ti::2"
+      }
+    },
+    "plan": {
+      "reasoning": "Step 0 - SMILES Consistency Check: CC=O is acetaldehyde. Atom indices: 0=C(SP3, methyl), 1=C(SP2, carbonyl carbon), 2=O(SP2, carbonyl oxygen). No radicals present, so this is a Molecule adsorption. No mismatch with user request.\n\nStep 1 - Analyze History:\n- bridge @ Rh-Ti: E=-1.200 eV (successful)\n- hollow @ Rh-Rh-Ti: E=-1.350 eV (best so far, successful)\n- hollow @ Rh-Rh-Rh: E=-1.280 eV (successful)\nNo convergence tags ([🔄 Converged to known best]) observed. Three distinct sites tested. The Rh-Rh-Ti hollow is currently the best at -1.350 eV.\n\nStep 2 - Remaining untested sites:\n- ontop @ Rh (not tested)\n- ontop @ Ti (not tested)\n- bridge @ Rh-Rh (not tested)\n- hollow @ Rh-Rh-Rh-Ti (4-fold, not tested)\n\nThe 4-fold hollow Rh-Rh-Rh-Ti is a high-coordination site that hasn't been tested. On alloy surfaces, 4-fold hollows can provide stronger binding due to more metal-adsorbate interactions. Given that the Rh-Rh-Ti hollow gave -1.350 eV, the 4-fold Rh-Rh-Rh-Ti hollow might give even stronger binding. This is the most promising untested site.\n\nStep 3 - User intent: Find lowest energy adsorption configuration for acetaldehyde.\n\nStep 4 - Adsorbate analysis: Acetaldehyde (CC=O). The oxygen atom (index 2) has lone pairs and is the primary donor for surface binding. The carbonyl carbon (index 1, SP2) can also interact with the surface. For hollow sites, O-down binding via index 2 is most common, or C=O side-on via indices [1,2].\n\nStep 5 - Surface analysis: Available 4-fold hollow: Rh-Rh-Rh-Ti. This is a unique site not yet tested.\n\nStep 6 - Plan: Try the 4-fold hollow Rh-Rh-Rh-Ti site with O-atom (index 2) binding. The oxygen lone pair interaction at a high-coordination hollow site could yield stronger adsorption. Alternatively, C=O side-on [1,2] at this hollow. Given the pattern that O-down binding tends to be favorable for aldehydes on transition metals, I'll use O binding (index 2) at the Rh-Rh-Rh-Ti hollow.\n\nPredicted energy: The 4-fold hollow has more metal contacts. Given the trend (bridge=-1.200, Rh-Rh-Rh hollow=-1.280, Rh-Rh-Ti hollow=-1.350), the 4-fold Rh-Rh-Rh-Ti hollow might give slightly stronger binding, estimated around -1.40 eV.",
+      "adsorbate_type": "Molecule",
+      "predicted_relaxed_energy_eV": -1.4,
+      "solution": {
+        "action": "continue",
+        "site_type": "hollow",
+        "surface_binding_atoms": [
+          "Rh",
+          "Rh",
+          "Rh",
+          "Ti"
+        ],
+        "adsorbate_binding_indices": [
+          2
+        ],
+        "relax_top_n": 1,
+        "touch_sphere_size": 2,
+        "overlap_thr": 0.1,
+        "conformers_per_site_cap": 4
+      }
+    },
+    "result_type": "Perfect"
+  },
+  "last_analysis": {
+    "status": "success",
+    "most_stable_energy_eV": -1.15,
+    "is_dissociated": false,
+    "is_covalently_bound": true,
+    "bond_change_count": 0,
+    "energy_source": "llm_predicted",
+    "site_analysis": {
+      "planned_site_type": "bridge",
+      "actual_site_type": "bridge",
+      "is_chemical_slip": false,
+      "planned_symbols": [
+        "Rh",
+        "Rh"
+      ],
+      "actual_symbols": [
+        "Rh",
+        "Rh"
+      ],
+      "site_fingerprint": "llm-oracle::bridge::Rh-Rh::2"
+    }
+  },
+  "attempt_records": [
+    {
+      "attempt_index": 1,
+      "plan": {
+        "reasoning": "Step 0 - SMILES Consistency Check: The SMILES CC=O corresponds to acetaldehyde. Atom indices: 0=C (SP3, methyl carbon), 1=C (SP2, carbonyl carbon), 2=O (SP2, carbonyl oxygen). No radicals present, so this is a Molecule adsorption. No mismatch with user request.\n\nStep 1 - Analyze Old Plans: No history exists. This is the first attempt.\n\nStep 2 - Formulate New Plan: For acetaldehyde on transition metal surfaces, the most common and typically strongest adsorption mode involves the oxygen lone pair donating to the surface (eta-1 O-down configuration) or the carbonyl C=O binding in an eta-2 (C,O) bridge configuration. On Rh-containing surfaces, the oxygen-down ontop configuration is a classic starting point, but the eta-2 C=O bridge mode often gives lower energies.\n\nStep 3 - Analyze Request: Find the lowest-energy adsorption configuration for acetaldehyde on Rh2Ti2(111).\n\nStep 4 - Analyze Adsorbate: Acetaldehyde (CC=O). Key functional group: aldehyde (C=O). The carbonyl oxygen (index 2) has lone pairs and is SP2 hybridized - good donor atom. The carbonyl carbon (index 1) is SP2 and electrophilic. For eta-2 adsorption, both C(1) and O(2) can bind to two surface atoms at a bridge site.\n\nStep 5 - Analyze Surface: Available sites include Rh-Rh bridge and Rh-Ti bridge. The Rh-Ti bridge is particularly interesting for acetaldehyde because the heterogeneous electronic environment (Rh being more noble, Ti being more oxophilic) can stabilize the C=O in an eta-2 fashion with O preferring Ti and C preferring Rh.\n\nStep 6 - Formulate Plan: I will start with the eta-2 C=O adsorption at the Rh-Ti bridge site, with C(index 1) binding to Rh and O(index 2) binding to Ti. This is chemically motivated: Ti is oxophilic and will stabilize the oxygen end, while Rh activates the carbon end. This is expected to give the lowest energy configuration.\n\nPredicted energy: For acetaldehyde on Rh-containing alloy surfaces with MACE-MP-0 small, typical adsorption energies for eta-2 C=O configurations are in the range of -0.8 to -1.5 eV. Given the Rh2Ti2(111) surface with oxophilic Ti, I estimate approximately -1.2 eV.",
+        "adsorbate_type": "Molecule",
+        "solution": {
+          "action": "continue",
+          "site_type": "bridge",
+          "surface_binding_atoms": [
+            "Rh",
+            "Ti"
+          ],
+          "adsorbate_binding_indices": [
+            1,
+            2
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        },
+        "predicted_relaxed_energy_eV": -1.2
+      },
+      "plan_key": "bridge|Rh,Ti|1,2|Molecule|2.0",
+      "planner_reasoning": "Step 0 - SMILES Consistency Check: The SMILES CC=O corresponds to acetaldehyde. Atom indices: 0=C (SP3, methyl carbon), 1=C (SP2, carbonyl carbon), 2=O (SP2, carbonyl oxygen). No radicals present, so this is a Molecule adsorption. No mismatch with user request.\n\nStep 1 - Analyze Old Plans: No history exists. This is the first attempt.\n\nStep 2 - Formulate New Plan: For acetaldehyde on transition metal surfaces, the most common and typically strongest adsorption mode involves the oxygen lone pair donating to the surface (eta-1 O-down configuration) or the carbonyl C=O binding in an eta-2 (C,O) bridge configuration. On Rh-containing surfaces, the oxygen-down ontop configuration is a classic starting point, but the eta-2 C=O bridge mode often gives lower energies.\n\nStep 3 - Analyze Request: Find the lowest-energy adsorption configuration for acetaldehyde on Rh2Ti2(111).\n\nStep 4 - Analyze Adsorbate: Acetaldehyde (CC=O). Key functional group: aldehyde (C=O). The carbonyl oxygen (index 2) has lone pairs and is SP2 hybridized - good donor atom. The carbonyl carbon (index 1) is SP2 and electrophilic. For eta-2 adsorption, both C(1) and O(2) can bind to two surface atoms at a bridge site.\n\nStep 5 - Analyze Surface: Available sites include Rh-Rh bridge and Rh-Ti bridge. The Rh-Ti bridge is particularly interesting for acetaldehyde because the heterogeneous electronic environment (Rh being more noble, Ti being more oxophilic) can stabilize the C=O in an eta-2 fashion with O preferring Ti and C preferring Rh.\n\nStep 6 - Formulate Plan: I will start with the eta-2 C=O adsorption at the Rh-Ti bridge site, with C(index 1) binding to Rh and O(index 2) binding to Ti. This is chemically motivated: Ti is oxophilic and will stabilize the oxygen end, while Rh activates the carbon end. This is expected to give the lowest energy configuration.\n\nPredicted energy: For acetaldehyde on Rh-containing alloy surfaces with MACE-MP-0 small, typical adsorption energies for eta-2 C=O configurations are in the range of -0.8 to -1.5 eV. Given the Rh2Ti2(111) surface with oxophilic Ti, I estimate approximately -1.2 eV.",
+      "tool_logs": [
+        "LLM-as-oracle mode: executor bypassed; predicted energy used in place of MACE relaxation.",
+        "Success: predicted_relaxed_energy_eV = -1.2000 eV."
+      ],
+      "status": "success",
+      "most_stable_energy_eV": -1.2,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": false,
+      "planned_site_type": "bridge",
+      "actual_site_type": "bridge",
+      "energy_source": "llm_predicted",
+      "history_entry": "【✅ Perfect Adsorption】 bridge @ ['Rh', 'Ti'] (Index [1, 2]) -> Site: bridge (Rh,Ti) [🌟 New Best] | E=-1.200 eV"
+    },
+    {
+      "attempt_index": 2,
+      "plan": {
+        "reasoning": "Step 0 - SMILES Consistency Check: CC=O is acetaldehyde. Atom 0 is SP3 carbon (methyl), atom 1 is SP2 carbon (carbonyl C), atom 2 is SP2 oxygen (carbonyl O). No radicals present, so this is a Molecule adsorption.\n\nStep 1 - Analyze History: One successful attempt exists: bridge @ ['Rh', 'Ti'] with O (index 2) or C (index 1) binding, E=-1.200 eV. This is the current best. I need to explore other sites to see if a lower energy configuration exists.\n\nStep 2 - New Plan: The history shows one bridge (Rh-Ti) configuration tested. I should now try:\n- Ontop Rh with O-down (oxygen lone pair donating to Rh)\n- Hollow sites\n- Bridge Rh-Rh with O-down\n\nFor acetaldehyde, the oxygen atom (index 2) is the primary donor via lone pairs. The carbonyl C (index 1) can also bind in eta2 fashion. Let me try ontop Rh with O-down (index 2), which is a classic adsorption mode for aldehydes on transition metals. Rh is more electronegative/noble than Ti, so O-Rh ontop is a reasonable next attempt.\n\nAlternatively, I could try hollow sites. Let me try the Rh-Rh-Ti hollow (3-fold) with O binding, as hollow sites often give stronger binding for oxygen-containing species.\n\nStep 3 - User Intent: Find lowest energy adsorption for acetaldehyde on Rh2Ti2(111).\n\nStep 4 - Adsorbate: Acetaldehyde (CC=O). Key binding atoms: O (index 2, SP2, lone pairs) and C=O carbon (index 1, SP2). No radicals.\n\nStep 5 - Surface Sites Available: Ontop: Rh, Ti; Bridge: Rh-Rh, Rh-Ti; Hollow-3: Rh-Rh-Rh, Rh-Rh-Ti; Hollow-4: Rh-Rh-Rh-Ti.\n\nStep 6 - Plan: Try hollow Rh-Rh-Ti site with O (index 2) binding. Hollow sites can provide stronger adsorption for oxygen. This is a new configuration not yet tested. The Rh-Rh-Ti hollow combines both metal types and may offer favorable electronic environment. Predicted energy: hollow sites for O-containing molecules on Rh-Ti alloys typically give slightly stronger binding than bridge, so I estimate around -1.3 to -1.5 eV. Best estimate: -1.35 eV.",
+        "adsorbate_type": "Molecule",
+        "solution": {
+          "action": "continue",
+          "site_type": "hollow",
+          "surface_binding_atoms": [
+            "Rh",
+            "Rh",
+            "Ti"
+          ],
+          "adsorbate_binding_indices": [
+            2
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        },
+        "predicted_relaxed_energy_eV": -1.35
+      },
+      "plan_key": "hollow|Rh,Rh,Ti|2|Molecule|2.0",
+      "planner_reasoning": "Step 0 - SMILES Consistency Check: CC=O is acetaldehyde. Atom 0 is SP3 carbon (methyl), atom 1 is SP2 carbon (carbonyl C), atom 2 is SP2 oxygen (carbonyl O). No radicals present, so this is a Molecule adsorption.\n\nStep 1 - Analyze History: One successful attempt exists: bridge @ ['Rh', 'Ti'] with O (index 2) or C (index 1) binding, E=-1.200 eV. This is the current best. I need to explore other sites to see if a lower energy configuration exists.\n\nStep 2 - New Plan: The history shows one bridge (Rh-Ti) configuration tested. I should now try:\n- Ontop Rh with O-down (oxygen lone pair donating to Rh)\n- Hollow sites\n- Bridge Rh-Rh with O-down\n\nFor acetaldehyde, the oxygen atom (index 2) is the primary donor via lone pairs. The carbonyl C (index 1) can also bind in eta2 fashion. Let me try ontop Rh with O-down (index 2), which is a classic adsorption mode for aldehydes on transition metals. Rh is more electronegative/noble than Ti, so O-Rh ontop is a reasonable next attempt.\n\nAlternatively, I could try hollow sites. Let me try the Rh-Rh-Ti hollow (3-fold) with O binding, as hollow sites often give stronger binding for oxygen-containing species.\n\nStep 3 - User Intent: Find lowest energy adsorption for acetaldehyde on Rh2Ti2(111).\n\nStep 4 - Adsorbate: Acetaldehyde (CC=O). Key binding atoms: O (index 2, SP2, lone pairs) and C=O carbon (index 1, SP2). No radicals.\n\nStep 5 - Surface Sites Available: Ontop: Rh, Ti; Bridge: Rh-Rh, Rh-Ti; Hollow-3: Rh-Rh-Rh, Rh-Rh-Ti; Hollow-4: Rh-Rh-Rh-Ti.\n\nStep 6 - Plan: Try hollow Rh-Rh-Ti site with O (index 2) binding. Hollow sites can provide stronger adsorption for oxygen. This is a new configuration not yet tested. The Rh-Rh-Ti hollow combines both metal types and may offer favorable electronic environment. Predicted energy: hollow sites for O-containing molecules on Rh-Ti alloys typically give slightly stronger binding than bridge, so I estimate around -1.3 to -1.5 eV. Best estimate: -1.35 eV.",
+      "tool_logs": [
+        "LLM-as-oracle mode: executor bypassed; predicted energy used in place of MACE relaxation.",
+        "Success: predicted_relaxed_energy_eV = -1.3500 eV."
+      ],
+      "status": "success",
+      "most_stable_energy_eV": -1.35,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": false,
+      "planned_site_type": "hollow",
+      "actual_site_type": "hollow",
+      "energy_source": "llm_predicted",
+      "history_entry": "【✅ Perfect Adsorption】 hollow @ ['Rh', 'Rh', 'Ti'] (Index [2]) -> Site: hollow (Rh,Rh,Ti) [🌟 New Best] | E=-1.350 eV"
+    },
+    {
+      "attempt_index": 3,
+      "plan": {
+        "reasoning": "Step 0 - SMILES Consistency Check: CC=O is acetaldehyde. Atom 0 is SP3 carbon (methyl), atom 1 is SP2 carbon (carbonyl C), atom 2 is SP2 oxygen (carbonyl O). No radicals present, so this is a Molecule adsorption.\n\nStep 1 - Analyze History:\n- bridge @ Rh-Ti (indices [1,2]): E=-1.200 eV (successful, O-end or C=O bridge)\n- hollow @ Rh-Rh-Ti (index [2]): E=-1.350 eV (successful, O-down hollow, current best)\n\nTwo sites tested so far. The hollow Rh-Rh-Ti with O binding is the current best at -1.350 eV.\n\nStep 2 - Formulate New Plan:\nRemaining untested configurations:\n1. Ontop Rh or Ti (O-down or C-down)\n2. Hollow Rh-Rh-Rh (pure Rh hollow)\n3. Hollow Rh-Rh-Rh-Ti (4-fold hollow)\n4. Bridge Rh-Rh\n5. Different binding atom on already-tested site types\n\nThe most promising unexplored option is the Rh-Rh-Rh hollow (pure Rh 3-fold hollow) with O binding (index 2). Pure Rh hollows are known to be strong adsorption sites for oxygen-containing species. Alternatively, the Rh-Rh bridge with O binding could be interesting.\n\nGiven that the hollow Rh-Rh-Ti gave -1.350 eV with O binding, the pure Rh-Rh-Rh hollow might give a similar or slightly different energy. Let me try the Rh-Rh-Rh hollow with O (index 2) binding, as this is a distinct chemical environment from the Rh-Rh-Ti hollow.\n\nAlso worth trying: ontop Ti with O binding, since Ti is oxophilic and could strongly bind the carbonyl oxygen.\n\nI'll try the ontop Ti site with O (index 2) binding, as Ti is highly oxophilic and this could yield a lower energy than the current best. This is a completely new site type and surface atom combination not yet tested.\n\nPredicted energy: Ti ontop with O binding for acetaldehyde - Ti is strongly oxophilic, so this could be competitive. I estimate around -1.1 to -1.3 eV based on the trend. I'll go with the Rh-Rh-Rh hollow with O binding as it's a natural next step.\n\nActually, let me reconsider. The available hollow sites are Rh-Rh-Rh and Rh-Rh-Ti (already tested). The Rh-Rh-Rh hollow with O binding is the most logical next step. I predict it will give around -1.25 to -1.40 eV.\n\nStep 6 - Plan: hollow @ Rh-Rh-Rh with O (index 2) binding.",
+        "adsorbate_type": "Molecule",
+        "predicted_relaxed_energy_eV": -1.28,
+        "solution": {
+          "action": "continue",
+          "site_type": "hollow",
+          "surface_binding_atoms": [
+            "Rh",
+            "Rh",
+            "Rh"
+          ],
+          "adsorbate_binding_indices": [
+            2
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "hollow|Rh,Rh,Rh|2|Molecule|2.0",
+      "planner_reasoning": "Step 0 - SMILES Consistency Check: CC=O is acetaldehyde. Atom 0 is SP3 carbon (methyl), atom 1 is SP2 carbon (carbonyl C), atom 2 is SP2 oxygen (carbonyl O). No radicals present, so this is a Molecule adsorption.\n\nStep 1 - Analyze History:\n- bridge @ Rh-Ti (indices [1,2]): E=-1.200 eV (successful, O-end or C=O bridge)\n- hollow @ Rh-Rh-Ti (index [2]): E=-1.350 eV (successful, O-down hollow, current best)\n\nTwo sites tested so far. The hollow Rh-Rh-Ti with O binding is the current best at -1.350 eV.\n\nStep 2 - Formulate New Plan:\nRemaining untested configurations:\n1. Ontop Rh or Ti (O-down or C-down)\n2. Hollow Rh-Rh-Rh (pure Rh hollow)\n3. Hollow Rh-Rh-Rh-Ti (4-fold hollow)\n4. Bridge Rh-Rh\n5. Different binding atom on already-tested site types\n\nThe most promising unexplored option is the Rh-Rh-Rh hollow (pure Rh 3-fold hollow) with O binding (index 2). Pure Rh hollows are known to be strong adsorption sites for oxygen-containing species. Alternatively, the Rh-Rh bridge with O binding could be interesting.\n\nGiven that the hollow Rh-Rh-Ti gave -1.350 eV with O binding, the pure Rh-Rh-Rh hollow might give a similar or slightly different energy. Let me try the Rh-Rh-Rh hollow with O (index 2) binding, as this is a distinct chemical environment from the Rh-Rh-Ti hollow.\n\nAlso worth trying: ontop Ti with O binding, since Ti is oxophilic and could strongly bind the carbonyl oxygen.\n\nI'll try the ontop Ti site with O (index 2) binding, as Ti is highly oxophilic and this could yield a lower energy than the current best. This is a completely new site type and surface atom combination not yet tested.\n\nPredicted energy: Ti ontop with O binding for acetaldehyde - Ti is strongly oxophilic, so this could be competitive. I estimate around -1.1 to -1.3 eV based on the trend. I'll go with the Rh-Rh-Rh hollow with O binding as it's a natural next step.\n\nActually, let me reconsider. The available hollow sites are Rh-Rh-Rh and Rh-Rh-Ti (already tested). The Rh-Rh-Rh hollow with O binding is the most logical next step. I predict it will give around -1.25 to -1.40 eV.\n\nStep 6 - Plan: hollow @ Rh-Rh-Rh with O (index 2) binding.",
+      "tool_logs": [
+        "LLM-as-oracle mode: executor bypassed; predicted energy used in place of MACE relaxation.",
+        "Success: predicted_relaxed_energy_eV = -1.2800 eV."
+      ],
+      "status": "success",
+      "most_stable_energy_eV": -1.28,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": false,
+      "planned_site_type": "hollow",
+      "actual_site_type": "hollow",
+      "energy_source": "llm_predicted",
+      "history_entry": "【✅ Perfect Adsorption】 hollow @ ['Rh', 'Rh', 'Rh'] (Index [2]) -> Site: hollow (Rh,Rh,Rh) | E=-1.280 eV"
+    },
+    {
+      "attempt_index": 4,
+      "plan": {
+        "reasoning": "Step 0 - SMILES Consistency Check: CC=O is acetaldehyde. Atom indices: 0=C(SP3, methyl), 1=C(SP2, carbonyl carbon), 2=O(SP2, carbonyl oxygen). No radicals present, so this is a Molecule adsorption. No mismatch with user request.\n\nStep 1 - Analyze History:\n- bridge @ Rh-Ti: E=-1.200 eV (successful)\n- hollow @ Rh-Rh-Ti: E=-1.350 eV (best so far, successful)\n- hollow @ Rh-Rh-Rh: E=-1.280 eV (successful)\nNo convergence tags ([🔄 Converged to known best]) observed. Three distinct sites tested. The Rh-Rh-Ti hollow is currently the best at -1.350 eV.\n\nStep 2 - Remaining untested sites:\n- ontop @ Rh (not tested)\n- ontop @ Ti (not tested)\n- bridge @ Rh-Rh (not tested)\n- hollow @ Rh-Rh-Rh-Ti (4-fold, not tested)\n\nThe 4-fold hollow Rh-Rh-Rh-Ti is a high-coordination site that hasn't been tested. On alloy surfaces, 4-fold hollows can provide stronger binding due to more metal-adsorbate interactions. Given that the Rh-Rh-Ti hollow gave -1.350 eV, the 4-fold Rh-Rh-Rh-Ti hollow might give even stronger binding. This is the most promising untested site.\n\nStep 3 - User intent: Find lowest energy adsorption configuration for acetaldehyde.\n\nStep 4 - Adsorbate analysis: Acetaldehyde (CC=O). The oxygen atom (index 2) has lone pairs and is the primary donor for surface binding. The carbonyl carbon (index 1, SP2) can also interact with the surface. For hollow sites, O-down binding via index 2 is most common, or C=O side-on via indices [1,2].\n\nStep 5 - Surface analysis: Available 4-fold hollow: Rh-Rh-Rh-Ti. This is a unique site not yet tested.\n\nStep 6 - Plan: Try the 4-fold hollow Rh-Rh-Rh-Ti site with O-atom (index 2) binding. The oxygen lone pair interaction at a high-coordination hollow site could yield stronger adsorption. Alternatively, C=O side-on [1,2] at this hollow. Given the pattern that O-down binding tends to be favorable for aldehydes on transition metals, I'll use O binding (index 2) at the Rh-Rh-Rh-Ti hollow.\n\nPredicted energy: The 4-fold hollow has more metal contacts. Given the trend (bridge=-1.200, Rh-Rh-Rh hollow=-1.280, Rh-Rh-Ti hollow=-1.350), the 4-fold Rh-Rh-Rh-Ti hollow might give slightly stronger binding, estimated around -1.40 eV.",
+        "adsorbate_type": "Molecule",
+        "predicted_relaxed_energy_eV": -1.4,
+        "solution": {
+          "action": "continue",
+          "site_type": "hollow",
+          "surface_binding_atoms": [
+            "Rh",
+            "Rh",
+            "Rh",
+            "Ti"
+          ],
+          "adsorbate_binding_indices": [
+            2
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "hollow|Rh,Rh,Rh,Ti|2|Molecule|2.0",
+      "planner_reasoning": "Step 0 - SMILES Consistency Check: CC=O is acetaldehyde. Atom indices: 0=C(SP3, methyl), 1=C(SP2, carbonyl carbon), 2=O(SP2, carbonyl oxygen). No radicals present, so this is a Molecule adsorption. No mismatch with user request.\n\nStep 1 - Analyze History:\n- bridge @ Rh-Ti: E=-1.200 eV (successful)\n- hollow @ Rh-Rh-Ti: E=-1.350 eV (best so far, successful)\n- hollow @ Rh-Rh-Rh: E=-1.280 eV (successful)\nNo convergence tags ([🔄 Converged to known best]) observed. Three distinct sites tested. The Rh-Rh-Ti hollow is currently the best at -1.350 eV.\n\nStep 2 - Remaining untested sites:\n- ontop @ Rh (not tested)\n- ontop @ Ti (not tested)\n- bridge @ Rh-Rh (not tested)\n- hollow @ Rh-Rh-Rh-Ti (4-fold, not tested)\n\nThe 4-fold hollow Rh-Rh-Rh-Ti is a high-coordination site that hasn't been tested. On alloy surfaces, 4-fold hollows can provide stronger binding due to more metal-adsorbate interactions. Given that the Rh-Rh-Ti hollow gave -1.350 eV, the 4-fold Rh-Rh-Rh-Ti hollow might give even stronger binding. This is the most promising untested site.\n\nStep 3 - User intent: Find lowest energy adsorption configuration for acetaldehyde.\n\nStep 4 - Adsorbate analysis: Acetaldehyde (CC=O). The oxygen atom (index 2) has lone pairs and is the primary donor for surface binding. The carbonyl carbon (index 1, SP2) can also interact with the surface. For hollow sites, O-down binding via index 2 is most common, or C=O side-on via indices [1,2].\n\nStep 5 - Surface analysis: Available 4-fold hollow: Rh-Rh-Rh-Ti. This is a unique site not yet tested.\n\nStep 6 - Plan: Try the 4-fold hollow Rh-Rh-Rh-Ti site with O-atom (index 2) binding. The oxygen lone pair interaction at a high-coordination hollow site could yield stronger adsorption. Alternatively, C=O side-on [1,2] at this hollow. Given the pattern that O-down binding tends to be favorable for aldehydes on transition metals, I'll use O binding (index 2) at the Rh-Rh-Rh-Ti hollow.\n\nPredicted energy: The 4-fold hollow has more metal contacts. Given the trend (bridge=-1.200, Rh-Rh-Rh hollow=-1.280, Rh-Rh-Ti hollow=-1.350), the 4-fold Rh-Rh-Rh-Ti hollow might give slightly stronger binding, estimated around -1.40 eV.",
+      "tool_logs": [
+        "LLM-as-oracle mode: executor bypassed; predicted energy used in place of MACE relaxation.",
+        "Success: predicted_relaxed_energy_eV = -1.4000 eV."
+      ],
+      "status": "success",
+      "most_stable_energy_eV": -1.4,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": false,
+      "planned_site_type": "hollow",
+      "actual_site_type": "hollow",
+      "energy_source": "llm_predicted",
+      "history_entry": "【✅ Perfect Adsorption】 hollow @ ['Rh', 'Rh', 'Rh', 'Ti'] (Index [2]) -> Site: hollow (Rh,Rh,Rh,Ti) [🌟 New Best] | E=-1.400 eV"
+    },
+    {
+      "attempt_index": 5,
+      "plan": {
+        "reasoning": "Step 0 - SMILES Consistency Check: CC=O is acetaldehyde. Atom indices: 0=C(SP3, methyl), 1=C(SP2, carbonyl carbon), 2=O(SP2, carbonyl oxygen). No radicals present, so this is a Molecule adsorption. No mismatch with user request.\n\nStep 1 - Analyze History:\n- bridge @ Rh-Ti: E=-1.200 eV (O binding via index 2 or C=O binding)\n- hollow @ Rh-Rh-Ti: E=-1.350 eV\n- hollow @ Rh-Rh-Rh: E=-1.280 eV\n- hollow @ Rh-Rh-Rh-Ti (4-fold): E=-1.400 eV [Current Best]\nAll four major site types have been tested. No [🔄 Converged to known best] or [⚠️ Energy Degenerate] tags present. The 4-fold hollow Rh-Rh-Rh-Ti site gives the lowest energy at -1.400 eV.\n\nStep 2 - Remaining untested sites: The only remaining untested site from the available list is ontop (Rh or Ti). Let me consider ontop adsorption. For acetaldehyde, ontop adsorption via the oxygen lone pair (index 2) on Rh is a classic configuration. This hasn't been tested yet. However, ontop sites typically give weaker adsorption than hollow sites for transition metals. The energy would likely be around -0.8 to -1.1 eV, which is less than the current best of -1.400 eV.\n\nAlternatively, I could try a different binding mode at the Rh-Rh bridge site (not yet tested - only Rh-Ti bridge was tested). The Rh-Rh bridge with O binding (index 2) could give a different energy.\n\nStep 3 - Available untested combinations:\n- ontop @ Rh (O binding, index 2)\n- ontop @ Ti (O binding, index 2)\n- bridge @ Rh-Rh (O binding, index 2)\n- bridge @ Rh-Rh (C=O side-on, indices 1,2)\n- bridge @ Rh-Ti (C=O side-on, indices 1,2) - different from the tested Rh-Ti bridge\n\nThe Rh-Rh bridge has not been tested. Given that Rh-Rh-Rh hollow gave -1.280 eV and Rh-Rh-Rh-Ti gave -1.400 eV, the Rh-Rh bridge might give intermediate energy around -1.1 to -1.3 eV, still below the current best.\n\nStep 4 - Decision: I should try the Rh-Rh bridge site with O binding (index 2) as it's the only major untested bridge configuration. However, given that all hollow sites have been tested and the 4-fold hollow is the best, and ontop/bridge sites are generally weaker, the probability of finding a better configuration is low.\n\nActually, let me reconsider: I have tested bridge(Rh-Ti), hollow(Rh-Rh-Ti), hollow(Rh-Rh-Rh), hollow(Rh-Rh-Rh-Ti). The remaining untested sites are: ontop(Rh), ontop(Ti), bridge(Rh-Rh). Since ontop sites are typically weaker, the most promising untested site is bridge(Rh-Rh). I'll try this with O binding (index 2) as oxygen lone pair donation is the primary binding mode for acetaldehyde.\n\nStep 5 - Convergence assessment: With 4 out of ~7 site types tested and the trend showing hollow > bridge > (expected ontop), and the 4-fold hollow being the best, I should try bridge(Rh-Rh) as the last meaningful attempt before terminating.\n\nPredicted energy for Rh-Rh bridge with O binding: likely around -1.1 to -1.25 eV, below the current best of -1.400 eV. This is unlikely to be the new best but worth one more attempt.\n\nActually, given the hard cap of 5 attempts and we've used 4, this is the last attempt. I'll try bridge @ Rh-Rh with O (index 2) binding.",
+        "adsorbate_type": "Molecule",
+        "predicted_relaxed_energy_eV": -1.15,
+        "solution": {
+          "action": "continue",
+          "site_type": "bridge",
+          "surface_binding_atoms": [
+            "Rh",
+            "Rh"
+          ],
+          "adsorbate_binding_indices": [
+            2
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "bridge|Rh,Rh|2|Molecule|2.0",
+      "planner_reasoning": "Step 0 - SMILES Consistency Check: CC=O is acetaldehyde. Atom indices: 0=C(SP3, methyl), 1=C(SP2, carbonyl carbon), 2=O(SP2, carbonyl oxygen). No radicals present, so this is a Molecule adsorption. No mismatch with user request.\n\nStep 1 - Analyze History:\n- bridge @ Rh-Ti: E=-1.200 eV (O binding via index 2 or C=O binding)\n- hollow @ Rh-Rh-Ti: E=-1.350 eV\n- hollow @ Rh-Rh-Rh: E=-1.280 eV\n- hollow @ Rh-Rh-Rh-Ti (4-fold): E=-1.400 eV [Current Best]\nAll four major site types have been tested. No [🔄 Converged to known best] or [⚠️ Energy Degenerate] tags present. The 4-fold hollow Rh-Rh-Rh-Ti site gives the lowest energy at -1.400 eV.\n\nStep 2 - Remaining untested sites: The only remaining untested site from the available list is ontop (Rh or Ti). Let me consider ontop adsorption. For acetaldehyde, ontop adsorption via the oxygen lone pair (index 2) on Rh is a classic configuration. This hasn't been tested yet. However, ontop sites typically give weaker adsorption than hollow sites for transition metals. The energy would likely be around -0.8 to -1.1 eV, which is less than the current best of -1.400 eV.\n\nAlternatively, I could try a different binding mode at the Rh-Rh bridge site (not yet tested - only Rh-Ti bridge was tested). The Rh-Rh bridge with O binding (index 2) could give a different energy.\n\nStep 3 - Available untested combinations:\n- ontop @ Rh (O binding, index 2)\n- ontop @ Ti (O binding, index 2)\n- bridge @ Rh-Rh (O binding, index 2)\n- bridge @ Rh-Rh (C=O side-on, indices 1,2)\n- bridge @ Rh-Ti (C=O side-on, indices 1,2) - different from the tested Rh-Ti bridge\n\nThe Rh-Rh bridge has not been tested. Given that Rh-Rh-Rh hollow gave -1.280 eV and Rh-Rh-Rh-Ti gave -1.400 eV, the Rh-Rh bridge might give intermediate energy around -1.1 to -1.3 eV, still below the current best.\n\nStep 4 - Decision: I should try the Rh-Rh bridge site with O binding (index 2) as it's the only major untested bridge configuration. However, given that all hollow sites have been tested and the 4-fold hollow is the best, and ontop/bridge sites are generally weaker, the probability of finding a better configuration is low.\n\nActually, let me reconsider: I have tested bridge(Rh-Ti), hollow(Rh-Rh-Ti), hollow(Rh-Rh-Rh), hollow(Rh-Rh-Rh-Ti). The remaining untested sites are: ontop(Rh), ontop(Ti), bridge(Rh-Rh). Since ontop sites are typically weaker, the most promising untested site is bridge(Rh-Rh). I'll try this with O binding (index 2) as oxygen lone pair donation is the primary binding mode for acetaldehyde.\n\nStep 5 - Convergence assessment: With 4 out of ~7 site types tested and the trend showing hollow > bridge > (expected ontop), and the 4-fold hollow being the best, I should try bridge(Rh-Rh) as the last meaningful attempt before terminating.\n\nPredicted energy for Rh-Rh bridge with O binding: likely around -1.1 to -1.25 eV, below the current best of -1.400 eV. This is unlikely to be the new best but worth one more attempt.\n\nActually, given the hard cap of 5 attempts and we've used 4, this is the last attempt. I'll try bridge @ Rh-Rh with O (index 2) binding.",
+      "tool_logs": [
+        "LLM-as-oracle mode: executor bypassed; predicted energy used in place of MACE relaxation.",
+        "Success: predicted_relaxed_energy_eV = -1.1500 eV."
+      ],
+      "status": "success",
+      "most_stable_energy_eV": -1.15,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": false,
+      "planned_site_type": "bridge",
+      "actual_site_type": "bridge",
+      "energy_source": "llm_predicted",
+      "history_entry": "【✅ Perfect Adsorption】 bridge @ ['Rh', 'Rh'] (Index [2]) -> Site: bridge (Rh,Rh) | E=-1.150 eV"
+    }
+  ],
+  "history": [
+    "【✅ Perfect Adsorption】 bridge @ ['Rh', 'Ti'] (Index [1, 2]) -> Site: bridge (Rh,Ti) [🌟 New Best] | E=-1.200 eV",
+    "【✅ Perfect Adsorption】 hollow @ ['Rh', 'Rh', 'Ti'] (Index [2]) -> Site: hollow (Rh,Rh,Ti) [🌟 New Best] | E=-1.350 eV",
+    "【✅ Perfect Adsorption】 hollow @ ['Rh', 'Rh', 'Rh'] (Index [2]) -> Site: hollow (Rh,Rh,Rh) | E=-1.280 eV",
+    "【✅ Perfect Adsorption】 hollow @ ['Rh', 'Rh', 'Rh', 'Ti'] (Index [2]) -> Site: hollow (Rh,Rh,Rh,Ti) [🌟 New Best] | E=-1.400 eV",
+    "【✅ Perfect Adsorption】 bridge @ ['Rh', 'Rh'] (Index [2]) -> Site: bridge (Rh,Rh) | E=-1.150 eV"
+  ],
+  "error": null,
+  "perfect_count": 5,
+  "dissociation_count": 0,
+  "rearrangement_count": 0,
+  "calc_failure_count": 0,
+  "chemical_slip_count": 0
+}

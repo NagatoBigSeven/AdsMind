@@ -1,0 +1,136 @@
+{
+  "case_id": "10",
+  "case_metadata": {
+    "case_id": "10",
+    "slab_file": "datasets/cmu20/10_Pt_100.xyz",
+    "smiles": "[OH]",
+    "user_request": "Find the lowest-energy adsorption configuration for hydroxyl radical on the provided surface.",
+    "surface_family": "monometallic",
+    "adsorbate_name": "OH",
+    "miller_index": "(100)",
+    "reaction_class": "ORR",
+    "ablation_candidate": "FALSE",
+    "notes": "Facet sensitivity test; DFT validation target"
+  },
+  "status": "success",
+  "best_energy_eV": -2.35,
+  "iteration_count": 1,
+  "max_attempts": 5,
+  "final_site_type": "ontop",
+  "converged_tag": false,
+  "wall_clock_sec": 33.859212044626474,
+  "total_input_tokens": 3286,
+  "total_output_tokens": 2052,
+  "artifact_paths": {},
+  "best_result": {
+    "most_stable_energy_eV": -2.35,
+    "analysis_json": {
+      "status": "success",
+      "most_stable_energy_eV": -2.35,
+      "is_dissociated": false,
+      "is_covalently_bound": true,
+      "bond_change_count": 0,
+      "energy_source": "llm_predicted",
+      "site_analysis": {
+        "planned_site_type": "ontop",
+        "actual_site_type": "ontop",
+        "is_chemical_slip": false,
+        "planned_symbols": [
+          "Pt"
+        ],
+        "actual_symbols": [
+          "Pt"
+        ],
+        "site_fingerprint": "llm-oracle::ontop::Pt::0"
+      }
+    },
+    "plan": {
+      "reasoning": "No history available. SMILES [OH] shows O (index 0) with radical_electrons=1, so ReactiveSpecies via O. Start with simplest stable ontop site on pure Pt surface.",
+      "adsorbate_type": "ReactiveSpecies",
+      "solution": {
+        "action": "continue",
+        "site_type": "ontop",
+        "surface_binding_atoms": [
+          "Pt"
+        ],
+        "adsorbate_binding_indices": [
+          0
+        ],
+        "relax_top_n": 1,
+        "touch_sphere_size": 2,
+        "overlap_thr": 0.1,
+        "conformers_per_site_cap": 4
+      },
+      "predicted_relaxed_energy_eV": -2.35
+    },
+    "result_type": "Perfect"
+  },
+  "last_analysis": {
+    "status": "success",
+    "most_stable_energy_eV": -2.35,
+    "is_dissociated": false,
+    "is_covalently_bound": true,
+    "bond_change_count": 0,
+    "energy_source": "llm_predicted",
+    "site_analysis": {
+      "planned_site_type": "ontop",
+      "actual_site_type": "ontop",
+      "is_chemical_slip": false,
+      "planned_symbols": [
+        "Pt"
+      ],
+      "actual_symbols": [
+        "Pt"
+      ],
+      "site_fingerprint": "llm-oracle::ontop::Pt::0"
+    }
+  },
+  "attempt_records": [
+    {
+      "attempt_index": 1,
+      "plan": {
+        "reasoning": "No history available. SMILES [OH] shows O (index 0) with radical_electrons=1, so ReactiveSpecies via O. Start with simplest stable ontop site on pure Pt surface.",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "ontop",
+          "surface_binding_atoms": [
+            "Pt"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        },
+        "predicted_relaxed_energy_eV": -2.35
+      },
+      "plan_key": "ontop|Pt|0|ReactiveSpecies|2.0",
+      "planner_reasoning": "No history available. SMILES [OH] shows O (index 0) with radical_electrons=1, so ReactiveSpecies via O. Start with simplest stable ontop site on pure Pt surface.",
+      "tool_logs": [
+        "LLM-as-oracle mode: executor bypassed; predicted energy used in place of MACE relaxation.",
+        "Success: predicted_relaxed_energy_eV = -2.3500 eV."
+      ],
+      "status": "success",
+      "most_stable_energy_eV": -2.35,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": false,
+      "planned_site_type": "ontop",
+      "actual_site_type": "ontop",
+      "energy_source": "llm_predicted",
+      "history_entry": "【✅ Perfect Adsorption】 ontop @ ['Pt'] (Index [0]) -> Site: ontop (Pt) [🌟 New Best] | E=-2.350 eV"
+    }
+  ],
+  "history": [
+    "【✅ Perfect Adsorption】 ontop @ ['Pt'] (Index [0]) -> Site: ontop (Pt) [🌟 New Best] | E=-2.350 eV"
+  ],
+  "error": null,
+  "perfect_count": 1,
+  "dissociation_count": 0,
+  "rearrangement_count": 0,
+  "calc_failure_count": 0,
+  "chemical_slip_count": 0
+}

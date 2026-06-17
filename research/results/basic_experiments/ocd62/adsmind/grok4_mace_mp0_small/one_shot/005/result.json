@@ -1,0 +1,208 @@
+{
+  "case_id": "005",
+  "case_metadata": {
+    "case_id": "005",
+    "slab_file": "datasets/ocd62/005_As48Hf48Ni48_NH2.xyz",
+    "smiles": "[NH2]",
+    "user_request": "Find the lowest-energy adsorption configuration for the adsorbate with SMILES [NH2] on the provided surface.",
+    "surface_family": "intermetallic",
+    "adsorbate_name": "[NH2]",
+    "miller_index": "",
+    "reaction_class": "GENERALIZATION",
+    "ablation_candidate": "FALSE",
+    "notes": "OCD id=70; adsorbate=[NH2]; surface_formula=As48Hf48Ni48; y_relaxed=-3.784177 eV; site=38",
+    "surface_formula": "As48Hf48Ni48",
+    "surface_elements": "As;Hf;Ni",
+    "bare_slab_atoms": "144",
+    "adsorbate_atoms": "3",
+    "y_relaxed": "-3.784177",
+    "site_indices": "38"
+  },
+  "status": "success",
+  "best_energy_eV": -8.993228912353516,
+  "iteration_count": 1,
+  "max_attempts": 1,
+  "final_site_type": "bridge",
+  "converged_tag": false,
+  "wall_clock_sec": 498.77990059927106,
+  "total_input_tokens": 5027,
+  "total_output_tokens": 1404,
+  "artifact_paths": {
+    "BEST_NH2_bridge_E-8.993": "research/results/basic_experiments/ocd62/adsmind/grok4_mace_mp0_small/one_shot/005/artifacts/BEST_NH2_bridge_E-8.993.xyz",
+    "BEST_NH2_bridge_E-8.993.xyz": "research/results/basic_experiments/ocd62/adsmind/grok4_mace_mp0_small/one_shot/005/artifacts/BEST_NH2_bridge_E-8.993.xyz",
+    "best_structure_file": "research/results/basic_experiments/ocd62/adsmind/grok4_mace_mp0_small/one_shot/005/artifacts/BEST_NH2_bridge_E-8.993.xyz",
+    "conformers_[NH2]": "research/results/basic_experiments/ocd62/adsmind/grok4_mace_mp0_small/one_shot/005/artifacts/conformers_[NH2].traj",
+    "conformers_[NH2].traj": "research/results/basic_experiments/ocd62/adsmind/grok4_mace_mp0_small/one_shot/005/artifacts/conformers_[NH2].traj",
+    "final": "research/results/basic_experiments/ocd62/adsmind/grok4_mace_mp0_small/one_shot/005/artifacts/final.xyz",
+    "final.xyz": "research/results/basic_experiments/ocd62/adsmind/grok4_mace_mp0_small/one_shot/005/artifacts/final.xyz",
+    "relaxation": "research/results/basic_experiments/ocd62/adsmind/grok4_mace_mp0_small/one_shot/005/artifacts/relaxation.traj",
+    "relaxation.traj": "research/results/basic_experiments/ocd62/adsmind/grok4_mace_mp0_small/one_shot/005/artifacts/relaxation.traj",
+    "relaxation_trajectory_file": "research/results/basic_experiments/ocd62/adsmind/grok4_mace_mp0_small/one_shot/005/artifacts/relaxation.traj"
+  },
+  "best_result": {
+    "most_stable_energy_eV": -8.993228912353516,
+    "analysis_json": {
+      "status": "success",
+      "message": "Most stable config adsorption energy: -8.9932 eV. Target Atom: N (from plan index 0, global index 144 in relaxed structure). -> Nearest: Hf (Index 22), Distance: 2.049 Å (Threshold: 3.567), Bound: True. Bonded Surface Atoms: Hf-2.049Å, Ni-2.113Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: False (Planned ['Hf', 'Ni'] -> Actual ['Hf', 'Ni']).",
+      "most_stable_energy_eV": -8.993228912353516,
+      "target_adsorbate_atom": "N",
+      "target_adsorbate_atom_index": 144,
+      "bonded_surface_atoms": [
+        {
+          "symbol": "Hf",
+          "index": 22,
+          "distance": 2.049
+        },
+        {
+          "symbol": "Ni",
+          "index": 77,
+          "distance": 2.113
+        }
+      ],
+      "nearest_slab_atom": "Hf",
+      "nearest_slab_atom_index": 22,
+      "final_bond_distance_A": 2.049,
+      "estimated_covalent_cutoff_A": 2.706,
+      "is_covalently_bound": true,
+      "reaction_detected": false,
+      "is_dissociated": false,
+      "n_components": 1,
+      "bond_change_count": 0,
+      "site_analysis": {
+        "planned_site_type": "bridge",
+        "planned_connectivity": 2,
+        "actual_site_type": "bridge",
+        "actual_connectivity": 2,
+        "is_chemical_slip": false,
+        "planned_symbols": [
+          "Hf",
+          "Ni"
+        ],
+        "actual_symbols": [
+          "Hf",
+          "Ni"
+        ],
+        "site_fingerprint": "Hf22-Ni77"
+      },
+      "best_structure_file": "research/results/basic_experiments/ocd62/adsmind/grok4_mace_mp0_small/one_shot/005/artifacts/BEST_NH2_bridge_E-8.993.xyz",
+      "generated_conformers_file": "research/results/basic_experiments/ocd62/adsmind/grok4_mace_mp0_small/one_shot/005/artifacts/conformers_[NH2].traj",
+      "relaxation_trajectory_file": "research/results/basic_experiments/ocd62/adsmind/grok4_mace_mp0_small/one_shot/005/artifacts/final.xyz",
+      "session_id": "010-f90471fb"
+    },
+    "plan": {
+      "reasoning": "SMILES Consistency Check: The SMILES is [NH2], representing the NH2 radical. The atom list shows a single N atom at index 0 with SP3 hybridization, degree 0, radical_electrons=1, and formal_charge=0. This confirms it is a radical species, suitable for 'ReactiveSpecies'. No hybridization mismatch with user request. The binding atom N (index 0) has unpaired electrons, appropriate for ReactiveSpecies. History is None, so this is the first attempt. Analyze Old Plans: No previous plans, successes, failures, or energies. No unstable sites identified. No convergence tags. Formulate New Plan: Goal is lowest adsorption energy. For NH2 radical, common adsorption is via N at bridge sites on metal surfaces, as seen in ammonia decomposition catalysis where NH2 prefers bridge coordination. Surface has Hf, Ni, As; selecting Hf-Ni bridge as it involves two metallic atoms likely to provide strong binding. Avoid unstable or previously tested sites (none here). Site type restricted to ontop/bridge/hollow. This plan is new. Analyze Request: Find lowest-energy adsorption configuration for [NH2] on the surface. Analyze Adsorbate: SMILES [NH2] is NH2 radical; major functional group is amine radical; binding through N (index 0). Analyze Surface: Available bridge sites include Hf-Ni. Formulate Plan: Use ReactiveSpecies for radical; bind via N (index 0) at bridge Hf-Ni site. Defaults for other parameters. Hard limit of 1 attempt noted, but proceeding with initial plan as history is empty.",
+      "adsorbate_type": "ReactiveSpecies",
+      "solution": {
+        "action": "continue",
+        "site_type": "bridge",
+        "surface_binding_atoms": [
+          "Hf",
+          "Ni"
+        ],
+        "adsorbate_binding_indices": [
+          0
+        ],
+        "relax_top_n": 1,
+        "touch_sphere_size": 2,
+        "overlap_thr": 0.1,
+        "conformers_per_site_cap": 4
+      }
+    },
+    "result_type": "Perfect"
+  },
+  "last_analysis": {
+    "status": "success",
+    "message": "Most stable config adsorption energy: -8.9932 eV. Target Atom: N (from plan index 0, global index 144 in relaxed structure). -> Nearest: Hf (Index 22), Distance: 2.049 Å (Threshold: 3.567), Bound: True. Bonded Surface Atoms: Hf-2.049Å, Ni-2.113Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: False (Planned ['Hf', 'Ni'] -> Actual ['Hf', 'Ni']).",
+    "most_stable_energy_eV": -8.993228912353516,
+    "target_adsorbate_atom": "N",
+    "target_adsorbate_atom_index": 144,
+    "bonded_surface_atoms": [
+      {
+        "symbol": "Hf",
+        "index": 22,
+        "distance": 2.049
+      },
+      {
+        "symbol": "Ni",
+        "index": 77,
+        "distance": 2.113
+      }
+    ],
+    "nearest_slab_atom": "Hf",
+    "nearest_slab_atom_index": 22,
+    "final_bond_distance_A": 2.049,
+    "estimated_covalent_cutoff_A": 2.706,
+    "is_covalently_bound": true,
+    "reaction_detected": false,
+    "is_dissociated": false,
+    "n_components": 1,
+    "bond_change_count": 0,
+    "site_analysis": {
+      "planned_site_type": "bridge",
+      "planned_connectivity": 2,
+      "actual_site_type": "bridge",
+      "actual_connectivity": 2,
+      "is_chemical_slip": false,
+      "planned_symbols": [
+        "Hf",
+        "Ni"
+      ],
+      "actual_symbols": [
+        "Hf",
+        "Ni"
+      ],
+      "site_fingerprint": "Hf22-Ni77"
+    },
+    "best_structure_file": "research/results/basic_experiments/ocd62/adsmind/grok4_mace_mp0_small/one_shot/005/artifacts/BEST_NH2_bridge_E-8.993.xyz",
+    "generated_conformers_file": "research/results/basic_experiments/ocd62/adsmind/grok4_mace_mp0_small/one_shot/005/artifacts/conformers_[NH2].traj",
+    "relaxation_trajectory_file": "research/results/basic_experiments/ocd62/adsmind/grok4_mace_mp0_small/one_shot/005/artifacts/final.xyz",
+    "session_id": "010-f90471fb"
+  },
+  "attempt_records": [
+    {
+      "attempt_index": 1,
+      "plan": {
+        "reasoning": "SMILES Consistency Check: The SMILES is [NH2], representing the NH2 radical. The atom list shows a single N atom at index 0 with SP3 hybridization, degree 0, radical_electrons=1, and formal_charge=0. This confirms it is a radical species, suitable for 'ReactiveSpecies'. No hybridization mismatch with user request. The binding atom N (index 0) has unpaired electrons, appropriate for ReactiveSpecies. History is None, so this is the first attempt. Analyze Old Plans: No previous plans, successes, failures, or energies. No unstable sites identified. No convergence tags. Formulate New Plan: Goal is lowest adsorption energy. For NH2 radical, common adsorption is via N at bridge sites on metal surfaces, as seen in ammonia decomposition catalysis where NH2 prefers bridge coordination. Surface has Hf, Ni, As; selecting Hf-Ni bridge as it involves two metallic atoms likely to provide strong binding. Avoid unstable or previously tested sites (none here). Site type restricted to ontop/bridge/hollow. This plan is new. Analyze Request: Find lowest-energy adsorption configuration for [NH2] on the surface. Analyze Adsorbate: SMILES [NH2] is NH2 radical; major functional group is amine radical; binding through N (index 0). Analyze Surface: Available bridge sites include Hf-Ni. Formulate Plan: Use ReactiveSpecies for radical; bind via N (index 0) at bridge Hf-Ni site. Defaults for other parameters. Hard limit of 1 attempt noted, but proceeding with initial plan as history is empty.",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "bridge",
+          "surface_binding_atoms": [
+            "Hf",
+            "Ni"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "bridge|Hf,Ni|0|ReactiveSpecies|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -8.993228912353516,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": false,
+      "planned_site_type": "bridge",
+      "actual_site_type": "bridge",
+      "best_structure_file": "research/results/basic_experiments/ocd62/adsmind/grok4_mace_mp0_small/one_shot/005/artifacts/BEST_NH2_bridge_E-8.993.xyz",
+      "generated_conformers_file": "research/results/basic_experiments/ocd62/adsmind/grok4_mace_mp0_small/one_shot/005/artifacts/conformers_[NH2].traj",
+      "relaxation_trajectory_file": "research/results/basic_experiments/ocd62/adsmind/grok4_mace_mp0_small/one_shot/005/artifacts/final.xyz",
+      "message": "Most stable config adsorption energy: -8.9932 eV. Target Atom: N (from plan index 0, global index 144 in relaxed structure). -> Nearest: Hf (Index 22), Distance: 2.049 Å (Threshold: 3.567), Bound: True. Bonded Surface Atoms: Hf-2.049Å, Ni-2.113Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: False (Planned ['Hf', 'Ni'] -> Actual ['Hf', 'Ni']).",
+      "history_entry": "【✅ Perfect Adsorption】 bridge @ ['Hf', 'Ni'] (Index [0]) -> Site: bridge (Hf,Ni) [🌟 New Best] | E=-8.993 eV"
+    }
+  ],
+  "history": [
+    "【✅ Perfect Adsorption】 bridge @ ['Hf', 'Ni'] (Index [0]) -> Site: bridge (Hf,Ni) [🌟 New Best] | E=-8.993 eV"
+  ],
+  "error": null,
+  "perfect_count": 1,
+  "dissociation_count": 0,
+  "rearrangement_count": 0,
+  "calc_failure_count": 0,
+  "chemical_slip_count": 0,
+  "best_structure_file": "research/results/basic_experiments/ocd62/adsmind/grok4_mace_mp0_small/one_shot/005/artifacts/BEST_NH2_bridge_E-8.993.xyz"
+}

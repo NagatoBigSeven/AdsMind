@@ -1,0 +1,28 @@
+{
+  "temperature": 0,
+  "max_tokens": 4096,
+  "timeout_sec": 120,
+  "relaxation_mode": "standard",
+  "calculator_backend": "mace",
+  "mace_device": "cpu",
+  "mace_precision": "float32",
+  "mace_model": "small",
+  "mace_use_dispersion": false,
+  "fmax": 0.1,
+  "random_seed": 42,
+  "manifest_version": "cmu_manifest_v1",
+  "user_request_mode": "per-case explicit request string from datasets/cmu20/cmu20_manifest.csv",
+  "llm_backend": "openrouter",
+  "llm_model": "google/gemini-2.5-pro",
+  "llm_base_url": "https://openrouter.ai/api/v1",
+  "llm_api_key_env_var": "OPENROUTER_API_KEY",
+  "platform": "linux-x86_64-cpu-float32",
+  "notes": [
+    "Gemini 2.5 Pro one-shot benchmark configuration with MACE-MP-0 small.",
+    "Target model id: google/gemini-2.5-pro.",
+    "API keys are supplied at runtime and are not stored in this config.",
+    "Physics protocol is locked by calculator backend, MACE size, device, precision, and dispersion settings."
+  ],
+  "max_retries": 1,
+  "transport_variant": "openrouter"
+}

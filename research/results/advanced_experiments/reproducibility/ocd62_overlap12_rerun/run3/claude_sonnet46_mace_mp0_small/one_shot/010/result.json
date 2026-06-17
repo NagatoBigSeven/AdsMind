@@ -1,0 +1,215 @@
+{
+  "case_id": "010",
+  "case_metadata": {
+    "case_id": "010",
+    "slab_file": "datasets/ocd62_overlap12/010_Cr18Pt18_H.xyz",
+    "smiles": "[H]",
+    "user_request": "Find the lowest-energy adsorption configuration for atomic hydrogen on the provided surface.",
+    "surface_family": "intermetallic",
+    "adsorbate_name": "H",
+    "miller_index": "",
+    "reaction_class": "HER",
+    "ablation_candidate": "FALSE",
+    "notes": "OCD-GMAE source key=596; original_ads_smi=[H]; surface_formula=Cr18Pt18; y_relaxed=-1.602807 eV; site=[28, 34]; OCD62 overlap12 RUN3 symlink to representative50 source file; sha256=9e5ea3c71cf59459b60a4a249237ae00b2e0b1fb75472abdb8eec5c5fde4c446",
+    "source_key": "596",
+    "original_ads_smi": "[H]",
+    "surface_formula": "Cr18Pt18",
+    "surface_elements": "Cr;Pt",
+    "bare_slab_atoms": "36",
+    "adsorbate_atoms": "1",
+    "y_relaxed": "-1.602807",
+    "site_indices": "28;34",
+    "selection_bucket": "cmu_exact"
+  },
+  "status": "success",
+  "best_energy_eV": -4.743168592453003,
+  "iteration_count": 1,
+  "max_attempts": 1,
+  "final_site_type": "bridge",
+  "converged_tag": false,
+  "wall_clock_sec": 33.515524953603745,
+  "total_input_tokens": 4031,
+  "total_output_tokens": 1566,
+  "artifact_paths": {
+    "BEST_H_hollow_to_bridge_E-4.743": "artifacts/BEST_H_hollow_to_bridge_E-4.743.xyz",
+    "BEST_H_hollow_to_bridge_E-4.743.xyz": "artifacts/BEST_H_hollow_to_bridge_E-4.743.xyz",
+    "best_structure_file": "artifacts/BEST_H_hollow_to_bridge_E-4.743.xyz",
+    "conformers_[H]": "artifacts/conformers_[H].traj",
+    "conformers_[H].traj": "artifacts/conformers_[H].traj",
+    "final": "artifacts/final.xyz",
+    "final.xyz": "artifacts/final.xyz",
+    "relaxation": "artifacts/relaxation.traj",
+    "relaxation.traj": "artifacts/relaxation.traj",
+    "relaxation_trajectory_file": "artifacts/relaxation.traj"
+  },
+  "best_result": {
+    "most_stable_energy_eV": -4.743168592453003,
+    "analysis_json": {
+      "status": "success",
+      "message": "Most stable config adsorption energy: -4.7432 eV. Target Atom: H (from plan index 0, global index 36 in relaxed structure). -> Nearest: Pt (Index 22), Distance: 1.75 Å (Threshold: 2.422), Bound: True. Bonded Surface Atoms: Pt-1.75Å, Pt-1.763Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Cr', 'Pt', 'Pt'] -> Actual ['Pt', 'Pt']).",
+      "most_stable_energy_eV": -4.743168592453003,
+      "target_adsorbate_atom": "H",
+      "target_adsorbate_atom_index": 36,
+      "bonded_surface_atoms": [
+        {
+          "symbol": "Pt",
+          "index": 22,
+          "distance": 1.75
+        },
+        {
+          "symbol": "Pt",
+          "index": 34,
+          "distance": 1.763
+        }
+      ],
+      "nearest_slab_atom": "Pt",
+      "nearest_slab_atom_index": 22,
+      "final_bond_distance_A": 1.75,
+      "estimated_covalent_cutoff_A": 1.837,
+      "is_covalently_bound": true,
+      "reaction_detected": false,
+      "is_dissociated": false,
+      "n_components": 1,
+      "bond_change_count": 0,
+      "site_analysis": {
+        "planned_site_type": "hollow",
+        "planned_connectivity": 3,
+        "actual_site_type": "bridge",
+        "actual_connectivity": 2,
+        "is_chemical_slip": true,
+        "planned_symbols": [
+          "Cr",
+          "Pt",
+          "Pt"
+        ],
+        "actual_symbols": [
+          "Pt",
+          "Pt"
+        ],
+        "site_fingerprint": "Pt22-Pt34"
+      },
+      "best_structure_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/claude_sonnet46_mace_mp0_small/one_shot/010/artifacts/BEST_H_hollow_to_bridge_E-4.743.xyz",
+      "generated_conformers_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/claude_sonnet46_mace_mp0_small/one_shot/010/artifacts/conformers_[H].traj",
+      "relaxation_trajectory_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/claude_sonnet46_mace_mp0_small/one_shot/010/artifacts/final.xyz",
+      "session_id": "010-e7992bdb"
+    },
+    "plan": {
+      "reasoning": "Step 0 - SMILES Consistency Check: The SMILES is [H], representing atomic hydrogen. This is a radical species (hydrogen atom) with one unpaired electron. No hybridization issues. It is a ReactiveSpecies.\n\nStep 1 - Analyze Old Plans: No history exists. This is the first attempt.\n\nStep 2 - Formulate New Plan: Since this is the first and only attempt (hard limit = 1), I need to choose the most likely lowest-energy site for atomic hydrogen on a Cr-Pt alloy surface.\n\nStep 3 - Analyze Request: Find the lowest-energy adsorption configuration for atomic H on Cr18Pt18 surface.\n\nStep 4 - Analyze Adsorbate: [H] is atomic hydrogen. The heavy atom index list is [] (empty, since H is not a heavy atom). For atomic hydrogen as a ReactiveSpecies, the binding index should be [0] referring to the hydrogen atom itself (index 0 in the adsorbate).\n\nStep 5 - Analyze Surface: Available sites include ontop (Cr, Pt), bridge (Cr-Cr, Cr-Pt, Pt-Pt), and hollow (Cr-Cr-Pt, Cr-Pt-Pt). For atomic hydrogen on transition metal surfaces, hollow and bridge sites are typically preferred over ontop sites. On Pt surfaces, H commonly adsorbs at bridge or hollow sites. On Cr-Pt alloys, the Cr-Pt bridge or hollow sites are good candidates. Given the single attempt limit, I will choose the hollow Cr-Pt-Pt site as it combines both metals and hollow sites generally provide stronger binding for H atoms due to higher coordination.\n\nStep 6 - Formulate Plan: Use hollow site with Cr-Pt-Pt surface atoms. The adsorbate binding index is [0] for the H atom. adsorbate_type is ReactiveSpecies since atomic H has an unpaired electron.",
+      "adsorbate_type": "ReactiveSpecies",
+      "solution": {
+        "action": "continue",
+        "site_type": "hollow",
+        "surface_binding_atoms": [
+          "Cr",
+          "Pt",
+          "Pt"
+        ],
+        "adsorbate_binding_indices": [
+          0
+        ],
+        "relax_top_n": 1,
+        "touch_sphere_size": 2,
+        "overlap_thr": 0.1,
+        "conformers_per_site_cap": 4
+      }
+    },
+    "result_type": "Perfect"
+  },
+  "last_analysis": {
+    "status": "success",
+    "message": "Most stable config adsorption energy: -4.7432 eV. Target Atom: H (from plan index 0, global index 36 in relaxed structure). -> Nearest: Pt (Index 22), Distance: 1.75 Å (Threshold: 2.422), Bound: True. Bonded Surface Atoms: Pt-1.75Å, Pt-1.763Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Cr', 'Pt', 'Pt'] -> Actual ['Pt', 'Pt']).",
+    "most_stable_energy_eV": -4.743168592453003,
+    "target_adsorbate_atom": "H",
+    "target_adsorbate_atom_index": 36,
+    "bonded_surface_atoms": [
+      {
+        "symbol": "Pt",
+        "index": 22,
+        "distance": 1.75
+      },
+      {
+        "symbol": "Pt",
+        "index": 34,
+        "distance": 1.763
+      }
+    ],
+    "nearest_slab_atom": "Pt",
+    "nearest_slab_atom_index": 22,
+    "final_bond_distance_A": 1.75,
+    "estimated_covalent_cutoff_A": 1.837,
+    "is_covalently_bound": true,
+    "reaction_detected": false,
+    "is_dissociated": false,
+    "n_components": 1,
+    "bond_change_count": 0,
+    "site_analysis": {
+      "planned_site_type": "hollow",
+      "planned_connectivity": 3,
+      "actual_site_type": "bridge",
+      "actual_connectivity": 2,
+      "is_chemical_slip": true,
+      "planned_symbols": [
+        "Cr",
+        "Pt",
+        "Pt"
+      ],
+      "actual_symbols": [
+        "Pt",
+        "Pt"
+      ],
+      "site_fingerprint": "Pt22-Pt34"
+    },
+    "best_structure_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/claude_sonnet46_mace_mp0_small/one_shot/010/artifacts/BEST_H_hollow_to_bridge_E-4.743.xyz",
+    "generated_conformers_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/claude_sonnet46_mace_mp0_small/one_shot/010/artifacts/conformers_[H].traj",
+    "relaxation_trajectory_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/claude_sonnet46_mace_mp0_small/one_shot/010/artifacts/final.xyz",
+    "session_id": "010-e7992bdb"
+  },
+  "attempt_records": [
+    {
+      "attempt_index": 1,
+      "plan": {
+        "reasoning": "Step 0 - SMILES Consistency Check: The SMILES is [H], representing atomic hydrogen. This is a radical species (hydrogen atom) with one unpaired electron. No hybridization issues. It is a ReactiveSpecies.\n\nStep 1 - Analyze Old Plans: No history exists. This is the first attempt.\n\nStep 2 - Formulate New Plan: Since this is the first and only attempt (hard limit = 1), I need to choose the most likely lowest-energy site for atomic hydrogen on a Cr-Pt alloy surface.\n\nStep 3 - Analyze Request: Find the lowest-energy adsorption configuration for atomic H on Cr18Pt18 surface.\n\nStep 4 - Analyze Adsorbate: [H] is atomic hydrogen. The heavy atom index list is [] (empty, since H is not a heavy atom). For atomic hydrogen as a ReactiveSpecies, the binding index should be [0] referring to the hydrogen atom itself (index 0 in the adsorbate).\n\nStep 5 - Analyze Surface: Available sites include ontop (Cr, Pt), bridge (Cr-Cr, Cr-Pt, Pt-Pt), and hollow (Cr-Cr-Pt, Cr-Pt-Pt). For atomic hydrogen on transition metal surfaces, hollow and bridge sites are typically preferred over ontop sites. On Pt surfaces, H commonly adsorbs at bridge or hollow sites. On Cr-Pt alloys, the Cr-Pt bridge or hollow sites are good candidates. Given the single attempt limit, I will choose the hollow Cr-Pt-Pt site as it combines both metals and hollow sites generally provide stronger binding for H atoms due to higher coordination.\n\nStep 6 - Formulate Plan: Use hollow site with Cr-Pt-Pt surface atoms. The adsorbate binding index is [0] for the H atom. adsorbate_type is ReactiveSpecies since atomic H has an unpaired electron.",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "hollow",
+          "surface_binding_atoms": [
+            "Cr",
+            "Pt",
+            "Pt"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "hollow|Cr,Pt,Pt|0|ReactiveSpecies|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -4.743168592453003,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": true,
+      "planned_site_type": "hollow",
+      "actual_site_type": "bridge",
+      "best_structure_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/claude_sonnet46_mace_mp0_small/one_shot/010/artifacts/BEST_H_hollow_to_bridge_E-4.743.xyz",
+      "generated_conformers_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/claude_sonnet46_mace_mp0_small/one_shot/010/artifacts/conformers_[H].traj",
+      "relaxation_trajectory_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/claude_sonnet46_mace_mp0_small/one_shot/010/artifacts/final.xyz",
+      "message": "Most stable config adsorption energy: -4.7432 eV. Target Atom: H (from plan index 0, global index 36 in relaxed structure). -> Nearest: Pt (Index 22), Distance: 1.75 Å (Threshold: 2.422), Bound: True. Bonded Surface Atoms: Pt-1.75Å, Pt-1.763Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Cr', 'Pt', 'Pt'] -> Actual ['Pt', 'Pt']).",
+      "history_entry": "【✅ Perfect Adsorption】 hollow @ ['Cr', 'Pt', 'Pt'] (Index [0]) -> Site: bridge (Pt,Pt) | E=-4.743 eV"
+    }
+  ],
+  "history": [
+    "【✅ Perfect Adsorption】 hollow @ ['Cr', 'Pt', 'Pt'] (Index [0]) -> Site: bridge (Pt,Pt) | E=-4.743 eV"
+  ],
+  "error": null,
+  "perfect_count": 1,
+  "dissociation_count": 0,
+  "rearrangement_count": 0,
+  "calc_failure_count": 0,
+  "chemical_slip_count": 1,
+  "best_structure_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/claude_sonnet46_mace_mp0_small/one_shot/010/artifacts/BEST_H_hollow_to_bridge_E-4.743.xyz"
+}

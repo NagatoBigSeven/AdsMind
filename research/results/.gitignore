@@ -1,0 +1,43 @@
+# Ignore everything under research/results by default, then re-include only
+# curated, lightweight, path-sanitized records. Raw run payloads (trajectories,
+# artifacts, agent/driver logs, per-run structures, and plots) are NOT committed
+# here -- they are distributed as a GitHub Release archive. See the README.md in
+# this directory and paper-artifacts/MANIFEST.md.
+*
+!.gitignore
+!README.md
+!README_CN.md
+
+# Re-include the curated experiment trees (directories first; the file-type
+# rules below decide which contents are actually tracked).
+!basic_experiments/
+!basic_experiments/**
+!advanced_experiments/
+!advanced_experiments/**
+!processed/
+!processed/**
+
+# Drop raw / heavy / non-curated payloads even inside the curated trees. These
+# live in the GitHub Release archive instead of Git history.
+**/artifacts/
+**/traj/
+**/logs/
+**/*.traj
+**/*.xyz
+**/*.pkl
+**/*.npy
+**/*.npz
+**/*.png
+**/*.svg
+**/*.pdf
+**/*.zip
+**/*.log
+**/agent_log.txt
+**/comparison_snapshot.json
+**/config.json
+**/__pycache__/
+**/*.pyc
+**/.DS_Store
+
+# Keep the sanitized public run-config sidecar (raw config.json stays ignored).
+!**/run_config.public.json

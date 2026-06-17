@@ -1,0 +1,315 @@
+{
+  "case_id": "05",
+  "case_metadata": {
+    "case_id": "05",
+    "slab_file": "datasets/cmu20/05_Cu3Ag_111.xyz",
+    "smiles": "[H]",
+    "user_request": "Find the lowest-energy adsorption configuration for atomic hydrogen on the provided surface.",
+    "surface_family": "intermetallic",
+    "adsorbate_name": "H",
+    "miller_index": "(111)",
+    "reaction_class": "HER",
+    "ablation_candidate": "FALSE",
+    "notes": "Cu3Ag hydrogen benchmark"
+  },
+  "status": "success",
+  "best_energy_eV": -0.45,
+  "iteration_count": 5,
+  "max_attempts": 5,
+  "final_site_type": "hollow",
+  "converged_tag": false,
+  "wall_clock_sec": 205.1765738762915,
+  "total_input_tokens": 19550,
+  "total_output_tokens": 20605,
+  "artifact_paths": {
+    "iteration_energy_curve": "research/results/basic_experiments/cmu20/adsmind/gemini25pro_mace_mp0_small/no_executor/05/artifacts/iteration_energy_curve.png",
+    "iteration_energy_curve.png": "research/results/basic_experiments/cmu20/adsmind/gemini25pro_mace_mp0_small/no_executor/05/artifacts/iteration_energy_curve.png",
+    "iteration_energy_curve_png": "research/results/basic_experiments/cmu20/adsmind/gemini25pro_mace_mp0_small/no_executor/05/artifacts/iteration_energy_curve.png",
+    "summary_report": "research/results/basic_experiments/cmu20/adsmind/gemini25pro_mace_mp0_small/no_executor/05/artifacts/summary_report.md",
+    "summary_report.md": "research/results/basic_experiments/cmu20/adsmind/gemini25pro_mace_mp0_small/no_executor/05/artifacts/summary_report.md",
+    "summary_report_file": "research/results/basic_experiments/cmu20/adsmind/gemini25pro_mace_mp0_small/no_executor/05/artifacts/summary_report.md"
+  },
+  "best_result": {
+    "most_stable_energy_eV": -0.45,
+    "analysis_json": {
+      "status": "success",
+      "most_stable_energy_eV": -0.45,
+      "is_dissociated": false,
+      "is_covalently_bound": true,
+      "bond_change_count": 0,
+      "energy_source": "llm_predicted",
+      "site_analysis": {
+        "planned_site_type": "hollow",
+        "actual_site_type": "hollow",
+        "is_chemical_slip": false,
+        "planned_symbols": [
+          "Cu",
+          "Cu",
+          "Cu"
+        ],
+        "actual_symbols": [
+          "Cu",
+          "Cu",
+          "Cu"
+        ],
+        "site_fingerprint": "llm-oracle::hollow::Cu-Cu-Cu::0"
+      }
+    },
+    "plan": {
+      "reasoning": "This is the first attempt to find the lowest energy adsorption site for atomic hydrogen on the Cu3Ag(111) surface. The history is empty. The adsorbate is atomic hydrogen ([H]), which is a radical. Therefore, the `adsorbate_type` must be `ReactiveSpecies`, and the binding atom is the hydrogen itself (index 0). Based on general chemical principles for small atoms on close-packed metal surfaces, hollow sites are often the most stable. The available sites list includes two types of 3-fold hollow sites: `Cu-Cu-Cu` and `Ag-Cu-Cu`. I will start by testing the pure `Cu-Cu-Cu` hollow site, as copper is generally more reactive towards hydrogen than silver. This represents a logical, high-symmetry starting point for the search.",
+      "adsorbate_type": "ReactiveSpecies",
+      "predicted_relaxed_energy_eV": -0.45,
+      "solution": {
+        "action": "continue",
+        "site_type": "hollow",
+        "surface_binding_atoms": [
+          "Cu",
+          "Cu",
+          "Cu"
+        ],
+        "adsorbate_binding_indices": [
+          0
+        ],
+        "relax_top_n": 1,
+        "touch_sphere_size": 2,
+        "overlap_thr": 0.1,
+        "conformers_per_site_cap": 4
+      }
+    },
+    "result_type": "Perfect"
+  },
+  "last_analysis": {
+    "status": "success",
+    "most_stable_energy_eV": -0.395,
+    "is_dissociated": false,
+    "is_covalently_bound": true,
+    "bond_change_count": 0,
+    "energy_source": "llm_predicted",
+    "site_analysis": {
+      "planned_site_type": "hollow",
+      "actual_site_type": "hollow",
+      "is_chemical_slip": false,
+      "planned_symbols": [
+        "Ag",
+        "Cu",
+        "Cu",
+        "Cu"
+      ],
+      "actual_symbols": [
+        "Ag",
+        "Cu",
+        "Cu",
+        "Cu"
+      ],
+      "site_fingerprint": "llm-oracle::hollow::Ag-Cu-Cu-Cu::0"
+    }
+  },
+  "attempt_records": [
+    {
+      "attempt_index": 1,
+      "plan": {
+        "reasoning": "This is the first attempt to find the lowest energy adsorption site for atomic hydrogen on the Cu3Ag(111) surface. The history is empty. The adsorbate is atomic hydrogen ([H]), which is a radical. Therefore, the `adsorbate_type` must be `ReactiveSpecies`, and the binding atom is the hydrogen itself (index 0). Based on general chemical principles for small atoms on close-packed metal surfaces, hollow sites are often the most stable. The available sites list includes two types of 3-fold hollow sites: `Cu-Cu-Cu` and `Ag-Cu-Cu`. I will start by testing the pure `Cu-Cu-Cu` hollow site, as copper is generally more reactive towards hydrogen than silver. This represents a logical, high-symmetry starting point for the search.",
+        "adsorbate_type": "ReactiveSpecies",
+        "predicted_relaxed_energy_eV": -0.45,
+        "solution": {
+          "action": "continue",
+          "site_type": "hollow",
+          "surface_binding_atoms": [
+            "Cu",
+            "Cu",
+            "Cu"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "hollow|Cu,Cu,Cu|0|ReactiveSpecies|2.0",
+      "planner_reasoning": "This is the first attempt to find the lowest energy adsorption site for atomic hydrogen on the Cu3Ag(111) surface. The history is empty. The adsorbate is atomic hydrogen ([H]), which is a radical. Therefore, the `adsorbate_type` must be `ReactiveSpecies`, and the binding atom is the hydrogen itself (index 0). Based on general chemical principles for small atoms on close-packed metal surfaces, hollow sites are often the most stable. The available sites list includes two types of 3-fold hollow sites: `Cu-Cu-Cu` and `Ag-Cu-Cu`. I will start by testing the pure `Cu-Cu-Cu` hollow site, as copper is generally more reactive towards hydrogen than silver. This represents a logical, high-symmetry starting point for the search.",
+      "tool_logs": [
+        "LLM-as-oracle mode: executor bypassed; predicted energy used in place of MACE relaxation.",
+        "Success: predicted_relaxed_energy_eV = -0.4500 eV."
+      ],
+      "status": "success",
+      "most_stable_energy_eV": -0.45,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": false,
+      "planned_site_type": "hollow",
+      "actual_site_type": "hollow",
+      "energy_source": "llm_predicted",
+      "history_entry": "【✅ Perfect Adsorption】 hollow @ ['Cu', 'Cu', 'Cu'] (Index [0]) -> Site: hollow (Cu,Cu,Cu) [🌟 New Best] | E=-0.450 eV"
+    },
+    {
+      "attempt_index": 2,
+      "plan": {
+        "reasoning": "The previous successful attempt found that atomic hydrogen adsorbs on a Cu-Cu-Cu hollow site with an energy of -0.450 eV. This is a strong adsorption and currently the best configuration. To systematically search for an even lower energy site, I must now test other available high-symmetry sites on this alloy surface. The provided list of available sites includes other hollow, bridge, and ontop sites involving both Cu and Ag. Atomic hydrogen typically favors high-coordination sites. The next logical step is to explore a different type of 3-fold hollow site, specifically one that includes the other metal component, Ag. Therefore, I will plan an adsorption on the 'Ag-Cu-Cu' hollow site. Since hydrogen generally binds more weakly to Ag than to Cu, I predict that this site will be less stable than the pure Cu-Cu-Cu site, resulting in a less negative adsorption energy.",
+        "adsorbate_type": "ReactiveSpecies",
+        "predicted_relaxed_energy_eV": -0.315,
+        "solution": {
+          "action": "continue",
+          "site_type": "hollow",
+          "surface_binding_atoms": [
+            "Ag",
+            "Cu",
+            "Cu"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "hollow|Ag,Cu,Cu|0|ReactiveSpecies|2.0",
+      "planner_reasoning": "The previous successful attempt found that atomic hydrogen adsorbs on a Cu-Cu-Cu hollow site with an energy of -0.450 eV. This is a strong adsorption and currently the best configuration. To systematically search for an even lower energy site, I must now test other available high-symmetry sites on this alloy surface. The provided list of available sites includes other hollow, bridge, and ontop sites involving both Cu and Ag. Atomic hydrogen typically favors high-coordination sites. The next logical step is to explore a different type of 3-fold hollow site, specifically one that includes the other metal component, Ag. Therefore, I will plan an adsorption on the 'Ag-Cu-Cu' hollow site. Since hydrogen generally binds more weakly to Ag than to Cu, I predict that this site will be less stable than the pure Cu-Cu-Cu site, resulting in a less negative adsorption energy.",
+      "tool_logs": [
+        "LLM-as-oracle mode: executor bypassed; predicted energy used in place of MACE relaxation.",
+        "Success: predicted_relaxed_energy_eV = -0.3150 eV."
+      ],
+      "status": "success",
+      "most_stable_energy_eV": -0.315,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": false,
+      "planned_site_type": "hollow",
+      "actual_site_type": "hollow",
+      "energy_source": "llm_predicted",
+      "history_entry": "【✅ Perfect Adsorption】 hollow @ ['Ag', 'Cu', 'Cu'] (Index [0]) -> Site: hollow (Ag,Cu,Cu) | E=-0.315 eV"
+    },
+    {
+      "attempt_index": 3,
+      "plan": {
+        "reasoning": "0. **SMILES Consistency Check**: The SMILES `[H]` represents atomic hydrogen, which is a radical. This is consistent with using `ReactiveSpecies` for adsorption.\n1. **Analyze Old Plans**: I have successfully tested two 3-fold hollow sites. The `hollow @ ['Cu', 'Cu', 'Cu']` site yielded the best energy so far at -0.450 eV. The mixed `hollow @ ['Ag', 'Cu', 'Cu']` site was significantly less stable at -0.315 eV. This suggests that pure Cu sites are more favorable for H adsorption than sites involving Ag.\n2. **Formulate New Plan**: To continue the systematic search for the lowest energy configuration, I will now investigate the bridge sites. The available bridge sites are `Ag-Cu` and `Cu-Cu`. Based on the observation that pure Cu sites are more stable, I will prioritize testing the `Cu-Cu` bridge site. I expect its adsorption energy to be less negative (less stable) than the best hollow site, but it must be tested to confirm the global minimum.\n3. **Analyze Request**: The user wants to find the most stable adsorption site for atomic hydrogen.\n4. **Analyze Adsorbate**: The adsorbate is atomic hydrogen `[H]`. It is a radical with one atom at index 0. Therefore, `adsorbate_type` must be `ReactiveSpecies` and `adsorbate_binding_indices` will be `[0]`.\n5. **Analyze Surface**: The `Available Sites List` confirms the existence of a `Cu-Cu` bridge site.\n6. **Formulate Plan**: I will plan an adsorption on the `Cu-Cu` bridge site. `site_type` will be \"bridge\", `surface_binding_atoms` will be `[\"Cu\", \"Cu\"]`, and `adsorbate_binding_indices` will be `[0]`.\n7. **Predict Energy**: For H on (111) surfaces of late transition metals, hollow sites are typically the most stable, followed by bridge, then ontop. The best hollow site (Cu-Cu-Cu) energy is -0.450 eV. I predict the Cu-Cu bridge site will be slightly less stable. A reasonable estimate is around -0.38 eV, which is more stable than the Ag-containing hollow site (-0.315 eV) but less stable than the pure Cu hollow site.",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "bridge",
+          "surface_binding_atoms": [
+            "Cu",
+            "Cu"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        },
+        "predicted_relaxed_energy_eV": -0.38
+      },
+      "plan_key": "bridge|Cu,Cu|0|ReactiveSpecies|2.0",
+      "planner_reasoning": "0. **SMILES Consistency Check**: The SMILES `[H]` represents atomic hydrogen, which is a radical. This is consistent with using `ReactiveSpecies` for adsorption.\n1. **Analyze Old Plans**: I have successfully tested two 3-fold hollow sites. The `hollow @ ['Cu', 'Cu', 'Cu']` site yielded the best energy so far at -0.450 eV. The mixed `hollow @ ['Ag', 'Cu', 'Cu']` site was significantly less stable at -0.315 eV. This suggests that pure Cu sites are more favorable for H adsorption than sites involving Ag.\n2. **Formulate New Plan**: To continue the systematic search for the lowest energy configuration, I will now investigate the bridge sites. The available bridge sites are `Ag-Cu` and `Cu-Cu`. Based on the observation that pure Cu sites are more stable, I will prioritize testing the `Cu-Cu` bridge site. I expect its adsorption energy to be less negative (less stable) than the best hollow site, but it must be tested to confirm the global minimum.\n3. **Analyze Request**: The user wants to find the most stable adsorption site for atomic hydrogen.\n4. **Analyze Adsorbate**: The adsorbate is atomic hydrogen `[H]`. It is a radical with one atom at index 0. Therefore, `adsorbate_type` must be `ReactiveSpecies` and `adsorbate_binding_indices` will be `[0]`.\n5. **Analyze Surface**: The `Available Sites List` confirms the existence of a `Cu-Cu` bridge site.\n6. **Formulate Plan**: I will plan an adsorption on the `Cu-Cu` bridge site. `site_type` will be \"bridge\", `surface_binding_atoms` will be `[\"Cu\", \"Cu\"]`, and `adsorbate_binding_indices` will be `[0]`.\n7. **Predict Energy**: For H on (111) surfaces of late transition metals, hollow sites are typically the most stable, followed by bridge, then ontop. The best hollow site (Cu-Cu-Cu) energy is -0.450 eV. I predict the Cu-Cu bridge site will be slightly less stable. A reasonable estimate is around -0.38 eV, which is more stable than the Ag-containing hollow site (-0.315 eV) but less stable than the pure Cu hollow site.",
+      "tool_logs": [
+        "LLM-as-oracle mode: executor bypassed; predicted energy used in place of MACE relaxation.",
+        "Success: predicted_relaxed_energy_eV = -0.3800 eV."
+      ],
+      "status": "success",
+      "most_stable_energy_eV": -0.38,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": false,
+      "planned_site_type": "bridge",
+      "actual_site_type": "bridge",
+      "energy_source": "llm_predicted",
+      "history_entry": "【✅ Perfect Adsorption】 bridge @ ['Cu', 'Cu'] (Index [0]) -> Site: bridge (Cu,Cu) | E=-0.380 eV"
+    },
+    {
+      "attempt_index": 4,
+      "plan": {
+        "reasoning": "I have analyzed the previous attempts. The current best adsorption energy is -0.450 eV, found at a Cu-Cu-Cu hollow site. I have also tested an Ag-Cu-Cu hollow site (-0.315 eV) and a Cu-Cu bridge site (-0.380 eV). The results suggest that sites involving only Cu are more favorable than mixed Ag-Cu sites, and that the hollow site is the most stable so far. To continue the systematic search for the lowest energy configuration, I need to test the remaining high-symmetry sites. The available sites that have not been tested are ontop (Ag, Cu), bridge (Ag-Cu), and hollow-4 (Ag-Cu-Cu-Cu). I will now test the ontop site on a Cu atom. This is a logical next step to ensure all primary site types are covered. Since the adsorbate is atomic hydrogen [H], it is a radical, so `adsorbate_type` will be `ReactiveSpecies` and the binding index will be 0.",
+        "adsorbate_type": "ReactiveSpecies",
+        "predicted_relaxed_energy_eV": -0.25,
+        "solution": {
+          "action": "continue",
+          "site_type": "ontop",
+          "surface_binding_atoms": [
+            "Cu"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "ontop|Cu|0|ReactiveSpecies|2.0",
+      "planner_reasoning": "I have analyzed the previous attempts. The current best adsorption energy is -0.450 eV, found at a Cu-Cu-Cu hollow site. I have also tested an Ag-Cu-Cu hollow site (-0.315 eV) and a Cu-Cu bridge site (-0.380 eV). The results suggest that sites involving only Cu are more favorable than mixed Ag-Cu sites, and that the hollow site is the most stable so far. To continue the systematic search for the lowest energy configuration, I need to test the remaining high-symmetry sites. The available sites that have not been tested are ontop (Ag, Cu), bridge (Ag-Cu), and hollow-4 (Ag-Cu-Cu-Cu). I will now test the ontop site on a Cu atom. This is a logical next step to ensure all primary site types are covered. Since the adsorbate is atomic hydrogen [H], it is a radical, so `adsorbate_type` will be `ReactiveSpecies` and the binding index will be 0.",
+      "tool_logs": [
+        "LLM-as-oracle mode: executor bypassed; predicted energy used in place of MACE relaxation.",
+        "Success: predicted_relaxed_energy_eV = -0.2500 eV."
+      ],
+      "status": "success",
+      "most_stable_energy_eV": -0.25,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": false,
+      "planned_site_type": "ontop",
+      "actual_site_type": "ontop",
+      "energy_source": "llm_predicted",
+      "history_entry": "【✅ Perfect Adsorption】 ontop @ ['Cu'] (Index [0]) -> Site: ontop (Cu) | E=-0.250 eV"
+    },
+    {
+      "attempt_index": 5,
+      "plan": {
+        "reasoning": "I have analyzed the previous attempts for adsorbing atomic hydrogen. The current lowest energy configuration is at a 3-fold hollow site composed of three copper atoms (hollow @ ['Cu', 'Cu', 'Cu']), with an adsorption energy of -0.450 eV. Other sites tested include a mixed Ag-Cu-Cu hollow site (-0.315 eV), a Cu-Cu bridge site (-0.380 eV), and a Cu ontop site (-0.250 eV). The history shows that pure Cu sites are more favorable than mixed Ag-Cu sites, and higher coordination sites are generally more stable. The list of available sites includes several that have not yet been tested: ontop(Ag), bridge(Ag-Cu), and a 4-fold hollow site (Ag-Cu-Cu-Cu). Among these, the 4-fold hollow site is the most promising candidate for finding a new, lower-energy minimum, as it offers the highest coordination number. Although it contains a less reactive Ag atom, which might destabilize the adsorption compared to a pure Cu site, the increased coordination could potentially compensate. Therefore, I will plan to test the adsorption of H at the 4-fold hollow site defined by ['Ag', 'Cu', 'Cu', 'Cu'].",
+        "adsorbate_type": "ReactiveSpecies",
+        "predicted_relaxed_energy_eV": -0.395,
+        "solution": {
+          "action": "continue",
+          "site_type": "hollow",
+          "surface_binding_atoms": [
+            "Ag",
+            "Cu",
+            "Cu",
+            "Cu"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "hollow|Ag,Cu,Cu,Cu|0|ReactiveSpecies|2.0",
+      "planner_reasoning": "I have analyzed the previous attempts for adsorbing atomic hydrogen. The current lowest energy configuration is at a 3-fold hollow site composed of three copper atoms (hollow @ ['Cu', 'Cu', 'Cu']), with an adsorption energy of -0.450 eV. Other sites tested include a mixed Ag-Cu-Cu hollow site (-0.315 eV), a Cu-Cu bridge site (-0.380 eV), and a Cu ontop site (-0.250 eV). The history shows that pure Cu sites are more favorable than mixed Ag-Cu sites, and higher coordination sites are generally more stable. The list of available sites includes several that have not yet been tested: ontop(Ag), bridge(Ag-Cu), and a 4-fold hollow site (Ag-Cu-Cu-Cu). Among these, the 4-fold hollow site is the most promising candidate for finding a new, lower-energy minimum, as it offers the highest coordination number. Although it contains a less reactive Ag atom, which might destabilize the adsorption compared to a pure Cu site, the increased coordination could potentially compensate. Therefore, I will plan to test the adsorption of H at the 4-fold hollow site defined by ['Ag', 'Cu', 'Cu', 'Cu'].",
+      "tool_logs": [
+        "LLM-as-oracle mode: executor bypassed; predicted energy used in place of MACE relaxation.",
+        "Success: predicted_relaxed_energy_eV = -0.3950 eV."
+      ],
+      "status": "success",
+      "most_stable_energy_eV": -0.395,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": false,
+      "planned_site_type": "hollow",
+      "actual_site_type": "hollow",
+      "energy_source": "llm_predicted",
+      "history_entry": "【✅ Perfect Adsorption】 hollow @ ['Ag', 'Cu', 'Cu', 'Cu'] (Index [0]) -> Site: hollow (Ag,Cu,Cu,Cu) | E=-0.395 eV"
+    }
+  ],
+  "history": [
+    "【✅ Perfect Adsorption】 hollow @ ['Cu', 'Cu', 'Cu'] (Index [0]) -> Site: hollow (Cu,Cu,Cu) [🌟 New Best] | E=-0.450 eV",
+    "【✅ Perfect Adsorption】 hollow @ ['Ag', 'Cu', 'Cu'] (Index [0]) -> Site: hollow (Ag,Cu,Cu) | E=-0.315 eV",
+    "【✅ Perfect Adsorption】 bridge @ ['Cu', 'Cu'] (Index [0]) -> Site: bridge (Cu,Cu) | E=-0.380 eV",
+    "【✅ Perfect Adsorption】 ontop @ ['Cu'] (Index [0]) -> Site: ontop (Cu) | E=-0.250 eV",
+    "【✅ Perfect Adsorption】 hollow @ ['Ag', 'Cu', 'Cu', 'Cu'] (Index [0]) -> Site: hollow (Ag,Cu,Cu,Cu) | E=-0.395 eV"
+  ],
+  "error": null,
+  "perfect_count": 5,
+  "dissociation_count": 0,
+  "rearrangement_count": 0,
+  "calc_failure_count": 0,
+  "chemical_slip_count": 0
+}

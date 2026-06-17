@@ -1,0 +1,257 @@
+{
+  "case_id": "18",
+  "case_metadata": {
+    "case_id": "18",
+    "slab_file": "datasets/cmu20/18_Al3Zr_101.xyz",
+    "smiles": "CC=O",
+    "user_request": "Find the lowest-energy adsorption configuration for acetaldehyde on the provided surface.",
+    "surface_family": "intermetallic",
+    "adsorbate_name": "OCHCH3",
+    "miller_index": "(101)",
+    "reaction_class": "COMPLEX",
+    "ablation_candidate": "FALSE",
+    "notes": "Best-available reconstruction from sanitized filename CC_O and formula C2H4O"
+  },
+  "status": "success",
+  "best_energy_eV": -1.18,
+  "iteration_count": 4,
+  "max_attempts": 5,
+  "final_site_type": "ontop",
+  "converged_tag": false,
+  "wall_clock_sec": 92.71995587274432,
+  "total_input_tokens": 22409,
+  "total_output_tokens": 5147,
+  "artifact_paths": {
+    "iteration_energy_curve": "research/results/basic_experiments/cmu20/adsmind/gpt54_mace_mp0_small/no_executor/18/artifacts/iteration_energy_curve.png",
+    "iteration_energy_curve.png": "research/results/basic_experiments/cmu20/adsmind/gpt54_mace_mp0_small/no_executor/18/artifacts/iteration_energy_curve.png",
+    "iteration_energy_curve_png": "research/results/basic_experiments/cmu20/adsmind/gpt54_mace_mp0_small/no_executor/18/artifacts/iteration_energy_curve.png",
+    "summary_report": "research/results/basic_experiments/cmu20/adsmind/gpt54_mace_mp0_small/no_executor/18/artifacts/summary_report.md",
+    "summary_report.md": "research/results/basic_experiments/cmu20/adsmind/gpt54_mace_mp0_small/no_executor/18/artifacts/summary_report.md",
+    "summary_report_file": "research/results/basic_experiments/cmu20/adsmind/gpt54_mace_mp0_small/no_executor/18/artifacts/summary_report.md"
+  },
+  "best_result": {
+    "most_stable_energy_eV": -1.18,
+    "analysis_json": {
+      "status": "success",
+      "most_stable_energy_eV": -1.18,
+      "is_dissociated": false,
+      "is_covalently_bound": true,
+      "bond_change_count": 0,
+      "energy_source": "llm_predicted",
+      "site_analysis": {
+        "planned_site_type": "ontop",
+        "actual_site_type": "ontop",
+        "is_chemical_slip": false,
+        "planned_symbols": [
+          "Zr"
+        ],
+        "actual_symbols": [
+          "Zr"
+        ],
+        "site_fingerprint": "llm-oracle::ontop::Zr::2"
+      }
+    },
+    "plan": {
+      "reasoning": "No prior attempts exist, so an initial physically motivated screening plan is needed. The adsorbate from SMILES CC=O is acetaldehyde. The heavy-atom index list is consistent with acetaldehyde: index 0 is the methyl carbon (sp3), index 1 is the carbonyl carbon (sp2), and index 2 is the carbonyl oxygen (sp2). There is no SMILES/description mismatch, and there are no radical electrons on any atom, so this must be treated as a Molecule, not a ReactiveSpecies. For intact molecular adsorption of acetaldehyde on a metallic/intermetallic Al-Zr surface, the most chemically valid donor site is the carbonyl oxygen lone pair. Binding through the saturated methyl carbon is invalid for Molecule mode, and binding through the carbonyl carbon alone is less appropriate than O-donation for a closed-shell aldehyde. On an oxophilic alloy surface containing Zr, the strongest likely initial interaction is O coordinated to a Zr ontop site. Hollow Al-Al-Zr may also stabilize O, but for a first attempt the most probable lowest-energy motif is O-ontop-Zr because Zr is more Lewis acidic/oxophilic than Al and aldehydes commonly adsorb via the oxygen lone pair in upright or slightly tilted configurations. Therefore the best initial plan is molecular O-bound ontop adsorption on Zr using adsorbate index 2. Estimated MACE-MP-0 small relaxed adsorption energy for this configuration is moderately strong molecular chemisorption, around -1.18 eV.",
+      "adsorbate_type": "Molecule",
+      "solution": {
+        "action": "continue",
+        "site_type": "ontop",
+        "surface_binding_atoms": [
+          "Zr"
+        ],
+        "adsorbate_binding_indices": [
+          2
+        ],
+        "relax_top_n": 1,
+        "touch_sphere_size": 2,
+        "overlap_thr": 0.1,
+        "conformers_per_site_cap": 4
+      },
+      "predicted_relaxed_energy_eV": -1.18
+    },
+    "result_type": "Perfect"
+  },
+  "last_analysis": {
+    "status": "success",
+    "most_stable_energy_eV": -0.89,
+    "is_dissociated": false,
+    "is_covalently_bound": true,
+    "bond_change_count": 0,
+    "energy_source": "llm_predicted",
+    "site_analysis": {
+      "planned_site_type": "bridge",
+      "actual_site_type": "bridge",
+      "is_chemical_slip": false,
+      "planned_symbols": [
+        "Al",
+        "Al"
+      ],
+      "actual_symbols": [
+        "Al",
+        "Al"
+      ],
+      "site_fingerprint": "llm-oracle::bridge::Al-Al::2"
+    }
+  },
+  "attempt_records": [
+    {
+      "attempt_index": 1,
+      "plan": {
+        "reasoning": "No prior attempts exist, so an initial physically motivated screening plan is needed. The adsorbate from SMILES CC=O is acetaldehyde. The heavy-atom index list is consistent with acetaldehyde: index 0 is the methyl carbon (sp3), index 1 is the carbonyl carbon (sp2), and index 2 is the carbonyl oxygen (sp2). There is no SMILES/description mismatch, and there are no radical electrons on any atom, so this must be treated as a Molecule, not a ReactiveSpecies. For intact molecular adsorption of acetaldehyde on a metallic/intermetallic Al-Zr surface, the most chemically valid donor site is the carbonyl oxygen lone pair. Binding through the saturated methyl carbon is invalid for Molecule mode, and binding through the carbonyl carbon alone is less appropriate than O-donation for a closed-shell aldehyde. On an oxophilic alloy surface containing Zr, the strongest likely initial interaction is O coordinated to a Zr ontop site. Hollow Al-Al-Zr may also stabilize O, but for a first attempt the most probable lowest-energy motif is O-ontop-Zr because Zr is more Lewis acidic/oxophilic than Al and aldehydes commonly adsorb via the oxygen lone pair in upright or slightly tilted configurations. Therefore the best initial plan is molecular O-bound ontop adsorption on Zr using adsorbate index 2. Estimated MACE-MP-0 small relaxed adsorption energy for this configuration is moderately strong molecular chemisorption, around -1.18 eV.",
+        "adsorbate_type": "Molecule",
+        "solution": {
+          "action": "continue",
+          "site_type": "ontop",
+          "surface_binding_atoms": [
+            "Zr"
+          ],
+          "adsorbate_binding_indices": [
+            2
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        },
+        "predicted_relaxed_energy_eV": -1.18
+      },
+      "plan_key": "ontop|Zr|2|Molecule|2.0",
+      "planner_reasoning": "No prior attempts exist, so an initial physically motivated screening plan is needed. The adsorbate from SMILES CC=O is acetaldehyde. The heavy-atom index list is consistent with acetaldehyde: index 0 is the methyl carbon (sp3), index 1 is the carbonyl carbon (sp2), and index 2 is the carbonyl oxygen (sp2). There is no SMILES/description mismatch, and there are no radical electrons on any atom, so this must be treated as a Molecule, not a ReactiveSpecies. For intact molecular adsorption of acetaldehyde on a metallic/intermetallic Al-Zr surface, the most chemically valid donor site is the carbonyl oxygen lone pair. Binding through the saturated methyl carbon is invalid for Molecule mode, and binding through the carbonyl carbon alone is less appropriate than O-donation for a closed-shell aldehyde. On an oxophilic alloy surface containing Zr, the strongest likely initial interaction is O coordinated to a Zr ontop site. Hollow Al-Al-Zr may also stabilize O, but for a first attempt the most probable lowest-energy motif is O-ontop-Zr because Zr is more Lewis acidic/oxophilic than Al and aldehydes commonly adsorb via the oxygen lone pair in upright or slightly tilted configurations. Therefore the best initial plan is molecular O-bound ontop adsorption on Zr using adsorbate index 2. Estimated MACE-MP-0 small relaxed adsorption energy for this configuration is moderately strong molecular chemisorption, around -1.18 eV.",
+      "tool_logs": [
+        "LLM-as-oracle mode: executor bypassed; predicted energy used in place of MACE relaxation.",
+        "Success: predicted_relaxed_energy_eV = -1.1800 eV."
+      ],
+      "status": "success",
+      "most_stable_energy_eV": -1.18,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": false,
+      "planned_site_type": "ontop",
+      "actual_site_type": "ontop",
+      "energy_source": "llm_predicted",
+      "history_entry": "【✅ Perfect Adsorption】 ontop @ ['Zr'] (Index [2]) -> Site: ontop (Zr) [🌟 New Best] | E=-1.180 eV"
+    },
+    {
+      "attempt_index": 2,
+      "plan": {
+        "reasoning": "SMILES consistency check: CC=O is acetaldehyde. The heavy-atom list is C(0, SP3)-C(1, SP2)-O(2, SP2), which is fully consistent with acetaldehyde; no radical electrons are present, so this must be treated as a Molecule, not a ReactiveSpecies. The strongest donor atom for molecular adsorption is the carbonyl oxygen at index 2. History analysis: only one successful plan has been tested so far, namely ontop adsorption through O on Zr, with predicted relaxed energy -1.180 eV, and it is currently the best. No convergence-to-known-best or chemical-slip tags are present, so termination is not justified. To systematically search for a lower-energy configuration, the next most chemically plausible high-symmetry motif on this mixed Al/Zr surface is a bridge involving the oxophilic Zr together with neighboring Al. For acetaldehyde on electropositive alloy surfaces, O-bound configurations usually dominate over C-bound molecular adsorption, and an O-bridged Al-Zr geometry can sometimes outperform simple Zr-ontop if the surface geometry allows stronger polarization of the C=O group. I therefore propose a new, distinct plan: bridge site over Al-Zr using the carbonyl O as the single molecular binding atom. This remains chemically valid for a closed-shell molecule because O donates a lone pair. Predicted MACE-MP-0 small relaxed adsorption energy for this initial configuration is slightly stronger than the current best, estimated at -1.260.",
+        "adsorbate_type": "Molecule",
+        "solution": {
+          "action": "continue",
+          "site_type": "bridge",
+          "surface_binding_atoms": [
+            "Al",
+            "Zr"
+          ],
+          "adsorbate_binding_indices": [
+            2
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4,
+          "predicted_relaxed_energy_eV": -1.26
+        }
+      },
+      "plan_key": "bridge|Al,Zr|2|Molecule|2.0",
+      "planner_reasoning": "SMILES consistency check: CC=O is acetaldehyde. The heavy-atom list is C(0, SP3)-C(1, SP2)-O(2, SP2), which is fully consistent with acetaldehyde; no radical electrons are present, so this must be treated as a Molecule, not a ReactiveSpecies. The strongest donor atom for molecular adsorption is the carbonyl oxygen at index 2. History analysis: only one successful plan has been tested so far, namely ontop adsorption through O on Zr, with predicted relaxed energy -1.180 eV, and it is currently the best. No convergence-to-known-best or chemical-slip tags are present, so termination is not justified. To systematically search for a lower-energy configuration, the next most chemically plausible high-symmetry motif on this mixed Al/Zr surface is a bridge involving the oxophilic Zr together with neighboring Al. For acetaldehyde on electropositive alloy surfaces, O-bound configurations usually dominate over C-bound molecular adsorption, and an O-bridged Al-Zr geometry can sometimes outperform simple Zr-ontop if the surface geometry allows stronger polarization of the C=O group. I therefore propose a new, distinct plan: bridge site over Al-Zr using the carbonyl O as the single molecular binding atom. This remains chemically valid for a closed-shell molecule because O donates a lone pair. Predicted MACE-MP-0 small relaxed adsorption energy for this initial configuration is slightly stronger than the current best, estimated at -1.260.",
+      "tool_logs": [
+        "LLM-as-oracle mode: executor bypassed; predicted energy used in place of MACE relaxation.",
+        "LLM oracle Failed: planner output missing or invalid 'predicted_relaxed_energy_eV' (got None)."
+      ],
+      "status": "error",
+      "message": "LLM oracle Failed: planner output missing or invalid 'predicted_relaxed_energy_eV' (got None).",
+      "energy_source": "llm_predicted"
+    },
+    {
+      "attempt_index": 3,
+      "plan": {
+        "reasoning": "SMILES consistency check: CC=O is acetaldehyde, consistent with the user request. Heavy-atom indices are fixed as 0 = methyl carbon (SP3), 1 = carbonyl carbon (SP2), 2 = oxygen (SP2). No radicals are present, so adsorbate_type must be Molecule. For closed-shell acetaldehyde, the most chemically valid donor is the carbonyl oxygen (index 2); the methyl carbon is saturated and should not be used for molecular adsorption, while carbonyl carbon binding is less natural than O donation on this electropositive Al/Zr surface. History analysis: successful trial is ontop/Zr with index [2], E = -1.180 eV, current best. A bridge/Al-Zr attempt with index [2] was already attempted in the planner space, even though its oracle output failed. Therefore it cannot be repeated. Remaining distinct high-symmetry combinations that are chemically meaningful are ontop/Al with O, bridge/Al-Al with O, and hollow/Al-Al-Zr with O. Because acetaldehyde is a carbonyl donor and Zr is more oxophilic than Al, ontop Al is expected to be weaker than the known ontop Zr result. Hollow Al-Al-Zr with a single O donor is geometrically possible, but for a localized lone-pair donor on a small molecule it is often less favorable than ontop due to poor directional overlap and steric tilt requirements. The most informative untested alternative is therefore hollow on Al-Al-Zr using the oxygen atom, which probes whether the mixed threefold pocket can outperform ontop Zr. This is a new combination in the required (site_type, surface_binding_atoms, adsorbate_binding_indices) space. I expect it to bind moderately strongly but likely slightly weaker than the best Zr-ontop state after relaxation.",
+        "adsorbate_type": "Molecule",
+        "solution": {
+          "action": "continue",
+          "site_type": "hollow",
+          "surface_binding_atoms": [
+            "Al",
+            "Al",
+            "Zr"
+          ],
+          "adsorbate_binding_indices": [
+            2
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        },
+        "predicted_relaxed_energy_eV": -0.96
+      },
+      "plan_key": "hollow|Al,Al,Zr|2|Molecule|2.0",
+      "planner_reasoning": "SMILES consistency check: CC=O is acetaldehyde, consistent with the user request. Heavy-atom indices are fixed as 0 = methyl carbon (SP3), 1 = carbonyl carbon (SP2), 2 = oxygen (SP2). No radicals are present, so adsorbate_type must be Molecule. For closed-shell acetaldehyde, the most chemically valid donor is the carbonyl oxygen (index 2); the methyl carbon is saturated and should not be used for molecular adsorption, while carbonyl carbon binding is less natural than O donation on this electropositive Al/Zr surface. History analysis: successful trial is ontop/Zr with index [2], E = -1.180 eV, current best. A bridge/Al-Zr attempt with index [2] was already attempted in the planner space, even though its oracle output failed. Therefore it cannot be repeated. Remaining distinct high-symmetry combinations that are chemically meaningful are ontop/Al with O, bridge/Al-Al with O, and hollow/Al-Al-Zr with O. Because acetaldehyde is a carbonyl donor and Zr is more oxophilic than Al, ontop Al is expected to be weaker than the known ontop Zr result. Hollow Al-Al-Zr with a single O donor is geometrically possible, but for a localized lone-pair donor on a small molecule it is often less favorable than ontop due to poor directional overlap and steric tilt requirements. The most informative untested alternative is therefore hollow on Al-Al-Zr using the oxygen atom, which probes whether the mixed threefold pocket can outperform ontop Zr. This is a new combination in the required (site_type, surface_binding_atoms, adsorbate_binding_indices) space. I expect it to bind moderately strongly but likely slightly weaker than the best Zr-ontop state after relaxation.",
+      "tool_logs": [
+        "LLM-as-oracle mode: executor bypassed; predicted energy used in place of MACE relaxation.",
+        "Success: predicted_relaxed_energy_eV = -0.9600 eV."
+      ],
+      "status": "success",
+      "most_stable_energy_eV": -0.96,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": false,
+      "planned_site_type": "hollow",
+      "actual_site_type": "hollow",
+      "energy_source": "llm_predicted",
+      "history_entry": "【✅ Perfect Adsorption】 hollow @ ['Al', 'Al', 'Zr'] (Index [2]) -> Site: hollow (Al,Al,Zr) | E=-0.960 eV"
+    },
+    {
+      "attempt_index": 4,
+      "plan": {
+        "reasoning": "SMILES consistency check: CC=O is acetaldehyde. Heavy-atom indices are 0 methyl carbon (sp3), 1 carbonyl carbon (sp2), and 2 oxygen (sp2). This matches the user request; no saturation mismatch warning is needed. No atom has radical electrons, so the adsorbate must be treated as a Molecule. History analysis: completed unique attempts are ontop on Zr with O index [2], giving the current best E=-1.180 eV, and hollow on Al-Al-Zr with O index [2], giving E=-0.960 eV. The earlier bridge Al-Zr with O index [2] was also already attempted in plan space, even though its oracle output was invalid, so it cannot be proposed again. Remaining high-symmetry untried combinations from the allowed site list are ontop on Al and bridge on Al-Al. For a closed-shell aldehyde, the chemically valid donor atom is the carbonyl oxygen lone pair, so index [2] is still the correct binding atom. O adsorption on Al is plausible but generally weaker than on the more oxophilic Zr, while an Al-Al bridge could still offer a distinct geometry worth checking before termination because not all major listed site combinations have been tested yet. Among the remaining options, bridge Al-Al is the more informative distinct molecular adsorption geometry relative to the already tested ontop and hollow cases. I therefore propose O-bound bridge adsorption across Al-Al. Predicted relaxed energy should be weaker than Zr ontop and likely around or slightly weaker than the hollow result because Al-Al is less favorable for carbonyl O donation than Zr-containing motifs.",
+        "adsorbate_type": "Molecule",
+        "solution": {
+          "action": "continue",
+          "site_type": "bridge",
+          "surface_binding_atoms": [
+            "Al",
+            "Al"
+          ],
+          "adsorbate_binding_indices": [
+            2
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        },
+        "predicted_relaxed_energy_eV": -0.89
+      },
+      "plan_key": "bridge|Al,Al|2|Molecule|2.0",
+      "planner_reasoning": "SMILES consistency check: CC=O is acetaldehyde. Heavy-atom indices are 0 methyl carbon (sp3), 1 carbonyl carbon (sp2), and 2 oxygen (sp2). This matches the user request; no saturation mismatch warning is needed. No atom has radical electrons, so the adsorbate must be treated as a Molecule. History analysis: completed unique attempts are ontop on Zr with O index [2], giving the current best E=-1.180 eV, and hollow on Al-Al-Zr with O index [2], giving E=-0.960 eV. The earlier bridge Al-Zr with O index [2] was also already attempted in plan space, even though its oracle output was invalid, so it cannot be proposed again. Remaining high-symmetry untried combinations from the allowed site list are ontop on Al and bridge on Al-Al. For a closed-shell aldehyde, the chemically valid donor atom is the carbonyl oxygen lone pair, so index [2] is still the correct binding atom. O adsorption on Al is plausible but generally weaker than on the more oxophilic Zr, while an Al-Al bridge could still offer a distinct geometry worth checking before termination because not all major listed site combinations have been tested yet. Among the remaining options, bridge Al-Al is the more informative distinct molecular adsorption geometry relative to the already tested ontop and hollow cases. I therefore propose O-bound bridge adsorption across Al-Al. Predicted relaxed energy should be weaker than Zr ontop and likely around or slightly weaker than the hollow result because Al-Al is less favorable for carbonyl O donation than Zr-containing motifs.",
+      "tool_logs": [
+        "LLM-as-oracle mode: executor bypassed; predicted energy used in place of MACE relaxation.",
+        "Success: predicted_relaxed_energy_eV = -0.8900 eV."
+      ],
+      "status": "success",
+      "most_stable_energy_eV": -0.89,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": false,
+      "planned_site_type": "bridge",
+      "actual_site_type": "bridge",
+      "energy_source": "llm_predicted",
+      "history_entry": "【✅ Perfect Adsorption】 bridge @ ['Al', 'Al'] (Index [2]) -> Site: bridge (Al,Al) | E=-0.890 eV"
+    }
+  ],
+  "history": [
+    "【✅ Perfect Adsorption】 ontop @ ['Zr'] (Index [2]) -> Site: ontop (Zr) [🌟 New Best] | E=-1.180 eV",
+    "【Calculation Failed】 bridge @ ['Al', 'Zr'] (Index [2]) -> Reason: LLM oracle Failed: planner output missing or invalid 'predicted_relaxed_energy_eV' (got None).",
+    "【✅ Perfect Adsorption】 hollow @ ['Al', 'Al', 'Zr'] (Index [2]) -> Site: hollow (Al,Al,Zr) | E=-0.960 eV",
+    "【✅ Perfect Adsorption】 bridge @ ['Al', 'Al'] (Index [2]) -> Site: bridge (Al,Al) | E=-0.890 eV"
+  ],
+  "error": null,
+  "perfect_count": 3,
+  "dissociation_count": 0,
+  "rearrangement_count": 0,
+  "calc_failure_count": 1,
+  "chemical_slip_count": 0
+}

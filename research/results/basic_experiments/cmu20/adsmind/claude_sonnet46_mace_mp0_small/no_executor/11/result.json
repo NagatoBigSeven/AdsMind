@@ -1,0 +1,228 @@
+{
+  "case_id": "11",
+  "case_metadata": {
+    "case_id": "11",
+    "slab_file": "datasets/cmu20/11_Pd_111.xyz",
+    "smiles": "[OH]",
+    "user_request": "Find the lowest-energy adsorption configuration for hydroxyl radical on the provided surface.",
+    "surface_family": "monometallic",
+    "adsorbate_name": "OH",
+    "miller_index": "(111)",
+    "reaction_class": "ORR",
+    "ablation_candidate": "FALSE",
+    "notes": "Pd ORR benchmark"
+  },
+  "status": "success",
+  "best_energy_eV": -3.1,
+  "iteration_count": 3,
+  "max_attempts": 5,
+  "final_site_type": "hollow",
+  "converged_tag": false,
+  "wall_clock_sec": 145.22452492266893,
+  "total_input_tokens": 18444,
+  "total_output_tokens": 7619,
+  "artifact_paths": {
+    "iteration_energy_curve": "research/results/basic_experiments/cmu20/adsmind/claude_sonnet46_mace_mp0_small/no_executor/11/artifacts/iteration_energy_curve.png",
+    "iteration_energy_curve.png": "research/results/basic_experiments/cmu20/adsmind/claude_sonnet46_mace_mp0_small/no_executor/11/artifacts/iteration_energy_curve.png",
+    "iteration_energy_curve_png": "research/results/basic_experiments/cmu20/adsmind/claude_sonnet46_mace_mp0_small/no_executor/11/artifacts/iteration_energy_curve.png",
+    "summary_report": "research/results/basic_experiments/cmu20/adsmind/claude_sonnet46_mace_mp0_small/no_executor/11/artifacts/summary_report.md",
+    "summary_report.md": "research/results/basic_experiments/cmu20/adsmind/claude_sonnet46_mace_mp0_small/no_executor/11/artifacts/summary_report.md",
+    "summary_report_file": "research/results/basic_experiments/cmu20/adsmind/claude_sonnet46_mace_mp0_small/no_executor/11/artifacts/summary_report.md"
+  },
+  "best_result": {
+    "most_stable_energy_eV": -3.1,
+    "analysis_json": {
+      "status": "success",
+      "most_stable_energy_eV": -3.1,
+      "is_dissociated": false,
+      "is_covalently_bound": true,
+      "bond_change_count": 0,
+      "energy_source": "llm_predicted",
+      "site_analysis": {
+        "planned_site_type": "hollow",
+        "actual_site_type": "hollow",
+        "is_chemical_slip": false,
+        "planned_symbols": [
+          "Pd",
+          "Pd",
+          "Pd"
+        ],
+        "actual_symbols": [
+          "Pd",
+          "Pd",
+          "Pd"
+        ],
+        "site_fingerprint": "llm-oracle::hollow::Pd-Pd-Pd::0"
+      }
+    },
+    "plan": {
+      "reasoning": "Step 0 - SMILES Consistency Check: The SMILES [OH] represents a hydroxyl radical. The RDKit analysis confirms: index 0 is O, SP3 hybridized, with 1 radical electron. This is consistent with a reactive radical species (OH•). No inconsistency detected.\n\nStep 1 - Analyze Old Plans: No history exists (None). This is the first attempt.\n\nStep 2 - Formulate New Plan: For OH radical on Pd(111), the oxygen atom (index 0) has 1 unpaired electron, making it a ReactiveSpecies. Literature and MACE-MP-0 predictions consistently show that OH prefers the hollow (fcc or hcp) site on Pd(111), followed by bridge, then ontop. The hollow site typically gives the strongest binding for OH on close-packed Pd surfaces. I will start with the hollow site, binding through the O atom (index 0) to three Pd atoms.\n\nStep 3 - Analyze Request: Find the lowest-energy adsorption configuration for hydroxyl radical on Pd(111).\n\nStep 4 - Adsorbate Analysis: [OH] is a hydroxyl radical. O atom at index 0 has radical_electrons=1, SP3 hybridization, degree=0. This is the binding atom.\n\nStep 5 - Surface Analysis: Available sites are Bridge (Pd-Pd), Hollow-3 (Pd-Pd-Pd), and Ontop (Pd). For hollow site, surface_binding_atoms = ['Pd', 'Pd', 'Pd'] but since we can only use 1 or 2 binding indices for hollow, I will use 1 binding index (O) at the hollow site.\n\nStep 6 - Plan: site_type='hollow', surface_binding_atoms=['Pd','Pd','Pd'], adsorbate_binding_indices=[0]. This places the O radical at the 3-fold hollow site.\n\nPredicted MACE-MP-0 energy: For OH on Pd(111) hollow site, MACE-MP-0 small typically predicts adsorption energies around -2.8 to -3.5 eV for OH at hollow sites. A reasonable estimate is approximately -3.1 eV.",
+      "adsorbate_type": "ReactiveSpecies",
+      "predicted_relaxed_energy_eV": -3.1,
+      "solution": {
+        "action": "continue",
+        "site_type": "hollow",
+        "surface_binding_atoms": [
+          "Pd",
+          "Pd",
+          "Pd"
+        ],
+        "adsorbate_binding_indices": [
+          0
+        ],
+        "relax_top_n": 1,
+        "touch_sphere_size": 2,
+        "overlap_thr": 0.1,
+        "conformers_per_site_cap": 4
+      }
+    },
+    "result_type": "Perfect"
+  },
+  "last_analysis": {
+    "status": "success",
+    "most_stable_energy_eV": -2.55,
+    "is_dissociated": false,
+    "is_covalently_bound": true,
+    "bond_change_count": 0,
+    "energy_source": "llm_predicted",
+    "site_analysis": {
+      "planned_site_type": "ontop",
+      "actual_site_type": "ontop",
+      "is_chemical_slip": false,
+      "planned_symbols": [
+        "Pd"
+      ],
+      "actual_symbols": [
+        "Pd"
+      ],
+      "site_fingerprint": "llm-oracle::ontop::Pd::0"
+    }
+  },
+  "attempt_records": [
+    {
+      "attempt_index": 1,
+      "plan": {
+        "reasoning": "Step 0 - SMILES Consistency Check: The SMILES [OH] represents a hydroxyl radical. The RDKit analysis confirms: index 0 is O, SP3 hybridized, with 1 radical electron. This is consistent with a reactive radical species (OH•). No inconsistency detected.\n\nStep 1 - Analyze Old Plans: No history exists (None). This is the first attempt.\n\nStep 2 - Formulate New Plan: For OH radical on Pd(111), the oxygen atom (index 0) has 1 unpaired electron, making it a ReactiveSpecies. Literature and MACE-MP-0 predictions consistently show that OH prefers the hollow (fcc or hcp) site on Pd(111), followed by bridge, then ontop. The hollow site typically gives the strongest binding for OH on close-packed Pd surfaces. I will start with the hollow site, binding through the O atom (index 0) to three Pd atoms.\n\nStep 3 - Analyze Request: Find the lowest-energy adsorption configuration for hydroxyl radical on Pd(111).\n\nStep 4 - Adsorbate Analysis: [OH] is a hydroxyl radical. O atom at index 0 has radical_electrons=1, SP3 hybridization, degree=0. This is the binding atom.\n\nStep 5 - Surface Analysis: Available sites are Bridge (Pd-Pd), Hollow-3 (Pd-Pd-Pd), and Ontop (Pd). For hollow site, surface_binding_atoms = ['Pd', 'Pd', 'Pd'] but since we can only use 1 or 2 binding indices for hollow, I will use 1 binding index (O) at the hollow site.\n\nStep 6 - Plan: site_type='hollow', surface_binding_atoms=['Pd','Pd','Pd'], adsorbate_binding_indices=[0]. This places the O radical at the 3-fold hollow site.\n\nPredicted MACE-MP-0 energy: For OH on Pd(111) hollow site, MACE-MP-0 small typically predicts adsorption energies around -2.8 to -3.5 eV for OH at hollow sites. A reasonable estimate is approximately -3.1 eV.",
+        "adsorbate_type": "ReactiveSpecies",
+        "predicted_relaxed_energy_eV": -3.1,
+        "solution": {
+          "action": "continue",
+          "site_type": "hollow",
+          "surface_binding_atoms": [
+            "Pd",
+            "Pd",
+            "Pd"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "hollow|Pd,Pd,Pd|0|ReactiveSpecies|2.0",
+      "planner_reasoning": "Step 0 - SMILES Consistency Check: The SMILES [OH] represents a hydroxyl radical. The RDKit analysis confirms: index 0 is O, SP3 hybridized, with 1 radical electron. This is consistent with a reactive radical species (OH•). No inconsistency detected.\n\nStep 1 - Analyze Old Plans: No history exists (None). This is the first attempt.\n\nStep 2 - Formulate New Plan: For OH radical on Pd(111), the oxygen atom (index 0) has 1 unpaired electron, making it a ReactiveSpecies. Literature and MACE-MP-0 predictions consistently show that OH prefers the hollow (fcc or hcp) site on Pd(111), followed by bridge, then ontop. The hollow site typically gives the strongest binding for OH on close-packed Pd surfaces. I will start with the hollow site, binding through the O atom (index 0) to three Pd atoms.\n\nStep 3 - Analyze Request: Find the lowest-energy adsorption configuration for hydroxyl radical on Pd(111).\n\nStep 4 - Adsorbate Analysis: [OH] is a hydroxyl radical. O atom at index 0 has radical_electrons=1, SP3 hybridization, degree=0. This is the binding atom.\n\nStep 5 - Surface Analysis: Available sites are Bridge (Pd-Pd), Hollow-3 (Pd-Pd-Pd), and Ontop (Pd). For hollow site, surface_binding_atoms = ['Pd', 'Pd', 'Pd'] but since we can only use 1 or 2 binding indices for hollow, I will use 1 binding index (O) at the hollow site.\n\nStep 6 - Plan: site_type='hollow', surface_binding_atoms=['Pd','Pd','Pd'], adsorbate_binding_indices=[0]. This places the O radical at the 3-fold hollow site.\n\nPredicted MACE-MP-0 energy: For OH on Pd(111) hollow site, MACE-MP-0 small typically predicts adsorption energies around -2.8 to -3.5 eV for OH at hollow sites. A reasonable estimate is approximately -3.1 eV.",
+      "tool_logs": [
+        "LLM-as-oracle mode: executor bypassed; predicted energy used in place of MACE relaxation.",
+        "Success: predicted_relaxed_energy_eV = -3.1000 eV."
+      ],
+      "status": "success",
+      "most_stable_energy_eV": -3.1,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": false,
+      "planned_site_type": "hollow",
+      "actual_site_type": "hollow",
+      "energy_source": "llm_predicted",
+      "history_entry": "【✅ Perfect Adsorption】 hollow @ ['Pd', 'Pd', 'Pd'] (Index [0]) -> Site: hollow (Pd,Pd,Pd) [🌟 New Best] | E=-3.100 eV"
+    },
+    {
+      "attempt_index": 2,
+      "plan": {
+        "reasoning": "Step 0 - SMILES Consistency Check: The SMILES [OH] represents a hydroxyl radical. The RDKit analysis confirms: O atom at index 0, SP3 hybridization, 1 radical electron, degree 0. This is indeed a reactive radical species. adsorbate_type = 'ReactiveSpecies', binding via O atom at index 0.\n\nStep 1 - Analyze History: One successful attempt exists: hollow @ ['Pd','Pd','Pd'] (Index [0]) -> E=-3.100 eV, marked as [🌟 New Best]. No convergence tags ([🔄 Converged to known best]) are present. Two other site types remain untested: bridge (Pd-Pd) and ontop (Pd).\n\nStep 2 - Formulate New Plan: I need to test the remaining sites. The bridge site is a natural next candidate. For OH radical on Pd(111), bridge sites are commonly competitive with hollow sites. I will test bridge adsorption with O binding to a Pd-Pd bridge site.\n\nStep 3 - User Intent: Find the lowest-energy adsorption configuration for OH on Pd(111).\n\nStep 4 - Adsorbate Analysis: O at index 0 has 1 radical electron → ReactiveSpecies, binding via index [0].\n\nStep 5 - Surface Analysis: Available bridge site is Pd-Pd. This is valid.\n\nStep 6 - Plan: site_type='bridge', surface_binding_atoms=['Pd','Pd'], adsorbate_binding_indices=[0].\n\nEnergy Prediction: For OH on Pd(111), bridge sites typically yield slightly less stable adsorption than hollow (fcc) sites. Based on the hollow result of -3.100 eV and typical MACE-MP-0 trends for OH on Pd(111), I estimate the bridge site will give approximately -2.85 eV. The ontop site would be even less stable (~-2.3 eV). Since hollow is already the best known result and bridge is likely weaker, but I must test to confirm.",
+        "adsorbate_type": "ReactiveSpecies",
+        "predicted_relaxed_energy_eV": -2.85,
+        "solution": {
+          "action": "continue",
+          "site_type": "bridge",
+          "surface_binding_atoms": [
+            "Pd",
+            "Pd"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "bridge|Pd,Pd|0|ReactiveSpecies|2.0",
+      "planner_reasoning": "Step 0 - SMILES Consistency Check: The SMILES [OH] represents a hydroxyl radical. The RDKit analysis confirms: O atom at index 0, SP3 hybridization, 1 radical electron, degree 0. This is indeed a reactive radical species. adsorbate_type = 'ReactiveSpecies', binding via O atom at index 0.\n\nStep 1 - Analyze History: One successful attempt exists: hollow @ ['Pd','Pd','Pd'] (Index [0]) -> E=-3.100 eV, marked as [🌟 New Best]. No convergence tags ([🔄 Converged to known best]) are present. Two other site types remain untested: bridge (Pd-Pd) and ontop (Pd).\n\nStep 2 - Formulate New Plan: I need to test the remaining sites. The bridge site is a natural next candidate. For OH radical on Pd(111), bridge sites are commonly competitive with hollow sites. I will test bridge adsorption with O binding to a Pd-Pd bridge site.\n\nStep 3 - User Intent: Find the lowest-energy adsorption configuration for OH on Pd(111).\n\nStep 4 - Adsorbate Analysis: O at index 0 has 1 radical electron → ReactiveSpecies, binding via index [0].\n\nStep 5 - Surface Analysis: Available bridge site is Pd-Pd. This is valid.\n\nStep 6 - Plan: site_type='bridge', surface_binding_atoms=['Pd','Pd'], adsorbate_binding_indices=[0].\n\nEnergy Prediction: For OH on Pd(111), bridge sites typically yield slightly less stable adsorption than hollow (fcc) sites. Based on the hollow result of -3.100 eV and typical MACE-MP-0 trends for OH on Pd(111), I estimate the bridge site will give approximately -2.85 eV. The ontop site would be even less stable (~-2.3 eV). Since hollow is already the best known result and bridge is likely weaker, but I must test to confirm.",
+      "tool_logs": [
+        "LLM-as-oracle mode: executor bypassed; predicted energy used in place of MACE relaxation.",
+        "Success: predicted_relaxed_energy_eV = -2.8500 eV."
+      ],
+      "status": "success",
+      "most_stable_energy_eV": -2.85,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": false,
+      "planned_site_type": "bridge",
+      "actual_site_type": "bridge",
+      "energy_source": "llm_predicted",
+      "history_entry": "【✅ Perfect Adsorption】 bridge @ ['Pd', 'Pd'] (Index [0]) -> Site: bridge (Pd,Pd) | E=-2.850 eV"
+    },
+    {
+      "attempt_index": 3,
+      "plan": {
+        "reasoning": "Step 0 - SMILES Consistency Check: The SMILES [OH] represents a hydroxyl radical. The RDKit analysis confirms atom index 0 is O with SP3 hybridization, degree 0, and radical_electrons=1. This is indeed a reactive radical species, so adsorbate_type should be 'ReactiveSpecies'. The binding atom is O at index 0.\n\nStep 1 - Analyze Old Plans:\n- hollow @ Pd-Pd-Pd: E = -3.100 eV [Best so far]\n- bridge @ Pd-Pd: E = -2.850 eV\n\nBoth succeeded without issues. The hollow site is currently the best. The remaining untested site is 'ontop' at a single Pd atom.\n\nStep 2 - Formulate New Plan:\nThe three canonical high-symmetry sites on Pd(111) are: hollow (tested, -3.100 eV), bridge (tested, -2.850 eV), and ontop (not yet tested). I should test the ontop site to complete the systematic survey. On Pd(111), OH typically prefers hollow > bridge > ontop, so ontop is expected to be higher in energy (~-2.5 to -2.6 eV range based on MACE-MP-0 trends). However, I must test it to confirm.\n\nStep 3 - User Request: Find the lowest-energy adsorption configuration for OH on Pd(111).\n\nStep 4 - Adsorbate Analysis: O atom at index 0, radical_electrons=1, SP3 hybridization. Binding through O.\n\nStep 5 - Surface Analysis: Available sites include [Ontop]: Pd (single Pd atom).\n\nStep 6 - Plan: ontop site, surface_binding_atoms=['Pd'], adsorbate_binding_indices=[0].\n\nPredicted energy for ontop: Based on the trend hollow (-3.100) > bridge (-2.850) > ontop, I estimate ontop at approximately -2.55 eV for MACE-MP-0 small.",
+        "adsorbate_type": "ReactiveSpecies",
+        "predicted_relaxed_energy_eV": -2.55,
+        "solution": {
+          "action": "continue",
+          "site_type": "ontop",
+          "surface_binding_atoms": [
+            "Pd"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "ontop|Pd|0|ReactiveSpecies|2.0",
+      "planner_reasoning": "Step 0 - SMILES Consistency Check: The SMILES [OH] represents a hydroxyl radical. The RDKit analysis confirms atom index 0 is O with SP3 hybridization, degree 0, and radical_electrons=1. This is indeed a reactive radical species, so adsorbate_type should be 'ReactiveSpecies'. The binding atom is O at index 0.\n\nStep 1 - Analyze Old Plans:\n- hollow @ Pd-Pd-Pd: E = -3.100 eV [Best so far]\n- bridge @ Pd-Pd: E = -2.850 eV\n\nBoth succeeded without issues. The hollow site is currently the best. The remaining untested site is 'ontop' at a single Pd atom.\n\nStep 2 - Formulate New Plan:\nThe three canonical high-symmetry sites on Pd(111) are: hollow (tested, -3.100 eV), bridge (tested, -2.850 eV), and ontop (not yet tested). I should test the ontop site to complete the systematic survey. On Pd(111), OH typically prefers hollow > bridge > ontop, so ontop is expected to be higher in energy (~-2.5 to -2.6 eV range based on MACE-MP-0 trends). However, I must test it to confirm.\n\nStep 3 - User Request: Find the lowest-energy adsorption configuration for OH on Pd(111).\n\nStep 4 - Adsorbate Analysis: O atom at index 0, radical_electrons=1, SP3 hybridization. Binding through O.\n\nStep 5 - Surface Analysis: Available sites include [Ontop]: Pd (single Pd atom).\n\nStep 6 - Plan: ontop site, surface_binding_atoms=['Pd'], adsorbate_binding_indices=[0].\n\nPredicted energy for ontop: Based on the trend hollow (-3.100) > bridge (-2.850) > ontop, I estimate ontop at approximately -2.55 eV for MACE-MP-0 small.",
+      "tool_logs": [
+        "LLM-as-oracle mode: executor bypassed; predicted energy used in place of MACE relaxation.",
+        "Success: predicted_relaxed_energy_eV = -2.5500 eV."
+      ],
+      "status": "success",
+      "most_stable_energy_eV": -2.55,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": false,
+      "planned_site_type": "ontop",
+      "actual_site_type": "ontop",
+      "energy_source": "llm_predicted",
+      "history_entry": "【✅ Perfect Adsorption】 ontop @ ['Pd'] (Index [0]) -> Site: ontop (Pd) | E=-2.550 eV"
+    }
+  ],
+  "history": [
+    "【✅ Perfect Adsorption】 hollow @ ['Pd', 'Pd', 'Pd'] (Index [0]) -> Site: hollow (Pd,Pd,Pd) [🌟 New Best] | E=-3.100 eV",
+    "【✅ Perfect Adsorption】 bridge @ ['Pd', 'Pd'] (Index [0]) -> Site: bridge (Pd,Pd) | E=-2.850 eV",
+    "【✅ Perfect Adsorption】 ontop @ ['Pd'] (Index [0]) -> Site: ontop (Pd) | E=-2.550 eV"
+  ],
+  "error": null,
+  "perfect_count": 3,
+  "dissociation_count": 0,
+  "rearrangement_count": 0,
+  "calc_failure_count": 0,
+  "chemical_slip_count": 0
+}

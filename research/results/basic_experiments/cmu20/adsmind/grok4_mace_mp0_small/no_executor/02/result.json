@@ -1,0 +1,232 @@
+{
+  "case_id": "02",
+  "case_metadata": {
+    "case_id": "02",
+    "slab_file": "datasets/cmu20/02_Mo3Pd_111.xyz",
+    "smiles": "[N]=[NH]",
+    "user_request": "Find the lowest-energy adsorption configuration for NNH on the provided surface.",
+    "surface_family": "intermetallic",
+    "adsorbate_name": "NNH",
+    "miller_index": "(111)",
+    "reaction_class": "NRR",
+    "ablation_candidate": "TRUE",
+    "notes": "Dissociation-prone in prior run; Mo3Pd benchmark"
+  },
+  "status": "success",
+  "best_energy_eV": -2.05,
+  "iteration_count": 3,
+  "max_attempts": 5,
+  "final_site_type": "hollow",
+  "converged_tag": false,
+  "wall_clock_sec": 117.68768882378936,
+  "total_input_tokens": 14796,
+  "total_output_tokens": 7469,
+  "artifact_paths": {
+    "iteration_energy_curve": "research/results/basic_experiments/cmu20/adsmind/grok4_mace_mp0_small/no_executor/02/artifacts/iteration_energy_curve.png",
+    "iteration_energy_curve.png": "research/results/basic_experiments/cmu20/adsmind/grok4_mace_mp0_small/no_executor/02/artifacts/iteration_energy_curve.png",
+    "iteration_energy_curve_png": "research/results/basic_experiments/cmu20/adsmind/grok4_mace_mp0_small/no_executor/02/artifacts/iteration_energy_curve.png",
+    "summary_report": "research/results/basic_experiments/cmu20/adsmind/grok4_mace_mp0_small/no_executor/02/artifacts/summary_report.md",
+    "summary_report.md": "research/results/basic_experiments/cmu20/adsmind/grok4_mace_mp0_small/no_executor/02/artifacts/summary_report.md",
+    "summary_report_file": "research/results/basic_experiments/cmu20/adsmind/grok4_mace_mp0_small/no_executor/02/artifacts/summary_report.md"
+  },
+  "best_result": {
+    "most_stable_energy_eV": -2.05,
+    "analysis_json": {
+      "status": "success",
+      "most_stable_energy_eV": -2.05,
+      "is_dissociated": false,
+      "is_covalently_bound": true,
+      "bond_change_count": 0,
+      "energy_source": "llm_predicted",
+      "site_analysis": {
+        "planned_site_type": "hollow",
+        "actual_site_type": "hollow",
+        "is_chemical_slip": false,
+        "planned_symbols": [
+          "Mo",
+          "Mo",
+          "Mo"
+        ],
+        "actual_symbols": [
+          "Mo",
+          "Mo",
+          "Mo"
+        ],
+        "site_fingerprint": "llm-oracle::hollow::Mo-Mo-Mo::0"
+      }
+    },
+    "plan": {
+      "reasoning": "History tested ontop-Mo (E=-1.850 eV) and bridge Mo-Mo (E=-1.920 eV, current best). No convergence tags or slips observed. Hollow sites remain untested; propose hollow on Mo-Mo-Mo with binding via the radical N (index 0) to explore possible lower energy. Predicted MACE-MP-0 energy for this new hollow configuration is estimated slightly below current best due to higher coordination.",
+      "adsorbate_type": "ReactiveSpecies",
+      "predicted_relaxed_energy_eV": -2.05,
+      "solution": {
+        "action": "continue",
+        "site_type": "hollow",
+        "surface_binding_atoms": [
+          "Mo",
+          "Mo",
+          "Mo"
+        ],
+        "adsorbate_binding_indices": [
+          0
+        ],
+        "relax_top_n": 1,
+        "touch_sphere_size": 2,
+        "overlap_thr": 0.1,
+        "conformers_per_site_cap": 4
+      }
+    },
+    "result_type": "Perfect"
+  },
+  "last_analysis": {
+    "status": "success",
+    "most_stable_energy_eV": -2.05,
+    "is_dissociated": false,
+    "is_covalently_bound": true,
+    "bond_change_count": 0,
+    "energy_source": "llm_predicted",
+    "site_analysis": {
+      "planned_site_type": "hollow",
+      "actual_site_type": "hollow",
+      "is_chemical_slip": false,
+      "planned_symbols": [
+        "Mo",
+        "Mo",
+        "Mo"
+      ],
+      "actual_symbols": [
+        "Mo",
+        "Mo",
+        "Mo"
+      ],
+      "site_fingerprint": "llm-oracle::hollow::Mo-Mo-Mo::0"
+    }
+  },
+  "attempt_records": [
+    {
+      "attempt_index": 1,
+      "plan": {
+        "reasoning": "History is empty so this is the first proposal. SMILES [N]=[NH] shows index 0 (N) has radical_electrons=1 while index 1 does not; therefore ReactiveSpecies is required and binding must occur at index 0. Start with the simplest high-symmetry ontop-Mo site using the available site list.",
+        "adsorbate_type": "ReactiveSpecies",
+        "predicted_relaxed_energy_eV": -1.85,
+        "solution": {
+          "action": "continue",
+          "site_type": "ontop",
+          "surface_binding_atoms": [
+            "Mo"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "ontop|Mo|0|ReactiveSpecies|2.0",
+      "planner_reasoning": "History is empty so this is the first proposal. SMILES [N]=[NH] shows index 0 (N) has radical_electrons=1 while index 1 does not; therefore ReactiveSpecies is required and binding must occur at index 0. Start with the simplest high-symmetry ontop-Mo site using the available site list.",
+      "tool_logs": [
+        "LLM-as-oracle mode: executor bypassed; predicted energy used in place of MACE relaxation.",
+        "Success: predicted_relaxed_energy_eV = -1.8500 eV."
+      ],
+      "status": "success",
+      "most_stable_energy_eV": -1.85,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": false,
+      "planned_site_type": "ontop",
+      "actual_site_type": "ontop",
+      "energy_source": "llm_predicted",
+      "history_entry": "【✅ Perfect Adsorption】 ontop @ ['Mo'] (Index [0]) -> Site: ontop (Mo) [🌟 New Best] | E=-1.850 eV"
+    },
+    {
+      "attempt_index": 2,
+      "plan": {
+        "reasoning": "History contains only one successful ontop-Mo adsorption via index 0 (E=-1.850 eV). To locate a potentially lower-energy geometry we must test a distinct high-symmetry site. The adsorbate is the NNH radical (SMILES [N]=[NH]); RDKit data confirm the sole unpaired electron resides on N index 0, therefore ReactiveSpecies binding through index 0 is required. We select a Mo-Mo bridge site that is chemically distinct from the already-sampled ontop-Mo environment. No prior plan used bridge geometry, satisfying the 'completely new plan' constraint.",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "bridge",
+          "surface_binding_atoms": [
+            "Mo",
+            "Mo"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        },
+        "predicted_relaxed_energy_eV": -1.92
+      },
+      "plan_key": "bridge|Mo,Mo|0|ReactiveSpecies|2.0",
+      "planner_reasoning": "History contains only one successful ontop-Mo adsorption via index 0 (E=-1.850 eV). To locate a potentially lower-energy geometry we must test a distinct high-symmetry site. The adsorbate is the NNH radical (SMILES [N]=[NH]); RDKit data confirm the sole unpaired electron resides on N index 0, therefore ReactiveSpecies binding through index 0 is required. We select a Mo-Mo bridge site that is chemically distinct from the already-sampled ontop-Mo environment. No prior plan used bridge geometry, satisfying the 'completely new plan' constraint.",
+      "tool_logs": [
+        "LLM-as-oracle mode: executor bypassed; predicted energy used in place of MACE relaxation.",
+        "Success: predicted_relaxed_energy_eV = -1.9200 eV."
+      ],
+      "status": "success",
+      "most_stable_energy_eV": -1.92,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": false,
+      "planned_site_type": "bridge",
+      "actual_site_type": "bridge",
+      "energy_source": "llm_predicted",
+      "history_entry": "【✅ Perfect Adsorption】 bridge @ ['Mo', 'Mo'] (Index [0]) -> Site: bridge (Mo,Mo) [🌟 New Best] | E=-1.920 eV"
+    },
+    {
+      "attempt_index": 3,
+      "plan": {
+        "reasoning": "History tested ontop-Mo (E=-1.850 eV) and bridge Mo-Mo (E=-1.920 eV, current best). No convergence tags or slips observed. Hollow sites remain untested; propose hollow on Mo-Mo-Mo with binding via the radical N (index 0) to explore possible lower energy. Predicted MACE-MP-0 energy for this new hollow configuration is estimated slightly below current best due to higher coordination.",
+        "adsorbate_type": "ReactiveSpecies",
+        "predicted_relaxed_energy_eV": -2.05,
+        "solution": {
+          "action": "continue",
+          "site_type": "hollow",
+          "surface_binding_atoms": [
+            "Mo",
+            "Mo",
+            "Mo"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "hollow|Mo,Mo,Mo|0|ReactiveSpecies|2.0",
+      "planner_reasoning": "History tested ontop-Mo (E=-1.850 eV) and bridge Mo-Mo (E=-1.920 eV, current best). No convergence tags or slips observed. Hollow sites remain untested; propose hollow on Mo-Mo-Mo with binding via the radical N (index 0) to explore possible lower energy. Predicted MACE-MP-0 energy for this new hollow configuration is estimated slightly below current best due to higher coordination.",
+      "tool_logs": [
+        "LLM-as-oracle mode: executor bypassed; predicted energy used in place of MACE relaxation.",
+        "Success: predicted_relaxed_energy_eV = -2.0500 eV."
+      ],
+      "status": "success",
+      "most_stable_energy_eV": -2.05,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": false,
+      "planned_site_type": "hollow",
+      "actual_site_type": "hollow",
+      "energy_source": "llm_predicted",
+      "history_entry": "【✅ Perfect Adsorption】 hollow @ ['Mo', 'Mo', 'Mo'] (Index [0]) -> Site: hollow (Mo,Mo,Mo) [🌟 New Best] | E=-2.050 eV"
+    }
+  ],
+  "history": [
+    "【✅ Perfect Adsorption】 ontop @ ['Mo'] (Index [0]) -> Site: ontop (Mo) [🌟 New Best] | E=-1.850 eV",
+    "【✅ Perfect Adsorption】 bridge @ ['Mo', 'Mo'] (Index [0]) -> Site: bridge (Mo,Mo) [🌟 New Best] | E=-1.920 eV",
+    "【✅ Perfect Adsorption】 hollow @ ['Mo', 'Mo', 'Mo'] (Index [0]) -> Site: hollow (Mo,Mo,Mo) [🌟 New Best] | E=-2.050 eV"
+  ],
+  "error": null,
+  "perfect_count": 3,
+  "dissociation_count": 0,
+  "rearrangement_count": 0,
+  "calc_failure_count": 0,
+  "chemical_slip_count": 0
+}

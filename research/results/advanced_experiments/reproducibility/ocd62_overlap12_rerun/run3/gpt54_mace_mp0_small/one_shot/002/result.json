@@ -1,0 +1,151 @@
+{
+  "case_id": "002",
+  "case_metadata": {
+    "case_id": "002",
+    "slab_file": "datasets/ocd62_overlap12/002_Ag18Sr27_N_N.xyz",
+    "smiles": "[N]=N",
+    "user_request": "Find the lowest-energy adsorption configuration for the adsorbate with SMILES [N]=N on the provided surface.",
+    "surface_family": "intermetallic",
+    "adsorbate_name": "[N]=N",
+    "miller_index": "",
+    "reaction_class": "GENERALIZATION",
+    "ablation_candidate": "FALSE",
+    "notes": "OCD-GMAE source key=94; original_ads_smi=[N]=N; surface_formula=Ag18Sr27; y_relaxed=-1.304037 eV; site=[0, 1, 4, 14, 16]; OCD62 overlap12 RUN3 symlink to representative50 source file; sha256=7c9035eac94170fd614b394ebb69b6a7970bddbca81c729ae772008c905b3272",
+    "source_key": "94",
+    "original_ads_smi": "[N]=N",
+    "surface_formula": "Ag18Sr27",
+    "surface_elements": "Ag;Sr",
+    "bare_slab_atoms": "45",
+    "adsorbate_atoms": "3",
+    "y_relaxed": "-1.304037",
+    "site_indices": "0;1;4;14;16",
+    "selection_bucket": "small_n_species"
+  },
+  "status": "failed",
+  "best_energy_eV": null,
+  "iteration_count": 1,
+  "max_attempts": 1,
+  "final_site_type": null,
+  "converged_tag": false,
+  "wall_clock_sec": 124.15436371415854,
+  "total_input_tokens": 3477,
+  "total_output_tokens": 1259,
+  "artifact_paths": {
+    "BEST_N_N_ontop_to_hollow_FCC-No-Subsurf_DISS_E-5.608": "artifacts/BEST_N_N_ontop_to_hollow_FCC-No-Subsurf_DISS_E-5.608.xyz",
+    "BEST_N_N_ontop_to_hollow_FCC-No-Subsurf_DISS_E-5.608.xyz": "artifacts/BEST_N_N_ontop_to_hollow_FCC-No-Subsurf_DISS_E-5.608.xyz",
+    "best_structure_file": "artifacts/BEST_N_N_ontop_to_hollow_FCC-No-Subsurf_DISS_E-5.608.xyz",
+    "conformers_[N]_N": "artifacts/conformers_[N]_N.traj",
+    "conformers_[N]_N.traj": "artifacts/conformers_[N]_N.traj",
+    "final": "artifacts/final.xyz",
+    "final.xyz": "artifacts/final.xyz",
+    "relaxation": "artifacts/relaxation.traj",
+    "relaxation.traj": "artifacts/relaxation.traj",
+    "relaxation_trajectory_file": "artifacts/relaxation.traj"
+  },
+  "best_result": {},
+  "last_analysis": {
+    "status": "success",
+    "message": "Most stable config adsorption energy: -5.6078 eV. Target Atom: N (from plan index 0, global index 45 in relaxed structure). -> Nearest: Sr (Index 16), Distance: 2.358 Å (Threshold: 3.857), Bound: True. Bonded Surface Atoms: Sr-2.358Å, Sr-2.404Å, Sr-2.59Å, Sr-3.689Å. Is Bound: True. Reactivity Change Detected: True (Bond Changes: 1). Chemical Slip: True (Planned ['Sr'] -> Actual ['Sr', 'Sr', 'Sr', 'Sr']).",
+    "most_stable_energy_eV": -5.607814788818359,
+    "target_adsorbate_atom": "N",
+    "target_adsorbate_atom_index": 45,
+    "bonded_surface_atoms": [
+      {
+        "symbol": "Sr",
+        "index": 16,
+        "distance": 2.358
+      },
+      {
+        "symbol": "Sr",
+        "index": 4,
+        "distance": 2.404
+      },
+      {
+        "symbol": "Sr",
+        "index": 1,
+        "distance": 2.59
+      },
+      {
+        "symbol": "Sr",
+        "index": 0,
+        "distance": 3.689
+      }
+    ],
+    "nearest_slab_atom": "Sr",
+    "nearest_slab_atom_index": 16,
+    "final_bond_distance_A": 2.358,
+    "estimated_covalent_cutoff_A": 2.926,
+    "is_covalently_bound": true,
+    "reaction_detected": true,
+    "is_dissociated": true,
+    "n_components": 2,
+    "bond_change_count": 1,
+    "site_analysis": {
+      "planned_site_type": "ontop",
+      "planned_connectivity": 1,
+      "actual_site_type": "hollow (FCC/No-Subsurf)",
+      "actual_connectivity": 4,
+      "is_chemical_slip": true,
+      "planned_symbols": [
+        "Sr"
+      ],
+      "actual_symbols": [
+        "Sr",
+        "Sr",
+        "Sr",
+        "Sr"
+      ],
+      "site_fingerprint": "Sr16-Sr4-Sr1-Sr0"
+    },
+    "best_structure_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/gpt54_mace_mp0_small/one_shot/002/artifacts/BEST_N_N_ontop_to_hollow_FCC-No-Subsurf_DISS_E-5.608.xyz",
+    "generated_conformers_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/gpt54_mace_mp0_small/one_shot/002/artifacts/conformers_[N]_N.traj",
+    "relaxation_trajectory_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/gpt54_mace_mp0_small/one_shot/002/artifacts/final.xyz",
+    "session_id": "002-c5928834"
+  },
+  "attempt_records": [
+    {
+      "attempt_index": 1,
+      "plan": {
+        "reasoning": "No previous attempts exist, so I must propose the best physically sensible initial plan. The user wants the lowest-energy adsorption configuration for [N]=N on an Ag/Sr alloy surface. The SMILES consistency check shows two N atoms with indices 0 and 1. Index 0 has one radical electron, while index 1 has zero. Therefore, if I choose adsorbate_type ReactiveSpecies, the binding index must include the radical-bearing atom 0; using atom 1 alone as a reactive binding center would violate the rules. The species [N]=N is not neutral closed-shell N2; it is a radical diazenyl-like species by the provided RDKit facts, so I will treat it as ReactiveSpecies and bind through atom 0. For an alloy surface containing electropositive Sr and nobler Ag, a radical N center is likely stabilized more strongly at the more oxophilic/nitrophilic Sr than at Ag. With only one attempt allowed, the best initial low-energy guess is therefore end-on adsorption of the radical N at an Sr ontop site rather than a weaker Ag ontop site. A bridge or hollow motif could also be relevant for N-N side-on interaction, but for this specific radical species the strongest first guess is usually direct anchoring of the radical-bearing N to the most reactive single metal center. This satisfies the site alignment rule for ontop with one adsorbate binding index. Surface options confirm ontop Sr exists, so this plan is valid.",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "ontop",
+          "surface_binding_atoms": [
+            "Sr"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "ontop|Sr|0|ReactiveSpecies|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -5.607814788818359,
+      "bond_change_count": 1,
+      "is_dissociated": true,
+      "is_chemical_slip": true,
+      "planned_site_type": "ontop",
+      "actual_site_type": "hollow (FCC/No-Subsurf)",
+      "best_structure_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/gpt54_mace_mp0_small/one_shot/002/artifacts/BEST_N_N_ontop_to_hollow_FCC-No-Subsurf_DISS_E-5.608.xyz",
+      "generated_conformers_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/gpt54_mace_mp0_small/one_shot/002/artifacts/conformers_[N]_N.traj",
+      "relaxation_trajectory_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/gpt54_mace_mp0_small/one_shot/002/artifacts/final.xyz",
+      "message": "Most stable config adsorption energy: -5.6078 eV. Target Atom: N (from plan index 0, global index 45 in relaxed structure). -> Nearest: Sr (Index 16), Distance: 2.358 Å (Threshold: 3.857), Bound: True. Bonded Surface Atoms: Sr-2.358Å, Sr-2.404Å, Sr-2.59Å, Sr-3.689Å. Is Bound: True. Reactivity Change Detected: True (Bond Changes: 1). Chemical Slip: True (Planned ['Sr'] -> Actual ['Sr', 'Sr', 'Sr', 'Sr']).",
+      "history_entry": "【❌ Dissociated】 ontop @ ['Sr'] (Index [0]) -> Site: hollow (FCC/No-Subsurf) (Sr,Sr,Sr,Sr) | E=-5.608 eV"
+    }
+  ],
+  "history": [
+    "【❌ Dissociated】 ontop @ ['Sr'] (Index [0]) -> Site: hollow (FCC/No-Subsurf) (Sr,Sr,Sr,Sr) | E=-5.608 eV"
+  ],
+  "error": null,
+  "perfect_count": 0,
+  "dissociation_count": 1,
+  "rearrangement_count": 0,
+  "calc_failure_count": 0,
+  "chemical_slip_count": 1,
+  "best_structure_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run3/gpt54_mace_mp0_small/one_shot/002/artifacts/BEST_N_N_ontop_to_hollow_FCC-No-Subsurf_DISS_E-5.608.xyz"
+}

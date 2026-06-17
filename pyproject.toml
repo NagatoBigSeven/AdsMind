@@ -1,0 +1,115 @@
+[build-system]
+requires = ["setuptools>=77", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "adsmind"
+version = "0.1.0"
+description = "Physics-grounded multi-agent system for self-correcting adsorption-configuration discovery."
+readme = "README.md"
+requires-python = ">=3.10,<3.12"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [
+    { name = "Zongmin Zhang", email = "zzhanghw@connect.ust.hk" },
+    { name = "Yuyang Lou" },
+    { name = "Bowen Zhang" },
+    { name = "Junwu Chen" },
+    { name = "Ryo Kuroki" },
+    { name = "Xuan Vu Nguyen" },
+    { name = "Edvin Fako" },
+    { name = "Lixue Cheng" },
+    { name = "Philippe Schwaller" },
+]
+maintainers = [
+    { name = "AdsMind contributors" },
+]
+keywords = [
+    "adsorption",
+    "catalysis",
+    "atomistic-simulation",
+    "multi-agent-systems",
+    "mace",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "Operating System :: MacOS",
+    "Operating System :: POSIX :: Linux",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Scientific/Engineering :: Chemistry",
+]
+dependencies = [
+    "ase>=3.26.0",
+    "autoadsorbate>=0.2.2",
+    "langchain-core>=0.3.0",
+    "langchain-openai>=0.3.33",
+    "langchain-ollama>=0.2.0",
+    "langchain-huggingface>=0.1.0",
+    "langgraph>=0.2.0",
+    "matplotlib>=3.8",
+    "pillow>=10",
+    "requests>=2.32.5",
+    "pandas>=2.3.2",
+    "python-dotenv>=1.0.0",
+    "rdkit",
+    "scikit-learn>=1.7.2",
+    "scipy>=1.15.3",
+    "torch==2.2.1",
+    "mace-torch>=0.3.14",
+    "numpy<2.0",
+    "streamlit>=1.49.1",
+    "torch-dftd",
+    "transformers<5",
+    "accelerate"
+]
+
+[project.scripts]
+adsmind = "adsmind.agent.agent:main_cli"
+adsmind-preflight = "adsmind.utils.preflight:main"
+adsmind-ui = "adsmind.app.launcher:main"
+
+[project.urls]
+Homepage = "https://github.com/NagatoBigSeven/AdsMind"
+Repository = "https://github.com/NagatoBigSeven/AdsMind"
+Issues = "https://github.com/NagatoBigSeven/AdsMind/issues"
+Documentation = "https://github.com/NagatoBigSeven/AdsMind#readme"
+
+[tool.setuptools.packages.find]
+include = ["adsmind", "adsmind.*"]
+exclude = ["research", "research.*", "tests", "tests.*"]
+
+[project.optional-dependencies]
+dev = [
+    "build>=1.2",
+    "pytest>=8.0",
+    "ruff>=0.6.0",
+    "twine>=5.1",
+]
+research = [
+    "matplotlib>=3.8",
+    "scienceplots>=2.1.1",
+]
+weave = ["weave>=0.52.6"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 88
+target-version = "py310"
+extend-exclude = [
+    "research/figures/panel_b_blender/addon/",
+    "research/paper_plots/**/*.ipynb",
+    "research/results/**/catalyst_tools/",
+]
+
+[tool.ruff.lint.per-file-ignores]
+"research/agent_eval/export_dft_iteration_alignment.py" = ["E402"]
+"research/agent_eval/render_panel_b_assets.py" = ["E402"]
+"research/agent_eval/run_configs/**/*.py" = ["E402"]
+"research/analysis/*.py" = ["E402"]
+"research/figures/panel_b_ovito/scripts/catalyst_surface_visualizer.py" = ["E722"]

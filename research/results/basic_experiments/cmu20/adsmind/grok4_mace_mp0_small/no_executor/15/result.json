@@ -1,0 +1,232 @@
+{
+  "case_id": "15",
+  "case_metadata": {
+    "case_id": "15",
+    "slab_file": "datasets/cmu20/15_Cu6Ga2_100.xyz",
+    "smiles": "[CH2]CO",
+    "user_request": "Find the lowest-energy adsorption configuration for the 2-hydroxyethyl radical on the provided surface.",
+    "surface_family": "intermetallic",
+    "adsorbate_name": "CH2CH2OH",
+    "miller_index": "(100)",
+    "reaction_class": "COMPLEX",
+    "ablation_candidate": "FALSE",
+    "notes": "Resolved from prior AdsMind outputs; local evidence matches formula C2H5O"
+  },
+  "status": "success",
+  "best_energy_eV": -2.18,
+  "iteration_count": 3,
+  "max_attempts": 5,
+  "final_site_type": "hollow",
+  "converged_tag": false,
+  "wall_clock_sec": 112.21833628043532,
+  "total_input_tokens": 15012,
+  "total_output_tokens": 7779,
+  "artifact_paths": {
+    "iteration_energy_curve": "research/results/basic_experiments/cmu20/adsmind/grok4_mace_mp0_small/no_executor/15/artifacts/iteration_energy_curve.png",
+    "iteration_energy_curve.png": "research/results/basic_experiments/cmu20/adsmind/grok4_mace_mp0_small/no_executor/15/artifacts/iteration_energy_curve.png",
+    "iteration_energy_curve_png": "research/results/basic_experiments/cmu20/adsmind/grok4_mace_mp0_small/no_executor/15/artifacts/iteration_energy_curve.png",
+    "summary_report": "research/results/basic_experiments/cmu20/adsmind/grok4_mace_mp0_small/no_executor/15/artifacts/summary_report.md",
+    "summary_report.md": "research/results/basic_experiments/cmu20/adsmind/grok4_mace_mp0_small/no_executor/15/artifacts/summary_report.md",
+    "summary_report_file": "research/results/basic_experiments/cmu20/adsmind/grok4_mace_mp0_small/no_executor/15/artifacts/summary_report.md"
+  },
+  "best_result": {
+    "most_stable_energy_eV": -2.18,
+    "analysis_json": {
+      "status": "success",
+      "most_stable_energy_eV": -2.18,
+      "is_dissociated": false,
+      "is_covalently_bound": true,
+      "bond_change_count": 0,
+      "energy_source": "llm_predicted",
+      "site_analysis": {
+        "planned_site_type": "hollow",
+        "actual_site_type": "hollow",
+        "is_chemical_slip": false,
+        "planned_symbols": [
+          "Cu",
+          "Cu",
+          "Cu"
+        ],
+        "actual_symbols": [
+          "Cu",
+          "Cu",
+          "Cu"
+        ],
+        "site_fingerprint": "llm-oracle::hollow::Cu-Cu-Cu::0"
+      }
+    },
+    "plan": {
+      "reasoning": "History shows ontop (Cu, adsorbate index 0) at -2.050 eV and bridge (Cu-Cu, adsorbate index 0) at -2.120 eV; both succeeded without dissociation. Hollow sites remain untested. SMILES [CH2]CO and RDKit data confirm ReactiveSpecies binding at radical carbon (index 0). Propose hollow site on three Cu atoms to explore lower-energy configuration on the alloy surface.",
+      "adsorbate_type": "ReactiveSpecies",
+      "solution": {
+        "action": "continue",
+        "site_type": "hollow",
+        "surface_binding_atoms": [
+          "Cu",
+          "Cu",
+          "Cu"
+        ],
+        "adsorbate_binding_indices": [
+          0
+        ],
+        "relax_top_n": 1,
+        "touch_sphere_size": 2,
+        "overlap_thr": 0.1,
+        "conformers_per_site_cap": 4
+      },
+      "predicted_relaxed_energy_eV": -2.18
+    },
+    "result_type": "Perfect"
+  },
+  "last_analysis": {
+    "status": "success",
+    "most_stable_energy_eV": -2.18,
+    "is_dissociated": false,
+    "is_covalently_bound": true,
+    "bond_change_count": 0,
+    "energy_source": "llm_predicted",
+    "site_analysis": {
+      "planned_site_type": "hollow",
+      "actual_site_type": "hollow",
+      "is_chemical_slip": false,
+      "planned_symbols": [
+        "Cu",
+        "Cu",
+        "Cu"
+      ],
+      "actual_symbols": [
+        "Cu",
+        "Cu",
+        "Cu"
+      ],
+      "site_fingerprint": "llm-oracle::hollow::Cu-Cu-Cu::0"
+    }
+  },
+  "attempt_records": [
+    {
+      "attempt_index": 1,
+      "plan": {
+        "reasoning": "No prior attempts. SMILES [CH2]CO matches 2-hydroxyethyl radical with unpaired electron on C index 0 (SP3, radical_electrons=1). Use ReactiveSpecies binding exclusively at index 0. Start with simplest stable ontop Cu site consistent with listed sites.",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "ontop",
+          "surface_binding_atoms": [
+            "Cu"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        },
+        "predicted_relaxed_energy_eV": -2.05
+      },
+      "plan_key": "ontop|Cu|0|ReactiveSpecies|2.0",
+      "planner_reasoning": "No prior attempts. SMILES [CH2]CO matches 2-hydroxyethyl radical with unpaired electron on C index 0 (SP3, radical_electrons=1). Use ReactiveSpecies binding exclusively at index 0. Start with simplest stable ontop Cu site consistent with listed sites.",
+      "tool_logs": [
+        "LLM-as-oracle mode: executor bypassed; predicted energy used in place of MACE relaxation.",
+        "Success: predicted_relaxed_energy_eV = -2.0500 eV."
+      ],
+      "status": "success",
+      "most_stable_energy_eV": -2.05,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": false,
+      "planned_site_type": "ontop",
+      "actual_site_type": "ontop",
+      "energy_source": "llm_predicted",
+      "history_entry": "【✅ Perfect Adsorption】 ontop @ ['Cu'] (Index [0]) -> Site: ontop (Cu) [🌟 New Best] | E=-2.050 eV"
+    },
+    {
+      "attempt_index": 2,
+      "plan": {
+        "reasoning": "History contains only one successful ontop-Cu adsorption (E=-2.050 eV) via the radical carbon (index 0). All other high-symmetry sites remain untested. Propose a new bridge site using the same radical carbon to explore possible stabilization on the alloy surface. adsorbate_type=ReactiveSpecies because the SMILES describes a radical with unpaired electron on C0. site_type=bridge, surface_binding_atoms=['Cu','Cu'], adsorbate_binding_indices=[0].",
+        "adsorbate_type": "ReactiveSpecies",
+        "predicted_relaxed_energy_eV": -2.12,
+        "solution": {
+          "action": "continue",
+          "site_type": "bridge",
+          "surface_binding_atoms": [
+            "Cu",
+            "Cu"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "bridge|Cu,Cu|0|ReactiveSpecies|2.0",
+      "planner_reasoning": "History contains only one successful ontop-Cu adsorption (E=-2.050 eV) via the radical carbon (index 0). All other high-symmetry sites remain untested. Propose a new bridge site using the same radical carbon to explore possible stabilization on the alloy surface. adsorbate_type=ReactiveSpecies because the SMILES describes a radical with unpaired electron on C0. site_type=bridge, surface_binding_atoms=['Cu','Cu'], adsorbate_binding_indices=[0].",
+      "tool_logs": [
+        "LLM-as-oracle mode: executor bypassed; predicted energy used in place of MACE relaxation.",
+        "Success: predicted_relaxed_energy_eV = -2.1200 eV."
+      ],
+      "status": "success",
+      "most_stable_energy_eV": -2.12,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": false,
+      "planned_site_type": "bridge",
+      "actual_site_type": "bridge",
+      "energy_source": "llm_predicted",
+      "history_entry": "【✅ Perfect Adsorption】 bridge @ ['Cu', 'Cu'] (Index [0]) -> Site: bridge (Cu,Cu) [🌟 New Best] | E=-2.120 eV"
+    },
+    {
+      "attempt_index": 3,
+      "plan": {
+        "reasoning": "History shows ontop (Cu, adsorbate index 0) at -2.050 eV and bridge (Cu-Cu, adsorbate index 0) at -2.120 eV; both succeeded without dissociation. Hollow sites remain untested. SMILES [CH2]CO and RDKit data confirm ReactiveSpecies binding at radical carbon (index 0). Propose hollow site on three Cu atoms to explore lower-energy configuration on the alloy surface.",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "hollow",
+          "surface_binding_atoms": [
+            "Cu",
+            "Cu",
+            "Cu"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        },
+        "predicted_relaxed_energy_eV": -2.18
+      },
+      "plan_key": "hollow|Cu,Cu,Cu|0|ReactiveSpecies|2.0",
+      "planner_reasoning": "History shows ontop (Cu, adsorbate index 0) at -2.050 eV and bridge (Cu-Cu, adsorbate index 0) at -2.120 eV; both succeeded without dissociation. Hollow sites remain untested. SMILES [CH2]CO and RDKit data confirm ReactiveSpecies binding at radical carbon (index 0). Propose hollow site on three Cu atoms to explore lower-energy configuration on the alloy surface.",
+      "tool_logs": [
+        "LLM-as-oracle mode: executor bypassed; predicted energy used in place of MACE relaxation.",
+        "Success: predicted_relaxed_energy_eV = -2.1800 eV."
+      ],
+      "status": "success",
+      "most_stable_energy_eV": -2.18,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": false,
+      "planned_site_type": "hollow",
+      "actual_site_type": "hollow",
+      "energy_source": "llm_predicted",
+      "history_entry": "【✅ Perfect Adsorption】 hollow @ ['Cu', 'Cu', 'Cu'] (Index [0]) -> Site: hollow (Cu,Cu,Cu) [🌟 New Best] | E=-2.180 eV"
+    }
+  ],
+  "history": [
+    "【✅ Perfect Adsorption】 ontop @ ['Cu'] (Index [0]) -> Site: ontop (Cu) [🌟 New Best] | E=-2.050 eV",
+    "【✅ Perfect Adsorption】 bridge @ ['Cu', 'Cu'] (Index [0]) -> Site: bridge (Cu,Cu) [🌟 New Best] | E=-2.120 eV",
+    "【✅ Perfect Adsorption】 hollow @ ['Cu', 'Cu', 'Cu'] (Index [0]) -> Site: hollow (Cu,Cu,Cu) [🌟 New Best] | E=-2.180 eV"
+  ],
+  "error": null,
+  "perfect_count": 3,
+  "dissociation_count": 0,
+  "rearrangement_count": 0,
+  "calc_failure_count": 0,
+  "chemical_slip_count": 0
+}

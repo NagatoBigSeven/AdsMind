@@ -1,0 +1,294 @@
+{
+  "case_id": "03",
+  "case_metadata": {
+    "case_id": "03",
+    "slab_file": "datasets/cmu20/03_Pd3Cu_111.xyz",
+    "smiles": "[H]",
+    "user_request": "Find the lowest-energy adsorption configuration for atomic hydrogen on the provided surface.",
+    "surface_family": "intermetallic",
+    "adsorbate_name": "H",
+    "miller_index": "(111)",
+    "reaction_class": "HER",
+    "ablation_candidate": "FALSE",
+    "notes": "Paper surface label CuPd3"
+  },
+  "status": "success",
+  "best_energy_eV": -3.338566541671753,
+  "iteration_count": 3,
+  "max_attempts": 5,
+  "final_site_type": "hollow (FCC/No-Subsurf)",
+  "converged_tag": false,
+  "wall_clock_sec": 336.5442902930081,
+  "total_input_tokens": 17198,
+  "total_output_tokens": 4689,
+  "artifact_paths": {
+    "BEST_H_bridge_to_hollow_HCP-Subsurf-Atom_E-3.307": "research/results/advanced_experiments/reproducibility/cmu20_gpt54_mace_mp0_small_multiseed/seed44/full/03/artifacts/BEST_H_bridge_to_hollow_HCP-Subsurf-Atom_E-3.307.xyz",
+    "BEST_H_bridge_to_hollow_HCP-Subsurf-Atom_E-3.307.xyz": "research/results/advanced_experiments/reproducibility/cmu20_gpt54_mace_mp0_small_multiseed/seed44/full/03/artifacts/BEST_H_bridge_to_hollow_HCP-Subsurf-Atom_E-3.307.xyz",
+    "best_structure_file": "research/results/advanced_experiments/reproducibility/cmu20_gpt54_mace_mp0_small_multiseed/seed44/full/03/artifacts/BEST_H_hollow_to_hollow_FCC-No-Subsurf_E-3.339.xyz",
+    "BEST_H_hollow_to_bridge_E-3.139": "research/results/advanced_experiments/reproducibility/cmu20_gpt54_mace_mp0_small_multiseed/seed44/full/03/artifacts/BEST_H_hollow_to_bridge_E-3.139.xyz",
+    "BEST_H_hollow_to_bridge_E-3.139.xyz": "research/results/advanced_experiments/reproducibility/cmu20_gpt54_mace_mp0_small_multiseed/seed44/full/03/artifacts/BEST_H_hollow_to_bridge_E-3.139.xyz",
+    "BEST_H_hollow_to_hollow_FCC-No-Subsurf_E-3.339": "research/results/advanced_experiments/reproducibility/cmu20_gpt54_mace_mp0_small_multiseed/seed44/full/03/artifacts/BEST_H_hollow_to_hollow_FCC-No-Subsurf_E-3.339.xyz",
+    "BEST_H_hollow_to_hollow_FCC-No-Subsurf_E-3.339.xyz": "research/results/advanced_experiments/reproducibility/cmu20_gpt54_mace_mp0_small_multiseed/seed44/full/03/artifacts/BEST_H_hollow_to_hollow_FCC-No-Subsurf_E-3.339.xyz",
+    "conformers_[H]": "research/results/advanced_experiments/reproducibility/cmu20_gpt54_mace_mp0_small_multiseed/seed44/full/03/artifacts/conformers_[H].traj",
+    "conformers_[H].traj": "research/results/advanced_experiments/reproducibility/cmu20_gpt54_mace_mp0_small_multiseed/seed44/full/03/artifacts/conformers_[H].traj",
+    "final": "research/results/advanced_experiments/reproducibility/cmu20_gpt54_mace_mp0_small_multiseed/seed44/full/03/artifacts/final.xyz",
+    "final.xyz": "research/results/advanced_experiments/reproducibility/cmu20_gpt54_mace_mp0_small_multiseed/seed44/full/03/artifacts/final.xyz",
+    "relaxation": "research/results/advanced_experiments/reproducibility/cmu20_gpt54_mace_mp0_small_multiseed/seed44/full/03/artifacts/relaxation.traj",
+    "relaxation.traj": "research/results/advanced_experiments/reproducibility/cmu20_gpt54_mace_mp0_small_multiseed/seed44/full/03/artifacts/relaxation.traj",
+    "relaxation_trajectory_file": "research/results/advanced_experiments/reproducibility/cmu20_gpt54_mace_mp0_small_multiseed/seed44/full/03/artifacts/relaxation.traj"
+  },
+  "best_result": {
+    "most_stable_energy_eV": -3.338566541671753,
+    "analysis_json": {
+      "status": "success",
+      "message": "Most stable config adsorption energy: -3.3386 eV. Target Atom: H (from plan index 0, global index 64 in relaxed structure). -> Nearest: Pd (Index 55), Distance: 1.83 Å (Threshold: 2.465), Bound: True. Bonded Surface Atoms: Pd-1.83Å, Pd-1.835Å, Pd-1.908Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: False (Planned ['Pd', 'Pd', 'Pd'] -> Actual ['Pd', 'Pd', 'Pd']).",
+      "most_stable_energy_eV": -3.338566541671753,
+      "target_adsorbate_atom": "H",
+      "target_adsorbate_atom_index": 64,
+      "bonded_surface_atoms": [
+        {
+          "symbol": "Pd",
+          "index": 55,
+          "distance": 1.83
+        },
+        {
+          "symbol": "Pd",
+          "index": 53,
+          "distance": 1.835
+        },
+        {
+          "symbol": "Pd",
+          "index": 57,
+          "distance": 1.908
+        }
+      ],
+      "nearest_slab_atom": "Pd",
+      "nearest_slab_atom_index": 55,
+      "final_bond_distance_A": 1.83,
+      "estimated_covalent_cutoff_A": 1.87,
+      "is_covalently_bound": true,
+      "reaction_detected": false,
+      "is_dissociated": false,
+      "n_components": 1,
+      "bond_change_count": 0,
+      "site_analysis": {
+        "planned_site_type": "hollow",
+        "planned_connectivity": 3,
+        "actual_site_type": "hollow (FCC/No-Subsurf)",
+        "actual_connectivity": 3,
+        "is_chemical_slip": false,
+        "planned_symbols": [
+          "Pd",
+          "Pd",
+          "Pd"
+        ],
+        "actual_symbols": [
+          "Pd",
+          "Pd",
+          "Pd"
+        ],
+        "site_fingerprint": "Pd55-Pd53-Pd57"
+      },
+      "best_structure_file": "research/results/advanced_experiments/reproducibility/cmu20_gpt54_mace_mp0_small_multiseed/seed44/full/03/artifacts/BEST_H_hollow_to_hollow_FCC-No-Subsurf_E-3.339.xyz",
+      "generated_conformers_file": "research/results/advanced_experiments/reproducibility/cmu20_gpt54_mace_mp0_small_multiseed/seed44/full/03/artifacts/conformers_[H].traj",
+      "relaxation_trajectory_file": "research/results/advanced_experiments/reproducibility/cmu20_gpt54_mace_mp0_small_multiseed/seed44/full/03/artifacts/final.xyz",
+      "session_id": "03-1e386090"
+    },
+    "plan": {
+      "reasoning": "SMILES consistency check: the adsorbate is [H], i.e. atomic hydrogen, which is a radical species rather than a closed-shell molecule. There is no mismatch between the user request and the SMILES. For adsorption mode selection, hydrogen should therefore be treated as a ReactiveSpecies, and the single H atom is the binding atom. The provided heavy atom list is empty because hydrogen is not a heavy atom; for this adsorbate there is only one atom total, so the only chemically valid binding index is 0. History analysis: there are no previous attempts, so no sites have been tested and no instability or convergence information exists. Request analysis: the user wants the lowest-energy adsorption configuration for atomic hydrogen on a Pd3Cu(111) alloy surface. For H on close-packed late transition-metal surfaces, high-coordination sites are typically the best starting point, and on Pd-rich (111) surfaces hollow adsorption is generally more favorable than ontop or bridge. Given the available site list, the most Pd-rich hollow environment available is Hollow-3: Pd-Pd-Pd. This is the most physically motivated initial plan for finding the lowest-energy state efficiently. Surface analysis: allowed canonical site types are ontop, bridge, and hollow. The available hollow environments include Cu-Pd-Pd, Pd-Pd-Pd, and Hollow-4 Cu-Pd-Pd-Pd, but the JSON must use canonical site_type only. Since H is monodentate, one adsorbate binding index is appropriate, and hollow with one binding index is allowed. Therefore the best initial systematic test is H in a Pd-Pd-Pd hollow site.",
+      "adsorbate_type": "ReactiveSpecies",
+      "solution": {
+        "action": "continue",
+        "site_type": "hollow",
+        "surface_binding_atoms": [
+          "Pd",
+          "Pd",
+          "Pd"
+        ],
+        "adsorbate_binding_indices": [
+          0
+        ],
+        "relax_top_n": 1,
+        "touch_sphere_size": 2,
+        "overlap_thr": 0.1,
+        "conformers_per_site_cap": 4
+      }
+    },
+    "result_type": "Perfect"
+  },
+  "last_analysis": {
+    "status": "success",
+    "message": "Most stable config adsorption energy: -3.3067 eV. Target Atom: H (from plan index 0, global index 64 in relaxed structure). -> Nearest: Pd (Index 53), Distance: 1.84 Å (Threshold: 2.465), Bound: True. Bonded Surface Atoms: Pd-1.84Å, Pd-1.852Å, Pd-1.859Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Pd', 'Pd'] -> Actual ['Pd', 'Pd', 'Pd']).",
+    "most_stable_energy_eV": -3.306736707687378,
+    "target_adsorbate_atom": "H",
+    "target_adsorbate_atom_index": 64,
+    "bonded_surface_atoms": [
+      {
+        "symbol": "Pd",
+        "index": 53,
+        "distance": 1.84
+      },
+      {
+        "symbol": "Pd",
+        "index": 55,
+        "distance": 1.852
+      },
+      {
+        "symbol": "Pd",
+        "index": 63,
+        "distance": 1.859
+      }
+    ],
+    "nearest_slab_atom": "Pd",
+    "nearest_slab_atom_index": 53,
+    "final_bond_distance_A": 1.84,
+    "estimated_covalent_cutoff_A": 1.87,
+    "is_covalently_bound": true,
+    "reaction_detected": false,
+    "is_dissociated": false,
+    "n_components": 1,
+    "bond_change_count": 0,
+    "site_analysis": {
+      "planned_site_type": "bridge",
+      "planned_connectivity": 2,
+      "actual_site_type": "hollow (HCP/Subsurf-Atom)",
+      "actual_connectivity": 3,
+      "is_chemical_slip": true,
+      "planned_symbols": [
+        "Pd",
+        "Pd"
+      ],
+      "actual_symbols": [
+        "Pd",
+        "Pd",
+        "Pd"
+      ],
+      "site_fingerprint": "Pd53-Pd55-Pd63"
+    },
+    "best_structure_file": "research/results/advanced_experiments/reproducibility/cmu20_gpt54_mace_mp0_small_multiseed/seed44/full/03/artifacts/BEST_H_bridge_to_hollow_HCP-Subsurf-Atom_E-3.307.xyz",
+    "generated_conformers_file": "research/results/advanced_experiments/reproducibility/cmu20_gpt54_mace_mp0_small_multiseed/seed44/full/03/artifacts/conformers_[H].traj",
+    "relaxation_trajectory_file": "research/results/advanced_experiments/reproducibility/cmu20_gpt54_mace_mp0_small_multiseed/seed44/full/03/artifacts/final.xyz",
+    "session_id": "03-1e386090"
+  },
+  "attempt_records": [
+    {
+      "attempt_index": 1,
+      "plan": {
+        "reasoning": "SMILES consistency check: the adsorbate is [H], i.e. atomic hydrogen, which is a radical species rather than a closed-shell molecule. There is no mismatch between the user request and the SMILES. For adsorption mode selection, hydrogen should therefore be treated as a ReactiveSpecies, and the single H atom is the binding atom. The provided heavy atom list is empty because hydrogen is not a heavy atom; for this adsorbate there is only one atom total, so the only chemically valid binding index is 0. History analysis: there are no previous attempts, so no sites have been tested and no instability or convergence information exists. Request analysis: the user wants the lowest-energy adsorption configuration for atomic hydrogen on a Pd3Cu(111) alloy surface. For H on close-packed late transition-metal surfaces, high-coordination sites are typically the best starting point, and on Pd-rich (111) surfaces hollow adsorption is generally more favorable than ontop or bridge. Given the available site list, the most Pd-rich hollow environment available is Hollow-3: Pd-Pd-Pd. This is the most physically motivated initial plan for finding the lowest-energy state efficiently. Surface analysis: allowed canonical site types are ontop, bridge, and hollow. The available hollow environments include Cu-Pd-Pd, Pd-Pd-Pd, and Hollow-4 Cu-Pd-Pd-Pd, but the JSON must use canonical site_type only. Since H is monodentate, one adsorbate binding index is appropriate, and hollow with one binding index is allowed. Therefore the best initial systematic test is H in a Pd-Pd-Pd hollow site.",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "hollow",
+          "surface_binding_atoms": [
+            "Pd",
+            "Pd",
+            "Pd"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "hollow|Pd,Pd,Pd|0|ReactiveSpecies|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -3.338566541671753,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": false,
+      "planned_site_type": "hollow",
+      "actual_site_type": "hollow (FCC/No-Subsurf)",
+      "best_structure_file": "research/results/advanced_experiments/reproducibility/cmu20_gpt54_mace_mp0_small_multiseed/seed44/full/03/artifacts/BEST_H_hollow_to_hollow_FCC-No-Subsurf_E-3.339.xyz",
+      "generated_conformers_file": "research/results/advanced_experiments/reproducibility/cmu20_gpt54_mace_mp0_small_multiseed/seed44/full/03/artifacts/conformers_[H].traj",
+      "relaxation_trajectory_file": "research/results/advanced_experiments/reproducibility/cmu20_gpt54_mace_mp0_small_multiseed/seed44/full/03/artifacts/final.xyz",
+      "message": "Most stable config adsorption energy: -3.3386 eV. Target Atom: H (from plan index 0, global index 64 in relaxed structure). -> Nearest: Pd (Index 55), Distance: 1.83 Å (Threshold: 2.465), Bound: True. Bonded Surface Atoms: Pd-1.83Å, Pd-1.835Å, Pd-1.908Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: False (Planned ['Pd', 'Pd', 'Pd'] -> Actual ['Pd', 'Pd', 'Pd']).",
+      "history_entry": "【✅ Perfect Adsorption】 hollow @ ['Pd', 'Pd', 'Pd'] (Index [0]) -> ⚠️ Geometric Slip: hollow -> hollow (FCC/No-Subsurf) [🌟 New Best] | E=-3.339 eV"
+    },
+    {
+      "attempt_index": 2,
+      "plan": {
+        "reasoning": "SMILES consistency check: the adsorbate is [H], i.e. atomic hydrogen, which is a radical species rather than a closed-shell molecule. There is no hybridization mismatch issue here. For ReactiveSpecies usage, the binding atom must carry an unpaired electron; atomic hydrogen does, so ReactiveSpecies is appropriate. History analysis: only one successful plan exists so far, namely a hollow site over ['Pd','Pd','Pd'] (Index [0]), which relaxed to a hollow FCC-like geometry and gave E = -3.339 eV, marked as the current best. There is no [🔄 Converged to known best] tag, no chemical slip, and only one hollow environment has been tested. Therefore termination is not yet justified. User intent is to find the lowest-energy adsorption configuration of atomic H on the Pd3Cu(111) alloy slab. For H on late-transition-metal (111) surfaces, hollow sites are often favorable, but alloy heterogeneity can make mixed-metal hollows competitive. Since Pd-Pd-Pd hollow has already been tested and is best so far, the most systematic new plan is to probe a chemically distinct hollow environment rather than repeat the same one or move immediately to a likely less stable ontop site. The available untested mixed hollow is Cu-Pd-Pd, which could be competitive due to local alloy effects. Adsorbate analysis: the provided heavy atom index list is empty because hydrogen is not a heavy atom. However, the adsorbate is a single atom [H], so the only valid binding atom is the hydrogen atom itself, giving adsorbate_binding_indices = [0]. This is the only chemically sensible choice for atomic hydrogen adsorption. Surface analysis: Cu-Pd-Pd is listed as an available Hollow-3 site, so canonical site_type must be 'hollow' with surface_binding_atoms ['Cu','Pd','Pd'].",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "hollow",
+          "surface_binding_atoms": [
+            "Cu",
+            "Pd",
+            "Pd"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "hollow|Cu,Pd,Pd|0|ReactiveSpecies|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -3.139073133468628,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": true,
+      "planned_site_type": "hollow",
+      "actual_site_type": "bridge",
+      "best_structure_file": "research/results/advanced_experiments/reproducibility/cmu20_gpt54_mace_mp0_small_multiseed/seed44/full/03/artifacts/BEST_H_hollow_to_bridge_E-3.139.xyz",
+      "generated_conformers_file": "research/results/advanced_experiments/reproducibility/cmu20_gpt54_mace_mp0_small_multiseed/seed44/full/03/artifacts/conformers_[H].traj",
+      "relaxation_trajectory_file": "research/results/advanced_experiments/reproducibility/cmu20_gpt54_mace_mp0_small_multiseed/seed44/full/03/artifacts/final.xyz",
+      "message": "Most stable config adsorption energy: -3.1391 eV. Target Atom: H (from plan index 0, global index 64 in relaxed structure). -> Nearest: Pd (Index 28), Distance: 1.743 Å (Threshold: 2.465), Bound: True. Bonded Surface Atoms: Pd-1.743Å, Pd-1.75Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Cu', 'Pd', 'Pd'] -> Actual ['Pd', 'Pd']).",
+      "history_entry": "【✅ Perfect Adsorption】 hollow @ ['Cu', 'Pd', 'Pd'] (Index [0]) -> ⚠️【Unstable Site Warning】⚠️: Planned hollow (Cu-Pd-Pd) is unstable, adsorbate spontaneously slipped to bridge (Pd-Pd).This means Cu-Pd-Pd has insufficient affinity for this adsorbate. Please **FORBID** testing Cu-Pd-Pd type sites again! | E=-3.139 eV"
+    },
+    {
+      "attempt_index": 3,
+      "plan": {
+        "reasoning": "SMILES consistency check: the adsorbate is [H], i.e. atomic hydrogen, which is a radical species rather than a closed-shell molecule. This should therefore be treated as ReactiveSpecies. For atomic H, the single atom used for binding is the hydrogen atom itself; the heavy atom list is empty because H is not a heavy atom, so there is no heavy-atom index to select from that list. Based on the SMILES, the only chemically valid binding atom is the sole H atom, and it indeed corresponds to a radical adsorbate. History analysis: two plans have been tested successfully. (1) hollow with surface_binding_atoms ['Pd','Pd','Pd'] gave the current best energy, E = -3.339 eV, and relaxed to a stable hollow FCC-like site. (2) hollow with ['Cu','Pd','Pd'] was explicitly flagged unstable and slipped to bridge (Pd-Pd), with E = -3.139 eV; per instruction, Cu-Pd-Pd hollow must be forbidden from further testing. No convergence-to-known-best termination tag is present, so termination is not yet mandatory. To systematically search for a lower-energy site, a completely new plan is required. Since Pd-rich environments already outperform the Cu-containing hollow and Cu-Pd-Pd hollow is invalid, the next most chemically plausible high-symmetry untested candidate is a Pd-Pd bridge site. This also checks whether H prefers 2-fold Pd coordination over 3-fold Pd coordination on this alloyed (111) surface. User intent is to find the lowest-energy adsorption configuration for atomic hydrogen on the given Pd3Cu(111) slab, so the next plan should target an untested major site likely to compete with the current best. Surface analysis: allowed bridge options are Cu-Pd and Pd-Pd; Pd-Pd is preferred over Cu-Pd because the tested Cu-containing environment was less favorable. Therefore, propose a bridge site on Pd-Pd. Adsorbate binding uses the sole H atom.",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "bridge",
+          "surface_binding_atoms": [
+            "Pd",
+            "Pd"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "bridge|Pd,Pd|0|ReactiveSpecies|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -3.306736707687378,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": true,
+      "planned_site_type": "bridge",
+      "actual_site_type": "hollow (HCP/Subsurf-Atom)",
+      "best_structure_file": "research/results/advanced_experiments/reproducibility/cmu20_gpt54_mace_mp0_small_multiseed/seed44/full/03/artifacts/BEST_H_bridge_to_hollow_HCP-Subsurf-Atom_E-3.307.xyz",
+      "generated_conformers_file": "research/results/advanced_experiments/reproducibility/cmu20_gpt54_mace_mp0_small_multiseed/seed44/full/03/artifacts/conformers_[H].traj",
+      "relaxation_trajectory_file": "research/results/advanced_experiments/reproducibility/cmu20_gpt54_mace_mp0_small_multiseed/seed44/full/03/artifacts/final.xyz",
+      "message": "Most stable config adsorption energy: -3.3067 eV. Target Atom: H (from plan index 0, global index 64 in relaxed structure). -> Nearest: Pd (Index 53), Distance: 1.84 Å (Threshold: 2.465), Bound: True. Bonded Surface Atoms: Pd-1.84Å, Pd-1.852Å, Pd-1.859Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: True (Planned ['Pd', 'Pd'] -> Actual ['Pd', 'Pd', 'Pd']).",
+      "history_entry": "【✅ Perfect Adsorption】 bridge @ ['Pd', 'Pd'] (Index [0]) -> ⚠️【Unstable Site Warning】⚠️: Planned bridge (Pd-Pd) is unstable, adsorbate spontaneously slipped to hollow (HCP/Subsurf-Atom) (Pd-Pd-Pd).This means Pd-Pd has insufficient affinity for this adsorbate. Please **FORBID** testing Pd-Pd type sites again! [⚠️ Energy Degenerate but Geometrically Distinct] | E=-3.307 eV"
+    }
+  ],
+  "history": [
+    "【✅ Perfect Adsorption】 hollow @ ['Pd', 'Pd', 'Pd'] (Index [0]) -> ⚠️ Geometric Slip: hollow -> hollow (FCC/No-Subsurf) [🌟 New Best] | E=-3.339 eV",
+    "【✅ Perfect Adsorption】 hollow @ ['Cu', 'Pd', 'Pd'] (Index [0]) -> ⚠️【Unstable Site Warning】⚠️: Planned hollow (Cu-Pd-Pd) is unstable, adsorbate spontaneously slipped to bridge (Pd-Pd).This means Cu-Pd-Pd has insufficient affinity for this adsorbate. Please **FORBID** testing Cu-Pd-Pd type sites again! | E=-3.139 eV",
+    "【✅ Perfect Adsorption】 bridge @ ['Pd', 'Pd'] (Index [0]) -> ⚠️【Unstable Site Warning】⚠️: Planned bridge (Pd-Pd) is unstable, adsorbate spontaneously slipped to hollow (HCP/Subsurf-Atom) (Pd-Pd-Pd).This means Pd-Pd has insufficient affinity for this adsorbate. Please **FORBID** testing Pd-Pd type sites again! [⚠️ Energy Degenerate but Geometrically Distinct] | E=-3.307 eV"
+  ],
+  "error": null,
+  "perfect_count": 3,
+  "dissociation_count": 0,
+  "rearrangement_count": 0,
+  "calc_failure_count": 0,
+  "chemical_slip_count": 2,
+  "best_structure_file": "research/results/advanced_experiments/reproducibility/cmu20_gpt54_mace_mp0_small_multiseed/seed44/full/03/artifacts/BEST_H_hollow_to_hollow_FCC-No-Subsurf_E-3.339.xyz"
+}

@@ -1,0 +1,235 @@
+{
+  "case_id": "005",
+  "case_metadata": {
+    "case_id": "005",
+    "slab_file": "datasets/ocd62_overlap12/005_ocd_201_Cr36N48_CH_O.xyz",
+    "smiles": "[CH]=O",
+    "user_request": "Find the lowest-energy adsorption configuration for the adsorbate with SMILES [CH]=O on the provided surface.",
+    "surface_family": "compound",
+    "adsorbate_name": "[CH]=O",
+    "miller_index": "",
+    "reaction_class": "GENERALIZATION",
+    "ablation_candidate": "FALSE",
+    "notes": "OCD-GMAE source key=201; original_ads_smi=[CH]=O; surface_formula=Cr36N48; y_relaxed=-4.026478 eV; site=[4, 6, 36]; OCD62 overlap12 RUN3 symlink to representative50 source file; sha256=b5c73af519a5d1b538be622d4572742cef48b39b2b240ce24d4b887ff388ebb0",
+    "source_key": "201",
+    "original_ads_smi": "[CH]=O",
+    "surface_formula": "Cr36N48",
+    "surface_elements": "Cr;N",
+    "bare_slab_atoms": "84",
+    "adsorbate_atoms": "3",
+    "y_relaxed": "-4.026478",
+    "site_indices": "4;6;36",
+    "selection_bucket": "small_organic"
+  },
+  "status": "success",
+  "best_energy_eV": -5.672840118408203,
+  "iteration_count": 1,
+  "max_attempts": 1,
+  "final_site_type": "bridge",
+  "converged_tag": false,
+  "wall_clock_sec": 197.72892900928855,
+  "total_input_tokens": 4762,
+  "total_output_tokens": 6536,
+  "artifact_paths": {
+    "BEST_CH_O_bridge_E-5.673": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run4/grok4_mace_mp0_small/one_shot/005/artifacts/BEST_CH_O_bridge_E-5.673.xyz",
+    "BEST_CH_O_bridge_E-5.673.xyz": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run4/grok4_mace_mp0_small/one_shot/005/artifacts/BEST_CH_O_bridge_E-5.673.xyz",
+    "best_structure_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run4/grok4_mace_mp0_small/one_shot/005/artifacts/BEST_CH_O_bridge_E-5.673.xyz",
+    "conformers_[CH]_O": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run4/grok4_mace_mp0_small/one_shot/005/artifacts/conformers_[CH]_O.traj",
+    "conformers_[CH]_O.traj": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run4/grok4_mace_mp0_small/one_shot/005/artifacts/conformers_[CH]_O.traj",
+    "final": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run4/grok4_mace_mp0_small/one_shot/005/artifacts/final.xyz",
+    "final.xyz": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run4/grok4_mace_mp0_small/one_shot/005/artifacts/final.xyz",
+    "relaxation": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run4/grok4_mace_mp0_small/one_shot/005/artifacts/relaxation.traj",
+    "relaxation.traj": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run4/grok4_mace_mp0_small/one_shot/005/artifacts/relaxation.traj",
+    "relaxation_trajectory_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run4/grok4_mace_mp0_small/one_shot/005/artifacts/relaxation.traj"
+  },
+  "best_result": {
+    "most_stable_energy_eV": -5.672840118408203,
+    "analysis_json": {
+      "status": "success",
+      "message": "Most stable config adsorption energy: -5.6728 eV. Target Atom 1: C (from plan index 0, global index 84). -> Nearest: Cr (Index 4), Distance: 2.137 Å (Threshold: 2.365), Bound: True. Target Atom 2: O (from plan index 1, global index 85). -> Nearest: Cr (Index 4), Distance: 2.942 Å (Threshold: 2.255), Bound: False. Bonded Surface Atoms: C(84)-Cr(2.383Å), O(85)-Cr(2.608Å). Is Bound: False. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: False (Planned ['Cr', 'Cr'] -> Actual ['Cr', 'Cr']).",
+      "most_stable_energy_eV": -5.672840118408203,
+      "bonded_surface_atoms": [
+        {
+          "adsorbate_atom": "C(84)",
+          "adsorbate_atom_index": 84,
+          "symbol": "Cr",
+          "index": 4,
+          "distance": 2.383
+        },
+        {
+          "adsorbate_atom": "O(85)",
+          "adsorbate_atom_index": 85,
+          "symbol": "Cr",
+          "index": 6,
+          "distance": 2.608
+        }
+      ],
+      "final_bond_distance_A": 2.383,
+      "is_covalently_bound": false,
+      "atom_1": {
+        "symbol": "C",
+        "global_index": 84,
+        "distance_A": 2.137,
+        "is_bound": true
+      },
+      "atom_2": {
+        "symbol": "O",
+        "global_index": 85,
+        "distance_A": 2.942,
+        "is_bound": false
+      },
+      "reaction_detected": false,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "n_components": 1,
+      "site_analysis": {
+        "planned_site_type": "bridge",
+        "planned_connectivity": 2,
+        "actual_site_type": "bridge",
+        "actual_connectivity": 2,
+        "is_chemical_slip": false,
+        "planned_symbols": [
+          "Cr",
+          "Cr"
+        ],
+        "actual_symbols": [
+          "Cr",
+          "Cr"
+        ],
+        "site_fingerprint": "Cr4-Cr6"
+      },
+      "best_structure_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run4/grok4_mace_mp0_small/one_shot/005/artifacts/BEST_CH_O_bridge_E-5.673.xyz",
+      "generated_conformers_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run4/grok4_mace_mp0_small/one_shot/005/artifacts/conformers_[CH]_O.traj",
+      "relaxation_trajectory_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run4/grok4_mace_mp0_small/one_shot/005/artifacts/final.xyz",
+      "session_id": "005-064d3782"
+    },
+    "plan": {
+      "reasoning": "SMILES Consistency Check: The provided atom list shows C at index 0 (SP2, radical_electrons 1) and O at index 1 (SP2, radical_electrons 0). This matches the SMILES [CH]=O for the formyl radical. No hybridization mismatch with user description. For ReactiveSpecies, binding atoms must have radical_electrons > 0, which is true for index 0. Analyze Old Plans: History is None, so no previous attempts. Formulate New Plan: The goal is to find the lowest-energy adsorption configuration. The adsorbate is the formyl radical ([CH]=O), with a radical on carbon. Common adsorption modes for formyl include eta1 (through C) or eta2 (through C and O). The eta2 mode often has lower energy on metal surfaces. To enable bi-dentate binding [0,1], use 'Molecule' type, as 'ReactiveSpecies' requires all binding atoms to have unpaired electrons, which O does not. Start with bridge site on Cr-Cr, as Cr is the metal and likely prefers binding both C and O. This is a new plan differing from None. Surface Heterogeneity: Surface has Cr and N; starting with Cr-Cr due to metallic nature. Analyze Request: User wants the lowest-energy configuration, so prioritize likely stable mode. Analyze Adsorbate: Major functional group is carbonyl with radical on C. Indices confirmed from list. Analyze Surface: Available bridge sites include Cr-Cr. Formulate Plan: Propose bridge site for eta2 adsorption.",
+      "adsorbate_type": "Molecule",
+      "solution": {
+        "action": "continue",
+        "site_type": "bridge",
+        "surface_binding_atoms": [
+          "Cr",
+          "Cr"
+        ],
+        "adsorbate_binding_indices": [
+          0,
+          1
+        ],
+        "relax_top_n": 1,
+        "touch_sphere_size": 2,
+        "overlap_thr": 0.1,
+        "conformers_per_site_cap": 4
+      }
+    },
+    "result_type": "Perfect"
+  },
+  "last_analysis": {
+    "status": "success",
+    "message": "Most stable config adsorption energy: -5.6728 eV. Target Atom 1: C (from plan index 0, global index 84). -> Nearest: Cr (Index 4), Distance: 2.137 Å (Threshold: 2.365), Bound: True. Target Atom 2: O (from plan index 1, global index 85). -> Nearest: Cr (Index 4), Distance: 2.942 Å (Threshold: 2.255), Bound: False. Bonded Surface Atoms: C(84)-Cr(2.383Å), O(85)-Cr(2.608Å). Is Bound: False. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: False (Planned ['Cr', 'Cr'] -> Actual ['Cr', 'Cr']).",
+    "most_stable_energy_eV": -5.672840118408203,
+    "bonded_surface_atoms": [
+      {
+        "adsorbate_atom": "C(84)",
+        "adsorbate_atom_index": 84,
+        "symbol": "Cr",
+        "index": 4,
+        "distance": 2.383
+      },
+      {
+        "adsorbate_atom": "O(85)",
+        "adsorbate_atom_index": 85,
+        "symbol": "Cr",
+        "index": 6,
+        "distance": 2.608
+      }
+    ],
+    "final_bond_distance_A": 2.383,
+    "is_covalently_bound": false,
+    "atom_1": {
+      "symbol": "C",
+      "global_index": 84,
+      "distance_A": 2.137,
+      "is_bound": true
+    },
+    "atom_2": {
+      "symbol": "O",
+      "global_index": 85,
+      "distance_A": 2.942,
+      "is_bound": false
+    },
+    "reaction_detected": false,
+    "bond_change_count": 0,
+    "is_dissociated": false,
+    "n_components": 1,
+    "site_analysis": {
+      "planned_site_type": "bridge",
+      "planned_connectivity": 2,
+      "actual_site_type": "bridge",
+      "actual_connectivity": 2,
+      "is_chemical_slip": false,
+      "planned_symbols": [
+        "Cr",
+        "Cr"
+      ],
+      "actual_symbols": [
+        "Cr",
+        "Cr"
+      ],
+      "site_fingerprint": "Cr4-Cr6"
+    },
+    "best_structure_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run4/grok4_mace_mp0_small/one_shot/005/artifacts/BEST_CH_O_bridge_E-5.673.xyz",
+    "generated_conformers_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run4/grok4_mace_mp0_small/one_shot/005/artifacts/conformers_[CH]_O.traj",
+    "relaxation_trajectory_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run4/grok4_mace_mp0_small/one_shot/005/artifacts/final.xyz",
+    "session_id": "005-064d3782"
+  },
+  "attempt_records": [
+    {
+      "attempt_index": 1,
+      "plan": {
+        "reasoning": "SMILES Consistency Check: The provided atom list shows C at index 0 (SP2, radical_electrons 1) and O at index 1 (SP2, radical_electrons 0). This matches the SMILES [CH]=O for the formyl radical. No hybridization mismatch with user description. For ReactiveSpecies, binding atoms must have radical_electrons > 0, which is true for index 0. Analyze Old Plans: History is None, so no previous attempts. Formulate New Plan: The goal is to find the lowest-energy adsorption configuration. The adsorbate is the formyl radical ([CH]=O), with a radical on carbon. Common adsorption modes for formyl include eta1 (through C) or eta2 (through C and O). The eta2 mode often has lower energy on metal surfaces. To enable bi-dentate binding [0,1], use 'Molecule' type, as 'ReactiveSpecies' requires all binding atoms to have unpaired electrons, which O does not. Start with bridge site on Cr-Cr, as Cr is the metal and likely prefers binding both C and O. This is a new plan differing from None. Surface Heterogeneity: Surface has Cr and N; starting with Cr-Cr due to metallic nature. Analyze Request: User wants the lowest-energy configuration, so prioritize likely stable mode. Analyze Adsorbate: Major functional group is carbonyl with radical on C. Indices confirmed from list. Analyze Surface: Available bridge sites include Cr-Cr. Formulate Plan: Propose bridge site for eta2 adsorption.",
+        "adsorbate_type": "Molecule",
+        "solution": {
+          "action": "continue",
+          "site_type": "bridge",
+          "surface_binding_atoms": [
+            "Cr",
+            "Cr"
+          ],
+          "adsorbate_binding_indices": [
+            0,
+            1
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "bridge|Cr,Cr|0,1|Molecule|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -5.672840118408203,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": false,
+      "planned_site_type": "bridge",
+      "actual_site_type": "bridge",
+      "best_structure_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run4/grok4_mace_mp0_small/one_shot/005/artifacts/BEST_CH_O_bridge_E-5.673.xyz",
+      "generated_conformers_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run4/grok4_mace_mp0_small/one_shot/005/artifacts/conformers_[CH]_O.traj",
+      "relaxation_trajectory_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run4/grok4_mace_mp0_small/one_shot/005/artifacts/final.xyz",
+      "message": "Most stable config adsorption energy: -5.6728 eV. Target Atom 1: C (from plan index 0, global index 84). -> Nearest: Cr (Index 4), Distance: 2.137 Å (Threshold: 2.365), Bound: True. Target Atom 2: O (from plan index 1, global index 85). -> Nearest: Cr (Index 4), Distance: 2.942 Å (Threshold: 2.255), Bound: False. Bonded Surface Atoms: C(84)-Cr(2.383Å), O(85)-Cr(2.608Å). Is Bound: False. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: False (Planned ['Cr', 'Cr'] -> Actual ['Cr', 'Cr']).",
+      "history_entry": "【✅ Perfect Adsorption】 bridge @ ['Cr', 'Cr'] (Index [0, 1]) -> Site: bridge (Cr,Cr) | E=-5.673 eV"
+    }
+  ],
+  "history": [
+    "【✅ Perfect Adsorption】 bridge @ ['Cr', 'Cr'] (Index [0, 1]) -> Site: bridge (Cr,Cr) | E=-5.673 eV"
+  ],
+  "error": null,
+  "perfect_count": 1,
+  "dissociation_count": 0,
+  "rearrangement_count": 0,
+  "calc_failure_count": 0,
+  "chemical_slip_count": 0,
+  "best_structure_file": "research/results/advanced_experiments/reproducibility/ocd62_overlap12_rerun/run4/grok4_mace_mp0_small/one_shot/005/artifacts/BEST_CH_O_bridge_E-5.673.xyz"
+}

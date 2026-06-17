@@ -1,0 +1,222 @@
+{
+  "case_id": "18",
+  "case_metadata": {
+    "case_id": "18",
+    "slab_file": "datasets/cmu20/18_Al3Zr_101.xyz",
+    "smiles": "CC=O",
+    "user_request": "Find the lowest-energy adsorption configuration for acetaldehyde on the provided surface.",
+    "surface_family": "intermetallic",
+    "adsorbate_name": "OCHCH3",
+    "miller_index": "(101)",
+    "reaction_class": "COMPLEX",
+    "ablation_candidate": "FALSE",
+    "notes": "Best-available reconstruction from sanitized filename CC_O and formula C2H4O"
+  },
+  "status": "success",
+  "best_energy_eV": -0.82,
+  "iteration_count": 3,
+  "max_attempts": 5,
+  "final_site_type": "ontop",
+  "converged_tag": false,
+  "wall_clock_sec": 117.32281356304884,
+  "total_input_tokens": 14713,
+  "total_output_tokens": 7118,
+  "artifact_paths": {
+    "iteration_energy_curve": "research/results/basic_experiments/cmu20/adsmind/grok4_mace_mp0_small/no_executor/18/artifacts/iteration_energy_curve.png",
+    "iteration_energy_curve.png": "research/results/basic_experiments/cmu20/adsmind/grok4_mace_mp0_small/no_executor/18/artifacts/iteration_energy_curve.png",
+    "iteration_energy_curve_png": "research/results/basic_experiments/cmu20/adsmind/grok4_mace_mp0_small/no_executor/18/artifacts/iteration_energy_curve.png",
+    "summary_report": "research/results/basic_experiments/cmu20/adsmind/grok4_mace_mp0_small/no_executor/18/artifacts/summary_report.md",
+    "summary_report.md": "research/results/basic_experiments/cmu20/adsmind/grok4_mace_mp0_small/no_executor/18/artifacts/summary_report.md",
+    "summary_report_file": "research/results/basic_experiments/cmu20/adsmind/grok4_mace_mp0_small/no_executor/18/artifacts/summary_report.md"
+  },
+  "best_result": {
+    "most_stable_energy_eV": -0.82,
+    "analysis_json": {
+      "status": "success",
+      "most_stable_energy_eV": -0.82,
+      "is_dissociated": false,
+      "is_covalently_bound": true,
+      "bond_change_count": 0,
+      "energy_source": "llm_predicted",
+      "site_analysis": {
+        "planned_site_type": "ontop",
+        "actual_site_type": "ontop",
+        "is_chemical_slip": false,
+        "planned_symbols": [
+          "Zr"
+        ],
+        "actual_symbols": [
+          "Zr"
+        ],
+        "site_fingerprint": "llm-oracle::ontop::Zr::2"
+      }
+    },
+    "plan": {
+      "reasoning": "History is empty so this is the first proposal. SMILES CC=O matches acetaldehyde with carbonyl O (index 2, SP2, lone pairs) as the natural donor; no radicals present so adsorbate_type=Molecule. Start with the most chemically plausible high-symmetry site: O-bound ontop Zr. This satisfies all site-alignment and chemical-type rules.",
+      "adsorbate_type": "Molecule",
+      "solution": {
+        "action": "continue",
+        "site_type": "ontop",
+        "surface_binding_atoms": [
+          "Zr"
+        ],
+        "adsorbate_binding_indices": [
+          2
+        ],
+        "relax_top_n": 1,
+        "touch_sphere_size": 2,
+        "overlap_thr": 0.1,
+        "conformers_per_site_cap": 4
+      },
+      "predicted_relaxed_energy_eV": -0.82
+    },
+    "result_type": "Perfect"
+  },
+  "last_analysis": {
+    "status": "success",
+    "most_stable_energy_eV": -0.79,
+    "is_dissociated": false,
+    "is_covalently_bound": true,
+    "bond_change_count": 0,
+    "energy_source": "llm_predicted",
+    "site_analysis": {
+      "planned_site_type": "bridge",
+      "actual_site_type": "bridge",
+      "is_chemical_slip": false,
+      "planned_symbols": [
+        "Al",
+        "Zr"
+      ],
+      "actual_symbols": [
+        "Al",
+        "Zr"
+      ],
+      "site_fingerprint": "llm-oracle::bridge::Al-Zr::2"
+    }
+  },
+  "attempt_records": [
+    {
+      "attempt_index": 1,
+      "plan": {
+        "reasoning": "History is empty so this is the first proposal. SMILES CC=O matches acetaldehyde with carbonyl O (index 2, SP2, lone pairs) as the natural donor; no radicals present so adsorbate_type=Molecule. Start with the most chemically plausible high-symmetry site: O-bound ontop Zr. This satisfies all site-alignment and chemical-type rules.",
+        "adsorbate_type": "Molecule",
+        "solution": {
+          "action": "continue",
+          "site_type": "ontop",
+          "surface_binding_atoms": [
+            "Zr"
+          ],
+          "adsorbate_binding_indices": [
+            2
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        },
+        "predicted_relaxed_energy_eV": -0.82
+      },
+      "plan_key": "ontop|Zr|2|Molecule|2.0",
+      "planner_reasoning": "History is empty so this is the first proposal. SMILES CC=O matches acetaldehyde with carbonyl O (index 2, SP2, lone pairs) as the natural donor; no radicals present so adsorbate_type=Molecule. Start with the most chemically plausible high-symmetry site: O-bound ontop Zr. This satisfies all site-alignment and chemical-type rules.",
+      "tool_logs": [
+        "LLM-as-oracle mode: executor bypassed; predicted energy used in place of MACE relaxation.",
+        "Success: predicted_relaxed_energy_eV = -0.8200 eV."
+      ],
+      "status": "success",
+      "most_stable_energy_eV": -0.82,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": false,
+      "planned_site_type": "ontop",
+      "actual_site_type": "ontop",
+      "energy_source": "llm_predicted",
+      "history_entry": "【✅ Perfect Adsorption】 ontop @ ['Zr'] (Index [2]) -> Site: ontop (Zr) [🌟 New Best] | E=-0.820 eV"
+    },
+    {
+      "attempt_index": 2,
+      "plan": {
+        "reasoning": "History shows only one successful ontop Zr (O index 2) adsorption at -0.820 eV. All other high-symmetry sites remain untested. Propose ontop Al via same O index to check heterogeneity on the alloy surface. No reactivity issues or slips observed.",
+        "adsorbate_type": "Molecule",
+        "solution": {
+          "action": "continue",
+          "site_type": "ontop",
+          "surface_binding_atoms": [
+            "Al"
+          ],
+          "adsorbate_binding_indices": [
+            2
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        },
+        "predicted_relaxed_energy_eV": -0.65
+      },
+      "plan_key": "ontop|Al|2|Molecule|2.0",
+      "planner_reasoning": "History shows only one successful ontop Zr (O index 2) adsorption at -0.820 eV. All other high-symmetry sites remain untested. Propose ontop Al via same O index to check heterogeneity on the alloy surface. No reactivity issues or slips observed.",
+      "tool_logs": [
+        "LLM-as-oracle mode: executor bypassed; predicted energy used in place of MACE relaxation.",
+        "Success: predicted_relaxed_energy_eV = -0.6500 eV."
+      ],
+      "status": "success",
+      "most_stable_energy_eV": -0.65,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": false,
+      "planned_site_type": "ontop",
+      "actual_site_type": "ontop",
+      "energy_source": "llm_predicted",
+      "history_entry": "【✅ Perfect Adsorption】 ontop @ ['Al'] (Index [2]) -> Site: ontop (Al) | E=-0.650 eV"
+    },
+    {
+      "attempt_index": 3,
+      "plan": {
+        "reasoning": "History shows only ontop Zr (O index 2, E=-0.820 eV, current best) and ontop Al (E=-0.650 eV) tested. Both succeeded without dissociation. Bridge Al-Zr remains untested per available sites list and is a chemically plausible next high-symmetry site for eta1-O binding. No convergence to known best or unstable slips observed, so continue. Adsorbate is stable Molecule; O (index 2) has lone pairs and is the correct donor.",
+        "adsorbate_type": "Molecule",
+        "solution": {
+          "action": "continue",
+          "site_type": "bridge",
+          "surface_binding_atoms": [
+            "Al",
+            "Zr"
+          ],
+          "adsorbate_binding_indices": [
+            2
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        },
+        "predicted_relaxed_energy_eV": -0.79
+      },
+      "plan_key": "bridge|Al,Zr|2|Molecule|2.0",
+      "planner_reasoning": "History shows only ontop Zr (O index 2, E=-0.820 eV, current best) and ontop Al (E=-0.650 eV) tested. Both succeeded without dissociation. Bridge Al-Zr remains untested per available sites list and is a chemically plausible next high-symmetry site for eta1-O binding. No convergence to known best or unstable slips observed, so continue. Adsorbate is stable Molecule; O (index 2) has lone pairs and is the correct donor.",
+      "tool_logs": [
+        "LLM-as-oracle mode: executor bypassed; predicted energy used in place of MACE relaxation.",
+        "Success: predicted_relaxed_energy_eV = -0.7900 eV."
+      ],
+      "status": "success",
+      "most_stable_energy_eV": -0.79,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": false,
+      "planned_site_type": "bridge",
+      "actual_site_type": "bridge",
+      "energy_source": "llm_predicted",
+      "history_entry": "【✅ Perfect Adsorption】 bridge @ ['Al', 'Zr'] (Index [2]) -> Site: bridge (Al,Zr) [⚠️ Energy Degenerate but Geometrically Distinct] | E=-0.790 eV"
+    }
+  ],
+  "history": [
+    "【✅ Perfect Adsorption】 ontop @ ['Zr'] (Index [2]) -> Site: ontop (Zr) [🌟 New Best] | E=-0.820 eV",
+    "【✅ Perfect Adsorption】 ontop @ ['Al'] (Index [2]) -> Site: ontop (Al) | E=-0.650 eV",
+    "【✅ Perfect Adsorption】 bridge @ ['Al', 'Zr'] (Index [2]) -> Site: bridge (Al,Zr) [⚠️ Energy Degenerate but Geometrically Distinct] | E=-0.790 eV"
+  ],
+  "error": null,
+  "perfect_count": 3,
+  "dissociation_count": 0,
+  "rearrangement_count": 0,
+  "calc_failure_count": 0,
+  "chemical_slip_count": 0
+}

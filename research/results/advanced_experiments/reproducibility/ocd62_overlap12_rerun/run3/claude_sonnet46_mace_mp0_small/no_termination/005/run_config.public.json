@@ -1,0 +1,89 @@
+{
+  "_public_config": {
+    "normalized_fields": [
+      "frozen_config.manifest_id_normalized"
+    ],
+    "omitted_operational_field_count": 2,
+    "redacted_fields": [
+      "api_key_source",
+      "frozen_config.llm_api_key_env_var"
+    ],
+    "schema_version": 1,
+    "source_file": "config.json"
+  },
+  "api_key_source": "<redacted>",
+  "case": {
+    "ablation_candidate": "FALSE",
+    "adsorbate_atoms": "3",
+    "adsorbate_name": "[CH]=O",
+    "bare_slab_atoms": "84",
+    "case_id": "005",
+    "miller_index": "",
+    "original_ads_smi": "[CH]=O",
+    "reaction_class": "GENERALIZATION",
+    "selection_bucket": "small_organic",
+    "site_indices": "4;6;36",
+    "slab_file": "datasets/ocd62_overlap12/005_ocd_201_Cr36N48_CH_O.xyz",
+    "smiles": "[CH]=O",
+    "source_key": "201",
+    "surface_elements": "Cr;N",
+    "surface_family": "compound",
+    "surface_formula": "Cr36N48",
+    "user_request": "Find the lowest-energy adsorption configuration for the adsorbate with SMILES [CH]=O on the provided surface.",
+    "y_relaxed": "-4.026478"
+  },
+  "dry_run": false,
+  "frozen_config": {
+    "calculator_backend": "mace",
+    "fmax": 0.1,
+    "llm_api_key_env_var": "<redacted>",
+    "llm_backend": "anthropic",
+    "llm_base_url": "https://api.anthropic.com/v1/",
+    "llm_model": "claude-sonnet-4-6",
+    "mace_device": "cpu",
+    "mace_model": "small",
+    "mace_precision": "float32",
+    "mace_use_dispersion": false,
+    "manifest_id": "ocd62_overlap12_manifest",
+    "max_retries": 5,
+    "max_tokens": 4096,
+    "platform": "EPFL-cluster-cpu-float32",
+    "random_seed": 42,
+    "relaxation_mode": "standard",
+    "temperature": 0,
+    "timeout_sec": 120,
+    "transport_variant": "anthropic-official",
+    "user_request_mode": "per-case explicit request string from datasets/ocd62_overlap12/manifest.csv"
+  },
+  "git_sha": "54d129d4bd712530229cd49b37fad7d4b0241f34",
+  "resolved_runtime_flags": {
+    "calculator_backend": "mace",
+    "calculator_config": {
+      "device": "cpu",
+      "model": "small",
+      "precision": "float32",
+      "use_dispersion": false
+    },
+    "enable_forbid": true,
+    "enable_slip_feedback": true,
+    "enable_termination": false,
+    "llm_backend": "anthropic",
+    "llm_config": {
+      "extra_options": {
+        "base_url": "https://api.anthropic.com/v1/"
+      },
+      "max_tokens": 4096,
+      "model": "claude-sonnet-4-6",
+      "temperature": 0,
+      "timeout": 120
+    },
+    "max_attempts": 5,
+    "random_seed": 42,
+    "relaxation_config": {
+      "fmax": 0.1
+    },
+    "relaxation_mode": "standard"
+  },
+  "session_id": "005-f215c60f",
+  "timestamp": "2026-05-04T10:14:41+00:00"
+}

@@ -1,0 +1,210 @@
+{
+  "case_id": "005",
+  "case_metadata": {
+    "case_id": "005",
+    "slab_file": "datasets/ocd62_overlap12/005_ocd_201_Cr36N48_CH_O.xyz",
+    "smiles": "[CH]=O",
+    "user_request": "Find the lowest-energy adsorption configuration for the adsorbate with SMILES [CH]=O on the provided surface.",
+    "surface_family": "compound",
+    "adsorbate_name": "[CH]=O",
+    "miller_index": "",
+    "reaction_class": "GENERALIZATION",
+    "ablation_candidate": "FALSE",
+    "notes": "OCD-GMAE source key=201; original_ads_smi=[CH]=O; surface_formula=Cr36N48; y_relaxed=-4.026478 eV; site=[4, 6, 36]; OCD62 overlap12 RUN3 symlink to representative50 source file; sha256=b5c73af519a5d1b538be622d4572742cef48b39b2b240ce24d4b887ff388ebb0",
+    "source_key": "201",
+    "original_ads_smi": "[CH]=O",
+    "surface_formula": "Cr36N48",
+    "surface_elements": "Cr;N",
+    "bare_slab_atoms": "84",
+    "adsorbate_atoms": "3",
+    "y_relaxed": "-4.026478",
+    "site_indices": "4;6;36",
+    "selection_bucket": "small_organic"
+  },
+  "status": "success",
+  "best_energy_eV": -6.155149459838867,
+  "iteration_count": 1,
+  "max_attempts": 1,
+  "final_site_type": "bridge",
+  "converged_tag": false,
+  "wall_clock_sec": 138.34553676843643,
+  "total_input_tokens": 4645,
+  "total_output_tokens": 5243,
+  "artifact_paths": {
+    "BEST_CH_O_bridge_E-6.155": "research/results/canonical_raw/ocd62_overlap12_grok_outlier_seed_sweep_20260509/seed_400/single_shot/005/artifacts/BEST_CH_O_bridge_E-6.155.xyz",
+    "BEST_CH_O_bridge_E-6.155.xyz": "research/results/canonical_raw/ocd62_overlap12_grok_outlier_seed_sweep_20260509/seed_400/single_shot/005/artifacts/BEST_CH_O_bridge_E-6.155.xyz",
+    "best_structure_file": "research/results/canonical_raw/ocd62_overlap12_grok_outlier_seed_sweep_20260509/seed_400/single_shot/005/artifacts/BEST_CH_O_bridge_E-6.155.xyz",
+    "conformers_[CH]_O": "research/results/canonical_raw/ocd62_overlap12_grok_outlier_seed_sweep_20260509/seed_400/single_shot/005/artifacts/conformers_[CH]_O.traj",
+    "conformers_[CH]_O.traj": "research/results/canonical_raw/ocd62_overlap12_grok_outlier_seed_sweep_20260509/seed_400/single_shot/005/artifacts/conformers_[CH]_O.traj",
+    "final": "research/results/canonical_raw/ocd62_overlap12_grok_outlier_seed_sweep_20260509/seed_400/single_shot/005/artifacts/final.xyz",
+    "final.xyz": "research/results/canonical_raw/ocd62_overlap12_grok_outlier_seed_sweep_20260509/seed_400/single_shot/005/artifacts/final.xyz",
+    "relaxation": "research/results/canonical_raw/ocd62_overlap12_grok_outlier_seed_sweep_20260509/seed_400/single_shot/005/artifacts/relaxation.traj",
+    "relaxation.traj": "research/results/canonical_raw/ocd62_overlap12_grok_outlier_seed_sweep_20260509/seed_400/single_shot/005/artifacts/relaxation.traj",
+    "relaxation_trajectory_file": "research/results/canonical_raw/ocd62_overlap12_grok_outlier_seed_sweep_20260509/seed_400/single_shot/005/artifacts/relaxation.traj"
+  },
+  "best_result": {
+    "most_stable_energy_eV": -6.155149459838867,
+    "analysis_json": {
+      "status": "success",
+      "message": "Most stable config adsorption energy: -6.1551 eV. Target Atom: C (from plan index 0, global index 84 in relaxed structure). -> Nearest: Cr (Index 8), Distance: 2.266 Å (Threshold: 3.117), Bound: True. Bonded Surface Atoms: Cr-2.266Å, Cr-2.956Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: False (Planned ['Cr', 'Cr'] -> Actual ['Cr', 'Cr']).",
+      "most_stable_energy_eV": -6.155149459838867,
+      "target_adsorbate_atom": "C",
+      "target_adsorbate_atom_index": 84,
+      "bonded_surface_atoms": [
+        {
+          "symbol": "Cr",
+          "index": 8,
+          "distance": 2.266
+        },
+        {
+          "symbol": "Cr",
+          "index": 3,
+          "distance": 2.956
+        }
+      ],
+      "nearest_slab_atom": "Cr",
+      "nearest_slab_atom_index": 8,
+      "final_bond_distance_A": 2.266,
+      "estimated_covalent_cutoff_A": 2.365,
+      "is_covalently_bound": true,
+      "reaction_detected": false,
+      "is_dissociated": false,
+      "n_components": 1,
+      "bond_change_count": 0,
+      "site_analysis": {
+        "planned_site_type": "bridge",
+        "planned_connectivity": 2,
+        "actual_site_type": "bridge",
+        "actual_connectivity": 2,
+        "is_chemical_slip": false,
+        "planned_symbols": [
+          "Cr",
+          "Cr"
+        ],
+        "actual_symbols": [
+          "Cr",
+          "Cr"
+        ],
+        "site_fingerprint": "Cr8-Cr3"
+      },
+      "best_structure_file": "outputs/005-4ae86437/BEST_CH_O_bridge_E-6.155.xyz",
+      "generated_conformers_file": "outputs/005-4ae86437/conformers_[CH]_O.traj",
+      "relaxation_trajectory_file": "outputs/005-4ae86437/final.xyz",
+      "session_id": "005-4ae86437"
+    },
+    "plan": {
+      "reasoning": "SMILES Consistency Check: The SMILES [CH]=O represents the formyl radical with a radical on carbon (index 0, radical_electrons=1) and oxygen (index 1, radical_electrons=0). Hybridization is SP2 for both, consistent with the user request. No mismatch detected. Analyze Old Plans: History is None, so no previous attempts. Formulate New Plan: This is the initial plan. The goal is to find the lowest-energy adsorption configuration systematically. Physical Consistency: Not applicable yet. Site Naming: Using canonical 'bridge'. Since history is empty, proposing the best initial plan. Analyze Request: User wants the lowest-energy adsorption for [CH]=O on the surface. Analyze Adsorbate: Major functional group is carbonyl with a radical on carbon. Atoms: C (index 0, SP2, radical=1), O (index 1, SP2, radical=0). Since it's a radical species, select 'ReactiveSpecies' and bind via the atom with unpaired electrons (carbon, index 0). Cannot bind via O as it lacks unpaired electrons for ReactiveSpecies. Analyze Surface: Available bridge sites include Cr-Cr, suitable for metal-metal bridging. Formulate Plan: For formyl radical, adsorption via carbon in a bridge site between two Cr atoms is a promising starting point, as Cr sites are likely active, and bridge coordination can stabilize the radical. Single binding index [0] for carbon, as only it has the radical. This differs from any (none) previous plans. Hard limit is 1 attempt, but proposing this as the initial one.",
+      "adsorbate_type": "ReactiveSpecies",
+      "solution": {
+        "action": "continue",
+        "site_type": "bridge",
+        "surface_binding_atoms": [
+          "Cr",
+          "Cr"
+        ],
+        "adsorbate_binding_indices": [
+          0
+        ],
+        "relax_top_n": 1,
+        "touch_sphere_size": 2,
+        "overlap_thr": 0.1,
+        "conformers_per_site_cap": 4
+      }
+    },
+    "result_type": "Perfect"
+  },
+  "last_analysis": {
+    "status": "success",
+    "message": "Most stable config adsorption energy: -6.1551 eV. Target Atom: C (from plan index 0, global index 84 in relaxed structure). -> Nearest: Cr (Index 8), Distance: 2.266 Å (Threshold: 3.117), Bound: True. Bonded Surface Atoms: Cr-2.266Å, Cr-2.956Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: False (Planned ['Cr', 'Cr'] -> Actual ['Cr', 'Cr']).",
+    "most_stable_energy_eV": -6.155149459838867,
+    "target_adsorbate_atom": "C",
+    "target_adsorbate_atom_index": 84,
+    "bonded_surface_atoms": [
+      {
+        "symbol": "Cr",
+        "index": 8,
+        "distance": 2.266
+      },
+      {
+        "symbol": "Cr",
+        "index": 3,
+        "distance": 2.956
+      }
+    ],
+    "nearest_slab_atom": "Cr",
+    "nearest_slab_atom_index": 8,
+    "final_bond_distance_A": 2.266,
+    "estimated_covalent_cutoff_A": 2.365,
+    "is_covalently_bound": true,
+    "reaction_detected": false,
+    "is_dissociated": false,
+    "n_components": 1,
+    "bond_change_count": 0,
+    "site_analysis": {
+      "planned_site_type": "bridge",
+      "planned_connectivity": 2,
+      "actual_site_type": "bridge",
+      "actual_connectivity": 2,
+      "is_chemical_slip": false,
+      "planned_symbols": [
+        "Cr",
+        "Cr"
+      ],
+      "actual_symbols": [
+        "Cr",
+        "Cr"
+      ],
+      "site_fingerprint": "Cr8-Cr3"
+    },
+    "best_structure_file": "outputs/005-4ae86437/BEST_CH_O_bridge_E-6.155.xyz",
+    "generated_conformers_file": "outputs/005-4ae86437/conformers_[CH]_O.traj",
+    "relaxation_trajectory_file": "outputs/005-4ae86437/final.xyz",
+    "session_id": "005-4ae86437"
+  },
+  "attempt_records": [
+    {
+      "attempt_index": 1,
+      "plan": {
+        "reasoning": "SMILES Consistency Check: The SMILES [CH]=O represents the formyl radical with a radical on carbon (index 0, radical_electrons=1) and oxygen (index 1, radical_electrons=0). Hybridization is SP2 for both, consistent with the user request. No mismatch detected. Analyze Old Plans: History is None, so no previous attempts. Formulate New Plan: This is the initial plan. The goal is to find the lowest-energy adsorption configuration systematically. Physical Consistency: Not applicable yet. Site Naming: Using canonical 'bridge'. Since history is empty, proposing the best initial plan. Analyze Request: User wants the lowest-energy adsorption for [CH]=O on the surface. Analyze Adsorbate: Major functional group is carbonyl with a radical on carbon. Atoms: C (index 0, SP2, radical=1), O (index 1, SP2, radical=0). Since it's a radical species, select 'ReactiveSpecies' and bind via the atom with unpaired electrons (carbon, index 0). Cannot bind via O as it lacks unpaired electrons for ReactiveSpecies. Analyze Surface: Available bridge sites include Cr-Cr, suitable for metal-metal bridging. Formulate Plan: For formyl radical, adsorption via carbon in a bridge site between two Cr atoms is a promising starting point, as Cr sites are likely active, and bridge coordination can stabilize the radical. Single binding index [0] for carbon, as only it has the radical. This differs from any (none) previous plans. Hard limit is 1 attempt, but proposing this as the initial one.",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "bridge",
+          "surface_binding_atoms": [
+            "Cr",
+            "Cr"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "bridge|Cr,Cr|0|ReactiveSpecies|2.0",
+      "status": "success",
+      "most_stable_energy_eV": -6.155149459838867,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": false,
+      "planned_site_type": "bridge",
+      "actual_site_type": "bridge",
+      "best_structure_file": "outputs/005-4ae86437/BEST_CH_O_bridge_E-6.155.xyz",
+      "generated_conformers_file": "outputs/005-4ae86437/conformers_[CH]_O.traj",
+      "relaxation_trajectory_file": "outputs/005-4ae86437/final.xyz",
+      "message": "Most stable config adsorption energy: -6.1551 eV. Target Atom: C (from plan index 0, global index 84 in relaxed structure). -> Nearest: Cr (Index 8), Distance: 2.266 Å (Threshold: 3.117), Bound: True. Bonded Surface Atoms: Cr-2.266Å, Cr-2.956Å. Is Bound: True. Reactivity Change Detected: False (Bond Changes: 0). Chemical Slip: False (Planned ['Cr', 'Cr'] -> Actual ['Cr', 'Cr']).",
+      "history_entry": "【✅ Perfect Adsorption】 bridge @ ['Cr', 'Cr'] (Index [0]) -> Site: bridge (Cr,Cr) | E=-6.155 eV"
+    }
+  ],
+  "history": [
+    "【✅ Perfect Adsorption】 bridge @ ['Cr', 'Cr'] (Index [0]) -> Site: bridge (Cr,Cr) | E=-6.155 eV"
+  ],
+  "error": null,
+  "perfect_count": 1,
+  "dissociation_count": 0,
+  "rearrangement_count": 0,
+  "calc_failure_count": 0,
+  "chemical_slip_count": 0
+}

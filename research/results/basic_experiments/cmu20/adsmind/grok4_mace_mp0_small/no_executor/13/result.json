@@ -1,0 +1,232 @@
+{
+  "case_id": "13",
+  "case_metadata": {
+    "case_id": "13",
+    "slab_file": "datasets/cmu20/13_Ag_100.xyz",
+    "smiles": "[OH]",
+    "user_request": "Find the lowest-energy adsorption configuration for hydroxyl radical on the provided surface.",
+    "surface_family": "monometallic",
+    "adsorbate_name": "OH",
+    "miller_index": "(100)",
+    "reaction_class": "ORR",
+    "ablation_candidate": "FALSE",
+    "notes": "Prior runs labeled all final sites as desorbed"
+  },
+  "status": "success",
+  "best_energy_eV": -2.42,
+  "iteration_count": 3,
+  "max_attempts": 5,
+  "final_site_type": "bridge",
+  "converged_tag": false,
+  "wall_clock_sec": 122.59823849797249,
+  "total_input_tokens": 14420,
+  "total_output_tokens": 6941,
+  "artifact_paths": {
+    "iteration_energy_curve": "research/results/basic_experiments/cmu20/adsmind/grok4_mace_mp0_small/no_executor/13/artifacts/iteration_energy_curve.png",
+    "iteration_energy_curve.png": "research/results/basic_experiments/cmu20/adsmind/grok4_mace_mp0_small/no_executor/13/artifacts/iteration_energy_curve.png",
+    "iteration_energy_curve_png": "research/results/basic_experiments/cmu20/adsmind/grok4_mace_mp0_small/no_executor/13/artifacts/iteration_energy_curve.png",
+    "summary_report": "research/results/basic_experiments/cmu20/adsmind/grok4_mace_mp0_small/no_executor/13/artifacts/summary_report.md",
+    "summary_report.md": "research/results/basic_experiments/cmu20/adsmind/grok4_mace_mp0_small/no_executor/13/artifacts/summary_report.md",
+    "summary_report_file": "research/results/basic_experiments/cmu20/adsmind/grok4_mace_mp0_small/no_executor/13/artifacts/summary_report.md"
+  },
+  "best_result": {
+    "most_stable_energy_eV": -2.42,
+    "analysis_json": {
+      "status": "success",
+      "most_stable_energy_eV": -2.42,
+      "is_dissociated": false,
+      "is_covalently_bound": true,
+      "bond_change_count": 0,
+      "energy_source": "llm_predicted",
+      "site_analysis": {
+        "planned_site_type": "bridge",
+        "actual_site_type": "bridge",
+        "is_chemical_slip": false,
+        "planned_symbols": [
+          "Ag",
+          "Ag"
+        ],
+        "actual_symbols": [
+          "Ag",
+          "Ag"
+        ],
+        "site_fingerprint": "llm-oracle::bridge::Ag-Ag::0"
+      }
+    },
+    "plan": {
+      "reasoning": "History shows only ontop Ag (index 0) tested successfully with E=-2.350 eV as new best. No other high-symmetry sites (bridge, hollow) explored yet. OH is a radical (O index 0 has 1 unpaired electron), so ReactiveSpecies. Propose bridge site using two Ag atoms to check for potentially lower energy.",
+      "adsorbate_type": "ReactiveSpecies",
+      "solution": {
+        "action": "continue",
+        "site_type": "bridge",
+        "surface_binding_atoms": [
+          "Ag",
+          "Ag"
+        ],
+        "adsorbate_binding_indices": [
+          0
+        ],
+        "relax_top_n": 1,
+        "touch_sphere_size": 2,
+        "overlap_thr": 0.1,
+        "conformers_per_site_cap": 4
+      },
+      "predicted_relaxed_energy_eV": -2.42
+    },
+    "result_type": "Perfect"
+  },
+  "last_analysis": {
+    "status": "success",
+    "most_stable_energy_eV": -2.31,
+    "is_dissociated": false,
+    "is_covalently_bound": true,
+    "bond_change_count": 0,
+    "energy_source": "llm_predicted",
+    "site_analysis": {
+      "planned_site_type": "hollow",
+      "actual_site_type": "hollow",
+      "is_chemical_slip": false,
+      "planned_symbols": [
+        "Ag",
+        "Ag",
+        "Ag",
+        "Ag"
+      ],
+      "actual_symbols": [
+        "Ag",
+        "Ag",
+        "Ag",
+        "Ag"
+      ],
+      "site_fingerprint": "llm-oracle::hollow::Ag-Ag-Ag-Ag::0"
+    }
+  },
+  "attempt_records": [
+    {
+      "attempt_index": 1,
+      "plan": {
+        "reasoning": "No prior attempts in history. SMILES [OH] is hydroxyl radical with O (index 0) having radical_electrons=1, so ReactiveSpecies. Start with most common stable site for OH on fcc(100) metals: O binding at ontop Ag. This satisfies all site alignment and chemical rules.",
+        "adsorbate_type": "ReactiveSpecies",
+        "predicted_relaxed_energy_eV": -2.35,
+        "solution": {
+          "action": "continue",
+          "site_type": "ontop",
+          "surface_binding_atoms": [
+            "Ag"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "ontop|Ag|0|ReactiveSpecies|2.0",
+      "planner_reasoning": "No prior attempts in history. SMILES [OH] is hydroxyl radical with O (index 0) having radical_electrons=1, so ReactiveSpecies. Start with most common stable site for OH on fcc(100) metals: O binding at ontop Ag. This satisfies all site alignment and chemical rules.",
+      "tool_logs": [
+        "LLM-as-oracle mode: executor bypassed; predicted energy used in place of MACE relaxation.",
+        "Success: predicted_relaxed_energy_eV = -2.3500 eV."
+      ],
+      "status": "success",
+      "most_stable_energy_eV": -2.35,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": false,
+      "planned_site_type": "ontop",
+      "actual_site_type": "ontop",
+      "energy_source": "llm_predicted",
+      "history_entry": "【✅ Perfect Adsorption】 ontop @ ['Ag'] (Index [0]) -> Site: ontop (Ag) [🌟 New Best] | E=-2.350 eV"
+    },
+    {
+      "attempt_index": 2,
+      "plan": {
+        "reasoning": "History shows only ontop Ag (index 0) tested successfully with E=-2.350 eV as new best. No other high-symmetry sites (bridge, hollow) explored yet. OH is a radical (O index 0 has 1 unpaired electron), so ReactiveSpecies. Propose bridge site using two Ag atoms to check for potentially lower energy.",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "bridge",
+          "surface_binding_atoms": [
+            "Ag",
+            "Ag"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        },
+        "predicted_relaxed_energy_eV": -2.42
+      },
+      "plan_key": "bridge|Ag,Ag|0|ReactiveSpecies|2.0",
+      "planner_reasoning": "History shows only ontop Ag (index 0) tested successfully with E=-2.350 eV as new best. No other high-symmetry sites (bridge, hollow) explored yet. OH is a radical (O index 0 has 1 unpaired electron), so ReactiveSpecies. Propose bridge site using two Ag atoms to check for potentially lower energy.",
+      "tool_logs": [
+        "LLM-as-oracle mode: executor bypassed; predicted energy used in place of MACE relaxation.",
+        "Success: predicted_relaxed_energy_eV = -2.4200 eV."
+      ],
+      "status": "success",
+      "most_stable_energy_eV": -2.42,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": false,
+      "planned_site_type": "bridge",
+      "actual_site_type": "bridge",
+      "energy_source": "llm_predicted",
+      "history_entry": "【✅ Perfect Adsorption】 bridge @ ['Ag', 'Ag'] (Index [0]) -> Site: bridge (Ag,Ag) [🌟 New Best] | E=-2.420 eV"
+    },
+    {
+      "attempt_index": 3,
+      "plan": {
+        "reasoning": "History shows ontop (E=-2.350 eV) and bridge (E=-2.420 eV) both succeeded with bridge as current best. Hollow-4 site remains untested per available sites list. OH radical (index 0, radical_electrons=1) binds via O; use ReactiveSpecies. Propose hollow with single-point binding to explore potentially lower energy.",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "hollow",
+          "surface_binding_atoms": [
+            "Ag",
+            "Ag",
+            "Ag",
+            "Ag"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        },
+        "predicted_relaxed_energy_eV": -2.31
+      },
+      "plan_key": "hollow|Ag,Ag,Ag,Ag|0|ReactiveSpecies|2.0",
+      "planner_reasoning": "History shows ontop (E=-2.350 eV) and bridge (E=-2.420 eV) both succeeded with bridge as current best. Hollow-4 site remains untested per available sites list. OH radical (index 0, radical_electrons=1) binds via O; use ReactiveSpecies. Propose hollow with single-point binding to explore potentially lower energy.",
+      "tool_logs": [
+        "LLM-as-oracle mode: executor bypassed; predicted energy used in place of MACE relaxation.",
+        "Success: predicted_relaxed_energy_eV = -2.3100 eV."
+      ],
+      "status": "success",
+      "most_stable_energy_eV": -2.31,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": false,
+      "planned_site_type": "hollow",
+      "actual_site_type": "hollow",
+      "energy_source": "llm_predicted",
+      "history_entry": "【✅ Perfect Adsorption】 hollow @ ['Ag', 'Ag', 'Ag', 'Ag'] (Index [0]) -> Site: hollow (Ag,Ag,Ag,Ag) | E=-2.310 eV"
+    }
+  ],
+  "history": [
+    "【✅ Perfect Adsorption】 ontop @ ['Ag'] (Index [0]) -> Site: ontop (Ag) [🌟 New Best] | E=-2.350 eV",
+    "【✅ Perfect Adsorption】 bridge @ ['Ag', 'Ag'] (Index [0]) -> Site: bridge (Ag,Ag) [🌟 New Best] | E=-2.420 eV",
+    "【✅ Perfect Adsorption】 hollow @ ['Ag', 'Ag', 'Ag', 'Ag'] (Index [0]) -> Site: hollow (Ag,Ag,Ag,Ag) | E=-2.310 eV"
+  ],
+  "error": null,
+  "perfect_count": 3,
+  "dissociation_count": 0,
+  "rearrangement_count": 0,
+  "calc_failure_count": 0,
+  "chemical_slip_count": 0
+}

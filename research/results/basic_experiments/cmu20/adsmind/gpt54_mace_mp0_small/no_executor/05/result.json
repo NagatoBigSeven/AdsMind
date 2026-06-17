@@ -1,0 +1,268 @@
+{
+  "case_id": "05",
+  "case_metadata": {
+    "case_id": "05",
+    "slab_file": "datasets/cmu20/05_Cu3Ag_111.xyz",
+    "smiles": "[H]",
+    "user_request": "Find the lowest-energy adsorption configuration for atomic hydrogen on the provided surface.",
+    "surface_family": "intermetallic",
+    "adsorbate_name": "H",
+    "miller_index": "(111)",
+    "reaction_class": "HER",
+    "ablation_candidate": "FALSE",
+    "notes": "Cu3Ag hydrogen benchmark"
+  },
+  "status": "success",
+  "best_energy_eV": -2.55,
+  "iteration_count": 4,
+  "max_attempts": 5,
+  "final_site_type": "hollow",
+  "converged_tag": false,
+  "wall_clock_sec": 101.08474962040782,
+  "total_input_tokens": 19500,
+  "total_output_tokens": 5200,
+  "artifact_paths": {
+    "iteration_energy_curve": "research/results/basic_experiments/cmu20/adsmind/gpt54_mace_mp0_small/no_executor/05/artifacts/iteration_energy_curve.png",
+    "iteration_energy_curve.png": "research/results/basic_experiments/cmu20/adsmind/gpt54_mace_mp0_small/no_executor/05/artifacts/iteration_energy_curve.png",
+    "iteration_energy_curve_png": "research/results/basic_experiments/cmu20/adsmind/gpt54_mace_mp0_small/no_executor/05/artifacts/iteration_energy_curve.png",
+    "summary_report": "research/results/basic_experiments/cmu20/adsmind/gpt54_mace_mp0_small/no_executor/05/artifacts/summary_report.md",
+    "summary_report.md": "research/results/basic_experiments/cmu20/adsmind/gpt54_mace_mp0_small/no_executor/05/artifacts/summary_report.md",
+    "summary_report_file": "research/results/basic_experiments/cmu20/adsmind/gpt54_mace_mp0_small/no_executor/05/artifacts/summary_report.md"
+  },
+  "best_result": {
+    "most_stable_energy_eV": -2.55,
+    "analysis_json": {
+      "status": "success",
+      "most_stable_energy_eV": -2.55,
+      "is_dissociated": false,
+      "is_covalently_bound": true,
+      "bond_change_count": 0,
+      "energy_source": "llm_predicted",
+      "site_analysis": {
+        "planned_site_type": "hollow",
+        "actual_site_type": "hollow",
+        "is_chemical_slip": false,
+        "planned_symbols": [
+          "Cu",
+          "Cu",
+          "Cu"
+        ],
+        "actual_symbols": [
+          "Cu",
+          "Cu",
+          "Cu"
+        ],
+        "site_fingerprint": "llm-oracle::hollow::Cu-Cu-Cu::0"
+      }
+    },
+    "plan": {
+      "reasoning": "SMILES consistency check: the adsorbate is [H], i.e. atomic hydrogen, which is a radical with one unpaired electron, so it should be treated as ReactiveSpecies. There is no mismatch between user request and SMILES. The provided heavy atom index list is empty because hydrogen is not a heavy atom; for [H], the only atom is hydrogen at index 0, so the binding index must be [0]. History is empty, so no sites have been tested yet and there are no prior failures or convergence signals. User intent is to find the lowest-energy adsorption configuration for atomic H on a Cu-Ag alloy (111) surface. For H on late transition-metal fcc(111) surfaces, hollow sites are generally preferred over ontop and bridge due to higher coordination. On Cu-rich environments, H usually binds stronger than on Ag, so among the available motifs the Cu-rich threefold hollow should be the most promising initial low-energy candidate. The available hollow environments are Ag-Cu-Cu, Cu-Cu-Cu, and Ag-Cu-Cu-Cu (4-fold-like listed but must be encoded as canonical hollow). A Cu-Cu-Cu threefold hollow is the best first guess for the global minimum because it maximizes interaction with the more H-affine Cu atoms while preserving the usual preference of H for hollow coordination on (111)-type surfaces. Therefore the first plan should target a hollow site with surface_binding_atoms ['Cu','Cu','Cu'] and adsorbate_binding_indices [0]. Predicted MACE-MP-0 small relaxed adsorption energy for H in this preferred Cu3 hollow environment is moderately exothermic, around -2.55 eV.",
+      "adsorbate_type": "ReactiveSpecies",
+      "solution": {
+        "action": "continue",
+        "site_type": "hollow",
+        "surface_binding_atoms": [
+          "Cu",
+          "Cu",
+          "Cu"
+        ],
+        "adsorbate_binding_indices": [
+          0
+        ],
+        "relax_top_n": 1,
+        "touch_sphere_size": 2,
+        "overlap_thr": 0.1,
+        "conformers_per_site_cap": 4
+      },
+      "predicted_relaxed_energy_eV": -2.55
+    },
+    "result_type": "Perfect"
+  },
+  "last_analysis": {
+    "status": "success",
+    "most_stable_energy_eV": -2.11,
+    "is_dissociated": false,
+    "is_covalently_bound": true,
+    "bond_change_count": 0,
+    "energy_source": "llm_predicted",
+    "site_analysis": {
+      "planned_site_type": "ontop",
+      "actual_site_type": "ontop",
+      "is_chemical_slip": false,
+      "planned_symbols": [
+        "Cu"
+      ],
+      "actual_symbols": [
+        "Cu"
+      ],
+      "site_fingerprint": "llm-oracle::ontop::Cu::0"
+    }
+  },
+  "attempt_records": [
+    {
+      "attempt_index": 1,
+      "plan": {
+        "reasoning": "SMILES consistency check: the adsorbate is [H], i.e. atomic hydrogen, which is a radical with one unpaired electron, so it should be treated as ReactiveSpecies. There is no mismatch between user request and SMILES. The provided heavy atom index list is empty because hydrogen is not a heavy atom; for [H], the only atom is hydrogen at index 0, so the binding index must be [0]. History is empty, so no sites have been tested yet and there are no prior failures or convergence signals. User intent is to find the lowest-energy adsorption configuration for atomic H on a Cu-Ag alloy (111) surface. For H on late transition-metal fcc(111) surfaces, hollow sites are generally preferred over ontop and bridge due to higher coordination. On Cu-rich environments, H usually binds stronger than on Ag, so among the available motifs the Cu-rich threefold hollow should be the most promising initial low-energy candidate. The available hollow environments are Ag-Cu-Cu, Cu-Cu-Cu, and Ag-Cu-Cu-Cu (4-fold-like listed but must be encoded as canonical hollow). A Cu-Cu-Cu threefold hollow is the best first guess for the global minimum because it maximizes interaction with the more H-affine Cu atoms while preserving the usual preference of H for hollow coordination on (111)-type surfaces. Therefore the first plan should target a hollow site with surface_binding_atoms ['Cu','Cu','Cu'] and adsorbate_binding_indices [0]. Predicted MACE-MP-0 small relaxed adsorption energy for H in this preferred Cu3 hollow environment is moderately exothermic, around -2.55 eV.",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "hollow",
+          "surface_binding_atoms": [
+            "Cu",
+            "Cu",
+            "Cu"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        },
+        "predicted_relaxed_energy_eV": -2.55
+      },
+      "plan_key": "hollow|Cu,Cu,Cu|0|ReactiveSpecies|2.0",
+      "planner_reasoning": "SMILES consistency check: the adsorbate is [H], i.e. atomic hydrogen, which is a radical with one unpaired electron, so it should be treated as ReactiveSpecies. There is no mismatch between user request and SMILES. The provided heavy atom index list is empty because hydrogen is not a heavy atom; for [H], the only atom is hydrogen at index 0, so the binding index must be [0]. History is empty, so no sites have been tested yet and there are no prior failures or convergence signals. User intent is to find the lowest-energy adsorption configuration for atomic H on a Cu-Ag alloy (111) surface. For H on late transition-metal fcc(111) surfaces, hollow sites are generally preferred over ontop and bridge due to higher coordination. On Cu-rich environments, H usually binds stronger than on Ag, so among the available motifs the Cu-rich threefold hollow should be the most promising initial low-energy candidate. The available hollow environments are Ag-Cu-Cu, Cu-Cu-Cu, and Ag-Cu-Cu-Cu (4-fold-like listed but must be encoded as canonical hollow). A Cu-Cu-Cu threefold hollow is the best first guess for the global minimum because it maximizes interaction with the more H-affine Cu atoms while preserving the usual preference of H for hollow coordination on (111)-type surfaces. Therefore the first plan should target a hollow site with surface_binding_atoms ['Cu','Cu','Cu'] and adsorbate_binding_indices [0]. Predicted MACE-MP-0 small relaxed adsorption energy for H in this preferred Cu3 hollow environment is moderately exothermic, around -2.55 eV.",
+      "tool_logs": [
+        "LLM-as-oracle mode: executor bypassed; predicted energy used in place of MACE relaxation.",
+        "Success: predicted_relaxed_energy_eV = -2.5500 eV."
+      ],
+      "status": "success",
+      "most_stable_energy_eV": -2.55,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": false,
+      "planned_site_type": "hollow",
+      "actual_site_type": "hollow",
+      "energy_source": "llm_predicted",
+      "history_entry": "【✅ Perfect Adsorption】 hollow @ ['Cu', 'Cu', 'Cu'] (Index [0]) -> Site: hollow (Cu,Cu,Cu) [🌟 New Best] | E=-2.550 eV"
+    },
+    {
+      "attempt_index": 2,
+      "plan": {
+        "reasoning": "SMILES [H] is atomic hydrogen, i.e. a radical species, so ReactiveSpecies is appropriate. There is no SMILES/user-description mismatch. For atomic H, the single atom has an unpaired electron, so using it as the binding atom is chemically valid. The provided heavy atom index list is empty because hydrogen is not a heavy atom, but for this adsorbate the only valid binding atom is the sole H atom, so the binding index is 0. History shows one successful and best adsorption already found: hollow on Cu-Cu-Cu with predicted relaxed energy -2.550 eV. No failures or slips are reported. Since the best known site is a pure Cu3 hollow, remaining plausible competitors are other high-symmetry sites in this alloy: Cu-Cu bridge, Cu ontop, mixed Ag-Cu bridge, mixed Ag-Cu-Cu hollow, Ag ontop, and Ag-Cu-Cu-Cu 4-fold-like hollow represented canonically as hollow. For H on coinage-metal (111) alloy surfaces, stronger binding is generally favored by higher Cu coordination and disfavored by Ag participation; thus Cu3 hollow is already very likely optimal. The only potentially competitive untested family is the mixed/alloy hollow environment, but it should bind weaker than Cu3 hollow. Because major distinct site chemistry has not been exhaustively sampled and no [🔄 Converged to known best] tag is present, I should not terminate yet. The most systematic next test is the mixed threefold hollow Ag-Cu-Cu, which is the closest chemically to the current best and could reveal alloy heterogeneity. I predict it will be weaker than the Cu3 hollow by roughly 0.2-0.4 eV; best estimate -2.240 eV.",
+        "adsorbate_type": "ReactiveSpecies",
+        "predicted_relaxed_energy_eV": -2.24,
+        "solution": {
+          "action": "continue",
+          "site_type": "hollow",
+          "surface_binding_atoms": [
+            "Ag",
+            "Cu",
+            "Cu"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        }
+      },
+      "plan_key": "hollow|Ag,Cu,Cu|0|ReactiveSpecies|2.0",
+      "planner_reasoning": "SMILES [H] is atomic hydrogen, i.e. a radical species, so ReactiveSpecies is appropriate. There is no SMILES/user-description mismatch. For atomic H, the single atom has an unpaired electron, so using it as the binding atom is chemically valid. The provided heavy atom index list is empty because hydrogen is not a heavy atom, but for this adsorbate the only valid binding atom is the sole H atom, so the binding index is 0. History shows one successful and best adsorption already found: hollow on Cu-Cu-Cu with predicted relaxed energy -2.550 eV. No failures or slips are reported. Since the best known site is a pure Cu3 hollow, remaining plausible competitors are other high-symmetry sites in this alloy: Cu-Cu bridge, Cu ontop, mixed Ag-Cu bridge, mixed Ag-Cu-Cu hollow, Ag ontop, and Ag-Cu-Cu-Cu 4-fold-like hollow represented canonically as hollow. For H on coinage-metal (111) alloy surfaces, stronger binding is generally favored by higher Cu coordination and disfavored by Ag participation; thus Cu3 hollow is already very likely optimal. The only potentially competitive untested family is the mixed/alloy hollow environment, but it should bind weaker than Cu3 hollow. Because major distinct site chemistry has not been exhaustively sampled and no [🔄 Converged to known best] tag is present, I should not terminate yet. The most systematic next test is the mixed threefold hollow Ag-Cu-Cu, which is the closest chemically to the current best and could reveal alloy heterogeneity. I predict it will be weaker than the Cu3 hollow by roughly 0.2-0.4 eV; best estimate -2.240 eV.",
+      "tool_logs": [
+        "LLM-as-oracle mode: executor bypassed; predicted energy used in place of MACE relaxation.",
+        "Success: predicted_relaxed_energy_eV = -2.2400 eV."
+      ],
+      "status": "success",
+      "most_stable_energy_eV": -2.24,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": false,
+      "planned_site_type": "hollow",
+      "actual_site_type": "hollow",
+      "energy_source": "llm_predicted",
+      "history_entry": "【✅ Perfect Adsorption】 hollow @ ['Ag', 'Cu', 'Cu'] (Index [0]) -> Site: hollow (Ag,Cu,Cu) | E=-2.240 eV"
+    },
+    {
+      "attempt_index": 3,
+      "plan": {
+        "reasoning": "SMILES consistency check: [H] is atomic hydrogen, a radical species, so ReactiveSpecies is appropriate. There is no mismatch between user request and SMILES. For atomic hydrogen, the single atom is the binding atom; although the provided heavy-atom list is empty because hydrogen is not a heavy atom, the only chemically valid adsorbate atom is the sole H atom at index 0. History analysis: two hollow 3-fold sites have already been tested successfully. Hollow (Cu,Cu,Cu) gave the current best energy at -2.550 eV, while hollow (Ag,Cu,Cu) is weaker at -2.240 eV. No failures, slips, or convergence-to-known-best tags are present. Since major hollow environments are not exhausted and Cu-rich coordination is clearly favored over Ag-containing coordination, the next most plausible lower-energy untested site is the Cu-Cu bridge, which can sometimes compete closely with hollow for H on Cu-based alloy (111) surfaces, especially if local alloy strain/electronic effects destabilize some hollows. Ontop is generally less favorable for H on close-packed Cu/Ag surfaces, and Ag-containing bridge is expected weaker than Cu-Cu based on the existing trend. Therefore a new, distinct, physically motivated plan is to test bridge adsorption on a Cu-Cu pair. User intent is to find the lowest-energy adsorption configuration for atomic hydrogen on the given Cu-Ag alloy surface. Predicted MACE-MP-0 small relaxed adsorption energy for H at Cu-Cu bridge is slightly less stable than the best Cu3 hollow but potentially competitive, estimated at -2.430 eV.",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "bridge",
+          "surface_binding_atoms": [
+            "Cu",
+            "Cu"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        },
+        "predicted_relaxed_energy_eV": -2.43
+      },
+      "plan_key": "bridge|Cu,Cu|0|ReactiveSpecies|2.0",
+      "planner_reasoning": "SMILES consistency check: [H] is atomic hydrogen, a radical species, so ReactiveSpecies is appropriate. There is no mismatch between user request and SMILES. For atomic hydrogen, the single atom is the binding atom; although the provided heavy-atom list is empty because hydrogen is not a heavy atom, the only chemically valid adsorbate atom is the sole H atom at index 0. History analysis: two hollow 3-fold sites have already been tested successfully. Hollow (Cu,Cu,Cu) gave the current best energy at -2.550 eV, while hollow (Ag,Cu,Cu) is weaker at -2.240 eV. No failures, slips, or convergence-to-known-best tags are present. Since major hollow environments are not exhausted and Cu-rich coordination is clearly favored over Ag-containing coordination, the next most plausible lower-energy untested site is the Cu-Cu bridge, which can sometimes compete closely with hollow for H on Cu-based alloy (111) surfaces, especially if local alloy strain/electronic effects destabilize some hollows. Ontop is generally less favorable for H on close-packed Cu/Ag surfaces, and Ag-containing bridge is expected weaker than Cu-Cu based on the existing trend. Therefore a new, distinct, physically motivated plan is to test bridge adsorption on a Cu-Cu pair. User intent is to find the lowest-energy adsorption configuration for atomic hydrogen on the given Cu-Ag alloy surface. Predicted MACE-MP-0 small relaxed adsorption energy for H at Cu-Cu bridge is slightly less stable than the best Cu3 hollow but potentially competitive, estimated at -2.430 eV.",
+      "tool_logs": [
+        "LLM-as-oracle mode: executor bypassed; predicted energy used in place of MACE relaxation.",
+        "Success: predicted_relaxed_energy_eV = -2.4300 eV."
+      ],
+      "status": "success",
+      "most_stable_energy_eV": -2.43,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": false,
+      "planned_site_type": "bridge",
+      "actual_site_type": "bridge",
+      "energy_source": "llm_predicted",
+      "history_entry": "【✅ Perfect Adsorption】 bridge @ ['Cu', 'Cu'] (Index [0]) -> Site: bridge (Cu,Cu) | E=-2.430 eV"
+    },
+    {
+      "attempt_index": 4,
+      "plan": {
+        "reasoning": "SMILES [H] is atomic hydrogen, i.e. a radical species, so it should be treated as ReactiveSpecies. There is no hybridization mismatch issue. For atomic H, the binding atom is the single H atom, and using one binding index is chemically consistent with radical adsorption. History shows three successful chemisorbed states have already been tested: hollow (Cu,Cu,Cu) at -2.550 eV, hollow (Ag,Cu,Cu) at -2.240 eV, and bridge (Cu,Cu) at -2.430 eV. The current best is clearly the Cu3 hollow site. No failures or slip events are reported. Since the surface is a Cu-Ag alloy and the tested Cu-rich sites are substantially stronger than the mixed Ag-containing hollow, the most plausible untested lower-energy candidate among the enumerated high-symmetry sites is an ontop Cu site; ontop Ag is expected to be weaker, bridge Ag-Cu is likely weaker than bridge Cu-Cu, and the 4-fold Ag-Cu-Cu-Cu site on an fcc(111)-type environment is typically less favorable or not truly competitive for H compared with 3-fold Cu hollow. Thus the most systematic new distinct plan is ontop on Cu. The provided heavy atom index list is empty because H is not a heavy atom, but the adsorbate still contains one atom; the only chemically valid binding atom is that single H atom, so index 0 is the required adsorption index. This plan is new relative to all prior successful plans. Based on the trend hollow Cu3 < bridge Cu2 < mixed hollow, I predict ontop Cu will be somewhat weaker than bridge Cu-Cu, around -2.1 eV.",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "ontop",
+          "surface_binding_atoms": [
+            "Cu"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        },
+        "predicted_relaxed_energy_eV": -2.11
+      },
+      "plan_key": "ontop|Cu|0|ReactiveSpecies|2.0",
+      "planner_reasoning": "SMILES [H] is atomic hydrogen, i.e. a radical species, so it should be treated as ReactiveSpecies. There is no hybridization mismatch issue. For atomic H, the binding atom is the single H atom, and using one binding index is chemically consistent with radical adsorption. History shows three successful chemisorbed states have already been tested: hollow (Cu,Cu,Cu) at -2.550 eV, hollow (Ag,Cu,Cu) at -2.240 eV, and bridge (Cu,Cu) at -2.430 eV. The current best is clearly the Cu3 hollow site. No failures or slip events are reported. Since the surface is a Cu-Ag alloy and the tested Cu-rich sites are substantially stronger than the mixed Ag-containing hollow, the most plausible untested lower-energy candidate among the enumerated high-symmetry sites is an ontop Cu site; ontop Ag is expected to be weaker, bridge Ag-Cu is likely weaker than bridge Cu-Cu, and the 4-fold Ag-Cu-Cu-Cu site on an fcc(111)-type environment is typically less favorable or not truly competitive for H compared with 3-fold Cu hollow. Thus the most systematic new distinct plan is ontop on Cu. The provided heavy atom index list is empty because H is not a heavy atom, but the adsorbate still contains one atom; the only chemically valid binding atom is that single H atom, so index 0 is the required adsorption index. This plan is new relative to all prior successful plans. Based on the trend hollow Cu3 < bridge Cu2 < mixed hollow, I predict ontop Cu will be somewhat weaker than bridge Cu-Cu, around -2.1 eV.",
+      "tool_logs": [
+        "LLM-as-oracle mode: executor bypassed; predicted energy used in place of MACE relaxation.",
+        "Success: predicted_relaxed_energy_eV = -2.1100 eV."
+      ],
+      "status": "success",
+      "most_stable_energy_eV": -2.11,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": false,
+      "planned_site_type": "ontop",
+      "actual_site_type": "ontop",
+      "energy_source": "llm_predicted",
+      "history_entry": "【✅ Perfect Adsorption】 ontop @ ['Cu'] (Index [0]) -> Site: ontop (Cu) | E=-2.110 eV"
+    }
+  ],
+  "history": [
+    "【✅ Perfect Adsorption】 hollow @ ['Cu', 'Cu', 'Cu'] (Index [0]) -> Site: hollow (Cu,Cu,Cu) [🌟 New Best] | E=-2.550 eV",
+    "【✅ Perfect Adsorption】 hollow @ ['Ag', 'Cu', 'Cu'] (Index [0]) -> Site: hollow (Ag,Cu,Cu) | E=-2.240 eV",
+    "【✅ Perfect Adsorption】 bridge @ ['Cu', 'Cu'] (Index [0]) -> Site: bridge (Cu,Cu) | E=-2.430 eV",
+    "【✅ Perfect Adsorption】 ontop @ ['Cu'] (Index [0]) -> Site: ontop (Cu) | E=-2.110 eV"
+  ],
+  "error": null,
+  "perfect_count": 4,
+  "dissociation_count": 0,
+  "rearrangement_count": 0,
+  "calc_failure_count": 0,
+  "chemical_slip_count": 0
+}

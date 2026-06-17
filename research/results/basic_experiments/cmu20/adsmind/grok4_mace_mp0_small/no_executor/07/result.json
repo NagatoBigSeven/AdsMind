@@ -1,0 +1,195 @@
+{
+  "case_id": "07",
+  "case_metadata": {
+    "case_id": "07",
+    "slab_file": "datasets/cmu20/07_Ru3Mo_111.xyz",
+    "smiles": "[H]",
+    "user_request": "Find the lowest-energy adsorption configuration for atomic hydrogen on the provided surface.",
+    "surface_family": "intermetallic",
+    "adsorbate_name": "H",
+    "miller_index": "(111)",
+    "reaction_class": "HER",
+    "ablation_candidate": "FALSE",
+    "notes": "Ru3Mo hydrogen benchmark"
+  },
+  "status": "success",
+  "best_energy_eV": -2.65,
+  "iteration_count": 2,
+  "max_attempts": 5,
+  "final_site_type": "hollow",
+  "converged_tag": false,
+  "wall_clock_sec": 125.91617861762643,
+  "total_input_tokens": 10903,
+  "total_output_tokens": 5084,
+  "artifact_paths": {
+    "iteration_energy_curve": "research/results/basic_experiments/cmu20/adsmind/grok4_mace_mp0_small/no_executor/07/artifacts/iteration_energy_curve.png",
+    "iteration_energy_curve.png": "research/results/basic_experiments/cmu20/adsmind/grok4_mace_mp0_small/no_executor/07/artifacts/iteration_energy_curve.png",
+    "iteration_energy_curve_png": "research/results/basic_experiments/cmu20/adsmind/grok4_mace_mp0_small/no_executor/07/artifacts/iteration_energy_curve.png",
+    "summary_report": "research/results/basic_experiments/cmu20/adsmind/grok4_mace_mp0_small/no_executor/07/artifacts/summary_report.md",
+    "summary_report.md": "research/results/basic_experiments/cmu20/adsmind/grok4_mace_mp0_small/no_executor/07/artifacts/summary_report.md",
+    "summary_report_file": "research/results/basic_experiments/cmu20/adsmind/grok4_mace_mp0_small/no_executor/07/artifacts/summary_report.md"
+  },
+  "best_result": {
+    "most_stable_energy_eV": -2.65,
+    "analysis_json": {
+      "status": "success",
+      "most_stable_energy_eV": -2.65,
+      "is_dissociated": false,
+      "is_covalently_bound": true,
+      "bond_change_count": 0,
+      "energy_source": "llm_predicted",
+      "site_analysis": {
+        "planned_site_type": "hollow",
+        "actual_site_type": "hollow",
+        "is_chemical_slip": false,
+        "planned_symbols": [
+          "Ru",
+          "Ru",
+          "Ru"
+        ],
+        "actual_symbols": [
+          "Ru",
+          "Ru",
+          "Ru"
+        ],
+        "site_fingerprint": "llm-oracle::hollow::Ru-Ru-Ru::0"
+      }
+    },
+    "plan": {
+      "reasoning": "SMILES [H] is atomic hydrogen radical (unpaired electron on index 0). History is empty so this is first proposal. Select ReactiveSpecies with hollow site on most stable Ru-Ru-Ru environment as initial high-symmetry guess for H on late-transition-metal alloy surface.",
+      "adsorbate_type": "ReactiveSpecies",
+      "solution": {
+        "action": "continue",
+        "site_type": "hollow",
+        "surface_binding_atoms": [
+          "Ru",
+          "Ru",
+          "Ru"
+        ],
+        "adsorbate_binding_indices": [
+          0
+        ],
+        "relax_top_n": 1,
+        "touch_sphere_size": 2,
+        "overlap_thr": 0.1,
+        "conformers_per_site_cap": 4
+      },
+      "predicted_relaxed_energy_eV": -2.65
+    },
+    "result_type": "Perfect"
+  },
+  "last_analysis": {
+    "status": "success",
+    "most_stable_energy_eV": -2.48,
+    "is_dissociated": false,
+    "is_covalently_bound": true,
+    "bond_change_count": 0,
+    "energy_source": "llm_predicted",
+    "site_analysis": {
+      "planned_site_type": "hollow",
+      "actual_site_type": "hollow",
+      "is_chemical_slip": false,
+      "planned_symbols": [
+        "Mo",
+        "Mo",
+        "Ru"
+      ],
+      "actual_symbols": [
+        "Mo",
+        "Mo",
+        "Ru"
+      ],
+      "site_fingerprint": "llm-oracle::hollow::Mo-Mo-Ru::0"
+    }
+  },
+  "attempt_records": [
+    {
+      "attempt_index": 1,
+      "plan": {
+        "reasoning": "SMILES [H] is atomic hydrogen radical (unpaired electron on index 0). History is empty so this is first proposal. Select ReactiveSpecies with hollow site on most stable Ru-Ru-Ru environment as initial high-symmetry guess for H on late-transition-metal alloy surface.",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "hollow",
+          "surface_binding_atoms": [
+            "Ru",
+            "Ru",
+            "Ru"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        },
+        "predicted_relaxed_energy_eV": -2.65
+      },
+      "plan_key": "hollow|Ru,Ru,Ru|0|ReactiveSpecies|2.0",
+      "planner_reasoning": "SMILES [H] is atomic hydrogen radical (unpaired electron on index 0). History is empty so this is first proposal. Select ReactiveSpecies with hollow site on most stable Ru-Ru-Ru environment as initial high-symmetry guess for H on late-transition-metal alloy surface.",
+      "tool_logs": [
+        "LLM-as-oracle mode: executor bypassed; predicted energy used in place of MACE relaxation.",
+        "Success: predicted_relaxed_energy_eV = -2.6500 eV."
+      ],
+      "status": "success",
+      "most_stable_energy_eV": -2.65,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": false,
+      "planned_site_type": "hollow",
+      "actual_site_type": "hollow",
+      "energy_source": "llm_predicted",
+      "history_entry": "【✅ Perfect Adsorption】 hollow @ ['Ru', 'Ru', 'Ru'] (Index [0]) -> Site: hollow (Ru,Ru,Ru) [🌟 New Best] | E=-2.650 eV"
+    },
+    {
+      "attempt_index": 2,
+      "plan": {
+        "reasoning": "History shows only one successful plan: hollow (Ru,Ru,Ru) with E=-2.650 eV as new best. No convergence tag or chemical slip observed. For atomic H (ReactiveSpecies, binding index 0) a different high-symmetry hollow environment (Mo-Mo-Ru) remains untested on the alloy surface and must be checked before termination. All other rules satisfied.",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "hollow",
+          "surface_binding_atoms": [
+            "Mo",
+            "Mo",
+            "Ru"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        },
+        "predicted_relaxed_energy_eV": -2.48
+      },
+      "plan_key": "hollow|Mo,Mo,Ru|0|ReactiveSpecies|2.0",
+      "planner_reasoning": "History shows only one successful plan: hollow (Ru,Ru,Ru) with E=-2.650 eV as new best. No convergence tag or chemical slip observed. For atomic H (ReactiveSpecies, binding index 0) a different high-symmetry hollow environment (Mo-Mo-Ru) remains untested on the alloy surface and must be checked before termination. All other rules satisfied.",
+      "tool_logs": [
+        "LLM-as-oracle mode: executor bypassed; predicted energy used in place of MACE relaxation.",
+        "Success: predicted_relaxed_energy_eV = -2.4800 eV."
+      ],
+      "status": "success",
+      "most_stable_energy_eV": -2.48,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": false,
+      "planned_site_type": "hollow",
+      "actual_site_type": "hollow",
+      "energy_source": "llm_predicted",
+      "history_entry": "【✅ Perfect Adsorption】 hollow @ ['Mo', 'Mo', 'Ru'] (Index [0]) -> Site: hollow (Mo,Mo,Ru) | E=-2.480 eV"
+    }
+  ],
+  "history": [
+    "【✅ Perfect Adsorption】 hollow @ ['Ru', 'Ru', 'Ru'] (Index [0]) -> Site: hollow (Ru,Ru,Ru) [🌟 New Best] | E=-2.650 eV",
+    "【✅ Perfect Adsorption】 hollow @ ['Mo', 'Mo', 'Ru'] (Index [0]) -> Site: hollow (Mo,Mo,Ru) | E=-2.480 eV"
+  ],
+  "error": null,
+  "perfect_count": 2,
+  "dissociation_count": 0,
+  "rearrangement_count": 0,
+  "calc_failure_count": 0,
+  "chemical_slip_count": 0
+}

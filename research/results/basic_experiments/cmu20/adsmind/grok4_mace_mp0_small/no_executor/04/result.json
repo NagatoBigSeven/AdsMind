@@ -1,0 +1,263 @@
+{
+  "case_id": "04",
+  "case_metadata": {
+    "case_id": "04",
+    "slab_file": "datasets/cmu20/04_Pd3Cu_111.xyz",
+    "smiles": "[N]=[NH]",
+    "user_request": "Find the lowest-energy adsorption configuration for NNH on the provided surface.",
+    "surface_family": "intermetallic",
+    "adsorbate_name": "NNH",
+    "miller_index": "(111)",
+    "reaction_class": "NRR",
+    "ablation_candidate": "FALSE",
+    "notes": "Paper surface label CuPd3; dissociation observed before"
+  },
+  "status": "success",
+  "best_energy_eV": -2.35,
+  "iteration_count": 4,
+  "max_attempts": 5,
+  "final_site_type": "ontop",
+  "converged_tag": false,
+  "wall_clock_sec": 143.97916788235307,
+  "total_input_tokens": 19026,
+  "total_output_tokens": 7445,
+  "artifact_paths": {
+    "iteration_energy_curve": "research/results/basic_experiments/cmu20/adsmind/grok4_mace_mp0_small/no_executor/04/artifacts/iteration_energy_curve.png",
+    "iteration_energy_curve.png": "research/results/basic_experiments/cmu20/adsmind/grok4_mace_mp0_small/no_executor/04/artifacts/iteration_energy_curve.png",
+    "iteration_energy_curve_png": "research/results/basic_experiments/cmu20/adsmind/grok4_mace_mp0_small/no_executor/04/artifacts/iteration_energy_curve.png",
+    "summary_report": "research/results/basic_experiments/cmu20/adsmind/grok4_mace_mp0_small/no_executor/04/artifacts/summary_report.md",
+    "summary_report.md": "research/results/basic_experiments/cmu20/adsmind/grok4_mace_mp0_small/no_executor/04/artifacts/summary_report.md",
+    "summary_report_file": "research/results/basic_experiments/cmu20/adsmind/grok4_mace_mp0_small/no_executor/04/artifacts/summary_report.md"
+  },
+  "best_result": {
+    "most_stable_energy_eV": -2.35,
+    "analysis_json": {
+      "status": "success",
+      "most_stable_energy_eV": -2.35,
+      "is_dissociated": false,
+      "is_covalently_bound": true,
+      "bond_change_count": 0,
+      "energy_source": "llm_predicted",
+      "site_analysis": {
+        "planned_site_type": "ontop",
+        "actual_site_type": "ontop",
+        "is_chemical_slip": false,
+        "planned_symbols": [
+          "Pd"
+        ],
+        "actual_symbols": [
+          "Pd"
+        ],
+        "site_fingerprint": "llm-oracle::ontop::Pd::0"
+      }
+    },
+    "plan": {
+      "reasoning": "History is empty so this is the first proposal. SMILES [N]=[NH] matches the provided atom list with index 0 (N, radical_electrons=1) as the correct binding atom; therefore ReactiveSpecies is required. Start with the most common stable ontop site on Pd using the radical N.",
+      "adsorbate_type": "ReactiveSpecies",
+      "solution": {
+        "action": "continue",
+        "site_type": "ontop",
+        "surface_binding_atoms": [
+          "Pd"
+        ],
+        "adsorbate_binding_indices": [
+          0
+        ],
+        "relax_top_n": 1,
+        "touch_sphere_size": 2,
+        "overlap_thr": 0.1,
+        "conformers_per_site_cap": 4
+      },
+      "predicted_relaxed_energy_eV": -2.35
+    },
+    "result_type": "Perfect"
+  },
+  "last_analysis": {
+    "status": "success",
+    "most_stable_energy_eV": -2.05,
+    "is_dissociated": false,
+    "is_covalently_bound": true,
+    "bond_change_count": 0,
+    "energy_source": "llm_predicted",
+    "site_analysis": {
+      "planned_site_type": "bridge",
+      "actual_site_type": "bridge",
+      "is_chemical_slip": false,
+      "planned_symbols": [
+        "Cu",
+        "Pd"
+      ],
+      "actual_symbols": [
+        "Cu",
+        "Pd"
+      ],
+      "site_fingerprint": "llm-oracle::bridge::Cu-Pd::0"
+    }
+  },
+  "attempt_records": [
+    {
+      "attempt_index": 1,
+      "plan": {
+        "reasoning": "History is empty so this is the first proposal. SMILES [N]=[NH] matches the provided atom list with index 0 (N, radical_electrons=1) as the correct binding atom; therefore ReactiveSpecies is required. Start with the most common stable ontop site on Pd using the radical N.",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "ontop",
+          "surface_binding_atoms": [
+            "Pd"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        },
+        "predicted_relaxed_energy_eV": -2.35
+      },
+      "plan_key": "ontop|Pd|0|ReactiveSpecies|2.0",
+      "planner_reasoning": "History is empty so this is the first proposal. SMILES [N]=[NH] matches the provided atom list with index 0 (N, radical_electrons=1) as the correct binding atom; therefore ReactiveSpecies is required. Start with the most common stable ontop site on Pd using the radical N.",
+      "tool_logs": [
+        "LLM-as-oracle mode: executor bypassed; predicted energy used in place of MACE relaxation.",
+        "Success: predicted_relaxed_energy_eV = -2.3500 eV."
+      ],
+      "status": "success",
+      "most_stable_energy_eV": -2.35,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": false,
+      "planned_site_type": "ontop",
+      "actual_site_type": "ontop",
+      "energy_source": "llm_predicted",
+      "history_entry": "【✅ Perfect Adsorption】 ontop @ ['Pd'] (Index [0]) -> Site: ontop (Pd) [🌟 New Best] | E=-2.350 eV"
+    },
+    {
+      "attempt_index": 2,
+      "plan": {
+        "reasoning": "History contains only one successful ontop-Pd adsorption (E=-2.350 eV) via index 0. SMILES [N]=[NH] shows a radical on N(0), confirming ReactiveSpecies. No unstable sites or slips observed. Propose a new bridge configuration on Pd-Pd to explore lower energy possibilities.",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "bridge",
+          "surface_binding_atoms": [
+            "Pd",
+            "Pd"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        },
+        "predicted_relaxed_energy_eV": -2.31
+      },
+      "plan_key": "bridge|Pd,Pd|0|ReactiveSpecies|2.0",
+      "planner_reasoning": "History contains only one successful ontop-Pd adsorption (E=-2.350 eV) via index 0. SMILES [N]=[NH] shows a radical on N(0), confirming ReactiveSpecies. No unstable sites or slips observed. Propose a new bridge configuration on Pd-Pd to explore lower energy possibilities.",
+      "tool_logs": [
+        "LLM-as-oracle mode: executor bypassed; predicted energy used in place of MACE relaxation.",
+        "Success: predicted_relaxed_energy_eV = -2.3100 eV."
+      ],
+      "status": "success",
+      "most_stable_energy_eV": -2.31,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": false,
+      "planned_site_type": "bridge",
+      "actual_site_type": "bridge",
+      "energy_source": "llm_predicted",
+      "history_entry": "【✅ Perfect Adsorption】 bridge @ ['Pd', 'Pd'] (Index [0]) -> Site: bridge (Pd,Pd) [⚠️ Energy Degenerate but Geometrically Distinct] | E=-2.310 eV"
+    },
+    {
+      "attempt_index": 3,
+      "plan": {
+        "reasoning": "History tested ontop(Pd) best at -2.350 eV and bridge(Pd-Pd) at -2.310 eV (geometrically distinct, valid). SMILES [N]=[NH] shows index 0 (N, SP2, radical=1) must be used for ReactiveSpecies. Major high-symmetry Pd sites exhausted; propose new hollow Pd-Pd-Pd environment to check alloy heterogeneity. Predicted MACE energy slightly above best due to coordination change.",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "hollow",
+          "surface_binding_atoms": [
+            "Pd",
+            "Pd",
+            "Pd"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        },
+        "predicted_relaxed_energy_eV": -2.28
+      },
+      "plan_key": "hollow|Pd,Pd,Pd|0|ReactiveSpecies|2.0",
+      "planner_reasoning": "History tested ontop(Pd) best at -2.350 eV and bridge(Pd-Pd) at -2.310 eV (geometrically distinct, valid). SMILES [N]=[NH] shows index 0 (N, SP2, radical=1) must be used for ReactiveSpecies. Major high-symmetry Pd sites exhausted; propose new hollow Pd-Pd-Pd environment to check alloy heterogeneity. Predicted MACE energy slightly above best due to coordination change.",
+      "tool_logs": [
+        "LLM-as-oracle mode: executor bypassed; predicted energy used in place of MACE relaxation.",
+        "Success: predicted_relaxed_energy_eV = -2.2800 eV."
+      ],
+      "status": "success",
+      "most_stable_energy_eV": -2.28,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": false,
+      "planned_site_type": "hollow",
+      "actual_site_type": "hollow",
+      "energy_source": "llm_predicted",
+      "history_entry": "【✅ Perfect Adsorption】 hollow @ ['Pd', 'Pd', 'Pd'] (Index [0]) -> Site: hollow (Pd,Pd,Pd) | E=-2.280 eV"
+    },
+    {
+      "attempt_index": 4,
+      "plan": {
+        "reasoning": "History shows ontop(Pd) as current best at -2.350 eV; bridge(Pd-Pd) and hollow(Pd-Pd-Pd) are higher. All major Pd-centric sites tested. New plan must explore remaining heterogeneous site (Cu-Pd bridge) using the radical N (index 0) as ReactiveSpecies. No convergence to identical geometry observed.",
+        "adsorbate_type": "ReactiveSpecies",
+        "solution": {
+          "action": "continue",
+          "site_type": "bridge",
+          "surface_binding_atoms": [
+            "Cu",
+            "Pd"
+          ],
+          "adsorbate_binding_indices": [
+            0
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        },
+        "predicted_relaxed_energy_eV": -2.05
+      },
+      "plan_key": "bridge|Cu,Pd|0|ReactiveSpecies|2.0",
+      "planner_reasoning": "History shows ontop(Pd) as current best at -2.350 eV; bridge(Pd-Pd) and hollow(Pd-Pd-Pd) are higher. All major Pd-centric sites tested. New plan must explore remaining heterogeneous site (Cu-Pd bridge) using the radical N (index 0) as ReactiveSpecies. No convergence to identical geometry observed.",
+      "tool_logs": [
+        "LLM-as-oracle mode: executor bypassed; predicted energy used in place of MACE relaxation.",
+        "Success: predicted_relaxed_energy_eV = -2.0500 eV."
+      ],
+      "status": "success",
+      "most_stable_energy_eV": -2.05,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": false,
+      "planned_site_type": "bridge",
+      "actual_site_type": "bridge",
+      "energy_source": "llm_predicted",
+      "history_entry": "【✅ Perfect Adsorption】 bridge @ ['Cu', 'Pd'] (Index [0]) -> Site: bridge (Cu,Pd) | E=-2.050 eV"
+    }
+  ],
+  "history": [
+    "【✅ Perfect Adsorption】 ontop @ ['Pd'] (Index [0]) -> Site: ontop (Pd) [🌟 New Best] | E=-2.350 eV",
+    "【✅ Perfect Adsorption】 bridge @ ['Pd', 'Pd'] (Index [0]) -> Site: bridge (Pd,Pd) [⚠️ Energy Degenerate but Geometrically Distinct] | E=-2.310 eV",
+    "【✅ Perfect Adsorption】 hollow @ ['Pd', 'Pd', 'Pd'] (Index [0]) -> Site: hollow (Pd,Pd,Pd) | E=-2.280 eV",
+    "【✅ Perfect Adsorption】 bridge @ ['Cu', 'Pd'] (Index [0]) -> Site: bridge (Cu,Pd) | E=-2.050 eV"
+  ],
+  "error": null,
+  "perfect_count": 4,
+  "dissociation_count": 0,
+  "rearrangement_count": 0,
+  "calc_failure_count": 0,
+  "chemical_slip_count": 0
+}

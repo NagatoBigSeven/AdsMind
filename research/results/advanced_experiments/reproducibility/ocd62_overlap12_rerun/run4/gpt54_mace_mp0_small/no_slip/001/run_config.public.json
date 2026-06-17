@@ -1,0 +1,92 @@
+{
+  "_public_config": {
+    "model_family": "gpt-5.4-2026-03-05",
+    "normalized_fields": [
+      "frozen_config.manifest_id_normalized",
+      "frozen_config.transport_variant_normalized"
+    ],
+    "omitted_operational_field_count": 2,
+    "provider_transport": "openrouter",
+    "redacted_fields": [
+      "api_key_source",
+      "frozen_config.llm_api_key_env_var"
+    ],
+    "schema_version": 1,
+    "source_file": "config.json"
+  },
+  "api_key_source": "<redacted>",
+  "case": {
+    "ablation_candidate": "FALSE",
+    "adsorbate_atoms": "5",
+    "adsorbate_name": "NO",
+    "bare_slab_atoms": "72",
+    "case_id": "001",
+    "miller_index": "",
+    "original_ads_smi": "NO",
+    "reaction_class": "GENERALIZATION",
+    "selection_bucket": "small_n_species",
+    "site_indices": "4",
+    "slab_file": "datasets/ocd62_overlap12/001_ocd_16_Hf18Sc18Si36_NO.xyz",
+    "smiles": "NO",
+    "source_key": "16",
+    "surface_elements": "Hf;Sc;Si",
+    "surface_family": "intermetallic",
+    "surface_formula": "Hf18Sc18Si36",
+    "user_request": "Find the lowest-energy adsorption configuration for the adsorbate with SMILES NO on the provided surface.",
+    "y_relaxed": "0.442459"
+  },
+  "dry_run": false,
+  "frozen_config": {
+    "calculator_backend": "mace",
+    "fmax": 0.1,
+    "llm_api_key_env_var": "<redacted>",
+    "llm_backend": "openrouter",
+    "llm_base_url": "https://api.openai.com/v1",
+    "llm_model": "gpt-5.4-2026-03-05",
+    "mace_device": "cpu",
+    "mace_model": "small",
+    "mace_precision": "float32",
+    "mace_use_dispersion": false,
+    "manifest_id": "ocd62_overlap12_manifest",
+    "max_retries": 5,
+    "max_tokens": 4096,
+    "platform": "EPFL-cluster-cpu-float32",
+    "random_seed": 42,
+    "relaxation_mode": "standard",
+    "temperature": 0.0,
+    "timeout_sec": 120,
+    "transport_variant": "openai-official",
+    "user_request_mode": "per-case explicit request string from datasets/ocd62_overlap12/manifest.csv"
+  },
+  "git_sha": "54d129d4bd712530229cd49b37fad7d4b0241f34",
+  "resolved_runtime_flags": {
+    "calculator_backend": "mace",
+    "calculator_config": {
+      "device": "cpu",
+      "model": "small",
+      "precision": "float32",
+      "use_dispersion": false
+    },
+    "enable_forbid": false,
+    "enable_slip_feedback": false,
+    "enable_termination": true,
+    "llm_backend": "openrouter",
+    "llm_config": {
+      "extra_options": {
+        "base_url": "https://api.openai.com/v1"
+      },
+      "max_tokens": 4096,
+      "model": "gpt-5.4-2026-03-05",
+      "temperature": 0.0,
+      "timeout": 120
+    },
+    "max_attempts": 5,
+    "random_seed": 42,
+    "relaxation_config": {
+      "fmax": 0.1
+    },
+    "relaxation_mode": "standard"
+  },
+  "session_id": "001-29c8540b",
+  "timestamp": "2026-05-04T20:47:12+00:00"
+}

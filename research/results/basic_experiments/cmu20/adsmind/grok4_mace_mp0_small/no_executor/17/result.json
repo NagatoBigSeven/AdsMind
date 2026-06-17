@@ -1,0 +1,184 @@
+{
+  "case_id": "17",
+  "case_metadata": {
+    "case_id": "17",
+    "slab_file": "datasets/cmu20/17_Rh2Ti2_111.xyz",
+    "smiles": "CC=O",
+    "user_request": "Find the lowest-energy adsorption configuration for acetaldehyde on the provided surface.",
+    "surface_family": "intermetallic",
+    "adsorbate_name": "OCHCH3",
+    "miller_index": "(111)",
+    "reaction_class": "COMPLEX",
+    "ablation_candidate": "FALSE",
+    "notes": "Best-available reconstruction from sanitized filename CC_O and formula C2H4O"
+  },
+  "status": "success",
+  "best_energy_eV": -0.92,
+  "iteration_count": 2,
+  "max_attempts": 5,
+  "final_site_type": "ontop",
+  "converged_tag": false,
+  "wall_clock_sec": 68.77391724660993,
+  "total_input_tokens": 10879,
+  "total_output_tokens": 4834,
+  "artifact_paths": {
+    "iteration_energy_curve": "research/results/basic_experiments/cmu20/adsmind/grok4_mace_mp0_small/no_executor/17/artifacts/iteration_energy_curve.png",
+    "iteration_energy_curve.png": "research/results/basic_experiments/cmu20/adsmind/grok4_mace_mp0_small/no_executor/17/artifacts/iteration_energy_curve.png",
+    "iteration_energy_curve_png": "research/results/basic_experiments/cmu20/adsmind/grok4_mace_mp0_small/no_executor/17/artifacts/iteration_energy_curve.png",
+    "summary_report": "research/results/basic_experiments/cmu20/adsmind/grok4_mace_mp0_small/no_executor/17/artifacts/summary_report.md",
+    "summary_report.md": "research/results/basic_experiments/cmu20/adsmind/grok4_mace_mp0_small/no_executor/17/artifacts/summary_report.md",
+    "summary_report_file": "research/results/basic_experiments/cmu20/adsmind/grok4_mace_mp0_small/no_executor/17/artifacts/summary_report.md"
+  },
+  "best_result": {
+    "most_stable_energy_eV": -0.92,
+    "analysis_json": {
+      "status": "success",
+      "most_stable_energy_eV": -0.92,
+      "is_dissociated": false,
+      "is_covalently_bound": true,
+      "bond_change_count": 0,
+      "energy_source": "llm_predicted",
+      "site_analysis": {
+        "planned_site_type": "ontop",
+        "actual_site_type": "ontop",
+        "is_chemical_slip": false,
+        "planned_symbols": [
+          "Ti"
+        ],
+        "actual_symbols": [
+          "Ti"
+        ],
+        "site_fingerprint": "llm-oracle::ontop::Ti::2"
+      }
+    },
+    "plan": {
+      "reasoning": "History is empty so this is the first proposal. SMILES CC=O matches acetaldehyde with no radicals or hybridization mismatch. Carbonyl O (index 2) has lone pairs and is the preferred donor for initial Molecule-type adsorption. Start with the most chemically plausible ontop site on Ti (oxophilic).",
+      "adsorbate_type": "Molecule",
+      "solution": {
+        "action": "continue",
+        "site_type": "ontop",
+        "surface_binding_atoms": [
+          "Ti"
+        ],
+        "adsorbate_binding_indices": [
+          2
+        ],
+        "relax_top_n": 1,
+        "touch_sphere_size": 2,
+        "overlap_thr": 0.1,
+        "conformers_per_site_cap": 4
+      },
+      "predicted_relaxed_energy_eV": -0.92
+    },
+    "result_type": "Perfect"
+  },
+  "last_analysis": {
+    "status": "success",
+    "most_stable_energy_eV": -0.85,
+    "is_dissociated": false,
+    "is_covalently_bound": true,
+    "bond_change_count": 0,
+    "energy_source": "llm_predicted",
+    "site_analysis": {
+      "planned_site_type": "bridge",
+      "actual_site_type": "bridge",
+      "is_chemical_slip": false,
+      "planned_symbols": [
+        "Rh",
+        "Ti"
+      ],
+      "actual_symbols": [
+        "Rh",
+        "Ti"
+      ],
+      "site_fingerprint": "llm-oracle::bridge::Rh-Ti::2"
+    }
+  },
+  "attempt_records": [
+    {
+      "attempt_index": 1,
+      "plan": {
+        "reasoning": "History is empty so this is the first proposal. SMILES CC=O matches acetaldehyde with no radicals or hybridization mismatch. Carbonyl O (index 2) has lone pairs and is the preferred donor for initial Molecule-type adsorption. Start with the most chemically plausible ontop site on Ti (oxophilic).",
+        "adsorbate_type": "Molecule",
+        "solution": {
+          "action": "continue",
+          "site_type": "ontop",
+          "surface_binding_atoms": [
+            "Ti"
+          ],
+          "adsorbate_binding_indices": [
+            2
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        },
+        "predicted_relaxed_energy_eV": -0.92
+      },
+      "plan_key": "ontop|Ti|2|Molecule|2.0",
+      "planner_reasoning": "History is empty so this is the first proposal. SMILES CC=O matches acetaldehyde with no radicals or hybridization mismatch. Carbonyl O (index 2) has lone pairs and is the preferred donor for initial Molecule-type adsorption. Start with the most chemically plausible ontop site on Ti (oxophilic).",
+      "tool_logs": [
+        "LLM-as-oracle mode: executor bypassed; predicted energy used in place of MACE relaxation.",
+        "Success: predicted_relaxed_energy_eV = -0.9200 eV."
+      ],
+      "status": "success",
+      "most_stable_energy_eV": -0.92,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": false,
+      "planned_site_type": "ontop",
+      "actual_site_type": "ontop",
+      "energy_source": "llm_predicted",
+      "history_entry": "【✅ Perfect Adsorption】 ontop @ ['Ti'] (Index [2]) -> Site: ontop (Ti) [🌟 New Best] | E=-0.920 eV"
+    },
+    {
+      "attempt_index": 2,
+      "plan": {
+        "reasoning": "History shows only one successful ontop-Ti (O index 2) configuration at -0.920 eV, already the best. No convergence tag present yet. To systematically check heterogeneity on the alloy surface, a new distinct high-symmetry site (bridge Rh-Ti via O) is proposed. This satisfies all site-alignment and chemical-type rules and has not been attempted.",
+        "adsorbate_type": "Molecule",
+        "solution": {
+          "action": "continue",
+          "site_type": "bridge",
+          "surface_binding_atoms": [
+            "Rh",
+            "Ti"
+          ],
+          "adsorbate_binding_indices": [
+            2
+          ],
+          "relax_top_n": 1,
+          "touch_sphere_size": 2,
+          "overlap_thr": 0.1,
+          "conformers_per_site_cap": 4
+        },
+        "predicted_relaxed_energy_eV": -0.85
+      },
+      "plan_key": "bridge|Rh,Ti|2|Molecule|2.0",
+      "planner_reasoning": "History shows only one successful ontop-Ti (O index 2) configuration at -0.920 eV, already the best. No convergence tag present yet. To systematically check heterogeneity on the alloy surface, a new distinct high-symmetry site (bridge Rh-Ti via O) is proposed. This satisfies all site-alignment and chemical-type rules and has not been attempted.",
+      "tool_logs": [
+        "LLM-as-oracle mode: executor bypassed; predicted energy used in place of MACE relaxation.",
+        "Success: predicted_relaxed_energy_eV = -0.8500 eV."
+      ],
+      "status": "success",
+      "most_stable_energy_eV": -0.85,
+      "bond_change_count": 0,
+      "is_dissociated": false,
+      "is_chemical_slip": false,
+      "planned_site_type": "bridge",
+      "actual_site_type": "bridge",
+      "energy_source": "llm_predicted",
+      "history_entry": "【✅ Perfect Adsorption】 bridge @ ['Rh', 'Ti'] (Index [2]) -> Site: bridge (Rh,Ti) | E=-0.850 eV"
+    }
+  ],
+  "history": [
+    "【✅ Perfect Adsorption】 ontop @ ['Ti'] (Index [2]) -> Site: ontop (Ti) [🌟 New Best] | E=-0.920 eV",
+    "【✅ Perfect Adsorption】 bridge @ ['Rh', 'Ti'] (Index [2]) -> Site: bridge (Rh,Ti) | E=-0.850 eV"
+  ],
+  "error": null,
+  "perfect_count": 2,
+  "dissociation_count": 0,
+  "rearrangement_count": 0,
+  "calc_failure_count": 0,
+  "chemical_slip_count": 0
+}
