@@ -116,6 +116,18 @@ If you use AdsMind, cite the manuscript/software metadata in
 title page is also provided in [docs/references.md](docs/references.md), and the
 manuscript reference library is available as [refs.bib](refs.bib).
 
+```bibtex
+@misc{zhang2026adsmindphysicsgroundedmultiagentselfcorrecting,
+      title={AdsMind: A Physics-Grounded Multi-Agent System for Self-Correcting Discovery of Adsorption Configurations on Heterogeneous Catalyst Surfaces},
+      author={Zongmin Zhang and Yuyang Lou and Bowen Zhang and Junwu Chen and Ryo Kuroki and Xuan Vu Nguyen and Edvin Fako and Lixue Cheng and Philippe Schwaller},
+      year={2026},
+      eprint={2606.19152},
+      archivePrefix={arXiv},
+      primaryClass={cond-mat.mtrl-sci},
+      url={https://arxiv.org/abs/2606.19152},
+}
+```
+
 ## Contributing
 
 Contributions are welcome. Please read [CONTRIBUTING.md](CONTRIBUTING.md) before
