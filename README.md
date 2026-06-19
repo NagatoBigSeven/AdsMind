@@ -102,9 +102,10 @@ outputs live under `research/results/`; start with
 [research/results/README.md](research/results/README.md) before using those
 CSV/JSON/TEX files.
 
-Large raw run payloads (trajectories, per-run artifacts, agent/driver logs) are
-distributed as a GitHub release archive rather than committed directly, so a
-clone stays small. The committed result tree keeps only path-sanitized summaries
+Large raw run payloads (trajectories, per-run artifacts, agent/driver logs) will
+be distributed as a GitHub release archive (not yet published; available from
+the sole first author on request in the meantime) rather than committed
+directly, so a clone stays small. The committed result tree keeps only path-sanitized summaries
 and per-case records. See
 [paper-artifacts/MANIFEST.md](paper-artifacts/MANIFEST.md) for the artifact
 archive layout.
